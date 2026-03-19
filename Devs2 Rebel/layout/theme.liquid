@@ -1,0 +1,33 @@
+<!doctype html>
+<html class="no-js" lang="{{ shop.locale | default: 'vi' }}">
+  <head>
+    <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
+    {%- include 'head-meta-tags' -%}
+    {%- include 'head-fonts' -%}
+    {%- include 'head-stylesheets' -%}
+    {%- include 'head-design-systems' -%}
+    {%- include 'head-script' -%} 
+    {%- comment %}{{ content_for_header }}{% endcomment -%}
+    {%- assign headHaravan = content_for_header -%}
+    {%- assign headHaravan = headHaravan | replace: '/>', '>'%} <!-- Replace Trailing slash -->
+    {{ headHaravan }} 
+  </head>
+  <body>
+    {%- include 'skip-to-content-link', href: '#MainContent', text: 'Chuyển đến nội dung chính' -%}
+    {%- include 'icons-sprite' -%}
+    {%- include 'announcement-bar' -%}
+    {%- include 'header' -%}
+    {%- include 'mobile-menu' -%}
+    <main id="MainContent">{{ content_for_layout }}</main>
+    {%- include 'footer' -%}
+    {%- include 'newsletter-modal' -%}
+    {%- include 'cart-modal' -%}
+    {%- include 'search-modal' -%}
+    {%- include 'quickview-modal' -%}
+    {%- include 'float-social' -%}
+    <div class="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
+    <div class="overlay"></div>
+    <button type="button" class="back-to-top" id="backToTop" aria-label="Về đầu trang"><svg class="icon" width="18" height="18"><use href="#icon-chevron-right" /></svg></button>
+    <wishlist-manager></wishlist-manager>
+  </body>
+</html>

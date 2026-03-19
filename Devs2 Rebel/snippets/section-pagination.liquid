@@ -1,0 +1,47 @@
+{%- if paginate.pages > 1 %}
+{%- assign page_title = "Phân trang" -%}
+{%- assign previous_page_title = 'Trang trước' -%}
+{%- assign next_page_title = 'Trang sau' -%}
+<div class="section-pagination">
+  <nav aria-label="{{ page_title }}" class="section-pagination__nav">
+    <ul class="section-pagination__list">
+      {%- if paginate.current_page > 1 and paginate.previous -%}
+      <li class="section-pagination__item">
+        <a class="section-pagination__link section-pagination__link--prev" href="{{ paginate.previous.url }}" title="{{ previous_page_title }}" aria-label="{{ previous_page_title }}">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="section-pagination__icon"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
+        </a>
+      </li>
+      {%- endif -%}
+
+      {%- for part in paginate.parts -%}
+      <li class="section-pagination__item">
+        {%- if part.is_link -%}
+        <a class="section-pagination__link" href="{{ part.url }}" title="{{ page_title }} {{ part.title }}" aria-label="Trang {{ part.title }}" data-page="{{ part.title }}">
+          {{ part.title }}
+        </a>
+        {%- else -%}
+        {%- assign part_title_number = part.title | times: 1 -%}
+        {%- if part_title_number == paginate.current_page -%}
+        <span class="section-pagination__link section-pagination__link--active" title="Trang hiện tại" aria-current="page">
+          {{ part.title }}
+        </span>
+        {%- else -%}
+        <span class="section-pagination__link section-pagination__link--ellipsis" title="...">
+          {{ part.title }}
+        </span>
+        {%- endif -%}
+        {%- endif -%}
+      </li>
+      {%- endfor -%}
+
+      {%- if paginate.current_page < paginate.pages -%}
+      <li class="section-pagination__item">
+        <a class="section-pagination__link section-pagination__link--next" href="{{ paginate.next.url }}" title="{{ next_page_title }}" aria-label="{{ next_page_title }}">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="section-pagination__icon"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+        </a>
+      </li>
+      {%- endif -%}
+    </ul>
+  </nav>
+</div>
+{%- endif -%}

@@ -1,0 +1,130 @@
+{%- include 'section-breadcrumb' -%}
+<stores-page class="page-stores">
+  <section class="stores-hero">
+    <div class="page-width">
+      <div class="stores-hero__wrap">
+        <h1 class="stores-hero__title">{{ settings.page_stores_title | default: 'Hệ Thống Cửa Hàng' }}</h1>
+        {%- if settings.page_stores_description != blank -%}
+        <p class="stores-hero__description">{{ settings.page_stores_description }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  <section class="stores-main section-padding">
+    <div class="page-width">
+      <div class="stores-main__wrap">
+        <aside class="stores-sidebar" id="stores-sidebar">
+          <div class="stores-sidebar__inner">
+            <div class="stores-sidebar__search">
+              <label for="stores-search" class="sr-only">Tìm kiếm cửa hàng</label>
+              <div class="stores-sidebar__search-box">
+                {%- include 'icon' with name: 'search', size: '18' -%}
+                <input type="text" id="stores-search" class="stores-sidebar__search-input" placeholder="Tìm tên hoặc địa chỉ..." autocomplete="off">
+              </div>
+            </div>
+            <div class="stores-sidebar__filter">
+              <label for="stores-province" class="stores-sidebar__label">Tỉnh / Thành phố</label>
+              <select id="stores-province" class="stores-sidebar__select">
+                <option value="">Tất cả tỉnh thành</option>
+              </select>
+            </div>
+            <div class="stores-sidebar__filter">
+              <label for="stores-district" class="stores-sidebar__label">Quận / Huyện</label>
+              <select id="stores-district" class="stores-sidebar__select" disabled>
+                <option value="">Tất cả quận huyện</option>
+              </select>
+            </div>
+            <div class="stores-sidebar__meta">
+              <span class="stores-sidebar__count" id="stores-count"></span>
+              <button type="button" class="stores-sidebar__clear" id="stores-clear" style="display:none">
+                {%- include 'icon' with name: 'close', size: '12' -%}
+                <span>Xóa bộ lọc</span>
+              </button>
+            </div>
+          </div>
+        </aside>
+
+        <div class="stores-grid" id="stores-grid">
+          {%- assign store_count = 0 -%}
+          {%- for i in (1..20) -%}
+          {%- capture check -%}page_stores_item_check_{{ i }}{%- endcapture -%}
+          {%- capture name -%}page_stores_item_name_{{ i }}{%- endcapture -%}
+          {%- capture address -%}page_stores_item_address_{{ i }}{%- endcapture -%}
+          {%- capture province -%}page_stores_item_province_{{ i }}{%- endcapture -%}
+          {%- capture district -%}page_stores_item_district_{{ i }}{%- endcapture -%}
+          {%- capture phone -%}page_stores_item_phone_{{ i }}{%- endcapture -%}
+          {%- capture email -%}page_stores_item_email_{{ i }}{%- endcapture -%}
+          {%- capture hours -%}page_stores_item_hours_{{ i }}{%- endcapture -%}
+          {%- capture map -%}page_stores_item_map_{{ i }}{%- endcapture -%}
+          {%- if settings[check] and settings[name] != blank -%}
+          {%- assign store_count = store_count | plus: 1 -%}
+          <div class="stores-card"
+               data-store-name="{{ settings[name] | escape }}"
+               data-store-address="{{ settings[address] | escape }}"
+               data-store-province="{{ settings[province] | escape }}"
+               data-store-district="{{ settings[district] | escape }}">
+            {%- if settings[map] != blank -%}
+            <div class="stores-card__map">
+              {{ settings[map] }}
+            </div>
+            {%- endif -%}
+            <div class="stores-card__content">
+              <h3 class="stores-card__name">
+                {%- include 'icon' with name: 'store', size: '18' -%}
+                {{ settings[name] }}
+              </h3>
+              {%- if settings[address] != blank -%}
+              <div class="stores-card__info">
+                {%- include 'icon' with name: 'location', size: '16' -%}
+                <span>{{ settings[address] }}</span>
+              </div>
+              {%- endif -%}
+              {%- if settings[phone] != blank -%}
+              <div class="stores-card__info">
+                {%- include 'icon' with name: 'phone', size: '16' -%}
+                <a href="tel:{{ settings[phone] | replace: ' ', '' | replace: '.', '' }}" title="Gọi {{ settings[phone] }}">{{ settings[phone] }}</a>
+              </div>
+              {%- endif -%}
+              {%- if settings[email] != blank -%}
+              <div class="stores-card__info">
+                {%- include 'icon' with name: 'email', size: '16' -%}
+                <a href="mailto:{{ settings[email] }}" title="Email {{ settings[email] }}">{{ settings[email] }}</a>
+              </div>
+              {%- endif -%}
+              {%- if settings[hours] != blank -%}
+              <div class="stores-card__info">
+                {%- include 'icon' with name: 'calendar', size: '16' -%}
+                <span>{{ settings[hours] }}</span>
+              </div>
+              {%- endif -%}
+              {%- if settings[map] != blank -%}
+              <a href="https://www.google.com/maps/search/{{ settings[address] | url_encode }}" target="_blank" rel="noopener" class="stores-card__direction" title="Chỉ đường đến {{ settings[name] | escape }}">
+                {%- include 'icon' with name: 'location', size: '16' -%}
+                <span>Chỉ đường</span>
+              </a>
+              {%- endif -%}
+            </div>
+          </div>
+          {%- endif -%}
+          {%- endfor -%}
+
+          <div class="stores-empty" id="stores-empty" style="display:none">
+            {%- include 'icon' with name: 'sad', size: '48' -%}
+            <p>Không tìm thấy cửa hàng phù hợp</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- if page.content != blank -%}
+  <section class="stores-content section-padding">
+    <div class="page-width">
+      <div class="stores-content__wrap">
+        {{ page.content }}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+</stores-page>

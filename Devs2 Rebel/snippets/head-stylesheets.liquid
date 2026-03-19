@@ -1,0 +1,45 @@
+<link rel="preconnect" href="//hstatic.net">
+<link rel="preconnect" href="//product.hstatic.net/" crossorigin>
+<link rel="dns-prefetch" href="//hstatic.net">
+<link rel="dns-prefetch" href="//theme.hstatic.net/">
+<link rel="dns-prefetch" href="//file.hstatic.net/">
+
+<link rel="stylesheet" href="{{ 'swiper.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'theme.css' | asset_url }}"> 
+{%- if template == 'index' -%}
+<link rel="stylesheet" href="{{ 'index.css' | asset_url }}">
+{%- if settings.section_slider_check and settings.section_slider_item_check_1 -%}
+<link rel="preload" as="image" href="{{ 'section_slider_item_desktop_1.png' | asset_url }}" media="(min-width: 768px)">
+<link rel="preload" as="image" href="{{ 'section_slider_item_mobile_1.png' | asset_url }}" media="(max-width: 767px)">
+{%- endif -%} 
+{%- elsif template == 'list-collections' -%}
+<link rel="stylesheet" href="{{ 'list-collections.css' | asset_url }}">
+{%- elsif template == 'collection' -%}
+<link rel="stylesheet" href="{{ 'collection.css' | asset_url }}">
+{%- elsif template == 'product' -%}
+<link rel="stylesheet" href="{{ 'product.css' | asset_url }}">
+{%- elsif template == 'cart' -%}
+<link rel="stylesheet" href="{{ 'cart.css' | asset_url }}">
+{%- elsif template == '404' -%}
+<link rel="stylesheet" href="{{ '404.css' | asset_url }}">
+{%- elsif template == 'blog' -%}
+<link rel="stylesheet" href="{{ 'blog.css' | asset_url }}">
+{%- elsif template == 'article' -%}
+<link rel="stylesheet" href="{{ 'article.css' | asset_url }}">
+{%- elsif template contains 'customer' -%}
+<link rel="stylesheet" href="{{ 'customer.css' | asset_url }}">
+{%- elsif template contains 'search' -%}
+<link rel="stylesheet" href="{{ 'search.css' | asset_url }}">
+{%- elsif template == 'page' -%}
+<link rel="stylesheet" href="{{ 'page.css' | asset_url }}">
+{%- elsif template == 'page.wishlist' -%}
+<link rel="stylesheet" href="{{ 'page-wishlist.css' | asset_url }}">
+{%- elsif template == 'page.about' -%}
+<link rel="stylesheet" href="{{ 'page-about.css' | asset_url }}">
+{%- elsif template == 'page.contact' -%}
+<link rel="stylesheet" href="{{ 'page-contact.css' | asset_url }}">
+{%- elsif template == 'page.stores' -%}
+<link rel="stylesheet" href="{{ 'page-stores.css' | asset_url }}">
+{%- elsif template == 'page.faq' -%}
+<link rel="stylesheet" href="{{ 'page-faq.css' | asset_url }}">
+{%- endif -%}

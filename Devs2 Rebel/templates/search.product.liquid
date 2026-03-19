@@ -1,0 +1,4 @@
+{%- layout none -%}
+{%- for product in search.results -%}
+{%- include 'product-card' with product, lazyload: "lazy", show_vendor: true -%}
+{%- endfor -%}

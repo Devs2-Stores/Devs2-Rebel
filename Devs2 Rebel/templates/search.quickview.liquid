@@ -1,0 +1,131 @@
+{%- layout none -%}
+{%- for product in search.results limit: 1 -%}
+<script type="application/json" id="quickview-product-json">{{ product | json }}</script>
+{%- assign available = product.selected_or_first_available_variant.available -%}
+{%- assign selected_variant = product.selected_or_first_available_variant | default: product.variants.first -%}
+<div class="quickview-product" data-quickview-product>
+  <div class="quickview-product__media">
+    <div class="swiper quickview-product__slider">
+      <div class="swiper-wrapper">
+        {%- if product.images.size > 0 -%}
+        {%- for image in product.images -%}
+        <div class="swiper-slide">
+          <img src="{{ image | img_url: '1024x1024' }}" alt="{{ image.alt | default: product.title | escape }}" width="{{ image.width }}" height="{{ image.height }}" loading="lazy" class="quickview-product__image">
+        </div>
+        {%- endfor -%}
+        {%- else -%}
+        <div class="swiper-slide">
+          <img src="{{ 'no-image.png' | asset_url }}" alt="{{ product.title | escape }}" width="800" height="1200" class="quickview-product__image">
+        </div>
+        {%- endif -%}
+      </div>
+      {%- if product.images.size > 1 -%}
+      <button type="button" class="swiper-button-next" aria-label="Ảnh tiếp theo"></button>
+      <button type="button" class="swiper-button-prev" aria-label="Ảnh trước"></button>
+      {%- endif -%}
+    </div>
+
+    {%- if product.images.size > 1 -%}
+    <div class="swiper quickview-product__thumbs">
+      <div class="swiper-wrapper">
+        {%- for image in product.images -%}
+        <div class="swiper-slide">
+          <img src="{{ image | img_url: 'compact' }}" alt="{{ image.alt | default: product.title | escape }}" loading="lazy" class="quickview-product__thumb-image">
+        </div>
+        {%- endfor -%}
+      </div>
+    </div>
+    {%- endif -%}
+  </div>
+
+  <div class="quickview-product__info">
+    <h2 class="quickview-product__title">
+      <a href="{{ product.url }}">{{ product.title | escape }}</a>
+    </h2>
+
+    <ul class="quickview-product__meta">
+      {%- if settings.product_show_sku and selected_variant.sku != blank -%}
+      <li class="quickview-product__meta-item">
+        <span class="quickview-product__meta-label">Mã:</span>
+        <strong data-product-sku>{{ selected_variant.sku }}</strong>
+      </li>
+      <li class="quickview-product__meta-separator">|</li>
+      {%- endif -%}
+
+      {%- if settings.product_show_brand and product.vendor != blank -%}
+      <li class="quickview-product__meta-item">
+        <span class="quickview-product__meta-label">Thương hiệu:</span>
+        <strong class="quickview-product__meta-link">{{ product.vendor | link_to_vendor }}</strong>
+      </li>
+      <li class="quickview-product__meta-separator">|</li>
+      {%- endif -%}
+
+      {%- if settings.product_show_type and product.type != blank -%}
+      <li class="quickview-product__meta-item">
+        <span class="quickview-product__meta-label">Loại:</span>
+        <strong class="quickview-product__meta-link">{{ product.type | link_to_type }}</strong>
+      </li>
+      <li class="quickview-product__meta-separator">|</li>
+      {%- endif -%}
+
+      {%- if settings.product_show_availability -%}
+      <li class="quickview-product__meta-item">
+        <span class="quickview-product__meta-label">Tình trạng:</span>
+        {%- if available -%}
+        <strong data-product-available class="quickview-product__status--available">Còn hàng</strong>
+        {%- else -%}
+        <strong data-product-available class="quickview-product__status--unavailable">Hết hàng</strong>
+        {%- endif -%}
+      </li>
+      {%- endif -%}
+    </ul>
+
+    <div class="quickview-product__price-box">
+      <div class="quickview-product__price-current" data-product-price>
+        {%- if selected_variant.price == 0 -%}Liên hệ{%- else -%}{{ selected_variant.price | money }}{%- endif -%}
+      </div>
+      <div class="quickview-product__price-compare" data-product-compare style="{%- if selected_variant.compare_at_price and selected_variant.compare_at_price > selected_variant.price -%}display: block;{%- else -%}display: none;{%- endif -%}">
+        {{ selected_variant.compare_at_price | money }}
+      </div>
+      <div class="quickview-product__price-sale" data-product-sale style="{%- if selected_variant.compare_at_price and selected_variant.compare_at_price > selected_variant.price -%}display: block;{%- else -%}display: none;{%- endif -%}">
+        {%- if selected_variant.compare_at_price and selected_variant.compare_at_price > selected_variant.price -%}
+        {%- assign percent = selected_variant.compare_at_price | minus: selected_variant.price | times: 100.0 | divided_by: selected_variant.compare_at_price | round -%}
+        -{{ percent }}%
+        {%- else -%}
+        -0%
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="quickview-product__variant-picker" data-hide-size-guide>
+      {%- include 'quickview-variant-picker' -%}
+    </div>
+
+    <div class="quickview-product__actions">
+      <div class="quickview-product__quantity-group">
+        <label class="quickview-product__quantity-label">Số lượng</label>
+        {%- include 'quantity-selector' with form: "", product: product, variant: selected_variant, value: 1, min: 1, step: 1 -%}
+      </div>
+
+      <div class="quickview-product__buttons">
+        <button {% unless available %}disabled{% endunless %} data-product-add data-action="quickview-add-to-cart" type="button" class="button-primary quickview-product__add-btn" aria-label="Thêm sản phẩm vào giỏ hàng">
+          <span class="button-spinner hidden"></span>
+          <span class="button-content">
+            {%- include 'icon' with name: 'cart' -%}
+            <span class="quickview-add-to-cart-text" data-add-text>{%- if available -%}Thêm vào giỏ{%- else -%}Hết hàng{%- endif -%}</span>
+          </span>
+        </button>
+        {%- if available -%}
+        <a href="{{ product.url }}" class="button-primary active quickview-product__view-btn">
+          Xem chi tiết
+        </a>
+        {%- else -%}
+        <a href="{{ settings.product_contact_link | default: '/lien-he' }}" class="button-primary active quickview-product__view-btn">
+          Liên hệ
+        </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+{%- endfor -%}

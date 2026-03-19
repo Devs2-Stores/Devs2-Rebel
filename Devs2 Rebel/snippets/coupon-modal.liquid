@@ -1,0 +1,40 @@
+<coupon-modal class="coupon-modal-wrapper hidden" role="dialog" aria-modal="true" aria-labelledby="coupon-modal-title">
+  <div class="coupon-modal-overlay" data-action="close" role="button" tabindex="0" aria-label="Đóng"></div>
+  <div class="coupon-modal-panel">
+    <div class="coupon-modal-header">
+      <h2 class="coupon-modal-title" id="coupon-modal-title">Mã giảm giá</h2>
+      <button type="button" class="coupon-modal-close" data-action="close" aria-label="Đóng">
+        {%- include 'icon' with name: 'close' -%}
+      </button>
+    </div>
+    <div class="coupon-modal-content">
+      <div class="coupon-modal-list">
+        {%- for i in (1..8) -%}
+        {%- capture check -%}product_coupon_check_{{ i }}{%- endcapture -%}
+        {%- capture title -%}product_coupon_title_{{ i }}{%- endcapture -%}
+        {%- capture code -%}product_coupon_code_{{ i }}{%- endcapture -%}
+        {%- capture desc -%}product_coupon_desc_{{ i }}{%- endcapture -%}
+        {%- capture expiry -%}product_coupon_expiry_{{ i }}{%- endcapture -%}
+
+        {%- if settings[check] and settings[code] != blank -%}
+        <div class="coupon-modal-item">
+          <div class="coupon-modal-item-left">
+            {%- if settings[title] != blank -%}
+            <div class="coupon-modal-title-text">{{ settings[title] }}</div>
+            {%- endif -%}
+            <div class="coupon-modal-code">{{ settings[code] }}</div>
+            <div class="coupon-modal-desc">{{ settings[desc] }}</div>
+            {%- if settings[expiry] != blank -%}
+            <div class="coupon-modal-expire">HSD: {{ settings[expiry] }}</div>
+            {%- endif -%}
+          </div>
+          <button type="button" class="coupon-modal-copy" data-code="{{ settings[code] | escape }}">
+            Sao chép
+          </button>
+        </div>
+        {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</coupon-modal>

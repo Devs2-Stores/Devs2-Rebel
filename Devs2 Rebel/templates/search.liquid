@@ -1,0 +1,107 @@
+{%- assign search_query = search.terms | default: '' -%}
+{%- assign products_per_page = 20 -%}
+
+<search-template class="search-template">
+	{%- include 'section-breadcrumb' -%}
+	<div class="page-width">
+		
+		<div class="search-template__header">
+			<h1 class="search-template__title">
+				{%- if search_query != blank -%}
+				Kết quả tìm kiếm cho "{{ search_query }}"
+				{%- else -%}
+				Tìm kiếm sản phẩm
+				{%- endif -%}
+			</h1>
+			{%- if search.performed and search.results_count > 0 -%}
+			<p class="search-template__count">Tìm thấy {{ search.results_count }} kết quả</p>
+			{%- endif -%}
+		</div>
+
+		<div class="search-template__form-wrapper">
+			<form action="/search" method="get" class="search-template__form" role="search">
+        <input type="hidden" name="type" value="product">
+				<div class="search-template__input-group">
+					<input 
+						type="search" 
+						name="q" 
+						value="{{ search_query }}" 
+						placeholder="Tìm kiếm sản phẩm..." 
+						class="search-template__input"
+						autocomplete="off"
+						aria-label="Tìm kiếm sản phẩm">
+					<button type="submit" class="search-template__submit" aria-label="Tìm kiếm">
+						{%- include 'icon' with name: 'search' -%}
+						<span>Tìm kiếm</span>
+					</button>
+				</div>
+			</form>
+		</div>
+
+		{%- if search.performed -%}
+			{%- if search.results_count > 0 -%}
+				{%- paginate search.results by products_per_page -%}
+				<div class="search-template__results">
+					<div class="search-template__results-header">
+						<span class="search-template__results-info">
+							{%- assign end_count = paginate.current_offset | plus: paginate.page_size -%}
+							{%- if end_count > search.results_count -%}{%- assign end_count = search.results_count -%}{%- endif -%}
+							Hiển thị {{ paginate.current_offset | plus: 1 }}-{{ end_count }} trong {{ search.results_count }} kết quả
+						</span>
+					</div>
+
+					<ul class="product-cards search-template__products">
+				{%- for product in search.results -%}
+				{%- assign lazyload = "lazy" -%}
+				{%- assign fetchpriority = "auto" -%}
+				{%- if forloop.index <= 3 -%}
+					{%- assign lazyload = "eager" -%}
+				{%- endif -%}
+				{%- if forloop.first -%}
+					{%- assign fetchpriority = "high" -%}
+				{%- endif -%}
+				<li class="product-cards__item">
+					{%- include 'product-card' with product, lazyload: lazyload, fetchpriority: fetchpriority, show_vendor: true -%}
+				</li>
+				{%- endfor -%}
+			</ul>
+
+					{%- if paginate.pages > 1 -%}
+					<div class="search-template__pagination">
+						{%- include 'section-pagination' -%}
+					</div>
+					{%- endif -%}
+				</div>
+				{%- endpaginate -%}
+			{%- else -%}
+				<div class="search-template__empty">
+					<div class="search-template__empty-icon">
+						{%- include 'icon' with name: 'search' -%}
+					</div>
+					<h2 class="search-template__empty-title">Không tìm thấy kết quả nào</h2>
+					<p class="search-template__empty-text">
+						Không tìm thấy sản phẩm nào phù hợp với từ khóa "{{ search_query }}".
+						<br>Vui lòng thử lại với từ khóa khác.
+					</p>
+					<div class="search-template__empty-suggestions">
+						<p><strong>Gợi ý:</strong></p>
+						<ul>
+							<li>Kiểm tra lại chính tả của từ khóa</li>
+							<li>Thử sử dụng từ khóa ngắn gọn hơn</li>
+							<li>Thử sử dụng từ khóa tổng quát hơn</li>
+						</ul>
+					</div>
+				</div>
+			{%- endif -%}
+		{%- else -%}
+			<div class="search-template__placeholder">
+				<div class="search-template__placeholder-icon">
+					{%- include 'icon' with name: 'search' -%}
+				</div>
+				<h2 class="search-template__placeholder-title">Tìm kiếm sản phẩm</h2>
+				<p class="search-template__placeholder-text">Nhập từ khóa vào ô tìm kiếm để bắt đầu</p>
+			</div>
+		{%- endif -%}
+
+	</div>
+</search-template>

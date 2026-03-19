@@ -1,0 +1,46 @@
+{%- include 'section-breadcrumb' -%}
+<div class="page-default">
+	<div class="page-width section-padding">
+		<article class="page-default__wrap">
+			<header class="page-default__header">
+				<h1 class="page-default__title">{{ page.title }}</h1>
+			</header>
+
+			{%- if page.content != blank -%}
+			<div class="page-default__content">
+				{{ page.content }}
+			</div>
+			{%- else -%}
+			<div class="page-default__placeholder">
+				<div class="page-default__placeholder-icon">
+					{%- include 'icon' with name: 'file-text' -%}
+				</div>
+				<p class="page-default__placeholder-text">Nội dung trang đang được cập nhật.</p>
+			</div>
+			{%- endif -%}
+
+			{%- if page.metafields.show_contact_info -%}
+			<footer class="page-default__footer">
+				<h2>Cần hỗ trợ?</h2>
+				<p>Liên hệ với chúng tôi để biết thêm thông tin chi tiết.</p>
+				{%- if settings.page_contact_email != blank or settings.page_contact_phone != blank -%}
+				<ul class="page-default__contact-list">
+					{%- if settings.page_contact_email != blank -%}
+					<li>
+						<strong>Email:</strong> 
+						<a href="mailto:{{ settings.page_contact_email }}" title="Email {{ settings.page_contact_email }}">{{ settings.page_contact_email }}</a>
+					</li>
+					{%- endif -%}
+					{%- if settings.page_contact_phone != blank -%}
+					<li>
+						<strong>Điện thoại:</strong> 
+						<a href="tel:{{ settings.page_contact_phone | replace: ' ', '' }}" title="Gọi {{ settings.page_contact_phone }}">{{ settings.page_contact_phone }}</a>
+					</li>
+					{%- endif -%}
+				</ul>
+				{%- endif -%}
+			</footer>
+			{%- endif -%}
+		</article>
+	</div>
+</div>

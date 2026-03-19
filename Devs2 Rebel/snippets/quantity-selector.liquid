@@ -1,0 +1,38 @@
+{%- comment %}
+Accepts:
+- form: {String} Form ID
+- product: {Object} Variant object
+- variant: {Object} Variant object
+- value: {Number} Value
+- min: {Number} Min (optional)
+- step: {Number} Step (optional)
+{% endcomment -%}
+
+{%- assign min = min | default: 1 -%}
+{%- assign step = step | default: 1 -%}
+{%- assign input_id = 'quantity-' | append: variant.id -%}
+<quantity-selector class="quantity-selector">
+	<button class="quantity-selector__button quantity-selector__decrease" type="button" data-action="decrease" aria-label="Giảm số lượng" aria-controls="{{ input_id }}">
+		<span class="sr-only">Giảm số lượng {{ product.title | escape }}</span>
+		{%- include 'icon' with name: 'minus', size: '16' -%}
+	</button>
+	<input class="quantity-selector__input"
+		   id="{{ input_id }}"
+		   type="number"
+		   aria-label="Số lượng {{ product.title | escape }}"
+		   {%- if form != blank %} form="{{ form }}"{% endif %}
+		   data-product-id="{{ product.id }}"
+		   data-variant-id="{{ variant.id }}"
+		   name="updates[{{ variant.id }}]"
+		   value="{{ value }}"
+		   min="{{ min }}"
+		   max="999"
+		   step="{{ step }}"
+		   autocomplete="off"
+		   inputmode="numeric"
+		   required>
+	<button class="quantity-selector__button quantity-selector__increase" type="button" data-action="increase" aria-label="Tăng số lượng" aria-controls="{{ input_id }}">
+		<span class="sr-only">Tăng số lượng {{ product.title | escape }}</span>
+		{%- include 'icon' with name: 'plus', size: '16' -%}
+	</button>
+</quantity-selector>

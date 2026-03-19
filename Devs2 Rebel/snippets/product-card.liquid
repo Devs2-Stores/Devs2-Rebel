@@ -1,0 +1,55 @@
+{%- assign price = product.selected_or_first_available_variant.price -%}
+{%- assign compare = product.selected_or_first_available_variant.compare_at_price -%}
+{%- assign discount = 0 -%}
+{%- if compare > price -%}{%- assign discount = compare | minus: price -%}{%- endif -%}
+{%- assign discount_percentage = 0 -%}
+{%- if discount > 0 -%}{%- assign discount_percentage = discount | times: 100 | divided_by: compare | round -%}{%- endif -%}
+{%- if product and product != empty -%}
+<product-card class="product-card">
+  <article class="product-card__wrapper">
+    <div class="product-card__media">
+      <a class="product-card__media-inner" href="{{ product.url }}" aria-label="Xem {{ product.title | escape }}" title="{{ product.title | escape }}">
+        {%- if product.featured_image -%}
+        <div class="product-card__media-image">
+          {%- assign featured_image = product.featured_image.src -%}
+          <picture>
+            <source media="(max-width: 640px)" srcset="{{ featured_image | img_url: 'grande' }}">
+            <source media="(max-width: 1024px)" srcset="{{ featured_image | img_url: '1024x1024' }}">
+            <img src="{{ featured_image | img_url: 'grande' }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="400" height="600" loading="{{ lazyload | default: 'lazy' }}" decoding="async" class="product-card__img-primary">
+          </picture>
+          {%- if product.images[1] -%}
+          {%- assign second_image = product.images[1].src -%}
+          <picture>
+            <source media="(max-width: 640px)" srcset="{{ second_image | img_url: 'grande' }}">
+            <source media="(max-width: 1024px)" srcset="{{ second_image | img_url: '1024x1024' }}">
+            <img src="{{ second_image | img_url: 'grande' }}" alt="{{ product.images[1].alt | default: product.title | escape }}" width="400" height="600" loading="lazy" decoding="async" class="product-card__img-secondary">
+          </picture>
+          {%- endif -%}
+        </div>
+        {%- endif -%}
+        {%- unless product.available -%}<div class="product-card__badge">{{ settings.product_soldout_text | default: 'Hết hàng' }}</div>{%- endunless -%}
+        {%- if discount_percentage > 0 -%}<div class="product-card__badge product-card__badge--discount">-{{ discount_percentage }}%</div>{%- endif -%}
+      </a>
+      <button type="button" class="product-card__quickview" data-action="open-quickview" data-product-handle="{{ product.handle }}" aria-label="Xem nhanh {{ product.title | escape }}" title="Xem nhanh">{%- include 'icon' with name: 'eye-show' -%}</button>
+      <form class="product-card__add-form" action="/cart/add" method="POST">
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <button type="submit" class="product-card__add-btn" aria-label="Thêm {{ product.title | escape }} vào giỏ hàng" title="Thêm vào giỏ" {%- unless product.available -%}disabled{%- endunless -%}>{%- include 'icon' with name: 'cart' -%}</button>
+      </form>
+      <button type="button" class="product-card__wishlist" data-action="add-wishlist" data-product-id="{{ product.id }}" data-product-handle="{{ product.handle }}" aria-label="Thêm {{ product.title | escape }} vào yêu thích" title="Thêm vào yêu thích">{%- include 'icon' with name: 'heart' -%}</button>
+    </div>
+    <div class="product-card__content">
+      {%- if show_vendor -%}<div class="product-card__vendor"><span>{%- if product.vendor != blank -%}{{ product.vendor | escape }}{%- else -%}{{ shop.name | escape }}{%- endif -%}</span></div>{%- endif -%}
+      <h3 class="product-card__title"><a href="{{ product.url }}" title="{{ product.title | escape }}">{{ product.title | escape }}</a></h3>
+      <div class="product-card__price">
+        {%- if price == 0 -%}
+        <span class="product-card__price-contact">{{ settings.product_contact_text | default: 'Liên hệ' }}</span>
+        {%- else -%}
+        {%- if compare > price -%}<del class="product-card__price-compare">{{ compare | money }}</del>{%- endif -%}
+        <span class="product-card__price-sale">{{ price | money }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+  </article>
+</product-card>
+{%- endif -%}

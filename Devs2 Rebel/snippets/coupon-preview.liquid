@@ -1,0 +1,18 @@
+<coupon-preview class="coupon-preview" data-action="open-modal">
+	<div class="coupon-preview__label">
+		{%- include 'icon' with name: 'tag' -%}
+		<span>{{ settings.product_coupon_label | default: "Mã giảm giá" }}</span>
+	</div>
+	<div class="coupon-preview__list">
+		{%- for i in (1..8) -%}
+		{%- capture check -%}product_coupon_check_{{ i }}{%- endcapture -%}
+		{%- capture code -%}product_coupon_code_{{ i }}{%- endcapture -%}
+		{%- if settings[check] and settings[code] != blank -%}
+		<div class="coupon-preview__item">
+			<span class="coupon-preview__code">{{ settings[code] }}</span>
+		</div>
+		{%- endif -%}
+		{%- endfor -%}
+	</div>
+	<div class="coupon-preview__overlay"></div>
+</coupon-preview>

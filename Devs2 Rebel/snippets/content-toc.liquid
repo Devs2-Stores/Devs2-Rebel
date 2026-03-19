@@ -1,0 +1,19 @@
+{%- if settings.toc_enable == true -%}
+<content-toc class="toc" data-heading-levels="{{ settings.toc_heading_levels | default: 'h2h3' }}"{% if content_selector %} content-selector="{{ content_selector }}"{% endif %}{% if settings.toc_show_numbers == true %} data-show-numbers{% endif %}{% if settings.toc_collapsed == true %} data-collapsed{% endif %} style="--toc-bg: {{ settings.toc_bg_color | default: '#f3f4f6' }}; --toc-text: {{ settings.toc_text_color | default: '#1f2937' }}; --toc-active: {{ settings.toc_active_color | default: '#FF3300' }};">
+	<div class="toc__title">{{ settings.toc_title | default: 'Mục lục' }}</div>
+</content-toc>
+{%- if settings.toc_floating_enable == true -%}
+<toc-floating class="toc-floating" style="--toc-bg: {{ settings.toc_bg_color | default: '#f3f4f6' }}; --toc-text: {{ settings.toc_text_color | default: '#1f2937' }}; --toc-active: {{ settings.toc_active_color | default: '#FF3300' }};" aria-label="{{ settings.toc_title | default: 'Mục lục' }}">
+	<div class="toc-floating__overlay"></div>
+	<button type="button" class="toc-floating__trigger" aria-label="Mở {{ settings.toc_title | default: 'mục lục' }}">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+	</button>
+	<div class="toc-floating__panel">
+		<div class="toc-floating__header">
+			<span class="toc-floating__title">{{ settings.toc_title | default: 'Mục lục' }}</span>
+			<button type="button" class="toc-floating__close" aria-label="Đóng">&times;</button>
+		</div>
+	</div>
+</toc-floating>
+{%- endif -%}
+{%- endif -%}

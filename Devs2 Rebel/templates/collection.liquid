@@ -1,0 +1,91 @@
+{%- assign collection_all_text = 'Tất cả sản phẩm' -%}
+{%- assign products_per_page = settings.collection_template_products_per_page | default: 20 -%}
+
+<div class="collection-template">
+  {%- include 'section-breadcrumb' -%}
+  <div class="page-width">
+
+    <div class="collection-template__title">
+      <h1 class="collection-template__heading">
+        {%- if collection.handle != 'all' -%}
+        {{ collection.title }}
+        {%- else -%}
+        {{ collection_all_text }}
+        {%- endif -%}
+      </h1>
+    </div>
+
+    {%- include 'collection-image' -%}
+    {%- include 'collection-menu' -%}
+    {%- include 'collection-best' -%}
+
+    {%- if collection.description != blank -%}
+    <div class="collection-template__short-description">
+      <div class="collection-template__short-description-content">
+        {{ collection.description | strip_html | truncatewords: 50 }}
+      </div>
+    </div>
+    {%- endif -%}
+
+    <div class="collection-template__mobile-filter-ctrl">
+      <button type="button" class="collection-template__filter-btn" data-action="open-filter" aria-label="Mở bộ lọc sản phẩm">
+        {%- include 'icon' with name: 'filter' -%}
+        <span>Bộ lọc</span>
+      </button>
+    </div>
+
+    {%- paginate collection.products by products_per_page -%}
+    <facet-filters class="collection-template__wrapper">
+      <div class="collection-template__facet-filter" id="CollectionFilterDrawer">
+        <div class="collection-template__facet-filter-header">
+          <span class="collection-template__facet-filter-header-title">Bộ lọc</span>
+          <button type="button" class="collection-template__close-filter" data-action="close-filter" aria-label="Đóng bộ lọc">
+            {%- include 'icon' with name: 'close' -%}
+          </button>
+        </div>
+        <div class="collection-template__facet-filter-title">
+          <strong>Bộ lọc sản phẩm</strong>
+        </div>
+        <div class="collection-template__facet-filter-content">
+          {%- include 'collection-facet-filter' -%}
+        </div>
+      </div>
+      <div class="collection-template__filter-overlay" data-action="close-filter"></div>
+
+      <div class="collection-template__products-container">
+        {%- include 'collection-sort', limit: products_per_page -%}
+
+        <ul class="product-cards collection-template__products">
+          {%- for product in collection.products limit: products_per_page -%}
+          {%- assign lazyload = "lazy" -%}
+          {%- assign fetchpriority = "auto" -%}
+          {%- if forloop.index <= 3 -%}
+          {%- assign lazyload = "eager" -%}
+          {%- endif -%}
+          {%- if forloop.first -%}
+          {%- assign fetchpriority = "high" -%}
+          {%- endif -%}
+          <li class="product-cards__item">
+            {%- include 'product-card' with product, lazyload: lazyload, fetchpriority: fetchpriority, show_vendor: true -%}
+          </li>
+          {%- else -%}
+          <li class="product-cards__item product-cards__item--empty">
+            <p>Không có sản phẩm nào trong danh mục này.</p>
+          </li>
+          {%- endfor -%}
+        </ul>
+        <div class="collection-template__pagination">
+          {%- include 'section-pagination' -%}
+        </div>
+      </div>
+    </facet-filters>
+    {%- if collection.description != blank -%}
+    <div class="collection-template__description">
+      <div class="collection-template__description-content">
+        {{ collection.description }}
+      </div>
+    </div>
+    {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</div>

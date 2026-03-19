@@ -1,0 +1,64 @@
+<cart-items role="list">
+  <form action="/cart" method="POST" id="cart-template__data-form" novalidate>
+    <div class="cart-template__data-head">
+      <span class="head-image">Hình ảnh</span>
+      <span class="head-info">Thông tin sản phẩm</span>
+    </div>
+    {%- for item in cart.items -%}
+    <cart-item data-var-id="{{ item.variant_id }}" data-product-id="{{ item.product.id }}" data-line-item="{{ forloop.index }}" role="listitem">
+      <a class="cart-item__image" href="{{ item.product.url }}">
+        {%- if item.image -%}
+        {%- assign cart_item_image = item.image | img_url: 'large' -%}
+        {%- elsif item.product.featured_image -%}
+        {%- assign cart_item_image = item.product.featured_image | img_url: 'large' -%}
+        {%- else -%}
+        {%- assign cart_item_image = 'no-image.png' | asset_url -%}
+        {%- endif -%}
+        <img src="{{ cart_item_image }}" alt="{{ item.product.title | escape }}" width="80" height="80" loading="lazy">
+      </a>
+      <div class="cart-item__info">
+        <div>
+          <a href="{{ item.product.url }}" class="cart-item__title">{{ item.product.title }}</a>
+          {%- if item.variant.title != 'Default Title' -%}
+          <ul class="cart-item__variants">
+            {%- for option in item.product.options -%}
+            <li>{{ option }}: {{ item.variant.options[forloop.index0] }}</li>
+            {%- endfor -%}
+          </ul>
+          {%- endif -%}
+          <div class="cart-item__price-mobile">
+            {%- if item.price == 0 -%}
+            <strong class="cart-item__price">Liên hệ</strong>
+            {%- else -%}
+            <strong class="cart-item__price">{{ item.price | money }}</strong>
+            {%- if item.variant.compare_at_price > item.price -%}
+            <del class="cart-item__compare-price">{{ item.variant.compare_at_price | money }}</del>
+            {%- endif -%}
+            {%- endif -%}
+          </div>
+        </div>
+        <div class="cart-item__quantity">
+          <label class="sr-only">Số lượng</label>
+          {%- if item.price > 0 -%}
+          {%- include 'quantity-selector' with form: "cart-template__data-form", product: item.product, variant: item.variant, value: item.quantity, min: 1, step: 1 -%}
+          {%- endif -%}
+          <button type="button" data-action="delete-item" title="Xóa sản phẩm" class="cart-item__delete" aria-label="Xóa {{ item.product.title | escape }}">Xoá</button>
+        </div>
+      </div>
+      <div class="cart-item__actions">
+        <span>
+          {%- if item.price == 0 -%}
+          <strong class="cart-item__price">Liên hệ</strong>
+          {%- else -%}
+          <strong class="cart-item__price">{{ item.price | money }}</strong>
+          {%- if item.variant.compare_at_price > item.price -%}
+          <del class="cart-item__compare-price">{{ item.variant.compare_at_price | money }}</del>
+          {%- endif -%}
+          {%- endif -%}
+        </span>
+        <button type="button" data-action="delete-item" title="Xóa sản phẩm" class="cart-item__delete" aria-label="Xóa {{ item.product.title | escape }}">Xoá</button>
+      </div>
+    </cart-item>
+    {%- endfor -%}
+  </form>
+</cart-items>

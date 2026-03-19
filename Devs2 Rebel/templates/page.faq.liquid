@@ -1,0 +1,99 @@
+{%- include 'section-breadcrumb' -%}
+<faq-page class="page-faq">
+  <section class="faq-hero">
+    <div class="page-width">
+      <div class="faq-hero__wrap">
+        <h1 class="faq-hero__title">{{ settings.page_faq_title | default: 'Câu Hỏi Thường Gặp' }}</h1>
+        {%- if settings.page_faq_description != blank -%}
+        <p class="faq-hero__description">{{ settings.page_faq_description }}</p>
+        {%- endif -%}
+        <div class="faq-hero__search">
+          <label for="faq-search" class="sr-only">Tìm câu hỏi</label>
+          <div class="faq-hero__search-box">
+            {%- include 'icon' with name: 'search', size: '20' -%}
+            <input type="text" id="faq-search" class="faq-hero__search-input" placeholder="Tìm kiếm câu hỏi..." autocomplete="off">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq-main section-padding">
+    <div class="page-width">
+      <div class="faq-main__wrap">
+        {%- for g in (1..5) -%}
+        {%- capture group_check -%}page_faq_group_check_{{ g }}{%- endcapture -%}
+        {%- capture group_title -%}page_faq_group_title_{{ g }}{%- endcapture -%}
+        {%- if settings[group_check] and settings[group_title] != blank -%}
+        <div class="faq-group" data-faq-group="{{ g }}">
+          <h2 class="faq-group__title">
+            {%- include 'icon' with name: 'tag', size: '20' -%}
+            {{ settings[group_title] }}
+          </h2>
+          <div class="faq-group__items">
+            {%- for i in (1..10) -%}
+            {%- capture q_check -%}page_faq_group_{{ g }}_item_check_{{ i }}{%- endcapture -%}
+            {%- capture q_title -%}page_faq_group_{{ g }}_item_title_{{ i }}{%- endcapture -%}
+            {%- capture q_content -%}page_faq_group_{{ g }}_item_content_{{ i }}{%- endcapture -%}
+            {%- if settings[q_check] and settings[q_title] != blank -%}
+            <details class="faq-item" data-faq-question="{{ settings[q_title] | escape }}">
+              <summary class="faq-item__question">
+                <span class="faq-item__question-text">{{ settings[q_title] }}</span>
+                <span class="faq-item__icon">
+                  {%- include 'icon' with name: 'chevron-down', size: '20' -%}
+                </span>
+              </summary>
+              <div class="faq-item__answer">
+                {{ settings[q_content] }}
+              </div>
+            </details>
+            {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+        {%- endif -%}
+        {%- endfor -%}
+
+        <div class="faq-empty" id="faq-empty" style="display: none;">
+          {%- include 'icon' with name: 'sad', size: '48' -%}
+          <p>Không tìm thấy câu hỏi phù hợp</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- if settings.page_faq_contact_show -%}
+  <section class="faq-contact section-padding-bg">
+    <div class="page-width">
+      <div class="faq-contact__wrap">
+        <h2 class="faq-contact__title">{{ settings.page_faq_contact_title | default: 'Vẫn cần hỗ trợ?' }}</h2>
+        <p class="faq-contact__description">{{ settings.page_faq_contact_description | default: 'Liên hệ với chúng tôi để được tư vấn trực tiếp' }}</p>
+        <div class="faq-contact__actions">
+          {%- if settings.page_faq_contact_phone != blank -%}
+          <a href="tel:{{ settings.page_faq_contact_phone | replace: ' ', '' }}" class="faq-contact__btn faq-contact__btn--phone">
+            {%- include 'icon' with name: 'phone', size: '18' -%}
+            <span>{{ settings.page_faq_contact_phone }}</span>
+          </a>
+          {%- endif -%}
+          {%- if settings.page_faq_contact_email != blank -%}
+          <a href="mailto:{{ settings.page_faq_contact_email }}" class="faq-contact__btn faq-contact__btn--email">
+            {%- include 'icon' with name: 'email', size: '18' -%}
+            <span>{{ settings.page_faq_contact_email }}</span>
+          </a>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- if page.content != blank -%}
+  <section class="faq-content section-padding">
+    <div class="page-width">
+      <div class="faq-content__wrap">
+        {{ page.content }}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+</faq-page>

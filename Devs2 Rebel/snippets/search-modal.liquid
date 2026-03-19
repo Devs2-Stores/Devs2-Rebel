@@ -1,0 +1,32 @@
+<search-modal class="search-modal-wrapper" role="dialog" aria-modal="true" aria-labelledby="search-modal-title">
+	<button type="button" class="search-modal-overlay" data-action="close-search-modal" aria-label="Đóng tìm kiếm"></button>
+	<div class="search-modal-panel">
+		<div class="search-modal-header">
+			<h2 class="search-modal-title" id="search-modal-title">Tìm kiếm sản phẩm</h2>
+			<button type="button" class="search-modal-close" data-action="close-search-modal" aria-label="Đóng tìm kiếm">{%- include 'icon' with name: 'close', class: 'icon-close' -%}</button>
+		</div>
+		<div class="search-modal-input-wrapper">
+			<form class="search-modal-form" action="/search" method="get" role="search">
+				<div class="search-modal-form-inner">
+					<input type="hidden" name="type" value="product">
+					<label for="search-modal-input" class="sr-only">Tìm kiếm sản phẩm</label>
+					<input type="text" name="q" id="search-modal-input" class="search-modal-input" placeholder="Tìm kiếm sản phẩm..." autocomplete="off" autofocus>
+					<button type="submit" class="search-modal-submit" aria-label="Tìm kiếm">{%- include 'icon' with name: 'search', class: 'search-modal-icon' -%}</button>
+				</div>
+			</form>
+		</div>
+		<div class="search-modal-results" aria-live="polite" aria-atomic="false">
+			<div class="search-modal-results-content">
+				<div class="search-modal-empty">
+					<p>Nhập từ khóa để tìm kiếm sản phẩm...</p>
+				</div>
+			</div>
+		</div>
+		<div class="search-modal-loading hidden">
+			<div class="search-modal-loading-content">
+				<div class="search-modal-loading-spinner"></div>
+				<p class="search-modal-loading-text">Đang tìm kiếm...</p>
+			</div>
+		</div>
+	</div>
+</search-modal>

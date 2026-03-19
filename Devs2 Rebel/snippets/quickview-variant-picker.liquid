@@ -1,0 +1,49 @@
+{%- if product.variants.size > 1 -%}
+{%- assign options = product.options -%}
+<quickview-variant-picker class="variant-picker-wrapper">
+  <script type="application/json" id="quickview-product-json">{{ product | json }}</script>
+  {%- for option in options -%}
+  {%- assign option_slug = option | handleize -%}
+  {%- assign turn_on_image = false -%}
+  {%- if option_slug == "mau-sac" or option_slug == "color" -%}{%- assign turn_on_image = true -%}{%- endif -%}
+  <quickview-variant-picker-item class="variant-picker" data-option-index="{{ forloop.index0 }}" data-option-name="{{ option }}">
+    <div class="variant-picker__label">
+      {{ option }}:
+      <span class="variant-picker__selected-value" data-selected-value></span>
+    </div>
+    <div class="variant-picker__items" role="radiogroup" aria-label="{{ option }}">
+      {%- assign option_position = 'option' | append: forloop.index -%}
+      {%- assign raw_values = product.variants | map: option_position | uniq -%}
+      {%- assign values_str = '' -%}
+      {%- for val in raw_values -%}
+        {%- unless val == blank -%}
+          {%- if values_str == '' -%}
+            {%- assign values_str = val -%}
+          {%- else -%}
+            {%- assign values_str = values_str | append: '|||' | append: val -%}
+          {%- endif -%}
+        {%- endunless -%}
+      {%- endfor -%}
+      {%- assign values = values_str | split: '|||' -%}
+      {%- for value in values -%}
+      {%- assign value_available = false -%}
+      {%- for variant in product.variants -%}
+      {%- if variant[option_position] == value and variant.available -%}{%- assign value_available = true -%}{%- endif -%}
+      {%- endfor -%}
+      {%- capture id -%}quickview-variant-picker-item-{{ option_position }}-{{ forloop.index }}{%- endcapture -%}
+      <div class="variant-picker__item {% unless value_available -%}variant-picker__item--sold-out{% endunless -%}">
+        <input type="radio" class="variant-picker__item-input" id="{{ id }}" name="quickview-variant-picker-item-{{ option_position }}" value="{{ value }}" data-value="{{ value }}">
+        <label class="variant-picker__item-label {% if turn_on_image %}variant-picker__item-label--image{% endif %}" for="{{ id }}">
+          {%- if turn_on_image -%}
+          <quickview-variant-picker-image class="variant-picker__item-image" data-option="{{ option_position }}" data-value="{{ value }}"></quickview-variant-picker-image>
+          {%- else -%}
+          <span>{{ value }}</span>
+          {%- endif -%}
+        </label>
+      </div>
+      {%- endfor -%}
+    </div>
+  </quickview-variant-picker-item>
+  {%- endfor -%}
+</quickview-variant-picker>
+{%- endif -%}

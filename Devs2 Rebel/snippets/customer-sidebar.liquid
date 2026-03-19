@@ -1,0 +1,33 @@
+<div class="customer-sidebar">
+  <div class="customer-sidebar__header">
+    <div class="customer-sidebar__avatar">
+      <img src="https://cdn.hstatic.net/files/200001135053/file/waving-hand.png" alt="{{ customer.last_name }} {{ customer.first_name }}" title="{{ customer.last_name }} {{ customer.first_name }}" width="64" height="64" loading="lazy" decoding="async">
+    </div>
+    <h3 class="customer-sidebar__name">
+      Xin chào, <b>{{ customer.last_name }} {{ customer.first_name }}</b>
+    </h3>
+  </div>
+  <nav class="customer-sidebar__nav">
+    <ul class="customer-sidebar__list">
+      <li>
+        <a href="/account" title="Thông tin tài khoản" aria-label="Thông tin tài khoản" class="customer-sidebar__link{% if template.name == 'customers[account]' %} active{% endif %}">
+          {%- include 'icon' with name: 'user' -%}
+          <span>Thông tin tài khoản</span>
+        </a>
+      </li>
+      <li>
+        <a href="/account/addresses" title="Danh sách địa chỉ" aria-label="Danh sách địa chỉ" class="customer-sidebar__link{% if template.name == 'customers[addresses]' %} active{% endif %}">
+          {%- include 'icon' with name: 'location' -%}
+          <span>Danh sách địa chỉ</span>
+        </a>
+      </li>
+
+      <li class="customer-sidebar__separator">
+        <a href="/account/logout" title="Đăng xuất" aria-label="Đăng xuất" class="customer-sidebar__link customer-sidebar__link--logout">
+          {%- include 'icon' with name: 'logout' -%}
+          <span>Đăng xuất</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

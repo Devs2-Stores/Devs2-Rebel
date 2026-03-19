@@ -1,0 +1,118 @@
+<article class="article-template" itemscope itemtype="https://schema.org/BlogPosting">
+  {%- include 'section-breadcrumb' -%}
+  <div class="page-width">
+    <div class="article-template__layout">
+      <div class="article-template__main">
+        {%- if article.image -%}
+        <div class="article-template__media" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+          <meta itemprop="url" content="{{ article.image.src | img_url: '2048x2048' }}">
+          <meta itemprop="width" content="{{ article.image.width }}">
+          <meta itemprop="height" content="{{ article.image.height }}">
+          <picture>
+            <source media="(max-width: 480px)" srcset="{{ article.image.src | img_url: 'large' }}">
+            <source media="(max-width: 768px)" srcset="{{ article.image.src | img_url: 'grande' }}">
+            <source media="(max-width: 1200px)" srcset="{{ article.image.src | img_url: '1024x1024' }}">
+            <img class="article-template__media-image" src="{{ article.image.src | img_url: '2048x2048' }}" alt="{{ article.image.alt | default: article.title | escape }}" loading="eager" fetchpriority="high" width="{{ article.image.width }}" height="{{ article.image.height }}">
+          </picture>
+        </div>
+        {%- endif -%}
+        <meta itemprop="dateModified" content="{{ article.published_at | date: '%Y-%m-%d' }}">
+        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization" style="display: none;">
+          <meta itemprop="name" content="{{ shop.name }}">
+          <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+            <meta itemprop="url" content="{{ 'header_logo.png' | asset_url }}">
+          </div>
+        </div>
+        <link itemprop="mainEntityOfPage" href="{{ canonical_url }}">
+        <div class="article-template__header">
+          <h1 class="article-template__title" itemprop="headline">{{ article.title }}</h1>
+          <meta itemprop="description" content="{{ article.excerpt | default: article.content | strip_html | truncatewords: 50 | escape }}">
+          <div class="article-template__info">
+            <span class="article-template__info-category">
+              <a href="{{ blog.url }}" title="{{ blog.title | escape }}">{{ blog.title }}</a>
+            </span>
+            <span class="article-template__info-author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+              <span class="article-template__info-label">Tác giả:</span>
+              <span class="article-template__info-value" itemprop="name">{{ article.author }}</span>
+            </span>
+            <span class="article-template__info-date" itemprop="dateCreated">
+              <span class="article-template__info-label">đăng ngày</span>
+              <time class="article-template__info-value" itemprop="datePublished" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: "%d/%m/%Y" }}</time>
+            </span>
+            <span class="article-template__info-comments">
+              <span class="article-template__info-value" itemprop="commentCount">{{ article.comments_count }}</span>
+              <span class="article-template__info-label">bình luận</span>
+            </span>
+          </div>
+        </div>
+        {%- include 'content-toc' -%}
+        <div class="article-template__content" itemprop="articleBody">{{ article.content }}</div>
+        <div class="article-template__share">{%- include 'share-buttons' with title: "Chia sẻ bài viết:" -%}</div>
+
+        {%- if blog.comments_enabled -%}
+        <section class="article-template__comments">
+          <div class="article-template__comments-form">
+            <h3 class="article-template__comments-form-title">Viết bình luận</h3>
+            {%- form "new_comment", article -%}
+            {%- if comment and comment.created_at -%}
+            <div class="article-template__comments-success">
+              {%- if blog.moderated? -%}Bình luận thành công! Lời bình cần được kiểm duyệt trước khi đăng.{%- else -%}Bình luận của bạn đã được đăng lên.{%- endif -%}
+            </div>
+            {%- endif -%}
+            {%- if form.errors.size > 0 -%}
+            <div class="article-template__comments-errors">{{ form.errors | default_errors }}</div>
+            {%- endif -%}
+            <div class="article-template__comments-form-fields">
+              <div class="article-template__comments-form-row">
+                <label class="article-template__comments-form-label">
+                  <span class="article-template__comments-form-label-text">Tên của bạn <span class="required">*</span></span>
+                  <input type="text" name="comment[author]" required value="{{ customer.name }}" placeholder="Nhập tên của bạn" class="article-template__comments-input">
+                </label>
+                <label class="article-template__comments-form-label">
+                  <span class="article-template__comments-form-label-text">Email của bạn <span class="required">*</span></span>
+                  <input type="email" name="comment[email]" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" placeholder="Nhập email của bạn" class="article-template__comments-input">
+                </label>
+              </div>
+              <label class="article-template__comments-form-label">
+                <span class="article-template__comments-form-label-text">Bình luận <span class="required">*</span></span>
+                <textarea name="comment[body]" required rows="5" placeholder="Viết bình luận của bạn..." class="article-template__comments-textarea">{{ form.body }}</textarea>
+              </label>
+              <button type="submit" class="button-primary active">Gửi bình luận</button>
+            </div>
+            {%- endform -%}
+          </div>
+
+          {%- if article.comments.size > 0 or comment.created_at -%}
+          <div class="article-template__comments-list">
+            <h3 class="article-template__comments-list-title">
+              {%- include 'icon' with name: 'comments' -%}
+              <span>{{ article.comments.size }} bình luận</span>
+            </h3>
+            <div class="article-template__comments-items">
+              {%- for comment in article.comments -%}
+              <div id="comment-{{ comment.id }}" class="article-template__comments-item">
+                <div class="article-template__comments-item-avatar">
+                <div class="article-template__comments-item-avatar-initials" aria-hidden="true">{{ comment.author | slice: 0 | upcase | escape }}</div>
+                </div>
+                <div class="article-template__comments-item-content">
+                  <div class="article-template__comments-item-header">
+                    <strong class="article-template__comments-item-author">{{ comment.author | escape }}</strong>
+                    <time class="article-template__comments-item-date" datetime="{{ comment.created_at | date: '%Y-%m-%dT%H:%M' }}">
+                      {{ comment.created_at | date: '%d/%m/%Y' }} lúc {{ comment.created_at | date: '%H:%M' }}
+                    </time>
+                  </div>
+                  <div class="article-template__comments-item-body">{{ comment.content }}</div>
+                </div>
+              </div>
+              {%- endfor -%}
+            </div>
+          </div>
+          {%- endif -%}
+        </section>
+        {%- endif -%}
+      </div>
+
+      <aside class="article-template__sidebar">{%- include 'article-sidebar' -%}</aside>
+    </div>
+  </div>
+</article>

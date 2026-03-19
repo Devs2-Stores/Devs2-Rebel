@@ -1,0 +1,20 @@
+{%- comment -%}
+  Icon Helper - SVG Sprite System
+  Usage: {%- include 'icon' with name: 'cart', class: 'icon-cart', size: '24' -%}
+  Parameters:
+    - name (required): Icon name (e.g., 'cart', 'close', 'search')
+    - class (optional): Additional CSS classes
+    - size (optional): Width/height in pixels (default: 24)
+    - width (optional): Custom width (overrides size)
+    - height (optional): Custom height (overrides size)
+    - aria_label (optional): Accessibility label
+{%- endcomment -%}
+{%- assign icon_name = name | default: 'close' -%}
+{%- assign icon_class = class | default: '' -%}
+{%- assign icon_size = size | default: '24' -%}
+{%- assign icon_width = width | default: icon_size -%}
+{%- assign icon_height = height | default: icon_size -%}
+{%- assign icon_label = aria_label | default: '' -%}
+<svg class="icon icon-{{ icon_name }} {{ icon_class }}" width="{{ icon_width }}" height="{{ icon_height }}"{% if icon_label != blank %} aria-label="{{ icon_label | escape }}"{% else %} aria-hidden="true"{% endif %}>
+  <use href="#icon-{{ icon_name }}"></use>
+</svg>

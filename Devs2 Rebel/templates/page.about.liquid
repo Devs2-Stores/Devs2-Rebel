@@ -1,0 +1,118 @@
+{%- include 'section-breadcrumb' -%}
+<about-page class="page-about">
+  <section class="about-hero">
+    <div class="about-hero__background">
+      <picture>
+        <source media="(min-width: 768px)" srcset="{{ 'page_about_hero_desktop.png' | asset_url }}" width="1920" height="600">
+        <source media="(max-width: 767px)" srcset="{{ 'page_about_hero_mobile.png' | asset_url }}" width="800" height="600">
+        <img src="{{ 'page_about_hero_desktop.png' | asset_url }}" alt="{{ settings.page_about_hero_title | escape }}" width="1920" height="600" loading="eager" fetchpriority="high">
+      </picture>
+    </div>
+    <div class="about-hero__content">
+      <div class="page-width">
+        {%- if settings.page_about_hero_subtitle != blank -%}
+        <p class="about-hero__subtitle">{{ settings.page_about_hero_subtitle }}</p>
+        {%- endif -%}
+        {%- if settings.page_about_hero_title != blank -%}
+        <h1 class="about-hero__title">{{ settings.page_about_hero_title }}</h1>
+        {%- else -%}
+        <h1 class="about-hero__title sr-only">{{ page.title | default: 'Giới thiệu' }}</h1>
+        {%- endif -%}
+        {%- if settings.page_about_hero_description != blank -%}
+        <p class="about-hero__description">{{ settings.page_about_hero_description }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  {%- if settings.page_about_mission_show -%}
+  <section class="about-mission section-padding">
+    <div class="page-width">
+      <div class="about-mission__wrap">
+        {%- if settings.page_about_mission_title != blank -%}
+        <h2 class="about-mission__title">{{ settings.page_about_mission_title }}</h2>
+        {%- endif -%}
+        {%- if settings.page_about_mission_description != blank -%}
+        <div class="about-mission__description">{{ settings.page_about_mission_description }}</div>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  <section class="about-features section-padding">
+    <div class="page-width">
+      <div class="about-features__wrap">
+        {%- for i in (1..4) -%}
+        {%- capture check -%}page_about_feature_item_check_{{ i }}{%- endcapture -%}
+        {%- capture image -%}page_about_feature_item_image_{{ i }}.png{%- endcapture -%}
+        {%- capture title -%}page_about_feature_item_title_{{ i }}{%- endcapture -%}
+        {%- capture description -%}page_about_feature_item_description_{{ i }}{%- endcapture -%}
+        {%- capture reverse -%}page_about_feature_item_reverse_{{ i }}{%- endcapture -%}
+        {%- if settings[check] -%}
+        <div class="about-features__item{% if settings[reverse] %} about-features__item--reverse{% endif %}">
+          <div class="about-features__item-image">
+            <img src="{{ image | asset_url }}" alt="{{ settings[title] | escape }}" width="600" height="400" loading="lazy">
+          </div>
+          <div class="about-features__item-content">
+            {%- if settings[title] != blank -%}
+            <h3 class="about-features__item-title">{{ settings[title] }}</h3>
+            {%- endif -%}
+            {%- if settings[description] != blank -%}
+            <div class="about-features__item-description">{{ settings[description] }}</div>
+            {%- endif -%}
+          </div>
+        </div>
+        {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+   {%- if settings.page_about_story_show -%}
+  <section class="about-story section-padding-bg">
+    <div class="page-width">
+      <div class="about-story__wrap">
+        {%- if settings.page_about_story_title != blank -%}
+        <h2 class="about-story__title">{{ settings.page_about_story_title }}</h2>
+        {%- endif -%}
+        {%- if settings.page_about_story_content != blank -%}
+        <div class="about-story__content">{{ settings.page_about_story_content }}</div>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- if settings.page_about_gallery_show -%}
+  <section class="about-gallery section-padding">
+    <div class="page-width">
+      {%- if settings.page_about_gallery_title != blank -%}
+      <h2 class="about-gallery__title">{{ settings.page_about_gallery_title }}</h2>
+      {%- endif -%}
+      <div class="about-gallery__grid">
+        {%- for i in (1..6) -%}
+        {%- capture check -%}page_about_gallery_item_check_{{ i }}{%- endcapture -%}
+        {%- capture image -%}page_about_gallery_item_image_{{ i }}.png{%- endcapture -%}
+        {%- capture title -%}page_about_gallery_item_title_{{ i }}{%- endcapture -%}
+        {%- if settings[check] -%}
+        <div class="about-gallery__item">
+          <img src="{{ image | asset_url }}" alt="{{ settings[title] | escape }}" width="400" height="500" loading="lazy">
+        </div>
+        {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- if page.content != blank -%}
+  <section class="about-content section-padding">
+    <div class="page-width">
+      <div class="about-content__wrap">
+        {{ page.content }}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+</about-page>

@@ -1,0 +1,92 @@
+<mobile-menu class="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu di động">
+  <button type="button" class="mobile-menu__overlay" data-action="close-mobile-menu" aria-label="Đóng menu"></button>
+  <div class="mobile-menu__drawer">
+    <div class="mobile-menu__header">
+      <span class="mobile-menu__title">Menu</span>
+      <button type="button" class="mobile-menu__close" data-action="close-mobile-menu" aria-label="Đóng menu">
+        {%- include 'icon' with name: 'close' -%}
+      </button>
+    </div>
+    <div class="mobile-menu__body">
+      <nav class="mobile-menu__nav">
+        <ul class="mobile-menu__list">
+          {%- if settings.header_menu != blank -%}
+            {%- for link in linklists[settings.header_menu].links -%}
+              {%- if linklists[link.handle].links -%}
+                <li class="mobile-menu__item mobile-menu__item--has-children">
+                  <button type="button" class="mobile-menu__trigger" aria-expanded="false">
+                    <span>{{ link.title }}</span>
+                    {%- include 'icon' with name: 'chevron-right' -%}
+                  </button>
+                  <ul class="mobile-menu__submenu">
+                    <li class="mobile-menu__submenu-back">
+                      <button type="button" class="mobile-menu__back-btn" aria-label="Quay lại">
+                        {%- include 'icon' with name: 'chevron-left' -%}
+                        <span>Quay lại</span>
+                      </button>
+                    </li>
+                    <li class="mobile-menu__submenu-title">
+                      <a href="{{ link.url }}">{{ link.title }}</a>
+                    </li>
+                    {%- for link_1 in linklists[link.handle].links -%}
+                      {%- if linklists[link_1.handle].links -%}
+                        <li class="mobile-menu__item mobile-menu__item--has-children">
+                          <button type="button" class="mobile-menu__trigger" aria-expanded="false">
+                            <span>{{ link_1.title }}</span>
+                            {%- include 'icon' with name: 'chevron-right' -%}
+                          </button>
+                          <ul class="mobile-menu__submenu">
+                            <li class="mobile-menu__submenu-back">
+                              <button type="button" class="mobile-menu__back-btn" aria-label="Quay lại">
+                                {%- include 'icon' with name: 'chevron-left' -%}
+                                <span>Quay lại</span>
+                              </button>
+                            </li>
+                            <li class="mobile-menu__submenu-title">
+                              <a href="{{ link_1.url }}">{{ link_1.title }}</a>
+                            </li>
+                            {%- for link_2 in linklists[link_1.handle].links -%}
+                              <li class="mobile-menu__item">
+                                <a href="{{ link_2.url }}" class="mobile-menu__link">{{ link_2.title }}</a>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        </li>
+                      {%- else -%}
+                        <li class="mobile-menu__item">
+                          <a href="{{ link_1.url }}" class="mobile-menu__link">{{ link_1.title }}</a>
+                        </li>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </ul>
+                </li>
+              {%- else -%}
+                <li class="mobile-menu__item">
+                  <a href="{{ link.url }}" class="mobile-menu__link">{{ link.title }}</a>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+        </ul>
+      </nav>
+    </div>
+    <div class="mobile-menu__footer">
+      <div class="mobile-menu__actions">
+        <a href="/account" class="mobile-menu__action-link">
+          {%- include 'icon' with name: 'user' -%}
+          <span>Tài khoản</span>
+        </a>
+        {%- if settings.wishlist_enable != false -%}
+          {%- assign wishlist_url = '/pages/wishlist' -%}
+          {%- if settings.wishlist_page != blank -%}
+            {%- assign wishlist_url = pages[settings.wishlist_page].url -%}
+          {%- endif -%}
+          <a href="{{ wishlist_url }}" class="mobile-menu__action-link">
+            {%- include 'icon' with name: 'heart' -%}
+            <span>Yêu thích</span>
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</mobile-menu>

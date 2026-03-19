@@ -1,0 +1,28 @@
+{%- if settings.announcement_bar_enable -%}
+<announcement-bar class="announcement-bar" style="--announcement-bg: {{ settings.announcement_color_bg | default: '#2b7fff' }}; --announcement-text: {{ settings.announcement_color_text | default: '#FFF' }};">
+  <div class="announcement-bar__container">
+    <div class="swiper announcement-bar__swiper">
+      <div class="swiper-wrapper">
+        {%- for i in (1..10) -%}
+        {%- capture check -%}announcement_item_check_{{ i }}{%- endcapture -%}
+        {%- capture text -%}announcement_item_text_{{ i }}{%- endcapture -%}
+        {%- capture link -%}announcement_item_link_{{ i }}{%- endcapture -%}
+        {%- if settings[check] -%}
+        <div class="swiper-slide announcement-bar__slide">
+          <div class="announcement-bar__content">
+            {%- if settings[link] != blank -%}
+            <a href="{{ settings[link] }}" class="announcement-bar__text announcement-bar__link">{{ settings[text] }}</a>
+            {%- else -%}
+            <span class="announcement-bar__text">{{ settings[text] }}</span>
+            {%- endif -%}
+          </div>
+        </div>
+        {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+    <button type="button" class="announcement-bar__nav announcement-bar__nav--prev swiper-button-prev" aria-label="Thông báo trước"></button>
+    <button type="button" class="announcement-bar__nav announcement-bar__nav--next swiper-button-next" aria-label="Thông báo tiếp theo"></button>
+  </div>
+</announcement-bar>
+{%- endif -%}

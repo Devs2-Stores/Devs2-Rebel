@@ -1,0 +1,16 @@
+<size-guide-modal class="size-guide-modal-wrapper hidden" role="dialog" aria-modal="true" aria-labelledby="size-guide-modal-title">
+  <button type="button" class="size-guide-modal-overlay" data-action="close" aria-label="Đóng"></button>
+  <div class="size-guide-modal-panel">
+    <div class="size-guide-modal-header">
+      <h2 class="size-guide-modal-title" id="size-guide-modal-title">Hướng dẫn chọn size</h2>
+      <button type="button" class="size-guide-modal-close" data-action="close" aria-label="Đóng hướng dẫn">
+        {%- include 'icon' with name: 'close' -%}
+      </button>
+    </div>
+    <div class="size-guide-modal-content">
+      {%- if settings.product_size_guide_page != blank and pages[settings.product_size_guide_page].content != blank -%}
+      {{ pages[settings.product_size_guide_page].content }}
+      {%- endif -%}
+    </div>
+  </div>
+</size-guide-modal>

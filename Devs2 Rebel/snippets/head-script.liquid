@@ -1,0 +1,62 @@
+<script>
+  window.themeConfig = {
+    formatMoney: {{ shop.money_format | json }},
+    no_image_product: String(`{{ 'no_image_product.jpg' | asset_url }}`),
+    routes: {
+      get_cart_url: "/cart.js",
+      add_cart_url: "/cart/add.js",
+      remove_cart_url: "/cart/change.js",
+      update_cart_url: "/cart/update.js"
+    },
+    cart: {
+      events: {
+        quantity_changed: "cart-quantity-changed",
+        item_delete: "cart-item-deleted",
+        item_add: "cart-item-added",
+        item_update: "cart-item-updated",
+        item_remove: "cart-item-removed",
+      },
+      auto_open_sidebar: true
+    },
+    collection: {
+      id: {%- if collection.id -%}{{ collection.id }}{%- else -%}null{%- endif -%}
+    },
+    {%- if template contains 'product' -%}
+    product: {
+      events: {
+        variant_change: "variant:change"
+      },
+      data: {{ product | json }}
+    },
+    {%- endif -%}
+    quickview: {
+      data: "Quickview data"
+    }
+  }
+</script>
+<script defer src="{{ 'swiper.js' | asset_url }}"></script>
+<script defer src="{{ 'theme.js' | asset_url }}"></script>
+{%- if template == 'index' -%}
+<script defer src="{{ 'index.js' | asset_url }}"></script>
+{%- elsif template == 'collection' -%}
+<script defer src="{{ 'collection.js' | asset_url }}"></script>
+<script defer src="{{ 'search_filter.js' | asset_url }}"></script>
+{%- elsif template == 'product' -%}
+<script defer src="{{ 'product.js' | asset_url }}"></script>
+{%- elsif template == 'cart' -%}
+<script defer src="{{ 'cart.js' | asset_url }}"></script>
+{%- elsif template contains 'customer' -%}
+<script defer src="{{ 'customer.js' | asset_url }}"></script>
+{%- elsif template == 'page.contact' -%}
+<script defer src="{{ 'page-contact.js' | asset_url }}"></script>
+{%- elsif template == 'page.about' -%}
+<script defer src="{{ 'page-about.js' | asset_url }}"></script>
+{%- elsif template == 'page.stores' -%}
+<script defer src="{{ 'page-stores.js' | asset_url }}"></script>
+{%- elsif template == 'page.faq' -%}
+<script defer src="{{ 'page-faq.js' | asset_url }}"></script>
+{%- elsif template contains 'search' -%}
+<script defer src="{{ 'search.js' | asset_url }}"></script>
+<script defer src="{{ 'search_filter.js' | asset_url }}"></script>
+{%- endif -%}
+<script defer src="{{ 'wishlist.js' | asset_url }}"></script>

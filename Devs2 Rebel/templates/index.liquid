@@ -1,0 +1,776 @@
+<h1 class="sr-only">{{ shop.name }}{% if shop.description != blank %} - {{ shop.description | strip_html | truncatewords: 15 }}{% endif %}</h1>
+{%- if settings.section_slider_check -%}
+<section class="section-slider">
+  <div class="section-slider-wrap">
+    <div class="swiper section-slider-swiper swiper-custom-forSlider">
+      <div class="swiper-wrapper">
+        {%- assign count = 0 -%}
+        {%- for i in (1..5) -%}
+        {%- capture check -%}section_slider_item_check_{{ i }}{%- endcapture -%}
+        {%- capture use_content -%}section_slider_item_use_content_{{ i }}{%- endcapture -%}
+        {%- capture image_desktop -%}section_slider_item_desktop_{{ i }}.png{%- endcapture -%}
+        {%- capture image_mobile -%}section_slider_item_mobile_{{ i }}.png{%- endcapture -%}
+        {%- capture title -%}section_slider_item_title_{{ i }}{%- endcapture -%}
+        {%- capture description -%}section_slider_item_description_{{ i }}{%- endcapture -%}
+        {%- capture button -%}section_slider_item_button_{{ i }}{%- endcapture -%}
+        {%- capture link -%}section_slider_item_link_{{ i }}{%- endcapture -%}
+        {%- if settings[check] -%}
+        <div class="swiper-slide section-slider-item">
+          <div class="section-slider-item-wrap">
+            <div class="section-slider-item-image">
+              <picture>
+                <source width="1920" height="800" media="(min-width: 768px)" srcset="{{ image_desktop | asset_url }}">
+                <source width="800" height="800" media="(min-width: 0)" srcset="{{ image_mobile | asset_url }}">
+                <img {% if count == 0 %} loading="eager" decoding="sync" fetchpriority="high" {% else %} loading="lazy" decoding="async" {% endif %} width="1920" height="960" src="{{ image_desktop | asset_url }}" alt="{{ settings[title] | escape }}" title="{{ settings[title] | escape }}">
+              </picture>
+            </div>
+            {%- if settings[use_content] -%}
+            <div class="section-slider-item-content">
+              {%- if settings[title] != blank -%}
+              <h2 class="section-slider-item-content-title section-heading">{{ settings[title] }}</h2>
+              {%- endif -%}
+              {%- if settings[description] != blank -%}
+              <div class="section-slider-item-content-description section-content">
+                {{ settings[description] }}
+              </div>
+              {%- endif -%}
+              {%- if settings[button] != blank and settings[link] != blank -%}
+              <a href="{{ settings[link] }}" class="section-slider-item-content-button button button-primary big white" title="{{ settings[button] | escape }}">
+                {{- settings[button] -}}
+              </a>
+              {%- endif -%}
+            </div>
+            {%- endif -%}
+          </div>
+        </div>
+        {%- assign count = count | plus: 1 -%}
+        {%- endif -%}
+        {%- endfor -%}
+      </div>
+      <div class="swiper-pagination section-slider-pagination"></div>
+    </div>
+  </div>
+</section>
+{%- endif -%}
+{%- if settings.section_text_check -%}
+<section class="section-text section-padding scroll-fade-up">
+  <div class="page-width">
+    <div class="section-text-wrap">
+      <div class="section-text-content">
+        <span class="section-text-content-line" aria-hidden="true"></span>
+        {%- if settings.section_text_title != blank -%}
+        <h2 class="section-text-content-title section-heading">{{ settings.section_text_title }}</h2>
+        {%- endif -%}
+        {%- if settings.section_text_description != blank -%}
+        <div class="section-text-content-description">{{ settings.section_text_description }}</div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+{%- endif -%}
+{%- if settings.section_image_with_text_check -%}
+<section class="section-image-with-text section-padding scroll-fade-up">
+  <div class="page-width">
+    <div class="section-image-with-text-wrap">
+      <div class="section-image-with-text-container">
+        <div class="section-image-with-text-image">
+          {%- if settings.section_image_with_text_link != blank -%}
+          <a class="section-image-with-text-image-link" href="{{ settings.section_image_with_text_link }}" title="{{ settings.section_image_with_text_heading | escape }}">
+            {%- endif -%}
+            <picture>
+              <source width="800" height="800" media="(min-width: 0)" srcset="{{ 'section_iwt_desktop.png' | asset_url }}">
+              <img width="1600" height="800" loading="lazy" decoding="async" src="{{ 'section_iwt_desktop.png' | asset_url }}" alt="{{ settings.section_image_with_text_alt | escape }}" title="{{ settings.section_image_with_text_alt | escape }}">
+            </picture>
+            {%- if settings.section_image_with_text_link != blank -%}
+          </a>
+          {%- endif -%}
+        </div>
+        <div class="section-image-with-text-content">
+          {%- if settings.section_image_with_text_subtitle != blank -%}
+          <span class="section-image-with-text-content-subtitle section-sub-heading">
+            {{- settings.section_image_with_text_subtitle -}}
+          </span>
+          {%- endif -%}
+          {%- if settings.section_image_with_text_heading != blank -%}
+          <h2 class="section-image-with-text-content-title section-heading">
+            {%- if settings.section_image_with_text_link != blank -%}
+            <a class="section-heading-link" href="{{ settings.section_image_with_text_link }}" title="{{ settings.section_image_with_text_title | escape }}">
+              {%- endif -%}
+              {{ settings.section_image_with_text_heading }}
+              {%- if settings.section_image_with_text_link != blank -%}
+            </a>
+            {%- endif -%}
+          </h2>
+          {%- endif -%}
+          {%- if settings.section_image_with_text_description != blank -%}
+          <div class="section-image-with-text-content-description">
+            {{ settings.section_image_with_text_description }}
+          </div>
+          {%- endif -%}
+          {%- if settings.section_image_with_text_button != blank and settings.section_image_with_text_link != blank -%}
+          <a href="{{ settings.section_image_with_text_link }}" class="section-image-with-text-content-button button button-primary" title="{{ settings.section_image_with_text_button | escape }}">
+            {{- settings.section_image_with_text_button -}}
+          </a>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{%- endif -%}
+{%- if settings.section_flash_sale_check -%}
+{%- assign flash_collection = collections[settings.section_flash_sale_collection] -%}
+<section class="section-flash-sale scroll-fade-up">
+  <div class="section-flash-sale__ambient">
+    <div class="section-flash-sale__glow section-flash-sale__glow--left"></div>
+    <div class="section-flash-sale__glow section-flash-sale__glow--right"></div>
+  </div>
+  {%- if settings.section_flash_sale_countdown_date != blank -%}
+  <div class="section-flash-sale__bg-timer" aria-hidden="true">
+    <span class="section-flash-sale__bg-timer-text" data-flash-bg-timer data-time="{{ settings.section_flash_sale_countdown_date }}">00:00:00</span>
+  </div>
+  {%- endif -%}
+  <div class="page-width">
+    <div class="section-flash-sale__head">
+      <div class="section-flash-sale__head-left">
+        {%- if settings.section_flash_sale_subtitle != blank -%}
+        <div class="section-flash-sale__subtitle">
+          {%- include 'icon' with name: 'flash', class: 'section-flash-sale__subtitle-icon' -%}
+          <span>{{ settings.section_flash_sale_subtitle }}</span>
+        </div>
+        {%- endif -%}
+        {%- if settings.section_flash_sale_title != blank -%}
+        <h2 class="section-flash-sale__title section-heading">{{ settings.section_flash_sale_title }}</h2>
+        {%- endif -%}
+      </div>
+      {%- if settings.section_flash_sale_countdown_date != blank -%}
+      <div class="section-flash-sale__countdown">
+        <div class="section-flash-sale__countdown-panel" data-flash-countdown data-time="{{ settings.section_flash_sale_countdown_date }}">
+          <span class="section-flash-sale__countdown-item"><b data-flash-hrs>00</b> HRS</span>
+          <span class="section-flash-sale__countdown-sep"></span>
+          <span class="section-flash-sale__countdown-item"><b data-flash-min>00</b> MIN</span>
+          <span class="section-flash-sale__countdown-sep"></span>
+          <span class="section-flash-sale__countdown-item"><b data-flash-sec>00</b> SEC</span>
+        </div>
+      </div>
+      {%- endif -%}
+    </div>
+    <div class="section-flash-sale__carousel">
+      {%- if flash_collection != null and flash_collection.products_count > 0 -%}
+      <div class="swiper section-flash-sale__swiper">
+        <div class="swiper-wrapper">
+          {%- for product in flash_collection.products limit: 12 -%}
+          {%- assign fake_sold = forloop.index | times: 7 | plus: 15 -%}
+          {%- assign fake_stock = 50 -%}
+          <div class="swiper-slide">
+            {%- include 'product-card-special' with product: product, sold_count: fake_sold, stock_total: fake_stock -%}
+          </div>
+          {%- endfor -%}
+        </div>
+      </div>
+      {%- else -%}
+      <p class="empty-message">Không có sản phẩm trong bộ sưu tập này.</p>
+      {%- endif -%}
+    </div>
+    {%- if settings.section_flash_sale_view_all != blank and settings.section_flash_sale_link != blank -%}
+    <div class="section-flash-sale__footer">
+      <a href="{{ settings.section_flash_sale_link }}" class="section-flash-sale__view-all" title="{{ settings.section_flash_sale_view_all | escape }}">
+        {{ settings.section_flash_sale_view_all }}
+        {%- include 'icon' with name: 'arrow' -%}
+      </a>
+    </div>
+    {%- endif -%}
+  </div>
+</section>
+{%- endif -%}
+{%- assign bg_color = settings.section_marquee_features_bg_color | default: '#1a1a1a' -%}
+{%- assign text_color = settings.section_marquee_features_text_color | default: '#ffffff' -%}
+{%- assign duration = settings.section_marquee_features_duration | default: '30' | plus: 0 -%}
+<section class="section-marquee-features" style="--marquee-bg-color: {{ bg_color }}; --marquee-text-color: {{ text_color }}; --marquee-duration: {{ duration }}s;">
+  <div class="section-marquee-features-wrap">
+    <div class="section-marquee-features-track">
+      {%- for repeat in (1..2) -%}
+      {%- for i in (1..10) -%}
+      {%- capture check -%}section_marquee_features_item_check_{{ i }}{%- endcapture -%}
+      {%- capture icon -%}section_marquee_features_item_icon_{{ i }}.png{%- endcapture -%}
+      {%- capture text -%}section_marquee_features_item_text_{{ i }}{%- endcapture -%}
+      {%- if settings[check] and settings[text] != blank -%}
+      <div class="section-marquee-features-item">
+        <div class="section-marquee-features-item-text">{{ settings[text] }}</div>
+      </div>
+      {%- endif -%}
+      {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{%- if settings.section_product_banner_check -%}
+<div class="section_index--product-banner scroll-fade-up">
+  <div class="page-width">
+    <div class="section_index--product-banner-wrap">
+      <div class="section_index--product-banner-head">
+        {%- if settings.section_product_banner_subtitle != blank -%}
+        <span class="section_index--product-banner-subtitle section-sub-heading">
+          {{- settings.section_product_banner_subtitle -}}
+        </span>
+        {%- endif -%}
+        {%- if settings.section_product_banner_headtitle != blank -%}
+        <h2 class="section_index--product-banner-title section-heading">
+          {{ settings.section_product_banner_headtitle }}
+        </h2>
+        {%- endif -%}
+      </div>
+      <div class="section_index--product-banner-tabs-group">
+        <div class="section_index--product-banner-tabs">
+          {%- for i in (1..3) -%}
+          {%- capture check -%}section_product_banner_item_check_{{ i }}{%- endcapture -%}
+          {%- capture titletab -%}section_product_banner_item_titletab_{{ i  }}{%- endcapture -%}
+          {%- if settings[check] -%}
+          <div class="section_index--product-banner-tab {% if forloop.first %}active{% endif %}" data-tab="{{ forloop.index }}">
+            <span>{{ settings[titletab] }}</span>
+          </div>
+          {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+      <div class="section_index--product-banner-right">
+        <div class="section_index--product-banner-mains">
+          {%- for i in (1..3) -%}
+          {%- capture check -%}section_product_banner_item_check_{{ i }}{%- endcapture -%}
+          {%- capture flaghandle -%}section_product_banner_item_flaghandle_{{ i }}{%- endcapture -%}
+          {%- capture mainhandle -%}{{ settings[flaghandle] }}{%- endcapture -%}
+          {%- if settings[check] -%}
+          <div class="section_index--product-banner-main {% if forloop.first %}active{% endif %}" data-tab="{{ forloop.index }}">
+            <div class="section_index--product-banner-main-box">
+              {%- if collections[mainhandle] -%}
+              {%- if collections[mainhandle].products_count > 0 -%}
+              {%- for product in collections[mainhandle].products limit: 4 -%}
+              {%- include 'product-card' -%}
+              {%- endfor -%}
+              {%- else -%}
+              <p class="empty-message">Nội dung đang được cập nhật...</p>
+              {%- endif -%}
+              {%- else -%}
+              {%- if collections.all.products_count > 0 -%}
+              {%- for product in collections.all.products limit: 4 -%}
+              {%- include 'product-card' -%}
+              {%- endfor -%}
+              {%- else -%}
+              <p class="empty-message">Nội dung đang được cập nhật...</p>
+              {%- endif -%}
+              {%- endif -%}
+            </div>
+          </div>
+          {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+      <div class="section_index--product-banner-left">
+        <div class="section_index--product-banner-details">
+          {%- for i in (1..3) -%}
+          {%- capture check -%}section_product_banner_item_check_{{ i }}{%- endcapture -%}
+          {%- capture image -%}section_product_banner_item_image_{{ i }}.png{%- endcapture -%}
+          {%- capture titledes -%}section_product_banner_item_titledes_{{ i }}{%- endcapture -%}
+          {%- capture subtitledes -%}section_product_banner_item_subtitledes_{{ i }}{%- endcapture -%}
+          {%- capture contentdes -%}section_product_banner_item_contentdes_{{ i }}{%- endcapture -%}
+          {%- capture flaghandle -%}section_product_banner_item_flaghandle_{{ i }}{%- endcapture -%}
+          {%- capture mainhandle -%}{{ settings[flaghandle] }}{%- endcapture -%}
+          {%- if settings[check] -%}
+          <div class="section_index--product-banner-detail {% if forloop.first %}active{% endif %}" data-tab="{{ forloop.index }}">
+            <div class="section_index--product-banner-detail-box">
+              <img width="1000" height="1200" src="{{ image | img_url:'1024x1024' | asset_url }}" alt="{{ settings[titledes] }}">
+              <h3>{{ settings[titledes] }}</h3>
+              <h4>{{ settings[subtitledes] }}</h4>
+              <p>{{ settings[contentdes] }}</p>
+              <a class="fbuttonStyle1" href="{{ collections[mainhandle].url }}"><span>Xem tất cả</span></a>
+            </div>
+          </div>
+          {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%- endif -%}
+{%- if settings.section_collections_check -%}
+<section class="section-collections section-padding-bg scroll-fade-up" style="background: url('{{ 'section_collections_bg.png' | asset_url }}') top center/cover no-repeat;">
+  <div class="page-width">
+    <div class="section-collections-wrap">
+      <div class="section-collections-head">
+        <h2 class="section-collections-head-title section-heading">
+          <a href="{{ settings.section_collections_link }}" class="section-heading-link" title="{{ settings.section_collections_title | escape }}">
+            {{ settings.section_collections_title }}
+          </a>
+        </h2>
+      </div>
+      <div class="section-collections-items">
+        {%- for i in (1..20) -%}
+        {%- capture check -%}section_collections_item_check_{{ i }}{%- endcapture -%}
+        {%- capture image -%}section_collections_item_image_{{ i }}.png{%- endcapture -%}
+        {%- capture title -%}section_collections_item_title_{{ i }}{%- endcapture -%}
+        {%- capture link -%}section_collections_item_link_{{ i }}{%- endcapture -%}
+        {%- capture use_image -%}section_collections_item_use_image_{{ i }}{%- endcapture -%}
+        {%- if settings[check] -%}
+        <div class="section-collections-item">
+          <a class="section-collections-item-link" href="{{ settings[link] }}" title="{{ settings[title] | escape }}">
+            {%- if settings[use_image] -%}
+            <img width="400" height="200" loading="lazy" decoding="async" src="{{ image | asset_url }}" alt="{{ settings[title] | escape }}" title="{{ settings[title] | escape }}">
+            {%- else -%}
+            <span class="top-text">{{ settings[title] }}</span>
+            <span class="bot-text">{{ settings[title] }}</span>
+            {%- endif -%}
+          </a>
+        </div>
+        {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+{%- endif -%}
+{%- if settings.section_products_slider_check -%}
+<section class="section-products-slider section-padding scroll-fade-up">
+  <div class="page-width">
+    <div class="section-products-slider-wrap">
+      <div class="section-products-slider-head">
+        <h2 class="section-products-slider-head-title section-heading">
+          {%- if settings.section_products_slider_link != blank -%}
+          <a href="{{ settings.section_products_slider_link }}" class="section-heading-link" title="{{ settings.section_products_slider_title | escape }}">
+            {{- settings.section_products_slider_title -}}
+          </a>
+          {%- else -%}
+          {{ settings.section_products_slider_title }}
+          {%- endif -%}
+        </h2>
+      </div>
+      <div class="section-products-slider-main">
+        {%- assign collection = collections[settings.section_products_slider_collection] -%}
+        {%- if collection != null and collection.products_count > 0 -%}
+        <div class="swiper section-products-slider-swiper swiper-custom-forSlider">
+          <div class="swiper-wrapper">
+            {%- for product in collection.products -%}
+            <div class="swiper-slide section-products-slider-item">
+              {%- include 'product-card', product: product -%}
+            </div>
+            {%- endfor -%}
+          </div>
+          <div class="swiper-button-prev section-products-slider-button-prev"></div>
+          <div class="swiper-button-next section-products-slider-button-next"></div>
+        </div>
+        {%- else -%}
+        <p class="empty-message">Không có sản phẩm trong bộ sưu tập này.</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+{%- endif -%}
+{%- if settings.section_hero_campaign_check -%}
+<section class="section-hero-campaign section-padding scroll-fade-up">
+  <div class="page-width">
+    <div class="section-hero-campaign__grid">
+      <div class="section-hero-campaign__content">
+        {%- if settings.section_hero_campaign_subtitle != blank -%}
+        <span class="section-hero-campaign__subtitle">{{ settings.section_hero_campaign_subtitle }}</span>
+        {%- endif -%}
+        {%- if settings.section_hero_campaign_title != blank -%}
+        <h2 class="section-hero-campaign__title">{{ settings.section_hero_campaign_title }}</h2>
+        {%- endif -%}
+        {%- if settings.section_hero_campaign_description != blank -%}
+        <p class="section-hero-campaign__description">{{ settings.section_hero_campaign_description }}</p>
+        {%- endif -%}
+        {%- if settings.section_hero_campaign_button != blank and settings.section_hero_campaign_link != blank -%}
+        <div class="section-hero-campaign__action">
+          <a href="{{ settings.section_hero_campaign_link }}" class="section-hero-campaign__link" title="{{ settings.section_hero_campaign_button | escape }}">
+            <span>{{ settings.section_hero_campaign_button }}</span>
+            {%- include 'icon' with name: 'arrow' -%}
+          </a>
+        </div>
+        {%- endif -%}
+      </div>
+      <div class="section-hero-campaign__media">
+        <div class="section-hero-campaign__image-main">
+          <img width="800" height="1000" loading="lazy" decoding="async" src="{{ 'section_hero_campaign_main.png' | asset_url }}" alt="{{ settings.section_hero_campaign_title | escape }}">
+        </div>
+        <div class="section-hero-campaign__image-overlay">
+          <img width="400" height="530" loading="lazy" decoding="async" src="{{ 'section_hero_campaign_overlay.png' | asset_url }}" alt="{{ settings.section_hero_campaign_subtitle | escape }}">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{%- endif -%}
+{%- if settings.section_lookbook_check -%}
+{%- assign lookbook_collection = collections[settings.section_lookbook_collection] -%}
+<section class="section-lookbook scroll-fade-up">
+  <div class="section-lookbook__background">
+    <picture>
+      <source width="1920" height="960" media="(min-width: 768px)" srcset="{{ 'section_lookbook_desktop.png' | asset_url }}">
+      <source width="800" height="1000" media="(min-width: 0)" srcset="{{ 'section_lookbook_mobile.png' | asset_url }}">
+      <img width="1920" height="960" loading="lazy" decoding="async" src="{{ 'section_lookbook_desktop.png' | asset_url }}" alt="{{ settings.section_lookbook_title | escape }}">
+    </picture>
+    <div class="section-lookbook__overlay"></div>
+  </div>
+  <div class="section-lookbook__text">
+    {%- if settings.section_lookbook_subtitle != blank -%}
+    <p class="section-lookbook__subtitle">{{ settings.section_lookbook_subtitle }}</p>
+    {%- endif -%}
+    {%- if settings.section_lookbook_title != blank -%}
+    <h2 class="section-lookbook__title">{{ settings.section_lookbook_title }}</h2>
+    {%- endif -%}
+  </div>
+  <div class="section-lookbook__hotspots">
+    {%- if lookbook_collection != null and lookbook_collection.products_count > 0 -%}
+    {%- for product in lookbook_collection.products limit: 5 -%}
+    {%- capture pos_top -%}section_lookbook_hotspot_top_{{ forloop.index }}{%- endcapture -%}
+    {%- capture pos_left -%}section_lookbook_hotspot_left_{{ forloop.index }}{%- endcapture -%}
+    {%- assign hotspot_top = settings[pos_top] | default: '50' -%}
+    {%- assign hotspot_left = settings[pos_left] | default: '50' -%}
+    {%- assign price = product.variants[0].price -%}
+    {%- assign compare = product.variants[0].compare_at_price -%}
+    <div class="section-lookbook__hotspot" style="top: {{ hotspot_top }}%; left: {{ hotspot_left }}%;">
+      <button type="button" class="section-lookbook__dot" data-action="open-quickview" data-product-handle="{{ product.handle }}" aria-label="Xem nhanh {{ product.title | escape }}">
+        <span class="section-lookbook__dot-inner"></span>
+      </button>
+      <div class="section-lookbook__tooltip">
+        {%- if product.featured_image -%}
+        <div class="section-lookbook__tooltip-image">
+          <img width="80" height="80" loading="lazy" decoding="async" src="{{ product.featured_image.src | img_url: 'small' }}" alt="{{ product.title | escape }}">
+        </div>
+        {%- endif -%}
+        <div class="section-lookbook__tooltip-info">
+          <p class="section-lookbook__tooltip-name">{{ product.title }}</p>
+          <p class="section-lookbook__tooltip-price">
+            {%- if price == 0 -%}
+            {{ settings.product_contact_text | default: 'Liên hệ' }}
+            {%- else -%}
+            {%- if compare > price -%}
+            <del>{{ compare | money }}</del>
+            {%- endif -%}
+            <span>{{ price | money }}</span>
+            {%- endif -%}
+          </p>
+        </div>
+        {%- include 'icon' with name: 'eye-show', class: 'section-lookbook__tooltip-icon' -%}
+      </div>
+    </div>
+    {%- endfor -%}
+    {%- endif -%}
+  </div>
+  {%- if settings.section_lookbook_button != blank and settings.section_lookbook_link != blank -%}
+  <div class="section-lookbook__action">
+    <a href="{{ settings.section_lookbook_link }}" class="section-lookbook__cta" title="{{ settings.section_lookbook_button | escape }}">
+      <span>{{ settings.section_lookbook_button }}</span>
+      {%- include 'icon' with name: 'arrow' -%}
+    </a>
+  </div>
+  {%- endif -%}
+  {%- if lookbook_collection != null and lookbook_collection.products_count > 0 -%}
+  <div class="section-lookbook__mobile-slider">
+    <div class="section-lookbook__mobile-track">
+      {%- for product in lookbook_collection.products limit: 5 -%}
+      <div class="section-lookbook__mobile-item">
+        {%- include 'product-card' -%}
+      </div>
+      {%- endfor -%}
+    </div>
+  </div>
+  {%- endif -%}
+</section>
+{%- endif -%}
+<section class="section-group-banners section-padding scroll-fade-up">
+  <div class="page-width">
+    <div class="section-group-banners-wrap">
+      <div class="section-group-banners-items">
+        {%- for i in (1..3) -%}
+        {%- capture check -%}section_group_banners_item_check_{{ i }}{%- endcapture -%}
+        {%- capture image -%}section_group_banners_item_image_{{ i }}.png{%- endcapture -%}
+        {%- capture link -%}section_group_banners_item_link_{{ i }}{%- endcapture -%}
+        {%- capture button -%}section_group_banners_item_button_{{ i }}{%- endcapture -%}
+        {%- if settings[check] -%}
+        <div class="section-group-banners-item">
+          <a class="section-group-banners-item-link" href="{{ settings[link] }}" title="{{ settings[button] | escape }}">
+            <img width="600" height="600" loading="lazy" decoding="async" src="{{ image | asset_url }}" alt="{{ settings[button] | escape }}" title="{{ settings[button] | escape }}">
+            <span class="section-group-banners-item-button button-primary white">{{ settings[button] }}</span>
+          </a>
+        </div>
+        {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section-countdown-banner section-padding scroll-fade-up">
+  <div class="section-countdown-banner-container">
+    <div class="section-countdown-banner-background">
+      {%- capture image_desktop -%}section_countdown_banner_bg_d.jpg{%- endcapture -%}
+      {%- capture image_mobile -%}section_countdown_banner_bg_m.jpg{%- endcapture -%}
+      <picture>
+        <source width="1920" height="640" media="(min-width: 768px)" srcset="{{ image_desktop | asset_url }}">
+        <source width="800" height="800" media="(min-width: 0)" srcset="{{ image_mobile | asset_url }}">
+        <img width="1920" height="640" loading="lazy" decoding="async" src="{{ image_desktop | asset_url }}" alt="{{ settings.section_countdown_banner_heading | escape }}">
+      </picture>
+    </div>
+    <div class="section-countdown-banner-content">
+      <div class="page-width">
+        <div class="section-countdown-banner-content-inner">
+          {%- if settings.section_countdown_banner_heading != blank -%}
+          <h2 class="section-countdown-banner-content-heading section-heading">
+            {{ settings.section_countdown_banner_heading }}
+          </h2>
+          {%- endif -%}
+          {%- if settings.section_countdown_banner_description != blank -%}
+          <div class="section-countdown-banner-content-description section-content">
+            {{ settings.section_countdown_banner_description }}
+          </div>
+          {%- endif -%}
+          {%- if settings.section_countdown_banner_time != blank -%}
+          <div class="section-countdown-banner-content-countdown">
+            {%- assign countdown_color = settings.section_countdown_banner_countdown_color | default: '#F30' -%}
+            {%- assign countdown_text_color = settings.section_countdown_banner_countdown_text_color | default: '#F9F9F9' -%}
+            <div data-time="{{ settings.section_countdown_banner_time }}" class="countdownLoop-vi" style="--countdown-color: {{ countdown_color }}; --countdown-text-color: {{ countdown_text_color }};"></div>
+          </div>
+          {%- endif -%}
+          {%- if settings.section_countdown_banner_button != blank and settings.section_countdown_banner_button_link != blank -%}
+          <div class="section-countdown-banner-content-button">
+            <a href="{{ settings.section_countdown_banner_button_link }}" class="button button-primary big white" title="{{ settings.section_countdown_banner_button | escape }}">
+              {{ settings.section_countdown_banner_button }}
+            </a>
+          </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{%- if settings.section_instagram_check -%}
+<section class="section-instagram section-padding scroll-fade-up">
+  <div class="page-width">
+    <div class="section-instagram-wrap">
+      <div class="section-instagram-head">
+        <h2 class="section-instagram-head-title section-heading">
+          {%- if settings.section_instagram_link != blank -%}
+          <a href="{{ settings.section_instagram_link }}" class="section-heading-link" title="{{ settings.section_instagram_title | escape }}">
+            {{- settings.section_instagram_title -}}
+          </a>
+          {%- else -%}
+          {{ settings.section_instagram_title }}
+          {%- endif -%}
+        </h2>
+      </div>
+      <div class="section-instagram-main">
+        <div class="section-instagram-items">
+          {%- for i in (1..10) -%}
+          {%- capture check -%}section_instagram_item_check_{{ i }}{%- endcapture -%}
+          {%- capture title -%}section_instagram_item_title_{{ i }}{%- endcapture -%}
+          {%- capture image -%}section_instagram_item_image_{{ i }}.jpg{%- endcapture -%}
+          {%- capture link -%}section_instagram_item_link_{{ i }}{%- endcapture -%}
+          {%- if settings[check] -%}
+          <div class="section-instagram-item">
+            <a href="{{ settings[link] }}" class="section-instagram-item-link" title="{{ settings[title] | escape }}">
+              <img width="600" height="600" loading="lazy" decoding="async" src="{{ image | asset_url }}" alt="{{ settings[title] | escape }}" title="{{ settings[title] | escape }}">
+              <span class="section-instagram-item-icon">
+                {%- include 'icon' with name: 'instagram' -%}
+              </span>
+            </a>
+          </div>
+          {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{%- endif -%}
+{%- if settings.section_blog_check -%}
+{%- assign blog_handle = settings.section_blog_handle | default: 'all' -%}
+{%- assign blog_source = blogs[blog_handle] -%}
+{%- assign blog_limit = settings.section_blog_limit | default: 8 | plus: 0 -%}
+<section class="section-home-blog section-padding scroll-fade-up">
+  <div class="page-width">
+    <div class="section-home-blog__head">
+      <div class="section-home-blog__head-left">
+        {%- if settings.section_blog_subtitle != blank -%}
+        <span class="section-home-blog__subtitle section-sub-heading">{{ settings.section_blog_subtitle }}</span>
+        {%- endif -%}
+        {%- if settings.section_blog_title != blank -%}
+        <h2 class="section-home-blog__title section-heading">
+          {%- if settings.section_blog_link != blank -%}
+          <a href="{{ settings.section_blog_link }}" class="section-heading-link" title="{{ settings.section_blog_title | escape }}">
+            {{- settings.section_blog_title -}}
+          </a>
+          {%- else -%}
+          {{ settings.section_blog_title }}
+          {%- endif -%}
+        </h2>
+        {%- endif -%}
+      </div>
+      {%- if settings.section_blog_view_all != blank and settings.section_blog_link != blank -%}
+      <a href="{{ settings.section_blog_link }}" class="section-home-blog__view-all" title="{{ settings.section_blog_view_all | escape }}">
+        {{- settings.section_blog_view_all -}}
+        {%- include 'icon' with name: 'arrow' -%}
+      </a>
+      {%- endif -%}
+    </div>
+    <div class="section-home-blog__carousel">
+      {%- if blog_source != null and blog_source.articles_count > 0 -%}
+      <div class="swiper section-home-blog__swiper">
+        <div class="swiper-wrapper">
+          {%- for article in blog_source.articles limit: blog_limit -%}
+          {%- assign lazyload = 'lazy' -%}
+          {%- if forloop.index <= 4 -%}{%- assign lazyload = 'eager' -%}{%- endif -%}
+          <div class="swiper-slide">
+            {%- include 'article-card' with article, lazyload: lazyload -%}
+          </div>
+          {%- endfor -%}
+        </div>
+      </div>
+      <div class="swiper-button-prev section-home-blog__nav-prev"></div>
+      <div class="swiper-button-next section-home-blog__nav-next"></div>
+      {%- else -%}
+      <p class="empty-message">Chưa có bài viết nào.</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+{%- endif -%} 
+{%- if settings.section_trending_check -%}
+<section class="section-trending section-padding scroll-fade-up">
+  <div class="page-width">
+    <div class="section-trending__head">
+      <h2 class="section-trending__title section-heading">
+        {%- if settings.section_trending_link != blank -%}
+        <a href="{{ settings.section_trending_link }}" class="section-heading-link" title="{{ settings.section_trending_title | escape }}">
+          {{- settings.section_trending_title -}}
+        </a>
+        {%- else -%}
+        {{ settings.section_trending_title }}
+        {%- endif -%}
+      </h2>
+      {%- if settings.section_trending_view_all != blank and settings.section_trending_link != blank -%}
+      <a href="{{ settings.section_trending_link }}" class="section-trending__view-all" title="{{ settings.section_trending_view_all | escape }}">
+        {{- settings.section_trending_view_all -}}
+      </a>
+      {%- endif -%}
+    </div>
+    <div class="section-trending__items">
+      {%- assign trending_collection = collections[settings.section_trending_collection] -%}
+      {%- if trending_collection != null and trending_collection.products_count > 0 -%}
+      {%- for product in trending_collection.products limit: 10 -%}
+      {%- assign price = product.variants[0].price -%}
+      {%- assign compare = product.variants[0].compare_at_price -%}
+      <a href="{{ product.url }}" class="section-trending__item" title="{{ product.title | escape }}">
+        <span class="section-trending__rank">
+          {%- if forloop.index < 10 -%}0{%- endif -%}{{ forloop.index -}}
+        </span>
+        <div class="section-trending__image">
+          {%- if product.featured_image -%}
+          <img width="64" height="64" loading="lazy" decoding="async" src="{{ product.featured_image.src | img_url: 'small' }}" alt="{{ product.featured_image.alt | default: product.title | escape }}">
+          {%- endif -%}
+        </div>
+        <div class="section-trending__content">
+          <p class="section-trending__name">{{ product.title }}</p>
+          <p class="section-trending__meta">
+            {%- if price == 0 -%}
+            {{ settings.product_contact_text | default: 'Liên hệ' }}
+            {%- else -%}
+            {%- if compare > price -%}
+            <del class="section-trending__price-compare">{{ compare | money }}</del>
+            {%- endif -%}
+            <span class="section-trending__price-sale">{{ price | money }}</span>
+            {%- endif -%}
+            {%- unless product.available -%}
+            &bull; {{ settings.product_soldout_text | default: 'Hết hàng' }}
+            {%- endunless -%}
+          </p>
+        </div>
+        <span class="section-trending__arrow">
+          {%- include 'icon' with name: 'arrow' -%}
+        </span>
+      </a>
+      {%- endfor -%}
+      {%- else -%}
+      <p class="empty-message">Không có sản phẩm trong bộ sưu tập này.</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+<section class="section-policy section-padding scroll-fade-up">
+  <div class="page-width">
+    <div class="section-policy-wrap">
+      <div class="section-policy-items">
+        {%- for i in (1..4) -%}
+        {%- capture check -%}section_policy_item_check_{{ i }}{%- endcapture -%}
+        {%- capture title -%}section_policy_item_title_{{ i }}{%- endcapture -%}
+        {%- capture description -%}section_policy_item_description_{{ i }}{%- endcapture -%}
+        {%- capture link -%}section_policy_item_link_{{ i }}{%- endcapture -%}
+        {%- capture use_image -%}section_policy_item_use_image_{{ i }}{%- endcapture -%}
+        {%- capture image -%}section_policy_item_image_{{ i }}.png{%- endcapture -%}
+        {%- if settings[check] -%}
+        <div class="section-policy-item">
+          <a href="{{ settings[link] }}" class="section-policy-item-link" title="{{ settings[title] | escape }}">
+            <img width="600" height="600" loading="lazy" decoding="async" src="{{ image | asset_url }}" alt="{{ settings[title] | escape }}" title="{{ settings[title] | escape }}">
+            <div class="section-policy-item-content">
+              <h3 class="section-policy-item-content-title">{{ settings[title] }}</h3>
+              <div class="section-policy-item-content-description">{{ settings[description] }}</div>
+            </div>
+          </a>
+        </div>
+        {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+{%- if settings.section_contacts_check -%}
+<section class="section-contacts section-padding scroll-fade-up">
+  <div class="page-width">
+    <div class="section-contacts-wrap">
+      <div class="section-contacts-head">
+        <h2 class="section-contacts-head-title section-heading">
+          {%- if settings.section_contacts_link != blank -%}
+          <a href="{{ settings.section_contacts_link }}" class="section-heading-link" title="{{ settings.section_contacts_title | escape }}">
+            {{- settings.section_contacts_title -}}
+          </a>
+          {%- else -%}
+          {{ settings.section_contacts_title }}
+          {%- endif -%}
+        </h2>
+      </div>
+      <div class="section-contacts-main">
+        <div class="section-contacts-items">
+          {%- for i in (1..4) -%}
+          {%- capture check -%}section_contacts_item_check_{{ i }}{%- endcapture -%}
+          {%- capture icon -%}section_contacts_item_icon_{{ i }}.png{%- endcapture -%}
+          {%- capture title -%}section_contacts_item_title_{{ i }}{%- endcapture -%}
+          {%- capture description -%}section_contacts_item_description_{{ i }}{%- endcapture -%}
+          {%- capture button -%}section_contacts_item_button_{{ i }}{%- endcapture -%}
+          {%- capture link -%}section_contacts_item_link_{{ i }}{%- endcapture -%}
+          {%- if settings[check] -%}
+          <div class="section-contacts-item">
+            <div class="section-contacts-item-wrap">
+              <div class="section-contacts-item-content">
+                <h3 class="section-contacts-item-content-title">{{ settings[title] }}</h3>
+                <div class="section-contacts-item-content-description">{{ settings[description] }}</div>
+                {%- if settings[button] != blank and settings[link] != blank -%}
+                <a href="{{ settings[link] }}" class="section-contacts-item-content-button button button-primary" title="{{ settings[button] | escape }}">
+                  {{- settings[button] -}}
+                </a>
+                {%- endif -%}
+              </div>
+              <div class="section-contacts-item-icon">
+                <img width="48" height="48" loading="lazy" decoding="async" src="{{ icon | asset_url }}" alt="{{ settings[title] | escape }}" title="{{ settings[title] | escape }}">
+              </div>
+            </div>
+          </div>
+          {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{%- endif -%}

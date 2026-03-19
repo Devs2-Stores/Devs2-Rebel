@@ -1,0 +1,341 @@
+{%- assign available = product.selected_or_first_available_variant.available -%}
+<product-template class="product-template">
+  {%- include 'section-breadcrumb' -%}
+  <div class="page-width">
+    <div class="product-template__wrapper">
+      <div class="product-template__media-wrapper{% if settings.product_lightbox_enable %} lightbox-enabled{% endif %}">
+        <div class="swiper product-template__media-slider">
+          <div class="swiper-wrapper">
+            {%- if product.images.size > 0 -%}
+            {%- for image in product.images -%}
+            <div class="swiper-slide product-template__media-slide">
+              <img src="{{ image | img_url: '1024x1024' }}" srcset="{{ image | img_url: '1024x1024' }} 1024w, {{ image | img_url: '2048x2048' }} 2048w" sizes="(min-width: 992px) 40vw, 100vw" alt="{{ image.alt | default: product.title | escape }}" width="1365" height="2048" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" decoding="async" {% if forloop.first %} fetchpriority="high" {% endif %} class="product-template__media-image" data-product-featured-image>
+            </div>
+            {%- endfor -%}
+            {%- for media in product.media -%}
+            {%- if media.media_type == 'external_video' -%}
+            <div class="swiper-slide product-template__media-slide product-template__media-slide--video" data-video-host="{{ media.host }}">
+              <div class="product-template__video-wrapper">
+                {%- if media.host == 'youtube' -%}
+                <iframe src="{{ media | external_video_url }}&enablejsapi=1&mute=1" class="product-template__video-iframe" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe>
+                {%- else -%}
+                <iframe src="{{ media | external_video_url }}" class="product-template__video-iframe" frameborder="0" allow="autoplay" allowfullscreen loading="lazy"></iframe>
+                {%- endif -%}
+              </div>
+            </div>
+            {%- endif -%}
+            {%- endfor -%}
+            {%- else -%}
+            <div class="swiper-slide product-template__media-slide">
+              <img src="{{ 'no-image.png' | img_url: 'large' | asset_url }}" alt="{{ product.title | escape }}" width="800" height="1200" loading="eager" decoding="async" class="product-template__media-image">
+            </div>
+            {%- endif -%}
+          </div>
+          <button type="button" class="swiper-button-next" aria-label="Ảnh tiếp theo"></button>
+          <button type="button" class="swiper-button-prev" aria-label="Ảnh trước"></button>
+        </div>
+        {%- assign has_video = false -%}
+        {%- for media in product.media -%}{%- if media.media_type == 'external_video' -%}{%- assign has_video = true -%}{%- endif -%}{%- endfor -%}
+        {%- if product.images.size > 1 or has_video -%}
+        <div class="swiper product-template__media-thumbs">
+          <div class="swiper-wrapper">
+            {%- for image in product.images -%}
+            <div class="swiper-slide product-template__media-thumb">
+              <img src="{{ image | img_url: 'large' }}" srcset="{{ image | img_url: 'large' }} 120w, {{ image | img_url: '1024x1024' }} 240w" sizes="80px" alt="{{ image.alt | default: product.title | escape }}" width="1365" height="2048" loading="lazy" decoding="async" class="product-template__media-thumb-image">
+            </div>
+            {%- endfor -%}
+            {%- for media in product.media -%}
+            {%- if media.media_type == 'external_video' -%}
+            <div class="swiper-slide product-template__media-thumb product-template__media-thumb--video">
+              <img src="{{ media.preview_image.src | product_img_url: 'compact' }}" alt="{{ media.alt | default: 'Video' }}" loading="lazy" decoding="async" class="product-template__media-thumb-image" width="120" height="68">
+              <span class="product-template__thumb-play-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M8 5v14l11-7L8 5z" fill="#fff"/></svg>
+              </span>
+            </div>
+            {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+        {%- endif -%}
+      </div>
+      <product-template-info class="product-template__info">
+        <h1 class="product-template__title">{{ product.title | escape }}</h1>
+        <ul class="product-template__meta">
+          {%- if settings.product_show_sku -%}
+          <li class="product-template__meta-item">
+            <span class="product-template__meta-label">Mã:</span>
+            <strong data-product-sku>
+              {{- product.selected_or_first_available_variant.sku | default: 'Đang cập nhật' -}}
+            </strong>
+          </li>
+          {%- endif -%}
+          {%- if settings.product_show_brand -%}
+          {%- if product.vendor and product.vendor != '' and product.vendor != blank -%}
+          {%- if settings.product_show_sku -%}
+          <li class="product-template__meta-separator">|</li>
+          {%- endif -%}
+          <li class="product-template__meta-item">
+            <span class="product-template__meta-label">Thương hiệu:</span>
+            <strong>{{ product.vendor | link_to_vendor }}</strong>
+          </li>
+          {%- endif -%}
+          {%- endif -%}
+          {%- if settings.product_show_type -%}
+          {%- if product.type and product.type != '' and product.type != blank -%}
+          {%- if settings.product_show_sku or settings.product_show_brand -%}
+          <li class="product-template__meta-separator">|</li>
+          {%- endif -%}
+          <li class="product-template__meta-item">
+            <span class="product-template__meta-label">Loại:</span>
+            <strong>{{ product.type | link_to_type }}</strong>
+          </li>
+          {%- endif -%}
+          {%- endif -%}
+          {%- if settings.product_show_availability -%}
+          {%- if settings.product_show_sku or settings.product_show_brand or settings.product_show_type -%}
+          <li class="product-template__meta-separator">|</li>
+          {%- endif -%}
+          <li class="product-template__meta-item">
+            <span class="product-template__meta-label">Tình trạng:</span>
+            {%- if available -%}
+            <strong data-product-available class="product-template__status--available">Còn hàng</strong>
+            {%- else -%}
+            <strong data-product-available class="product-template__status--unavailable">Hết hàng</strong>
+            {%- endif -%}
+          </li>
+          {%- endif -%}
+        </ul>
+        <div class="product-template__price-box">
+          <div class="product-template__price-current" data-product-price>
+            {%- assign selected_variant = product.selected_or_first_available_variant | default: product.variants.first -%}
+            {%- if selected_variant.price == 0 -%}Liên hệ{%- else -%}{{ selected_variant.price | money }}{%- endif -%}
+          </div>
+          <div class="product-template__price-compare" data-product-compare style="{%- if selected_variant.compare_at_price and selected_variant.compare_at_price > selected_variant.price -%}display: block;{%- else -%}display: none;{%- endif -%}">
+            {{ selected_variant.compare_at_price | money }}
+          </div>
+          <div class="product-template__price-sale" data-product-sale style="{%- if selected_variant.compare_at_price and selected_variant.compare_at_price > selected_variant.price -%}display: block;{%- else -%}display: none;{%- endif -%}">
+            {%- if selected_variant.compare_at_price and selected_variant.compare_at_price > selected_variant.price -%}
+            {%- assign percent = selected_variant.compare_at_price | minus: selected_variant.price | times: 100.0 | divided_by: selected_variant.compare_at_price | round -%}
+            -{{ percent }}%
+            {%- else -%}
+            -0%
+            {%- endif -%}
+          </div>
+        </div>
+        <div class="product-template__variant-picker">
+          {%- include 'product-variant-picker' -%}
+        </div>
+        <div class="product-template__actions">
+          <div class="product-template__quantity-group">
+            <label class="product-template__quantity-label">Số lượng</label>
+            {%- include 'quantity-selector' with form: "", product: product, variant: product.selected_or_first_available_variant, value: 1, min: 1, step: 1 -%}
+          </div>
+          {%- if settings.product_coupon_enable -%}
+          {%- include 'coupon-preview' -%}
+          {%- endif -%}
+          {%- if settings.product_stock_counter_enable -%}
+          {%- assign inv = product.selected_or_first_available_variant.inventory_quantity -%}
+          {%- assign stock_threshold = settings.product_stock_counter_threshold | default: 10 -%}
+          <div class="product-template__stock-counter{% if inv > 0 and inv <= stock_threshold %} is-visible{% endif %}" data-stock-counter data-threshold="{{ stock_threshold }}">
+            <span class="stock-counter__text">
+              <img src="https://cdn.hstatic.net/files/200001135053/file/4f05fdd32e72cde6dc74__1_.png" alt="" width="14" height="14" class="stock-counter__fire-icon" loading="lazy" decoding="async">
+              Chỉ còn <b data-stock-qty>{{ inv }}</b> sản phẩm — Nhanh tay kẻo hết!
+            </span>
+          </div>
+          {%- endif -%}
+          <div class="product-template__buttons">
+            <button {% unless available %} disabled {% endunless %} id="product-template__add" data-product-add type="button" class="button-primary product-template__add-btn" aria-label="Thêm sản phẩm vào giỏ hàng">
+              <span class="button-spinner hidden"></span>
+              <span class="button-content">
+                {%- include 'icon' with name: 'cart' -%}
+                <span>Thêm vào giỏ</span>
+              </span>
+            </button>
+            <button {% unless available %} disabled {% endunless %} id="product-template__buy" data-product-buy data-contact-link="{{ settings.product_contact_link | default: '/lien-he' }}" type="button" class="button-primary active product-template__buy-btn" aria-label="Mua ngay sản phẩm này">
+              <span class="button-spinner hidden"></span>
+              <span class="button-content">Mua ngay</span>
+            </button>
+            {%- if settings.product_show_wishlist -%}
+            <button type="button" class="product-template__wishlist-btn" data-product-wishlist data-product-id="{{ product.id }}" aria-label="Thêm vào yêu thích">
+              {%- include 'icon' with name: 'heart' -%}
+            </button>
+            {%- endif -%}
+          </div>
+          {%- if settings.product_back_in_stock_enable -%}
+          <div class="back-in-stock" data-back-in-stock style="{% if available %}display:none{% endif %}">
+            <div class="back-in-stock__inner">
+              <div class="back-in-stock__header">
+                <span class="back-in-stock__icon">🔔</span>
+                <strong class="back-in-stock__title">Thông báo khi có hàng</strong>
+              </div>
+              <p class="back-in-stock__desc">Để lại email, chúng tôi sẽ thông báo khi sản phẩm có hàng trở lại.</p>
+              {% capture noCaptcha %}
+              {% form 'contact' %}
+              {%- if form.posted_successfully? -%}
+              <div class="back-in-stock__success" role="alert">
+                <span>✅</span> Đã đăng ký! Chúng tôi sẽ thông báo khi có hàng.
+              </div>
+              {%- endif -%}
+              <div class="back-in-stock__form" {% if form.posted_successfully? %}style="display:none"{% endif %}>
+                <input type="email" name="contact[email]" class="back-in-stock__email" placeholder="Email của bạn" required aria-label="Email đăng ký thông báo">
+                <input type="hidden" name="contact[body]" value="[Back-in-stock] {{ product.title }} - {{ product.selected_or_first_available_variant.title }} | {{ shop.url }}{{ product.url }}" data-bis-body>
+                <button type="submit" class="back-in-stock__submit button-primary" aria-label="Đăng ký thông báo">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                </button>
+              </div>
+              {%- endform -%}
+              {%- endcapture -%}
+              {{ noCaptcha | replace: 'script', 'noscript' }}
+            </div>
+          </div>
+          {%- endif -%}
+        </div>
+        <div class="product-template__commitments">
+          {%- for i in (1..4) -%}
+          {%- capture check -%}product_commitment_check_{{ i }}{%- endcapture -%}
+          {%- capture image -%}product_commitment_image_{{ i }}.png{%- endcapture -%}
+          {%- capture text -%}product_commitment_text_{{ i }}{%- endcapture -%}
+          {%- if settings[check] -%}
+          <div class="product-template__commitment-item">
+            <div class="product-template__commitment-icon">
+              <img src="{{ image | img_url: 'small' | asset_url }}" alt="{{ settings[text] | escape }}" width="48" height="48" loading="lazy" decoding="async">
+            </div>
+            <div class="product-template__commitment-content">
+              <strong class="product-template__commitment-title">
+                {{- settings[text] | default: 'Cam kết sản phẩm' -}}
+              </strong>
+            </div>
+          </div>
+          {%- endif -%}
+          {%- endfor -%}
+        </div>
+        <div class="product-template__tabs">
+          <div class="product-template__tabs-nav" role="tablist">
+            {%- if product.description != blank -%}
+            <button class="product-template__tab-btn active" data-tab="description" role="tab" aria-selected="true" aria-controls="panel-description" id="tab-description">
+              <span>{{ settings.product_tab_description_name | default: 'Mô tả sản phẩm' }}</span>
+            </button>
+            {%- endif -%}
+            {%- if settings.product_tab_1_enable and settings.product_tab_1_page != blank -%}
+            <button class="product-template__tab-btn" data-tab="tab1" role="tab" aria-selected="false" aria-controls="panel-tab1" id="tab-tab1">
+              <span>{{ settings.product_tab_1_name | default: 'Tab 1' }}</span>
+            </button>
+            {%- endif -%}
+            {%- if settings.product_tab_2_enable and settings.product_tab_2_page != blank -%}
+            <button class="product-template__tab-btn" data-tab="tab2" role="tab" aria-selected="false" aria-controls="panel-tab2" id="tab-tab2">
+              <span>{{ settings.product_tab_2_name | default: 'Tab 2' }}</span>
+            </button>
+            {%- endif -%}
+            {%- if settings.product_tab_3_enable and settings.product_tab_3_page != blank -%}
+            <button class="product-template__tab-btn" data-tab="tab3" role="tab" aria-selected="false" aria-controls="panel-tab3" id="tab-tab3">
+              <span>{{ settings.product_tab_3_name | default: 'Tab 3' }}</span>
+            </button>
+            {%- endif -%}
+          </div>
+          <div class="product-template__tabs-content">
+            {%- if product.description != blank -%}
+            <div class="product-template__tab-panel active" data-panel="description" role="tabpanel" aria-labelledby="tab-description" id="panel-description">
+              <div class="product-template__description-wrapper" data-description-wrapper>
+                <div class="product-template__description-content is-collapsed" data-description-content>
+                  {{ product.description }}
+                </div>
+                <button class="product-template__description-toggle" data-description-toggle data-readmore-enabled="{{ settings.product_description_readmore | default: true }}" data-max-height="{{ settings.product_description_max_height | default: 300 }}">
+                  <span data-toggle-text-more>Xem thêm</span>
+                  <span data-toggle-text-less class="hidden">Rút gọn</span>
+                  {%- include 'icon' with name: 'chevron-right' -%}
+                </button>
+              </div>
+            </div>
+            {%- endif -%}
+            {%- if settings.product_tab_1_enable and settings.product_tab_1_page != blank -%}
+            <div class="product-template__tab-panel" data-panel="tab1" role="tabpanel" aria-labelledby="tab-tab1" id="panel-tab1">
+              <div class="product-template__description-wrapper" data-description-wrapper>
+                <div class="product-template__description-content is-collapsed" data-description-content>
+                  {{ pages[settings.product_tab_1_page].content }}
+                </div>
+                <button class="product-template__description-toggle" data-description-toggle data-readmore-enabled="{{ settings.product_description_readmore | default: true }}" data-max-height="{{ settings.product_description_max_height | default: 300 }}">
+                  <span data-toggle-text-more>Xem thêm</span>
+                  <span data-toggle-text-less class="hidden">Rút gọn</span>
+                  {%- include 'icon' with name: 'chevron-right' -%}
+                </button>
+              </div>
+            </div>
+            {%- endif -%}
+            {%- if settings.product_tab_2_enable and settings.product_tab_2_page != blank -%}
+            <div class="product-template__tab-panel" data-panel="tab2" role="tabpanel" aria-labelledby="tab-tab2" id="panel-tab2">
+              <div class="product-template__description-wrapper" data-description-wrapper>
+                <div class="product-template__description-content is-collapsed" data-description-content>
+                  {{ pages[settings.product_tab_2_page].content }}
+                </div>
+                <button class="product-template__description-toggle" data-description-toggle data-readmore-enabled="{{ settings.product_description_readmore | default: true }}" data-max-height="{{ settings.product_description_max_height | default: 300 }}">
+                  <span data-toggle-text-more>Xem thêm</span>
+                  <span data-toggle-text-less class="hidden">Rút gọn</span>
+                  {%- include 'icon' with name: 'chevron-right' -%}
+                </button>
+              </div>
+            </div>
+            {%- endif -%}
+            {%- if settings.product_tab_3_enable and settings.product_tab_3_page != blank -%}
+            <div class="product-template__tab-panel" data-panel="tab3" role="tabpanel" aria-labelledby="tab-tab3" id="panel-tab3">
+              <div class="product-template__description-wrapper" data-description-wrapper>
+                <div class="product-template__description-content is-collapsed" data-description-content>
+                  {{ pages[settings.product_tab_3_page].content }}
+                </div>
+                <button class="product-template__description-toggle" data-description-toggle data-readmore-enabled="{{ settings.product_description_readmore | default: true }}" data-max-height="{{ settings.product_description_max_height | default: 300 }}">
+                  <span data-toggle-text-more>Xem thêm</span>
+                  <span data-toggle-text-less class="hidden">Rút gọn</span>
+                  {%- include 'icon' with name: 'chevron-right' -%}
+                </button>
+              </div>
+            </div>
+            {%- endif -%}
+          </div>
+        </div>
+        {%- if settings.product_sharing_enable -%}
+        <div class="product-template__sharing">
+          {%- include 'share-buttons' -%}
+        </div>
+        {%- endif -%}
+      </product-template-info>
+    </div>
+    <div class="product-template__other">
+      {%- if settings.product_related_enable -%}
+      {%- if product.collections.size > 0 -%}
+      {%- assign collection_relate_object = product.collections.first -%}
+      {%- assign limit = settings.product_related_limit | default: 4 -%}
+      <product-template-relate class="product-template__relate">
+        <h2 class="global-heading" id="related-products">
+          {{ settings.product_related_title | default: 'Sản phẩm liên quan' }}
+        </h2>
+        <div class="product-template__relate-wrap swiper">
+          <ul class="product-cards product-template__relate-grids swiper-wrapper">
+            {%- for product in collection_relate_object.products limit: limit -%}
+            {%- assign lazyload = 'lazy' -%}
+            {%- assign fetchpriority = 'auto' -%}
+            {%- if forloop.index <= 3 -%}
+            {%- assign lazyload = 'eager' -%}
+            {%- endif -%}
+            {%- if forloop.first -%}
+            {%- assign fetchpriority = 'high' -%}
+            {%- endif -%}
+            <li class="product-cards__item swiper-slide">
+              {%- include 'product-card' with product, lazyload: lazyload, fetchpriority: fetchpriority, show_vendor: true -%}
+            </li>
+            {%- endfor -%}
+          </ul>
+          <button type="button" class="swiper-button-prev" aria-label="Sản phẩm trước"></button>
+          <button type="button" class="swiper-button-next" aria-label="Sản phẩm tiếp theo"></button>
+        </div>
+      </product-template-relate>
+      {%- endif -%}
+      {%- endif -%}
+      {%- include 'product-viewed' -%}
+    </div>
+  </div>
+</product-template>
+{%- include 'product-sticky-add' -%}
+{%- if settings.product_lightbox_enable -%}
+<product-lightbox class="product-lightbox"></product-lightbox>
+{%- endif -%}
+{%- include 'coupon-modal' -%}
+{%- include 'size-guide-modal' -%}

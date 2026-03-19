@@ -1,0 +1,28 @@
+{%- if settings.collection_best_check -%}
+	{%- assign limit = settings.collection_best_limit | default: 10 -%}
+	{%- assign target_collection = blank -%}
+	
+	{%- if settings.collection_best_type == 'manual' -%}
+		{%- assign target_collection = collections[settings.collection_best_manual_slug] -%}
+	{%- else -%}
+		{%- assign target_collection = collection -%}
+	{%- endif -%}
+
+	{%- if target_collection and target_collection.products_count > 0 -%}
+		<collection-best class="collection-best">
+			<div class="collection-best__header">
+				<h2 class="collection-best__title">{{ settings.collection_best_title }}</h2>
+			</div>
+			<div class="collection-best__content swiper" style="--swiper-cols-mobile: 2; --swiper-cols-tablet: 3; --swiper-cols-laptop: 4; --swiper-cols-desktop: 5; --swiper-gap-mobile: 10px; --swiper-gap-tablet: 15px; --swiper-gap-laptop: 20px; --swiper-gap-desktop: 20px;">
+				<div class="swiper-wrapper">
+					{%- for product in target_collection.products limit: limit -%}
+						<div class="swiper-slide">
+							{%- include 'product-card' -%}
+						</div>
+					{%- endfor -%}
+				</div>
+				<div class="swiper-pagination"></div>
+			</div>
+		</collection-best>
+	{%- endif -%}
+{%- endif -%}

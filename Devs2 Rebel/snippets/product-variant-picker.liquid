@@ -1,0 +1,54 @@
+{%- if product.variants.size > 1 -%}
+{%- assign options = product.options -%}
+{%- assign size_guide_shown = false -%}
+<product-variant-picker class="variant-picker-wrapper">
+  <script type="application/json" id="main-product-json">{{ product | json }}</script>
+  {%- for option in options -%}
+  {%- assign option_slug = option | handleize -%}
+  {%- assign turn_on_image = false -%}
+  {%- if option_slug == "mau-sac" or option_slug == "color" -%}{%- assign turn_on_image = true -%}{%- endif -%}
+  <product-variant-picker-item class="variant-picker" data-option-index="{{ forloop.index0 }}" data-option-name="{{ option }}">
+    <div class="variant-picker__label">
+      {{ option }}:
+      {%- if option_slug == "mau-sac" or option_slug == "color" -%}<span class="variant-picker__selected-value" data-selected-value></span>{%- endif -%}
+      {%- assign option_lower = option | downcase -%}
+      {%- if settings.product_size_guide_enable and size_guide_shown == false and (option_lower contains 'size' or option_lower contains 'kích') -%}
+      {%- assign size_guide_shown = true -%}
+      <button type="button" class="variant-picker__size-guide-btn" data-size-guide-trigger>
+        {%- include 'icon' with name: 'grid', size: '16' -%}
+        <span>{{ settings.product_size_guide_button | default: "Hướng dẫn chọn size" }}</span>
+      </button>
+      {%- endif -%}
+    </div>
+    <div class="variant-picker__items" role="radiogroup" aria-label="{{ option }}">
+      {%- assign option_position = 'option' | append: forloop.index -%}
+      {%- assign raw_values = product.variants | map: option_position | uniq -%}
+      {%- assign values_str = '' -%}
+      {%- for val in raw_values -%}
+        {%- unless val == blank -%}
+          {%- if values_str == '' -%}
+            {%- assign values_str = val -%}
+          {%- else -%}
+            {%- assign values_str = values_str | append: '|||' | append: val -%}
+          {%- endif -%}
+        {%- endunless -%}
+      {%- endfor -%}
+      {%- assign values = values_str | split: '|||' -%}
+      {%- for value in values -%}
+      {%- capture id -%}product-variant-picker-item-{{ option_position }}-{{ forloop.index }}{%- endcapture -%}
+      <div class="variant-picker__item">
+        <input type="radio" class="variant-picker__item-input" id="{{ id }}" name="product-variant-picker-item-{{ option_position }}" value="{{ value }}" data-value="{{ value }}">
+        <label class="variant-picker__item-label {% if turn_on_image %}variant-picker__item-label--image{% endif %}" for="{{ id }}">
+          {%- if turn_on_image -%}
+          <product-variant-picker-image class="variant-picker__item-image" data-option="{{ option_position }}" data-value="{{ value }}"></product-variant-picker-image>
+          {%- else -%}
+          <span>{{ value }}</span>
+          {%- endif -%}
+        </label>
+      </div>
+      {%- endfor -%}
+    </div>
+  </product-variant-picker-item>
+  {%- endfor -%}
+</product-variant-picker>
+{%- endif -%}

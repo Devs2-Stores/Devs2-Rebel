@@ -1,0 +1,9 @@
+{%- if settings.collection_template_image_check -%}
+<div class="collection-image">
+	{%- if collection.image != blank -%}
+	<img class="collection-image__img" loading="eager" fetchpriority="high" src="{{ collection.image | img_url: '2048x2048' }}" srcset="{{ collection.image | img_url: '2048x2048' }} 2048w, {{ collection.image | img_url: '1024x1024' }} 1024w, {{ collection.image | img_url: 'grande' }} 600w, {{ collection.image | img_url: 'large' }} 480w" sizes="(max-width: 480px) 50vw, 100vw" width="{{ collection.image.width }}" height="{{ collection.image.height }}" alt="{{ collection.title | escape }}">
+	{%- else -%}
+	<img class="collection-image__img" loading="eager" fetchpriority="high" src="{{ 'collection_template_image_desktop.png' | asset_url }}" alt="{{ collection.title | escape }}" width="1920" height="480" srcset="{{ 'collection_template_image_desktop.png' | asset_url }} 1920w, {{ 'collection_template_image_mobile.png' | asset_url }} 800w" sizes="(max-width: 800px) 100vw, 1920px">
+	{%- endif -%}
+</div>
+{%- endif -%}

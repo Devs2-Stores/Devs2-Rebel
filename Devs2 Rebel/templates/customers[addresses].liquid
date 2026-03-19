@@ -1,0 +1,290 @@
+<div class="addresses-template">
+  {%- include 'section-breadcrumb' -%}
+  <div class="page-width">
+    <h1 class="addresses-template__title">Danh sách địa chỉ</h1>
+    <div class="account-template__grid">
+      <div class="addresses-template__sidebar">
+        {%- include 'customer-sidebar' -%}
+      </div>
+      <div class="addresses-template__wrapper">
+        <div class="addresses-template__content">
+          {%- if customer.addresses.size > 0 -%}
+          <div class="addresses-template__list">
+            {%- for address in customer.addresses -%}
+            <div class="addresses-template__item" data-id="{{ address.id }}">
+              <div class="addresses-template__item-content">
+                <div class="addresses-template__item-info">
+                  {%- if address.id == customer.default_address.id -%}
+                  <span class="addresses-template__badge">Địa chỉ mặc định</span>
+                  {%- endif -%}
+                  <p class="addresses-template__name">{{ address.last_name }} {{ address.first_name }}</p>
+                  {%- if address.company != blank -%}
+                  <p class="addresses-template__detail"><strong>Công ty:</strong> {{ address.company }}</p>
+                  {%- endif -%}
+                  <p class="addresses-template__detail">
+                    <strong>Địa chỉ:</strong>
+                    {%- capture address_parts -%}
+                    {%- if address.address1 != blank -%}{{ address.address1 }}|{%- endif -%}
+                    {%- if address.address2 != blank -%}{{ address.address2 }}|{%- endif -%}
+                    {%- if address.ward != blank -%}{{ address.ward }}|{%- endif -%}
+                    {%- if address.district != blank -%}{{ address.district }}|{%- endif -%}
+                    {%- if address.city != blank -%}{{ address.city }}|{%- endif -%}
+                    {%- if address.province != blank -%}{{ address.province }}|{%- endif -%}
+                    {%- if address.country != blank -%}{{ address.country }}|{%- endif -%}
+                    {%- endcapture -%}
+                    {%- assign parts_array = address_parts | split: '|' -%}
+                    {{ parts_array | join: ', ' }}
+                  </p>
+                  {%- if address.phone != blank -%}
+                  <p class="addresses-template__detail"><strong>Điện thoại:</strong> {{ address.phone }}</p>
+                  {%- endif -%}
+                </div>
+                <div class="addresses-template__item-actions">
+                  <button type="button" title="Chỉnh sửa địa chỉ" aria-controls="edit_address_{{ address.id }}" class="button-primary" data-action="open-address-modal" data-modal-id="edit_address_{{ address.id }}">Chỉnh sửa</button>
+                  {%- unless address.id == customer.default_address.id -%}
+                  <button type="button" title="Xóa địa chỉ" class="button-primary button-danger" data-action="delete-address" data-address-id="{{ address.id }}">Xóa</button>
+                  {%- endunless -%}
+                </div>
+              </div>
+            </div>
+            {%- endfor -%}
+          </div>
+          {%- else -%}
+          <div class="addresses-template__empty">
+            {%- include 'icon' with name: 'sad', size: '60' -%}
+            <p>Bạn chưa có địa chỉ nào.</p>
+          </div>
+          {%- endif -%}
+          <div class="addresses-template__add">
+            <button type="button" id="acc-new" title="Thêm địa chỉ mới" class="button-primary active" data-action="open-address-modal" data-modal-id="addresses-new-modal">Thêm địa chỉ mới</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%- for address in customer.addresses -%}
+<address-modal class="address-modal-wrapper" id="edit_address_{{ address.id }}" role="dialog" aria-modal="true" aria-labelledby="edit_address_title_{{ address.id }}">
+  <button type="button" class="address-modal-overlay" data-action="close-address-modal" aria-label="Đóng"></button>
+  <div class="address-modal-panel">
+    {%- form 'customer_address', address -%}
+    <div class="address-modal-header">
+      <h2 class="address-modal-title" id="edit_address_title_{{ address.id }}">Chỉnh sửa địa chỉ</h2>
+      <button type="button" class="address-modal-close" data-action="close-address-modal" aria-label="Đóng">
+        {%- include 'icon' with name: 'close', size: '20' -%}
+      </button>
+    </div>
+    <div class="address-modal-body">
+      {%- if form.errors -%}
+      <div class="form-error" role="alert">{{ form.errors | default_errors }}</div>
+      {%- endif -%}
+      <div class="form form-address">
+        <div class="form-group">
+          <label for="edit_last_name_{{ address.id }}">
+            <span class="required">Họ</span>
+            <div class="form-group-input">
+              {%- include 'icon' with name: 'user' -%}
+              <input type="text" name="address[last_name]" id="edit_last_name_{{ address.id }}" placeholder="Nhập họ" value="{{ form.last_name }}" required autocapitalize="words" class="form-control">
+            </div>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="edit_first_name_{{ address.id }}">
+            <span class="required">Tên</span>
+            <div class="form-group-input">
+              {%- include 'icon' with name: 'user' -%}
+              <input type="text" name="address[first_name]" id="edit_first_name_{{ address.id }}" placeholder="Nhập tên" value="{{ form.first_name }}" required autocapitalize="words" class="form-control">
+            </div>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="edit_phone_{{ address.id }}">
+            <span>Số điện thoại</span>
+            <div class="form-group-input">
+              {%- include 'icon' with name: 'phone' -%}
+              <input type="tel" name="address[phone]" id="edit_phone_{{ address.id }}" placeholder="Nhập số điện thoại" value="{{ form.phone }}" pattern="\d+" maxlength="12" class="form-control">
+            </div>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="edit_company_{{ address.id }}">
+            <span>Công ty</span>
+            <div class="form-group-input">
+              {%- include 'icon' with name: 'store' -%}
+              <input type="text" name="address[company]" id="edit_company_{{ address.id }}" placeholder="Nhập tên công ty (nếu có)" value="{{ form.company }}" class="form-control">
+            </div>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="edit_address1_{{ address.id }}">
+            <span class="required">Địa chỉ</span>
+            <div class="form-group-input">
+              {%- include 'icon' with name: 'location' -%}
+              <input type="text" name="address[address1]" id="edit_address1_{{ address.id }}" placeholder="Nhập số nhà, tên đường" value="{{ form.address1 }}" class="form-control">
+            </div>
+          </label>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="edit_country_{{ address.id }}">
+              <span class="required">Quốc gia</span>
+              <div class="form-group-input">
+                {%- include 'icon' with name: 'location' -%}
+                <select name="address[country]" id="edit_country_{{ address.id }}" class="form-control" data-default="{{ form.country }}">
+                  <option value="" disabled>Chọn quốc gia</option>
+                  {{ country_option_tags }}
+                </select>
+              </div>
+            </label>
+          </div>
+          <div class="form-group not-vn">
+            <label for="edit_province_{{ address.id }}">
+              <span>Tỉnh thành</span>
+              <div class="form-group-input">
+                {%- include 'icon' with name: 'location' -%}
+                <select name="address[province]" id="edit_province_{{ address.id }}" class="form-control add province myselect" data-default="{{ form.province }}" data-address-type="province" data-address-zone="{{ address.id }}">
+                  <option value="" disabled selected>Chọn tỉnh thành</option>
+                </select>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="edit_zip_{{ address.id }}">
+            <span>Mã Zip</span>
+            <div class="form-group-input">
+              {%- include 'icon' with name: 'location' -%}
+              <input type="text" name="address[zip]" id="edit_zip_{{ address.id }}" placeholder="Nhập mã zip (nếu có)" value="{{ form.zip }}" class="form-control">
+            </div>
+          </label>
+        </div>
+        {%- unless address.id == customer.default_address.id -%}
+        <div class="form-group">
+          <label class="form-checkbox">
+            <input type="checkbox" name="address[default]" id="edit_is_default_{{ address.id }}" value="true">
+            <span>Đặt là địa chỉ mặc định?</span>
+          </label>
+        </div>
+        {%- endunless -%}
+      </div>
+    </div>
+    <div class="address-modal-footer">
+      <button type="button" class="button-primary" data-action="close-address-modal">Hủy</button>
+      <button type="submit" title="Cập nhật địa chỉ" class="button-primary active">Cập nhật địa chỉ</button>
+    </div>
+    {%- endform -%}
+  </div>
+</address-modal>
+{%- endfor -%}
+<address-modal class="address-modal-wrapper" id="addresses-new-modal" role="dialog" aria-modal="true" aria-labelledby="new_address_title">
+  <button type="button" class="address-modal-overlay" data-action="close-address-modal" aria-label="Đóng"></button>
+  <div class="address-modal-panel">
+    {%- form 'customer_address', customer.new_address -%}
+    <div class="address-modal-header">
+      <h2 class="address-modal-title" id="new_address_title">Thêm địa chỉ mới</h2>
+      <button type="button" class="address-modal-close" data-action="close-address-modal" aria-label="Đóng">
+        {%- include 'icon' with name: 'close', size: '20' -%}
+      </button>
+    </div>
+    <div class="address-modal-body">
+      {%- if form.errors -%}
+      <div class="form-error" role="alert">{{ form.errors | default_errors }}</div>
+      {%- endif -%}
+      <div class="form form-address">
+        <div class="form-group">
+          <label for="new_last_name">
+            <span class="required">Họ</span>
+            <div class="form-group-input">
+              {%- include 'icon' with name: 'user' -%}
+              <input type="text" name="address[last_name]" id="new_last_name" placeholder="Nhập họ" value="{{ form.last_name }}" required autocapitalize="words" class="form-control">
+            </div>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="new_first_name">
+            <span class="required">Tên</span>
+            <div class="form-group-input">
+              {%- include 'icon' with name: 'user' -%}
+              <input type="text" name="address[first_name]" id="new_first_name" placeholder="Nhập tên" value="{{ form.first_name }}" required autocapitalize="words" class="form-control">
+            </div>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="new_phone">
+            <span>Số điện thoại</span>
+            <div class="form-group-input">
+              {%- include 'icon' with name: 'phone' -%}
+              <input type="tel" name="address[phone]" id="new_phone" placeholder="Nhập số điện thoại" value="{{ form.phone }}" pattern="\d+" maxlength="12" class="form-control">
+            </div>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="new_company">
+            <span>Công ty</span>
+            <div class="form-group-input">
+              {%- include 'icon' with name: 'store' -%}
+              <input type="text" name="address[company]" id="new_company" placeholder="Nhập tên công ty (nếu có)" value="{{ form.company }}" class="form-control">
+            </div>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="new_address1">
+            <span class="required">Địa chỉ</span>
+            <div class="form-group-input">
+              {%- include 'icon' with name: 'location' -%}
+              <input type="text" name="address[address1]" id="new_address1" placeholder="Nhập số nhà, tên đường" value="{{ form.address1 }}" class="form-control">
+            </div>
+          </label>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="new_country">
+              <span class="required">Quốc gia</span>
+              <div class="form-group-input">
+                {%- include 'icon' with name: 'location' -%}
+                <select name="address[country]" id="new_country" class="form-control" data-default="{{ form.country | default: 'Việt Nam' }}">
+                  <option value="" disabled selected>Chọn quốc gia</option>
+                  {{ country_option_tags }}
+                </select>
+              </div>
+            </label>
+          </div>
+          <div class="form-group not-vn">
+            <label for="new_province">
+              <span>Tỉnh thành</span>
+              <div class="form-group-input">
+                {%- include 'icon' with name: 'location' -%}
+                <select name="address[province]" id="new_province" class="form-control add" data-address-type="province" data-address-zone="new">
+                  <option value="" disabled selected>Chọn tỉnh thành</option>
+                </select>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="new_zip">
+            <span>Mã Zip</span>
+            <div class="form-group-input">
+              {%- include 'icon' with name: 'location' -%}
+              <input type="text" name="address[zip]" id="new_zip" placeholder="Nhập mã zip (nếu có)" value="{{ form.zip }}" class="form-control">
+            </div>
+          </label>
+        </div>
+        <div class="form-group">
+          <label class="form-checkbox">
+            <input type="checkbox" name="address[default]" id="new_is_default" value="true">
+            <span>Đặt là địa chỉ mặc định?</span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="address-modal-footer">
+      <button type="button" class="button-primary" data-action="close-address-modal">Hủy</button>
+      <button type="submit" title="Thêm địa chỉ" class="button-primary active">Thêm địa chỉ</button>
+    </div>
+    {%- endform -%}
+  </div>
+</address-modal>

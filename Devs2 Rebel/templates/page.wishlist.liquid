@@ -1,0 +1,94 @@
+{%- include 'section-breadcrumb' -%}
+<div class="wishlist-page page-width section-padding">
+  <div class="wishlist-page__header">
+    <h1>{{ settings.wishlist_page_title | default: 'Sản phẩm yêu thích' }}</h1>
+    <p>Danh sách sản phẩm bạn đã lưu</p>
+  </div>
+  <div class="wishlist-page__content">
+    <div class="wishlist-page__empty" style="display: none;">
+      <div class="wishlist-page__empty-icon">{%- include 'icon' with name: 'heart' -%}</div>
+      <h2>{{ settings.wishlist_empty_text | default: 'Bạn chưa có sản phẩm yêu thích nào.' }}</h2>
+      <p>Hãy thêm sản phẩm yêu thích của bạn để xem lại sau</p>
+      <a href="{{ settings.wishlist_empty_button_link | default: '/collections/all' }}" class="button-primary">
+        {{- settings.wishlist_empty_button | default: 'Khám phá sản phẩm' -}}
+      </a>
+    </div>
+    <ul class="wishlist-page__products product-cards"></ul>
+  </div>
+</div>
+<script>
+  customElements.whenDefined('wishlist-manager').then(function() {
+    var wishlistManager = document.querySelector('wishlist-manager');
+    if (!wishlistManager) return;
+    var wishlist = wishlistManager.getWishlist();
+    var productsContainer = document.querySelector('.wishlist-page__products');
+    var emptyState = document.querySelector('.wishlist-page__empty');
+
+    if (wishlist.length === 0) {
+      emptyState.style.display = 'block';
+      productsContainer.style.display = 'none';
+      return;
+    }
+
+    // Get handles from wishlist items
+    var handles = wishlist
+      .map(function(item) { return typeof item === 'string' ? '' : (item.handle || ''); })
+      .filter(function(h) { return h !== ''; });
+
+    if (handles.length === 0) {
+      emptyState.style.display = 'block';
+      productsContainer.style.display = 'none';
+      return;
+    }
+
+    emptyState.style.display = 'none';
+    productsContainer.style.display = 'grid';
+
+    // Fetch each product by handle using Haravan search filter
+    var fetchPromises = handles.map(function(handle) {
+      return fetch('/search?q=filter=(handle:product=' + encodeURIComponent(handle) + ')&view=product')
+        .then(function(res) { return res.text(); })
+        .then(function(html) {
+          if (html && html.includes('product-card')) return html.trim();
+          return null;
+        })
+        .catch(function() { return null; });
+    });
+
+    Promise.all(fetchPromises)
+      .then(function(results) {
+        var validResults = results.filter(function(html) { return html; });
+        if (validResults.length === 0) {
+          emptyState.style.display = 'block';
+          productsContainer.style.display = 'none';
+          return;
+        }
+        productsContainer.innerHTML = validResults.map(function(html) {
+          return '<li class="product-cards__item">' + html + '</li>';
+        }).join('');
+        // Update button states for loaded cards
+        wishlistManager.updateAllWishlistStates();
+      })
+      .catch(function(err) {
+        console.error('Wishlist load error:', err);
+        emptyState.style.display = 'block';
+        productsContainer.style.display = 'none';
+      });
+
+    window.addEventListener('wishlist-changed', function(e) {
+      var removedId = e.detail && e.detail.productId;
+      if (removedId) {
+        var btn = productsContainer.querySelector('[data-product-id="' + removedId + '"]');
+        if (btn) {
+          var card = btn.closest('.product-cards__item');
+          if (card) card.remove();
+        }
+      }
+      var currentWishlist = wishlistManager.getWishlist();
+      if (currentWishlist.length === 0) {
+        emptyState.style.display = 'block';
+        productsContainer.style.display = 'none';
+      }
+    });
+  });
+</script>

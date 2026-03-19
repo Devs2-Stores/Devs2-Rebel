@@ -1,0 +1,38 @@
+{%- assign share_url = canonical_url -%}
+{%- assign share_url_encoded = share_url | url_encode | replace: ' ', '%20' -%}
+{%- assign share_title = page_title | url_encode | replace: ' ', '%20' -%}
+<share-buttons class="share-buttons" data-url="{{ share_url }}" role="group" aria-label="{{ title | default: 'Chia sẻ:' }}">
+	<div class="share-buttons__label" id="share-label">{{ title | default: 'Chia sẻ:' }}</div>
+	<div class="share-buttons__items" role="list" aria-labelledby="share-label">
+		<div class="share-buttons__item">
+			<a role="listitem" href="https://www.facebook.com/sharer/sharer.php?u={{ share_url_encoded }}" target="_blank" rel="noopener noreferrer" title="Chia sẻ lên Facebook" aria-label="Chia sẻ bài viết lên Facebook">
+				<img width="30" height="30" loading="lazy" decoding="async" src="https://cdn.hstatic.net/files/200001117620/file/facebook.png" alt="Facebook">
+			</a>
+		</div>
+		<div class="share-buttons__item">
+			<a role="listitem" href="https://twitter.com/intent/tweet?url={{ share_url_encoded }}&amp;text={{ share_title }}" target="_blank" rel="noopener noreferrer" title="Chia sẻ lên Twitter" aria-label="Chia sẻ bài viết lên Twitter">
+				<img width="30" height="30" loading="lazy" decoding="async" src="https://cdn.hstatic.net/files/200001117620/file/twitter.png" alt="Twitter">
+			</a>
+		</div>
+		<div class="share-buttons__item">
+			<a role="listitem" href="https://pinterest.com/pin/create/button/?url={{ share_url_encoded }}&amp;description={{ share_title }}" target="_blank" rel="noopener noreferrer" title="Chia sẻ lên Pinterest" aria-label="Chia sẻ bài viết lên Pinterest">
+				<img width="30" height="30" loading="lazy" decoding="async" src="https://cdn.hstatic.net/files/200001117620/file/pinterest.png" alt="Pinterest">
+			</a>
+		</div>
+		<div class="share-buttons__item">
+			<a role="listitem" href="https://www.linkedin.com/shareArticle?mini=true&amp;url={{ share_url_encoded }}&amp;title={{ share_title }}" target="_blank" rel="noopener noreferrer" title="Chia sẻ lên LinkedIn" aria-label="Chia sẻ bài viết lên LinkedIn">
+				<img width="30" height="30" loading="lazy" decoding="async" src="https://cdn.hstatic.net/files/200001117620/file/linkedin.png" alt="LinkedIn">
+			</a>
+		</div>
+		<div class="share-buttons__item">
+			<a role="listitem" href="mailto:?subject={{ share_title }}&amp;body={{ 'Xem sản phẩm này:' | url_encode | replace: ' ', '%20' }}%20{{ share_url_encoded }}" title="Chia sẻ qua Email" aria-label="Chia sẻ bài viết qua Email">
+				<img width="30" height="30" loading="lazy" decoding="async" src="https://cdn.hstatic.net/files/200001117620/file/email.png" alt="Email">
+			</a>
+		</div>
+		<div class="share-buttons__item">
+			<button type="button" class="share-buttons__copy" data-url="{{ share_url }}" title="Sao chép liên kết" aria-label="Sao chép liên kết bài viết">
+				<img width="30" height="30" loading="lazy" decoding="async" src="https://cdn.hstatic.net/files/200001117620/file/chain.png" alt="Copy Link">
+			</button>
+		</div>
+	</div>
+</share-buttons>

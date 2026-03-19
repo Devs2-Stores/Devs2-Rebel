@@ -1,0 +1,42 @@
+<div class="collection-sort">
+	<div class="collection-sort__count">
+		{%- if collection.products_count > 0 -%}
+			{%- assign current_count = paginate.current_page | times: limit -%}
+			{%- if current_count > collection.products_count -%}
+				{%- assign current_count = collection.products_count -%}
+			{%- endif -%}
+			<span class="collection-sort__count-text">
+				Hiển thị <b>{{ current_count }}</b> / {{ collection.products_count }} sản phẩm
+			</span>
+		{%- endif -%}
+	</div>
+	
+	<div class="collection-sort__view">
+		<button type="button" class="collection-sort__view-btn collection-sort__view-btn--active" data-view="grid" aria-label="Xem dạng lưới">
+			{%- include 'icon' with name: 'grid' -%}
+		</button>
+		<button type="button" class="collection-sort__view-btn" data-view="list" aria-label="Xem dạng danh sách">
+			{%- include 'icon' with name: 'list' -%}
+		</button>
+	</div>
+
+	<div class="collection-sort__by">
+		<label for="SortBy" class="collection-sort__label">Sắp xếp theo:</label>
+		<div class="collection-sort__select-wrapper">
+			{%- assign current_sort = '' -%}
+			{%- if collection.sort_by -%}
+				{%- assign current_sort = collection.sort_by -%}
+			{%- endif -%}
+			<select name="sortby" id="SortBy" class="collection-sort__select" aria-label="Sắp xếp">
+			<option value="" {% if current_sort == '' %}selected{% endif %}>Mặc định</option>
+			<option value="(title:product=asc)" {% if current_sort == '(title:product=asc)' %}selected{% endif %}>Tên A → Z</option>
+			<option value="(title:product=desc)" {% if current_sort == '(title:product=desc)' %}selected{% endif %}>Tên Z → A</option>
+			<option value="(price:product=asc)" {% if current_sort == '(price:product=asc)' %}selected{% endif %}>Giá thấp đến cao</option>
+			<option value="(price:product=desc)" {% if current_sort == '(price:product=desc)' %}selected{% endif %}>Giá cao đến thấp</option>
+			<option value="(updated_at:product=desc)" {% if current_sort == '(updated_at:product=desc)' %}selected{% endif %}>Mới nhất</option>
+			<option value="(updated_at:product=asc)" {% if current_sort == '(updated_at:product=asc)' %}selected{% endif %}>Cũ nhất</option>
+		</select>
+			{%- include 'icon' with name: 'arrow', class: 'collection-sort__icon' -%}
+		</div>
+	</div>
+</div>

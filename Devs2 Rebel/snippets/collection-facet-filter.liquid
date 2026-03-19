@@ -1,0 +1,132 @@
+{%- capture facet_filter_title -%}
+<div class="facet-filter__title">
+  <span class="facet-filter__title-text">replace_with_data</span>
+</div>
+{%- endcapture -%}
+
+{%- assign price_1 = settings.collection_filter_price_1 -%}
+{%- assign price_2 = settings.collection_filter_price_2 -%}
+{%- assign price_3 = settings.collection_filter_price_3 -%}
+{%- assign price_4 = settings.collection_filter_price_4 -%}
+
+<div class="facet-filters">
+  <form class="facet-filters__form">
+    <facet-filter class="facet-filter" data-operator="AND">
+      {{ facet_filter_title | replace: 'replace_with_data', 'Tình trạng' }}
+      <div class="facet-filter__content">
+        <div class="facet-filter__content-list" data-collapse-limit="5">
+          <facet-filter-item class="facet-filter-item" data-value="available">
+            <label for="facet-filter-available" class="facet-filter-item__label">
+              <input type="checkbox" name="available" id="facet-filter-available" value="true">
+              <span>Còn hàng</span>
+            </label>
+          </facet-filter-item>
+        </div>
+      </div>
+    </facet-filter>
+
+    <facet-filter class="facet-filter" data-operator="OR">
+      {{ facet_filter_title | replace: 'replace_with_data', 'Khoảng giá' }}
+      <div class="facet-filter__content">
+        <div class="facet-filter__content-list" data-collapse-limit="5">
+          <facet-filter-item class="facet-filter-item">
+            <label for="facet-filter-price-1" class="facet-filter-item__label">
+              <input type="checkbox" name="price_variant" id="facet-filter-price-1" value="0_{{ price_1 }}">
+              <span>Dưới {{ price_1 | money }}</span>
+            </label>
+          </facet-filter-item>
+          <facet-filter-item class="facet-filter-item">
+            <label for="facet-filter-price-2" class="facet-filter-item__label">
+              <input type="checkbox" name="price_variant" id="facet-filter-price-2" value="{{ price_1 }}_{{ price_2 }}">
+              <span>{{ price_1 | money }} - {{ price_2 | money }}</span>
+            </label>
+          </facet-filter-item>
+          <facet-filter-item class="facet-filter-item">
+            <label for="facet-filter-price-3" class="facet-filter-item__label">
+              <input type="checkbox" name="price_variant" id="facet-filter-price-3" value="{{ price_2 }}_{{ price_3 }}">
+              <span>{{ price_2 | money }} - {{ price_3 | money }}</span>
+            </label>
+          </facet-filter-item>
+          <facet-filter-item class="facet-filter-item">
+            <label for="facet-filter-price-4" class="facet-filter-item__label">
+              <input type="checkbox" name="price_variant" id="facet-filter-price-4" value="{{ price_3 }}_{{ price_4 }}">
+              <span>{{ price_3 | money }} - {{ price_4 | money }}</span>
+            </label>
+          </facet-filter-item>
+          <facet-filter-item class="facet-filter-item">
+            <label for="facet-filter-price-5" class="facet-filter-item__label">
+              <input type="checkbox" name="price_variant" id="facet-filter-price-5" value="{{ price_4 }}_999999999">
+              <span>Trên {{ price_4 | money }}</span>
+            </label>
+          </facet-filter-item>
+        </div>
+      </div>
+    </facet-filter>
+
+    <facet-filter class="facet-filter" data-operator="OR">
+      {{ facet_filter_title | replace: 'replace_with_data', 'Thương hiệu' }}
+      <div class="facet-filter__content">
+        <div class="facet-filter__content-list" data-collapse-limit="5">
+          {%- assign vendors = collection.all_vendors | sort -%}
+          {%- for vendor in vendors -%}
+          {%- if vendor and vendor != "" and vendor != blank -%}
+          <facet-filter-item class="facet-filter-item" data-value="{{ vendor | escape }}">
+            <label for="facet-filter-vendor-{{ vendor | handleize }}" class="facet-filter-item__label">
+              <input type="checkbox" name="vendor" id="facet-filter-vendor-{{ vendor | handleize }}" value="{{ vendor | escape }}">
+              <span>{{ vendor }}</span>
+            </label>
+          </facet-filter-item>
+          {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </facet-filter>
+
+    <facet-filter class="facet-filter" data-operator="OR">
+      {{ facet_filter_title | replace: 'replace_with_data', 'Loại sản phẩm' }}
+      <div class="facet-filter__content">
+        <div class="facet-filter__content-list" data-collapse-limit="5">
+          {%- assign product_types = collection.all_types | sort -%}
+          {%- for product_type in product_types -%}
+          {%- if product_type and product_type != "" and product_type != blank -%}
+          <facet-filter-item class="facet-filter-item" data-value="{{ product_type | escape }}">
+            <label for="facet-filter-product-type-{{ product_type | handleize }}" class="facet-filter-item__label">
+              <input type="checkbox" name="product_type" id="facet-filter-product-type-{{ product_type | handleize }}" value="{{ product_type | escape }}">
+              <span>{{ product_type }}</span>
+            </label>
+          </facet-filter-item>
+          {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </facet-filter>
+
+    {%- if settings.collection_filter_tags != blank -%}
+    <facet-filter class="facet-filter" data-operator="AND">
+      {{ facet_filter_title | replace: 'replace_with_data', 'Tags' }}
+      <div class="facet-filter__content">
+        <div class="facet-filter__content-list" data-collapse-limit="5">
+          {%- assign filter_tags = settings.collection_filter_tags | split: ',' -%}
+          {%- for tag in filter_tags -%}
+          {%- assign tag = tag | strip -%}
+          {%- if tag != blank -%}
+          <facet-filter-item class="facet-filter-item" data-value="{{ tag | escape }}">
+            <label for="facet-filter-tag-{{ tag | handleize }}" class="facet-filter-item__label">
+              <input type="checkbox" name="tag" id="facet-filter-tag-{{ tag | handleize }}" value="{{ tag | escape }}">
+              <span>{{ tag }}</span>
+            </label>
+          </facet-filter-item>
+          {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </facet-filter>
+    {%- endif -%}
+
+    <div class="collection-facet-filter__actions">
+      <button type="button" class="collection-facet-filter__clear-all" data-action="clear-all-filters" aria-label="Xóa tất cả bộ lọc">
+        Xóa tất cả bộ lọc
+      </button>
+    </div>
+  </form>
+</div>

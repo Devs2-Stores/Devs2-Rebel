@@ -1,0 +1,16 @@
+<quickview-modal class="quickview-modal-wrapper hidden" role="dialog" aria-modal="true" aria-labelledby="quickview-modal-title">
+  <div class="quickview-modal-overlay" data-action="close-quickview" role="button" tabindex="0" aria-label="Đóng xem nhanh"></div>
+  <div class="quickview-modal-panel">
+    <div class="quickview-modal-header">
+      <h2 class="quickview-modal-title" id="quickview-modal-title">Xem nhanh</h2>
+      <button type="button" class="quickview-modal-close" data-action="close-quickview" aria-label="Đóng xem nhanh">{%- include 'icon' with name: 'close' -%}</button>
+    </div>
+    <div class="quickview-modal-content">
+      <div class="quickview-modal-loading hidden">
+        <div class="quickview-modal-loading-spinner"></div>
+        <p>Đang tải sản phẩm...</p>
+      </div>
+      <div class="quickview-modal-body"></div>
+    </div>
+  </div>
+</quickview-modal>

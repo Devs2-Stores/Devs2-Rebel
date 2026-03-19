@@ -1,0 +1,54 @@
+<global-header class="header" data-sticky="{{ settings.header_sticky_enable | default: true }}" style="--header-bg: {{ settings.header_bg_color | default: '#ffffff' }}; --header-text: {{ settings.header_text_color | default: '#000000' }};">
+  <div class="page-width">
+    <div class="header__wrapper">
+      <button type="button" class="header__hamburger" data-action="open-mobile-menu" aria-label="Mở menu">
+        {%- include 'icon' with name: 'hamburger' -%}
+      </button>
+      <div class="header__logo">
+        <a href="/" class="header__logo-link" title="{{ shop.name }}" aria-label="Trang chủ {{ shop.name }}">
+          {%- if settings.header_logo_use -%}
+          <img src="{{ 'header_logo.png' | img_url: 'grande' | asset_url }}" alt="{{ shop.name | escape }}" width="{{ settings.header_logo_width | default: '150' }}" height="{{ settings.header_logo_height | default: '50' }}" loading="eager" decoding="async" fetchpriority="high" class="header__logo-image">
+          {%- else -%}
+          <span class="header__logo-text">{{ shop.name }}</span>
+          {%- endif -%}
+        </a>
+      </div>
+      <div class="header__menu">
+        {%- include 'megamenu' -%}
+      </div>
+      <div class="header__actions">
+        <button type="button" class="header__action-btn" data-action="open-search-modal" aria-label="Tìm kiếm">
+          {%- include 'icon' with name: 'search' -%}
+        </button>
+        {%- if settings.wishlist_enable != false and settings.wishlist_show_header_icon != false -%}
+        {%- assign wishlist_url = '/pages/wishlist' -%}
+        {%- if settings.wishlist_page != blank -%}
+        {%- assign wishlist_url = pages[settings.wishlist_page].url -%}
+        {%- endif -%}
+        <a href="{{ wishlist_url }}" class="header__action-btn wishlist-icon-wrapper" title="Yêu thích">
+          {%- include 'icon' with name: 'heart' -%}
+          {%- if settings.wishlist_show_count != false -%}
+          <span class="wishlist-count" style="display: none;">0</span>
+          {%- endif -%}
+        </a>
+        {%- endif -%}
+        <a href="/account" class="header__action-btn" aria-label="Tài khoản">
+          {%- include 'icon' with name: 'user' -%}
+        </a>
+        <button type="button" class="header__action-btn header__cart-btn" data-action="open-cart-sidebar" aria-label="Mở giỏ hàng">
+          {%- include 'icon' with name: 'cart' -%}
+          <span class="cart-count" aria-live="polite" aria-atomic="true">{{ cart.item_count }}</span>
+        </button>
+      </div>
+      <div class="header__mobile-actions">
+        <button type="button" class="header__action-btn" data-action="open-search-modal" aria-label="Tìm kiếm">
+          {%- include 'icon' with name: 'search' -%}
+        </button>
+        <button type="button" class="header__action-btn header__cart-btn" data-action="open-cart-sidebar" aria-label="Mở giỏ hàng">
+          {%- include 'icon' with name: 'cart' -%}
+          <span class="cart-count" aria-live="polite" aria-atomic="true">{{ cart.item_count }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</global-header>

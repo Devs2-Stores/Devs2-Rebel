@@ -1,0 +1,57 @@
+<ul class="shop-social">
+	{%- if settings.linkFbsocial != blank -%}
+	<li class="shop-social__item">
+		<a href="{{ settings.linkFbsocial }}" class="shop-social__link shop-social__link--facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook {{ shop.name }}" title="Theo dõi trên Facebook">
+			{%- include 'icon' with name: 'facebook' -%}
+		</a>
+	</li>
+	{%- endif -%}
+
+	{%- if settings.linkInsocial != blank -%}
+	<li class="shop-social__item">
+		<a href="{{ settings.linkInsocial }}" class="shop-social__link shop-social__link--instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram {{ shop.name }}" title="Theo dõi trên Instagram">
+			{%- include 'icon' with name: 'instagram' -%}
+		</a>
+	</li>
+	{%- endif -%}
+
+	{%- if settings.linkYtsocial != blank -%}
+	<li class="shop-social__item">
+		<a href="{{ settings.linkYtsocial }}" class="shop-social__link shop-social__link--youtube" target="_blank" rel="noopener noreferrer" aria-label="Youtube {{ shop.name }}" title="Theo dõi trên Youtube">
+			{%- include 'icon' with name: 'youtube' -%}
+		</a>
+	</li>
+	{%- endif -%}
+
+	{%- if settings.linkTwsocial != blank -%}
+	<li class="shop-social__item">
+		<a href="{{ settings.linkTwsocial }}" class="shop-social__link shop-social__link--tiktok" target="_blank" rel="noopener noreferrer" aria-label="TikTok {{ shop.name }}" title="Theo dõi trên TikTok">
+			{%- include 'icon' with name: 'tiktok' -%}
+		</a>
+	</li>
+	{%- endif -%}
+
+	{%- if settings.linkPisocial != blank -%}
+	<li class="shop-social__item">
+		<a href="{{ settings.linkPisocial }}" class="shop-social__link shop-social__link--pinterest" target="_blank" rel="noopener noreferrer" aria-label="Pinterest {{ shop.name }}" title="Theo dõi trên Pinterest">
+			{%- include 'icon' with name: 'pinterest' -%}
+		</a>
+	</li>
+	{%- endif -%}
+
+	{%- if settings.linkTwittersocial != blank -%}
+	<li class="shop-social__item">
+		<a href="{{ settings.linkTwittersocial }}" class="shop-social__link shop-social__link--twitter" target="_blank" rel="noopener noreferrer" aria-label="Twitter {{ shop.name }}" title="Theo dõi trên Twitter">
+			{%- include 'icon' with name: 'twitter' -%}
+		</a>
+	</li>
+	{%- endif -%}
+
+	{%- if settings.linkLinkedinsocial != blank -%}
+	<li class="shop-social__item">
+		<a href="{{ settings.linkLinkedinsocial }}" class="shop-social__link shop-social__link--linkedin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn {{ shop.name }}" title="Theo dõi trên LinkedIn">
+			{%- include 'icon' with name: 'linkedin' -%}
+		</a>
+	</li>
+	{%- endif -%}
+</ul>
