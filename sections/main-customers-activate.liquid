@@ -1,0 +1,65 @@
+
+<div class="activate-account-template">
+    <div class="page-width">
+    <h1 class="activate-account-template__title">{{ 'customer.activate_account.title' | t }}</h1>
+    <div class="activate-account-template__wrapper">
+      <div class="activate-account-template__form">
+        {%- form 'activate_customer_password' -%}
+        {%- if form.errors -%}
+        <div class="form-error" role="alert">{{ form.errors | default_errors }}</div>
+        {%- endif -%}
+        {%- if form.posted_successfully? -%}
+        <div class="form-success">
+          <p class="form-success__text">{{ 'customer.activate_account.success' | t }}</p>
+          <div class="form-success__action">
+            <a href="{{ routes.account_login_url }}" class="button-primary active" title="{{ 'customer.login_page.sign_in' | t }}">{{ 'customer.login_page.sign_in' | t }}</a>
+          </div>
+        </div>
+        {%- else -%}
+        <div class="form-info">
+          <p>{{ 'customer.activate_account.subtext' | t }}</p>
+        </div>
+        <div class="form form-activate-account">
+          <toggle-password class="form-group">
+            <label for="activate-password" class="label-password">
+              <span class="required">{{ 'customer.activate_account.password' | t }}</span>
+              <div class="form-group-input">
+                {%- render 'icon', name: 'password' -%}
+                <input type="password" id="activate-password" class="form-control" name="customer[password]" required minlength="8" placeholder="{{ 'customer.activate_account.password_placeholder' | t }}">
+                {%- render 'icon', name: 'eye-show', class: 'icon-eye-show right' -%}
+                {%- render 'icon', name: 'eye-hide', class: 'icon-eye-hide right', style: 'display:none;' -%}
+              </div>
+            </label>
+          </toggle-password>
+          <toggle-password class="form-group">
+            <label for="activate-password-confirm" class="label-password">
+              <span class="required">{{ 'customer.activate_account.password_confirm' | t }}</span>
+              <div class="form-group-input">
+                {%- render 'icon', name: 'password' -%}
+                <input type="password" id="activate-password-confirm" class="form-control" name="customer[password_confirmation]" required minlength="8" placeholder="{{ 'customer.activate_account.password_confirm_placeholder' | t }}">
+                {%- render 'icon', name: 'eye-show', class: 'icon-eye-show right' -%}
+                {%- render 'icon', name: 'eye-hide', class: 'icon-eye-hide right', style: 'display:none;' -%}
+              </div>
+            </label>
+          </toggle-password>
+          <div class="form-group">
+            <button type="submit" class="button-primary active form-submit" title="{{ 'customer.activate_account.submit' | t }}">{{ 'customer.activate_account.submit' | t }}</button>
+          </div>
+          <div class="form-group form-group--text-center">
+            <a class="link" href="{{ routes.account_login_url }}" title="{{ 'customer.activate_account.back_to_login' | t }}">{{ 'customer.activate_account.back_to_login' | t }}</a>
+          </div>
+        </div>
+        {%- endif -%}
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main_customers_activate.name",
+  "tag": "section",
+  "class": "section-main-customers-activate"
+}
+{% endschema %}

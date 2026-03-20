@@ -11,20 +11,20 @@
     <ul class="customer-sidebar__list">
       <li>
         <a href="/account" title="Thông tin tài khoản" aria-label="Thông tin tài khoản" class="customer-sidebar__link{% if template.name == 'customers[account]' %} active{% endif %}">
-          {%- include 'icon' with name: 'user' -%}
+          {%- render 'icon', name: 'user'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
           <span>Thông tin tài khoản</span>
         </a>
       </li>
       <li>
         <a href="/account/addresses" title="Danh sách địa chỉ" aria-label="Danh sách địa chỉ" class="customer-sidebar__link{% if template.name == 'customers[addresses]' %} active{% endif %}">
-          {%- include 'icon' with name: 'location' -%}
+          {%- render 'icon', name: 'location'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
           <span>Danh sách địa chỉ</span>
         </a>
       </li>
 
       <li class="customer-sidebar__separator">
         <a href="/account/logout" title="Đăng xuất" aria-label="Đăng xuất" class="customer-sidebar__link customer-sidebar__link--logout">
-          {%- include 'icon' with name: 'logout' -%}
+          {%- render 'icon', name: 'logout'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
           <span>Đăng xuất</span>
         </a>
       </li>

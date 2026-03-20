@@ -1,6 +1,9 @@
 # Dependencies
 node_modules/
 
+# Secrets
+.env
+
 # Shopify CLI
 .shopify/
 
@@ -15,6 +18,14 @@ Thumbs.db
 # Agent / AI
 .agent/
 .gemini/
+tools/
+
+
+# Reference themes (case study)
+_reference/
 
 # Build
 *.zip
+
+# Migration changelogs
+_changelogs/

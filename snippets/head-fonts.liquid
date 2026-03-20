@@ -1,10 +1,34 @@
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-{%- if settings.global_heading_font != blank -%}
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family={{ settings.global_heading_font }}&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family={{ settings.global_heading_font }}&display=swap">
-{%- endif -%}
-{%- if settings.global_body_font != blank -%}
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family={{ settings.global_body_font }}&display=swap">  
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family={{ settings.global_body_font }}&display=swap">
-{%- endif -%}
+{%- comment %}
+  Renders font preloading and @font-face declarations.
+  Uses Shopify font_picker settings (type_header_font, type_subheading_font, type_body_font).
+  Only loads non-system fonts.
+{% endcomment -%}
+
+{%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
+  <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+{%- endunless -%}
+
+{%- liquid
+  assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
+  assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
+  assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
+-%}
+
+{% style %}
+  {{ settings.type_header_font | font_face: font_display: 'swap' }}
+  {{ settings.type_subheading_font | font_face: font_display: 'swap' }}
+  {{ settings.type_body_font | font_face: font_display: 'swap' }}
+  {{ body_font_bold | font_face: font_display: 'swap' }}
+  {{ body_font_italic | font_face: font_display: 'swap' }}
+  {{ body_font_bold_italic | font_face: font_display: 'swap' }}
+{% endstyle %}
+
+{%- unless settings.type_body_font.system? -%}
+  <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
+{%- endunless -%}
+{%- unless settings.type_header_font.system? -%}
+  <link rel="preload" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
+{%- endunless -%}
+{%- unless settings.type_subheading_font.system? -%}
+  <link rel="preload" as="font" href="{{ settings.type_subheading_font | font_url }}" type="font/woff2" crossorigin>
+{%- endunless -%}

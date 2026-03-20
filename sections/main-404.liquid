@@ -1,0 +1,61 @@
+
+<div class="error-404-template">
+  <div class="page-width">
+    <div class="error-404-template__box">
+      <div class="error-404-template__icon">
+        {%- render 'icon', name: '404', class: 'icon-404' -%}
+      </div>
+      <h1 class="error-404-template__title">{{ section.settings.title }}</h1>
+      <p class="error-404-template__content">{{ section.settings.content }}</p>
+      <div class="error-404-template__actions">
+        <a class="error-404-template__back" href="/">
+          {%- render 'icon', name: 'arrow', class: 'icon-arrow' -%}
+          {{ section.settings.back_text }}
+        </a>
+        <a class="error-404-template__products button-primary active" href="{{ section.settings.products_link | default: routes.all_products_collection_url }}">
+          {{ section.settings.products_text }}
+          {%- render 'icon', name: 'cart', class: 'icon-cart' -%}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main_404.name",
+  "tag": "section",
+  "class": "section-main-404",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.main_404.settings.title.label",
+      "default": "Page not found"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "t:sections.main_404.settings.content.label",
+      "default": "The page you are looking for does not exist."
+    },
+    {
+      "type": "text",
+      "id": "back_text",
+      "label": "t:sections.main_404.settings.back_text.label",
+      "default": "Back to home"
+    },
+    {
+      "type": "text",
+      "id": "products_text",
+      "label": "t:sections.main_404.settings.products_text.label",
+      "default": "View products"
+    },
+    {
+      "type": "url",
+      "id": "products_link",
+      "label": "t:sections.main_404.settings.products_link.label"
+    }
+  ]
+}
+{% endschema %}

@@ -1,13 +1,13 @@
-<mega-menu class="megamenu" role="navigation" aria-label="Menu chính">
-  <button type="button" class="megamenu__arrow megamenu__arrow--left" aria-label="Cuộn trái" hidden>
-    {%- include 'icon' with name: 'chevron-left', size: 16 -%}
+<mega-menu class="megamenu" role="navigation" aria-label="{{ 'accessibility.navigation' | t | default: 'Main navigation' }}">
+  <button type="button" class="megamenu__arrow megamenu__arrow--left" aria-label="{{ 'accessibility.scroll_left' | t | default: 'Scroll left' }}" hidden>
+    {%- render 'icon', name: 'chevron-left' -%}
   </button>
   <div class="megamenu__container">
     <nav class="megamenu__nav">
       <ul class="megamenu__list" role="menubar">
-        {%- if settings.header_menu != blank -%}
-        {%- assign menu = linklists[settings.header_menu] -%}
-        {%- for link in menu.links -%}
+        {%- assign nav_menu = menu | default: linklists[settings.header_menu] | default: linklists['main-menu'] -%}
+        {%- if nav_menu != blank and nav_menu.links != blank -%}
+        {%- for link in nav_menu.links -%}
         {%- assign menu_index = forloop.index -%}
         {%- capture mega_check -%}megamenu_enable_{{ menu_index }}{%- endcapture -%}
         {%- capture mega_columns -%}megamenu_columns_{{ menu_index }}{%- endcapture -%}
@@ -15,13 +15,13 @@
         {%- capture mega_image_title -%}megamenu_image_title_{{ menu_index }}{%- endcapture -%}
         {%- capture mega_image_link -%}megamenu_image_link_{{ menu_index }}{%- endcapture -%}
         {%- assign has_children = false -%}
-        {%- if linklists[link.handle].links != blank -%}{%- assign has_children = true -%}{%- endif -%}
+        {%- if link.links.size > 0 -%}{%- assign has_children = true -%}{%- endif -%}
 
         {%- if has_children -%}
         <li class="megamenu__item {% if settings[mega_check] -%}has__mega{%- endif %}" role="none">
           <button type="button" class="megamenu__trigger" aria-expanded="false" aria-haspopup="true" aria-controls="megamenu-{{ menu_index }}" role="menuitem">
             <span>{{ link.title }}</span>
-            {%- include 'icon' with name: 'chevron-down', size: 12 -%}
+            {%- render 'icon', name: 'chevron-down' -%}
           </button>
 
           <div id="megamenu-{{ menu_index }}" class="megamenu__dropdown" role="menu" aria-hidden="true">
@@ -29,14 +29,14 @@
               {%- if settings[mega_check] -%}
               <div class="megamenu__grid" style="--mega-columns: {{ settings[mega_columns] | default: 4 }};">
                 <div class="megamenu__columns">
-                  {%- for link_2 in linklists[link.handle].links -%}
+                  {%- for link_2 in link.links -%}
                   <div class="megamenu__column">
-                    <h3 class="megamenu__column-title{% if linklists[link_2.handle].links == blank %} megamenu__column-title--no-children{% endif %}">
+                    <h3 class="megamenu__column-title{% if link_2.links.size == 0 %} megamenu__column-title--no-children{% endif %}">
                       <a href="{{ link_2.url }}" title="{{ link_2.title | escape }}" class="megamenu__column-title-link" role="menuitem">{{ link_2.title }}</a>
                     </h3>
-                    {%- if linklists[link_2.handle].links != blank -%}
+                    {%- if link_2.links.size > 0 -%}
                     <ul class="megamenu__links" role="none">
-                      {%- for link_3 in linklists[link_2.handle].links -%}
+                      {%- for link_3 in link_2.links -%}
                       <li role="none">
                         <a href="{{ link_3.url }}" title="{{ link_3.title | escape }}" class="megamenu__link" role="menuitem">{{ link_3.title }}</a>
                       </li>
@@ -55,7 +55,7 @@
                     {%- if settings[mega_image_title] != blank -%}
                     <div class="megamenu__featured-content">
                       <h4 class="megamenu__featured-title">{{ settings[mega_image_title] }}</h4>
-                      <span class="megamenu__featured-cta">Xem ngay</span>
+                      <span class="megamenu__featured-cta">{{ 'general.view_all' | t | default: 'View now' }}</span>
                     </div>
                     {%- endif -%}
                   </a>
@@ -65,17 +65,17 @@
               {%- else -%}
               <div class="megamenu__simple">
                 <ul class="megamenu__simple-list" role="none">
-                  {%- for link_2 in linklists[link.handle].links -%}
+                  {%- for link_2 in link.links -%}
                   {%- assign has_level3 = false -%}
-                  {%- if linklists[link_2.handle].links != blank -%}{%- assign has_level3 = true -%}{%- endif -%}
+                  {%- if link_2.links.size > 0 -%}{%- assign has_level3 = true -%}{%- endif -%}
                   <li class="{% if has_level3 %}megamenu__simple-parent{% endif %}" role="none">
                     <a href="{{ link_2.url }}" title="{{ link_2.title | escape }}" class="megamenu__simple-link" role="menuitem">
                       {{ link_2.title }}
-                      {%- if has_level3 -%}{%- include 'icon' with name: 'chevron-right', size: 10 -%}{%- endif -%}
+                      {%- if has_level3 -%}{%- render 'icon', name: 'chevron-right' -%}{%- endif -%}
                     </a>
                     {%- if has_level3 -%}
                     <ul class="megamenu__simple-sub" role="none">
-                      {%- for link_3 in linklists[link_2.handle].links -%}
+                      {%- for link_3 in link_2.links -%}
                       <li role="none">
                         <a href="{{ link_3.url }}" title="{{ link_3.title | escape }}" class="megamenu__simple-sublink" role="menuitem">{{ link_3.title }}</a>
                       </li>
@@ -100,14 +100,14 @@
         {%- endfor -%}
         {%- else -%}
         <li class="megamenu__item" role="none">
-          <span class="megamenu__trigger megamenu__trigger--text">Đang cập nhật</span>
+          <span class="megamenu__trigger megamenu__trigger--text">{{ 'general.updating' | t | default: 'Updating...' }}</span>
         </li>
         {%- endif -%}
       </ul>
     </nav>
   </div>
-  <button type="button" class="megamenu__arrow megamenu__arrow--right" aria-label="Cuộn phải" hidden>
-    {%- include 'icon' with name: 'chevron-right', size: 16 -%}
+  <button type="button" class="megamenu__arrow megamenu__arrow--right" aria-label="{{ 'accessibility.scroll_right' | t | default: 'Scroll right' }}" hidden>
+    {%- render 'icon', name: 'chevron-right' -%}
   </button>
   <div class="megamenu__overlay" aria-hidden="true"></div>
 </mega-menu>

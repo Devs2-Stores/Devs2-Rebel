@@ -246,8 +246,6 @@ textarea:focus-visible,
   border-radius: var(--radius-sm);
   outline: 2px solid var(--color-white);
 }
-.section-padding { margin-block: 3rem; }
-.section-padding-bg { margin-block: 3rem; padding-block: 3rem; }
 .section-breadcrumbs { padding: var(--space-lg) 0; font-size: var(--font-sm); color: var(--color-gray); }
 .section-breadcrumbs .breadcrumb {
   display: flex;
@@ -296,14 +294,10 @@ textarea:focus-visible,
 .section-pagination .pagination-link:hover { background: var(--color-primary); border-color: var(--color-primary); color: var(--color-white); }
 .section-pagination .pagination-link--active { background: var(--color-primary); border-color: var(--color-primary); color: var(--color-white); cursor: default; }
 .section-pagination .pagination-link--ellipsis { border: none; padding: 0 0.5rem; cursor: default; }
-.section-heading { font-weight: var(--font-weight-bold); font-size: var(--font-3xl); }
+.section-heading { font-weight: var(--font-weight-bold); }
 .section-heading .section-heading-link { color: var(--color-paragraph); transition: all var(--transition-base); cursor: pointer; }
 .section-heading .section-heading-link:hover { color: var(--color-primary); }
 .sticky { position: sticky; top: var(--headerh); }
-.global-heading { margin-block: 1.75rem; }
-@media (min-width: 1200px) {
-  .global-heading { margin-block: 2.75rem; }
-}
 .border { border: var(--border-width) solid var(--border-color); }
 .button-primary {
   flex: 1;
@@ -2972,8 +2966,3 @@ quickview-modal .quickview-modal-panel .quickview-modal-content .quickview-modal
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-/* ═══════════════════════════════════════════════════
-   SCROLL FADE UP ANIMATION
-   ═══════════════════════════════════════════════════ */
-.scroll-fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
-.scroll-fade-up.is-visible { opacity: 1; transform: translateY(0); }

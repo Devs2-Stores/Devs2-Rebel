@@ -12,7 +12,7 @@
 						<a href="{{ related_article.url }}" class="article-sidebar__related-post-link" title="{{ related_article.title | escape }}">
 							{%- if related_article.image -%}
 							<div class="article-sidebar__related-post-image">
-								<img src="{{ related_article.image.src | img_url: 'compact' }}" alt="{{ related_article.image.alt | default: related_article.title | escape }}" loading="lazy" width="64" height="64">
+								<img src="{{ related_article.image.src | image_url: width: 160 }}" alt="{{ related_article.image.alt | default: related_article.title | escape }}" loading="lazy" width="64" height="64">
 							</div>
 							{%- endif -%}
 							<div class="article-sidebar__related-post-content">

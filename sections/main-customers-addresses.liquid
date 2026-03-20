@@ -1,0 +1,295 @@
+
+<div class="addresses-template">
+    <div class="page-width">
+    <h1 class="addresses-template__title">{{ 'customer.addresses.title' | t }}</h1>
+    <div class="account-template__grid">
+      <div class="addresses-template__sidebar">
+        {%- render 'customer-sidebar' -%}
+      </div>
+      <div class="addresses-template__wrapper">
+        <div class="addresses-template__content">
+          {%- if customer.addresses.size > 0 -%}
+          <div class="addresses-template__list">
+            {%- for address in customer.addresses -%}
+            <div class="addresses-template__item" data-id="{{ address.id }}">
+              <div class="addresses-template__item-content">
+                <div class="addresses-template__item-info">
+                  {%- if address.id == customer.default_address.id -%}
+                  <span class="addresses-template__badge">{{ 'customer.addresses.default' | t }}</span>
+                  {%- endif -%}
+                  <p class="addresses-template__name">{{ address.last_name }} {{ address.first_name }}</p>
+                  {%- if address.company != blank -%}
+                  <p class="addresses-template__detail"><strong>{{ 'customer.addresses.company' | t }}:</strong> {{ address.company }}</p>
+                  {%- endif -%}
+                  <p class="addresses-template__detail">
+                    <strong>{{ 'customer.addresses.address1' | t }}:</strong>
+                    {%- capture address_parts -%}
+                    {%- if address.address1 != blank -%}{{ address.address1 }}|{%- endif -%}
+                    {%- if address.address2 != blank -%}{{ address.address2 }}|{%- endif -%}
+                    {%- if address.city != blank -%}{{ address.city }}|{%- endif -%}
+                    {%- if address.province != blank -%}{{ address.province }}|{%- endif -%}
+                    {%- if address.country != blank -%}{{ address.country }}|{%- endif -%}
+                    {%- endcapture -%}
+                    {%- assign parts_array = address_parts | split: '|' -%}
+                    {{ parts_array | join: ', ' }}
+                  </p>
+                  {%- if address.phone != blank -%}
+                  <p class="addresses-template__detail"><strong>{{ 'customer.register.phone' | t }}:</strong> {{ address.phone }}</p>
+                  {%- endif -%}
+                </div>
+                <div class="addresses-template__item-actions">
+                  <button type="button" title="{{ 'customer.addresses.edit' | t }}" aria-controls="edit_address_{{ address.id }}" class="button-primary" data-action="open-address-modal" data-modal-id="edit_address_{{ address.id }}">{{ 'customer.addresses.edit' | t }}</button>
+                  {%- unless address.id == customer.default_address.id -%}
+                  <button type="button" title="{{ 'customer.addresses.delete' | t }}" class="button-primary button-danger" data-action="delete-address" data-address-id="{{ address.id }}">{{ 'customer.addresses.delete' | t }}</button>
+                  {%- endunless -%}
+                </div>
+              </div>
+            </div>
+            {%- endfor -%}
+          </div>
+          {%- else -%}
+          <div class="addresses-template__empty">
+            {%- render 'icon', name: 'sad', size: '60' -%}
+            <p>{{ 'customer.addresses.no_addresses' | t }}</p>
+          </div>
+          {%- endif -%}
+          <div class="addresses-template__add">
+            <button type="button" id="acc-new" title="{{ 'customer.addresses.add_new' | t }}" class="button-primary active" data-action="open-address-modal" data-modal-id="addresses-new-modal">{{ 'customer.addresses.add_new' | t }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%- for address in customer.addresses -%}
+<address-modal class="address-modal-wrapper" id="edit_address_{{ address.id }}" role="dialog" aria-modal="true" aria-labelledby="edit_address_title_{{ address.id }}">
+  <button type="button" class="address-modal-overlay" data-action="close-address-modal" aria-label="{{ 'accessibility.close' | t }}"></button>
+  <div class="address-modal-panel">
+    {%- form 'customer_address', address -%}
+    <div class="address-modal-header">
+      <h2 class="address-modal-title" id="edit_address_title_{{ address.id }}">{{ 'customer.addresses.edit_address' | t }}</h2>
+      <button type="button" class="address-modal-close" data-action="close-address-modal" aria-label="{{ 'accessibility.close' | t }}">
+        {%- render 'icon', name: 'close', size: '20' -%}
+      </button>
+    </div>
+    <div class="address-modal-body">
+      {%- if form.errors -%}
+      <div class="form-error" role="alert">{{ form.errors | default_errors }}</div>
+      {%- endif -%}
+      <div class="form form-address">
+        <div class="form-group">
+          <label for="edit_last_name_{{ address.id }}">
+            <span class="required">{{ 'customer.addresses.last_name' | t }}</span>
+            <div class="form-group-input">
+              {%- render 'icon', name: 'user' -%}
+              <input type="text" name="address[last_name]" id="edit_last_name_{{ address.id }}" placeholder="{{ 'customer.addresses.last_name' | t }}" value="{{ form.last_name }}" required autocapitalize="words" class="form-control">
+            </div>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="edit_first_name_{{ address.id }}">
+            <span class="required">{{ 'customer.addresses.first_name' | t }}</span>
+            <div class="form-group-input">
+              {%- render 'icon', name: 'user' -%}
+              <input type="text" name="address[first_name]" id="edit_first_name_{{ address.id }}" placeholder="{{ 'customer.addresses.first_name' | t }}" value="{{ form.first_name }}" required autocapitalize="words" class="form-control">
+            </div>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="edit_phone_{{ address.id }}">
+            <span>{{ 'customer.register.phone' | t }}</span>
+            <div class="form-group-input">
+              {%- render 'icon', name: 'phone' -%}
+              <input type="tel" name="address[phone]" id="edit_phone_{{ address.id }}" placeholder="{{ 'customer.register.phone' | t }}" value="{{ form.phone }}" pattern="\d+" maxlength="12" class="form-control">
+            </div>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="edit_company_{{ address.id }}">
+            <span>{{ 'customer.addresses.company' | t }}</span>
+            <div class="form-group-input">
+              {%- render 'icon', name: 'store' -%}
+              <input type="text" name="address[company]" id="edit_company_{{ address.id }}" placeholder="{{ 'customer.addresses.company' | t }}" value="{{ form.company }}" class="form-control">
+            </div>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="edit_address1_{{ address.id }}">
+            <span class="required">{{ 'customer.addresses.address1' | t }}</span>
+            <div class="form-group-input">
+              {%- render 'icon', name: 'location' -%}
+              <input type="text" name="address[address1]" id="edit_address1_{{ address.id }}" placeholder="{{ 'customer.addresses.address1' | t }}" value="{{ form.address1 }}" class="form-control">
+            </div>
+          </label>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="edit_country_{{ address.id }}">
+              <span class="required">{{ 'customer.addresses.country' | t }}</span>
+              <div class="form-group-input">
+                {%- render 'icon', name: 'location' -%}
+                <select name="address[country]" id="edit_country_{{ address.id }}" class="form-control" data-default="{{ form.country }}">
+                  <option value="" disabled>{{ 'customer.addresses.country' | t }}</option>
+                  {{ country_option_tags }}
+                </select>
+              </div>
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="edit_province_{{ address.id }}">
+              <span>{{ 'customer.addresses.province' | t }}</span>
+              <div class="form-group-input">
+                {%- render 'icon', name: 'location' -%}
+                <select name="address[province]" id="edit_province_{{ address.id }}" class="form-control" data-default="{{ form.province }}">
+                  <option value="" disabled selected>{{ 'customer.addresses.province' | t }}</option>
+                </select>
+              </div>
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="edit_zip_{{ address.id }}">
+            <span>{{ 'customer.addresses.zip' | t }}</span>
+            <div class="form-group-input">
+              {%- render 'icon', name: 'location' -%}
+              <input type="text" name="address[zip]" id="edit_zip_{{ address.id }}" placeholder="{{ 'customer.addresses.zip' | t }}" value="{{ form.zip }}" class="form-control">
+            </div>
+          </label>
+        </div>
+        {%- unless address.id == customer.default_address.id -%}
+        <div class="form-group">
+          <label class="form-checkbox">
+            <input type="checkbox" name="address[default]" id="edit_is_default_{{ address.id }}" value="true">
+            <span>{{ 'customer.addresses.set_default' | t }}</span>
+          </label>
+        </div>
+        {%- endunless -%}
+      </div>
+    </div>
+    <div class="address-modal-footer">
+      <button type="button" class="button-primary" data-action="close-address-modal">{{ 'customer.addresses.cancel' | t }}</button>
+      <button type="submit" title="{{ 'customer.addresses.update' | t }}" class="button-primary active">{{ 'customer.addresses.update' | t }}</button>
+    </div>
+    {%- endform -%}
+  </div>
+</address-modal>
+{%- endfor -%}
+
+<address-modal class="address-modal-wrapper" id="addresses-new-modal" role="dialog" aria-modal="true" aria-labelledby="new_address_title">
+  <button type="button" class="address-modal-overlay" data-action="close-address-modal" aria-label="{{ 'accessibility.close' | t }}"></button>
+  <div class="address-modal-panel">
+    {%- form 'customer_address', customer.new_address -%}
+    <div class="address-modal-header">
+      <h2 class="address-modal-title" id="new_address_title">{{ 'customer.addresses.add_new' | t }}</h2>
+      <button type="button" class="address-modal-close" data-action="close-address-modal" aria-label="{{ 'accessibility.close' | t }}">
+        {%- render 'icon', name: 'close', size: '20' -%}
+      </button>
+    </div>
+    <div class="address-modal-body">
+      {%- if form.errors -%}
+      <div class="form-error" role="alert">{{ form.errors | default_errors }}</div>
+      {%- endif -%}
+      <div class="form form-address">
+        <div class="form-group">
+          <label for="new_last_name">
+            <span class="required">{{ 'customer.addresses.last_name' | t }}</span>
+            <div class="form-group-input">
+              {%- render 'icon', name: 'user' -%}
+              <input type="text" name="address[last_name]" id="new_last_name" placeholder="{{ 'customer.addresses.last_name' | t }}" value="{{ form.last_name }}" required autocapitalize="words" class="form-control">
+            </div>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="new_first_name">
+            <span class="required">{{ 'customer.addresses.first_name' | t }}</span>
+            <div class="form-group-input">
+              {%- render 'icon', name: 'user' -%}
+              <input type="text" name="address[first_name]" id="new_first_name" placeholder="{{ 'customer.addresses.first_name' | t }}" value="{{ form.first_name }}" required autocapitalize="words" class="form-control">
+            </div>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="new_phone">
+            <span>{{ 'customer.register.phone' | t }}</span>
+            <div class="form-group-input">
+              {%- render 'icon', name: 'phone' -%}
+              <input type="tel" name="address[phone]" id="new_phone" placeholder="{{ 'customer.register.phone' | t }}" value="{{ form.phone }}" pattern="\d+" maxlength="12" class="form-control">
+            </div>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="new_company">
+            <span>{{ 'customer.addresses.company' | t }}</span>
+            <div class="form-group-input">
+              {%- render 'icon', name: 'store' -%}
+              <input type="text" name="address[company]" id="new_company" placeholder="{{ 'customer.addresses.company' | t }}" value="{{ form.company }}" class="form-control">
+            </div>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="new_address1">
+            <span class="required">{{ 'customer.addresses.address1' | t }}</span>
+            <div class="form-group-input">
+              {%- render 'icon', name: 'location' -%}
+              <input type="text" name="address[address1]" id="new_address1" placeholder="{{ 'customer.addresses.address1' | t }}" value="{{ form.address1 }}" class="form-control">
+            </div>
+          </label>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="new_country">
+              <span class="required">{{ 'customer.addresses.country' | t }}</span>
+              <div class="form-group-input">
+                {%- render 'icon', name: 'location' -%}
+                <select name="address[country]" id="new_country" class="form-control" data-default="{{ form.country }}">
+                  <option value="" disabled selected>{{ 'customer.addresses.country' | t }}</option>
+                  {{ country_option_tags }}
+                </select>
+              </div>
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="new_province">
+              <span>{{ 'customer.addresses.province' | t }}</span>
+              <div class="form-group-input">
+                {%- render 'icon', name: 'location' -%}
+                <select name="address[province]" id="new_province" class="form-control" data-default="{{ form.province }}">
+                  <option value="" disabled selected>{{ 'customer.addresses.province' | t }}</option>
+                </select>
+              </div>
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="new_zip">
+            <span>{{ 'customer.addresses.zip' | t }}</span>
+            <div class="form-group-input">
+              {%- render 'icon', name: 'location' -%}
+              <input type="text" name="address[zip]" id="new_zip" placeholder="{{ 'customer.addresses.zip' | t }}" value="{{ form.zip }}" class="form-control">
+            </div>
+          </label>
+        </div>
+        <div class="form-group">
+          <label class="form-checkbox">
+            <input type="checkbox" name="address[default]" id="new_is_default" value="true">
+            <span>{{ 'customer.addresses.set_default' | t }}</span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="address-modal-footer">
+      <button type="button" class="button-primary" data-action="close-address-modal">{{ 'customer.addresses.cancel' | t }}</button>
+      <button type="submit" title="{{ 'customer.addresses.add_new' | t }}" class="button-primary active">{{ 'customer.addresses.add_new' | t }}</button>
+    </div>
+    {%- endform -%}
+  </div>
+</address-modal>
+
+{% schema %}
+{
+  "name": "t:sections.main_customers_addresses.name",
+  "tag": "section",
+  "class": "section-main-customers-addresses"
+}
+{% endschema %}

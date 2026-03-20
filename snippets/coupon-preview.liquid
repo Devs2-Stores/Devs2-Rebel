@@ -1,6 +1,6 @@
 <coupon-preview class="coupon-preview" data-action="open-modal">
 	<div class="coupon-preview__label">
-		{%- include 'icon' with name: 'tag' -%}
+		{%- render 'icon', name: 'tag'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
 		<span>{{ settings.product_coupon_label | default: "Mã giảm giá" }}</span>
 	</div>
 	<div class="coupon-preview__list">

@@ -4,7 +4,7 @@
     <div class="size-guide-modal-header">
       <h2 class="size-guide-modal-title" id="size-guide-modal-title">Hướng dẫn chọn size</h2>
       <button type="button" class="size-guide-modal-close" data-action="close" aria-label="Đóng hướng dẫn">
-        {%- include 'icon' with name: 'close' -%}
+        {%- render 'icon', name: 'close'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
       </button>
     </div>
     <div class="size-guide-modal-content">

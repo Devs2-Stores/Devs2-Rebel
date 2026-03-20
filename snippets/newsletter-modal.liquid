@@ -2,11 +2,11 @@
   <div id="newsletter-popup" role="dialog" aria-modal="true" aria-labelledby="newsletter-popup-title">
     <div class="newsletter-popup-wrapper">
       <div class="newsletter-popup-banner">
-        <img src="{{ 'newsletter_modal_image.png' | img_url: 'grande' | asset_url }}" alt="{{ settings.newsletter_modal_heading | default: 'Đăng ký nhận tin' | escape }}" width="900" height="1400" loading="lazy" decoding="async">
+        <img src="{{ 'newsletter_modal_image.png' | image_url: width: 600 | asset_url }}" alt="{{ settings.newsletter_modal_heading | default: 'Đăng ký nhận tin' | escape }}" width="900" height="1400" loading="lazy" decoding="async">
       </div>
       <div class="newsletter-popup-content">
         <button type="button" data-action="close-newsletter-popup" class="newsletter-popup-close" aria-label="Đóng">
-          <i class="icon">{%- include 'icon' with name: 'close' -%}</i>
+          <i class="icon">{%- render 'icon', name: 'close'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}</i>
         </button>
 
         <h2 class="global-heading" id="newsletter-popup-title">{{ settings.newsletter_modal_heading | default: 'Đăng ký nhận tin' }}</h2>

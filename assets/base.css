@@ -1,0 +1,70 @@
+/* ═══════════════════════════════════════════════════
+   BASE UTILITIES
+   Global utility classes used across all templates.
+   ═══════════════════════════════════════════════════ */
+
+/* ── Scroll Fade Up Animation ────────────────────── */
+.scroll-fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.scroll-fade-up.is-visible { opacity: 1; transform: translateY(0); }
+
+/* ── Heading Size Utilities ──────────────────────── */
+.heading-size-sm { font-size: var(--font-lg); }
+.heading-size-md { font-size: var(--font-xl); }
+.heading-size-lg { font-size: var(--font-2xl); }
+.heading-size-xl { font-size: var(--font-3xl); }
+@media (min-width: 768px) {
+  .heading-size-sm { font-size: var(--font-xl); }
+  .heading-size-md { font-size: var(--font-2xl); }
+  .heading-size-lg { font-size: var(--font-3xl); }
+  .heading-size-xl { font-size: var(--font-4xl); }
+}
+.card-heading-size-sm { font-size: var(--font-sm); }
+.card-heading-size-md { font-size: var(--font-base); }
+.card-heading-size-lg { font-size: var(--font-lg); }
+
+/* ── Image Shape Utilities ───────────────────────── */
+.image-shape { position: relative; overflow: hidden; }
+.image-shape img,
+.image-shape svg { width: 100%; height: 100%; object-fit: cover; }
+.image-shape--adapt { aspect-ratio: auto; }
+.image-shape--square { aspect-ratio: 1 / 1; }
+.image-shape--portrait { aspect-ratio: 4 / 5; }
+.image-shape--portrait-tall { aspect-ratio: 2 / 3; }
+.image-shape--landscape { aspect-ratio: 3 / 2; }
+.image-shape--landscape-wide { aspect-ratio: 5 / 4; }
+
+/* ── Image Position / Alignment ──────────────────── */
+.image-shape[class*="image-position"] img { object-position: var(--image-position, center center); }
+.image-position--top-left { --image-position: top left; }
+.image-position--top-center { --image-position: top center; }
+.image-position--top-right { --image-position: top right; }
+.image-position--middle-left { --image-position: center left; }
+.image-position--middle-center { --image-position: center center; }
+.image-position--middle-right { --image-position: center right; }
+.image-position--bottom-left { --image-position: bottom left; }
+.image-position--bottom-center { --image-position: bottom center; }
+.image-position--bottom-right { --image-position: bottom right; }
+
+/* ── Column Gap Utilities ───────────────────────── */
+.column-gap-none { --column-gap: 0px; }
+.column-gap-xs { --column-gap: 4px; }
+.column-gap-sm { --column-gap: 8px; }
+.column-gap-md { --column-gap: 16px; }
+.column-gap-lg { --column-gap: 24px; }
+.column-gap-xl { --column-gap: 32px; }
+@media (max-width: 749px) {
+  .column-gap-lg { --column-gap: 16px; }
+  .column-gap-xl { --column-gap: 20px; }
+}
+
+/* ── Text Alignment Utilities (responsive) ──────── */
+@media (min-width: 750px) {
+  .text-align-desktop-left { text-align: left; }
+  .text-align-desktop-center { text-align: center; }
+  .text-align-desktop-right { text-align: right; }
+}
+@media (max-width: 749px) {
+  .text-align-mobile-left { text-align: left; }
+  .text-align-mobile-center { text-align: center; }
+  .text-align-mobile-right { text-align: right; }
+}

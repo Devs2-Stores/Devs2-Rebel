@@ -1,0 +1,156 @@
+
+{%- liquid
+  if cart.item_count > 0
+    assign cart_data_attr = ''
+    assign cart_empty_attr = 'style="display: none;"'
+  else
+    assign cart_data_attr = 'style="display: none;"'
+    assign cart_empty_attr = ''
+  endif
+-%}
+
+<cart-template>
+    <div class="page-width">
+    <h1 class="cart-template__title">
+      {{ 'sections.cart.title' | t }}
+      <span class="cart-template__count">({{ cart.item_count }} {{ 'sections.cart.caption' | t }})</span>
+    </h1>
+
+    <div class="cart-template__wrapper">
+      <div class="cart-template__data" {{ cart_data_attr }}>
+        {%- render 'cart-items' -%}
+        <div class="cart-template__footer">
+          {%- if section.settings.show_note -%}
+          <div class="cart-template__note">
+            <h4>{{ 'sections.cart.note' | t }}</h4>
+            <label for="cart-template__note-input" class="sr-only">{{ 'sections.cart.note' | t }}</label>
+            <textarea name="note" id="cart-template__note-input" placeholder="{{ 'sections.cart.note' | t }}">{{ cart.note }}</textarea>
+
+            {%- if section.settings.show_invoice -%}
+            <h4 class="invoice-title">{{ section.settings.invoice_title }}</h4>
+            <label for="invoice-name" class="sr-only">{{ section.settings.invoice_company_label }}</label>
+            <input type="text" name="invoice[name]" id="invoice-name" value="{{ cart.attributes.invoice_name }}" class="invoice-input" placeholder="{{ section.settings.invoice_company_label }}">
+            <label for="invoice-taxcode" class="sr-only">{{ section.settings.invoice_tax_label }}</label>
+            <input type="text" name="invoice[taxcode]" id="invoice-taxcode" value="{{ cart.attributes.invoice_taxcode }}" class="invoice-input" placeholder="{{ section.settings.invoice_tax_label }}">
+            <label for="invoice-address" class="sr-only">{{ section.settings.invoice_address_label }}</label>
+            <input type="text" name="invoice[address]" id="invoice-address" value="{{ cart.attributes.invoice_address }}" class="invoice-input" placeholder="{{ section.settings.invoice_address_label }}">
+            {%- endif -%}
+          </div>
+          {%- endif -%}
+          <div class="cart-template__summary">{%- render 'cart-total' -%}</div>
+        </div>
+      </div>
+
+      <div class="cart-template__empty" {{ cart_empty_attr }}>
+        <span class="empty-icon">{%- render 'icon', name: 'sad' -%}</span>
+        <p class="empty-text">{{ 'sections.cart.empty' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="button-primary">
+          {{- 'general.continue_shopping' | t -}}
+        </a>
+      </div>
+
+      {%- if section.settings.show_upsale and section.settings.upsale_collection != blank -%}
+      {%- assign upsale_collection = collections[section.settings.upsale_collection] -%}
+      {%- if upsale_collection != blank and upsale_collection.products_count > 0 -%}
+      <div class="cart-template__upsale">
+        <section class="cart-template__upsale-products">
+          <h4>{{ section.settings.upsale_title }}</h4>
+          <ul class="upsale-list" role="list">
+            {%- for product in upsale_collection.products limit: section.settings.upsale_limit -%}
+            <li class="upsale-item" role="listitem">
+              <a href="{{ product.url }}" class="upsale-item__image">
+                {%- if product.featured_image -%}
+                <img src="{{ product.featured_image | image_url: width: 240 }}" alt="{{ product.title | escape }}" loading="lazy" decoding="async" width="120" height="120">
+                {%- endif -%}
+              </a>
+              <div class="upsale-item__info">
+                <a href="{{ product.url }}" class="upsale-item__title">{{ product.title }}</a>
+                <p class="upsale-item__vendor">{{ product.vendor }}</p>
+                <p class="upsale-item__price">{{ product.price | money }}</p>
+              </div>
+            </li>
+            {%- endfor -%}
+          </ul>
+        </section>
+      </div>
+      {%- endif -%}
+      {%- endif -%}
+    </div>
+  </div>
+</cart-template>
+
+{% schema %}
+{
+  "name": "t:sections.main_cart.name",
+  "tag": "section",
+  "class": "section-main-cart",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_note",
+      "label": "t:sections.main_cart.settings.show_note.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_invoice",
+      "label": "t:sections.main_cart.settings.show_invoice.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "invoice_title",
+      "label": "t:sections.main_cart.settings.invoice_title.label",
+      "default": "Invoice information (optional)"
+    },
+    {
+      "type": "text",
+      "id": "invoice_company_label",
+      "label": "t:sections.main_cart.settings.invoice_company_label.label",
+      "default": "Company name"
+    },
+    {
+      "type": "text",
+      "id": "invoice_tax_label",
+      "label": "t:sections.main_cart.settings.invoice_tax_label.label",
+      "default": "Tax code"
+    },
+    {
+      "type": "text",
+      "id": "invoice_address_label",
+      "label": "t:sections.main_cart.settings.invoice_address_label.label",
+      "default": "Invoice address"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main_cart.settings.header__upsale.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_upsale",
+      "label": "t:sections.main_cart.settings.show_upsale.label",
+      "default": false
+    },
+    {
+      "type": "collection",
+      "id": "upsale_collection",
+      "label": "t:sections.main_cart.settings.upsale_collection.label"
+    },
+    {
+      "type": "text",
+      "id": "upsale_title",
+      "label": "t:sections.main_cart.settings.upsale_title.label",
+      "default": "You may also like"
+    },
+    {
+      "type": "range",
+      "id": "upsale_limit",
+      "label": "t:sections.main_cart.settings.upsale_limit.label",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    }
+  ]
+}
+{% endschema %}

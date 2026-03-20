@@ -1,0 +1,54 @@
+{% doc %}
+  @description Card hiển thị collection với ảnh, tên và số sản phẩm
+  @param {collection} collection - Đối tượng collection (bắt buộc)
+  @param {string} [image_shape='square'] - Hình dạng ảnh: adapt, square, portrait, portrait-tall, landscape, landscape-wide
+  @param {string} [image_position='middle-center'] - Vị trí ảnh: top-left, top-center, ..., bottom-right
+  @param {string} [card_heading_size='md'] - Kích thước heading: sm, md, lg
+  @param {boolean} [show_product_count=true] - Hiển thị số sản phẩm
+  @param {string} [columns_mobile='2'] - Số cột mobile (dùng cho sizes attribute)
+  @param {number} [columns_desktop=3] - Số cột desktop (dùng cho sizes attribute)
+  @param {string} [lazyload='lazy'] - Loading strategy: lazy hoặc eager
+  @example {% render 'collection-card', collection: collection, image_shape: 'square' %}
+{% enddoc %}
+
+{%- liquid
+  assign image_shape = image_shape | default: 'square'
+  assign image_position = image_position | default: 'middle-center'
+  assign card_heading_size = card_heading_size | default: 'md'
+  if show_product_count == nil
+    assign show_product_count = true
+  endif
+  assign columns_mobile = columns_mobile | default: '2'
+  assign columns_desktop = columns_desktop | default: 3
+  assign lazyload = lazyload | default: 'lazy'
+  assign collection_image = collection.image | default: collection.products.first.featured_image
+-%}
+
+<a href="{{ collection.url }}" class="collection-card" title="{{ collection.title | escape }}">
+  <div class="collection-card__image image-shape image-shape--{{ image_shape }} image-position--{{ image_position }}">
+    {%- if collection_image -%}
+    <img
+      src="{{ collection_image | image_url: width: 600 }}"
+      srcset="{{ collection_image | image_url: width: 400 }} 400w, {{ collection_image | image_url: width: 600 }} 600w, {{ collection_image | image_url: width: 800 }} 800w, {{ collection_image | image_url: width: 1200 }} 1200w"
+      sizes="(max-width: 749px) {% if columns_mobile == '1' %}100vw{% else %}50vw{% endif %}, calc(100vw / {{ columns_desktop }})"
+      alt="{{ collection_image.alt | default: collection.title | escape }}"
+      width="{{ collection_image.width }}"
+      height="{{ collection_image.height }}"
+      loading="{{ lazyload }}"
+      decoding="async"
+    >
+    {%- else -%}
+    <div class="collection-card__placeholder image-shape image-shape--{{ image_shape }}">
+      {{ collection.title | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+    {%- endif -%}
+  </div>
+  <div class="collection-card__info">
+    <h3 class="collection-card__title card-heading-size-{{ card_heading_size }}">{{ collection.title }}</h3>
+    {%- if show_product_count -%}
+    <p class="collection-card__count">
+      {{ 'sections.collection_list.product_count' | t: count: collection.all_products_count }}
+    </p>
+    {%- endif -%}
+  </div>
+</a>

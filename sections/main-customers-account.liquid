@@ -1,0 +1,138 @@
+
+<div class="account-template">
+    <div class="page-width">
+    <h1 class="account-template__title">{{ 'customer.account.title' | t }}</h1>
+    <div class="account-template__grid">
+      <div class="account-template__sidebar">
+        {%- render 'customer-sidebar' -%}
+      </div>
+      <div class="account-template__wrapper">
+
+        <div class="account-template__info">
+          <div class="account-template__info-header">
+            <h4 class="account-template__info-title">
+              <i class="icon">{%- render 'icon', name: 'info' -%}</i>
+              {{ 'customer.account.details' | t }}
+            </h4>
+          </div>
+          <ul class="account-template__info-list">
+            <li><strong>{{ 'customer.account.name' | t }}:</strong> <span>{{ customer.last_name }} {{ customer.first_name }}</span></li>
+            <li><strong>{{ 'customer.login_page.email' | t }}:</strong> <span>{{ customer.email }}</span></li>
+            {%- unless customer.default_address.phone == blank -%}
+            <li><strong>{{ 'customer.register.phone' | t }}:</strong> <span>{{ customer.default_address.phone }}</span></li>
+            {%- endunless -%}
+            {%- unless customer.default_address.company == blank -%}
+            <li><strong>{{ 'customer.addresses.company' | t }}:</strong> <span>{{ customer.default_address.company }}</span></li>
+            {%- endunless -%}
+            {%- if customer.default_address -%}
+            <li>
+              <strong>{{ 'customer.addresses.address1' | t }}:</strong>
+              <span>
+                {%- capture addr -%}
+                {%- if customer.default_address.address1 != blank -%}{{ customer.default_address.address1 }}|{%- endif -%}
+                {%- if customer.default_address.province != blank -%}{{ customer.default_address.province }}|{%- endif -%}
+                {%- if customer.default_address.country != blank -%}{{ customer.default_address.country }}|{%- endif -%}
+                {%- endcapture -%}
+                {{ addr | split: '|' | join: ', ' }}
+              </span>
+            </li>
+            {%- endif -%}
+          </ul>
+        </div>
+
+        <div class="account-template__order">
+          <h4 class="account-template__section-title">
+            <i>{%- render 'icon', name: 'order' -%}</i>
+            {{ 'customer.orders.title' | t }}
+          </h4>
+          <div class="account-template__order-items">
+            {%- if customer.orders.size > 0 -%}
+            <div class="account-template__order-table">
+              {%- for order in customer.orders limit: 5 -%}
+              {%- assign order_url = order.customer_url | default: order.url -%}
+              <div class="account-template__order-row">
+                <div class="account-template__order-row-main">
+                  <a href="{{ order_url }}" class="account-template__order-name" title="{{ 'customer.orders.view_order' | t }}: {{ order.name }}">{{ order.name }}</a>
+                  <span class="account-template__order-meta">{{ order.created_at | date: '%d/%m/%Y' }} &middot; {{ order.line_items.size }} {{ 'customer.orders.items' | t }}</span>
+                </div>
+                <div class="account-template__order-row-statuses">
+                  <span class="account-template__status-group">
+                    <span class="account-template__label">{{ 'customer.orders.payment_status' | t }}:</span>
+                    {{ order.financial_status_label }}
+                  </span>
+                  <span class="account-template__status-group">
+                    <span class="account-template__label">{{ 'customer.orders.fulfillment_status' | t }}:</span>
+                    {{ order.fulfillment_status_label }}
+                  </span>
+                </div>
+                <div class="account-template__order-row-right">
+                  <strong class="account-template__order-total">{{ order.total_price | money }}</strong>
+                  <a href="{{ order_url }}" class="account-template__order-link">{{ 'customer.orders.view_order' | t }} →</a>
+                </div>
+              </div>
+              {%- endfor -%}
+            </div>
+            {%- else -%}
+            <div class="account-template__order-empty">
+              <i>{%- render 'icon', name: 'sad' -%}</i>
+              <p>{{ 'customer.orders.none' | t }}</p>
+              <a href="{{ routes.all_products_collection_url }}" class="button-primary active">{{ 'general.continue_shopping' | t }}</a>
+            </div>
+            {%- endif -%}
+          </div>
+        </div>
+
+        <div class="account-template__address">
+          <h4 class="account-template__section-title">
+            <i>{%- render 'icon', name: 'location' -%}</i>
+            {{ 'customer.addresses.title' | t }}
+          </h4>
+          <div class="account-template__address-items">
+            {%- if customer.addresses.size > 0 -%}
+            <div class="account-template__address-list">
+              {%- for address in customer.addresses limit: 3 -%}
+              <div class="account-template__address-card">
+                {%- if address.id == customer.default_address.id -%}
+                <span class="account-template__address-badge">{{ 'customer.addresses.default' | t }}</span>
+                {%- endif -%}
+                <p class="account-template__address-name"><strong>{{ address.last_name }} {{ address.first_name }}</strong></p>
+                {%- unless address.company == blank -%}
+                <p class="account-template__address-row"><span class="account-template__label">{{ 'customer.addresses.company' | t }}:</span> {{ address.company }}</p>
+                {%- endunless -%}
+                {%- unless address.address1 == blank -%}
+                <p class="account-template__address-row"><span class="account-template__label">{{ 'customer.addresses.address1' | t }}:</span> {{ address.address1 }}</p>
+                {%- endunless -%}
+                {%- unless address.province == blank -%}
+                <p class="account-template__address-row"><span class="account-template__label">{{ 'customer.addresses.province' | t }}:</span> {{ address.province }}{%- unless address.country == blank -%}, {{ address.country }}{%- endunless -%}</p>
+                {%- endunless -%}
+                {%- unless address.phone == blank -%}
+                <p class="account-template__address-row"><span class="account-template__label">{{ 'customer.register.phone' | t }}:</span> {{ address.phone }}</p>
+                {%- endunless -%}
+              </div>
+              {%- endfor -%}
+            </div>
+            <div class="account-template__address-add">
+              <a href="{{ routes.account_addresses_url }}" class="button-primary active" title="{{ 'customer.addresses.manage' | t }}">{{ 'customer.addresses.manage' | t }}</a>
+            </div>
+            {%- else -%}
+            <div class="account-template__address-empty">
+              <i>{%- render 'icon', name: 'sad' -%}</i>
+              <p>{{ 'customer.addresses.no_addresses' | t }}</p>
+              <a href="{{ routes.account_addresses_url }}" class="button-primary active">{{ 'customer.addresses.add_new' | t }}</a>
+            </div>
+            {%- endif -%}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main_customers_account.name",
+  "tag": "section",
+  "class": "section-main-customers-account"
+}
+{% endschema %}

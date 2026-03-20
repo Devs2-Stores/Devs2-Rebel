@@ -1,0 +1,178 @@
+
+<article class="article-template" itemscope itemtype="https://schema.org/BlogPosting">
+    <div class="page-width">
+    <div class="article-template__layout">
+      <div class="article-template__main">
+        {%- if article.image -%}
+        <div class="article-template__media" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+          <meta itemprop="url" content="{{ article.image | image_url: width: 2048 }}">
+          <meta itemprop="width" content="{{ article.image.width }}">
+          <meta itemprop="height" content="{{ article.image.height }}">
+          <img
+            class="article-template__media-image"
+            src="{{ article.image | image_url: width: 1200 }}"
+            srcset="
+              {{ article.image | image_url: width: 480 }} 480w,
+              {{ article.image | image_url: width: 768 }} 768w,
+              {{ article.image | image_url: width: 1200 }} 1200w,
+              {{ article.image | image_url: width: 2048 }} 2048w
+            "
+            sizes="(max-width: 480px) 480px, (max-width: 768px) 768px, (max-width: 1200px) 1200px, 2048px"
+            alt="{{ article.image.alt | default: article.title | escape }}"
+            loading="eager"
+            fetchpriority="high"
+            width="{{ article.image.width }}"
+            height="{{ article.image.height }}"
+          >
+        </div>
+        {%- endif -%}
+
+        <meta itemprop="dateModified" content="{{ article.published_at | date: '%Y-%m-%d' }}">
+        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization" style="display: none;">
+          <meta itemprop="name" content="{{ shop.name }}">
+          {%- if settings.logo != blank -%}
+          <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+            <meta itemprop="url" content="{{ settings.logo | image_url: width: 500 }}">
+          </div>
+          {%- endif -%}
+        </div>
+        <link itemprop="mainEntityOfPage" href="{{ canonical_url }}">
+
+        <div class="article-template__header">
+          <h1 class="article-template__title" itemprop="headline">{{ article.title }}</h1>
+          <meta itemprop="description" content="{{ article.excerpt | default: article.content | strip_html | truncatewords: 50 | escape }}">
+          <div class="article-template__info">
+            <span class="article-template__info-category">
+              <a href="{{ blog.url }}" title="{{ blog.title | escape }}">{{ blog.title }}</a>
+            </span>
+            <span class="article-template__info-author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+              <span class="article-template__info-label">{{ 'blogs.article.author_label' | t }}:</span>
+              <span class="article-template__info-value" itemprop="name">{{ article.author }}</span>
+            </span>
+            <span class="article-template__info-date" itemprop="dateCreated">
+              <time class="article-template__info-value" itemprop="datePublished" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: "%d/%m/%Y" }}</time>
+            </span>
+            {%- if article.comments_count > 0 -%}
+            <span class="article-template__info-comments">
+              <span class="article-template__info-value" itemprop="commentCount">{{ article.comments_count }}</span>
+              <span class="article-template__info-label">{{ 'blogs.article.comments_label' | t }}</span>
+            </span>
+            {%- endif -%}
+          </div>
+        </div>
+
+        {%- if section.settings.show_toc -%}
+          {%- render 'content-toc' -%}
+        {%- endif -%}
+
+        <div class="article-template__content" itemprop="articleBody">{{ article.content }}</div>
+
+        {%- if section.settings.show_share -%}
+        <div class="article-template__share">
+          {%- render 'share-buttons', title: 'blogs.article.share' | t -%}
+        </div>
+        {%- endif -%}
+
+        {%- if blog.comments_enabled -%}
+        <section class="article-template__comments">
+          <div class="article-template__comments-form">
+            <h3 class="article-template__comments-form-title">{{ 'blogs.article.comment_form_title' | t }}</h3>
+            {%- form "new_comment", article -%}
+            {%- if comment and comment.created_at -%}
+            <div class="article-template__comments-success">
+              {%- if blog.moderated? -%}
+                {{ 'blogs.article.success_moderated' | t }}
+              {%- else -%}
+                {{ 'blogs.article.success' | t }}
+              {%- endif -%}
+            </div>
+            {%- endif -%}
+            {%- if form.errors.size > 0 -%}
+            <div class="article-template__comments-errors">{{ form.errors | default_errors }}</div>
+            {%- endif -%}
+            <div class="article-template__comments-form-fields">
+              <div class="article-template__comments-form-row">
+                <label class="article-template__comments-form-label">
+                  <span class="article-template__comments-form-label-text">{{ 'blogs.article.name' | t }} <span class="required">*</span></span>
+                  <input type="text" name="comment[author]" required value="{{ customer.name }}" placeholder="{{ 'blogs.article.name' | t }}" class="article-template__comments-input">
+                </label>
+                <label class="article-template__comments-form-label">
+                  <span class="article-template__comments-form-label-text">{{ 'blogs.article.email' | t }} <span class="required">*</span></span>
+                  <input type="email" name="comment[email]" required placeholder="{{ 'blogs.article.email' | t }}" class="article-template__comments-input">
+                </label>
+              </div>
+              <label class="article-template__comments-form-label">
+                <span class="article-template__comments-form-label-text">{{ 'blogs.article.message' | t }} <span class="required">*</span></span>
+                <textarea name="comment[body]" required rows="5" placeholder="{{ 'blogs.article.message' | t }}" class="article-template__comments-textarea">{{ form.body }}</textarea>
+              </label>
+              <button type="submit" class="button-primary active">{{ 'blogs.article.post' | t }}</button>
+            </div>
+            {%- endform -%}
+          </div>
+
+          {%- if article.comments.size > 0 or comment.created_at -%}
+          <div class="article-template__comments-list">
+            <h3 class="article-template__comments-list-title">
+              {%- render 'icon', name: 'comments' -%}
+              <span>{{ article.comments_count }} {{ 'blogs.article.comments_label' | t }}</span>
+            </h3>
+            <div class="article-template__comments-items">
+              {%- for comment in article.comments -%}
+              <div id="comment-{{ comment.id }}" class="article-template__comments-item">
+                <div class="article-template__comments-item-avatar">
+                  <div class="article-template__comments-item-avatar-initials" aria-hidden="true">{{ comment.author | slice: 0 | upcase | escape }}</div>
+                </div>
+                <div class="article-template__comments-item-content">
+                  <div class="article-template__comments-item-header">
+                    <strong class="article-template__comments-item-author">{{ comment.author | escape }}</strong>
+                    <time class="article-template__comments-item-date" datetime="{{ comment.created_at | date: '%Y-%m-%dT%H:%M' }}">
+                      {{ comment.created_at | date: '%d/%m/%Y %H:%M' }}
+                    </time>
+                  </div>
+                  <div class="article-template__comments-item-body">{{ comment.content }}</div>
+                </div>
+              </div>
+              {%- endfor -%}
+            </div>
+          </div>
+          {%- endif -%}
+        </section>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.show_sidebar -%}
+      <aside class="article-template__sidebar">
+        {%- render 'article-sidebar' -%}
+      </aside>
+      {%- endif -%}
+    </div>
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "t:sections.main_article.name",
+  "tag": "section",
+  "class": "section-main-article",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_sidebar",
+      "label": "t:sections.main_article.settings.show_sidebar.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_toc",
+      "label": "t:sections.main_article.settings.show_toc.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_share",
+      "label": "t:sections.main_article.settings.show_share.label",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

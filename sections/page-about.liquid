@@ -1,0 +1,167 @@
+
+<about-page class="page-about">
+  <section class="about-hero">
+    <div class="about-hero__background">
+      {%- if section.settings.hero_image_desktop != blank -%}
+      <picture>
+        {%- if section.settings.hero_image_mobile != blank -%}
+        <source media="(max-width: 767px)" srcset="{{ section.settings.hero_image_mobile | image_url: width: 800 }}" width="800" height="600">
+        {%- endif -%}
+        <source media="(min-width: 768px)" srcset="{{ section.settings.hero_image_desktop | image_url: width: 1920 }}" width="1920" height="600">
+        <img src="{{ section.settings.hero_image_desktop | image_url: width: 1920 }}" alt="{{ section.settings.hero_title | escape }}" width="1920" height="600" loading="eager" fetchpriority="high">
+      </picture>
+      {%- endif -%}
+    </div>
+    <div class="about-hero__content">
+      <div class="page-width">
+        {%- if section.settings.hero_subtitle != blank -%}
+        <p class="about-hero__subtitle">{{ section.settings.hero_subtitle }}</p>
+        {%- endif -%}
+        {%- if section.settings.hero_title != blank -%}
+        <h1 class="about-hero__title">{{ section.settings.hero_title }}</h1>
+        {%- else -%}
+        <h1 class="about-hero__title sr-only">{{ page.title | default: 'About us' }}</h1>
+        {%- endif -%}
+        {%- if section.settings.hero_description != blank -%}
+        <p class="about-hero__description">{{ section.settings.hero_description }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  {%- if section.settings.show_mission -%}
+  <section class="about-mission section-padding">
+    <div class="page-width">
+      <div class="about-mission__wrap">
+        {%- if section.settings.mission_title != blank -%}
+        <h2 class="about-mission__title">{{ section.settings.mission_title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.mission_description != blank -%}
+        <div class="about-mission__description">{{ section.settings.mission_description }}</div>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- assign feature_blocks = section.blocks | where: 'type', 'feature' -%}
+  {%- if feature_blocks.size > 0 -%}
+  <section class="about-features section-padding">
+    <div class="page-width">
+      <div class="about-features__wrap">
+        {%- for block in feature_blocks -%}
+        <div class="about-features__item{% if block.settings.reverse %} about-features__item--reverse{% endif %}" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+          <div class="about-features__item-image">
+            <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.title | escape }}" width="600" height="400" loading="lazy">
+          </div>
+          {%- endif -%}
+          <div class="about-features__item-content">
+            {%- if block.settings.title != blank -%}
+            <h3 class="about-features__item-title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.description != blank -%}
+            <div class="about-features__item-description">{{ block.settings.description }}</div>
+            {%- endif -%}
+          </div>
+        </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- if section.settings.show_story -%}
+  <section class="about-story section-padding-bg">
+    <div class="page-width">
+      <div class="about-story__wrap">
+        {%- if section.settings.story_title != blank -%}
+        <h2 class="about-story__title">{{ section.settings.story_title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.story_content != blank -%}
+        <div class="about-story__content">{{ section.settings.story_content }}</div>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- assign gallery_blocks = section.blocks | where: 'type', 'gallery_image' -%}
+  {%- if section.settings.show_gallery and gallery_blocks.size > 0 -%}
+  <section class="about-gallery section-padding">
+    <div class="page-width">
+      {%- if section.settings.gallery_title != blank -%}
+      <h2 class="about-gallery__title">{{ section.settings.gallery_title }}</h2>
+      {%- endif -%}
+      <div class="about-gallery__grid">
+        {%- for block in gallery_blocks -%}
+        {%- if block.settings.image != blank -%}
+        <div class="about-gallery__item" {{ block.shopify_attributes }}>
+          <img src="{{ block.settings.image | image_url: width: 400 }}" alt="{{ block.settings.alt | default: block.settings.image.alt | escape }}" width="400" height="500" loading="lazy">
+        </div>
+        {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- if page.content != blank -%}
+  <section class="about-content section-padding">
+    <div class="page-width">
+      <div class="about-content__wrap">
+        {{ page.content }}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+</about-page>
+
+{% schema %}
+{
+  "name": "t:sections.page_about.name",
+  "tag": "section",
+  "class": "section-page-about",
+  "settings": [
+    { "type": "header", "content": "t:sections.page_about.settings.header__hero.content" },
+    { "type": "image_picker", "id": "hero_image_desktop", "label": "t:sections.page_about.settings.hero_image_desktop.label" },
+    { "type": "image_picker", "id": "hero_image_mobile", "label": "t:sections.page_about.settings.hero_image_mobile.label" },
+    { "type": "text", "id": "hero_subtitle", "label": "t:sections.page_about.settings.hero_subtitle.label" },
+    { "type": "text", "id": "hero_title", "label": "t:sections.page_about.settings.hero_title.label" },
+    { "type": "richtext", "id": "hero_description", "label": "t:sections.page_about.settings.hero_description.label" },
+    { "type": "header", "content": "t:sections.page_about.settings.header__mission.content" },
+    { "type": "checkbox", "id": "show_mission", "label": "t:sections.page_about.settings.show_mission.label", "default": true },
+    { "type": "text", "id": "mission_title", "label": "t:sections.page_about.settings.mission_title.label" },
+    { "type": "richtext", "id": "mission_description", "label": "t:sections.page_about.settings.mission_description.label" },
+    { "type": "header", "content": "t:sections.page_about.settings.header__story.content" },
+    { "type": "checkbox", "id": "show_story", "label": "t:sections.page_about.settings.show_story.label", "default": true },
+    { "type": "text", "id": "story_title", "label": "t:sections.page_about.settings.story_title.label" },
+    { "type": "richtext", "id": "story_content", "label": "t:sections.page_about.settings.story_content.label" },
+    { "type": "header", "content": "t:sections.page_about.settings.header__gallery.content" },
+    { "type": "checkbox", "id": "show_gallery", "label": "t:sections.page_about.settings.show_gallery.label", "default": true },
+    { "type": "text", "id": "gallery_title", "label": "t:sections.page_about.settings.gallery_title.label" }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "t:sections.page_about.blocks.feature.name",
+      "limit": 4,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "t:sections.page_about.blocks.feature.settings.image.label" },
+        { "type": "text", "id": "title", "label": "t:sections.page_about.blocks.feature.settings.title.label" },
+        { "type": "richtext", "id": "description", "label": "t:sections.page_about.blocks.feature.settings.description.label" },
+        { "type": "checkbox", "id": "reverse", "label": "t:sections.page_about.blocks.feature.settings.reverse.label", "default": false }
+      ]
+    },
+    {
+      "type": "gallery_image",
+      "name": "t:sections.page_about.blocks.gallery_image.name",
+      "limit": 6,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "t:sections.page_about.blocks.gallery_image.settings.image.label" },
+        { "type": "text", "id": "alt", "label": "t:sections.page_about.blocks.gallery_image.settings.alt.label" }
+      ]
+    }
+  ]
+}
+{% endschema %}

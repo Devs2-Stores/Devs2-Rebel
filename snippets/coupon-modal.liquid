@@ -4,7 +4,7 @@
     <div class="coupon-modal-header">
       <h2 class="coupon-modal-title" id="coupon-modal-title">Mã giảm giá</h2>
       <button type="button" class="coupon-modal-close" data-action="close" aria-label="Đóng">
-        {%- include 'icon' with name: 'close' -%}
+        {%- render 'icon', name: 'close'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
       </button>
     </div>
     <div class="coupon-modal-content">

@@ -1,0 +1,110 @@
+
+<div class="collection-template">
+    <div class="page-width">
+
+    <div class="collection-template__title">
+      <h1 class="collection-template__heading">
+        {%- if collection.handle != 'all' -%}
+          {{ collection.title }}
+        {%- else -%}
+          {{ 'sections.collection_template.title' | t }}
+        {%- endif -%}
+      </h1>
+    </div>
+
+    {%- render 'collection-image' -%}
+    {%- render 'collection-menu' -%}
+    {%- render 'collection-best' -%}
+
+    {%- if collection.description != blank -%}
+    <div class="collection-template__short-description">
+      <div class="collection-template__short-description-content">
+        {{ collection.description | strip_html | truncatewords: 50 }}
+      </div>
+    </div>
+    {%- endif -%}
+
+    <div class="collection-template__mobile-filter-ctrl">
+      <button type="button" class="collection-template__filter-btn" data-action="open-filter" aria-label="{{ 'products.facets.filter_button' | t }}">
+        {%- render 'icon', name: 'filter' -%}
+        <span>{{ 'products.facets.filter_button' | t }}</span>
+      </button>
+    </div>
+
+    {%- paginate collection.products by section.settings.products_per_page -%}
+    <facet-filters class="collection-template__wrapper">
+      <div class="collection-template__facet-filter" id="CollectionFilterDrawer">
+        <div class="collection-template__facet-filter-header">
+          <span class="collection-template__facet-filter-header-title">{{ 'products.facets.filter_button' | t }}</span>
+          <button type="button" class="collection-template__close-filter" data-action="close-filter" aria-label="{{ 'accessibility.close' | t }}">
+            {%- render 'icon', name: 'close' -%}
+          </button>
+        </div>
+        <div class="collection-template__facet-filter-title">
+          <strong>{{ 'products.facets.filter_by_label' | t }}</strong>
+        </div>
+        <div class="collection-template__facet-filter-content">
+          {%- render 'collection-facet-filter' -%}
+        </div>
+      </div>
+      <div class="collection-template__filter-overlay" data-action="close-filter"></div>
+
+      <div class="collection-template__products-container" id="CollectionProductGrid">
+        {%- render 'collection-sort', limit: section.settings.products_per_page -%}
+
+        <ul class="product-cards collection-template__products">
+          {%- for product in collection.products -%}
+          {%- liquid
+            assign lazyload = "lazy"
+            assign fetchpriority = "auto"
+            if forloop.index <= 3
+              assign lazyload = "eager"
+            endif
+            if forloop.first
+              assign fetchpriority = "high"
+            endif
+          -%}
+          <li class="product-cards__item">
+            {%- render 'product-card', product: product, lazyload: lazyload, fetchpriority: fetchpriority, show_vendor: true -%}
+          </li>
+          {%- else -%}
+          <li class="product-cards__item product-cards__item--empty">
+            <p>{{ 'sections.collection_template.empty' | t }}</p>
+          </li>
+          {%- endfor -%}
+        </ul>
+        <div class="collection-template__pagination">
+          {%- render 'section-pagination' -%}
+        </div>
+      </div>
+    </facet-filters>
+
+    {%- if collection.description != blank -%}
+    <div class="collection-template__description">
+      <div class="collection-template__description-content">
+        {{ collection.description }}
+      </div>
+    </div>
+    {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main_collection.name",
+  "tag": "section",
+  "class": "section-main-collection",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "t:sections.main_collection.settings.products_per_page.label",
+      "min": 8,
+      "max": 36,
+      "step": 4,
+      "default": 20
+    }
+  ]
+}
+{% endschema %}

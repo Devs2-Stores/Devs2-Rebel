@@ -5,8 +5,8 @@
 		<div class="product-sticky-add__container">
 			<div class="product-sticky-add__product" data-sticky-product-info>
 				{%- if product.featured_image -%}
-				<img src="{{ product.featured_image | img_url: 'compact' }}"
-					 srcset="{{ product.featured_image | img_url: 'compact' }} 1x, {{ product.featured_image | img_url: 'medium' }} 2x"
+				<img src="{{ product.featured_image | image_url: width: 160 }}"
+					 srcset="{{ product.featured_image | image_url: width: 160 }} 1x, {{ product.featured_image | image_url: width: 240 }} 2x"
 					 alt="{{ product.title | escape }}" width="60" height="60"
 					 loading="lazy" decoding="async"
 					 class="product-sticky-add__image"
@@ -35,7 +35,7 @@
 						class="button-primary product-sticky-add__btn product-sticky-add__btn--add"
 						data-action="sticky-add-to-cart"
 						aria-label="Thêm vào giỏ hàng">
-					{%- include 'icon' with name: 'cart', size: '18' -%}
+					{%- render 'icon', name: 'cart'$(if(){", class: ''"}else{""})$(if(18){", size: '18'"}else{""}) -%}
 					<span>Thêm vào giỏ</span>
 				</button>
 				<button {% unless available %}disabled{% endunless %}

@@ -4,7 +4,7 @@
     <div class="mobile-menu__header">
       <span class="mobile-menu__title">Menu</span>
       <button type="button" class="mobile-menu__close" data-action="close-mobile-menu" aria-label="Đóng menu">
-        {%- include 'icon' with name: 'close' -%}
+        {%- render 'icon', name: 'close'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
       </button>
     </div>
     <div class="mobile-menu__body">
@@ -16,12 +16,12 @@
                 <li class="mobile-menu__item mobile-menu__item--has-children">
                   <button type="button" class="mobile-menu__trigger" aria-expanded="false">
                     <span>{{ link.title }}</span>
-                    {%- include 'icon' with name: 'chevron-right' -%}
+                    {%- render 'icon', name: 'chevron-right'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
                   </button>
                   <ul class="mobile-menu__submenu">
                     <li class="mobile-menu__submenu-back">
                       <button type="button" class="mobile-menu__back-btn" aria-label="Quay lại">
-                        {%- include 'icon' with name: 'chevron-left' -%}
+                        {%- render 'icon', name: 'chevron-left'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
                         <span>Quay lại</span>
                       </button>
                     </li>
@@ -33,12 +33,12 @@
                         <li class="mobile-menu__item mobile-menu__item--has-children">
                           <button type="button" class="mobile-menu__trigger" aria-expanded="false">
                             <span>{{ link_1.title }}</span>
-                            {%- include 'icon' with name: 'chevron-right' -%}
+                            {%- render 'icon', name: 'chevron-right'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
                           </button>
                           <ul class="mobile-menu__submenu">
                             <li class="mobile-menu__submenu-back">
                               <button type="button" class="mobile-menu__back-btn" aria-label="Quay lại">
-                                {%- include 'icon' with name: 'chevron-left' -%}
+                                {%- render 'icon', name: 'chevron-left'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
                                 <span>Quay lại</span>
                               </button>
                             </li>
@@ -73,7 +73,7 @@
     <div class="mobile-menu__footer">
       <div class="mobile-menu__actions">
         <a href="/account" class="mobile-menu__action-link">
-          {%- include 'icon' with name: 'user' -%}
+          {%- render 'icon', name: 'user'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
           <span>Tài khoản</span>
         </a>
         {%- if settings.wishlist_enable != false -%}
@@ -82,7 +82,7 @@
             {%- assign wishlist_url = pages[settings.wishlist_page].url -%}
           {%- endif -%}
           <a href="{{ wishlist_url }}" class="mobile-menu__action-link">
-            {%- include 'icon' with name: 'heart' -%}
+            {%- render 'icon', name: 'heart'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
             <span>Yêu thích</span>
           </a>
         {%- endif -%}

@@ -1,0 +1,135 @@
+<global-header class="header color-{{ section.settings.color_scheme }}" data-sticky="{{ section.settings.sticky_enable }}" style="--header-bg: {{ section.settings.bg_color | default: '#ffffff' }}; --header-text: {{ section.settings.text_color | default: '#000000' }};">
+  <div class="page-width">
+    <div class="header__wrapper">
+      <button type="button" class="header__hamburger" data-action="open-mobile-menu" aria-label="{{ 'accessibility.open_menu' | t }}">
+        {%- render 'icon', name: 'hamburger' -%}
+      </button>
+      <div class="header__logo">
+        <a href="{{ routes.root_url }}" class="header__logo-link" title="{{ shop.name }}" aria-label="{{ shop.name }}">
+          {%- if settings.logo != blank -%}
+          {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+          {{ settings.logo | image_url: width: 300 | image_tag:
+            alt: logo_alt,
+            width: settings.logo_width,
+            loading: 'eager',
+            fetchpriority: 'high',
+            class: 'header__logo-image'
+          }}
+          {%- else -%}
+          <span class="header__logo-text">{{ shop.name }}</span>
+          {%- endif -%}
+        </a>
+      </div>
+      <div class="header__menu">
+        {%- render 'megamenu', menu: section.settings.menu -%}
+      </div>
+      <div class="header__actions">
+        <button type="button" class="header__action-btn" data-action="open-search-modal" aria-label="{{ 'accessibility.search' | t }}">
+          {%- render 'icon', name: 'search' -%}
+        </button>
+        {%- if section.settings.show_wishlist -%}
+        {%- assign wishlist_url = section.settings.wishlist_page | default: '/pages/wishlist' -%}
+        <a href="{{ wishlist_url }}" class="header__action-btn wishlist-icon-wrapper" title="{{ 'accessibility.wishlist' | t }}">
+          {%- render 'icon', name: 'heart' -%}
+          {%- if section.settings.show_wishlist_count -%}
+          <span class="wishlist-count" style="display: none;">0</span>
+          {%- endif -%}
+        </a>
+        {%- endif -%}
+        <a href="{{ routes.account_url }}" class="header__action-btn" aria-label="{{ 'accessibility.account' | t }}">
+          {%- render 'icon', name: 'user' -%}
+        </a>
+        <button type="button" class="header__action-btn header__cart-btn" data-action="open-cart-sidebar" aria-label="{{ 'accessibility.open_cart' | t }}">
+          {%- render 'icon', name: 'cart' -%}
+          <span class="cart-count" aria-live="polite" aria-atomic="true">{{ cart.item_count }}</span>
+        </button>
+      </div>
+      <div class="header__mobile-actions">
+        <button type="button" class="header__action-btn" data-action="open-search-modal" aria-label="{{ 'accessibility.search' | t }}">
+          {%- render 'icon', name: 'search' -%}
+        </button>
+        <button type="button" class="header__action-btn header__cart-btn" data-action="open-cart-sidebar" aria-label="{{ 'accessibility.open_cart' | t }}">
+          {%- render 'icon', name: 'cart' -%}
+          <span class="cart-count" aria-live="polite" aria-atomic="true">{{ cart.item_count }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</global-header>
+
+{% schema %}
+{
+  "name": "t:sections.header.name",
+  "tag": "section",
+  "class": "section-header",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.header__menu.content"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "t:sections.header.settings.menu.label",
+      "default": "main-menu"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.header__behavior.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_enable",
+      "label": "t:sections.header.settings.sticky_enable.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.header__colors.content"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "t:sections.header.settings.bg_color.label",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:sections.header.settings.text_color.label",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.header__wishlist.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wishlist",
+      "label": "t:sections.header.settings.show_wishlist.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wishlist_count",
+      "label": "t:sections.header.settings.show_wishlist_count.label",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "wishlist_page",
+      "label": "t:sections.header.settings.wishlist_page.label"
+    }
+  ],
+  "enabled_on": {
+    "groups": ["header"]
+  }
+}
+{% endschema %}

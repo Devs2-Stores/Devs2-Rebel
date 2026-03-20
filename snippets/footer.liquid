@@ -13,27 +13,27 @@
         <div class="footer-info__social-media">
           {%- if settings.footer_social_facebook != blank -%}
           <a href="{{ settings.footer_social_facebook }}" title="Facebook" aria-label="Facebook" class="footer-social-media__link" target="_blank" rel="noopener noreferrer">
-            {%- include 'icon' with name: 'facebook', class: 'icon-facebook' -%}
+            {%- render 'icon', name: 'facebook'$(if(icon-facebook){", class: 'icon-facebook'"}else{""})$(if(){", size: ''"}else{""}) -%}
           </a>
           {%- endif -%}
           {%- if settings.footer_social_instagram != blank -%}
           <a href="{{ settings.footer_social_instagram }}" title="Instagram" aria-label="Instagram" class="footer-social-media__link" target="_blank" rel="noopener noreferrer">
-            {%- include 'icon' with name: 'instagram', class: 'icon-instagram' -%}
+            {%- render 'icon', name: 'instagram'$(if(icon-instagram){", class: 'icon-instagram'"}else{""})$(if(){", size: ''"}else{""}) -%}
           </a>
           {%- endif -%}
           {%- if settings.footer_social_twitter != blank -%}
           <a href="{{ settings.footer_social_twitter }}" title="Twitter / X" aria-label="Twitter" class="footer-social-media__link" target="_blank" rel="noopener noreferrer">
-            {%- include 'icon' with name: 'twitter' -%}
+            {%- render 'icon', name: 'twitter'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
           </a>
           {%- endif -%}
           {%- if settings.footer_social_tiktok != blank -%}
           <a href="{{ settings.footer_social_tiktok }}" title="Tiktok" aria-label="Tiktok" class="footer-social-media__link" target="_blank" rel="noopener noreferrer">
-            {%- include 'icon' with name: 'tiktok' -%}
+            {%- render 'icon', name: 'tiktok'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
           </a>
           {%- endif -%}
           {%- if settings.footer_social_youtube != blank -%}
           <a href="{{ settings.footer_social_youtube }}" title="YouTube" aria-label="YouTube" class="footer-social-media__link" target="_blank" rel="noopener noreferrer">
-            {%- include 'icon' with name: 'youtube' -%}
+            {%- render 'icon', name: 'youtube'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
           </a>
           {%- endif -%}
         </div>

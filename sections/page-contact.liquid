@@ -1,0 +1,187 @@
+
+<contact-page class="page-contact">
+  <section class="contact-hero">
+    <div class="page-width">
+      <div class="contact-hero__wrap">
+        <h1 class="contact-hero__title">{{ section.settings.title | default: 'templates.contact.form.title' | t }}</h1>
+        {%- if section.settings.description != blank -%}
+        <p class="contact-hero__description">{{ section.settings.description }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-main section-padding">
+    <div class="page-width">
+      <div class="contact-main__wrap">
+        <div class="contact-main__info">
+          <h2 class="contact-main__info-title">{{ 'sections.page_contact.contact_info' | t }}</h2>
+
+          {%- if section.settings.address != blank -%}
+          <div class="contact-main__info-item">
+            <div class="contact-main__info-item-icon">
+              {%- render 'icon', name: 'location' -%}
+            </div>
+            <div class="contact-main__info-item-content">
+              <h3 class="contact-main__info-item-title">{{ 'sections.page_contact.address' | t }}</h3>
+              <p class="contact-main__info-item-text">{{ section.settings.address }}</p>
+            </div>
+          </div>
+          {%- endif -%}
+
+          {%- if section.settings.phone != blank -%}
+          <div class="contact-main__info-item">
+            <div class="contact-main__info-item-icon">
+              {%- render 'icon', name: 'phone' -%}
+            </div>
+            <div class="contact-main__info-item-content">
+              <h3 class="contact-main__info-item-title">{{ 'sections.page_contact.phone' | t }}</h3>
+              <a href="tel:{{ section.settings.phone | replace: ' ', '' }}" class="contact-main__info-item-text" title="{{ 'sections.page_contact.call' | t }} {{ section.settings.phone }}">{{ section.settings.phone }}</a>
+            </div>
+          </div>
+          {%- endif -%}
+
+          {%- if section.settings.email != blank -%}
+          <div class="contact-main__info-item">
+            <div class="contact-main__info-item-icon">
+              {%- render 'icon', name: 'email' -%}
+            </div>
+            <div class="contact-main__info-item-content">
+              <h3 class="contact-main__info-item-title">{{ 'sections.page_contact.email' | t }}</h3>
+              <a href="mailto:{{ section.settings.email }}" class="contact-main__info-item-text" title="Email {{ section.settings.email }}">{{ section.settings.email }}</a>
+            </div>
+          </div>
+          {%- endif -%}
+
+          {%- if section.settings.hours != blank -%}
+          <div class="contact-main__info-item">
+            <div class="contact-main__info-item-icon">
+              {%- render 'icon', name: 'calendar' -%}
+            </div>
+            <div class="contact-main__info-item-content">
+              <h3 class="contact-main__info-item-title">{{ 'sections.page_contact.hours' | t }}</h3>
+              <p class="contact-main__info-item-text">{{ section.settings.hours }}</p>
+            </div>
+          </div>
+          {%- endif -%}
+
+          {%- if section.settings.show_social -%}
+          <div class="contact-main__info-social">
+            <h3 class="contact-main__info-social-title">{{ 'sections.page_contact.follow_us' | t }}</h3>
+            {%- render 'shop-social' -%}
+          </div>
+          {%- endif -%}
+        </div>
+
+        <div class="contact-main__form">
+          <h2 class="contact-main__form-title">{{ 'sections.page_contact.send_message' | t }}</h2>
+          {% form 'contact' %}
+          {%- if form.posted_successfully? -%}
+          <div class="contact-form__success" role="alert">
+            <div class="contact-form__success-icon">
+              {%- render 'icon', name: 'check-circle' -%}
+            </div>
+            <p class="contact-form__success-text">{{ 'templates.contact.form.post_success' | t }}</p>
+          </div>
+          {%- endif -%}
+
+          {%- if form.errors -%}
+          <div class="contact-form__error" role="alert">
+            <div class="contact-form__error-icon">
+              {%- render 'icon', name: 'alert-circle' -%}
+            </div>
+            <p class="contact-form__error-text">{{ 'templates.contact.form.error_heading' | t }}</p>
+          </div>
+          {%- endif -%}
+
+          <div class="form-group">
+            <label for="contact-name">
+              <span class="required">{{ 'templates.contact.form.name' | t }}</span>
+              <input type="text" id="contact-name" name="contact[{{ 'templates.contact.form.name' | t }}]" class="form-control" placeholder="{{ 'sections.page_contact.name_placeholder' | t }}" required aria-required="true" value="{%- if form.name -%}{{ form.name }}{%- endif -%}">
+            </label>
+            {%- if form.errors contains 'name' -%}
+            <span class="form-error-message">{{ form.errors.translated_fields['name'] }} {{ form.errors.messages['name'] }}</span>
+            {%- endif -%}
+          </div>
+
+          <div class="form-group">
+            <label for="contact-email">
+              <span class="required">{{ 'templates.contact.form.email' | t }}</span>
+              <input type="email" id="contact-email" name="contact[email]" class="form-control" placeholder="email@example.com" required aria-required="true" value="{%- if form.email -%}{{ form.email }}{%- endif -%}">
+            </label>
+            {%- if form.errors contains 'email' -%}
+            <span class="form-error-message">{{ form.errors.translated_fields['email'] }} {{ form.errors.messages['email'] }}</span>
+            {%- endif -%}
+          </div>
+
+          <div class="form-group">
+            <label for="contact-phone">
+              <span>{{ 'templates.contact.form.phone' | t }}</span>
+              <input type="tel" id="contact-phone" name="contact[{{ 'templates.contact.form.phone' | t }}]" class="form-control" placeholder="0123 456 789" value="{%- if form.phone -%}{{ form.phone }}{%- endif -%}">
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label for="contact-message">
+              <span class="required">{{ 'templates.contact.form.comment' | t }}</span>
+              <textarea id="contact-message" name="contact[{{ 'templates.contact.form.comment' | t }}]" class="form-control" rows="6" placeholder="{{ 'sections.page_contact.message_placeholder' | t }}" required aria-required="true">{%- if form.body -%}{{ form.body }}{%- endif -%}</textarea>
+            </label>
+            {%- if form.errors contains 'body' -%}
+            <span class="form-error-message">{{ form.errors.translated_fields['body'] }} {{ form.errors.messages['body'] }}</span>
+            {%- endif -%}
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="contact-form__submit button-primary" aria-label="{{ 'templates.contact.form.send' | t }}">
+              <span class="contact-form__submit-text">{{ 'templates.contact.form.send' | t }}</span>
+              {%- render 'icon', name: 'send' -%}
+            </button>
+          </div>
+          {%- endform -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- if section.settings.show_map and section.settings.map_embed != blank -%}
+  <section class="contact-map">
+    <div class="contact-map__wrap">
+      <div class="contact-map__embed">
+        {{ section.settings.map_embed }}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- if page.content != blank -%}
+  <section class="contact-content section-padding">
+    <div class="page-width">
+      <div class="contact-content__wrap">
+        {{ page.content }}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+</contact-page>
+
+{% schema %}
+{
+  "name": "t:sections.page_contact.name",
+  "tag": "section",
+  "class": "section-page-contact",
+  "settings": [
+    { "type": "header", "content": "t:sections.page_contact.settings.header__hero.content" },
+    { "type": "text", "id": "title", "label": "t:sections.page_contact.settings.title.label" },
+    { "type": "textarea", "id": "description", "label": "t:sections.page_contact.settings.description.label" },
+    { "type": "header", "content": "t:sections.page_contact.settings.header__info.content" },
+    { "type": "textarea", "id": "address", "label": "t:sections.page_contact.settings.address.label" },
+    { "type": "text", "id": "phone", "label": "t:sections.page_contact.settings.phone.label" },
+    { "type": "text", "id": "email", "label": "t:sections.page_contact.settings.email.label" },
+    { "type": "text", "id": "hours", "label": "t:sections.page_contact.settings.hours.label" },
+    { "type": "checkbox", "id": "show_social", "label": "t:sections.page_contact.settings.show_social.label", "default": true },
+    { "type": "header", "content": "t:sections.page_contact.settings.header__map.content" },
+    { "type": "checkbox", "id": "show_map", "label": "t:sections.page_contact.settings.show_map.label", "default": true },
+    { "type": "html", "id": "map_embed", "label": "t:sections.page_contact.settings.map_embed.label" }
+  ]
+}
+{% endschema %}

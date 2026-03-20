@@ -1,0 +1,85 @@
+
+<div class="register-template">
+    <div class="page-width">
+    <h1 class="register-template__title">{{ 'customer.register.title' | t }}</h1>
+    <div class="register-template__wrapper">
+      <div class="register-template__form">
+        <div class="form form-register" id="form-register">
+          {%- form 'create_customer' -%}
+          {%- if form.errors -%}
+          <div class="form-error" role="alert">{{ form.errors | default_errors }}</div>
+          {%- endif -%}
+          <div class="form-group">
+            <label for="register-lastname">
+              <span class="required">{{ 'customer.register.last_name' | t }}</span>
+              <div class="form-group-input">
+                {%- render 'icon', name: 'user' -%}
+                <input type="text" id="register-lastname" class="form-control" name="customer[last_name]" required placeholder="{{ 'customer.register.last_name_placeholder' | t }}">
+              </div>
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="register-firstname">
+              <span class="required">{{ 'customer.register.first_name' | t }}</span>
+              <div class="form-group-input">
+                {%- render 'icon', name: 'user' -%}
+                <input type="text" id="register-firstname" class="form-control" name="customer[first_name]" required placeholder="{{ 'customer.register.first_name_placeholder' | t }}">
+              </div>
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="register-phone">
+              <span class="required">{{ 'customer.register.phone' | t }}</span>
+              <div class="form-group-input">
+                {%- render 'icon', name: 'phone' -%}
+                <input type="tel" id="register-phone" class="form-control" name="customer[phone]" required placeholder="{{ 'customer.register.phone_placeholder' | t }}" pattern="^\+?\d{0,10}$">
+              </div>
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="register-email">
+              <span class="required">{{ 'customer.login_page.email' | t }}</span>
+              <div class="form-group-input">
+                {%- render 'icon', name: 'email' -%}
+                <input type="email" id="register-email" class="form-control" name="customer[email]" required placeholder="{{ 'customer.login_page.email_placeholder' | t }}">
+              </div>
+            </label>
+          </div>
+          <toggle-password class="form-group">
+            <label for="register-password" class="label-password">
+              <span class="required">{{ 'customer.login_page.password' | t }}</span>
+              <div class="form-group-input">
+                {%- render 'icon', name: 'password' -%}
+                <input type="password" id="register-password" class="form-control" name="customer[password]" required placeholder="{{ 'customer.login_page.password_placeholder' | t }}">
+                {%- render 'icon', name: 'eye-show', class: 'icon-eye-show right' -%}
+                {%- render 'icon', name: 'eye-hide', class: 'icon-eye-hide right', style: 'display:none;' -%}
+              </div>
+            </label>
+          </toggle-password>
+          <div class="form-group">
+            <button type="submit" class="button-primary active form-submit" title="{{ 'customer.register.submit' | t }}">{{ 'customer.register.submit' | t }}</button>
+          </div>
+          <div class="form-group form-group--text-center">
+            <span class="form-text">{{ 'customer.login_page.has_account' | t }} </span><a class="link" href="{{ routes.account_login_url }}" title="{{ 'customer.login_page.sign_in' | t }}">{{ 'customer.login_page.sign_in' | t }}</a>
+          </div>
+          {%- endform -%}
+        </div>
+      </div>
+      <div class="register-template__content">
+        <div class="register-template__quote-icon">{%- render 'icon', name: 'quote-open' -%}</div>
+        <div class="register-template__quote-text">
+          <p>{{ 'customer.register.quote' | t }}</p>
+        </div>
+        <div class="register-template__quote-icon register-template__quote-icon--right">{%- render 'icon', name: 'quote-close' -%}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main_customers_register.name",
+  "tag": "section",
+  "class": "section-main-customers-register"
+}
+{% endschema %}

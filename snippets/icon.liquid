@@ -1,6 +1,6 @@
 {%- comment -%}
   Icon Helper - SVG Sprite System
-  Usage: {%- include 'icon' with name: 'cart', class: 'icon-cart', size: '24' -%}
+  Usage: {%- render 'icon', name: 'cart'$(if(icon-cart){", class: 'icon-cart'"}else{""})$(if(24){", size: '24'"}else{""}) -%}
   Parameters:
     - name (required): Icon name (e.g., 'cart', 'close', 'search')
     - class (optional): Additional CSS classes

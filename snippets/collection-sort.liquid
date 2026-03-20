@@ -13,10 +13,10 @@
 	
 	<div class="collection-sort__view">
 		<button type="button" class="collection-sort__view-btn collection-sort__view-btn--active" data-view="grid" aria-label="Xem dạng lưới">
-			{%- include 'icon' with name: 'grid' -%}
+			{%- render 'icon', name: 'grid'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
 		</button>
 		<button type="button" class="collection-sort__view-btn" data-view="list" aria-label="Xem dạng danh sách">
-			{%- include 'icon' with name: 'list' -%}
+			{%- render 'icon', name: 'list'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
 		</button>
 	</div>
 
@@ -36,7 +36,7 @@
 			<option value="(updated_at:product=desc)" {% if current_sort == '(updated_at:product=desc)' %}selected{% endif %}>Mới nhất</option>
 			<option value="(updated_at:product=asc)" {% if current_sort == '(updated_at:product=asc)' %}selected{% endif %}>Cũ nhất</option>
 		</select>
-			{%- include 'icon' with name: 'arrow', class: 'collection-sort__icon' -%}
+			{%- render 'icon', name: 'arrow'$(if(collection-sort__icon){", class: 'collection-sort__icon'"}else{""})$(if(){", size: ''"}else{""}) -%}
 		</div>
 	</div>
 </div>

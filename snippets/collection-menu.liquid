@@ -6,8 +6,8 @@
 			<div class="collection-menu__item-image">
 				{%- if collection_item.image != blank -%}
 				<picture>
-					<source media="(max-width: 480px)" srcset="{{ collection_item.image | img_url: 'medium' }}">
-					<img src="{{ collection_item.image | img_url: 'medium' }}" alt="{{ collection_item.title | escape }}" width="80" height="80" loading="lazy" decoding="async">
+					<source media="(max-width: 480px)" srcset="{{ collection_item.image | image_url: width: 240 }}">
+					<img src="{{ collection_item.image | image_url: width: 240 }}" alt="{{ collection_item.title | escape }}" width="80" height="80" loading="lazy" decoding="async">
 				</picture>
 				{%- else -%}
 				<div class="collection-menu__item-image-placeholder">

@@ -1,0 +1,26 @@
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "menu-0": {
+          "type": "menu",
+          "settings": {
+            "heading": "Menu",
+            "menu": "footer"
+          }
+        }
+      },
+      "block_order": ["menu-0"],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "show_certs": false
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

@@ -1,0 +1,31 @@
+{%- layout none -%}
+{%- paginate search.results by 20 -%}
+{%- if search.results.size == 0 -%}
+<div class="collection-template__no-products">
+  <p>{{ 'templates.search.no_results_title' | t: terms: search.terms }}</p>
+</div>
+{%- else -%}
+<ul class="product-cards collection-template__products">
+  {%- for product in search.results -%}
+  {%- liquid
+    assign lazyload = 'lazy'
+    assign fetchpriority = 'auto'
+    if forloop.index <= 3
+      assign lazyload = 'eager'
+    endif
+    if forloop.first
+      assign fetchpriority = 'high'
+    endif
+  -%}
+  <li class="product-cards__item">
+    {%- render 'product-card', product: product, lazyload: lazyload, fetchpriority: fetchpriority, show_vendor: true -%}
+  </li>
+  {%- endfor -%}
+</ul>
+{%- endif -%}
+{%- if paginate.pages > 1 -%}
+<div class="collection-template__pagination">
+  {%- render 'section-pagination' -%}
+</div>
+{%- endif -%}
+{%- endpaginate -%}

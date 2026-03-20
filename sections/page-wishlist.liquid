@@ -1,0 +1,108 @@
+
+<div class="wishlist-page page-width section-padding">
+  <div class="wishlist-page__header">
+    <h1>{{ section.settings.title | default: 'sections.page_wishlist.default_title' | t }}</h1>
+    <p>{{ 'sections.page_wishlist.subtitle' | t }}</p>
+  </div>
+  <div class="wishlist-page__content">
+    <div class="wishlist-page__empty" style="display: none;">
+      <div class="wishlist-page__empty-icon">{%- render 'icon', name: 'heart' -%}</div>
+      <h2>{{ section.settings.empty_text | default: 'sections.page_wishlist.empty' | t }}</h2>
+      <p>{{ 'sections.page_wishlist.empty_hint' | t }}</p>
+      <a href="{{ section.settings.empty_button_link | default: routes.all_products_collection_url }}" class="button-primary">
+        {{- section.settings.empty_button_text | default: 'sections.page_wishlist.explore' | t -}}
+      </a>
+    </div>
+    <ul class="wishlist-page__products product-cards"></ul>
+  </div>
+</div>
+<script>
+  customElements.whenDefined('wishlist-manager').then(function() {
+    var wishlistManager = document.querySelector('wishlist-manager');
+    if (!wishlistManager) return;
+    var wishlist = wishlistManager.getWishlist();
+    var productsContainer = document.querySelector('.wishlist-page__products');
+    var emptyState = document.querySelector('.wishlist-page__empty');
+
+    if (wishlist.length === 0) {
+      emptyState.style.display = 'block';
+      productsContainer.style.display = 'none';
+      return;
+    }
+
+    var handles = wishlist
+      .map(function(item) { return typeof item === 'string' ? '' : (item.handle || ''); })
+      .filter(function(h) { return h !== ''; });
+
+    if (handles.length === 0) {
+      emptyState.style.display = 'block';
+      productsContainer.style.display = 'none';
+      return;
+    }
+
+    emptyState.style.display = 'none';
+    productsContainer.style.display = 'grid';
+
+    var fetchPromises = handles.map(function(handle) {
+      return fetch('/products/' + encodeURIComponent(handle) + '?view=card')
+        .then(function(res) {
+          if (!res.ok) throw new Error('Not found');
+          return res.text();
+        })
+        .then(function(html) {
+          if (html && html.trim().length > 0) return html.trim();
+          return null;
+        })
+        .catch(function() { return null; });
+    });
+
+    Promise.all(fetchPromises)
+      .then(function(results) {
+        var validResults = results.filter(function(html) { return html; });
+        if (validResults.length === 0) {
+          emptyState.style.display = 'block';
+          productsContainer.style.display = 'none';
+          return;
+        }
+        productsContainer.innerHTML = validResults.map(function(html) {
+          return '<li class="product-cards__item">' + html + '</li>';
+        }).join('');
+        wishlistManager.updateAllWishlistStates();
+      })
+      .catch(function(err) {
+        console.error('Wishlist load error:', err);
+        emptyState.style.display = 'block';
+        productsContainer.style.display = 'none';
+      });
+
+    window.addEventListener('wishlist-changed', function(e) {
+      var removedId = e.detail && e.detail.productId;
+      if (removedId) {
+        var btn = productsContainer.querySelector('[data-product-id="' + removedId + '"]');
+        if (btn) {
+          var card = btn.closest('.product-cards__item');
+          if (card) card.remove();
+        }
+      }
+      var currentWishlist = wishlistManager.getWishlist();
+      if (currentWishlist.length === 0) {
+        emptyState.style.display = 'block';
+        productsContainer.style.display = 'none';
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.page_wishlist.name",
+  "tag": "section",
+  "class": "section-page-wishlist",
+  "settings": [
+    { "type": "text", "id": "title", "label": "t:sections.page_wishlist.settings.title.label" },
+    { "type": "text", "id": "empty_text", "label": "t:sections.page_wishlist.settings.empty_text.label" },
+    { "type": "text", "id": "empty_button_text", "label": "t:sections.page_wishlist.settings.empty_button_text.label" },
+    { "type": "url", "id": "empty_button_link", "label": "t:sections.page_wishlist.settings.empty_button_link.label" }
+  ]
+}
+{% endschema %}

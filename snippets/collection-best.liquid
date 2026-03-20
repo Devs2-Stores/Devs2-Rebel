@@ -17,7 +17,7 @@
 				<div class="swiper-wrapper">
 					{%- for product in target_collection.products limit: limit -%}
 						<div class="swiper-slide">
-							{%- include 'product-card' -%}
+							{%- render 'product-card' -%}
 						</div>
 					{%- endfor -%}
 				</div>

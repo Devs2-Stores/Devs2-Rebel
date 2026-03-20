@@ -1,0 +1,149 @@
+
+<stores-page class="page-stores">
+  <section class="stores-hero">
+    <div class="page-width">
+      <div class="stores-hero__wrap">
+        <h1 class="stores-hero__title">{{ section.settings.title | default: 'sections.page_stores.default_title' | t }}</h1>
+        {%- if section.settings.description != blank -%}
+        <p class="stores-hero__description">{{ section.settings.description }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  <section class="stores-main section-padding">
+    <div class="page-width">
+      <div class="stores-main__wrap">
+        <aside class="stores-sidebar" id="stores-sidebar">
+          <div class="stores-sidebar__inner">
+            <div class="stores-sidebar__search">
+              <label for="stores-search" class="sr-only">{{ 'sections.page_stores.search_label' | t }}</label>
+              <div class="stores-sidebar__search-box">
+                {%- render 'icon', name: 'search', size: '18' -%}
+                <input type="text" id="stores-search" class="stores-sidebar__search-input" placeholder="{{ 'sections.page_stores.search_placeholder' | t }}" autocomplete="off">
+              </div>
+            </div>
+            <div class="stores-sidebar__filter">
+              <label for="stores-province" class="stores-sidebar__label">{{ 'sections.page_stores.province' | t }}</label>
+              <select id="stores-province" class="stores-sidebar__select">
+                <option value="">{{ 'sections.page_stores.all_provinces' | t }}</option>
+              </select>
+            </div>
+            <div class="stores-sidebar__filter">
+              <label for="stores-district" class="stores-sidebar__label">{{ 'sections.page_stores.district' | t }}</label>
+              <select id="stores-district" class="stores-sidebar__select" disabled>
+                <option value="">{{ 'sections.page_stores.all_districts' | t }}</option>
+              </select>
+            </div>
+            <div class="stores-sidebar__meta">
+              <span class="stores-sidebar__count" id="stores-count"></span>
+              <button type="button" class="stores-sidebar__clear" id="stores-clear" style="display:none">
+                {%- render 'icon', name: 'close', size: '12' -%}
+                <span>{{ 'sections.page_stores.clear_filter' | t }}</span>
+              </button>
+            </div>
+          </div>
+        </aside>
+
+        <div class="stores-grid" id="stores-grid">
+          {%- for block in section.blocks -%}
+          {%- if block.type == 'store' -%}
+          <div class="stores-card"
+               data-store-name="{{ block.settings.name | escape }}"
+               data-store-address="{{ block.settings.address | escape }}"
+               data-store-province="{{ block.settings.province | escape }}"
+               data-store-district="{{ block.settings.district | escape }}"
+               {{ block.shopify_attributes }}>
+            {%- if block.settings.map_embed != blank -%}
+            <div class="stores-card__map">
+              {{ block.settings.map_embed }}
+            </div>
+            {%- endif -%}
+            <div class="stores-card__content">
+              <h3 class="stores-card__name">
+                {%- render 'icon', name: 'store', size: '18' -%}
+                {{ block.settings.name }}
+              </h3>
+              {%- if block.settings.address != blank -%}
+              <div class="stores-card__info">
+                {%- render 'icon', name: 'location', size: '16' -%}
+                <span>{{ block.settings.address }}</span>
+              </div>
+              {%- endif -%}
+              {%- if block.settings.phone != blank -%}
+              <div class="stores-card__info">
+                {%- render 'icon', name: 'phone', size: '16' -%}
+                <a href="tel:{{ block.settings.phone | replace: ' ', '' | replace: '.', '' }}" title="{{ 'sections.page_contact.call' | t }} {{ block.settings.phone }}">{{ block.settings.phone }}</a>
+              </div>
+              {%- endif -%}
+              {%- if block.settings.email != blank -%}
+              <div class="stores-card__info">
+                {%- render 'icon', name: 'email', size: '16' -%}
+                <a href="mailto:{{ block.settings.email }}" title="Email {{ block.settings.email }}">{{ block.settings.email }}</a>
+              </div>
+              {%- endif -%}
+              {%- if block.settings.hours != blank -%}
+              <div class="stores-card__info">
+                {%- render 'icon', name: 'calendar', size: '16' -%}
+                <span>{{ block.settings.hours }}</span>
+              </div>
+              {%- endif -%}
+              {%- if block.settings.address != blank -%}
+              <a href="https://www.google.com/maps/search/{{ block.settings.address | url_encode }}" target="_blank" rel="noopener" class="stores-card__direction" title="{{ 'sections.page_stores.get_directions' | t }}">
+                {%- render 'icon', name: 'location', size: '16' -%}
+                <span>{{ 'sections.page_stores.get_directions' | t }}</span>
+              </a>
+              {%- endif -%}
+            </div>
+          </div>
+          {%- endif -%}
+          {%- endfor -%}
+
+          <div class="stores-empty" id="stores-empty" style="display:none">
+            {%- render 'icon', name: 'sad', size: '48' -%}
+            <p>{{ 'sections.page_stores.no_results' | t }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- if page.content != blank -%}
+  <section class="stores-content section-padding">
+    <div class="page-width">
+      <div class="stores-content__wrap">
+        {{ page.content }}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+</stores-page>
+
+{% schema %}
+{
+  "name": "t:sections.page_stores.name",
+  "tag": "section",
+  "class": "section-page-stores",
+  "settings": [
+    { "type": "text", "id": "title", "label": "t:sections.page_stores.settings.title.label" },
+    { "type": "textarea", "id": "description", "label": "t:sections.page_stores.settings.description.label" }
+  ],
+  "blocks": [
+    {
+      "type": "store",
+      "name": "t:sections.page_stores.blocks.store.name",
+      "limit": 20,
+      "settings": [
+        { "type": "text", "id": "name", "label": "t:sections.page_stores.blocks.store.settings.name.label" },
+        { "type": "textarea", "id": "address", "label": "t:sections.page_stores.blocks.store.settings.address.label" },
+        { "type": "text", "id": "province", "label": "t:sections.page_stores.blocks.store.settings.province.label" },
+        { "type": "text", "id": "district", "label": "t:sections.page_stores.blocks.store.settings.district.label" },
+        { "type": "text", "id": "phone", "label": "t:sections.page_stores.blocks.store.settings.phone.label" },
+        { "type": "text", "id": "email", "label": "t:sections.page_stores.blocks.store.settings.email.label" },
+        { "type": "text", "id": "hours", "label": "t:sections.page_stores.blocks.store.settings.hours.label" },
+        { "type": "html", "id": "map_embed", "label": "t:sections.page_stores.blocks.store.settings.map_embed.label" }
+      ]
+    }
+  ]
+}
+{% endschema %}

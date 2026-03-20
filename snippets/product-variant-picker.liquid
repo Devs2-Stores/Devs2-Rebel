@@ -15,7 +15,7 @@
       {%- if settings.product_size_guide_enable and size_guide_shown == false and (option_lower contains 'size' or option_lower contains 'kích') -%}
       {%- assign size_guide_shown = true -%}
       <button type="button" class="variant-picker__size-guide-btn" data-size-guide-trigger>
-        {%- include 'icon' with name: 'grid', size: '16' -%}
+        {%- render 'icon', name: 'grid'$(if(){", class: ''"}else{""})$(if(16){", size: '16'"}else{""}) -%}
         <span>{{ settings.product_size_guide_button | default: "Hướng dẫn chọn size" }}</span>
       </button>
       {%- endif -%}

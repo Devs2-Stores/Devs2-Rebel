@@ -1,233 +1,195 @@
+{%- comment %}
+  Meta tags — SEO, Open Graph, Twitter Cards, JSON-LD.
+  Pattern: Horizon (page_image, request.page_type, liquid block assigns).
+{%- endcomment %}
+
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="view-transition" content="same-origin">
-<meta name="revisit-after" content="1 day">
-<meta name="HandheldFriendly" content="true">
 <meta name="theme-color" content="#ffffff">
-<link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png">
-<link rel="expect" href="#MainContent" id="view-transition-render-blocker">
-<link rel="canonical" href="{{ canonical_url | replace: 'http://', 'https://' }}">
-<link rel="alternate" href="{{ canonical_url | replace: 'http://', 'https://' }}" hreflang="vi-VN">
-{%- if paginate -%}
-{%- if paginate.previous -%}
-<link rel="prev" href="{{ paginate.previous.url }}">{%- endif -%}
-{%- if paginate.next -%}
-<link rel="next" href="{{ paginate.next.url }}">{%- endif -%}
+{%- if settings.favicon != blank -%}
+<link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
 {%- endif -%}
+<link rel="expect" href="#MainContent" id="view-transition-render-blocker">
+
+{%- liquid
+  assign og_title = page_title | default: shop.name
+  assign og_url = canonical_url | default: request.origin
+  assign og_type = 'website'
+  assign og_description = page_description | default: shop.description | default: shop.name
+
+  if request.page_type == 'product'
+    assign og_type = 'product'
+  elsif request.page_type == 'article'
+    assign og_type = 'article'
+  elsif request.page_type == 'password'
+    assign og_url = request.origin
+  endif
+-%}
+
+<link rel="canonical" href="{{ og_url }}">
+<link rel="alternate" href="{{ og_url }}" hreflang="vi-VN">
+
+{% if paginate %}
+  {% if paginate.previous %}
+    <link rel="prev" href="{{ paginate.previous.url }}">
+  {% endif %}
+  {% if paginate.next %}
+    <link rel="next" href="{{ paginate.next.url }}">
+  {% endif %}
+{% endif %}
+
 <title>
   {{ page_title }}
-  {%- if current_tags %} - {{ current_tags | join: ', ' }}{% endif -%}
-  {%- if current_page != 1 %} - Page {{ current_page }}{% endif -%}
-  {%- unless page_title contains shop.name %} - {{ shop.name }}{% endunless %}
+  {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+  {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+  {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
 </title>
-{%- if page_description != blank -%}
-<meta name="description" content="{{ page_description | escape }}">
-{%- else -%}
-<meta name="description" content="{{ shop.description | default: shop.name | escape }}">
-{%- endif -%}
 
-{%- if template contains 'search' -%}
-<meta name="robots" content="noindex, nofollow">
-{%- elsif current_page > 1 -%}
-<meta name="robots" content="noindex, follow">
-{%- elsif template contains 'customers' -%}
-<meta name="robots" content="noindex, nofollow">
-{%- else -%}
-<meta name="robots" content="index, follow">
-{%- endif -%}
+<meta name="description" content="{{ og_description | escape }}">
 
-{%- if template contains 'product' -%}
-<meta property="og:type" content="product">
-<meta property="og:title" content="{{ product.title | strip_html | strip_newlines | escape }}">
-<meta property="og:image" content="https:{{ product.featured_image.src | img_url: 'grande'  | remove: 'http:'}}">
-<meta property="og:image:secure_url" content="https:{{ product.featured_image.src | img_url: 'grande'  | remove: 'http:'}}">
-<meta property="og:image:width" content="{{ product.featured_image.width }}">
-<meta property="og:image:height" content="{{ product.featured_image.height }}">
-<meta property="og:price:amount" content="{{ product.price | money_without_currency | remove: ',' | remove: '₫'}}">
-<meta property="og:price:currency" content="{{ shop.currency }}">
-{%- elsif template contains 'collection' %}
-<meta property="og:type" content="website">
-<meta property="og:title" content="{{ collection.title | strip_html | strip_newlines | escape }}">
-{%- assign img_tag = '&lt;' | append: 'img' -%}
-{%- if collection.image -%}
-{%- assign src = collection.image.src | remove: 'https:' | remove: 'http:' -%}
-{%- else -%}
-{%- if collection.description contains img_tag -%}
-{%- assign src = collection.description | split: 'src="' -%}
-{%- assign src = src[1] | split: '"' | first | remove: 'https:' | remove: 'http:' -%}
-{%- else -%}
-{%- assign src = 'share_fb_home.png' | asset_url | remove: 'https:' | remove: 'http:'-%}
-{%- endif -%}
-{%- endif -%}
-<meta property="og:image" content="https:{{ src }}">
-<meta property="og:image:secure_url" content="https:{{ src }}">
-{%- elsif template contains 'article' %}
-<meta property="og:type" content="article">
-<meta property="og:title" content="{{ article.title | strip_html | strip_newlines | escape }}">
-{%- assign img_art = '&lt;' | append: 'img' -%}
-{%- if article.image -%}
-{%- assign src_art = article.image.src | remove: 'https:' | remove: 'http:' -%}
-{%- else -%}
-{%- if article.content contains img_art -%}
-{%- assign src_art = article.content | split: 'src="' -%}
-{%- assign src_art = src_art[1] | split: '"' | first | remove: 'https:' | remove: 'http:' -%}
-{%- endif -%}
-{%- endif -%}
-{%- if src_art  -%}
-<meta property="og:image" content="https:{{ src_art }}">
-<meta property="og:image:secure_url" content="https:{{ src_art }}">
-{%- else -%}
-<meta property="og:image" content="https:{{ 'share_fb_home.png' | asset_url | remove: 'https:' | remove: 'http:' }}">
-<meta property="og:image:secure_url" content="https:{{ 'share_fb_home.png' | asset_url | remove: 'https:' | remove: 'http:' }}">
-{%- endif -%}
-{%- else -%}
-<meta property="og:type" content="website">
-<meta property="og:title" content="{{ page_title | strip_html | strip_newlines | escape }}">
-<meta property="og:image" content="https:{{ 'share_fb_home.png' | asset_url | remove: 'https:' | remove: 'http:' }}">
-<meta property="og:image:secure_url" content="https:{{ 'share_fb_home.png' | asset_url | remove: 'https:' | remove: 'http:' }}">
-{%- endif -%}
-{%- if page_description -%}
-<meta property="og:description" content="{{ page_description | strip_html | strip_newlines | escape }}">
-{%- else -%}
-<meta property="og:description" content="{{ shop.description | default: shop.name | strip_html | strip_newlines | escape }}">
-{%- endif -%}
-<meta property="og:url" content="{{ canonical_url | replace: 'http://', 'https://' }}">
+{%- comment %} — Open Graph — {%- endcomment %}
 <meta property="og:site_name" content="{{ shop.name }}">
-<meta property="og:locale" content="vi_VN">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{{ page_title | strip_html | strip_newlines | escape }}">
-{%- if page_description -%}
-<meta name="twitter:description" content="{{ page_description | strip_html | strip_newlines | escape }}">
-{%- else -%}
-<meta name="twitter:description" content="{{ shop.description | default: shop.name | strip_html | strip_newlines | escape }}">
-{%- endif -%}
-{%- if template contains 'product' -%}
-<meta name="twitter:image" content="https:{{ product.featured_image.src | img_url: 'grande' | remove: 'http:' }}">
-{%- elsif template contains 'collection' and src -%}
-<meta name="twitter:image" content="https:{{ src }}">
-{%- elsif template contains 'article' and src_art -%}
-<meta name="twitter:image" content="https:{{ src_art }}">
-{%- else -%}
-<meta name="twitter:image" content="https:{{ 'share_fb_home.png' | asset_url }}">
-{%- endif -%}
+<meta property="og:url" content="{{ og_url }}">
+<meta property="og:title" content="{{ og_title | escape }}">
+<meta property="og:type" content="{{ og_type }}">
+<meta property="og:description" content="{{ og_description | escape }}">
 
-{%- if template == 'index' -%}
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": {{ shop.name | json }},
-    "url": "{{ shop.url | replace: 'http://', 'https://' }}",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "{{ shop.url | replace: 'http://', 'https://' }}/search?type=product&q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
-  }
-</script>
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": {{ shop.name | json }},
-    "url": "{{ shop.url | replace: 'http://', 'https://' }}",
-    {%- if settings.header_logo != blank -%} "logo": "https:{{ 'header_logo.png' | asset_url | remove: 'http:' | remove: 'https:' }}",
-    {%- endif -%} "sameAs": [
-      {%- assign social_links = '' -%}
-      {%- if settings.footer_social_facebook != blank -%}{%- assign social_links = social_links | append: '"' | append: settings.footer_social_facebook | append: '",' -%}{%- endif -%}
-      {%- if settings.footer_social_instagram != blank -%}{%- assign social_links = social_links | append: '"' | append: settings.footer_social_instagram | append: '",' -%}{%- endif -%}
-      {%- if settings.footer_social_youtube != blank -%}{%- assign social_links = social_links | append: '"' | append: settings.footer_social_youtube | append: '",' -%}{%- endif -%}
-      {%- if settings.footer_social_tiktok != blank -%}{%- assign social_links = social_links | append: '"' | append: settings.footer_social_tiktok | append: '",' -%}{%- endif -%}
-      {{ social_links | remove_last: ',' }}
-    ]
-    {%- if settings.footer_phone != blank -%}
-    ,"contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": {{ settings.footer_phone | json }},
-      "contactType": "customer service",
-      "availableLanguage": "Vietnamese"
-    }
-    {%- endif -%}
-    {%- if settings.footer_address != blank -%}
-    ,"address": {
-      "@type": "PostalAddress",
-      "streetAddress": {{ settings.footer_address | json }},
-      "addressCountry": "VN"
-    }
-    {%- endif -%}
-  }
-</script>
-{%- endif -%}
-{%- if template contains 'product' -%}
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "{{ shop.url | replace: 'http://', 'https://' }}" }
-      {%- if product.collections.size > 0 -%}
-      ,{ "@type": "ListItem", "position": 2, "name": {{ product.collections.first.title | json }}, "item": "{{ shop.url | replace: 'http://', 'https://' }}{{ product.collections.first.url }}" }
-      ,{ "@type": "ListItem", "position": 3, "name": {{ product.title | json }} }
-      {%- else -%}
-      ,{ "@type": "ListItem", "position": 2, "name": {{ product.title | json }} }
-      {%- endif -%}
-    ]
-  }
-</script>
-{%- endif -%}
-{%- if template contains 'collection' -%}
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "{{ shop.url | replace: 'http://', 'https://' }}" },
-      { "@type": "ListItem", "position": 2, "name": {{ collection.title | json }} }
-    ]
-  }
-</script>
-{%- endif -%}
-{%- if template contains 'article' -%}
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": {{ article.title | json }},
-    "url": "{{ shop.url | replace: 'http://', 'https://' }}{{ article.url }}",
-    {%- if article.image -%}
-    "image": "https:{{ article.image.src | remove: 'http:' | remove: 'https:' }}",
-    {%- endif -%}
-    "datePublished": "{{ article.created_at | date: '%Y-%m-%dT%H:%M:%S' }}",
-    {%- if article.updated_at -%}
-    "dateModified": "{{ article.updated_at | date: '%Y-%m-%dT%H:%M:%S' }}",
-    {%- endif -%}
-    "author": {
-      "@type": "Person",
-      "name": {{ article.author | json }}
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": {{ shop.name | json }}
-      {%- if settings.header_logo != blank -%}
-      ,"logo": {
-        "@type": "ImageObject",
-        "url": "https:{{ 'header_logo.png' | asset_url | remove: 'http:' | remove: 'https:' }}"
+{% if page_image %}
+  <meta property="og:image" content="http:{{ page_image | image_url }}">
+  <meta
+    property="og:image:secure_url"
+    content="https:{{ page_image | image_url }}"
+  >
+  <meta property="og:image:width" content="{{ page_image.width }}">
+  <meta property="og:image:height" content="{{ page_image.height }}">
+{% endif %}
+
+{% if request.page_type == 'product' %}
+  <meta property="og:price:amount" content="{{ product.price | money_without_currency | strip_html }}">
+  <meta property="og:price:currency" content="{{ cart.currency.iso_code }}">
+{% endif %}
+
+<meta property="og:locale" content="vi_VN">
+
+{%- comment %} — Twitter Cards — {%- endcomment %}
+{% if settings.social_twitter_link != blank %}
+  <meta
+    name="twitter:site"
+    content="{{ settings.social_twitter_link | split: 'twitter.com/' | last | prepend: '@' }}"
+  >
+{% endif %}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ og_title | escape }}">
+<meta name="twitter:description" content="{{ og_description | escape }}">
+
+{%- comment %} — JSON-LD Structured Data — {%- endcomment %}
+{% if template == 'index' %}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "url": "{{ shop.url }}",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "{{ shop.url }}/search?type=product&q={search_term_string}",
+        "query-input": "required name=search_term_string"
       }
-      {%- endif -%}
-    },
-    "description": {{ article.excerpt | default: article.content | strip_html | truncatewords: 50 | json }}
-  }
-</script>
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "{{ shop.url | replace: 'http://', 'https://' }}" },
-      { "@type": "ListItem", "position": 2, "name": {{ blog.title | json }}, "item": "{{ shop.url | replace: 'http://', 'https://' }}{{ blog.url }}" },
-      { "@type": "ListItem", "position": 3, "name": {{ article.title | json }} }
-    ]
-  }
-</script>
-{%- endif -%}
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": {{ shop.name | json }},
+      "url": "{{ shop.url }}",
+      {%- if settings.logo != blank %}
+        "logo": "https:{{ settings.logo | image_url: width: 500 }}",
+      {%- endif %}
+      "sameAs": [
+        {%- assign social_links = '' -%}
+        {%- if settings.social_facebook_link != blank -%}{%- assign social_links = social_links | append: '"' | append: settings.social_facebook_link | append: '",' -%}{%- endif -%}
+        {%- if settings.social_instagram_link != blank -%}{%- assign social_links = social_links | append: '"' | append: settings.social_instagram_link | append: '",' -%}{%- endif -%}
+        {%- if settings.social_youtube_link != blank -%}{%- assign social_links = social_links | append: '"' | append: settings.social_youtube_link | append: '",' -%}{%- endif -%}
+        {%- if settings.social_tiktok_link != blank -%}{%- assign social_links = social_links | append: '"' | append: settings.social_tiktok_link | append: '",' -%}{%- endif -%}
+        {{ social_links | remove_last: ',' }}
+      ]
+    }
+  </script>
+{% endif %}
+
+{% if request.page_type == 'product' %}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": {{ 'general.breadcrumbs.home' | t | json }}, "item": "{{ shop.url }}" }
+        {%- if product.collections.size > 0 -%}
+          ,{ "@type": "ListItem", "position": 2, "name": {{ product.collections.first.title | json }}, "item": "{{ shop.url }}{{ product.collections.first.url }}" }
+          ,{ "@type": "ListItem", "position": 3, "name": {{ product.title | json }} }
+        {%- else -%}
+          ,{ "@type": "ListItem", "position": 2, "name": {{ product.title | json }} }
+        {%- endif -%}
+      ]
+    }
+  </script>
+{% endif %}
+
+{% if request.page_type == 'collection' %}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": {{ 'general.breadcrumbs.home' | t | json }}, "item": "{{ shop.url }}" },
+        { "@type": "ListItem", "position": 2, "name": {{ collection.title | json }} }
+      ]
+    }
+  </script>
+{% endif %}
+
+{% if request.page_type == 'article' %}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": {{ article.title | json }},
+      "url": "{{ shop.url }}{{ article.url }}",
+      {%- if article.image %}
+        "image": "https:{{ article.image | image_url }}",
+      {%- endif %}
+      "datePublished": "{{ article.created_at | date: '%Y-%m-%dT%H:%M:%S' }}",
+      {%- if article.updated_at %}
+        "dateModified": "{{ article.updated_at | date: '%Y-%m-%dT%H:%M:%S' }}",
+      {%- endif %}
+      "author": {
+        "@type": "Person",
+        "name": {{ article.author | json }}
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": {{ shop.name | json }}
+        {%- if settings.logo != blank -%}
+          ,"logo": {
+            "@type": "ImageObject",
+            "url": "https:{{ settings.logo | image_url: width: 500 }}"
+          }
+        {%- endif -%}
+      },
+      "description": {{ article.excerpt | default: article.content | strip_html | truncatewords: 50 | json }}
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": {{ 'general.breadcrumbs.home' | t | json }}, "item": "{{ shop.url }}" },
+        { "@type": "ListItem", "position": 2, "name": {{ blog.title | json }}, "item": "{{ shop.url }}{{ blog.url }}" },
+        { "@type": "ListItem", "position": 3, "name": {{ article.title | json }} }
+      ]
+    }
+  </script>
+{% endif %}

@@ -1,16 +1,16 @@
 <cart-items role="list">
-  <form action="/cart" method="POST" id="cart-template__data-form" novalidate>
+  <form action="{{ routes.cart_url }}" method="POST" id="cart-template__data-form" novalidate>
     <div class="cart-template__data-head">
-      <span class="head-image">Hình ảnh</span>
-      <span class="head-info">Thông tin sản phẩm</span>
+      <span class="head-image">{{ 'sections.cart.headings.image' | t }}</span>
+      <span class="head-info">{{ 'sections.cart.headings.product' | t }}</span>
     </div>
     {%- for item in cart.items -%}
     <cart-item data-var-id="{{ item.variant_id }}" data-product-id="{{ item.product.id }}" data-line-item="{{ forloop.index }}" role="listitem">
       <a class="cart-item__image" href="{{ item.product.url }}">
         {%- if item.image -%}
-        {%- assign cart_item_image = item.image | img_url: 'large' -%}
+        {%- assign cart_item_image = item.image | image_url: width: 160 -%}
         {%- elsif item.product.featured_image -%}
-        {%- assign cart_item_image = item.product.featured_image | img_url: 'large' -%}
+        {%- assign cart_item_image = item.product.featured_image | image_url: width: 160 -%}
         {%- else -%}
         {%- assign cart_item_image = 'no-image.png' | asset_url -%}
         {%- endif -%}
@@ -28,7 +28,7 @@
           {%- endif -%}
           <div class="cart-item__price-mobile">
             {%- if item.price == 0 -%}
-            <strong class="cart-item__price">Liên hệ</strong>
+            <strong class="cart-item__price">{{ 'products.product.price.contact' | t }}</strong>
             {%- else -%}
             <strong class="cart-item__price">{{ item.price | money }}</strong>
             {%- if item.variant.compare_at_price > item.price -%}
@@ -38,11 +38,11 @@
           </div>
         </div>
         <div class="cart-item__quantity">
-          <label class="sr-only">Số lượng</label>
+          <label class="sr-only">{{ 'products.product.quantity.label' | t }}</label>
           {%- if item.price > 0 -%}
-          {%- include 'quantity-selector' with form: "cart-template__data-form", product: item.product, variant: item.variant, value: item.quantity, min: 1, step: 1 -%}
+          {%- render 'quantity-selector', form: "cart-template__data-form", product: item.product, variant: item.variant, value: item.quantity, min: 1, step: 1 -%}
           {%- endif -%}
-          <button type="button" data-action="delete-item" title="Xóa sản phẩm" class="cart-item__delete" aria-label="Xóa {{ item.product.title | escape }}">Xoá</button>
+          <button type="button" data-action="delete-item" title="{{ 'sections.cart.remove_title' | t: title: item.product.title }}" class="cart-item__delete" aria-label="{{ 'sections.cart.remove_title' | t: title: item.product.title }}">{{ 'sections.cart.remove' | t }}</button>
         </div>
       </div>
       <div class="cart-item__actions">
@@ -56,7 +56,7 @@
           {%- endif -%}
           {%- endif -%}
         </span>
-        <button type="button" data-action="delete-item" title="Xóa sản phẩm" class="cart-item__delete" aria-label="Xóa {{ item.product.title | escape }}">Xoá</button>
+        <button type="button" data-action="delete-item" title="{{ 'sections.cart.remove_title' | t: title: item.product.title }}" class="cart-item__delete" aria-label="{{ 'sections.cart.remove_title' | t: title: item.product.title }}">{{ 'sections.cart.remove' | t }}</button>
       </div>
     </cart-item>
     {%- endfor -%}

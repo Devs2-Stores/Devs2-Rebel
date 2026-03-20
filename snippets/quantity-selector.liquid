@@ -14,7 +14,7 @@ Accepts:
 <quantity-selector class="quantity-selector">
 	<button class="quantity-selector__button quantity-selector__decrease" type="button" data-action="decrease" aria-label="Giảm số lượng" aria-controls="{{ input_id }}">
 		<span class="sr-only">Giảm số lượng {{ product.title | escape }}</span>
-		{%- include 'icon' with name: 'minus', size: '16' -%}
+		{%- render 'icon', name: 'minus'$(if(){", class: ''"}else{""})$(if(16){", size: '16'"}else{""}) -%}
 	</button>
 	<input class="quantity-selector__input"
 		   id="{{ input_id }}"
@@ -33,6 +33,6 @@ Accepts:
 		   required>
 	<button class="quantity-selector__button quantity-selector__increase" type="button" data-action="increase" aria-label="Tăng số lượng" aria-controls="{{ input_id }}">
 		<span class="sr-only">Tăng số lượng {{ product.title | escape }}</span>
-		{%- include 'icon' with name: 'plus', size: '16' -%}
+		{%- render 'icon', name: 'plus'$(if(){", class: ''"}else{""})$(if(16){", size: '16'"}else{""}) -%}
 	</button>
 </quantity-selector>

@@ -1,0 +1,104 @@
+
+<div class="blog-template" itemscope itemtype="https://schema.org/Blog">
+  <meta itemprop="name" content="{{ blog.title }}">
+  <meta itemprop="description" content="{{ blog.description | strip_html | default: page_title }}">
+  <meta itemprop="url" content="{{ blog.url }}">
+
+    <div class="page-width">
+    {%- paginate blog.articles by section.settings.articles_per_page -%}
+
+    <div class="blog-template__wrapper {% unless section.settings.show_sidebar %}blog-template__wrapper--no-sidebar{% endunless %}">
+      <div class="blog-template__main">
+        <div class="blog-template__title">
+          <h1>
+            {%- if blog.handle != 'all' -%}
+              {{ blog.title }}
+              {%- if current_tags -%}
+                &raquo; {{ current_tags.first }}
+              {%- endif -%}
+            {%- else -%}
+              {{ 'blogs.article.blog' | t }}
+            {%- endif -%}
+          </h1>
+        </div>
+
+        {%- if blog.description != blank -%}
+        <div class="blog-template__description">
+          <div class="blog-template__description-content">
+            {{ blog.description | strip_html | truncatewords: 50 }}
+          </div>
+        </div>
+        {%- endif -%}
+
+        <div class="blog-template__articles-container">
+          <h2 class="sr-only">{{ 'blogs.article.blog' | t }}</h2>
+          {%- if blog.articles_count > 0 -%}
+          <ul class="blog-template__articles">
+            {%- for article in blog.articles -%}
+            {%- liquid
+              assign lazyload = "lazy"
+              assign fetchpriority = "auto"
+              if forloop.index <= 3
+                assign lazyload = "eager"
+              endif
+              if forloop.first
+                assign fetchpriority = "high"
+              endif
+            -%}
+            <li class="blog-template__article">
+              {%- render 'article-card', article: article, lazyload: lazyload, fetchpriority: fetchpriority, show_vendor: true -%}
+            </li>
+            {%- endfor -%}
+          </ul>
+          <div class="blog-template__pagination">
+            {%- render 'section-pagination' -%}
+          </div>
+          {%- else -%}
+          <p>{{ 'blogs.article.no_articles' | t }}</p>
+          {%- endif -%}
+        </div>
+
+        {%- if blog.description != blank -%}
+        <div class="blog-template__full-description">
+          <div class="blog-template__full-description-content">
+            {{ blog.description }}
+          </div>
+        </div>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.show_sidebar -%}
+      <aside class="blog-template__sidebar">
+        {%- render 'blog-sidebar' -%}
+      </aside>
+      {%- endif -%}
+    </div>
+
+    {%- endpaginate -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main_blog.name",
+  "tag": "section",
+  "class": "section-main-blog",
+  "settings": [
+    {
+      "type": "range",
+      "id": "articles_per_page",
+      "label": "t:sections.main_blog.settings.articles_per_page.label",
+      "min": 3,
+      "max": 24,
+      "step": 3,
+      "default": 6
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sidebar",
+      "label": "t:sections.main_blog.settings.show_sidebar.label",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

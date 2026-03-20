@@ -29,16 +29,16 @@
         <div class="product-card__media-image">
           {%- assign featured_image = product.featured_image.src -%}
           <picture>
-            <source media="(max-width: 640px)" srcset="{{ featured_image | img_url: 'grande' }}">
-            <source media="(max-width: 1024px)" srcset="{{ featured_image | img_url: '1024x1024' }}">
-            <img src="{{ featured_image | img_url: 'grande' }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="400" height="600" loading="{{ lazyload | default: 'lazy' }}" decoding="async" class="product-card__img-primary">
+            <source media="(max-width: 640px)" srcset="{{ featured_image | image_url: width: 600 }}">
+            <source media="(max-width: 1024px)" srcset="{{ featured_image | image_url: width: 1024 }}">
+            <img src="{{ featured_image | image_url: width: 600 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="400" height="600" loading="{{ lazyload | default: 'lazy' }}" decoding="async" class="product-card__img-primary">
           </picture>
           {%- if product.images[1] -%}
           {%- assign second_image = product.images[1].src -%}
           <picture>
-            <source media="(max-width: 640px)" srcset="{{ second_image | img_url: 'grande' }}">
-            <source media="(max-width: 1024px)" srcset="{{ second_image | img_url: '1024x1024' }}">
-            <img src="{{ second_image | img_url: 'grande' }}" alt="{{ product.images[1].alt | default: product.title | escape }}" width="400" height="600" loading="lazy" decoding="async" class="product-card__img-secondary">
+            <source media="(max-width: 640px)" srcset="{{ second_image | image_url: width: 600 }}">
+            <source media="(max-width: 1024px)" srcset="{{ second_image | image_url: width: 1024 }}">
+            <img src="{{ second_image | image_url: width: 600 }}" alt="{{ product.images[1].alt | default: product.title | escape }}" width="400" height="600" loading="lazy" decoding="async" class="product-card__img-secondary">
           </picture>
           {%- endif -%}
         </div>
@@ -50,13 +50,13 @@
         <div class="product-card__badge product-card__badge--discount">-{{ discount_percentage }}%</div>
         {%- endif -%}
       </a>
-      <button type="button" class="product-card__quickview" data-action="open-quickview" data-product-handle="{{ product.handle }}" aria-label="Xem nhanh {{ product.title | escape }}" title="Xem nhanh">{%- include 'icon' with name: 'eye-show' -%}</button>
+      <button type="button" class="product-card__quickview" data-action="open-quickview" data-product-handle="{{ product.handle }}" aria-label="Xem nhanh {{ product.title | escape }}" title="Xem nhanh">{%- render 'icon', name: 'eye-show'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}</button>
       <form class="product-card__add-form" action="/cart/add" method="POST">
         <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
         <input type="hidden" name="quantity" value="1">
-        <button type="submit" class="product-card__add-btn" aria-label="Thêm {{ product.title | escape }} vào giỏ hàng" title="Thêm vào giỏ" {%- unless product.available -%}disabled{%- endunless -%}>{%- include 'icon' with name: 'cart' -%}</button>
+        <button type="submit" class="product-card__add-btn" aria-label="Thêm {{ product.title | escape }} vào giỏ hàng" title="Thêm vào giỏ" {%- unless product.available -%}disabled{%- endunless -%}>{%- render 'icon', name: 'cart'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}</button>
       </form>
-      <button type="button" class="product-card__wishlist" data-action="add-wishlist" data-product-id="{{ product.id }}" data-product-handle="{{ product.handle }}" aria-label="Thêm {{ product.title | escape }} vào yêu thích" title="Thêm vào yêu thích">{%- include 'icon' with name: 'heart' -%}</button>
+      <button type="button" class="product-card__wishlist" data-action="add-wishlist" data-product-id="{{ product.id }}" data-product-handle="{{ product.handle }}" aria-label="Thêm {{ product.title | escape }} vào yêu thích" title="Thêm vào yêu thích">{%- render 'icon', name: 'heart'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}</button>
     </div>
     <div class="product-card__content">
       <h3 class="product-card__title"><a href="{{ product.url }}" title="{{ product.title | escape }}">{{ product.title | escape }}</a></h3>

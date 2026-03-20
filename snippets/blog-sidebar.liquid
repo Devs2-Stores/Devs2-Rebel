@@ -28,7 +28,7 @@ Accepts:
 				<a href="{{ article.url }}" class="blog-sidebar__recent-post-link" title="{{ article.title | escape }}">
 					<div class="blog-sidebar__recent-post-image">
 						{%- if article.image -%}
-						<img src="{{ article.image.src | img_url: 'compact' }}" alt="{{ article.image.alt | default: article.title | escape }}" loading="lazy" width="64" height="64">
+						<img src="{{ article.image.src | image_url: width: 160 }}" alt="{{ article.image.alt | default: article.title | escape }}" loading="lazy" width="64" height="64">
 						{%- else -%}
 						<div class="blog-sidebar__recent-post-placeholder"></div>
 						{%- endif -%}

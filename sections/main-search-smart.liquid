@@ -1,0 +1,43 @@
+{%- layout none -%}
+{%- if search.results.size == 0 -%}
+<div class="search-modal-no-results">
+  <p>{{ 'templates.search.no_results_title' | t: terms: search.terms }}</p>
+</div>
+{%- else -%}
+<div class="search-modal-products">
+  <div class="search-modal-products-header">
+    <h3>{{ 'templates.search.products' | t }} ({{ search.results.size }})</h3>
+  </div>
+  <ul class="search-modal-products-list">
+    {%- for product in search.results -%}
+    <li class="search-modal-product-item">
+      <a href="{{ product.url }}"
+         title="{{ product.title | escape }}"
+         aria-label="{{ product.title | escape }}">
+        <div class="search-modal-product-image">
+          <img src="{% if product.images.size > 0 %}{{ product.featured_image | image_url: width: 240 }}{% else %}{{ 'no_image_product.jpg' | asset_url }}{% endif %}"
+             alt="{{ product.title | escape }}"
+             loading="lazy">
+        </div>
+        <div class="search-modal-product-info">
+          <h4 class="search-modal-product-name">
+            {{ product.title }}
+          </h4>
+          {%- if product.vendor != blank -%}
+          <p class="search-modal-product-vendor">
+            {{ product.vendor }}
+          </p>
+          {%- endif -%}
+          <p class="search-modal-product-price">
+            {{ product.price | money }}
+          </p>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="search-modal-product-arrow">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+        </svg>
+      </a>
+    </li>
+    {%- endfor -%}
+  </ul>
+</div>
+{%- endif -%}

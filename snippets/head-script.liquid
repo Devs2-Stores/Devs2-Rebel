@@ -1,13 +1,23 @@
+{%- comment %}
+  Global scripts and configuration.
+  All config under window.themeConfig — includes routes, i18n strings, and per-template JS.
+{% endcomment -%}
+
 <script>
   window.themeConfig = {
+    shopUrl: '{{ request.origin }}',
     formatMoney: {{ shop.money_format | json }},
     no_image_product: String(`{{ 'no_image_product.jpg' | asset_url }}`),
+
     routes: {
-      get_cart_url: "/cart.js",
-      add_cart_url: "/cart/add.js",
-      remove_cart_url: "/cart/change.js",
-      update_cart_url: "/cart/update.js"
+      cart_url: '{{ routes.cart_url }}',
+      cart_add_url: '{{ routes.cart_add_url }}',
+      cart_change_url: '{{ routes.cart_change_url }}',
+      cart_update_url: '{{ routes.cart_update_url }}',
+      predictive_search_url: '{{ routes.predictive_search_url }}',
+      search_url: '{{ routes.search_url }}'
     },
+
     cart: {
       events: {
         quantity_changed: "cart-quantity-changed",
@@ -18,9 +28,28 @@
       },
       auto_open_sidebar: true
     },
+
+    strings: {
+      cart: {
+        error: `{{ 'sections.cart.cart_error' | t }}`,
+        quantityError: `{{ 'sections.cart.cart_quantity_error' | t: quantity: '[quantity]' }}`
+      },
+      variant: {
+        addToCart: `{{ 'products.product.add_to_cart' | t }}`,
+        soldOut: `{{ 'products.product.sold_out' | t }}`,
+        unavailable: `{{ 'products.product.unavailable' | t }}`,
+        unavailable_with_option: `{{ 'products.product.value_unavailable' | t: option: '[value]' }}`
+      },
+      accessibility: {
+        imageAvailable: `{{ 'products.product.media.image_available' | t: index: '[index]' }}`,
+        shareSuccess: `{{ 'general.share.success_message' | t }}`
+      }
+    },
+
     collection: {
       id: {%- if collection.id -%}{{ collection.id }}{%- else -%}null{%- endif -%}
     },
+
     {%- if template contains 'product' -%}
     product: {
       events: {
@@ -29,13 +58,15 @@
       data: {{ product | json }}
     },
     {%- endif -%}
-    quickview: {
-      data: "Quickview data"
-    }
+
+    quickview: {}
+
   }
 </script>
+
 <script defer src="{{ 'swiper.js' | asset_url }}"></script>
 <script defer src="{{ 'theme.js' | asset_url }}"></script>
+
 {%- if template == 'index' -%}
 <script defer src="{{ 'index.js' | asset_url }}"></script>
 {%- elsif template == 'collection' -%}
@@ -59,4 +90,9 @@
 <script defer src="{{ 'search.js' | asset_url }}"></script>
 <script defer src="{{ 'search_filter.js' | asset_url }}"></script>
 {%- endif -%}
+
 <script defer src="{{ 'wishlist.js' | asset_url }}"></script>
+
+{%- if settings.predictive_search_enabled -%}
+<script defer src="{{ 'predictive-search.js' | asset_url }}"></script>
+{%- endif -%}

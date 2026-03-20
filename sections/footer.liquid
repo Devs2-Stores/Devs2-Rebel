@@ -1,0 +1,235 @@
+<global-footer class="footer color-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="footer-wrapper">
+      <div class="footer-info">
+        <div class="footer-info__logo">
+          <a href="{{ routes.root_url }}" title="{{ shop.name | escape }}" class="footer-logo">
+            {%- if settings.footer_logo != blank -%}
+            {{ settings.footer_logo | image_url: width: 400 | image_tag:
+              alt: shop.name,
+              width: settings.footer_logo_width,
+              height: 60,
+              class: 'footer-logo__image',
+              loading: 'lazy'
+            }}
+            {%- else -%}
+            <span class="footer-logo__text">{{ shop.name }}</span>
+            {%- endif -%}
+          </a>
+        </div>
+        {%- if section.settings.description != blank -%}
+        <div class="footer-info__description">
+          <p class="footer-info__description-text">{{ section.settings.description }}</p>
+        </div>
+        {%- endif -%}
+        <div class="footer-info__social-media">
+          {%- if settings.social_facebook_link != blank -%}
+          <a href="{{ settings.social_facebook_link }}" title="Facebook" aria-label="Facebook" class="footer-social-media__link" target="_blank" rel="noopener noreferrer">
+            {%- render 'icon', name: 'facebook' -%}
+          </a>
+          {%- endif -%}
+          {%- if settings.social_instagram_link != blank -%}
+          <a href="{{ settings.social_instagram_link }}" title="Instagram" aria-label="Instagram" class="footer-social-media__link" target="_blank" rel="noopener noreferrer">
+            {%- render 'icon', name: 'instagram' -%}
+          </a>
+          {%- endif -%}
+          {%- if settings.social_youtube_link != blank -%}
+          <a href="{{ settings.social_youtube_link }}" title="YouTube" aria-label="YouTube" class="footer-social-media__link" target="_blank" rel="noopener noreferrer">
+            {%- render 'icon', name: 'youtube' -%}
+          </a>
+          {%- endif -%}
+          {%- if settings.social_tiktok_link != blank -%}
+          <a href="{{ settings.social_tiktok_link }}" title="TikTok" aria-label="TikTok" class="footer-social-media__link" target="_blank" rel="noopener noreferrer">
+            {%- render 'icon', name: 'tiktok' -%}
+          </a>
+          {%- endif -%}
+          {%- if settings.social_twitter_link != blank -%}
+          <a href="{{ settings.social_twitter_link }}" title="Twitter / X" aria-label="Twitter" class="footer-social-media__link" target="_blank" rel="noopener noreferrer">
+            {%- render 'icon', name: 'twitter' -%}
+          </a>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.show_certs -%}
+        <div class="footer-info__certs">
+          {%- if section.settings.cert_bct_link != blank -%}
+          <a href="{{ section.settings.cert_bct_link }}" class="footer-info__cert-item" target="_blank" rel="noopener noreferrer">
+            {%- if section.settings.cert_bct_image != blank -%}
+            {{ section.settings.cert_bct_image | image_url: width: 260 | image_tag:
+              width: 130, height: 50,
+              class: 'footer-info__cert-img',
+              loading: 'lazy'
+            }}
+            {%- endif -%}
+          </a>
+          {%- endif -%}
+          {%- if section.settings.cert_dmca_link != blank -%}
+          <a href="{{ section.settings.cert_dmca_link }}" class="footer-info__cert-item" target="_blank" rel="noopener noreferrer">
+            {%- if section.settings.cert_dmca_image != blank -%}
+            {{ section.settings.cert_dmca_image | image_url: width: 260 | image_tag:
+              width: 130, height: 50,
+              class: 'footer-info__cert-img',
+              loading: 'lazy'
+            }}
+            {%- endif -%}
+          </a>
+          {%- endif -%}
+        </div>
+        {%- endif -%}
+      </div>
+      <div class="footer-actions">
+        {%- if section.settings.newsletter_title != blank -%}
+        <div class="footer_actions__slogan">
+          <h3 class="footer_actions_slogan-title">{{ section.settings.newsletter_title }}</h3>
+        </div>
+        {%- endif -%}
+        <div class="footer-actions-menus">
+          {%- for block in section.blocks -%}
+          {%- if block.type == 'menu' -%}
+          <div class="footer-actions-menu" {{ block.shopify_attributes }}>
+            <h3 class="footer-actions-menu__title">{{ block.settings.heading }}</h3>
+            <ul class="footer-actions-menu__list">
+              {%- assign menu = linklists[block.settings.menu] -%}
+              {%- if block.settings.menu != blank and menu.links != blank -%}
+              {%- for link in menu.links -%}
+              <li>
+                <a title="{{ link.title | escape }}" href="{{ link.url }}">{{ link.title }}</a>
+              </li>
+              {%- endfor -%}
+              {%- endif -%}
+            </ul>
+          </div>
+          {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}</p>
+      <div class="footer-contact">
+        {%- if section.settings.address != blank -%}
+        <span class="footer-contact__item">{{ section.settings.address }}</span>
+        {%- endif -%}
+        {%- if section.settings.email != blank -%}
+        <span class="footer-contact__item"><a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></span>
+        {%- endif -%}
+        {%- if section.settings.phone != blank -%}
+        <span class="footer-contact__item"><a href="tel:{{ section.settings.phone }}">{{ section.settings.phone }}</a></span>
+        {%- endif -%}
+        {%- if section.settings.tax_code != blank -%}
+        <span class="footer-contact__item">{{ section.settings.tax_code }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</global-footer>
+
+{% schema %}
+{
+  "name": "t:sections.footer.name",
+  "tag": "section",
+  "class": "section-footer",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:sections.footer.settings.description.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header__newsletter.content"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_title",
+      "label": "t:sections.footer.settings.newsletter_title.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header__contact.content"
+    },
+    {
+      "type": "text",
+      "id": "address",
+      "label": "t:sections.footer.settings.address.label"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "t:sections.footer.settings.email.label"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "t:sections.footer.settings.phone.label"
+    },
+    {
+      "type": "text",
+      "id": "tax_code",
+      "label": "t:sections.footer.settings.tax_code.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header__certs.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_certs",
+      "label": "t:sections.footer.settings.show_certs.label",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "cert_bct_image",
+      "label": "t:sections.footer.settings.cert_bct_image.label"
+    },
+    {
+      "type": "url",
+      "id": "cert_bct_link",
+      "label": "t:sections.footer.settings.cert_bct_link.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "cert_dmca_image",
+      "label": "t:sections.footer.settings.cert_dmca_image.label"
+    },
+    {
+      "type": "url",
+      "id": "cert_dmca_link",
+      "label": "t:sections.footer.settings.cert_dmca_link.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "t:sections.footer.blocks.menu.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.footer.blocks.menu.settings.heading.label"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "t:sections.footer.blocks.menu.settings.menu.label"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "menu", "settings": { "heading": "Menu" } }
+    ]
+  },
+  "enabled_on": {
+    "groups": ["footer"]
+  }
+}
+{% endschema %}

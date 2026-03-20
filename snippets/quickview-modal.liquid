@@ -3,7 +3,7 @@
   <div class="quickview-modal-panel">
     <div class="quickview-modal-header">
       <h2 class="quickview-modal-title" id="quickview-modal-title">Xem nhanh</h2>
-      <button type="button" class="quickview-modal-close" data-action="close-quickview" aria-label="Đóng xem nhanh">{%- include 'icon' with name: 'close' -%}</button>
+      <button type="button" class="quickview-modal-close" data-action="close-quickview" aria-label="Đóng xem nhanh">{%- render 'icon', name: 'close'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}</button>
     </div>
     <div class="quickview-modal-content">
       <div class="quickview-modal-loading hidden">

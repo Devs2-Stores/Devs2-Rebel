@@ -1,0 +1,35 @@
+
+<div class="page-default">
+  <div class="page-width section-padding">
+    <h1 class="page-default__title">{{ page.title }}</h1>
+
+    {%- if page.content != blank -%}
+    <div class="page-default__content">
+      {{ page.content }}
+    </div>
+    {%- else -%}
+    <div class="page-default__placeholder">
+      <div class="page-default__placeholder-icon">
+        {%- render 'icon', name: 'file-text' -%}
+      </div>
+      <p class="page-default__placeholder-text">{{ section.settings.empty_text }}</p>
+    </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main_page.name",
+  "tag": "section",
+  "class": "section-main-page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "empty_text",
+      "label": "t:sections.main_page.settings.empty_text.label",
+      "default": "Page content is being updated."
+    }
+  ]
+}
+{% endschema %}

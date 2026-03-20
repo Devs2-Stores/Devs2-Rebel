@@ -1,0 +1,127 @@
+
+{%- assign search_query = search.terms | default: '' -%}
+
+<search-template class="search-template">
+    <div class="page-width">
+
+    <div class="search-template__header">
+      <h1 class="search-template__title">
+        {%- if search_query != blank -%}
+        {{ 'templates.search.results_with_count_and_term' | t: terms: search_query, count: search.results_count }}
+        {%- else -%}
+        {{ 'templates.search.title' | t }}
+        {%- endif -%}
+      </h1>
+      {%- if search.performed and search.results_count > 0 -%}
+      <p class="search-template__count">{{ 'templates.search.results_count' | t: count: search.results_count }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="search-template__form-wrapper">
+      <form action="{{ routes.search_url }}" method="get" class="search-template__form" role="search">
+        <input type="hidden" name="type" value="product">
+        <div class="search-template__input-group">
+          <input
+            type="search"
+            name="q"
+            value="{{ search_query }}"
+            placeholder="{{ 'templates.search.placeholder' | t }}"
+            class="search-template__input"
+            autocomplete="off"
+            aria-label="{{ 'templates.search.title' | t }}"
+          >
+          <button type="submit" class="search-template__submit" aria-label="{{ 'templates.search.search' | t }}">
+            {%- render 'icon', name: 'search' -%}
+            <span>{{ 'templates.search.search' | t }}</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    {%- if search.performed -%}
+      {%- if search.results_count > 0 -%}
+        {%- paginate search.results by section.settings.products_per_page -%}
+        <div class="search-template__results">
+          <div class="search-template__results-header">
+            <span class="search-template__results-info">
+              {%- assign end_count = paginate.current_offset | plus: paginate.page_size -%}
+              {%- if end_count > search.results_count -%}{%- assign end_count = search.results_count -%}{%- endif -%}
+              {{ 'templates.search.results_showing' | t: from: paginate.current_offset | plus: 1, to: end_count, total: search.results_count }}
+            </span>
+          </div>
+
+          <ul class="product-cards search-template__products">
+            {%- for product in search.results -%}
+            {%- liquid
+              assign lazyload = 'lazy'
+              assign fetchpriority = 'auto'
+              if forloop.index <= 3
+                assign lazyload = 'eager'
+              endif
+              if forloop.first
+                assign fetchpriority = 'high'
+              endif
+            -%}
+            <li class="product-cards__item">
+              {%- render 'product-card', product: product, lazyload: lazyload, fetchpriority: fetchpriority, show_vendor: true -%}
+            </li>
+            {%- endfor -%}
+          </ul>
+
+          {%- if paginate.pages > 1 -%}
+          <div class="search-template__pagination">
+            {%- render 'section-pagination' -%}
+          </div>
+          {%- endif -%}
+        </div>
+        {%- endpaginate -%}
+      {%- else -%}
+        <div class="search-template__empty">
+          <div class="search-template__empty-icon">
+            {%- render 'icon', name: 'search' -%}
+          </div>
+          <h2 class="search-template__empty-title">{{ 'templates.search.no_results_title' | t: terms: search_query }}</h2>
+          <p class="search-template__empty-text">
+            {{ 'templates.search.no_results' | t: terms: search_query }}
+          </p>
+          <div class="search-template__empty-suggestions">
+            <p><strong>{{ 'templates.search.suggestions' | t }}:</strong></p>
+            <ul>
+              <li>{{ 'templates.search.suggestion_1' | t }}</li>
+              <li>{{ 'templates.search.suggestion_2' | t }}</li>
+              <li>{{ 'templates.search.suggestion_3' | t }}</li>
+            </ul>
+          </div>
+        </div>
+      {%- endif -%}
+    {%- else -%}
+      <div class="search-template__placeholder">
+        <div class="search-template__placeholder-icon">
+          {%- render 'icon', name: 'search' -%}
+        </div>
+        <h2 class="search-template__placeholder-title">{{ 'templates.search.title' | t }}</h2>
+        <p class="search-template__placeholder-text">{{ 'templates.search.placeholder_text' | t }}</p>
+      </div>
+    {%- endif -%}
+
+  </div>
+</search-template>
+
+{% schema %}
+{
+  "name": "t:sections.main_search.name",
+  "tag": "section",
+  "class": "section-main-search",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "t:sections.main_search.settings.products_per_page.label",
+      "min": 8,
+      "max": 36,
+      "step": 4,
+      "default": 20
+    }
+  ]
+}
+{% endschema %}

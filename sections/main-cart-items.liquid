@@ -1,0 +1,59 @@
+
+{%- layout none -%}
+{%- if cart.item_count > 0 -%}
+{%- for item in cart.items -%}
+<div class="cart-modal-item" data-line-item="{{ forloop.index }}" data-variant-id="{{ item.variant_id }}">
+  <a href="{{ item.product.url }}" title="{{ item.product.title | escape }}" class="cart-modal-item__image">
+    {%- if item.image -%}
+    <img src="{{ item.image | image_url: width: 300 }}" alt="{{ item.product.title | escape }}"
+       loading="lazy" decoding="async" width="{{ item.image.width }}" height="{{ item.image.height }}">
+    {%- elsif item.product.featured_image -%}
+    <img src="{{ item.product.featured_image | image_url: width: 300 }}" alt="{{ item.product.title | escape }}"
+       loading="lazy" decoding="async" width="{{ item.product.featured_image.width }}" height="{{ item.product.featured_image.height }}">
+    {%- else -%}
+    <img src="{{ 'no-image.png' | asset_url }}" alt="{{ item.product.title | escape }}"
+       loading="lazy" decoding="async">
+    {%- endif -%}
+  </a>
+
+  <div class="cart-modal-item__info">
+    <div class="cart-modal-item__details">
+      <a href="{{ item.product.url }}" title="{{ item.product.title | escape }}" class="cart-modal-item__title">{{ item.product.title }}</a>
+
+      {%- if item.variant.title != 'Default Title' -%}
+      <ul class="cart-modal-item__variant">
+        {%- for option in item.product.options -%}
+        <li>{{ option }}: {{ item.variant.options[forloop.index0] }}</li>
+        {%- endfor -%}
+      </ul>
+      {%- endif -%}
+
+      <div class="cart-modal-item__price">
+        {%- if item.price == 0 -%}
+        <span class="price-contact">{{ 'products.product.price.contact' | t }}</span>
+        {%- else -%}
+        <span class="price-regular">{{ item.price | money }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="cart-modal-item__actions">
+      <div class="cart-modal-item__quantity">
+        {%- render 'quantity-selector', form: '', product: item.product, variant: item.variant, value: item.quantity, min: 1, step: 1 -%}
+      </div>
+      <button type="button" class="cart-modal-item__remove"
+          aria-label="{{ 'sections.cart.remove_title' | t: title: item.product.title }}" title="{{ 'sections.cart.remove_title' | t: title: item.product.title }}"
+          data-action="remove-cart-item" data-line="{{ forloop.index }}">
+        {%- render 'icon', name: 'trash' -%}
+      </button>
+    </div>
+  </div>
+</div>
+{%- endfor -%}
+{%- else -%}
+<div class="cart-modal-empty">
+  {%- render 'icon', name: 'cart', class: 'empty-icon' -%}
+  <p class="empty-text">{{ 'sections.cart.empty' | t }}</p>
+  <a href="{{ routes.all_products_collection_url }}" title="{{ 'general.continue_shopping' | t }}" class="button-primary">{{ 'general.continue_shopping' | t }}</a>
+</div>
+{%- endif -%}
