@@ -19,7 +19,7 @@
 					</div>
 					<div class="product-sticky-add__price" data-sticky-price>
 						{%- if product.price == 0 -%}
-						<span class="price-contact">Liên hệ</span>
+						<span class="price-contact">{{ 'products.product.price.contact' | t }}</span>
 						{%- else -%}
 						<span class="price-current">{{ product.price | money }}</span>
 						{%- if product.compare_at_price > product.price -%}
@@ -34,16 +34,16 @@
 						type="button"
 						class="button-primary product-sticky-add__btn product-sticky-add__btn--add"
 						data-action="sticky-add-to-cart"
-						aria-label="Thêm vào giỏ hàng">
-					{%- render 'icon', name: 'cart'$(if(){", class: ''"}else{""})$(if(18){", size: '18'"}else{""}) -%}
-					<span>Thêm vào giỏ</span>
+						aria-label="{{ 'products.product.add_to_cart' | t }}">
+					{%- render 'icon', name: 'cart' -%}
+					<span>{{ 'products.product.add_to_cart' | t }}</span>
 				</button>
 				<button {% unless available %}disabled{% endunless %}
 						type="button"
 						class="button-primary product-sticky-add__btn product-sticky-add__btn--buy"
 						data-action="sticky-buy-now"
-						aria-label="Mua ngay">
-					Mua ngay
+						aria-label="{{ 'products.product.buy_now' | t }}">
+					{{ 'products.product.buy_now' | t }}
 				</button>
 			</div>
 		</div>

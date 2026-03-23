@@ -1,0 +1,9 @@
+{%- layout none -%}
+{%- comment -%}
+  Product Card AJAX Section
+  Used by ProductViewed component to render product cards via Section Rendering API.
+  Usage: /products/{handle}?section_id=product-card-ajax
+{%- endcomment -%}
+{%- if product != blank -%}
+  {%- render 'product-card', product: product, lazyload: 'lazy', show_vendor: true -%}
+{%- endif -%}

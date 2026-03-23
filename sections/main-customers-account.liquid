@@ -1,3 +1,9 @@
+{%- style -%}
+  .section-main-customers-account {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+{%- endstyle -%}
 
 <div class="account-template">
     <div class="page-width">
@@ -53,7 +59,7 @@
               <div class="account-template__order-row">
                 <div class="account-template__order-row-main">
                   <a href="{{ order_url }}" class="account-template__order-name" title="{{ 'customer.orders.view_order' | t }}: {{ order.name }}">{{ order.name }}</a>
-                  <span class="account-template__order-meta">{{ order.created_at | date: '%d/%m/%Y' }} &middot; {{ order.line_items.size }} {{ 'customer.orders.items' | t }}</span>
+                  <span class="account-template__order-meta">{{ order.created_at | date: '%B %d, %Y' }} &middot; {{ order.line_items.size }} {{ 'customer.orders.items' | t }}</span>
                 </div>
                 <div class="account-template__order-row-statuses">
                   <span class="account-template__status-group">
@@ -133,6 +139,28 @@
 {
   "name": "t:sections.main_customers_account.name",
   "tag": "section",
-  "class": "section-main-customers-account"
+  "class": "section-main-customers-account",
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:sections.all.padding_top.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:sections.all.padding_bottom.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    }
+  ]
 }
 {% endschema %}

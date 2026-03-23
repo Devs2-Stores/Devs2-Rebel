@@ -1,9 +1,11 @@
 
+{{- 'page-stores.css' | asset_url | stylesheet_tag -}}
+<script src="{{ 'page-stores.js' | asset_url }}" defer="defer"></script>
 <stores-page class="page-stores">
   <section class="stores-hero">
     <div class="page-width">
       <div class="stores-hero__wrap">
-        <h1 class="stores-hero__title">{{ section.settings.title | default: 'sections.page_stores.default_title' | t }}</h1>
+        <h1 class="stores-hero__title">{% if section.settings.title != blank %}{{ section.settings.title }}{% else %}{{ 'sections.page_stores.default_title' | t }}{% endif %}</h1>
         {%- if section.settings.description != blank -%}
         <p class="stores-hero__description">{{ section.settings.description }}</p>
         {%- endif -%}
@@ -89,7 +91,7 @@
               </div>
               {%- endif -%}
               {%- if block.settings.address != blank -%}
-              <a href="https://www.google.com/maps/search/{{ block.settings.address | url_encode }}" target="_blank" rel="noopener" class="stores-card__direction" title="{{ 'sections.page_stores.get_directions' | t }}">
+              <a href="https://www.google.com/maps/search/{{ block.settings.address | url_encode }}" target="_blank" rel="noopener noreferrer" class="stores-card__direction" title="{{ 'sections.page_stores.get_directions' | t }}">
                 {%- render 'icon', name: 'location', size: '16' -%}
                 <span>{{ 'sections.page_stores.get_directions' | t }}</span>
               </a>

@@ -56,7 +56,7 @@ class NewsletterPopup {
     if (this.validateEmail(email)) {
       this.submitForm(email);
     } else {
-      alert('Vui lòng nhập địa chỉ email hợp lệ.');
+      alert('Please enter a valid email address.');
     }
   }
 

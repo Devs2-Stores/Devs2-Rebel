@@ -1,31 +1,38 @@
-<search-modal class="search-modal-wrapper" role="dialog" aria-modal="true" aria-labelledby="search-modal-title">
-	<button type="button" class="search-modal-overlay" data-action="close-search-modal" aria-label="Đóng tìm kiếm"></button>
+{{- 'search-modal.css' | asset_url | stylesheet_tag -}}
+<script src="{{ 'search-modal.js' | asset_url }}" defer="defer"></script>
+
+<search-modal class="search-modal-wrapper" role="dialog" aria-modal="true" aria-labelledby="search-modal-title" data-placeholder="{{ 'templates.search.enter_keyword' | t }}">
+	<button type="button" class="search-modal-overlay" data-action="close-search-modal" aria-label="{{ 'accessibility.close' | t }}"></button>
 	<div class="search-modal-panel">
 		<div class="search-modal-header">
-			<h2 class="search-modal-title" id="search-modal-title">Tìm kiếm sản phẩm</h2>
-			<button type="button" class="search-modal-close" data-action="close-search-modal" aria-label="Đóng tìm kiếm">{%- render 'icon', name: 'close'$(if(icon-close){", class: 'icon-close'"}else{""})$(if(){", size: ''"}else{""}) -%}</button>
+			<h2 class="search-modal-title" id="search-modal-title">{{ 'general.search.search' | t }}</h2>
+			<button type="button" class="search-modal-close" data-action="close-search-modal" aria-label="{{ 'accessibility.close' | t }}">
+				{%- render 'icon', name: 'close' -%}
+			</button>
 		</div>
 		<div class="search-modal-input-wrapper">
-			<form class="search-modal-form" action="/search" method="get" role="search">
+			<form class="search-modal-form" action="{{ routes.search_url }}" method="get" role="search">
 				<div class="search-modal-form-inner">
 					<input type="hidden" name="type" value="product">
-					<label for="search-modal-input" class="sr-only">Tìm kiếm sản phẩm</label>
-					<input type="text" name="q" id="search-modal-input" class="search-modal-input" placeholder="Tìm kiếm sản phẩm..." autocomplete="off" autofocus>
-					<button type="submit" class="search-modal-submit" aria-label="Tìm kiếm">{%- render 'icon', name: 'search'$(if(search-modal-icon){", class: 'search-modal-icon'"}else{""})$(if(){", size: ''"}else{""}) -%}</button>
+					<label for="search-modal-input" class="sr-only">{{ 'general.search.search' | t }}</label>
+					<input type="text" name="q" id="search-modal-input" class="search-modal-input" placeholder="{{ 'templates.search.placeholder' | t }}" autocomplete="off" autofocus role="combobox" aria-expanded="false" aria-controls="predictive-search-results" aria-haspopup="listbox">
+					<button type="submit" class="search-modal-submit" aria-label="{{ 'accessibility.search' | t }}">
+						{%- render 'icon', name: 'search' -%}
+					</button>
 				</div>
 			</form>
 		</div>
 		<div class="search-modal-results" aria-live="polite" aria-atomic="false">
-			<div class="search-modal-results-content">
+			<div class="search-modal-results-content" role="listbox">
 				<div class="search-modal-empty">
-					<p>Nhập từ khóa để tìm kiếm sản phẩm...</p>
+					<p>{{ 'templates.search.enter_keyword' | t }}</p>
 				</div>
 			</div>
 		</div>
 		<div class="search-modal-loading hidden">
 			<div class="search-modal-loading-content">
 				<div class="search-modal-loading-spinner"></div>
-				<p class="search-modal-loading-text">Đang tìm kiếm...</p>
+				<p class="search-modal-loading-text">{{ 'accessibility.loading' | t }}</p>
 			</div>
 		</div>
 	</div>

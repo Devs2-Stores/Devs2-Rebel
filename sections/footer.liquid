@@ -1,3 +1,5 @@
+{{ 'footer.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'footer.js' | asset_url }}" defer="defer"></script>
 <global-footer class="footer color-{{ section.settings.color_scheme }}">
   <div class="page-width">
     <div class="footer-wrapper">
@@ -56,6 +58,7 @@
             {%- if section.settings.cert_bct_image != blank -%}
             {{ section.settings.cert_bct_image | image_url: width: 260 | image_tag:
               width: 130, height: 50,
+              alt: 'BCT certification',
               class: 'footer-info__cert-img',
               loading: 'lazy'
             }}
@@ -67,6 +70,7 @@
             {%- if section.settings.cert_dmca_image != blank -%}
             {{ section.settings.cert_dmca_image | image_url: width: 260 | image_tag:
               width: 130, height: 50,
+              alt: 'DMCA certification',
               class: 'footer-info__cert-img',
               loading: 'lazy'
             }}
@@ -120,8 +124,54 @@
         {%- endif -%}
       </div>
     </div>
+
+    {%- comment -%} ═══ LOCALIZATION ═══ {%- endcomment -%}
+    {%- if section.settings.show_country_selector or section.settings.show_language_selector -%}
+      <div class="footer-localization">
+        {%- if section.settings.show_country_selector and localization.available_countries.size > 1 -%}
+          <div class="footer-localization__item">
+            {%- form 'localization', id: 'FooterCountryForm' -%}
+              <label class="footer-localization__label" for="FooterCountrySelect">
+                {{ 'localization.country_label' | t }}
+              </label>
+              <select class="footer-localization__select" id="FooterCountrySelect" name="country_code" data-localization-select>
+                {%- for country in localization.available_countries -%}
+                  <option value="{{ country.iso_code }}" {% if country.iso_code == localization.country.iso_code %}selected{% endif %}>
+                    {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                  </option>
+                {%- endfor -%}
+              </select>
+              <noscript><button type="submit">{{ 'localization.update' | t }}</button></noscript>
+            {%- endform -%}
+          </div>
+        {%- endif -%}
+        {%- if section.settings.show_language_selector and localization.available_languages.size > 1 -%}
+          <div class="footer-localization__item">
+            {%- form 'localization', id: 'FooterLanguageForm' -%}
+              <label class="footer-localization__label" for="FooterLanguageSelect">
+                {{ 'localization.language_label' | t }}
+              </label>
+              <select class="footer-localization__select" id="FooterLanguageSelect" name="locale_code" data-localization-select>
+                {%- for language in localization.available_languages -%}
+                  <option value="{{ language.iso_code }}" {% if language.iso_code == localization.language.iso_code %}selected{% endif %} lang="{{ language.iso_code }}">
+                    {{ language.endonym_name | capitalize }}
+                  </option>
+                {%- endfor -%}
+              </select>
+              <noscript><button type="submit">{{ 'localization.update' | t }}</button></noscript>
+            {%- endform -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
   </div>
 </global-footer>
+
+<script>
+  document.querySelectorAll('[data-localization-select]').forEach(function(sel) {
+    sel.addEventListener('change', function() { this.closest('form').submit(); });
+  });
+</script>
 
 {% schema %}
 {
@@ -203,6 +253,22 @@
       "type": "url",
       "id": "cert_dmca_link",
       "label": "t:sections.footer.settings.cert_dmca_link.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header__localization.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_country_selector",
+      "label": "t:sections.footer.settings.show_country_selector.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_language_selector",
+      "label": "t:sections.footer.settings.show_language_selector.label",
+      "default": true
     }
   ],
   "blocks": [

@@ -29,6 +29,6 @@
   transition: color 0.2s;
 }
 .error-404-template__back svg { width: 1rem; height: 1rem; transform: rotate(180deg); transition: transform 0.3s; }
-.error-404-template__back:hover { color: var(--color_main, #F30); }
+.error-404-template__back:hover { color: var(--color-primary, #F30); }
 .error-404-template__back:hover svg { transform: rotate(180deg) translateX(0.5rem); }
 .error-404-template__products svg { margin-left: .5rem; }

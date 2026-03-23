@@ -1,0 +1,47 @@
+{%- doc -%}
+  @description Product variant selector using dropdown/select elements
+  @param {boolean} [cross_out_unavailable=false] - Strike-through unavailable variants
+{%- enddoc -%}
+{%- if product.variants.size > 1 -%}
+{{ 'variant-picker.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'variant-picker.js' | asset_url }}" defer="defer"></script>
+{%- assign options = product.options -%}
+<product-variant-select class="variant-dropdown-wrapper"{% if cross_out_unavailable %} data-cross-out-unavailable{% endif %}>
+  <script type="application/json" id="dropdown-product-json">{{ product | json }}</script>
+  {%- for option in options -%}
+    {%- assign option_position = 'option' | append: forloop.index -%}
+    {%- assign raw_values = product.variants | map: option_position | uniq -%}
+    {%- assign values_str = '' -%}
+    {%- for val in raw_values -%}
+      {%- unless val == blank -%}
+        {%- if values_str == '' -%}
+          {%- assign values_str = val -%}
+        {%- else -%}
+          {%- assign values_str = values_str | append: '|||' | append: val -%}
+        {%- endif -%}
+      {%- endunless -%}
+    {%- endfor -%}
+    {%- assign values = values_str | split: '|||' -%}
+    <product-variant-select-item class="variant-dropdown" data-option-index="{{ forloop.index0 }}" data-option-name="{{ option }}">
+      <label class="variant-dropdown__label" for="variant-dropdown-{{ option_position }}">
+        {{- option -}}
+      </label>
+      <div class="variant-dropdown__select-wrapper">
+        <select
+          class="variant-dropdown__select"
+          id="variant-dropdown-{{ option_position }}"
+          name="variant-dropdown-{{ option_position }}"
+          aria-label="{{ option }}"
+        >
+          {%- for value in values -%}
+            <option value="{{ value }}">{{ value }}</option>
+          {%- endfor -%}
+        </select>
+        <span class="variant-dropdown__icon" aria-hidden="true">
+          {%- render 'icon', name: 'chevron-right' -%}
+        </span>
+      </div>
+    </product-variant-select-item>
+  {%- endfor -%}
+</product-variant-select>
+{%- endif -%}

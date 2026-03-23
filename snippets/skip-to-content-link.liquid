@@ -8,4 +8,5 @@
   @example
   {%- include 'skip-to-content-link', href: '#MainContent', text: 'Skip to main content' -%}
 {% endcomment -%}
+{{ 'skip-to-content-link.css' | asset_url | stylesheet_tag }}
 <a class="skip-to-content-link button-secondary" href="{{ href }}">{{ text }}</a>

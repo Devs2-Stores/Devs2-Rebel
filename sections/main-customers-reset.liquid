@@ -1,3 +1,9 @@
+{%- style -%}
+  .section-main-customers-reset {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+{%- endstyle -%}
 
 <div class="change-password-template">
     <div class="page-width">
@@ -21,7 +27,7 @@
             <p>{{ 'customer.reset_password.subtext' | t }}</p>
           </div>
           {%- endif -%}
-          <change-password-form class="form form-change-password">
+          <change-password-form class="form form-change-password" data-password-mismatch="{{ 'customer.reset_password.password_mismatch' | t }}" data-password-min-length="{{ 'customer.reset_password.password_min_length' | t }}">
             <toggle-password class="form-group">
               <label for="new-password" class="label-password">
                 <span class="required">{{ 'customer.reset_password.password' | t }}</span>
@@ -62,6 +68,28 @@
 {
   "name": "t:sections.main_customers_reset.name",
   "tag": "section",
-  "class": "section-main-customers-reset"
+  "class": "section-main-customers-reset",
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:sections.all.padding_top.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:sections.all.padding_bottom.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    }
+  ]
 }
 {% endschema %}

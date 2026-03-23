@@ -1,40 +1,43 @@
+{{- 'cart-modal.css' | asset_url | stylesheet_tag -}}
+<script src="{{ 'cart-modal.js' | asset_url }}" defer="defer"></script>
+
 <cart-modal class="cart-modal-wrapper" role="dialog" aria-modal="true" aria-labelledby="cart-modal-title">
-  <button type="button" class="cart-modal-overlay" data-action="close-cart-modal" aria-label="Đóng giỏ hàng"></button>
+  <button type="button" class="cart-modal-overlay" data-action="close-cart-modal" aria-label="{{ 'accessibility.close' | t }}"></button>
   <div class="cart-modal-panel">
     <div class="cart-modal-header">
       <h2 class="cart-modal-title" id="cart-modal-title">
-        Giỏ hàng của bạn (<span class="cart-modal-count cart-count">{{ cart.item_count }}</span>)
+        {{ 'sections.cart.title' | t }} (<span class="cart-modal-count cart-count">{{ cart.item_count }}</span>)
       </h2>
-      <button type="button" class="cart-modal-close" data-action="close-cart-modal" aria-label="Đóng giỏ hàng">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
+      <button type="button" class="cart-modal-close" data-action="close-cart-modal" aria-label="{{ 'accessibility.close' | t }}">
+        {%- render 'icon', name: 'close' -%}
       </button>
     </div>
     <div class="cart-modal-items">
       <div class="cart-modal-items-loading hidden">
         <div class="cart-modal-items-loading-spinner"></div>
-        <p class="cart-modal-items-loading-text">Đang tải giỏ hàng...</p>
+        <p class="cart-modal-items-loading-text">{{ 'accessibility.loading' | t }}</p>
       </div>
       <div class="cart-modal-items-empty hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="cart-modal-items-empty-icon"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
-        <p class="cart-modal-items-empty-text">Giỏ hàng của bạn đang trống</p>
-        <a href="/collections/all" class="cart-modal-items-empty-button">Tiếp tục mua sắm</a>
+        {%- render 'icon', name: 'cart' -%}
+        <p class="cart-modal-items-empty-text">{{ 'sections.cart.empty' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="cart-modal-items-empty-button">{{ 'general.continue_shopping' | t }}</a>
       </div>
       <div class="cart-modal-items-list"></div>
     </div>
     <div class="cart-modal-footer">
       <div class="cart-modal-summary">
         <div class="cart-modal-summary-row">
-          <span class="cart-modal-summary-label">Tổng cộng:</span>
-          <span class="cart-modal-total cart-price">{%- if cart.total_price == 0 -%}Liên hệ{%- else -%}{{ cart.total_price | money }}{%- endif -%}</span>
+          <span class="cart-modal-summary-label">{{ 'sections.cart.estimated_total' | t }}:</span>
+          <span class="cart-modal-total cart-price">{%- if cart.total_price == 0 -%}{{ 'products.product.contact' | t }}{%- else -%}{{ cart.total_price | money }}{%- endif -%}</span>
         </div>
-        <p class="cart-modal-summary-note">Thuế, giảm giá và phí vận chuyển được tính khi thanh toán</p>
+        <p class="cart-modal-summary-note">{{ 'sections.cart.taxes_included_shipping_at_checkout_without_policy' | t }}</p>
       </div>
       <div class="cart-modal-actions">
-        <a href="/cart" class="cart-modal-action-button cart-modal-action-view">Xem giỏ hàng</a>
-        <a href="/checkout" class="cart-modal-action-button cart-modal-action-checkout">
+        <a href="{{ routes.cart_url }}" class="cart-modal-action-button cart-modal-action-view">{{ 'general.cart.view_empty_cart' | t }}</a>
+        <a href="{{ routes.cart_url }}/checkout" class="cart-modal-action-button cart-modal-action-checkout">
           <span class="cart-modal-action-checkout-inner">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="cart-modal-action-checkout-icon"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
-            Thanh toán
+            {%- render 'icon', name: 'cart' -%}
+            {{ 'sections.cart.checkout' | t }}
           </span>
         </a>
       </div>

@@ -1,4 +1,6 @@
-<global-header class="header color-{{ section.settings.color_scheme }}" data-sticky="{{ section.settings.sticky_enable }}" style="--header-bg: {{ section.settings.bg_color | default: '#ffffff' }}; --header-text: {{ section.settings.text_color | default: '#000000' }};">
+{{ 'header.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'header.js' | asset_url }}" defer="defer"></script>
+<global-header class="header color-{{ section.settings.color_scheme }}" data-sticky="{{ section.settings.sticky_enable }}">
   <div class="page-width">
     <div class="header__wrapper">
       <button type="button" class="header__hamburger" data-action="open-mobile-menu" aria-label="{{ 'accessibility.open_menu' | t }}">
@@ -89,22 +91,6 @@
       "id": "sticky_enable",
       "label": "t:sections.header.settings.sticky_enable.label",
       "default": true
-    },
-    {
-      "type": "header",
-      "content": "t:sections.header.settings.header__colors.content"
-    },
-    {
-      "type": "color",
-      "id": "bg_color",
-      "label": "t:sections.header.settings.bg_color.label",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "t:sections.header.settings.text_color.label",
-      "default": "#000000"
     },
     {
       "type": "header",

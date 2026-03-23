@@ -1,30 +1,29 @@
-{%- comment %}
-  Product Card Special - Flash Sale variant
-  Usage: {%- include 'product-card-special' with product: product, sold_count: 42, stock_total: 50 -%}
-  Parameters:
-    - product (required): Product object
-    - sold_count (optional): Number of items sold (simulated via forloop or metafield)
-    - stock_total (optional): Total stock quantity
-    - lazyload (optional): 'lazy' | 'eager'
-{% endcomment -%}
+{%- doc -%}
+  @description Product Card Special — Flash Sale variant with stock bar and discount badge
+  @param {object} product - Product object (required)
+  @param {number} [sold_count=0] - Number of items sold (simulated via forloop or metafield)
+  @param {number} [stock_total=50] - Total stock quantity
+  @param {string} [lazyload='lazy'] - Loading strategy: 'lazy' or 'eager'
+  @example {%- render 'product-card-special', product: product, sold_count: 42, stock_total: 50 -%}
+{%- enddoc -%}
 {%- assign price = product.selected_or_first_available_variant.price -%}
 {%- assign compare = product.selected_or_first_available_variant.compare_at_price -%}
 {%- assign discount = 0 -%}
 {%- if compare > price -%}{%- assign discount = compare | minus: price -%}{%- endif -%}
 {%- assign discount_percentage = 0 -%}
 {%- if discount > 0 -%}{%- assign discount_percentage = discount | times: 100 | divided_by: compare | round -%}{%- endif -%}
-{%- assign _sold = sold_count | default: 0 | plus: 0 -%}
-{%- assign _stock = stock_total | default: 50 | plus: 0 -%}
-{%- if _stock <= 0 -%}{%- assign _stock = 50 -%}{%- endif -%}
-{%- assign _sold_pct = _sold | times: 100 | divided_by: _stock -%}
-{%- if _sold_pct > 100 -%}{%- assign _sold_pct = 100 -%}{%- endif -%}
-{%- assign _remaining = _stock | minus: _sold -%}
-{%- if _remaining < 0 -%}{%- assign _remaining = 0 -%}{%- endif -%}
+{%- assign card_sold = sold_count | default: 0 | plus: 0 -%}
+{%- assign card_stock = stock_total | default: 50 | plus: 0 -%}
+{%- if card_stock <= 0 -%}{%- assign card_stock = 50 -%}{%- endif -%}
+{%- assign card_sold_pct = card_sold | times: 100 | divided_by: card_stock -%}
+{%- if card_sold_pct > 100 -%}{%- assign card_sold_pct = 100 -%}{%- endif -%}
+{%- assign card_remaining = card_stock | minus: card_sold -%}
+{%- if card_remaining < 0 -%}{%- assign card_remaining = 0 -%}{%- endif -%}
 {%- if product and product != empty -%}
 <product-card class="product-card product-card--special">
   <article class="product-card__wrapper">
     <div class="product-card__media">
-      <a class="product-card__media-inner" href="{{ product.url }}" aria-label="Xem {{ product.title | escape }}" title="{{ product.title | escape }}">
+      <a class="product-card__media-inner" href="{{ product.url }}" aria-label="{{ 'products.product.view_full_details' | t }}: {{ product.title | escape }}" title="{{ product.title | escape }}">
         {%- if product.featured_image -%}
         <div class="product-card__media-image">
           {%- assign featured_image = product.featured_image.src -%}
@@ -44,25 +43,25 @@
         </div>
         {%- endif -%}
         {%- unless product.available -%}
-        <div class="product-card__badge">{{ settings.product_soldout_text | default: 'Hết hàng' }}</div>
+        <div class="product-card__badge">{{ settings.product_soldout_text | default: 'products.product.sold_out' | t }}</div>
         {%- endunless -%}
         {%- if discount_percentage > 0 and product.available -%}
         <div class="product-card__badge product-card__badge--discount">-{{ discount_percentage }}%</div>
         {%- endif -%}
       </a>
-      <button type="button" class="product-card__quickview" data-action="open-quickview" data-product-handle="{{ product.handle }}" aria-label="Xem nhanh {{ product.title | escape }}" title="Xem nhanh">{%- render 'icon', name: 'eye-show'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}</button>
-      <form class="product-card__add-form" action="/cart/add" method="POST">
+      <button type="button" class="product-card__quickview" data-action="open-quickview" data-product-handle="{{ product.handle }}" aria-label="{{ 'products.product.quick_view' | t }}: {{ product.title | escape }}" title="{{ 'products.product.quick_view' | t }}">{%- render 'icon', name: 'eye-show' -%}</button>
+      <form class="product-card__add-form" action="{{ routes.cart_add_url }}" method="POST">
         <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
         <input type="hidden" name="quantity" value="1">
-        <button type="submit" class="product-card__add-btn" aria-label="Thêm {{ product.title | escape }} vào giỏ hàng" title="Thêm vào giỏ" {%- unless product.available -%}disabled{%- endunless -%}>{%- render 'icon', name: 'cart'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}</button>
+        <button type="submit" class="product-card__add-btn" aria-label="{{ 'products.product.add_to_cart' | t }}: {{ product.title | escape }}" title="{{ 'products.product.add_to_cart' | t }}" {%- unless product.available -%}disabled{%- endunless -%}>{%- render 'icon', name: 'cart' -%}</button>
       </form>
-      <button type="button" class="product-card__wishlist" data-action="add-wishlist" data-product-id="{{ product.id }}" data-product-handle="{{ product.handle }}" aria-label="Thêm {{ product.title | escape }} vào yêu thích" title="Thêm vào yêu thích">{%- render 'icon', name: 'heart'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}</button>
+      <button type="button" class="product-card__wishlist" data-action="add-wishlist" data-product-id="{{ product.id }}" data-product-handle="{{ product.handle }}" aria-label="{{ 'general.wishlist.add' | t }}: {{ product.title | escape }}" title="{{ 'general.wishlist.add' | t }}">{%- render 'icon', name: 'heart' -%}</button>
     </div>
     <div class="product-card__content">
       <h3 class="product-card__title"><a href="{{ product.url }}" title="{{ product.title | escape }}">{{ product.title | escape }}</a></h3>
       <div class="product-card__price">
         {%- if price == 0 -%}
-        <span class="product-card__price-contact">{{ settings.product_contact_text | default: 'Liên hệ' }}</span>
+        <span class="product-card__price-contact">{{ settings.product_contact_text | default: 'products.product.price.contact' | t }}</span>
         {%- else -%}
         {%- if compare > price -%}<del class="product-card__price-compare">{{ compare | money }}</del>{%- endif -%}
         <span class="product-card__price-sale">{{ price | money }}</span>
@@ -71,19 +70,19 @@
         {%- endif -%}
         {%- endif -%}
       </div>
-      {%- if _sold > 0 -%}
+      {%- if card_sold > 0 -%}
       <div class="product-card__stock">
         <div class="product-card__stock-bar">
-          <div class="product-card__stock-fill {%- if _sold_pct >= 80 -%} product-card__stock-fill--hot{%- endif -%}" style="width: {{ _sold_pct }}%;"></div>
+          <div class="product-card__stock-fill {%- if card_sold_pct >= 80 -%} product-card__stock-fill--hot{%- endif -%}" style="width: {{ card_sold_pct }}%;"></div>
         </div>
         <div class="product-card__stock-info">
-          {%- if _sold_pct >= 80 -%}
+          {%- if card_sold_pct >= 80 -%}
           <span class="product-card__stock-urgent">
-            <img width="16" height="16" loading="lazy" decoding="async" src="https://cdn.hstatic.net/files/200001135053/file/4f05fdd32e72cde6dc74__1_.png" alt=""/>
-            Sắp cháy hàng
+            🔥
+            {{ 'products.product.almost_sold_out' | t }}
           </span>
           {%- endif -%}
-          <span class="product-card__stock-sold">Đã bán {{ _sold }}</span>
+          <span class="product-card__stock-sold">{{ 'products.product.sold_count' | t: count: card_sold | default: 'Sold' }} {{ card_sold }}</span>
         </div>
       </div>
       {%- endif -%}

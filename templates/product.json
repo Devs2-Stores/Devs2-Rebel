@@ -1,20 +1,91 @@
-﻿{
-    "sections":  {
-                     "main":  {
-                                  "type":  "main-product",
-                                  "settings":  {
-
-                                               },
-                                  "blocks":  {
-
-                                             }
-                              },
-                     "breadcrumb":  {
-                                        "type":  "breadcrumb"
-                                    }
-                 },
-    "order":  [
-                  "breadcrumb",
-                  "main"
-              ]
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb"
+    },
+    "main": {
+      "type": "main-product",
+      "settings": {},
+      "blocks": {
+        "title": {
+          "type": "title"
+        },
+        "product_meta": {
+          "type": "product_meta",
+          "settings": {
+            "show_sku": true,
+            "show_barcode": false,
+            "show_vendor": true,
+            "show_type": false,
+            "show_availability": true
+          }
+        },
+        "price": {
+          "type": "price"
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "buttons",
+            "cross_out_unavailable": true,
+            "unavailable_opacity": 50,
+            "option_spacing": 16
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector"
+        },
+        "coupon": {
+          "type": "coupon"
+        },
+        "stock_counter": {
+          "type": "stock_counter",
+          "settings": {
+            "stock_threshold": 10
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_wishlist": true
+          }
+        },
+        "back_in_stock": {
+          "type": "back_in_stock"
+        },
+        "payment_installments": {
+          "type": "payment_installments"
+        },
+        "tabs": {
+          "type": "tabs",
+          "settings": {
+            "tab_description_name": "Description",
+            "description_readmore": true,
+            "description_max_height": 300
+          }
+        },
+        "share": {
+          "type": "share"
+        }
+      },
+      "block_order": [
+        "title",
+        "product_meta",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "coupon",
+        "stock_counter",
+        "buy_buttons",
+        "back_in_stock",
+        "payment_installments",
+        "tabs",
+        "share"
+      ]
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main"
+  ]
 }

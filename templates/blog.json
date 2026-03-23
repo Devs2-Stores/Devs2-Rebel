@@ -1,17 +1,15 @@
-﻿{
-    "sections":  {
-                     "main":  {
-                                  "type":  "main-blog",
-                                  "settings":  {
-
-                                               }
-                              },
-                     "breadcrumb":  {
-                                        "type":  "breadcrumb"
-                                    }
-                 },
-    "order":  [
-                  "breadcrumb",
-                  "main"
-              ]
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb"
+    },
+    "main": {
+      "type": "main-blog",
+      "settings": {}
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main"
+  ]
 }

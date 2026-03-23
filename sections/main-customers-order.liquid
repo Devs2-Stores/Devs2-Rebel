@@ -1,3 +1,9 @@
+{%- style -%}
+  .section-main-customers-order {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+{%- endstyle -%}
 
 <div class="order-template">
     <div class="page-width">
@@ -12,7 +18,7 @@
             <div class="order-template__header-row">
               <div class="order-template__header-item">
                 <p class="order-template__label">{{ 'customer.order.date' | t }}:</p>
-                <p class="order-template__value">{{ order.created_at | date: '%d/%m/%Y' }}</p>
+                <p class="order-template__value">{{ order.created_at | date: '%B %d, %Y' }}</p>
               </div>
               <div class="order-template__header-item">
                 <p class="order-template__label">{{ 'customer.order.order_number' | t }}:</p>
@@ -32,7 +38,7 @@
             {%- if order.fulfillments.last.tracking_number != blank -%}
             <div class="order-template__tracking">
               <p class="order-template__label">{{ 'customer.order.tracking_number' | t }}:</p>
-              <a href="{{ order.fulfillments.last.tracking_url }}" class="order-template__tracking-link" title="Tracking" target="_blank" rel="noopener noreferrer">
+              <a href="{{ order.fulfillments.last.tracking_url }}" class="order-template__tracking-link" title="{{ 'customer.order.track_shipment' | t }}" target="_blank" rel="noopener noreferrer">
                 {{ order.fulfillments.last.tracking_number }}
                 {%- render 'icon', name: 'arrow', size: '14' -%}
               </a>
@@ -95,10 +101,10 @@
               <table class="order-template__table">
                 <thead>
                   <tr>
-                    <th class="text-left">{{ 'customer.order.product' | t }}</th>
-                    <th class="text-right">{{ 'customer.order.price' | t }}</th>
-                    <th class="text-center">{{ 'customer.order.quantity' | t }}</th>
-                    <th class="text-right">{{ 'customer.order.total' | t }}</th>
+                    <th scope="col" class="text-left">{{ 'customer.order.product' | t }}</th>
+                    <th scope="col" class="text-right">{{ 'customer.order.price' | t }}</th>
+                    <th scope="col" class="text-center">{{ 'customer.order.quantity' | t }}</th>
+                    <th scope="col" class="text-right">{{ 'customer.order.total' | t }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -170,6 +176,28 @@
 {
   "name": "t:sections.main_customers_order.name",
   "tag": "section",
-  "class": "section-main-customers-order"
+  "class": "section-main-customers-order",
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:sections.all.padding_top.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:sections.all.padding_bottom.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    }
+  ]
 }
 {% endschema %}

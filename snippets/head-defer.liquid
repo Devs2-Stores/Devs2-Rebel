@@ -1,3 +1,4 @@
+{%- if settings.recaptcha_site_key != blank -%}
 <script>
 	/* recaptcha — load on first user interaction */
 	!function(){
@@ -6,9 +7,10 @@
 			if(d)return;d=true;
 			events.forEach(function(e){window.removeEventListener(e,load,{capture:true})});
 			var a=document.getElementsByTagName('script')[0],c=document.createElement('script');
-			c.async=true;c.src='https://www.google.com/recaptcha/api.js?render=6Le047YqAAAAAKk-dTuIhf_F7L0m3Yp9hOkIxTn1';
+			c.async=true;c.src='https://www.google.com/recaptcha/api.js?render={{ settings.recaptcha_site_key }}';
 			a.parentNode.insertBefore(c,a);
 		}
 		events.forEach(function(e){window.addEventListener(e,load,{capture:true,once:true,passive:true})});
 	}();
 </script>
+{%- endif -%}

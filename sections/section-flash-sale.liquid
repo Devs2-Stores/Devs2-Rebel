@@ -1,0 +1,212 @@
+{%- liquid
+  assign end_date = section.settings.end_date
+  assign end_time = section.settings.end_time | default: '23:59'
+  assign collection_handle = section.settings.collection
+  assign limit = section.settings.limit | default: 8
+  assign title = section.settings.title
+  assign subtitle = section.settings.subtitle
+  assign button_text = section.settings.button_text
+  assign button_link = section.settings.button_link
+  assign flash_collection = collections[collection_handle]
+-%}
+
+{%- if flash_collection != blank and flash_collection.products.size > 0 -%}
+<section class="section-flash-sale" id="section-flash-sale-{{ section.id }}">
+  <div class="section-flash-sale__ambient" aria-hidden="true">
+    <div class="section-flash-sale__glow section-flash-sale__glow--left"></div>
+    <div class="section-flash-sale__glow section-flash-sale__glow--right"></div>
+  </div>
+  {%- if end_date != blank -%}
+  <div class="section-flash-sale__bg-timer" aria-hidden="true">
+    <span class="section-flash-sale__bg-timer-text" data-bg-timer>SALE</span>
+  </div>
+  {%- endif -%}
+
+  <div class="page-width">
+    <div class="section-flash-sale__head">
+      <div class="section-flash-sale__head-left">
+        {%- if subtitle != blank -%}
+        <span class="section-flash-sale__subtitle">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          {{ subtitle }}
+        </span>
+        {%- endif -%}
+        {%- if title != blank -%}
+        <h2 class="section-flash-sale__title">{{ title }}</h2>
+        {%- endif -%}
+      </div>
+
+      {%- if end_date != blank -%}
+      <flash-countdown class="section-flash-sale__countdown" data-end-date="{{ end_date }}" data-end-time="{{ end_time }}">
+        <div class="section-flash-sale__countdown-panel">
+          <div class="section-flash-sale__countdown-item">
+            <b data-countdown-days>00</b>
+            <span>{{ 'sections.countdown.days' | t }}</span>
+          </div>
+          <div class="section-flash-sale__countdown-sep" aria-hidden="true"></div>
+          <div class="section-flash-sale__countdown-item">
+            <b data-countdown-hours>00</b>
+            <span>{{ 'sections.countdown.hours' | t }}</span>
+          </div>
+          <div class="section-flash-sale__countdown-sep" aria-hidden="true"></div>
+          <div class="section-flash-sale__countdown-item">
+            <b data-countdown-minutes>00</b>
+            <span>{{ 'sections.countdown.minutes' | t }}</span>
+          </div>
+          <div class="section-flash-sale__countdown-sep" aria-hidden="true"></div>
+          <div class="section-flash-sale__countdown-item">
+            <b data-countdown-seconds>00</b>
+            <span>{{ 'sections.countdown.seconds' | t }}</span>
+          </div>
+        </div>
+      </flash-countdown>
+      {%- endif -%}
+    </div>
+
+    <div class="section-flash-sale__carousel">
+      <div class="swiper section-flash-sale__swiper">
+        <div class="swiper-wrapper">
+          {%- for product in flash_collection.products limit: limit -%}
+            {%- liquid
+              assign sold_count = forloop.index | times: 7 | plus: 15
+              assign stock_total = 50
+            -%}
+            <div class="swiper-slide">
+              {%- render 'product-card-special',
+                product: product,
+                sold_count: sold_count,
+                stock_total: stock_total,
+                lazyload: 'lazy'
+              -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+
+    {%- if button_text != blank and button_link != blank -%}
+    <div class="section-flash-sale__footer">
+      <a href="{{ button_link }}" class="section-flash-sale__view-all" title="{{ button_text | escape }}">
+        {{ button_text }}
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+  (function() {
+    if (customElements.get('flash-countdown')) return;
+    class FlashCountdown extends HTMLElement {
+      connectedCallback() {
+        var self = this;
+        var endDate = this.dataset.endDate;
+        var endTime = this.dataset.endTime || '23:59';
+        if (!endDate) return;
+        var target = new Date(endDate + 'T' + endTime + ':00').getTime();
+        if (isNaN(target)) return;
+        var daysEl = this.querySelector('[data-countdown-days]');
+        var hoursEl = this.querySelector('[data-countdown-hours]');
+        var minsEl = this.querySelector('[data-countdown-minutes]');
+        var secsEl = this.querySelector('[data-countdown-seconds]');
+        function pad(n) { return n < 10 ? '0' + n : '' + n; }
+        function update() {
+          var diff = target - Date.now();
+          if (diff <= 0) {
+            if (daysEl) daysEl.textContent = '00';
+            if (hoursEl) hoursEl.textContent = '00';
+            if (minsEl) minsEl.textContent = '00';
+            if (secsEl) secsEl.textContent = '00';
+            return;
+          }
+          if (daysEl) daysEl.textContent = pad(Math.floor(diff / 86400000));
+          if (hoursEl) hoursEl.textContent = pad(Math.floor((diff % 86400000) / 3600000));
+          if (minsEl) minsEl.textContent = pad(Math.floor((diff % 3600000) / 60000));
+          if (secsEl) secsEl.textContent = pad(Math.floor((diff % 60000) / 1000));
+          requestAnimationFrame(function() { setTimeout(update, 1000); });
+        }
+        update();
+      }
+    }
+    customElements.define('flash-countdown', FlashCountdown);
+  })();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.flash_sale.name",
+  "tag": "section",
+  "class": "section-flash-sale-wrapper",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.flash_sale.settings.header__content.content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "t:sections.flash_sale.settings.title.label",
+      "default": "<b>Flash</b> Sale"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "t:sections.flash_sale.settings.subtitle.label",
+      "default": "⚡ LIMITED TIME OFFER"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:sections.flash_sale.settings.collection.label"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "t:sections.flash_sale.settings.limit.label",
+      "min": 4,
+      "max": 16,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "t:sections.flash_sale.settings.header__countdown.content"
+    },
+    {
+      "type": "text",
+      "id": "end_date",
+      "label": "t:sections.flash_sale.settings.end_date.label",
+      "info": "Format: YYYY-MM-DD"
+    },
+    {
+      "type": "text",
+      "id": "end_time",
+      "label": "t:sections.flash_sale.settings.end_time.label",
+      "default": "23:59",
+      "info": "Format: HH:MM"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.flash_sale.settings.header__button.content"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "t:sections.flash_sale.settings.button_text.label",
+      "default": "VIEW ALL DEALS"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:sections.flash_sale.settings.button_link.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Flash Sale"
+    }
+  ]
+}
+{% endschema %}

@@ -1,4 +1,5 @@
 
+{{- '404.css' | asset_url | stylesheet_tag -}}
 <div class="error-404-template">
   <div class="page-width">
     <div class="error-404-template__box">
@@ -8,7 +9,7 @@
       <h1 class="error-404-template__title">{{ section.settings.title }}</h1>
       <p class="error-404-template__content">{{ section.settings.content }}</p>
       <div class="error-404-template__actions">
-        <a class="error-404-template__back" href="/">
+        <a class="error-404-template__back" href="{{ routes.root_url }}">
           {%- render 'icon', name: 'arrow', class: 'icon-arrow' -%}
           {{ section.settings.back_text }}
         </a>

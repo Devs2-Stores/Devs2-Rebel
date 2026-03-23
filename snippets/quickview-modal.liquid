@@ -1,14 +1,19 @@
+{{- 'quickview-modal.css' | asset_url | stylesheet_tag -}}
+<script src="{{ 'quickview-modal.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'quickview-variant-picker.js' | asset_url }}" defer="defer"></script>
 <quickview-modal class="quickview-modal-wrapper hidden" role="dialog" aria-modal="true" aria-labelledby="quickview-modal-title">
-  <div class="quickview-modal-overlay" data-action="close-quickview" role="button" tabindex="0" aria-label="Đóng xem nhanh"></div>
+  <div class="quickview-modal-overlay" data-action="close-quickview" role="button" tabindex="0" aria-label="{{ 'accessibility.quickview' | t }}"></div>
   <div class="quickview-modal-panel">
     <div class="quickview-modal-header">
-      <h2 class="quickview-modal-title" id="quickview-modal-title">Xem nhanh</h2>
-      <button type="button" class="quickview-modal-close" data-action="close-quickview" aria-label="Đóng xem nhanh">{%- render 'icon', name: 'close'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}</button>
+      <h2 class="quickview-modal-title" id="quickview-modal-title">{{ 'accessibility.quickview' | t }}</h2>
+      <button type="button" class="quickview-modal-close" data-action="close-quickview" aria-label="{{ 'accessibility.close' | t }}">
+        {%- render 'icon', name: 'close' -%}
+      </button>
     </div>
     <div class="quickview-modal-content">
       <div class="quickview-modal-loading hidden">
         <div class="quickview-modal-loading-spinner"></div>
-        <p>Đang tải sản phẩm...</p>
+        <p>{{ 'accessibility.loading' | t }}</p>
       </div>
       <div class="quickview-modal-body"></div>
     </div>

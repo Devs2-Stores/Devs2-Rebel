@@ -1,3 +1,9 @@
+{%- style -%}
+  .section-main-customers-login {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+{%- endstyle -%}
 
 <div class="login-template">
     <div class="page-width">
@@ -6,7 +12,7 @@
       <auth-form class="login-template__form login-layout">
         <div class="form form-login" id="form-login">
           {%- form 'customer_login' -%}
-          <div class="form-error">
+          <div class="form-error" role="alert">
             {%- for error in form.errors -%}{{ form.errors.messages[error] }}<br />{%- endfor -%}
           </div>
           <div class="form-group">
@@ -76,6 +82,28 @@
 {
   "name": "t:sections.main_customers_login.name",
   "tag": "section",
-  "class": "section-main-customers-login"
+  "class": "section-main-customers-login",
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:sections.all.padding_top.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:sections.all.padding_bottom.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    }
+  ]
 }
 {% endschema %}

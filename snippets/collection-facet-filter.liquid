@@ -1,132 +1,200 @@
-{%- capture facet_filter_title -%}
-<div class="facet-filter__title">
-  <span class="facet-filter__title-text">replace_with_data</span>
-</div>
-{%- endcapture -%}
+{% doc %}
+  @description Collection facet filter — Shopify native Storefront Filtering API
+  Renders all available filters dynamically from collection.filters.
+  Supports: list (checkboxes), price_range (min/max inputs), boolean.
+  @param {boolean} [collapse_filters=false] - Mặc định thu gọn các filter group
+  @example {%- render 'collection-facet-filter', collapse_filters: false -%}
+{% enddoc %}
 
-{%- assign price_1 = settings.collection_filter_price_1 -%}
-{%- assign price_2 = settings.collection_filter_price_2 -%}
-{%- assign price_3 = settings.collection_filter_price_3 -%}
-{%- assign price_4 = settings.collection_filter_price_4 -%}
+{%- liquid
+  assign t_clear_all = 'products.facets.clear_all_filters' | t
+  assign t_from = 'products.facets.from' | t
+  assign t_to = 'products.facets.to' | t
+  assign currency_symbol = cart.currency.symbol | default: '$'
+  if collapse_filters == nil
+    assign collapse_filters = false
+  endif
+-%}
 
-<div class="facet-filters">
-  <form class="facet-filters__form">
-    <facet-filter class="facet-filter" data-operator="AND">
-      {{ facet_filter_title | replace: 'replace_with_data', 'Tình trạng' }}
-      <div class="facet-filter__content">
-        <div class="facet-filter__content-list" data-collapse-limit="5">
-          <facet-filter-item class="facet-filter-item" data-value="available">
-            <label for="facet-filter-available" class="facet-filter-item__label">
-              <input type="checkbox" name="available" id="facet-filter-available" value="true">
-              <span>Còn hàng</span>
-            </label>
-          </facet-filter-item>
-        </div>
-      </div>
-    </facet-filter>
+<div class="facet-filters" id="FacetFiltersForm">
+  <form class="facet-filters__form" id="FacetFilterForm">
 
-    <facet-filter class="facet-filter" data-operator="OR">
-      {{ facet_filter_title | replace: 'replace_with_data', 'Khoảng giá' }}
-      <div class="facet-filter__content">
-        <div class="facet-filter__content-list" data-collapse-limit="5">
-          <facet-filter-item class="facet-filter-item">
-            <label for="facet-filter-price-1" class="facet-filter-item__label">
-              <input type="checkbox" name="price_variant" id="facet-filter-price-1" value="0_{{ price_1 }}">
-              <span>Dưới {{ price_1 | money }}</span>
-            </label>
-          </facet-filter-item>
-          <facet-filter-item class="facet-filter-item">
-            <label for="facet-filter-price-2" class="facet-filter-item__label">
-              <input type="checkbox" name="price_variant" id="facet-filter-price-2" value="{{ price_1 }}_{{ price_2 }}">
-              <span>{{ price_1 | money }} - {{ price_2 | money }}</span>
-            </label>
-          </facet-filter-item>
-          <facet-filter-item class="facet-filter-item">
-            <label for="facet-filter-price-3" class="facet-filter-item__label">
-              <input type="checkbox" name="price_variant" id="facet-filter-price-3" value="{{ price_2 }}_{{ price_3 }}">
-              <span>{{ price_2 | money }} - {{ price_3 | money }}</span>
-            </label>
-          </facet-filter-item>
-          <facet-filter-item class="facet-filter-item">
-            <label for="facet-filter-price-4" class="facet-filter-item__label">
-              <input type="checkbox" name="price_variant" id="facet-filter-price-4" value="{{ price_3 }}_{{ price_4 }}">
-              <span>{{ price_3 | money }} - {{ price_4 | money }}</span>
-            </label>
-          </facet-filter-item>
-          <facet-filter-item class="facet-filter-item">
-            <label for="facet-filter-price-5" class="facet-filter-item__label">
-              <input type="checkbox" name="price_variant" id="facet-filter-price-5" value="{{ price_4 }}_999999999">
-              <span>Trên {{ price_4 | money }}</span>
-            </label>
-          </facet-filter-item>
-        </div>
-      </div>
-    </facet-filter>
+    {%- for filter in collection.filters -%}
+      {%- liquid
+        comment
+          Auto-expand filter nếu có active values dù collapse_filters = true
+        endcomment
+        assign has_active = false
+        if filter.type == 'price_range'
+          if filter.min_value.value != nil or filter.max_value.value != nil
+            assign has_active = true
+          endif
+        elsif filter.active_values.size > 0
+          assign has_active = true
+        endif
 
-    <facet-filter class="facet-filter" data-operator="OR">
-      {{ facet_filter_title | replace: 'replace_with_data', 'Thương hiệu' }}
-      <div class="facet-filter__content">
-        <div class="facet-filter__content-list" data-collapse-limit="5">
-          {%- assign vendors = collection.all_vendors | sort -%}
-          {%- for vendor in vendors -%}
-          {%- if vendor and vendor != "" and vendor != blank -%}
-          <facet-filter-item class="facet-filter-item" data-value="{{ vendor | escape }}">
-            <label for="facet-filter-vendor-{{ vendor | handleize }}" class="facet-filter-item__label">
-              <input type="checkbox" name="vendor" id="facet-filter-vendor-{{ vendor | handleize }}" value="{{ vendor | escape }}">
-              <span>{{ vendor }}</span>
-            </label>
-          </facet-filter-item>
-          {%- endif -%}
+        assign is_open = true
+        if collapse_filters and has_active == false
+          assign is_open = false
+        endif
+      -%}
+      <facet-filter class="facet-filter" data-filter-type="{{ filter.type }}">
+        <details class="facet-filter__details"{% if is_open %} open{% endif %}>
+          <summary class="facet-filter__title">
+            <span class="facet-filter__title-text">
+              {{ filter.label | escape }}
+              {%- if filter.active_values.size > 0 -%}
+                <span class="facet-filter__count">({{ filter.active_values.size }})</span>
+              {%- endif -%}
+            </span>
+            <span class="facet-filter__arrow" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </summary>
+
+          <div class="facet-filter__content">
+            {%- case filter.type -%}
+
+              {%- when 'list' -%}
+                <div class="facet-filter__content-list" data-collapse-limit="5">
+                  {%- for value in filter.values -%}
+                    <facet-filter-item
+                      class="facet-filter-item{% if value.count == 0 and value.active == false %} facet-filter-item--disabled{% endif %}"
+                    >
+                      <label
+                        for="Filter-{{ filter.param_name | handleize }}-{{ forloop.index }}"
+                        class="facet-filter-item__label"
+                      >
+                        <input
+                          type="checkbox"
+                          name="{{ filter.param_name }}"
+                          value="{{ value.value | escape }}"
+                          id="Filter-{{ filter.param_name | handleize }}-{{ forloop.index }}"
+                          {% if value.active %}checked{% endif %}
+                          {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                        >
+                        <span>{{ value.label | escape }}</span>
+                        <span class="facet-filter-item__count">({{ value.count }})</span>
+                      </label>
+                    </facet-filter-item>
+                  {%- endfor -%}
+                </div>
+
+              {%- when 'price_range' -%}
+                {%- liquid
+                  assign range_max = filter.range_max | divided_by: 100.0 | ceil
+                  assign min_value = filter.min_value.value | default: 0 | divided_by: 100.0 | floor
+                  assign max_value = filter.max_value.value | divided_by: 100.0 | ceil
+                -%}
+                <div class="facet-filter__price-range">
+                  <div class="facet-filter__price-field">
+                    <label for="Filter-{{ filter.min_value.param_name | handleize }}">{{ t_from }}</label>
+                    <div class="facet-filter__price-input-wrap">
+                      <span class="facet-filter__price-currency">{{ currency_symbol }}</span>
+                      <input
+                        type="number"
+                        name="{{ filter.min_value.param_name }}"
+                        id="Filter-{{ filter.min_value.param_name | handleize }}"
+                        {%- if filter.min_value.value -%}
+                          value="{{ min_value }}"
+                        {%- endif -%}
+                        min="0"
+                        max="{{ range_max }}"
+                        placeholder="0"
+                        class="facet-filter__price-input"
+                        inputmode="numeric"
+                      >
+                    </div>
+                  </div>
+                  <span class="facet-filter__price-separator">—</span>
+                  <div class="facet-filter__price-field">
+                    <label for="Filter-{{ filter.max_value.param_name | handleize }}">{{ t_to }}</label>
+                    <div class="facet-filter__price-input-wrap">
+                      <span class="facet-filter__price-currency">{{ currency_symbol }}</span>
+                      <input
+                        type="number"
+                        name="{{ filter.max_value.param_name }}"
+                        id="Filter-{{ filter.max_value.param_name | handleize }}"
+                        {%- if filter.max_value.value -%}
+                          value="{{ max_value }}"
+                        {%- endif -%}
+                        min="0"
+                        max="{{ range_max }}"
+                        placeholder="{{ range_max }}"
+                        class="facet-filter__price-input"
+                        inputmode="numeric"
+                      >
+                    </div>
+                  </div>
+                </div>
+
+              {%- when 'boolean' -%}
+                {%- for value in filter.values -%}
+                  <facet-filter-item class="facet-filter-item">
+                    <label
+                      for="Filter-{{ filter.param_name | handleize }}-{{ forloop.index }}"
+                      class="facet-filter-item__label"
+                    >
+                      <input
+                        type="checkbox"
+                        name="{{ filter.param_name }}"
+                        value="{{ value.value }}"
+                        id="Filter-{{ filter.param_name | handleize }}-{{ forloop.index }}"
+                        {% if value.active %}checked{% endif %}
+                      >
+                      <span>{{ value.label | escape }}</span>
+                      <span class="facet-filter-item__count">({{ value.count }})</span>
+                    </label>
+                  </facet-filter-item>
+                {%- endfor -%}
+
+            {%- endcase -%}
+          </div>
+        </details>
+      </facet-filter>
+    {%- endfor -%}
+
+    {%- comment -%} ── Active filter tags ── {%- endcomment -%}
+    {%- assign active_count = 0 -%}
+    {%- for filter in collection.filters -%}
+      {%- if filter.type == 'price_range' -%}
+        {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
+          {%- assign active_count = active_count | plus: 1 -%}
+        {%- endif -%}
+      {%- else -%}
+        {%- assign active_count = active_count | plus: filter.active_values.size -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if active_count > 0 -%}
+      <div class="facet-filters__active" id="FacetFiltersActive">
+        <div class="facet-filters__active-list">
+          {%- for filter in collection.filters -%}
+            {%- if filter.type == 'price_range' -%}
+              {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
+                <a href="{{ filter.url_to_remove }}" class="facet-filters__active-tag" data-filter-remove>
+                  {{ filter.label }}:
+                  {%- if filter.min_value.value -%}{{ filter.min_value.value | money_without_trailing_zeros }}{%- else -%}{{ 0 | money_without_trailing_zeros }}{%- endif -%}
+                  –
+                  {%- if filter.max_value.value -%}{{ filter.max_value.value | money_without_trailing_zeros }}{%- else -%}{{ filter.range_max | money_without_trailing_zeros }}{%- endif -%}
+                  <span class="facet-filters__active-remove" aria-hidden="true">&times;</span>
+                </a>
+              {%- endif -%}
+            {%- else -%}
+              {%- for value in filter.active_values -%}
+                <a href="{{ value.url_to_remove }}" class="facet-filters__active-tag" data-filter-remove>
+                  {{ value.label | escape }}
+                  <span class="facet-filters__active-remove" aria-hidden="true">&times;</span>
+                </a>
+              {%- endfor -%}
+            {%- endif -%}
           {%- endfor -%}
         </div>
+        <a href="{{ collection.url }}?sort_by={{ collection.sort_by | default: collection.default_sort_by }}" class="facet-filters__clear-all" data-filter-remove>
+          {{ t_clear_all }}
+        </a>
       </div>
-    </facet-filter>
-
-    <facet-filter class="facet-filter" data-operator="OR">
-      {{ facet_filter_title | replace: 'replace_with_data', 'Loại sản phẩm' }}
-      <div class="facet-filter__content">
-        <div class="facet-filter__content-list" data-collapse-limit="5">
-          {%- assign product_types = collection.all_types | sort -%}
-          {%- for product_type in product_types -%}
-          {%- if product_type and product_type != "" and product_type != blank -%}
-          <facet-filter-item class="facet-filter-item" data-value="{{ product_type | escape }}">
-            <label for="facet-filter-product-type-{{ product_type | handleize }}" class="facet-filter-item__label">
-              <input type="checkbox" name="product_type" id="facet-filter-product-type-{{ product_type | handleize }}" value="{{ product_type | escape }}">
-              <span>{{ product_type }}</span>
-            </label>
-          </facet-filter-item>
-          {%- endif -%}
-          {%- endfor -%}
-        </div>
-      </div>
-    </facet-filter>
-
-    {%- if settings.collection_filter_tags != blank -%}
-    <facet-filter class="facet-filter" data-operator="AND">
-      {{ facet_filter_title | replace: 'replace_with_data', 'Tags' }}
-      <div class="facet-filter__content">
-        <div class="facet-filter__content-list" data-collapse-limit="5">
-          {%- assign filter_tags = settings.collection_filter_tags | split: ',' -%}
-          {%- for tag in filter_tags -%}
-          {%- assign tag = tag | strip -%}
-          {%- if tag != blank -%}
-          <facet-filter-item class="facet-filter-item" data-value="{{ tag | escape }}">
-            <label for="facet-filter-tag-{{ tag | handleize }}" class="facet-filter-item__label">
-              <input type="checkbox" name="tag" id="facet-filter-tag-{{ tag | handleize }}" value="{{ tag | escape }}">
-              <span>{{ tag }}</span>
-            </label>
-          </facet-filter-item>
-          {%- endif -%}
-          {%- endfor -%}
-        </div>
-      </div>
-    </facet-filter>
     {%- endif -%}
 
-    <div class="collection-facet-filter__actions">
-      <button type="button" class="collection-facet-filter__clear-all" data-action="clear-all-filters" aria-label="Xóa tất cả bộ lọc">
-        Xóa tất cả bộ lọc
-      </button>
-    </div>
   </form>
 </div>

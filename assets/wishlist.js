@@ -107,10 +107,10 @@ class WishlistManager extends HTMLElement {
 		const isInWishlist = this.isInWishlist(productId);
 		if (isInWishlist) {
 			this.removeFromWishlist(productId);
-			this.showToast('Đã xóa khỏi yêu thích');
+			this.showToast((themeConfig.strings.wishlist || {}).removed || 'Removed from wishlist');
 		} else {
 			this.addToWishlist(productId, handle);
-			this.showToast('Đã thêm vào yêu thích');
+			this.showToast((themeConfig.strings.wishlist || {}).added || 'Added to wishlist');
 		}
 		this.updateButtonState(btn, !isInWishlist);
 		this.updateWishlistCount();
@@ -121,16 +121,16 @@ class WishlistManager extends HTMLElement {
 		const iconUse = btn.querySelector('use');
 		if (isActive) {
 			btn.classList.add('active');
-			btn.setAttribute('title', 'Bỏ yêu thích');
-			btn.setAttribute('aria-label', 'Bỏ yêu thích');
+			btn.setAttribute('title', (themeConfig.strings.wishlist || {}).remove || 'Remove from wishlist');
+			btn.setAttribute('aria-label', (themeConfig.strings.wishlist || {}).remove || 'Remove from wishlist');
 			if (iconUse) {
 				iconUse.setAttribute('href', '#icon-heart-filled');
 				iconUse.setAttribute('xlink:href', '#icon-heart-filled');
 			}
 		} else {
 			btn.classList.remove('active');
-			btn.setAttribute('title', 'Thêm vào yêu thích');
-			btn.setAttribute('aria-label', 'Thêm vào yêu thích');
+			btn.setAttribute('title', (themeConfig.strings.wishlist || {}).add || 'Add to wishlist');
+			btn.setAttribute('aria-label', (themeConfig.strings.wishlist || {}).add || 'Add to wishlist');
 			if (iconUse) {
 				iconUse.setAttribute('href', '#icon-heart');
 				iconUse.setAttribute('xlink:href', '#icon-heart');
@@ -172,7 +172,13 @@ class WishlistManager extends HTMLElement {
 		}
 		const toast = document.createElement('div');
 		toast.className = 'toast-wrapper';
-		toast.innerHTML = '<div class="toast toast-success"><div class="toast-message">' + message + '</div></div>';
+		const toastInner = document.createElement('div');
+		toastInner.className = 'toast toast-success';
+		const toastMsg = document.createElement('div');
+		toastMsg.className = 'toast-message';
+		toastMsg.textContent = message;
+		toastInner.appendChild(toastMsg);
+		toast.appendChild(toastInner);
 		const container = document.querySelector('.toast-container') || this.createToastContainer();
 		container.appendChild(toast);
 		setTimeout(() => toast.classList.add('toast-show'), 10);
@@ -200,4 +206,4 @@ class WishlistManager extends HTMLElement {
 	}
 }
 
-customElements.define('wishlist-manager', WishlistManager);
+if (!customElements.get('wishlist-manager')) customElements.define('wishlist-manager', WishlistManager);

@@ -1,9 +1,11 @@
 
+{{- 'page-faq.css' | asset_url | stylesheet_tag -}}
+<script src="{{ 'page-faq.js' | asset_url }}" defer="defer"></script>
 <faq-page class="page-faq">
   <section class="faq-hero">
     <div class="page-width">
       <div class="faq-hero__wrap">
-        <h1 class="faq-hero__title">{{ section.settings.title | default: 'sections.page_faq.default_title' | t }}</h1>
+        <h1 class="faq-hero__title">{% if section.settings.title != blank %}{{ section.settings.title }}{% else %}{{ 'sections.page_faq.default_title' | t }}{% endif %}</h1>
         {%- if section.settings.description != blank -%}
         <p class="faq-hero__description">{{ section.settings.description }}</p>
         {%- endif -%}
@@ -79,8 +81,8 @@
   <section class="faq-contact section-padding-bg">
     <div class="page-width">
       <div class="faq-contact__wrap">
-        <h2 class="faq-contact__title">{{ section.settings.contact_title | default: 'sections.page_faq.need_help' | t }}</h2>
-        <p class="faq-contact__description">{{ section.settings.contact_description | default: 'sections.page_faq.contact_us' | t }}</p>
+        <h2 class="faq-contact__title">{% if section.settings.contact_title != blank %}{{ section.settings.contact_title }}{% else %}{{ 'sections.page_faq.need_help' | t }}{% endif %}</h2>
+        <p class="faq-contact__description">{% if section.settings.contact_description != blank %}{{ section.settings.contact_description }}{% else %}{{ 'sections.page_faq.contact_us' | t }}{% endif %}</p>
         <div class="faq-contact__actions">
           {%- if section.settings.contact_phone != blank -%}
           <a href="tel:{{ section.settings.contact_phone | replace: ' ', '' }}" class="faq-contact__btn faq-contact__btn--phone">

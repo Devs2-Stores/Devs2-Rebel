@@ -1,17 +1,47 @@
-﻿{
-    "sections":  {
-                     "main":  {
-                                  "type":  "main-collection",
-                                  "settings":  {
-
-                                               }
-                              },
-                     "breadcrumb":  {
-                                        "type":  "breadcrumb"
-                                    }
-                 },
-    "order":  [
-                  "breadcrumb",
-                  "main"
-              ]
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb"
+    },
+    "main": {
+      "type": "main-collection",
+      "settings": {},
+      "blocks": {
+        "collection_image": {
+          "type": "collection_image",
+          "settings": {
+            "enabled": true
+          }
+        },
+        "subcollections": {
+          "type": "subcollections",
+          "settings": {
+            "items_limit": 10
+          }
+        },
+        "best_sellers": {
+          "type": "best_sellers",
+          "settings": {
+            "enabled": true,
+            "title": "Best Sellers",
+            "source": "current",
+            "limit": 10
+          }
+        },
+        "description": {
+          "type": "description"
+        }
+      },
+      "block_order": [
+        "collection_image",
+        "subcollections",
+        "best_sellers",
+        "description"
+      ]
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main"
+  ]
 }

@@ -1,0 +1,19 @@
+.skip-to-content-link {
+  position: absolute;
+  overflow: hidden;
+  height: 1px;
+  left: -99999px;
+  word-wrap: normal !important;
+}
+.skip-to-content-link:focus {
+  position: fixed;
+  top: var(--space-sm);
+  left: var(--space-sm);
+  z-index: var(--z-toast);
+  height: auto;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-radius: var(--radius-sm);
+  outline: 2px solid var(--color-white);
+}

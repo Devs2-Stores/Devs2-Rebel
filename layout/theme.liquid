@@ -7,6 +7,7 @@
     {%- render 'head-color-schemes' -%}
     {%- render 'head-design-systems' -%}
     {%- render 'head-script' -%}
+    {%- render 'head-defer' -%}
     {{ content_for_header }}
   </head>
 
@@ -24,10 +25,15 @@
     {%- render 'cart-modal' -%}
     {%- render 'search-modal' -%}
     {%- render 'quickview-modal' -%}
+    {%- render 'mobile-menu' -%}
     {%- render 'float-social' -%}
+    {{ 'toast.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'toast.js' | asset_url }}" defer="defer"></script>
     <div class="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
     <div class="overlay"></div>
-    <button type="button" class="back-to-top" id="backToTop" aria-label="{{ 'accessibility.back_to_top' | t }}">
+    {{ 'back-to-top.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'back-to-top.js' | asset_url }}" defer="defer"></script>
+    <button type="button" class="back-to-top" id="backToTop" aria-label="{{ 'accessibility.back_to_top' | t }}" aria-hidden="true">
       <svg class="icon" width="18" height="18">
         <use href="#icon-chevron-right" />
       </svg>

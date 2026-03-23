@@ -1,7 +1,7 @@
 <coupon-preview class="coupon-preview" data-action="open-modal">
 	<div class="coupon-preview__label">
-		{%- render 'icon', name: 'tag'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
-		<span>{{ settings.product_coupon_label | default: "Mã giảm giá" }}</span>
+		{%- render 'icon', name: 'tag' -%}
+		<span>{{ settings.product_coupon_label | default: "Coupon code" }}</span>
 	</div>
 	<div class="coupon-preview__list">
 		{%- for i in (1..8) -%}

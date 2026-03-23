@@ -1,19 +1,23 @@
+{%- comment -%}
+  Main Search — Search results template section.
+  Displays search form, results grid, pagination, and empty states.
+{%- endcomment -%}
 
 {%- assign search_query = search.terms | default: '' -%}
 
 <search-template class="search-template">
-    <div class="page-width">
+  <div class="page-width">
 
     <div class="search-template__header">
       <h1 class="search-template__title">
         {%- if search_query != blank -%}
-        {{ 'templates.search.results_with_count_and_term' | t: terms: search_query, count: search.results_count }}
+          {{ 'templates.search.results_with_count_and_term' | t: terms: search_query, count: search.results_count }}
         {%- else -%}
-        {{ 'templates.search.title' | t }}
+          {{ 'templates.search.title' | t }}
         {%- endif -%}
       </h1>
       {%- if search.performed and search.results_count > 0 -%}
-      <p class="search-template__count">{{ 'templates.search.results_count' | t: count: search.results_count }}</p>
+        <p class="search-template__count">{{ 'templates.search.results_count' | t: count: search.results_count }}</p>
       {%- endif -%}
     </div>
 
@@ -44,34 +48,37 @@
         <div class="search-template__results">
           <div class="search-template__results-header">
             <span class="search-template__results-info">
+              {%- assign start_count = paginate.current_offset | plus: 1 -%}
               {%- assign end_count = paginate.current_offset | plus: paginate.page_size -%}
-              {%- if end_count > search.results_count -%}{%- assign end_count = search.results_count -%}{%- endif -%}
-              {{ 'templates.search.results_showing' | t: from: paginate.current_offset | plus: 1, to: end_count, total: search.results_count }}
+              {%- if end_count > search.results_count -%}
+                {%- assign end_count = search.results_count -%}
+              {%- endif -%}
+              {{ 'templates.search.results_showing' | t: from: start_count, to: end_count, total: search.results_count }}
             </span>
           </div>
 
-          <ul class="product-cards search-template__products">
+          <ul class="product-cards search-template__products" role="list">
             {%- for product in search.results -%}
-            {%- liquid
-              assign lazyload = 'lazy'
-              assign fetchpriority = 'auto'
-              if forloop.index <= 3
-                assign lazyload = 'eager'
-              endif
-              if forloop.first
-                assign fetchpriority = 'high'
-              endif
-            -%}
-            <li class="product-cards__item">
-              {%- render 'product-card', product: product, lazyload: lazyload, fetchpriority: fetchpriority, show_vendor: true -%}
-            </li>
+              {%- liquid
+                assign lazyload = 'lazy'
+                assign fetchpriority = 'auto'
+                if forloop.index <= 3
+                  assign lazyload = 'eager'
+                endif
+                if forloop.first
+                  assign fetchpriority = 'high'
+                endif
+              -%}
+              <li class="product-cards__item" role="listitem">
+                {%- render 'product-card', product: product, lazyload: lazyload, fetchpriority: fetchpriority, show_vendor: true -%}
+              </li>
             {%- endfor -%}
           </ul>
 
           {%- if paginate.pages > 1 -%}
-          <div class="search-template__pagination">
-            {%- render 'section-pagination' -%}
-          </div>
+            <div class="search-template__pagination">
+              {%- render 'section-pagination' -%}
+            </div>
           {%- endif -%}
         </div>
         {%- endpaginate -%}

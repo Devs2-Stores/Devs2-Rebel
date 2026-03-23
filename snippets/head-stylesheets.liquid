@@ -6,25 +6,12 @@
 <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
 
 {{ 'swiper.css' | asset_url | stylesheet_tag }}
+{{ 'reset.css' | asset_url | stylesheet_tag }}
 {{ 'base.css' | asset_url | stylesheet_tag }}
 {{ 'theme.css' | asset_url | stylesheet_tag }}
 
 {%- if template == 'index' -%}
   {{ 'index.css' | asset_url | stylesheet_tag }}
-  {%- if settings.section_slider_check and settings.section_slider_item_check_1 -%}
-    <link
-      rel="preload"
-      as="image"
-      href="{{ 'section_slider_item_desktop_1.png' | asset_url }}"
-      media="(min-width: 768px)"
-    >
-    <link
-      rel="preload"
-      as="image"
-      href="{{ 'section_slider_item_mobile_1.png' | asset_url }}"
-      media="(max-width: 767px)"
-    >
-  {%- endif -%}
 {%- elsif template == 'list-collections' -%}
   {{ 'list-collections.css' | asset_url | stylesheet_tag }}
 {%- elsif template == 'collection' -%}
@@ -37,14 +24,14 @@
   {{ '404.css' | asset_url | stylesheet_tag }}
 {%- elsif template == 'blog' -%}
   {{ 'blog.css' | asset_url | stylesheet_tag }}
+  {{ 'article-card.css' | asset_url | stylesheet_tag }}
 {%- elsif template == 'article' -%}
   {{ 'article.css' | asset_url | stylesheet_tag }}
+  {{ 'blog.css' | asset_url | stylesheet_tag }}
 {%- elsif template contains 'customer' -%}
   {{ 'customer.css' | asset_url | stylesheet_tag }}
 {%- elsif template contains 'search' -%}
   {{ 'search.css' | asset_url | stylesheet_tag }}
-{%- elsif template == 'page' -%}
-  {{ 'page.css' | asset_url | stylesheet_tag }}
 {%- elsif template == 'page.wishlist' -%}
   {{ 'page-wishlist.css' | asset_url | stylesheet_tag }}
 {%- elsif template == 'page.about' -%}
@@ -55,4 +42,6 @@
   {{ 'page-stores.css' | asset_url | stylesheet_tag }}
 {%- elsif template == 'page.faq' -%}
   {{ 'page-faq.css' | asset_url | stylesheet_tag }}
+{%- elsif template == 'page' -%}
+  {{ 'page.css' | asset_url | stylesheet_tag }}
 {%- endif -%}

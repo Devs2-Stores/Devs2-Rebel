@@ -1,0 +1,175 @@
+/* ═══════════════════════════════════════════════════
+   COUNTDOWN BANNER
+   ═══════════════════════════════════════════════════ */
+.countdown-banner {
+  display: block;
+  background: var(--countdown-bg, #1a1a2e);
+  color: var(--countdown-text, #fff);
+  overflow: hidden;
+  border-radius: 0.75rem;
+}
+
+/* ── Inner layout ── */
+.countdown-banner__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem 1.5rem;
+}
+@media (min-width: 750px) {
+  .countdown-banner--horizontal .countdown-banner__inner {
+    flex-direction: row;
+    justify-content: space-between;
+    padding-block: 2.5rem;
+  }
+}
+
+/* ── Media (optional image) ── */
+.countdown-banner__media {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 220px;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+@media (min-width: 750px) {
+  .countdown-banner--horizontal .countdown-banner__media {
+    max-width: 180px;
+    order: -1;
+  }
+}
+.countdown-banner__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 0.75rem;
+}
+
+/* ── Content ── */
+.countdown-banner__content {
+  text-align: center;
+  flex: 1;
+}
+@media (min-width: 750px) {
+  .countdown-banner--horizontal .countdown-banner__content {
+    text-align: start;
+  }
+}
+.countdown-banner__heading {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+@media (min-width: 750px) {
+  .countdown-banner__heading { font-size: 2rem; }
+}
+.countdown-banner__subheading {
+  margin: 0 0 1rem;
+  font-size: 0.9375rem;
+  opacity: 0.85;
+  line-height: 1.5;
+}
+.countdown-banner__btn {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  background: var(--countdown-accent, #e94560);
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  border-radius: 0.375rem;
+  transition: all 0.25s ease;
+}
+.countdown-banner__btn:hover {
+  filter: brightness(1.15);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Timer ── */
+.countdown-banner__timer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+@media (min-width: 750px) {
+  .countdown-banner__timer { gap: 0.75rem; }
+}
+.countdown-banner__unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  min-width: 3.5rem;
+  padding: 0.75rem 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+@media (min-width: 750px) {
+  .countdown-banner__unit {
+    min-width: 4.5rem;
+    padding: 1rem 0.75rem;
+  }
+}
+.countdown-banner__number {
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+@media (min-width: 750px) {
+  .countdown-banner__number { font-size: 2.5rem; }
+}
+.countdown-banner__label {
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+  font-weight: 500;
+}
+@media (min-width: 750px) {
+  .countdown-banner__label { font-size: 0.6875rem; }
+}
+.countdown-banner__separator {
+  font-size: 1.5rem;
+  font-weight: 700;
+  opacity: 0.5;
+  align-self: flex-start;
+  padding-block-start: 0.75rem;
+}
+@media (min-width: 750px) {
+  .countdown-banner__separator {
+    font-size: 2rem;
+    padding-block-start: 1rem;
+  }
+}
+
+/* ── Stacked layout ── */
+.countdown-banner--stacked .countdown-banner__inner {
+  flex-direction: column;
+  text-align: center;
+}
+.countdown-banner--stacked .countdown-banner__content { text-align: center; }
+
+/* ── Animation: pulse on last 60 seconds ── */
+@keyframes countdown-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .countdown-banner__btn { transition: none; }
+  .countdown-banner__btn:hover { transform: none; }
+}

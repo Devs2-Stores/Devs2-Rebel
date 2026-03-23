@@ -1,23 +1,39 @@
-{%- if collections.size > 0 -%}
+{% doc %}
+  @description Sub-collections navigation — horizontal pill links with thumbnails
+  @param {object} collections - Collection list from collection_list picker
+  @param {number} [items_limit=10] - Max number of collections to show
+  @example {%- render 'collection-menu', collections: block.settings.collections, items_limit: 10 -%}
+{% enddoc %}
+
+{%- assign items_limit = items_limit | default: 10 -%}
+
+{%- if collections != blank and collections.size > 0 -%}
 <div class="collection-menu">
-	<div class="collection-menu__list">
-		{%- for collection_item in collections limit: 10 -%}
-		<a href="{{ collection_item.url }}" class="collection-menu__item" title="{{ collection_item.title | escape }}" aria-label="{{ collection_item.title | escape }}">
-			<div class="collection-menu__item-image">
-				{%- if collection_item.image != blank -%}
-				<picture>
-					<source media="(max-width: 480px)" srcset="{{ collection_item.image | image_url: width: 240 }}">
-					<img src="{{ collection_item.image | image_url: width: 240 }}" alt="{{ collection_item.title | escape }}" width="80" height="80" loading="lazy" decoding="async">
-				</picture>
-				{%- else -%}
-				<div class="collection-menu__item-image-placeholder">
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
-				</div>
-				{%- endif -%}
-			</div>
-			<span class="collection-menu__item-text">{{ collection_item.title }}</span>
-		</a>
-		{%- endfor -%}
-	</div>
+  <div class="collection-menu__list">
+    {%- for collection_item in collections limit: items_limit -%}
+      <a href="{{ collection_item.url }}" class="collection-menu__item" title="{{ collection_item.title | escape }}">
+        <div class="collection-menu__item-image">
+          {%- if collection_item.image != blank -%}
+            {%- assign item_alt = collection_item.title | escape -%}
+            {{
+              collection_item.image
+              | image_url: width: 240
+              | image_tag:
+                widths: '80, 120, 240',
+                sizes: '80px',
+                alt: item_alt,
+                loading: 'lazy',
+                decoding: 'async'
+            }}
+          {%- else -%}
+            <div class="collection-menu__item-image-placeholder">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
+            </div>
+          {%- endif -%}
+        </div>
+        <span class="collection-menu__item-text">{{ collection_item.title }}</span>
+      </a>
+    {%- endfor -%}
+  </div>
 </div>
 {%- endif -%}

@@ -1,20 +1,28 @@
+{%- comment -%}
+  Main Page — Default page template section.
+  Displays page title and rich text content.
+{%- endcomment -%}
 
 <div class="page-default">
-  <div class="page-width section-padding">
-    <h1 class="page-default__title">{{ page.title }}</h1>
-
-    {%- if page.content != blank -%}
-    <div class="page-default__content">
-      {{ page.content }}
-    </div>
-    {%- else -%}
-    <div class="page-default__placeholder">
-      <div class="page-default__placeholder-icon">
-        {%- render 'icon', name: 'file-text' -%}
+  <div class="page-width">
+    <div class="page-default__wrap">
+      <div class="page-default__header">
+        <h1 class="page-default__title">{{ page.title }}</h1>
       </div>
-      <p class="page-default__placeholder-text">{{ section.settings.empty_text }}</p>
+
+      {%- if page.content != blank -%}
+      <div class="page-default__content">
+        {{ page.content }}
+      </div>
+      {%- else -%}
+      <div class="page-default__placeholder">
+        <div class="page-default__placeholder-icon">
+          {%- render 'icon', name: 'clipboard' -%}
+        </div>
+        <p class="page-default__placeholder-text">{{ section.settings.empty_text }}</p>
+      </div>
+      {%- endif -%}
     </div>
-    {%- endif -%}
   </div>
 </div>
 

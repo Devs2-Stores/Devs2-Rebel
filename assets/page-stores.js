@@ -67,7 +67,7 @@
 
     populateDistricts(province) {
       // Clear current
-      this.districtSelect.innerHTML = '<option value="">Tất cả quận huyện</option>';
+      this.districtSelect.innerHTML = '<option value="">All districts</option>';
       if (!province) {
         this.districtSelect.disabled = true;
         return;
@@ -165,7 +165,7 @@
 
     updateCount(count) {
       if (count === undefined) count = this.cards.length;
-      this.countEl.textContent = 'Hiển thị ' + count + '/' + this.cards.length + ' cửa hàng';
+      this.countEl.textContent = 'Showing ' + count + '/' + this.cards.length + ' stores';
     }
 
   }

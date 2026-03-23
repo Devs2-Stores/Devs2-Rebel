@@ -1,4 +1,6 @@
 {%- if section.settings.enable -%}
+{{ 'announcement-bar.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'announcement-bar.js' | asset_url }}" defer="defer"></script>
 <announcement-bar class="announcement-bar color-{{ section.settings.color_scheme }}" role="region" aria-label="{{ 'sections.announcement_bar.label' | t }}">
   <div class="announcement-bar__container">
     <div class="swiper announcement-bar__swiper">

@@ -1,19 +1,23 @@
 {%- comment %}
   Global scripts and configuration.
   All config under window.themeConfig — includes routes, i18n strings, and per-template JS.
-{% endcomment -%}
+{%- endcomment %}
 
 <script>
   window.themeConfig = {
     shopUrl: '{{ request.origin }}',
     formatMoney: {{ shop.money_format | json }},
-    no_image_product: String(`{{ 'no_image_product.jpg' | asset_url }}`),
+    no_image_product: String(`{{ 'no_image.png' | asset_url }}`),
 
     routes: {
+      root_url: '{{ routes.root_url }}',
       cart_url: '{{ routes.cart_url }}',
       cart_add_url: '{{ routes.cart_add_url }}',
       cart_change_url: '{{ routes.cart_change_url }}',
       cart_update_url: '{{ routes.cart_update_url }}',
+      get_cart_url: '{{ routes.cart_url }}.js',
+      checkout_url: '/checkout',
+      all_products_url: '{{ routes.all_products_collection_url }}',
       predictive_search_url: '{{ routes.predictive_search_url }}',
       search_url: '{{ routes.search_url }}'
     },
@@ -32,23 +36,50 @@
     strings: {
       cart: {
         error: `{{ 'sections.cart.cart_error' | t }}`,
-        quantityError: `{{ 'sections.cart.cart_quantity_error' | t: quantity: '[quantity]' }}`
+        quantityError: `{{ 'sections.cart.cart_quantity_error' | t: quantity: '[quantity]' }}`,
+        noteError: `{{ 'sections.cart.note_error' | t }}`,
+        invoiceError: `{{ 'sections.cart.invoice_error' | t }}`,
+        removeConfirm: `{{ 'sections.cart.remove_confirm' | t }}`,
+        caption: `{{ 'sections.cart.caption' | t }}`,
+        itemAdded: `{{ 'products.product.add_to_cart_success' | t }}`,
+        itemError: `{{ 'products.product.add_to_cart_error' | t }}`
       },
       variant: {
         addToCart: `{{ 'products.product.add_to_cart' | t }}`,
+        buyNow: `{{ 'products.product.buy_now' | t }}`,
         soldOut: `{{ 'products.product.sold_out' | t }}`,
         unavailable: `{{ 'products.product.unavailable' | t }}`,
-        unavailable_with_option: `{{ 'products.product.value_unavailable' | t: option: '[value]' }}`
+        unavailable_with_option: `{{ 'products.product.value_unavailable' | t: option_value: '[value]' }}`,
+        contact: `{{ 'products.product.price.contact' | t }}`,
+        inStock: `{{ 'products.product.inventory_in_stock' | t }}`,
+        updating: `{{ 'products.product.updating' | t }}`,
+        adding: `{{ 'products.product.adding' | t }}`,
+        selectAllOptions: `{{ 'products.product.select_all_options' | t }}`,
+        loadError: `{{ 'products.product.load_error' | t }}`
+      },
+      wishlist: {
+        added: `{{ 'general.wishlist.added' | t }}`,
+        removed: `{{ 'general.wishlist.removed' | t }}`,
+        add: `{{ 'general.wishlist.add' | t }}`,
+        remove: `{{ 'general.wishlist.remove' | t }}`
+      },
+      share: {
+        success: `{{ 'general.share.success_message' | t }}`,
+        copyFailed: `{{ 'general.share.copy_failed' | t }}`,
+        copied: `{{ 'general.share.copied' | t }}`,
+        copyArticleLink: `{{ 'general.share.copy_article_link' | t }}`,
+        couponCopied: `{{ 'general.share.coupon_copied' | t }}`
       },
       accessibility: {
+        close: `{{ 'accessibility.close' | t }}`,
         imageAvailable: `{{ 'products.product.media.image_available' | t: index: '[index]' }}`,
-        shareSuccess: `{{ 'general.share.success_message' | t }}`
+        shareSuccess: `{{ 'general.share.success_message' | t }}`,
+        previousSlide: `{{ 'accessibility.previous_slide' | t }}`,
+        nextSlide: `{{ 'accessibility.next_slide' | t }}`
       }
     },
 
-    collection: {
-      id: {%- if collection.id -%}{{ collection.id }}{%- else -%}null{%- endif -%}
-    },
+    collection: {},
 
     {%- if template contains 'product' -%}
     product: {
@@ -68,31 +99,25 @@
 <script defer src="{{ 'theme.js' | asset_url }}"></script>
 
 {%- if template == 'index' -%}
-<script defer src="{{ 'index.js' | asset_url }}"></script>
+  <script defer src="{{ 'index.js' | asset_url }}"></script>
 {%- elsif template == 'collection' -%}
-<script defer src="{{ 'collection.js' | asset_url }}"></script>
-<script defer src="{{ 'search_filter.js' | asset_url }}"></script>
+  <script defer src="{{ 'collection.js' | asset_url }}"></script>
 {%- elsif template == 'product' -%}
-<script defer src="{{ 'product.js' | asset_url }}"></script>
+  <script defer src="{{ 'product.js' | asset_url }}"></script>
 {%- elsif template == 'cart' -%}
-<script defer src="{{ 'cart.js' | asset_url }}"></script>
+  <script defer src="{{ 'cart.js' | asset_url }}"></script>
 {%- elsif template contains 'customer' -%}
-<script defer src="{{ 'customer.js' | asset_url }}"></script>
+  <script defer src="{{ 'customer.js' | asset_url }}"></script>
 {%- elsif template == 'page.contact' -%}
-<script defer src="{{ 'page-contact.js' | asset_url }}"></script>
+  <script defer src="{{ 'page-contact.js' | asset_url }}"></script>
 {%- elsif template == 'page.about' -%}
-<script defer src="{{ 'page-about.js' | asset_url }}"></script>
+  <script defer src="{{ 'page-about.js' | asset_url }}"></script>
 {%- elsif template == 'page.stores' -%}
-<script defer src="{{ 'page-stores.js' | asset_url }}"></script>
+  <script defer src="{{ 'page-stores.js' | asset_url }}"></script>
 {%- elsif template == 'page.faq' -%}
-<script defer src="{{ 'page-faq.js' | asset_url }}"></script>
+  <script defer src="{{ 'page-faq.js' | asset_url }}"></script>
 {%- elsif template contains 'search' -%}
-<script defer src="{{ 'search.js' | asset_url }}"></script>
-<script defer src="{{ 'search_filter.js' | asset_url }}"></script>
+  <script defer src="{{ 'search.js' | asset_url }}"></script>
 {%- endif -%}
 
 <script defer src="{{ 'wishlist.js' | asset_url }}"></script>
-
-{%- if settings.predictive_search_enabled -%}
-<script defer src="{{ 'predictive-search.js' | asset_url }}"></script>
-{%- endif -%}

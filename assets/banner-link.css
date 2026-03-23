@@ -1,0 +1,32 @@
+/* ═══════════════════════════════════════════════════
+   BANNER LINK
+   Simple clickable banner with desktop/mobile images.
+   ═══════════════════════════════════════════════════ */
+
+.banner-link__wrapper {
+  display: block;
+  overflow: hidden;
+  line-height: 0;
+}
+
+a.banner-link__wrapper {
+  transition: opacity var(--transition-fast);
+}
+a.banner-link__wrapper:hover {
+  opacity: 0.9;
+}
+
+.banner-link__img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── Desktop / Mobile visibility ────────────────── */
+.banner-link__mobile { display: block; }
+.banner-link__desktop { display: none; }
+
+@media (min-width: 750px) {
+  .banner-link__mobile { display: none; }
+  .banner-link__desktop { display: block; }
+}

@@ -1,33 +1,38 @@
-<div class="customer-sidebar">
+<customer-sidebar class="customer-sidebar">
   <div class="customer-sidebar__header">
     <div class="customer-sidebar__avatar">
-      <img src="https://cdn.hstatic.net/files/200001135053/file/waving-hand.png" alt="{{ customer.last_name }} {{ customer.first_name }}" title="{{ customer.last_name }} {{ customer.first_name }}" width="64" height="64" loading="lazy" decoding="async">
+      <span style="font-size: 2.5rem; line-height: 1;" aria-hidden="true">👋</span>
     </div>
     <h3 class="customer-sidebar__name">
-      Xin chào, <b>{{ customer.last_name }} {{ customer.first_name }}</b>
+      {{ 'customer.sidebar.greeting' | t }}, <b>{{ customer.last_name }} {{ customer.first_name }}</b>
     </h3>
   </div>
-  <nav class="customer-sidebar__nav">
+  <nav class="customer-sidebar__nav" aria-label="{{ 'customer.sidebar.nav_label' | t }}">
     <ul class="customer-sidebar__list">
       <li>
-        <a href="/account" title="Thông tin tài khoản" aria-label="Thông tin tài khoản" class="customer-sidebar__link{% if template.name == 'customers[account]' %} active{% endif %}">
-          {%- render 'icon', name: 'user'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
-          <span>Thông tin tài khoản</span>
+        <a href="{{ routes.account_url }}" title="{{ 'customer.sidebar.account_info' | t }}" aria-label="{{ 'customer.sidebar.account_info' | t }}" class="customer-sidebar__link">
+          {%- render 'icon', name: 'user' -%}
+          <span>{{ 'customer.sidebar.account_info' | t }}</span>
         </a>
       </li>
       <li>
-        <a href="/account/addresses" title="Danh sách địa chỉ" aria-label="Danh sách địa chỉ" class="customer-sidebar__link{% if template.name == 'customers[addresses]' %} active{% endif %}">
-          {%- render 'icon', name: 'location'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
-          <span>Danh sách địa chỉ</span>
+        <a href="{{ routes.account_url }}?view=orders" title="{{ 'customer.orders.title' | t }}" aria-label="{{ 'customer.orders.title' | t }}" class="customer-sidebar__link">
+          {%- render 'icon', name: 'order' -%}
+          <span>{{ 'customer.orders.title' | t }}</span>
         </a>
       </li>
-
+      <li>
+        <a href="{{ routes.account_addresses_url }}" title="{{ 'customer.addresses.title' | t }}" aria-label="{{ 'customer.addresses.title' | t }}" class="customer-sidebar__link">
+          {%- render 'icon', name: 'location' -%}
+          <span>{{ 'customer.addresses.title' | t }}</span>
+        </a>
+      </li>
       <li class="customer-sidebar__separator">
-        <a href="/account/logout" title="Đăng xuất" aria-label="Đăng xuất" class="customer-sidebar__link customer-sidebar__link--logout">
-          {%- render 'icon', name: 'logout'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
-          <span>Đăng xuất</span>
+        <a href="{{ routes.account_logout_url }}" title="{{ 'customer.log_out' | t }}" aria-label="{{ 'customer.log_out' | t }}" class="customer-sidebar__link customer-sidebar__link--logout">
+          {%- render 'icon', name: 'logout' -%}
+          <span>{{ 'customer.log_out' | t }}</span>
         </a>
       </li>
     </ul>
   </nav>
-</div>
+</customer-sidebar>

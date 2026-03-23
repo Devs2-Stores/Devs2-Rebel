@@ -27,16 +27,18 @@
 <a href="{{ collection.url }}" class="collection-card" title="{{ collection.title | escape }}">
   <div class="collection-card__image image-shape image-shape--{{ image_shape }} image-position--{{ image_position }}">
     {%- if collection_image -%}
-    <img
-      src="{{ collection_image | image_url: width: 600 }}"
-      srcset="{{ collection_image | image_url: width: 400 }} 400w, {{ collection_image | image_url: width: 600 }} 600w, {{ collection_image | image_url: width: 800 }} 800w, {{ collection_image | image_url: width: 1200 }} 1200w"
-      sizes="(max-width: 749px) {% if columns_mobile == '1' %}100vw{% else %}50vw{% endif %}, calc(100vw / {{ columns_desktop }})"
-      alt="{{ collection_image.alt | default: collection.title | escape }}"
-      width="{{ collection_image.width }}"
-      height="{{ collection_image.height }}"
-      loading="{{ lazyload }}"
-      decoding="async"
-    >
+    {%- assign image_alt = collection_image.alt | default: collection.title | escape -%}
+    {%- capture sizes_attr -%}(max-width: 749px) {% if columns_mobile == '1' %}100vw{% else %}50vw{% endif %}, calc(100vw / {{ columns_desktop }}){%- endcapture -%}
+    {{
+      collection_image
+      | image_url: width: 1200
+      | image_tag:
+        widths: '400, 600, 800, 1200',
+        sizes: sizes_attr,
+        alt: image_alt,
+        loading: lazyload,
+        decoding: 'async'
+    }}
     {%- else -%}
     <div class="collection-card__placeholder image-shape image-shape--{{ image_shape }}">
       {{ collection.title | placeholder_svg_tag: 'placeholder-svg' }}
@@ -47,7 +49,11 @@
     <h3 class="collection-card__title card-heading-size-{{ card_heading_size }}">{{ collection.title }}</h3>
     {%- if show_product_count -%}
     <p class="collection-card__count">
-      {{ 'sections.collection_list.product_count' | t: count: collection.all_products_count }}
+      {%- if collection.all_products_count == 0 -%}
+        {{ 'sections.collection_list.no_products' | t }}
+      {%- else -%}
+        {{ 'sections.collection_list.product_count' | t: count: collection.all_products_count }}
+      {%- endif -%}
     </p>
     {%- endif -%}
   </div>

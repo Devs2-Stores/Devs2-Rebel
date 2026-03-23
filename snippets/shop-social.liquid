@@ -1,56 +1,57 @@
+{{ 'shop-social.css' | asset_url | stylesheet_tag }}
 <ul class="shop-social">
 	{%- if settings.linkFbsocial != blank -%}
 	<li class="shop-social__item">
-		<a href="{{ settings.linkFbsocial }}" class="shop-social__link shop-social__link--facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook {{ shop.name }}" title="Theo dõi trên Facebook">
-			{%- render 'icon', name: 'facebook'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
+		<a href="{{ settings.linkFbsocial }}" class="shop-social__link shop-social__link--facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook {{ shop.name }}" title="{{ 'general.social.follow_on' | t: platform: 'Facebook' }}">
+			{%- render 'icon', name: 'facebook' -%}
 		</a>
 	</li>
 	{%- endif -%}
 
 	{%- if settings.linkInsocial != blank -%}
 	<li class="shop-social__item">
-		<a href="{{ settings.linkInsocial }}" class="shop-social__link shop-social__link--instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram {{ shop.name }}" title="Theo dõi trên Instagram">
-			{%- render 'icon', name: 'instagram'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
+		<a href="{{ settings.linkInsocial }}" class="shop-social__link shop-social__link--instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram {{ shop.name }}" title="{{ 'general.social.follow_on' | t: platform: 'Instagram' }}">
+			{%- render 'icon', name: 'instagram' -%}
 		</a>
 	</li>
 	{%- endif -%}
 
 	{%- if settings.linkYtsocial != blank -%}
 	<li class="shop-social__item">
-		<a href="{{ settings.linkYtsocial }}" class="shop-social__link shop-social__link--youtube" target="_blank" rel="noopener noreferrer" aria-label="Youtube {{ shop.name }}" title="Theo dõi trên Youtube">
-			{%- render 'icon', name: 'youtube'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
+		<a href="{{ settings.linkYtsocial }}" class="shop-social__link shop-social__link--youtube" target="_blank" rel="noopener noreferrer" aria-label="YouTube {{ shop.name }}" title="{{ 'general.social.follow_on' | t: platform: 'YouTube' }}">
+			{%- render 'icon', name: 'youtube' -%}
 		</a>
 	</li>
 	{%- endif -%}
 
 	{%- if settings.linkTwsocial != blank -%}
 	<li class="shop-social__item">
-		<a href="{{ settings.linkTwsocial }}" class="shop-social__link shop-social__link--tiktok" target="_blank" rel="noopener noreferrer" aria-label="TikTok {{ shop.name }}" title="Theo dõi trên TikTok">
-			{%- render 'icon', name: 'tiktok'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
+		<a href="{{ settings.linkTwsocial }}" class="shop-social__link shop-social__link--tiktok" target="_blank" rel="noopener noreferrer" aria-label="TikTok {{ shop.name }}" title="{{ 'general.social.follow_on' | t: platform: 'TikTok' }}">
+			{%- render 'icon', name: 'tiktok' -%}
 		</a>
 	</li>
 	{%- endif -%}
 
 	{%- if settings.linkPisocial != blank -%}
 	<li class="shop-social__item">
-		<a href="{{ settings.linkPisocial }}" class="shop-social__link shop-social__link--pinterest" target="_blank" rel="noopener noreferrer" aria-label="Pinterest {{ shop.name }}" title="Theo dõi trên Pinterest">
-			{%- render 'icon', name: 'pinterest'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
+		<a href="{{ settings.linkPisocial }}" class="shop-social__link shop-social__link--pinterest" target="_blank" rel="noopener noreferrer" aria-label="Pinterest {{ shop.name }}" title="{{ 'general.social.follow_on' | t: platform: 'Pinterest' }}">
+			{%- render 'icon', name: 'pinterest' -%}
 		</a>
 	</li>
 	{%- endif -%}
 
 	{%- if settings.linkTwittersocial != blank -%}
 	<li class="shop-social__item">
-		<a href="{{ settings.linkTwittersocial }}" class="shop-social__link shop-social__link--twitter" target="_blank" rel="noopener noreferrer" aria-label="Twitter {{ shop.name }}" title="Theo dõi trên Twitter">
-			{%- render 'icon', name: 'twitter'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
+		<a href="{{ settings.linkTwittersocial }}" class="shop-social__link shop-social__link--twitter" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter) {{ shop.name }}" title="{{ 'general.social.follow_on' | t: platform: 'X (Twitter)' }}">
+			{%- render 'icon', name: 'twitter' -%}
 		</a>
 	</li>
 	{%- endif -%}
 
 	{%- if settings.linkLinkedinsocial != blank -%}
 	<li class="shop-social__item">
-		<a href="{{ settings.linkLinkedinsocial }}" class="shop-social__link shop-social__link--linkedin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn {{ shop.name }}" title="Theo dõi trên LinkedIn">
-			{%- render 'icon', name: 'linkedin'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
+		<a href="{{ settings.linkLinkedinsocial }}" class="shop-social__link shop-social__link--linkedin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn {{ shop.name }}" title="{{ 'general.social.follow_on' | t: platform: 'LinkedIn' }}">
+			{%- render 'icon', name: 'linkedin' -%}
 		</a>
 	</li>
 	{%- endif -%}

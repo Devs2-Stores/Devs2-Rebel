@@ -1,26 +1,111 @@
 /* ═══════════════════════════════════════════════════
-   BASE UTILITIES
-   Global utility classes used across all templates.
+   BASE — Typography & Utility Classes
+   Global styles used across all templates.
    ═══════════════════════════════════════════════════ */
+
+/* ── Typography ─────────────────────────────────── */
+html,
+body {
+  font-family: var(--font-body-family);
+  font-weight: var(--font-body-weight, var(--font-weight-normal));
+  font-style: var(--font-body-style, normal);
+  line-height: var(--line-height-normal);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight, var(--font-weight-bold));
+  font-style: var(--font-heading-style, normal);
+  line-height: var(--line-height-tight);
+  margin-bottom: 1rem;
+}
+
+h1 { font-size: var(--font-2xl); }
+h2 { font-size: var(--font-xl); }
+h3 { font-size: var(--font-lg); }
+h4 { font-size: var(--font-base); }
+h5 { font-size: var(--font-sm); }
+h6 { font-size: var(--font-xs); }
+
+p {
+  font-family: var(--font-body-family);
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-sm);
+  line-height: var(--line-height-normal);
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 750px) {
+  h1 { font-size: var(--font-3xl); }
+  h2 { font-size: var(--font-2xl); }
+  h3 { font-size: var(--font-xl); }
+  h4 { font-size: var(--font-lg); }
+  h5 { font-size: var(--font-base); }
+  h6 { font-size: var(--font-sm); }
+  p  { font-size: var(--font-base); }
+}
+@media (min-width: 1024px) {
+  h1 { font-size: var(--font-4xl); }
+  h2 { font-size: var(--font-3xl); }
+  h3 { font-size: var(--font-2xl); }
+  h4 { font-size: var(--font-xl); }
+  h5 { font-size: var(--font-lg); }
+  h6 { font-size: var(--font-base); }
+}
+
+/* ── Section Heading / Subheading ───────────────── */
+.section-heading {
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight, var(--font-weight-bold));
+}
+
+.section-subheading {
+  font-family: var(--font-subheading-family, var(--font-body-family));
+  font-weight: var(--font-subheading-weight, var(--font-weight-normal));
+  font-style: var(--font-subheading-style, normal);
+}
 
 /* ── Scroll Fade Up Animation ────────────────────── */
 .scroll-fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .scroll-fade-up.is-visible { opacity: 1; transform: translateY(0); }
 
 /* ── Heading Size Utilities ──────────────────────── */
+.heading-size-xs { font-size: var(--font-base); }
 .heading-size-sm { font-size: var(--font-lg); }
 .heading-size-md { font-size: var(--font-xl); }
 .heading-size-lg { font-size: var(--font-2xl); }
 .heading-size-xl { font-size: var(--font-3xl); }
-@media (min-width: 768px) {
+.heading-size-2xl { font-size: var(--font-4xl); }
+@media (min-width: 750px) {
+  .heading-size-xs { font-size: var(--font-lg); }
   .heading-size-sm { font-size: var(--font-xl); }
   .heading-size-md { font-size: var(--font-2xl); }
   .heading-size-lg { font-size: var(--font-3xl); }
   .heading-size-xl { font-size: var(--font-4xl); }
+  .heading-size-2xl { font-size: var(--font-5xl); }
 }
 .card-heading-size-sm { font-size: var(--font-sm); }
 .card-heading-size-md { font-size: var(--font-base); }
 .card-heading-size-lg { font-size: var(--font-lg); }
+
+/* ── Content Size Utilities ─────────────────────── */
+.content-size-xs { font-size: 0.6875rem; }
+.content-size-sm { font-size: var(--font-xs); }
+.content-size-md { font-size: var(--font-sm); }
+.content-size-lg { font-size: var(--font-base); }
+.content-size-xl { font-size: var(--font-lg); }
+.content-size-xs *,
+.content-size-sm *,
+.content-size-md *,
+.content-size-lg *,
+.content-size-xl * { font-size: inherit; }
+@media (min-width: 750px) {
+  .content-size-xs { font-size: var(--font-xs); }
+  .content-size-sm { font-size: var(--font-sm); }
+  .content-size-md { font-size: var(--font-base); }
+  .content-size-lg { font-size: var(--font-lg); }
+  .content-size-xl { font-size: var(--font-xl); }
+}
 
 /* ── Image Shape Utilities ───────────────────────── */
 .image-shape { position: relative; overflow: hidden; }
@@ -45,16 +130,16 @@
 .image-position--bottom-center { --image-position: bottom center; }
 .image-position--bottom-right { --image-position: bottom right; }
 
-/* ── Column Gap Utilities ───────────────────────── */
+/* ── Column Gap Utilities (mobile-first) ─────────── */
 .column-gap-none { --column-gap: 0px; }
 .column-gap-xs { --column-gap: 4px; }
 .column-gap-sm { --column-gap: 8px; }
 .column-gap-md { --column-gap: 16px; }
-.column-gap-lg { --column-gap: 24px; }
-.column-gap-xl { --column-gap: 32px; }
-@media (max-width: 749px) {
-  .column-gap-lg { --column-gap: 16px; }
-  .column-gap-xl { --column-gap: 20px; }
+.column-gap-lg { --column-gap: 16px; }
+.column-gap-xl { --column-gap: 20px; }
+@media (min-width: 750px) {
+  .column-gap-lg { --column-gap: 24px; }
+  .column-gap-xl { --column-gap: 32px; }
 }
 
 /* ── Text Alignment Utilities (responsive) ──────── */
@@ -63,8 +148,45 @@
   .text-align-desktop-center { text-align: center; }
   .text-align-desktop-right { text-align: right; }
 }
-@media (max-width: 749px) {
-  .text-align-mobile-left { text-align: left; }
-  .text-align-mobile-center { text-align: center; }
-  .text-align-mobile-right { text-align: right; }
+.text-align-mobile-left { text-align: left; }
+.text-align-mobile-center { text-align: center; }
+.text-align-mobile-right { text-align: right; }
+@media (min-width: 750px) {
+  .text-align-mobile-left { text-align: unset; }
+  .text-align-mobile-center { text-align: unset; }
+  .text-align-mobile-right { text-align: unset; }
 }
+
+/* ── Section Padding ────────────────────────────── */
+.section-padding {
+  padding-top: var(--spacing-sections-mobile);
+  padding-bottom: var(--spacing-sections-mobile);
+}
+@media (min-width: 750px) {
+  .section-padding {
+    padding-top: var(--spacing-sections-desktop);
+    padding-bottom: var(--spacing-sections-desktop);
+  }
+}
+.section-padding-bg {
+  padding-top: var(--spacing-sections-mobile);
+  padding-bottom: var(--spacing-sections-mobile);
+}
+@media (min-width: 750px) {
+  .section-padding-bg {
+    padding-top: var(--spacing-sections-desktop);
+    padding-bottom: var(--spacing-sections-desktop);
+  }
+}
+
+/* ── Global Heading ─────────────────────────────── */
+.global-heading {
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight, var(--font-weight-bold));
+  font-style: var(--font-heading-style, normal);
+  line-height: var(--line-height-tight);
+  margin-bottom: var(--space-lg);
+}
+
+/* ── Focus None (skip link targets) ─────────────── */
+.focus-none:focus { outline: none; }

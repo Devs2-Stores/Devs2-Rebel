@@ -28,7 +28,7 @@
 -%}
 
 <link rel="canonical" href="{{ og_url }}">
-<link rel="alternate" href="{{ og_url }}" hreflang="vi-VN">
+<link rel="alternate" href="{{ og_url }}" hreflang="{{ request.locale.iso_code }}">
 
 {% if paginate %}
   {% if paginate.previous %}
@@ -70,7 +70,7 @@
   <meta property="og:price:currency" content="{{ cart.currency.iso_code }}">
 {% endif %}
 
-<meta property="og:locale" content="vi_VN">
+<meta property="og:locale" content="{{ request.locale.iso_code | replace: '-', '_' }}">
 
 {%- comment %} — Twitter Cards — {%- endcomment %}
 {% if settings.social_twitter_link != blank %}
@@ -123,6 +123,46 @@
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
+      "@type": "Product",
+      "name": {{ product.title | json }},
+      "url": "{{ shop.url }}{{ product.url }}",
+      {%- if product.description != blank %}
+        "description": {{ product.description | strip_html | truncatewords: 100 | json }},
+      {%- endif %}
+      {%- if product.featured_image %}
+        "image": [
+          "https:{{ product.featured_image | image_url: width: 1200 }}"
+          {%- for image in product.images offset: 1 limit: 4 -%}
+            ,"https:{{ image | image_url: width: 1200 }}"
+          {%- endfor -%}
+        ],
+      {%- endif %}
+      {%- if product.vendor != blank %}
+        "brand": {
+          "@type": "Brand",
+          "name": {{ product.vendor | json }}
+        },
+      {%- endif %}
+      {%- if product.selected_or_first_available_variant.sku != blank %}
+        "sku": {{ product.selected_or_first_available_variant.sku | json }},
+      {%- endif %}
+      {%- if product.selected_or_first_available_variant.barcode != blank %}
+        "gtin": {{ product.selected_or_first_available_variant.barcode | json }},
+      {%- endif %}
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "{{ cart.currency.iso_code }}",
+        "lowPrice": "{{ product.price_min | money_without_currency | strip_html }}",
+        "highPrice": "{{ product.price_max | money_without_currency | strip_html }}",
+        "offerCount": "{{ product.variants.size }}",
+        "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+        "url": "{{ shop.url }}{{ product.url }}"
+      }
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": {{ 'general.breadcrumbs.home' | t | json }}, "item": "{{ shop.url }}" }
@@ -160,9 +200,9 @@
       {%- if article.image %}
         "image": "https:{{ article.image | image_url }}",
       {%- endif %}
-      "datePublished": "{{ article.created_at | date: '%Y-%m-%dT%H:%M:%S' }}",
+      "datePublished": "{{ article.created_at | date: '%Y-%m-%dT%H:%M:%S%z' }}",
       {%- if article.updated_at %}
-        "dateModified": "{{ article.updated_at | date: '%Y-%m-%dT%H:%M:%S' }}",
+        "dateModified": "{{ article.updated_at | date: '%Y-%m-%dT%H:%M:%S%z' }}",
       {%- endif %}
       "author": {
         "@type": "Person",

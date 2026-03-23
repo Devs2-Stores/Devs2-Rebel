@@ -1,3 +1,9 @@
+{%- style -%}
+  .section-main-customers-addresses {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+{%- endstyle -%}
 
 <div class="addresses-template">
     <div class="page-width">
@@ -40,7 +46,7 @@
                 <div class="addresses-template__item-actions">
                   <button type="button" title="{{ 'customer.addresses.edit' | t }}" aria-controls="edit_address_{{ address.id }}" class="button-primary" data-action="open-address-modal" data-modal-id="edit_address_{{ address.id }}">{{ 'customer.addresses.edit' | t }}</button>
                   {%- unless address.id == customer.default_address.id -%}
-                  <button type="button" title="{{ 'customer.addresses.delete' | t }}" class="button-primary button-danger" data-action="delete-address" data-address-id="{{ address.id }}">{{ 'customer.addresses.delete' | t }}</button>
+                  <button type="button" title="{{ 'customer.addresses.delete' | t }}" class="button-primary button-danger" data-action="delete-address" data-address-id="{{ address.id }}" data-confirm="{{ 'customer.addresses.delete_confirm' | t }}">{{ 'customer.addresses.delete' | t }}</button>
                   {%- endunless -%}
                 </div>
               </div>
@@ -290,6 +296,28 @@
 {
   "name": "t:sections.main_customers_addresses.name",
   "tag": "section",
-  "class": "section-main-customers-addresses"
+  "class": "section-main-customers-addresses",
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:sections.all.padding_top.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:sections.all.padding_bottom.label",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    }
+  ]
 }
 {% endschema %}

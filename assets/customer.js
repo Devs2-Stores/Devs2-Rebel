@@ -32,7 +32,7 @@
       });
     }
   }
-  customElements.define('auth-form', AuthForm);
+  if (!customElements.get('auth-form')) customElements.define('auth-form', AuthForm);
 
   /* -------------------------------------------------------------------------- */
   /*                            CUSTOMER SIDEBAR                                */
@@ -60,7 +60,7 @@
       });
     }
   }
-  customElements.define('customer-sidebar', CustomerSidebar);
+  if (!customElements.get('customer-sidebar')) customElements.define('customer-sidebar', CustomerSidebar);
 
   /* -------------------------------------------------------------------------- */
   /*                             ADDRESS MODAL                                  */
@@ -190,7 +190,9 @@
     async loadData() {
       if (this.loadedData) return;
       try {
-        const rs = await fetch('/checkout/addresses.json').then(r => r.json());
+        const resp = await fetch('/checkout/addresses.json');
+        if (!resp.ok) throw new Error('Address API not available');
+        const rs = await resp.json();
         this.allProvince = rs.provinces;
         this.allDistrict = rs.districts;
         this.allWard = rs.wards;
@@ -296,7 +298,7 @@
       });
     }
   }
-  customElements.define('address-modal', AddressModal);
+  if (!customElements.get('address-modal')) customElements.define('address-modal', AddressModal);
 
   /* -------------------------------------------------------------------------- */
   /*                            TOGGLE PASSWORD                                 */
@@ -328,7 +330,7 @@
       this.classList.toggle('is-visible', isPassword);
     }
   }
-  customElements.define('toggle-password', TogglePassword);
+  if (!customElements.get('toggle-password')) customElements.define('toggle-password', TogglePassword);
 
   /* -------------------------------------------------------------------------- */
   /*                         CHANGE PASSWORD FORM                               */
@@ -348,19 +350,19 @@
       if (!this.newPassword || !this.confirmPassword) return;
       if (this.newPassword.value !== this.confirmPassword.value) {
         e.preventDefault();
-        alert('Mật khẩu mới và xác nhận mật khẩu không khớp. Vui lòng kiểm tra lại.');
+        alert(this.dataset.passwordMismatch || 'Passwords do not match.');
         this.confirmPassword.focus();
         return false;
       }
       if (this.newPassword.value.length < 8) {
         e.preventDefault();
-        alert('Mật khẩu mới phải có ít nhất 8 ký tự.');
+        alert(this.dataset.passwordMinLength || 'Password must be at least 8 characters.');
         this.newPassword.focus();
         return false;
       }
     }
   }
-  customElements.define('change-password-form', ChangePasswordForm);
+  if (!customElements.get('change-password-form')) customElements.define('change-password-form', ChangePasswordForm);
 
   /* -------------------------------------------------------------------------- */
   /*                          ADDRESS MODAL TRIGGERS                            */
@@ -380,7 +382,8 @@
       const deleteBtn = e.target.closest('[data-action="delete-address"]');
       if (deleteBtn) {
         const addressId = deleteBtn.dataset.addressId;
-        if (confirm('Bạn có chắc chắn muốn xóa địa chỉ này?')) {
+        const confirmMsg = deleteBtn.dataset.confirm || 'Are you sure you wish to delete this address?';
+        if (confirm(confirmMsg)) {
           const form = document.createElement('form');
           form.method = 'POST';
           form.action = '/account/addresses/' + addressId;

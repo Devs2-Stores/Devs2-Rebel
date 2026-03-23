@@ -1,0 +1,144 @@
+{% doc %}
+  @description Countdown banner — hiển thị đếm ngược với timer, hỗ trợ horizontal/stacked layout
+  @param {string} [heading] - Tiêu đề banner
+  @param {string} [subheading] - Phụ đề
+  @param {string} [button_text] - Text nút CTA
+  @param {string} [button_link] - URL nút CTA
+  @param {string} [end_date] - Ngày kết thúc (YYYY-MM-DD)
+  @param {string} [end_time='23:59'] - Giờ kết thúc (HH:MM)
+  @param {boolean} [show_after_expired=false] - Hiển thị sau khi hết hạn
+  @param {string} [layout='horizontal'] - Layout: horizontal hoặc stacked
+  @param {object} [image] - Ảnh banner (image_picker)
+  @param {string} [bg_color='#1a1a2e'] - Màu nền
+  @param {string} [text_color='#ffffff'] - Màu chữ
+  @param {string} [accent_color='#e94560'] - Màu nhấn (nút)
+  @param {string} [block_id] - Block ID unique
+  @example {%- render 'countdown-banner', heading: 'SALE', end_date: '2026-12-31', block_id: block.id -%}
+{% enddoc %}
+
+{%- liquid
+  assign heading = heading | default: 'FLASH SALE'
+  assign subheading = subheading | default: ''
+  assign button_text = button_text | default: 'SHOP NOW'
+  assign end_time = end_time | default: '23:59'
+  assign layout = layout | default: 'horizontal'
+  assign bg_color = bg_color | default: '#1a1a2e'
+  assign text_color = text_color | default: '#ffffff'
+  assign accent_color = accent_color | default: '#e94560'
+  assign unique_id = block_id | default: 'countdown'
+
+  if show_after_expired == nil
+    assign show_after_expired = false
+  endif
+-%}
+
+{%- if end_date != blank -%}
+  {{ 'countdown-banner.css' | asset_url | stylesheet_tag }}
+
+  <countdown-banner
+    class="countdown-banner countdown-banner--{{ layout }}"
+    style="--countdown-bg: {{ bg_color }}; --countdown-text: {{ text_color }}; --countdown-accent: {{ accent_color }};"
+    data-end-date="{{ end_date }}"
+    data-end-time="{{ end_time }}"
+    data-show-after-expired="{{ show_after_expired }}"
+    id="CountdownBanner-{{ unique_id }}"
+  >
+    <div class="countdown-banner__inner">
+      {%- if image != blank -%}
+        <div class="countdown-banner__media">
+          {{ image | image_url: width: 440 | image_tag:
+            widths: '220, 440',
+            sizes: '220px',
+            alt: heading,
+            loading: 'lazy',
+            decoding: 'async',
+            class: 'countdown-banner__image'
+          }}
+        </div>
+      {%- endif -%}
+
+      <div class="countdown-banner__content">
+        {%- if heading != blank -%}
+          <h3 class="countdown-banner__heading">{{ heading | escape }}</h3>
+        {%- endif -%}
+        {%- if subheading != blank -%}
+          <p class="countdown-banner__subheading">{{ subheading | escape }}</p>
+        {%- endif -%}
+        {%- if button_text != blank and button_link != blank -%}
+          <a href="{{ button_link }}" class="countdown-banner__btn">{{ button_text | escape }}</a>
+        {%- endif -%}
+      </div>
+
+      <div class="countdown-banner__timer" aria-live="polite" aria-atomic="true">
+        <div class="countdown-banner__unit">
+          <span class="countdown-banner__number" data-countdown-days>00</span>
+          <span class="countdown-banner__label">{{ 'sections.countdown.days' | t }}</span>
+        </div>
+        <span class="countdown-banner__separator" aria-hidden="true">:</span>
+        <div class="countdown-banner__unit">
+          <span class="countdown-banner__number" data-countdown-hours>00</span>
+          <span class="countdown-banner__label">{{ 'sections.countdown.hours' | t }}</span>
+        </div>
+        <span class="countdown-banner__separator" aria-hidden="true">:</span>
+        <div class="countdown-banner__unit">
+          <span class="countdown-banner__number" data-countdown-minutes>00</span>
+          <span class="countdown-banner__label">{{ 'sections.countdown.minutes' | t }}</span>
+        </div>
+        <span class="countdown-banner__separator" aria-hidden="true">:</span>
+        <div class="countdown-banner__unit">
+          <span class="countdown-banner__number" data-countdown-seconds>00</span>
+          <span class="countdown-banner__label">{{ 'sections.countdown.seconds' | t }}</span>
+        </div>
+      </div>
+    </div>
+  </countdown-banner>
+
+  <script>
+    (function() {
+      if (customElements.get('countdown-banner')) return;
+      class CountdownBanner extends HTMLElement {
+        connectedCallback() {
+          var self = this;
+          var endDate = this.dataset.endDate;
+          var endTime = this.dataset.endTime || '23:59';
+          var showAfterExpired = this.dataset.showAfterExpired === 'true';
+          if (!endDate) return;
+
+          var target = new Date(endDate + 'T' + endTime + ':00').getTime();
+          if (isNaN(target)) { this.style.display = 'none'; return; }
+
+          var daysEl = this.querySelector('[data-countdown-days]');
+          var hoursEl = this.querySelector('[data-countdown-hours]');
+          var minsEl = this.querySelector('[data-countdown-minutes]');
+          var secsEl = this.querySelector('[data-countdown-seconds]');
+
+          function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+          function update() {
+            var now = Date.now();
+            var diff = target - now;
+            if (diff <= 0) {
+              if (!showAfterExpired) { self.style.display = 'none'; }
+              if (daysEl) daysEl.textContent = '00';
+              if (hoursEl) hoursEl.textContent = '00';
+              if (minsEl) minsEl.textContent = '00';
+              if (secsEl) secsEl.textContent = '00';
+              return;
+            }
+            var d = Math.floor(diff / 86400000);
+            var h = Math.floor((diff % 86400000) / 3600000);
+            var m = Math.floor((diff % 3600000) / 60000);
+            var s = Math.floor((diff % 60000) / 1000);
+            if (daysEl) daysEl.textContent = pad(d);
+            if (hoursEl) hoursEl.textContent = pad(h);
+            if (minsEl) minsEl.textContent = pad(m);
+            if (secsEl) secsEl.textContent = pad(s);
+            requestAnimationFrame(function() { setTimeout(update, 1000); });
+          }
+          update();
+        }
+      }
+      customElements.define('countdown-banner', CountdownBanner);
+    })();
+  </script>
+{%- endif -%}

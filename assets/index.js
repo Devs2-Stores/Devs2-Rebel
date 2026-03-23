@@ -129,10 +129,10 @@
         var style = 'style="background:linear-gradient(135deg,' + color + ' 0%,' + darker + ' 100%);color:' + textColor + ';"';
 
         el.innerHTML =
-          '<span class="countdown-item" ' + style + '><b>' + pad(days) + '</b>Ngày</span>' +
-          '<span class="countdown-item" ' + style + '><b>' + pad(hours) + '</b>Giờ</span>' +
-          '<span class="countdown-item" ' + style + '><b>' + pad(minutes) + '</b>Phút</span>' +
-          '<span class="countdown-item" ' + style + '><b>' + pad(seconds) + '</b>Giây</span>';
+          '<span class="countdown-item" ' + style + '><b>' + pad(days) + '</b>Days</span>' +
+          '<span class="countdown-item" ' + style + '><b>' + pad(hours) + '</b>Hours</span>' +
+          '<span class="countdown-item" ' + style + '><b>' + pad(minutes) + '</b>Mins</span>' +
+          '<span class="countdown-item" ' + style + '><b>' + pad(seconds) + '</b>Secs</span>';
       }
     }, 1000);
   }

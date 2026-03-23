@@ -1,52 +1,179 @@
-{%- assign price = product.selected_or_first_available_variant.price -%}
-{%- assign compare = product.selected_or_first_available_variant.compare_at_price -%}
-{%- assign discount = 0 -%}
-{%- if compare > price -%}{%- assign discount = compare | minus: price -%}{%- endif -%}
-{%- assign discount_percentage = 0 -%}
-{%- if discount > 0 -%}{%- assign discount_percentage = discount | times: 100 | divided_by: compare | round -%}{%- endif -%}
+{% doc %}
+  @description Product card component — hiển thị sản phẩm với ảnh, tên, giá, badge, quick actions
+  @param {product} product - Đối tượng product (bắt buộc)
+  @param {boolean} [show_vendor=false] - Hiển thị vendor/brand
+  @param {boolean} [show_secondary_image=true] - Hiển thị ảnh thứ 2 khi hover
+  @param {boolean} [show_quickview=true] - Hiển thị nút xem nhanh
+  @param {boolean} [show_add_to_cart=true] - Hiển thị nút thêm giỏ hàng
+  @param {boolean} [show_wishlist=true] - Hiển thị nút yêu thích
+  @param {string} [lazyload='lazy'] - Loading strategy: lazy hoặc eager
+  @param {string} [fetchpriority='auto'] - Fetch priority: auto hoặc high
+  @param {string} [image_ratio='portrait'] - Tỷ lệ ảnh: adapt, portrait, square, landscape
+  @param {boolean} [show_compare=false] - Hiển thị checkbox so sánh sản phẩm
+  @example {% render 'product-card', product: product, show_vendor: true %}
+{% enddoc %}
+
+{%- liquid
+  comment
+    Boolean defaults: dùng nil check thay vì | default: true
+    vì | default: true sẽ override giá trị false
+  endcomment
+
+  if show_vendor == nil
+    assign show_vendor = false
+  endif
+  if show_secondary_image == nil
+    assign show_secondary_image = true
+  endif
+  if show_quickview == nil
+    assign show_quickview = true
+  endif
+  if show_add_to_cart == nil
+    assign show_add_to_cart = true
+  endif
+  if show_wishlist == nil
+    assign show_wishlist = true
+  endif
+
+  assign lazyload = lazyload | default: 'lazy'
+  assign fetchpriority = fetchpriority | default: 'auto'
+  assign image_ratio = image_ratio | default: 'portrait'
+
+  assign variant = product.selected_or_first_available_variant
+  assign price = variant.price
+  assign compare = variant.compare_at_price
+  assign discount_percentage = 0
+  if compare > price and compare > 0
+    assign discount = compare | minus: price
+    assign discount_percentage = discount | times: 100 | divided_by: compare | round
+  endif
+
+  assign t_view_product = 'products.product_card.view_product' | t
+  assign t_quick_view = 'products.product_card.quick_view' | t
+  assign t_add_to_cart = 'products.product_card.add_to_cart' | t
+  assign t_add_wishlist = 'products.product_card.add_to_wishlist' | t
+  assign t_sold_out = 'products.product_card.sold_out' | t
+  assign t_contact = 'products.product_card.contact_price' | t
+-%}
+
 {%- if product and product != empty -%}
+{{ 'product-card.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-card.js' | asset_url }}" defer="defer"></script>
 <product-card class="product-card">
   <article class="product-card__wrapper">
+    {%- comment -%} ── Compare checkbox ───────────── {%- endcomment -%}
+    {%- if show_compare -%}
+    <label class="product-card__compare">
+      <input
+        type="checkbox"
+        class="product-card__compare-input"
+        data-compare-id="{{ product.id }}"
+        data-compare-title="{{ product.title | escape }}"
+        data-compare-image="{{ product.featured_image | image_url: width: 200 }}"
+        data-compare-price="{{ variant.price | money }}"
+        data-compare-url="{{ product.url }}"
+        aria-label="{{ 'products.facets.compare' | t }} {{ product.title | escape }}"
+      >
+    </label>
+    {%- endif -%}
+    {%- comment -%} ── Media ─────────────────────── {%- endcomment -%}
     <div class="product-card__media">
-      <a class="product-card__media-inner" href="{{ product.url }}" aria-label="Xem {{ product.title | escape }}" title="{{ product.title | escape }}">
+      <a class="product-card__media-inner" href="{{ product.url }}" aria-label="{{ t_view_product }} {{ product.title | escape }}" title="{{ product.title | escape }}">
         {%- if product.featured_image -%}
-        <div class="product-card__media-image">
-          {%- assign featured_image = product.featured_image.src -%}
-          <picture>
-            <source media="(max-width: 640px)" srcset="{{ featured_image | image_url: width: 600 }}">
-            <source media="(max-width: 1024px)" srcset="{{ featured_image | image_url: width: 1024 }}">
-            <img src="{{ featured_image | image_url: width: 600 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="400" height="600" loading="{{ lazyload | default: 'lazy' }}" decoding="async" class="product-card__img-primary">
-          </picture>
-          {%- if product.images[1] -%}
-          {%- assign second_image = product.images[1].src -%}
-          <picture>
-            <source media="(max-width: 640px)" srcset="{{ second_image | image_url: width: 600 }}">
-            <source media="(max-width: 1024px)" srcset="{{ second_image | image_url: width: 1024 }}">
-            <img src="{{ second_image | image_url: width: 600 }}" alt="{{ product.images[1].alt | default: product.title | escape }}" width="400" height="600" loading="lazy" decoding="async" class="product-card__img-secondary">
-          </picture>
-          {%- endif -%}
-        </div>
+          <div class="product-card__media-image image-ratio--{{ image_ratio }}">
+            {%- assign primary_image_alt = product.featured_image.alt | default: product.title | escape -%}
+            {{
+              product.featured_image
+              | image_url: width: 800
+              | image_tag:
+                widths: '300, 400, 600, 800',
+                sizes: '(max-width: 749px) 50vw, 25vw',
+                alt: primary_image_alt,
+                loading: lazyload,
+                fetchpriority: fetchpriority,
+                decoding: 'async',
+                class: 'product-card__img-primary'
+            }}
+
+            {%- if show_secondary_image and product.images[1] -%}
+              {%- assign secondary_alt = product.images[1].alt | default: product.title | escape -%}
+              {{
+                product.images[1]
+                | image_url: width: 800
+                | image_tag:
+                  widths: '300, 400, 600, 800',
+                  sizes: '(max-width: 749px) 50vw, 25vw',
+                  alt: secondary_alt,
+                  loading: 'lazy',
+                  decoding: 'async',
+                  class: 'product-card__img-secondary'
+              }}
+            {%- endif -%}
+          </div>
+        {%- else -%}
+          {%- comment -%} Placeholder khi product không có ảnh {%- endcomment -%}
+          <div class="product-card__media-image image-ratio--{{ image_ratio }}">
+            <div class="product-card__media-placeholder">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3.75 21h16.5A1.5 1.5 0 0 0 21.75 19.5V4.5A1.5 1.5 0 0 0 20.25 3H3.75A1.5 1.5 0 0 0 2.25 4.5v15A1.5 1.5 0 0 0 3.75 21Z" />
+              </svg>
+            </div>
+          </div>
         {%- endif -%}
-        {%- unless product.available -%}<div class="product-card__badge">{{ settings.product_soldout_text | default: 'Hết hàng' }}</div>{%- endunless -%}
-        {%- if discount_percentage > 0 -%}<div class="product-card__badge product-card__badge--discount">-{{ discount_percentage }}%</div>{%- endif -%}
+
+        {%- comment -%} Badges {%- endcomment -%}
+        {%- unless product.available -%}
+          <div class="product-card__badge product-card__badge--soldout">{{ t_sold_out }}</div>
+        {%- endunless -%}
+        {%- if discount_percentage > 0 and product.available -%}
+          <div class="product-card__badge product-card__badge--discount">-{{ discount_percentage }}%</div>
+        {%- endif -%}
       </a>
-      <button type="button" class="product-card__quickview" data-action="open-quickview" data-product-handle="{{ product.handle }}" aria-label="Xem nhanh {{ product.title | escape }}" title="Xem nhanh">{%- render 'icon', name: 'eye-show'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}</button>
-      <form class="product-card__add-form" action="/cart/add" method="POST">
-        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-        <input type="hidden" name="quantity" value="1">
-        <button type="submit" class="product-card__add-btn" aria-label="Thêm {{ product.title | escape }} vào giỏ hàng" title="Thêm vào giỏ" {%- unless product.available -%}disabled{%- endunless -%}>{%- render 'icon', name: 'cart'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}</button>
-      </form>
-      <button type="button" class="product-card__wishlist" data-action="add-wishlist" data-product-id="{{ product.id }}" data-product-handle="{{ product.handle }}" aria-label="Thêm {{ product.title | escape }} vào yêu thích" title="Thêm vào yêu thích">{%- render 'icon', name: 'heart'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}</button>
+
+      {%- comment -%} Quick actions {%- endcomment -%}
+      {%- if show_quickview -%}
+        <button type="button" class="product-card__quickview" data-action="open-quickview" data-product-handle="{{ product.handle }}" aria-label="{{ t_quick_view }} {{ product.title | escape }}" title="{{ t_quick_view }}">
+          {%- render 'icon', name: 'eye-show' -%}
+        </button>
+      {%- endif -%}
+
+      {%- if show_add_to_cart -%}
+        <form class="product-card__add-form" action="{{ routes.cart_add_url }}" method="POST">
+          <input type="hidden" name="id" value="{{ variant.id }}">
+          <input type="hidden" name="quantity" value="1">
+          <button type="submit" class="product-card__add-btn" aria-label="{{ t_add_to_cart }} {{ product.title | escape }}" title="{{ t_add_to_cart }}" {%- unless product.available -%}disabled{%- endunless -%}>
+            {%- render 'icon', name: 'cart' -%}
+          </button>
+        </form>
+      {%- endif -%}
+
+      {%- if show_wishlist -%}
+        <button type="button" class="product-card__wishlist" data-action="add-wishlist" data-product-id="{{ product.id }}" data-product-handle="{{ product.handle }}" aria-label="{{ t_add_wishlist }} {{ product.title | escape }}" title="{{ t_add_wishlist }}">
+          {%- render 'icon', name: 'heart' -%}
+        </button>
+      {%- endif -%}
     </div>
+
+    {%- comment -%} ── Content ────────────────────── {%- endcomment -%}
     <div class="product-card__content">
-      {%- if show_vendor -%}<div class="product-card__vendor"><span>{%- if product.vendor != blank -%}{{ product.vendor | escape }}{%- else -%}{{ shop.name | escape }}{%- endif -%}</span></div>{%- endif -%}
-      <h3 class="product-card__title"><a href="{{ product.url }}" title="{{ product.title | escape }}">{{ product.title | escape }}</a></h3>
+      {%- if show_vendor and product.vendor != blank -%}
+        <div class="product-card__vendor">{{ product.vendor | escape }}</div>
+      {%- endif -%}
+
+      <h3 class="product-card__title">
+        <a href="{{ product.url }}" title="{{ product.title | escape }}">{{ product.title | escape }}</a>
+      </h3>
+
       <div class="product-card__price">
         {%- if price == 0 -%}
-        <span class="product-card__price-contact">{{ settings.product_contact_text | default: 'Liên hệ' }}</span>
+          <span class="product-card__price-contact">{{ t_contact }}</span>
         {%- else -%}
-        {%- if compare > price -%}<del class="product-card__price-compare">{{ compare | money }}</del>{%- endif -%}
-        <span class="product-card__price-sale">{{ price | money }}</span>
+          {%- if compare > price -%}
+            <del class="product-card__price-compare">{{ compare | money }}</del>
+          {%- endif -%}
+          <span class="product-card__price-sale{% if compare > price %} product-card__price-sale--on-sale{% endif %}">
+            {{ price | money }}
+          </span>
         {%- endif -%}
       </div>
     </div>

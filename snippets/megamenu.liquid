@@ -1,5 +1,7 @@
-<mega-menu class="megamenu" role="navigation" aria-label="{{ 'accessibility.navigation' | t | default: 'Main navigation' }}">
-  <button type="button" class="megamenu__arrow megamenu__arrow--left" aria-label="{{ 'accessibility.scroll_left' | t | default: 'Scroll left' }}" hidden>
+{{ 'megamenu.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'megamenu.js' | asset_url }}" defer="defer"></script>
+<mega-menu class="megamenu" role="navigation" aria-label="{{ 'accessibility.navigation' | t }}">
+  <button type="button" class="megamenu__arrow megamenu__arrow--left" aria-label="{{ 'accessibility.scroll_left' | t }}" hidden>
     {%- render 'icon', name: 'chevron-left' -%}
   </button>
   <div class="megamenu__container">
@@ -55,7 +57,7 @@
                     {%- if settings[mega_image_title] != blank -%}
                     <div class="megamenu__featured-content">
                       <h4 class="megamenu__featured-title">{{ settings[mega_image_title] }}</h4>
-                      <span class="megamenu__featured-cta">{{ 'general.view_all' | t | default: 'View now' }}</span>
+                      <span class="megamenu__featured-cta">{{ 'general.view_all' | t }}</span>
                     </div>
                     {%- endif -%}
                   </a>
@@ -100,13 +102,13 @@
         {%- endfor -%}
         {%- else -%}
         <li class="megamenu__item" role="none">
-          <span class="megamenu__trigger megamenu__trigger--text">{{ 'general.updating' | t | default: 'Updating...' }}</span>
+          <span class="megamenu__trigger megamenu__trigger--text">{{ 'general.updating' | t }}</span>
         </li>
         {%- endif -%}
       </ul>
     </nav>
   </div>
-  <button type="button" class="megamenu__arrow megamenu__arrow--right" aria-label="{{ 'accessibility.scroll_right' | t | default: 'Scroll right' }}" hidden>
+  <button type="button" class="megamenu__arrow megamenu__arrow--right" aria-label="{{ 'accessibility.scroll_right' | t }}" hidden>
     {%- render 'icon', name: 'chevron-right' -%}
   </button>
   <div class="megamenu__overlay" aria-hidden="true"></div>

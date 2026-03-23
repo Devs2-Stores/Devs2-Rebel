@@ -1,34 +1,39 @@
+{{- 'newsletter-modal.css' | asset_url | stylesheet_tag -}}
+<script src="{{ 'newsletter-modal.js' | asset_url }}" defer="defer"></script>
 <newsletter-modal>
   <div id="newsletter-popup" role="dialog" aria-modal="true" aria-labelledby="newsletter-popup-title">
     <div class="newsletter-popup-wrapper">
+      {%- if settings.newsletter_modal_image != blank -%}
       <div class="newsletter-popup-banner">
-        <img src="{{ 'newsletter_modal_image.png' | image_url: width: 600 | asset_url }}" alt="{{ settings.newsletter_modal_heading | default: 'Đăng ký nhận tin' | escape }}" width="900" height="1400" loading="lazy" decoding="async">
+        {%- assign newsletter_alt = settings.newsletter_modal_heading | default: 'Newsletter' | escape -%}
+        {{ settings.newsletter_modal_image | image_url: width: 600 | image_tag:
+          alt: newsletter_alt,
+          width: 900, height: 1400,
+          loading: 'lazy', decoding: 'async'
+        }}
       </div>
+      {%- endif -%}
       <div class="newsletter-popup-content">
-        <button type="button" data-action="close-newsletter-popup" class="newsletter-popup-close" aria-label="Đóng">
-          <i class="icon">{%- render 'icon', name: 'close'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}</i>
+        <button type="button" data-action="close-newsletter-popup" class="newsletter-popup-close" aria-label="{{ 'accessibility.close' | t }}">
+          {%- render 'icon', name: 'close' -%}
         </button>
 
-        <h2 class="global-heading" id="newsletter-popup-title">{{ settings.newsletter_modal_heading | default: 'Đăng ký nhận tin' }}</h2>
-        <p class="global-content">{{ settings.newsletter_modal_description | default: 'Nhận ưu đãi và thông tin mới nhất từ chúng tôi.' }}</p>
-        {%- capture noCaptcha -%}
+        <h2 class="global-heading" id="newsletter-popup-title">{% if settings.newsletter_modal_heading != blank %}{{ settings.newsletter_modal_heading }}{% else %}{{ 'newsletter.button_label' | t }}{% endif %}</h2>
+        <p class="global-content">{{ settings.newsletter_modal_description }}</p>
         {%- form 'customer' -%}
         <input type="hidden" name="contact[tags]" value="newsletter">
-        <input type="hidden" name="contact[first_name]" value="Người đăng ký">
+        <input type="hidden" name="contact[first_name]" value="Subscriber">
         <input type="hidden" name="contact[last_name]" value="">
         <div class="form-group">
           <label>
-            <span class="visually-hidden">Email</span>
-            <input class="form-control" title="Địa chỉ Email" type="email" placeholder="Nhập email ưu đãi" name="contact[email]" required autocomplete="email">
+            <span class="visually-hidden">{{ 'newsletter.label' | t }}</span>
+            <input class="form-control" title="{{ 'newsletter.label' | t }}" type="email" placeholder="{% if settings.newsletter_modal_placeholder != blank %}{{ settings.newsletter_modal_placeholder }}{% else %}{{ 'newsletter.label' | t }}{% endif %}" name="contact[email]" required autocomplete="email">
           </label>
         </div>
         <div class="form-group">
-          <button class="button-primary" type="submit" title="Đăng ký nhận tin">Đăng ký</button>
+          <button class="button-primary" type="submit" title="{{ 'newsletter.button_label' | t }}">{% if settings.newsletter_modal_button != blank %}{{ settings.newsletter_modal_button }}{% else %}{{ 'newsletter.button_label' | t }}{% endif %}</button>
         </div>
         {%- endform -%}
-        {%- endcapture -%}
-        {{ noCaptcha | replace: 'script', 'noscript' }}
-        <p class="newsletter-popup-privacy">Bằng cách đăng ký, bạn đồng ý nhận email marketing và chấp nhận <a href="/pages/chinh-sach-bao-mat" title="Chính sách bảo mật">Chính sách bảo mật</a> của chúng tôi.</p>
       </div>
     </div>
   </div>

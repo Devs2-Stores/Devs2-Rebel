@@ -1,6 +1,8 @@
 {%- if settings.float_social_enable -%}
+{{ 'float-social.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'float-social.js' | asset_url }}" defer="defer"></script>
 <float-social class="float-social" data-position="{{ settings.float_social_position | default: 'right' }}">
-  <button type="button" class="float-social__toggle" aria-label="Liên hệ" aria-expanded="false">
+  <button type="button" class="float-social__toggle" aria-label="{{ 'general.social.contact' | t }}" aria-expanded="false">
     <span class="float-social__toggle-icon">
       <svg class="icon" width="24" height="24"><use href="#icon-comments" /></svg>
     </span>
@@ -12,8 +14,8 @@
 
   <div class="float-social__panel" aria-hidden="true">
     <div class="float-social__header">
-      <p class="float-social__title">{{ settings.float_social_title | default: 'Liên hệ với chúng tôi' }}</p>
-      <p class="float-social__subtitle">{{ settings.float_social_subtitle | default: 'Chọn kênh liên hệ bạn muốn' }}</p>
+      <p class="float-social__title">{{ settings.float_social_title | default: 'Contact us' }}</p>
+      <p class="float-social__subtitle">{{ settings.float_social_subtitle | default: 'Choose a contact channel' }}</p>
     </div>
     <ul class="float-social__list">
       {%- if settings.float_hotline_enable -%}
@@ -126,11 +128,11 @@
 
       {%- if settings.float_map_enable -%}
       <li class="float-social__item" style="--item-index: 9;">
-        <a href="{{ settings.float_map_link }}" class="float-social__link float-social__link--map" title="Bản đồ" target="_blank" rel="noopener noreferrer">
+        <a href="{{ settings.float_map_link }}" class="float-social__link float-social__link--map" title="{{ 'general.social.map' | t }}" target="_blank" rel="noopener noreferrer">
           <span class="float-social__icon">
-            <img src="{{ 'float_map_image.png' | image_url: width: 160 | asset_url }}" alt="Bản đồ" width="28" height="28" loading="lazy">
+            <img src="{{ 'float_map_image.png' | image_url: width: 160 | asset_url }}" alt="{{ 'general.social.map' | t }}" width="28" height="28" loading="lazy">
           </span>
-          <span class="float-social__text">{{ settings.float_map_text | default: 'Bản đồ' }}</span>
+          <span class="float-social__text">{{ settings.float_map_text | default: 'Map' }}</span>
           <span class="float-social__arrow"><svg class="icon" width="14" height="14"><use href="#icon-chevron-right" /></svg></span>
         </a>
       </li>

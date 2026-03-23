@@ -47,18 +47,18 @@ class ContactPage extends HTMLElement {
 
     if (field.hasAttribute('required') && !field.value.trim()) {
       isValid = false;
-      errorMessage = 'Trường này là bắt buộc';
+      errorMessage = 'This field is required';
     } else if (field.type === 'email' && field.value.trim()) {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(field.value)) {
         isValid = false;
-        errorMessage = 'Email không hợp lệ';
+        errorMessage = 'Invalid email';
       }
     } else if (field.type === 'tel' && field.value.trim()) {
       const phoneRegex = /^[\d\s\-\+\(\)]{10,}$/;
       if (!phoneRegex.test(field.value)) {
         isValid = false;
-        errorMessage = 'Số điện thoại không hợp lệ';
+        errorMessage = 'Invalid phone number';
       }
     }
 
@@ -134,14 +134,14 @@ class ContactPage extends HTMLElement {
       this.submitButton.classList.add('loading');
       const textElement = this.submitButton.querySelector('.contact-form__submit-text');
       if (textElement) {
-        textElement.textContent = 'Đang gửi...';
+        textElement.textContent = 'Sending...';
       }
     } else {
       this.submitButton.disabled = false;
       this.submitButton.classList.remove('loading');
       const textElement = this.submitButton.querySelector('.contact-form__submit-text');
       if (textElement) {
-        textElement.textContent = 'Gửi tin nhắn';
+        textElement.textContent = 'Send message';
       }
     }
   }

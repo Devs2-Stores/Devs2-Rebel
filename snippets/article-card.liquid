@@ -1,0 +1,155 @@
+{%- comment -%}
+  Renders an article card.
+
+  Accepts:
+  - article: {Object} Article Liquid object (required)
+  - layout: {String} "grid" or "list" (default: "grid")
+  - lazyload: {String} "lazy" or "eager" (default: "lazy")
+  - fetchpriority: {String} "high", "low", "auto" (default: "auto")
+  - image_shape: {String} "landscape", "portrait", "square", "wide", "auto" (default: "landscape")
+  - image_alignment: {String} Image object-position: "top", "center", "bottom" (default: "center")
+  - show_author: {Boolean} Show author (default: true)
+  - show_date: {Boolean} Show date (default: true)
+  - show_excerpt: {Boolean} Show excerpt (default: true)
+  - show_read_more: {Boolean} Show read more button (default: true)
+  - show_comment_count: {Boolean} Show comment count (default: false)
+  - show_tags: {Boolean} Show article tags (default: false)
+  - show_category: {Boolean} Show blog name as category (default: false)
+{%- endcomment -%}
+
+{%- liquid
+  assign layout = layout | default: 'grid'
+  assign lazyload = lazyload | default: 'lazy'
+  assign fetchpriority = fetchpriority | default: 'auto'
+  assign image_shape = image_shape | default: 'landscape'
+  assign image_alignment = image_alignment | default: 'center'
+  assign show_date = show_date | default: true, allow_false: true
+  assign show_author = show_author | default: true, allow_false: true
+  assign show_excerpt = show_excerpt | default: true, allow_false: true
+  assign show_read_more = show_read_more | default: true, allow_false: true
+  assign show_comment_count = show_comment_count | default: false, allow_false: true
+  assign show_tags = show_tags | default: false, allow_false: true
+  assign show_category = show_category | default: false, allow_false: true
+
+  assign card_class = 'article-card'
+  if layout == 'list'
+    assign card_class = card_class | append: ' article-card--list'
+  endif
+  assign card_class = card_class | append: ' article-card--shape-' | append: image_shape
+  assign card_class = card_class | append: ' article-card--pos-' | append: image_alignment
+-%}
+
+<article class="{{ card_class }}" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-card__media">
+    <a href="{{ article.url }}" class="article-card__media-inner" title="{{ article.title | escape }}">
+      {%- if article.image -%}
+        {%- assign card_alt = article.image.alt | default: article.title | escape -%}
+        {{-
+          article.image
+          | image_url: width: 720
+          | image_tag:
+            class: 'article-card__media-image',
+            widths: '360,540,720,1080',
+            sizes: '(max-width: 575px) calc(100vw - 2rem), (max-width: 1199px) calc(50vw - 2rem), calc(33vw - 2rem)',
+            alt: card_alt,
+            loading: lazyload,
+            fetchpriority: fetchpriority
+        -}}
+      {%- else -%}
+        <img
+          class="article-card__media-image"
+          src="{{ 'no_image.png' | asset_url }}"
+          alt="{{ article.title | escape }}"
+          loading="{{ lazyload }}"
+          width="720"
+          height="480"
+        >
+      {%- endif -%}
+    </a>
+  </div>
+
+  <div class="article-card__content">
+    {%- if show_category -%}
+      <div class="article-card__category">
+        <a href="{{ blog.url }}" class="article-card__category-link">
+          {{ blog.title }}
+        </a>
+      </div>
+    {%- endif -%}
+
+    <h3 class="article-card__title" itemprop="headline">
+      <a href="{{ article.url }}" title="{{ article.title | escape }}">{{ article.title }}</a>
+    </h3>
+
+    {%- if show_date or show_author or show_comment_count -%}
+      <div class="article-card__meta">
+        {%- if show_date -%}
+          <span
+            class="article-card__date"
+            itemprop="datePublished"
+            content="{{ article.published_at | date: '%Y-%m-%d' }}"
+          >
+            {%- render 'icon', name: 'calendar' -%}
+            <time datetime="{{ article.published_at | date: '%Y-%m-%dT%H:%M' }}">
+              {{- article.published_at | date: '%B %d, %Y' -}}
+            </time>
+          </span>
+        {%- endif -%}
+        {%- if show_author -%}
+          <span class="article-card__author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+            {%- render 'icon', name: 'user' -%}
+            <span class="article-card__author-name" itemprop="name">{{ article.author }}</span>
+          </span>
+        {%- endif -%}
+        {%- if show_comment_count and article.comments_count > 0 -%}
+          <span class="article-card__comments">
+            {%- render 'icon', name: 'chat' -%}
+            <span>{{ article.comments_count }}</span>
+          </span>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if show_excerpt -%}
+      <div class="article-card__description" itemprop="description">
+        {%- if article.excerpt_or_content != blank -%}
+          {{ article.excerpt_or_content | strip_html | truncatewords: 25 }}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if show_tags and article.tags.size > 0 -%}
+      <div class="article-card__tags">
+        {%- for tag in article.tags limit: 3 -%}
+          <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="article-card__tag">{{ tag }}</a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if show_read_more -%}
+      <div class="article-card__button">
+        <a
+          href="{{ article.url }}"
+          class="article-card__read-more"
+          title="{{ 'blogs.article.read_more_title' | t: title: article.title }}"
+        >
+          {{ 'blogs.article.read_more_title' | t: title: '' | strip }}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</article>

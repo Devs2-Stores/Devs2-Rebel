@@ -1,29 +1,29 @@
 <cart-total class="cart-total">
-  <h4 class="cart-total__title">Tóm tắt đơn hàng</h4>
+  <h4 class="cart-total__title">{{ 'sections.cart.order_summary' | t }}</h4>
   <ul class="cart-total__list">
     <li>
-      <span>Số sản phẩm:</span>
-      <strong><span class="cart-count">{{ cart.item_count }}</span> sản phẩm</strong>
+      <span>{{ 'sections.cart.item_count' | t }}:</span>
+      <strong><span class="cart-count">{{ cart.item_count }}</span> {{ 'sections.cart.caption' | t }}</strong>
     </li>
     <li>
-      <span>Tạm tính:</span>
-      <strong class="cart-price">{%- if cart.total_price == 0 -%}Liên hệ{%- else -%}{{ cart.total_price | money }}{%- endif -%}</strong>
+      <span>{{ 'sections.cart.subtotal' | t }}:</span>
+      <strong class="cart-price">{%- if cart.total_price == 0 -%}{{ 'products.product.price.contact' | t }}{%- else -%}{{ cart.total_price | money }}{%- endif -%}</strong>
     </li>
     {%- if cart.total_discount > 0 -%}
     <li class="cart-total__discount">
-      <span>Giảm giá:</span>
+      <span>{{ 'sections.cart.discount' | t }}:</span>
       <strong>-{{ cart.total_discount | money }}</strong>
     </li>
     {%- endif -%}
     <li>
-      <span>Phí vận chuyển:</span>
-      <strong>Được tính ở bước sau</strong>
+      <span>{{ 'sections.cart.shipping' | t }}:</span>
+      <strong>{{ 'sections.cart.shipping_calculated' | t }}</strong>
     </li>
   </ul>
   <div class="cart-total__actions">
     {%- if cart.total_price > 0 -%}
-    <a href="/checkout" class="button-primary active">Thanh toán</a>
+    <a href="{{ routes.cart_url }}/checkout" class="button-primary active">{{ 'sections.cart.checkout' | t }}</a>
     {%- endif -%}
-    <a href="/collections/all" class="button-primary">Tiếp tục mua sắm</a>
+    <a href="{{ routes.all_products_collection_url }}" class="button-primary">{{ 'general.continue_shopping' | t }}</a>
   </div>
 </cart-total>

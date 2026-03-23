@@ -1,10 +1,12 @@
-<mobile-menu class="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu di động">
-  <button type="button" class="mobile-menu__overlay" data-action="close-mobile-menu" aria-label="Đóng menu"></button>
+{{ 'mobile-menu.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'mobile-menu.js' | asset_url }}" defer="defer"></script>
+<mobile-menu class="mobile-menu" role="dialog" aria-modal="true" aria-label="{{ 'accessibility.navigation' | t }}">
+  <button type="button" class="mobile-menu__overlay" data-action="close-mobile-menu" aria-label="{{ 'accessibility.close' | t }}"></button>
   <div class="mobile-menu__drawer">
     <div class="mobile-menu__header">
-      <span class="mobile-menu__title">Menu</span>
-      <button type="button" class="mobile-menu__close" data-action="close-mobile-menu" aria-label="Đóng menu">
-        {%- render 'icon', name: 'close'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
+      <span class="mobile-menu__title">{{ 'accessibility.navigation' | t }}</span>
+      <button type="button" class="mobile-menu__close" data-action="close-mobile-menu" aria-label="{{ 'accessibility.close' | t }}">
+        {%- render 'icon', name: 'close' -%}
       </button>
     </div>
     <div class="mobile-menu__body">
@@ -16,13 +18,13 @@
                 <li class="mobile-menu__item mobile-menu__item--has-children">
                   <button type="button" class="mobile-menu__trigger" aria-expanded="false">
                     <span>{{ link.title }}</span>
-                    {%- render 'icon', name: 'chevron-right'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
+                    {%- render 'icon', name: 'chevron-right' -%}
                   </button>
                   <ul class="mobile-menu__submenu">
                     <li class="mobile-menu__submenu-back">
-                      <button type="button" class="mobile-menu__back-btn" aria-label="Quay lại">
-                        {%- render 'icon', name: 'chevron-left'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
-                        <span>Quay lại</span>
+                      <button type="button" class="mobile-menu__back-btn" aria-label="{{ 'general.breadcrumbs.back' | t }}">
+                        {%- render 'icon', name: 'chevron-left' -%}
+                        <span>{{ 'general.breadcrumbs.back' | t }}</span>
                       </button>
                     </li>
                     <li class="mobile-menu__submenu-title">
@@ -33,13 +35,13 @@
                         <li class="mobile-menu__item mobile-menu__item--has-children">
                           <button type="button" class="mobile-menu__trigger" aria-expanded="false">
                             <span>{{ link_1.title }}</span>
-                            {%- render 'icon', name: 'chevron-right'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
+                            {%- render 'icon', name: 'chevron-right' -%}
                           </button>
                           <ul class="mobile-menu__submenu">
                             <li class="mobile-menu__submenu-back">
-                              <button type="button" class="mobile-menu__back-btn" aria-label="Quay lại">
-                                {%- render 'icon', name: 'chevron-left'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
-                                <span>Quay lại</span>
+                              <button type="button" class="mobile-menu__back-btn" aria-label="{{ 'general.breadcrumbs.back' | t }}">
+                                {%- render 'icon', name: 'chevron-left' -%}
+                                <span>{{ 'general.breadcrumbs.back' | t }}</span>
                               </button>
                             </li>
                             <li class="mobile-menu__submenu-title">
@@ -72,9 +74,9 @@
     </div>
     <div class="mobile-menu__footer">
       <div class="mobile-menu__actions">
-        <a href="/account" class="mobile-menu__action-link">
-          {%- render 'icon', name: 'user'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
-          <span>Tài khoản</span>
+        <a href="{{ routes.account_url }}" class="mobile-menu__action-link">
+          {%- render 'icon', name: 'user' -%}
+          <span>{{ 'customer.account.title' | t }}</span>
         </a>
         {%- if settings.wishlist_enable != false -%}
           {%- assign wishlist_url = '/pages/wishlist' -%}
@@ -82,8 +84,8 @@
             {%- assign wishlist_url = pages[settings.wishlist_page].url -%}
           {%- endif -%}
           <a href="{{ wishlist_url }}" class="mobile-menu__action-link">
-            {%- render 'icon', name: 'heart'$(if(){", class: ''"}else{""})$(if(){", size: ''"}else{""}) -%}
-            <span>Yêu thích</span>
+            {%- render 'icon', name: 'heart' -%}
+            <span>{{ 'general.wishlist.title' | t }}</span>
           </a>
         {%- endif -%}
       </div>

@@ -1,0 +1,17 @@
+.share-buttons { display: flex; align-items: center; gap: 0.5rem; }
+.share-buttons__label { font-size: var(--font-base); font-weight: 600; line-height: 1; }
+@media (max-width: 768px) {
+  .share-buttons__label { font-size: var(--font-sm); }
+}
+.share-buttons__items { display: flex; align-items: center; gap: 1rem; }
+@media (max-width: 768px) {
+  .share-buttons__items { gap: 0.5rem; }
+}
+.share-buttons__item { width: 30px; height: 30px; }
+@media (max-width: 768px) {
+  .share-buttons__item { width: 24px; height: 24px; }
+}
+.share-buttons__item a { display: block; transition: opacity 0.2s; }
+.share-buttons__item a:hover { opacity: 0.7; }
+.share-buttons__icon { display: block; }
+.share-buttons__icon svg { width: 2rem; height: 2rem; }

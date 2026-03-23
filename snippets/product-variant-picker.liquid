@@ -1,7 +1,9 @@
 {%- if product.variants.size > 1 -%}
+{{ 'variant-picker.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'variant-picker.js' | asset_url }}" defer="defer"></script>
 {%- assign options = product.options -%}
 {%- assign size_guide_shown = false -%}
-<product-variant-picker class="variant-picker-wrapper">
+<product-variant-picker class="variant-picker-wrapper"{% if cross_out_unavailable %} data-cross-out-unavailable{% endif %}>
   <script type="application/json" id="main-product-json">{{ product | json }}</script>
   {%- for option in options -%}
   {%- assign option_slug = option | handleize -%}
@@ -11,12 +13,20 @@
     <div class="variant-picker__label">
       {{ option }}:
       {%- if option_slug == "mau-sac" or option_slug == "color" -%}<span class="variant-picker__selected-value" data-selected-value></span>{%- endif -%}
-      {%- assign option_lower = option | downcase -%}
-      {%- if settings.product_size_guide_enable and size_guide_shown == false and (option_lower contains 'size' or option_lower contains 'kích') -%}
+      {%- liquid
+        assign option_lower = option | downcase
+        assign is_size_option = false
+        if option_lower contains 'size'
+          assign is_size_option = true
+        elsif option_lower contains 'kích'
+          assign is_size_option = true
+        endif
+      -%}
+      {%- if settings.product_size_guide_enable and size_guide_shown == false and is_size_option -%}
       {%- assign size_guide_shown = true -%}
       <button type="button" class="variant-picker__size-guide-btn" data-size-guide-trigger>
-        {%- render 'icon', name: 'grid'$(if(){", class: ''"}else{""})$(if(16){", size: '16'"}else{""}) -%}
-        <span>{{ settings.product_size_guide_button | default: "Hướng dẫn chọn size" }}</span>
+        {%- render 'icon', name: 'grid' -%}
+        <span>{{ settings.product_size_guide_button | default: 'products.product.size_guide' | t }}</span>
       </button>
       {%- endif -%}
     </div>

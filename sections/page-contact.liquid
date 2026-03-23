@@ -1,9 +1,11 @@
 
+{{- 'page-contact.css' | asset_url | stylesheet_tag -}}
+<script src="{{ 'page-contact.js' | asset_url }}" defer="defer"></script>
 <contact-page class="page-contact">
   <section class="contact-hero">
     <div class="page-width">
       <div class="contact-hero__wrap">
-        <h1 class="contact-hero__title">{{ section.settings.title | default: 'templates.contact.form.title' | t }}</h1>
+        <h1 class="contact-hero__title">{% if section.settings.title != blank %}{{ section.settings.title }}{% else %}{{ 'templates.contact.form.title' | t }}{% endif %}</h1>
         {%- if section.settings.description != blank -%}
         <p class="contact-hero__description">{{ section.settings.description }}</p>
         {%- endif -%}

@@ -11,15 +11,17 @@ Accepts:
 {%- assign min = min | default: 1 -%}
 {%- assign step = step | default: 1 -%}
 {%- assign input_id = 'quantity-' | append: variant.id -%}
+{{ 'quantity-selector.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'quantity-selector.js' | asset_url }}" defer="defer"></script>
 <quantity-selector class="quantity-selector">
-	<button class="quantity-selector__button quantity-selector__decrease" type="button" data-action="decrease" aria-label="Giảm số lượng" aria-controls="{{ input_id }}">
-		<span class="sr-only">Giảm số lượng {{ product.title | escape }}</span>
-		{%- render 'icon', name: 'minus'$(if(){", class: ''"}else{""})$(if(16){", size: '16'"}else{""}) -%}
+	<button class="quantity-selector__button quantity-selector__decrease" type="button" data-action="decrease" aria-label="{{ 'products.product.quantity.decrease' | t }}" aria-controls="{{ input_id }}">
+		<span class="sr-only">{{ 'products.product.quantity.decrease' | t }} {{ product.title | escape }}</span>
+		{%- render 'icon', name: 'minus', size: '16' -%}
 	</button>
 	<input class="quantity-selector__input"
 		   id="{{ input_id }}"
 		   type="number"
-		   aria-label="Số lượng {{ product.title | escape }}"
+		   aria-label="{{ 'products.product.quantity.input_label' | t: title: product.title }}"
 		   {%- if form != blank %} form="{{ form }}"{% endif %}
 		   data-product-id="{{ product.id }}"
 		   data-variant-id="{{ variant.id }}"
@@ -31,8 +33,8 @@ Accepts:
 		   autocomplete="off"
 		   inputmode="numeric"
 		   required>
-	<button class="quantity-selector__button quantity-selector__increase" type="button" data-action="increase" aria-label="Tăng số lượng" aria-controls="{{ input_id }}">
-		<span class="sr-only">Tăng số lượng {{ product.title | escape }}</span>
-		{%- render 'icon', name: 'plus'$(if(){", class: ''"}else{""})$(if(16){", size: '16'"}else{""}) -%}
+	<button class="quantity-selector__button quantity-selector__increase" type="button" data-action="increase" aria-label="{{ 'products.product.quantity.increase' | t }}" aria-controls="{{ input_id }}">
+		<span class="sr-only">{{ 'products.product.quantity.increase' | t }} {{ product.title | escape }}</span>
+		{%- render 'icon', name: 'plus', size: '16' -%}
 	</button>
 </quantity-selector>
