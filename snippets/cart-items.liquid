@@ -21,13 +21,26 @@
       </a>
       <div class="cart-item__info">
         <div>
-          <a href="{{ item.product.url }}" class="cart-item__title">{{ item.product.title }}</a>
+          <a href="{{ item.product.url }}" class="cart-item__title">{{ item.product.title | escape }}</a>
           {%- if item.variant.title != 'Default Title' -%}
           <ul class="cart-item__variants">
             {%- for option in item.product.options -%}
             <li>{{ option }}: {{ item.variant.options[forloop.index0] }}</li>
             {%- endfor -%}
           </ul>
+          {%- endif -%}
+          {%- if item.selling_plan_allocation -%}
+            <p class="cart-item__selling-plan">{{ item.selling_plan_allocation.selling_plan.name }}</p>
+          {%- endif -%}
+          {%- if item.line_level_discount_allocations != blank -%}
+            <ul class="cart-item__discounts" role="list">
+              {%- for discount_allocation in item.line_level_discount_allocations -%}
+                <li class="cart-item__discount">
+                  <svg aria-hidden="true" focusable="false" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.5 1.5h3.75l5.25 5.25-3.75 3.75L1.5 5.25V1.5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><circle cx="4.125" cy="3.875" r=".375" fill="currentColor"/></svg>
+                  {{ discount_allocation.discount_application.title }} (-{{ discount_allocation.amount | money }})
+                </li>
+              {%- endfor -%}
+            </ul>
           {%- endif -%}
           <div class="cart-item__price-mobile">
             {%- if item.price == 0 -%}
@@ -37,6 +50,12 @@
             {%- if item.variant.compare_at_price > item.price -%}
             <del class="cart-item__compare-price">{{ item.variant.compare_at_price | money }}</del>
             {%- endif -%}
+            {%- endif -%}
+            {%- if item.unit_price -%}
+              <span class="cart-item__unit-price">
+                <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+                {{ item.unit_price | money }}/{{ item.unit_price_measurement.reference_value }}{{ item.unit_price_measurement.reference_unit }}
+              </span>
             {%- endif -%}
           </div>
         </div>
@@ -57,6 +76,12 @@
           {%- if item.variant.compare_at_price > item.price -%}
           <del class="cart-item__compare-price">{{ item.variant.compare_at_price | money }}</del>
           {%- endif -%}
+          {%- endif -%}
+          {%- if item.unit_price -%}
+            <span class="cart-item__unit-price">
+              <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+              {{ item.unit_price | money }}/{{ item.unit_price_measurement.reference_value }}{{ item.unit_price_measurement.reference_unit }}
+            </span>
           {%- endif -%}
         </span>
         <button type="button" data-action="delete-item" title="{{ 'sections.cart.remove_title' | t: title: item.product.title }}" class="cart-item__delete" aria-label="{{ 'sections.cart.remove_title' | t: title: item.product.title }}">{{ 'sections.cart.remove' | t }}</button>

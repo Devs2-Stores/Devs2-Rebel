@@ -16,7 +16,7 @@
     {%- render 'icons-sprite' -%}
 
     {%- sections 'header-group' -%}
-    <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+    <main id="MainContent" class="content-for-layout focus-none" tabindex="-1">
       {{ content_for_layout }}
     </main>
     {%- sections 'footer-group' -%}
@@ -27,13 +27,14 @@
     {%- render 'quickview-modal' -%}
     {%- render 'mobile-menu' -%}
     {%- render 'float-social' -%}
-    {{ 'toast.css' | asset_url | stylesheet_tag }}
-    <script src="{{ 'toast.js' | asset_url }}" defer="defer"></script>
     <div class="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
     <div class="overlay"></div>
-    {{ 'back-to-top.css' | asset_url | stylesheet_tag }}
-    <script src="{{ 'back-to-top.js' | asset_url }}" defer="defer"></script>
-    <button type="button" class="back-to-top" id="backToTop" aria-label="{{ 'accessibility.back_to_top' | t }}" aria-hidden="true">
+    <button
+      type="button"
+      class="back-to-top"
+      id="backToTop"
+      aria-label="{{ 'accessibility.back_to_top' | t }}"
+    >
       <svg class="icon" width="18" height="18">
         <use href="#icon-chevron-right" />
       </svg>

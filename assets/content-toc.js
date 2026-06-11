@@ -165,7 +165,7 @@
       });
     }
   }
-  customElements.define('content-toc', ContentToc);
+  if (!customElements.get('content-toc')) customElements.define('content-toc', ContentToc);
 
   /* -------------------------------------------------------------------------- */
   /*                                TOC FLOATING                                */
@@ -287,5 +287,5 @@
       ThemeUtils.unlockScroll();
     }
   }
-  customElements.define('toc-floating', TocFloating);
+  if (!customElements.get('toc-floating')) customElements.define('toc-floating', TocFloating);
 })();

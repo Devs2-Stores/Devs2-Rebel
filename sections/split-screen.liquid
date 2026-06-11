@@ -1,0 +1,289 @@
+{%- comment -%}
+  Section: Split Screen Hero
+  Mô tả: 2 panel full-height cạnh nhau, hover phóng to panel.
+{%- endcomment -%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-split color-{{ section.settings.color_scheme }}"
+  style="--split-h: {{ section.settings.section_height }}vh;"
+>
+  {%- for block in section.blocks -%}
+    <div class="section-split__panel" {{ block.shopify_attributes }}>
+      <div class="section-split__media">
+        {%- if block.settings.image != blank -%}
+          {{ block.settings.image | image_url: width: 1200 | image_tag:
+            widths: '600, 900, 1200', sizes: '50vw',
+            loading: 'lazy', class: 'section-split__img'
+          }}
+        {%- else -%}
+          <div class="section-split__ph" style="background: {% cycle '#1a1a2e', '#16213e' %};"></div>
+        {%- endif -%}
+        <div class="section-split__overlay" style="--split-overlay: {{ block.settings.overlay_opacity | divided_by: 100.0 }};"></div>
+      </div>
+      <div class="section-split__content section-split__content--{{ block.settings.text_align }}">
+        {%- if block.settings.subheading != blank -%}
+          <p class="section-split__subheading subheading-size-sm">{{ block.settings.subheading }}</p>
+        {%- endif -%}
+        {%- if block.settings.heading != blank -%}
+          {%- assign ss_tag = block.settings.heading_tag | default: 'h2' -%}
+          <{{ ss_tag }} class="section-split__heading heading-size-{{ block.settings.heading_size }}">{{ block.settings.heading }}</{{ ss_tag }}>
+        {%- endif -%}
+        {%- if block.settings.text != blank -%}
+          <p class="section-split__text content-size-md">{{ block.settings.text }}</p>
+        {%- endif -%}
+        {%- if block.settings.button_label != blank -%}
+          <a href="{{ block.settings.button_link | default: '#' }}" class="section-split__btn section-split__btn--{{ block.settings.button_style }} button-size-{{ block.settings.button_size }}">
+            {{ block.settings.button_label }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endfor -%}
+</div>
+
+{% stylesheet %}
+  .section-split {
+    display: flex; flex-direction: column;
+    min-height: var(--split-h, 80vh);
+  }
+  @media (min-width: 750px) {
+    .section-split { flex-direction: row; }
+  }
+
+  .section-split__panel {
+    position: relative; flex: 1;
+    overflow: hidden; display: flex;
+    align-items: center; justify-content: center;
+    min-height: 50vh; color: #fff;
+    transition: flex 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+  @media (min-width: 750px) {
+    .section-split__panel { min-height: auto; }
+    .section-split:hover .section-split__panel { flex: 0.85; }
+    .section-split__panel:hover { flex: 1.15 !important; }
+  }
+
+  .section-split__media { position: absolute; inset: 0; }
+  .section-split__img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .section-split__panel:hover .section-split__img { transform: scale(1.05); }
+  .section-split__ph { width: 100%; height: 100%; }
+  .section-split__overlay {
+    position: absolute; inset: 0;
+    background: rgba(0, 0, 0, var(--split-overlay, 0.35));
+  }
+
+  .section-split__content {
+    position: relative; z-index: 2;
+    padding: 2rem; max-width: 28rem;
+    display: flex; flex-direction: column; gap: 0.75rem;
+  }
+  .section-split__content--left { align-items: flex-start; text-align: left; }
+  .section-split__content--center { align-items: center; text-align: center; }
+
+  .section-split__subheading { margin: 0; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(255,255,255,0.7); }
+  .section-split__heading { margin: 0; color: #fff; line-height: 1.1; }
+  .section-split__text { margin: 0; color: rgba(255,255,255,0.8); }
+
+  .section-split__btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 600; text-decoration: none; border-radius: var(--buttons-radius, 0);
+    cursor: pointer; transition: opacity 0.2s; margin-top: 0.25rem;
+  }
+  .section-split__btn:hover { opacity: 0.85; }
+  .section-split__btn--primary { background: #fff; color: #111; border: 1px solid #fff; }
+  .section-split__btn--secondary { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.5); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Split screen",
+  "tag": "section",
+  "class": "section-split-wrapper",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "section_height",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "Section height",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "panel",
+      "name": "Panel",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "range",
+          "id": "overlay_opacity",
+          "min": 0,
+          "max": 80,
+          "step": 5,
+          "unit": "%",
+          "label": "Overlay",
+          "default": 35
+        },
+        {
+          "type": "inline_richtext",
+          "id": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Shop Women"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "Heading size",
+          "options": [
+            {
+              "value": "lg",
+              "label": "L"
+            },
+            {
+              "value": "xl",
+              "label": "XL"
+            },
+            {
+              "value": "2xl",
+              "label": "2XL"
+            }
+          ],
+          "default": "xl"
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "Heading tag",
+          "options": [
+            {
+              "value": "h2",
+              "label": "H2"
+            },
+            {
+              "value": "h3",
+              "label": "H3"
+            },
+            {
+              "value": "h4",
+              "label": "H4"
+            }
+          ],
+          "default": "h2"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Explore"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            }
+          ],
+          "default": "primary"
+        },
+        {
+          "type": "select",
+          "id": "button_size",
+          "label": "Button size",
+          "options": [
+            {
+              "value": "md",
+              "label": "M"
+            },
+            {
+              "value": "lg",
+              "label": "L"
+            }
+          ],
+          "default": "lg"
+        },
+        {
+          "type": "select",
+          "id": "text_align",
+          "label": "Text align",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            }
+          ],
+          "default": "center"
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Split screen",
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "panel",
+          "settings": {
+            "heading": "Shop Women",
+            "button_label": "Explore"
+          }
+        },
+        {
+          "type": "panel",
+          "settings": {
+            "heading": "Shop Men",
+            "button_label": "Explore"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

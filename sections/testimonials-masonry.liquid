@@ -1,0 +1,394 @@
+{%- comment -%}
+  Section: Testimonials Masonry
+  Mô tả: Masonry layout (Pinterest-style) — cards khác chiều cao.
+{%- endcomment -%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-tmasonry color-{{ section.settings.color_scheme }}"
+  style="
+    --tm-dt: {{ section.settings.padding_top_desktop }}px;
+    --tm-db: {{ section.settings.padding_bottom_desktop }}px;
+    --tm-mt: {{ section.settings.padding_top_mobile }}px;
+    --tm-mb: {{ section.settings.padding_bottom_mobile }}px;
+    --tm-cols: {{ section.settings.columns_desktop }};
+  "
+>
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-tmasonry__head">
+        {%- if section.settings.subheading != blank -%}
+          <p class="section-tmasonry__subheading subheading-size-{{ section.settings.subheading_size }}">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+        <{{ section.settings.heading_tag }} class="section-tmasonry__heading heading-size-{{ section.settings.heading_size }}">
+          {{- section.settings.heading -}}
+        </{{ section.settings.heading_tag }}>
+      </div>
+    {%- endif -%}
+
+    <div class="section-tmasonry__grid">
+      {%- for block in section.blocks -%}
+        <div class="section-tmasonry__card" {{ block.shopify_attributes }}>
+          {%- if block.settings.rating > 0 -%}
+            <div class="section-tmasonry__stars">
+              {%- for i in (1..5) -%}
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                  fill="{% if i <= block.settings.rating %}currentColor{% else %}none{% endif %}"
+                  stroke="currentColor" stroke-width="1.5"
+                  class="section-tmasonry__star{% if i <= block.settings.rating %} section-tmasonry__star--filled{% endif %}"
+                ><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+
+          {%- if block.settings.quote != blank -%}
+            <blockquote class="section-tmasonry__quote content-size-{{ block.settings.quote_size }}">
+              "{{ block.settings.quote }}"
+            </blockquote>
+          {%- endif -%}
+
+          {%- if block.settings.image != blank -%}
+            <div class="section-tmasonry__photo">
+              {{ block.settings.image | image_url: width: 400 | image_tag: loading: 'lazy', class: 'section-tmasonry__photo-img' }}
+            </div>
+          {%- endif -%}
+
+          <div class="section-tmasonry__author">
+            {%- if block.settings.avatar != blank -%}
+              <div class="section-tmasonry__avatar">
+                {{ block.settings.avatar | image_url: width: 48 | image_tag: loading: 'lazy' }}
+              </div>
+            {%- endif -%}
+            <div>
+              {%- if block.settings.name != blank -%}
+                <span class="section-tmasonry__name">{{ block.settings.name }}</span>
+              {%- endif -%}
+              {%- if block.settings.info != blank -%}
+                <span class="section-tmasonry__info">{{ block.settings.info }}</span>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .section-tmasonry {
+    padding-block: var(--tm-mt) var(--tm-mb);
+    background: rgb(var(--color-background));
+    color: rgba(var(--color-foreground), 0.85);
+  }
+  @media (min-width: 750px) {
+    .section-tmasonry { padding-block: var(--tm-dt) var(--tm-db); }
+  }
+  .section-tmasonry__head { text-align: center; margin-bottom: 2.5rem; }
+  .section-tmasonry__subheading { margin: 0 0 0.25rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgb(var(--color-accent)); font-weight: 600; }
+  .section-tmasonry__heading { margin: 0; color: rgb(var(--color-foreground)); }
+
+  .section-tmasonry__grid {
+    columns: 1; column-gap: 1rem;
+  }
+  @media (min-width: 750px) {
+    .section-tmasonry__grid { columns: var(--tm-cols, 3); column-gap: 1.25rem; }
+  }
+
+  .section-tmasonry__card {
+    break-inside: avoid; margin-bottom: 1.25rem;
+    padding: 1.25rem; border-radius: 0.75rem;
+    background: rgba(var(--color-foreground), 0.02);
+    border: 1px solid rgba(var(--color-foreground), 0.06);
+    display: flex; flex-direction: column; gap: 0.75rem;
+  }
+
+  .section-tmasonry__stars { display: flex; gap: 2px; }
+  .section-tmasonry__star { color: rgba(var(--color-foreground), 0.15); }
+  .section-tmasonry__star--filled { color: #f59e0b; }
+
+  .section-tmasonry__quote {
+    margin: 0; font-style: italic; line-height: 1.6;
+    color: rgba(var(--color-foreground), 0.8);
+  }
+
+  .section-tmasonry__photo { border-radius: 0.375rem; overflow: hidden; }
+  .section-tmasonry__photo-img { width: 100%; height: auto; display: block; }
+
+  .section-tmasonry__author { display: flex; align-items: center; gap: 0.5rem; margin-top: auto; }
+  .section-tmasonry__avatar {
+    width: 2rem; height: 2rem; border-radius: 50%; overflow: hidden; flex-shrink: 0;
+  }
+  .section-tmasonry__avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .section-tmasonry__name { display: block; font-size: 0.8125rem; font-weight: 700; color: rgb(var(--color-foreground)); }
+  .section-tmasonry__info { display: block; font-size: 0.6875rem; color: rgba(var(--color-foreground), 0.4); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Testimonials masonry",
+  "tag": "section",
+  "class": "section-tmasonry-wrapper",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "What our customers say"
+    },
+    {
+      "type": "select",
+      "id": "subheading_size",
+      "label": "Subheading size",
+      "options": [
+        {
+          "value": "xs",
+          "label": "XS"
+        },
+        {
+          "value": "sm",
+          "label": "S"
+        }
+      ],
+      "default": "sm"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Reviews"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "sm",
+          "label": "S"
+        },
+        {
+          "value": "md",
+          "label": "M"
+        },
+        {
+          "value": "lg",
+          "label": "L"
+        }
+      ],
+      "default": "lg"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading tag",
+      "options": [
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Desktop columns",
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Desktop spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Mobile spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Top",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "label": "Stars",
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "quote",
+          "label": "Quote",
+          "default": "Absolutely love this product! The quality exceeded my expectations."
+        },
+        {
+          "type": "select",
+          "id": "quote_size",
+          "label": "Size",
+          "options": [
+            {
+              "value": "sm",
+              "label": "S"
+            },
+            {
+              "value": "md",
+              "label": "M"
+            }
+          ],
+          "default": "sm"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo",
+          "info": "Customer photo / product in use"
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Avatar"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Sarah M."
+        },
+        {
+          "type": "text",
+          "id": "info",
+          "label": "Info",
+          "default": "Verified buyer"
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials masonry",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Absolutely love this product! The quality exceeded my expectations. Highly recommend to anyone.",
+            "name": "Sarah M.",
+            "info": "Verified buyer",
+            "rating": 5
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Fast shipping and great customer service.",
+            "name": "James T.",
+            "info": "Repeat customer",
+            "rating": 5
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Best purchase I've made all year. The attention to detail is remarkable and worth every penny.",
+            "name": "Emily R.",
+            "info": "Verified buyer",
+            "rating": 4
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Beautiful craftsmanship.",
+            "name": "Michael K.",
+            "rating": 5
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I've tried many brands but this one stands out. The material quality and design are on another level. Will definitely be ordering more!",
+            "name": "Lisa W.",
+            "info": "VIP member",
+            "rating": 5
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Perfect gift idea. My wife loved it!",
+            "name": "David P.",
+            "rating": 5
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

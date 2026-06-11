@@ -87,8 +87,10 @@ cart-template .cart-template__note textarea {
   transition: border-color var(--transition-fast);
 }
 cart-template .cart-template__note textarea:focus {
-  outline: none;
   border-color: rgb(var(--color-button));
+}
+cart-template .cart-template__note textarea:focus:not(:focus-visible) {
+  outline: none;
 }
 cart-template .cart-template__note textarea::placeholder { color: rgba(var(--color-foreground), 0.35); }
 
@@ -112,8 +114,10 @@ cart-template .cart-template__note .invoice-input {
   transition: border-color var(--transition-fast);
 }
 cart-template .cart-template__note .invoice-input:focus {
-  outline: none;
   border-color: rgb(var(--color-button));
+}
+cart-template .cart-template__note .invoice-input:focus:not(:focus-visible) {
+  outline: none;
 }
 cart-template .cart-template__note .invoice-input::placeholder { color: rgba(var(--color-foreground), 0.35); }
 
@@ -371,7 +375,7 @@ cart-item .cart-item__compare-price {
 
 cart-item .cart-item__delete {
   font-size: var(--font-xs);
-  color: #dc2626;
+  color: var(--color-error);
   background: none;
   border: none;
   cursor: pointer;
@@ -622,7 +626,7 @@ cart-sidebar .cart-sidebar-item quantity-selector input {
 @media (min-width: 750px) {
   .cart-total .cart-total__list li strong { font-size: var(--font-lg); }
 }
-.cart-total .cart-total__list li.cart-total__discount { color: #16a34a; }
+.cart-total .cart-total__list li.cart-total__discount { color: var(--color-success); }
 .cart-total .cart-total__list li .cart-price {
   color: rgb(var(--color-button));
   font-size: var(--font-base);

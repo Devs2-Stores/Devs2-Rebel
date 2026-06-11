@@ -160,7 +160,7 @@
 .product-card--special .product-card__price-discount { font-size: 0.675rem; }
 .product-card--special .product-card__stock { margin-top: 0.5rem; }
 .product-card--special .product-card__stock-bar { height: 0.375rem; background: var(--color-border, #f0f2f4); border-radius: 9999px; overflow: hidden; }
-.product-card--special .product-card__stock-fill { height: 100%; border-radius: 9999px; background: linear-gradient(90deg, var(--color-primary) 0%, #60a5fa 100%); transition: width 0.6s ease; }
+.product-card--special .product-card__stock-fill { height: 100%; border-radius: 9999px; background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-info) 100%); transition: width 0.6s ease; }
 .product-card--special .product-card__stock-fill--hot { background: linear-gradient(90deg, #ef4444 0%, #f97316 100%); animation: stockPulse 2s ease-in-out infinite; }
 .product-card--special .product-card__stock-info {
   display: flex;

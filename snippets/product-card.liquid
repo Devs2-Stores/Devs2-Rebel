@@ -167,6 +167,10 @@
       <div class="product-card__price">
         {%- if price == 0 -%}
           <span class="product-card__price-contact">{{ t_contact }}</span>
+        {%- elsif product.price_varies -%}
+          <span class="product-card__price-range">
+            {{ product.price_min | money }} – {{ product.price_max | money }}
+          </span>
         {%- else -%}
           {%- if compare > price -%}
             <del class="product-card__price-compare">{{ compare | money }}</del>
@@ -174,6 +178,12 @@
           <span class="product-card__price-sale{% if compare > price %} product-card__price-sale--on-sale{% endif %}">
             {{ price | money }}
           </span>
+          {%- if product.selected_or_first_available_variant.unit_price -%}
+            <span class="product-card__unit-price">
+              <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+              {{ product.selected_or_first_available_variant.unit_price | money }}/{{ product.selected_or_first_available_variant.unit_price_measurement.reference_value }}{{ product.selected_or_first_available_variant.unit_price_measurement.reference_unit }}
+            </span>
+          {%- endif -%}
         {%- endif -%}
       </div>
     </div>

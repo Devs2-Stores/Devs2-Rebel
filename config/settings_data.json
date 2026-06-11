@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "current": "Devs2",
   "presets": {
@@ -14,56 +5,85 @@
       "color_schemes": {
         "scheme-1": {
           "settings": {
+            "accent": "#C4301C",
+            "border": "#E5E5E5",
+            "text": "#121212",
+            "subtext": "#666666",
             "background": "#FFFFFF",
+            "background_2": "#F5F5F5",
             "background_gradient": "",
-            "text": "#000000",
-            "button": "#FF3300",
+            "button": "#C4301C",
             "button_label": "#FFFFFF",
-            "secondary_button_label": "#000000",
-            "shadow": "#000000"
+            "secondary_button": "#F5F5F5",
+            "secondary_button_border": "#E5E5E5",
+            "secondary_button_label": "#121212",
+            "form_bg": "#F5F5F5",
+            "form_text": "#121212",
+            "sale_price": "#C4301C",
+            "progress_bar": "#C4301C",
+            "shadow": "#121212"
           }
         },
         "scheme-2": {
           "settings": {
+            "accent": "#C4301C",
+            "border": "#DDDDDD",
+            "text": "#121212",
+            "subtext": "#666666",
             "background": "#F5F5F5",
+            "background_2": "#EBEBEB",
             "background_gradient": "",
-            "text": "#000000",
-            "button": "#FF3300",
+            "button": "#C4301C",
             "button_label": "#FFFFFF",
-            "secondary_button_label": "#000000",
-            "shadow": "#000000"
+            "secondary_button": "#FFFFFF",
+            "secondary_button_border": "#C4301C",
+            "secondary_button_label": "#C4301C",
+            "form_bg": "#FFFFFF",
+            "form_text": "#121212",
+            "sale_price": "#C4301C",
+            "progress_bar": "#C4301C",
+            "shadow": "#121212"
           }
         },
         "scheme-3": {
           "settings": {
-            "background": "#1A1A1A",
-            "background_gradient": "",
+            "accent": "#FF3300",
+            "border": "#333333",
             "text": "#FFFFFF",
-            "button": "#FFFFFF",
-            "button_label": "#000000",
+            "subtext": "#AAAAAA",
+            "background": "#1A1A1A",
+            "background_2": "#252525",
+            "background_gradient": "",
+            "button": "#FF3300",
+            "button_label": "#FFFFFF",
+            "secondary_button": "#2A2A2A",
+            "secondary_button_border": "#FF3300",
             "secondary_button_label": "#FFFFFF",
+            "form_bg": "#252525",
+            "form_text": "#FFFFFF",
+            "sale_price": "#FF3300",
+            "progress_bar": "#FF3300",
             "shadow": "#000000"
           }
         },
         "scheme-4": {
           "settings": {
-            "background": "#000000",
-            "background_gradient": "",
+            "accent": "#FF3300",
+            "border": "#222222",
             "text": "#FFFFFF",
+            "subtext": "#999999",
+            "background": "#000000",
+            "background_2": "#111111",
+            "background_gradient": "",
             "button": "#FF3300",
             "button_label": "#FFFFFF",
+            "secondary_button": "#111111",
+            "secondary_button_border": "#FF3300",
             "secondary_button_label": "#FFFFFF",
-            "shadow": "#000000"
-          }
-        },
-        "scheme-5": {
-          "settings": {
-            "background": "#FF3300",
-            "background_gradient": "",
-            "text": "#FFFFFF",
-            "button": "#FFFFFF",
-            "button_label": "#FF3300",
-            "secondary_button_label": "#FFFFFF",
+            "form_bg": "#111111",
+            "form_text": "#FFFFFF",
+            "sale_price": "#FF3300",
+            "progress_bar": "#FF3300",
             "shadow": "#000000"
           }
         }
@@ -138,8 +158,8 @@
       "drawer_shadow_blur": 0,
       "badge_position": "bottom left",
       "badge_corner_radius": 40,
-      "sale_badge_color_scheme": "scheme-5",
-      "sold_out_badge_color_scheme": "scheme-3",
+      "sale_badge_color_scheme": "scheme-3",
+      "sold_out_badge_color_scheme": "scheme-4",
       "social_facebook_link": "",
       "social_instagram_link": "",
       "social_youtube_link": "",
@@ -182,8 +202,7 @@
       "float_social_position": "right",
       "float_social_title": "Contact us",
       "float_social_subtitle": "Choose your preferred channel",
-      "recaptcha_site_key": "6Le047YqAAAAAKk-dTuIhf_F7L0m3Yp9hOkIxTn1"
+      "recaptcha_site_key": ""
     }
   }
 }
- 

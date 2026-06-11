@@ -76,12 +76,12 @@
         {%- comment -%} Article header {%- endcomment -%}
         <div class="article-template__header">
           <h1 class="article-template__title heading-size-{{ heading_size }}" itemprop="headline">
-            {{ article.title }}
+            {{ article.title | escape }}
           </h1>
           <div class="article-template__info">
             {%- if show_category -%}
               <span class="article-template__info-category">
-                <a href="{{ blog.url }}" title="{{ blog.title | escape }}">{{ blog.title }}</a>
+                <a href="{{ blog.url }}" title="{{ blog.title | escape }}">{{ blog.title | escape }}</a>
               </span>
             {%- endif -%}
             {%- if show_author and article.author != blank -%}
@@ -92,7 +92,7 @@
                 itemtype="https://schema.org/Person"
               >
                 {%- render 'icon', name: 'user', size: '16' -%}
-                <span itemprop="name">{{ article.author }}</span>
+                <span itemprop="name">{{ article.author | escape }}</span>
               </span>
             {%- endif -%}
             {%- if show_date -%}
@@ -202,7 +202,7 @@
                             </svg>
                             <span>{{ 'blogs.article.previous_post' | t }}</span>
                           </span>
-                          <span class="article-template__nav-title">{{ prev_article.title }}</span>
+                          <span class="article-template__nav-title">{{ prev_article.title | escape }}</span>
                         </span>
                       </a>
                     {%- else -%}
@@ -265,7 +265,7 @@
                               <path d="m9 18 6-6-6-6"/>
                             </svg>
                           </span>
-                          <span class="article-template__nav-title">{{ next_article.title }}</span>
+                          <span class="article-template__nav-title">{{ next_article.title | escape }}</span>
                         </span>
                       </a>
                     {%- else -%}
@@ -507,7 +507,7 @@
                                 </div>
                                 <div class="blog-sidebar__recent-post-content">
                                   <h4 class="blog-sidebar__recent-post-title">
-                                    {{ related_article.title }}
+                                    {{ related_article.title | escape }}
                                   </h4>
                                   <div class="blog-sidebar__recent-post-date">
                                     {{ related_article.published_at | date: '%B %d, %Y' }}
@@ -570,8 +570,14 @@
       "id": "container_width",
       "label": "t:sections.all.container_width.label",
       "options": [
-        { "value": "fixed", "label": "t:sections.all.container_width.options__fixed.label" },
-        { "value": "full", "label": "t:sections.all.container_width.options__full.label" }
+        {
+          "value": "fixed",
+          "label": "t:sections.all.container_width.options__fixed.label"
+        },
+        {
+          "value": "full",
+          "label": "t:sections.all.container_width.options__full.label"
+        }
       ],
       "default": "fixed"
     },
@@ -584,10 +590,22 @@
       "id": "heading_size",
       "label": "t:sections.all.heading_size.label",
       "options": [
-        { "value": "sm", "label": "t:sections.all.heading_size.options__sm.label" },
-        { "value": "md", "label": "t:sections.all.heading_size.options__md.label" },
-        { "value": "lg", "label": "t:sections.all.heading_size.options__lg.label" },
-        { "value": "xl", "label": "t:sections.all.heading_size.options__xl.label" }
+        {
+          "value": "sm",
+          "label": "t:sections.all.heading_size.options__sm.label"
+        },
+        {
+          "value": "md",
+          "label": "t:sections.all.heading_size.options__md.label"
+        },
+        {
+          "value": "lg",
+          "label": "t:sections.all.heading_size.options__lg.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.heading_size.options__xl.label"
+        }
       ],
       "default": "lg"
     },
@@ -633,7 +651,6 @@
       "info": "t:sections.main_article.settings.show_toc.info",
       "default": true
     },
-
     {
       "type": "header",
       "content": "t:sections.main_article.settings.header__sidebar.content"
@@ -737,9 +754,18 @@
           "id": "heading_size",
           "label": "t:sections.all.heading_size.label",
           "options": [
-            { "value": "sm", "label": "t:sections.all.heading_size.options__sm.label" },
-            { "value": "md", "label": "t:sections.all.heading_size.options__md.label" },
-            { "value": "lg", "label": "t:sections.all.heading_size.options__lg.label" }
+            {
+              "value": "sm",
+              "label": "t:sections.all.heading_size.options__sm.label"
+            },
+            {
+              "value": "md",
+              "label": "t:sections.all.heading_size.options__md.label"
+            },
+            {
+              "value": "lg",
+              "label": "t:sections.all.heading_size.options__lg.label"
+            }
           ],
           "default": "sm"
         },
@@ -790,9 +816,18 @@
           "id": "heading_size",
           "label": "t:sections.all.heading_size.label",
           "options": [
-            { "value": "sm", "label": "t:sections.all.heading_size.options__sm.label" },
-            { "value": "md", "label": "t:sections.all.heading_size.options__md.label" },
-            { "value": "lg", "label": "t:sections.all.heading_size.options__lg.label" }
+            {
+              "value": "sm",
+              "label": "t:sections.all.heading_size.options__sm.label"
+            },
+            {
+              "value": "md",
+              "label": "t:sections.all.heading_size.options__md.label"
+            },
+            {
+              "value": "lg",
+              "label": "t:sections.all.heading_size.options__lg.label"
+            }
           ],
           "default": "sm"
         },
@@ -817,6 +852,9 @@
           "default": 0
         }
       ]
+    },
+    {
+      "type": "@app"
     }
   ]
 }

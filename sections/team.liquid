@@ -1,0 +1,333 @@
+{%- comment -%}
+  Section: Team / About Us Grid
+  Mô tả: Grid thành viên — avatar + name + role + social links.
+{%- endcomment -%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-team color-{{ section.settings.color_scheme }}"
+  style="
+    --team-dt: {{ section.settings.padding_top_desktop }}px;
+    --team-db: {{ section.settings.padding_bottom_desktop }}px;
+    --team-mt: {{ section.settings.padding_top_mobile }}px;
+    --team-mb: {{ section.settings.padding_bottom_mobile }}px;
+    --team-cols-d: {{ section.settings.columns_desktop }};
+  "
+>
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-team__head">
+        {%- if section.settings.subheading != blank -%}
+          <p class="section-team__subheading subheading-size-{{ section.settings.subheading_size }}">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+        <{{ section.settings.heading_tag }} class="section-team__heading heading-size-{{ section.settings.heading_size }}">
+          {{- section.settings.heading -}}
+        </{{ section.settings.heading_tag }}>
+      </div>
+    {%- endif -%}
+
+    <div class="section-team__grid">
+      {%- for block in section.blocks -%}
+        <div class="section-team__member" {{ block.shopify_attributes }}>
+          <div class="section-team__avatar-wrap">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 400 | image_tag:
+                loading: 'lazy', class: 'section-team__avatar'
+              }}
+            {%- else -%}
+              <div class="section-team__avatar-ph">
+                {{ block.settings.name | default: '?' | slice: 0 | upcase }}
+              </div>
+            {%- endif -%}
+          </div>
+          {%- if block.settings.name != blank -%}
+            <h3 class="section-team__name">{{ block.settings.name }}</h3>
+          {%- endif -%}
+          {%- if block.settings.role != blank -%}
+            <p class="section-team__role">{{ block.settings.role }}</p>
+          {%- endif -%}
+          {%- if block.settings.bio != blank -%}
+            <p class="section-team__bio">{{ block.settings.bio }}</p>
+          {%- endif -%}
+          {%- if block.settings.social_1 != blank or block.settings.social_2 != blank -%}
+            <div class="section-team__socials">
+              {%- if block.settings.social_1 != blank -%}
+                <a href="{{ block.settings.social_1 }}" target="_blank" rel="noopener" class="section-team__social-link" aria-label="{{ 'accessibility.social_link' | t }}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+              {%- endif -%}
+              {%- if block.settings.social_2 != blank -%}
+                <a href="{{ block.settings.social_2 }}" target="_blank" rel="noopener" class="section-team__social-link" aria-label="{{ 'accessibility.social_link' | t }}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .section-team {
+    padding-block: var(--team-mt) var(--team-mb);
+    background: rgb(var(--color-background));
+    color: rgba(var(--color-foreground), 0.85);
+  }
+  @media (min-width: 750px) {
+    .section-team { padding-block: var(--team-dt) var(--team-db); }
+  }
+  .section-team__head { text-align: center; margin-bottom: 2.5rem; }
+  .section-team__subheading { margin: 0 0 0.25rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgb(var(--color-accent)); font-weight: 600; }
+  .section-team__heading { margin: 0; color: rgb(var(--color-foreground)); }
+
+  .section-team__grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+    text-align: center;
+  }
+  @media (min-width: 750px) {
+    .section-team__grid {
+      grid-template-columns: repeat(var(--team-cols-d, 4), 1fr); gap: 2rem;
+    }
+  }
+
+  .section-team__member { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+  .section-team__avatar-wrap { width: 120px; height: 120px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+  @media (min-width: 750px) {
+    .section-team__avatar-wrap { width: 150px; height: 150px; }
+  }
+  .section-team__avatar { width: 100%; height: 100%; object-fit: cover; }
+  .section-team__avatar-ph {
+    width: 100%; height: 100%;
+    background: rgba(var(--color-foreground), 0.06);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; font-weight: 700; color: rgba(var(--color-foreground), 0.2);
+  }
+
+  .section-team__name { margin: 0; font-size: 1rem; font-weight: 700; color: rgb(var(--color-foreground)); }
+  .section-team__role { margin: 0; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgb(var(--color-accent)); font-weight: 600; }
+  .section-team__bio { margin: 0; font-size: 0.8125rem; color: rgba(var(--color-foreground), 0.6); line-height: 1.5; max-width: 18rem; }
+
+  .section-team__socials { display: flex; gap: 0.5rem; margin-top: 0.25rem; }
+  .section-team__social-link {
+    color: rgba(var(--color-foreground), 0.4);
+    transition: color 0.3s;
+  }
+  .section-team__social-link:hover { color: rgb(var(--color-accent)); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Team",
+  "tag": "section",
+  "class": "section-team-wrapper",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "select",
+      "id": "subheading_size",
+      "label": "Subheading size",
+      "options": [
+        {
+          "value": "xs",
+          "label": "XS"
+        },
+        {
+          "value": "sm",
+          "label": "S"
+        },
+        {
+          "value": "md",
+          "label": "M"
+        }
+      ],
+      "default": "sm"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Meet our team"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "sm",
+          "label": "S"
+        },
+        {
+          "value": "md",
+          "label": "M"
+        },
+        {
+          "value": "lg",
+          "label": "L"
+        },
+        {
+          "value": "xl",
+          "label": "XL"
+        }
+      ],
+      "default": "lg"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading tag",
+      "options": [
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "label": "Desktop columns",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Desktop spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Mobile spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Top",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "member",
+      "name": "Member",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Jane Doe"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role",
+          "default": "Founder & CEO"
+        },
+        {
+          "type": "text",
+          "id": "bio",
+          "label": "Bio"
+        },
+        {
+          "type": "url",
+          "id": "social_1",
+          "label": "Social link 1"
+        },
+        {
+          "type": "url",
+          "id": "social_2",
+          "label": "Social link 2"
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Team",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "member"
+        },
+        {
+          "type": "member"
+        },
+        {
+          "type": "member"
+        },
+        {
+          "type": "member"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

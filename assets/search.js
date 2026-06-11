@@ -1,3 +1,6 @@
+(function() {
+'use strict';
+
 // Search Template Component
 class SearchTemplate extends HTMLElement {
   constructor() {
@@ -62,4 +65,6 @@ class SearchTemplate extends HTMLElement {
   }
 }
 
-customElements.define('search-template', SearchTemplate);
+if (!customElements.get('search-template')) customElements.define('search-template', SearchTemplate);
+
+})();

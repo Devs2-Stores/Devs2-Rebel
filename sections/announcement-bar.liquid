@@ -9,9 +9,9 @@
         <div class="swiper-slide announcement-bar__slide" {{ block.shopify_attributes }}>
           <div class="announcement-bar__content">
             {%- if block.settings.link != blank -%}
-            <a href="{{ block.settings.link }}" class="announcement-bar__text announcement-bar__link">{{ block.settings.text }}</a>
+            <a href="{{ block.settings.link }}" class="announcement-bar__text announcement-bar__link">{{ block.settings.text | escape }}</a>
             {%- else -%}
-            <span class="announcement-bar__text">{{ block.settings.text }}</span>
+            <span class="announcement-bar__text">{{ block.settings.text | escape }}</span>
             {%- endif -%}
           </div>
         </div>
@@ -63,6 +63,9 @@
           "label": "t:sections.announcement_bar.blocks.announcement.settings.link.label"
         }
       ]
+    },
+    {
+      "type": "@app"
     }
   ],
   "default": {

@@ -1,0 +1,233 @@
+{%- comment -%}
+  Section: Button Group
+  Mô tả: Row CTA buttons — standalone utility section.
+{%- endcomment -%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-button-group color-{{ section.settings.color_scheme }}"
+  style="
+    --bg-dt: {{ section.settings.padding_top_desktop }}px;
+    --bg-db: {{ section.settings.padding_bottom_desktop }}px;
+    --bg-mt: {{ section.settings.padding_top_mobile }}px;
+    --bg-mb: {{ section.settings.padding_bottom_mobile }}px;
+  "
+>
+  <div class="page-width">
+    <div class="section-button-group__inner section-button-group__inner--{{ section.settings.alignment }}">
+      {%- for block in section.blocks -%}
+        <a
+          href="{{ block.settings.link | default: '#' }}"
+          class="section-button-group__btn section-button-group__btn--{{ block.settings.style }} button-size-{{ block.settings.size }}"
+          {{ block.shopify_attributes }}
+        >
+          {{- block.settings.label | default: 'Button' -}}
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .section-button-group {
+    padding-block: var(--bg-mt) var(--bg-mb);
+    background: rgb(var(--color-background));
+  }
+  @media (min-width: 750px) {
+    .section-button-group { padding-block: var(--bg-dt) var(--bg-db); }
+  }
+
+  .section-button-group__inner { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .section-button-group__inner--left { justify-content: flex-start; }
+  .section-button-group__inner--center { justify-content: center; }
+  .section-button-group__inner--right { justify-content: flex-end; }
+
+  .section-button-group__btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 600; text-decoration: none;
+    border-radius: var(--buttons-radius, 0);
+    transition: opacity 0.2s; cursor: pointer;
+  }
+  .section-button-group__btn:hover { opacity: 0.85; }
+  .section-button-group__btn--primary {
+    background: rgb(var(--color-button)); color: rgb(var(--color-button-text));
+    border: 1px solid rgb(var(--color-button));
+  }
+  .section-button-group__btn--secondary {
+    background: transparent; color: rgb(var(--color-foreground));
+    border: 1px solid rgba(var(--color-foreground), 0.3);
+  }
+  .section-button-group__btn--link {
+    background: none; border: none; color: rgb(var(--color-accent));
+    text-decoration: underline; text-underline-offset: 4px;
+    padding-inline: 0 !important; min-width: auto !important;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:sections.button_group.name",
+  "tag": "section",
+  "class": "section-button-group-wrapper",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.button_group.settings.color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "t:sections.button_group.settings.alignment.label",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Desktop spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.button_group.settings.padding_top_desktop.label",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.button_group.settings.padding_bottom_desktop.label",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Mobile spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.button_group.settings.padding_top_mobile.label",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.button_group.settings.padding_bottom_mobile.label",
+      "default": 15
+    }
+  ],
+  "blocks": [
+    {
+      "type": "button",
+      "name": "t:sections.button_group.blocks.button.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "t:sections.button_group.blocks.button.settings.label.label",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.button_group.blocks.button.settings.link.label"
+        },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "t:sections.button_group.blocks.button.settings.style.label",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "link",
+              "label": "Link"
+            }
+          ],
+          "default": "primary"
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "t:sections.button_group.blocks.button.settings.size.label",
+          "options": [
+            {
+              "value": "sm",
+              "label": "S"
+            },
+            {
+              "value": "md",
+              "label": "M"
+            },
+            {
+              "value": "lg",
+              "label": "L"
+            }
+          ],
+          "default": "md"
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.button_group.presets.button_group.name",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "button",
+          "settings": {
+            "label": "Shop collection",
+            "style": "primary"
+          }
+        },
+        {
+          "type": "button",
+          "settings": {
+            "label": "Learn more",
+            "style": "secondary"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

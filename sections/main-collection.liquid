@@ -1,5 +1,3 @@
-{{ 'collection.css' | asset_url | stylesheet_tag }}
-
 {%- liquid
   assign columns_desktop = section.settings.columns_desktop | default: 4
   assign columns_mobile = section.settings.columns_mobile | default: 2
@@ -13,17 +11,17 @@
   comment
     Boolean defaults: dùng nil check vì | default: true sẽ override false
   endcomment
-  if section.settings.enable_filtering == nil
+  if section.settings.enable_filtering == null
     assign enable_filtering = true
   else
     assign enable_filtering = section.settings.enable_filtering
   endif
-  if section.settings.enable_sorting == nil
+  if section.settings.enable_sorting == null
     assign enable_sorting = true
   else
     assign enable_sorting = section.settings.enable_sorting
   endif
-  if section.settings.show_product_count == nil
+  if section.settings.show_product_count == null
     assign show_product_count = true
   else
     assign show_product_count = section.settings.show_product_count
@@ -38,7 +36,6 @@
   style="--columns-desktop: {{ columns_desktop }}; --columns-mobile: {{ columns_mobile }};"
 >
   <div class="page-width">
-
     {%- comment -%} ── Collection Hero: Banner + Title ── {%- endcomment -%}
     {%- liquid
       assign show_banner = false
@@ -67,16 +64,23 @@
         class="collection-hero collection-hero--{{ hero_height }}{% unless has_content %} collection-hero--image-only{% endunless %}"
         {{ banner_block.shopify_attributes }}
       >
-        <div class="collection-hero__banner" style="{% if hero_ratio != 'auto' %}aspect-ratio: {{ hero_ratio }};{% endif %}">
+        <div
+          class="collection-hero__banner"
+          style="{% if hero_ratio != 'auto' %}aspect-ratio: {{ hero_ratio }};{% endif %}"
+        >
           {%- assign img_alt = collection.title | escape -%}
-          {{ collection.image | image_url: width: 2048 | image_tag:
-            widths: '480, 600, 1024, 1440, 2048',
-            sizes: '(min-width: 1024px) 50vw, 100vw',
-            alt: img_alt,
-            loading: 'eager',
-            fetchpriority: 'high',
-            class: 'collection-hero__img',
-            style: 'object-position: ' | append: hero_position
+          {{
+            collection.image
+            | image_url: width: 2048
+            | image_tag:
+              widths: '480, 600, 1024, 1440, 2048',
+              sizes: '(min-width: 1024px) 50vw, 100vw',
+              alt: img_alt,
+              loading: 'eager',
+              fetchpriority: 'high',
+              class: 'collection-hero__img',
+              style: 'object-position: '
+            | append: hero_position
           }}
         </div>
         {%- if has_content -%}
@@ -84,7 +88,7 @@
             {%- if hero_show_title -%}
               <h1 class="collection-hero__heading heading-size-{{ section.settings.heading_size | default: 'md' }}">
                 {%- if collection.handle != 'all' -%}
-                  {{ collection.title }}
+                  {{ collection.title | escape }}
                 {%- else -%}
                   {{ 'sections.collection_template.title' | t }}
                 {%- endif -%}
@@ -97,7 +101,8 @@
             {%- endif -%}
             {%- if hero_show_count and collection.products_count > 0 -%}
               <div class="collection-hero__count">
-                {{ collection.products_count }} {{ 'sections.collection_template.products_count' | t }}
+                {{ collection.products_count }}
+                {{ 'sections.collection_template.products_count' | t }}
               </div>
             {%- endif -%}
           </div>
@@ -107,7 +112,7 @@
         <div class="collection-template__title">
           <h1 class="collection-template__heading heading-size-{{ section.settings.heading_size | default: 'md' }}">
             {%- if collection.handle != 'all' -%}
-              {{ collection.title }}
+              {{ collection.title | escape }}
             {%- else -%}
               {{ 'sections.collection_template.title' | t }}
             {%- endif -%}
@@ -118,7 +123,7 @@
       <div class="collection-template__title">
         <h1 class="collection-template__heading heading-size-{{ section.settings.heading_size | default: 'md' }}">
           {%- if collection.handle != 'all' -%}
-            {{ collection.title }}
+            {{ collection.title | escape }}
           {%- else -%}
             {{ 'sections.collection_template.title' | t }}
           {%- endif -%}
@@ -129,14 +134,24 @@
     {%- comment -%} ── Blocks (reorderable in theme editor) ── {%- endcomment -%}
     {%- for block in section.blocks -%}
       {%- case block.type -%}
-
         {%- when 'subcollections' -%}
-          <div class="collection-template__block" style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;" {{ block.shopify_attributes }}>
-            {%- render 'collection-menu', collections: block.settings.collections, items_limit: block.settings.items_limit -%}
+          <div
+            class="collection-template__block"
+            style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;"
+            {{ block.shopify_attributes }}
+          >
+            {%- render 'collection-menu',
+              collections: block.settings.collections,
+              items_limit: block.settings.items_limit
+            -%}
           </div>
 
         {%- when 'best_sellers' -%}
-          <div class="collection-template__block" style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;" {{ block.shopify_attributes }}>
+          <div
+            class="collection-template__block"
+            style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;"
+            {{ block.shopify_attributes }}
+          >
             {%- render 'collection-best',
               enabled: block.settings.enabled,
               title: block.settings.title,
@@ -151,7 +166,11 @@
             {%- comment -%} Skip if hero already shows description to avoid duplicate content {%- endcomment -%}
             {%- unless hero_show_description -%}
               {%- assign desc_word_count = collection.description | strip_html | split: ' ' | size -%}
-              <div class="collection-template__block collection-template__description" style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;" {{ block.shopify_attributes }}>
+              <div
+                class="collection-template__block collection-template__description"
+                style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;"
+                {{ block.shopify_attributes }}
+              >
                 <div class="collection-desc" data-desc-toggle>
                   <div class="collection-desc__summary">
                     {{ collection.description | strip_html | truncatewords: 30 }}
@@ -173,7 +192,11 @@
           {%- endif -%}
 
         {%- when 'countdown_banner' -%}
-          <div class="collection-template__block" style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;" {{ block.shopify_attributes }}>
+          <div
+            class="collection-template__block"
+            style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;"
+            {{ block.shopify_attributes }}
+          >
             {%- render 'countdown-banner',
               heading: block.settings.heading,
               subheading: block.settings.subheading,
@@ -193,20 +216,24 @@
 
         {%- when '@app' -%}
           {% render block %}
-
       {%- endcase -%}
     {%- endfor -%}
 
     {%- comment -%} ── Mobile filter button ── {%- endcomment -%}
     {%- if enable_filtering -%}
       <div class="collection-template__mobile-filter-ctrl">
-        <button type="button" class="collection-template__filter-btn" data-action="open-filter" aria-label="{{ 'products.facets.filter_button' | t }}">
+        <button
+          type="button"
+          class="collection-template__filter-btn"
+          data-action="open-filter"
+          aria-label="{{ 'products.facets.filter_button' | t }}"
+        >
           {%- render 'icon', name: 'filter' -%}
           <span>{{ 'products.facets.filter_button' | t }}</span>
           {%- assign active_filter_count = 0 -%}
           {%- for filter in collection.filters -%}
             {%- if filter.type == 'price_range' -%}
-              {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
+              {%- if filter.min_value.value != null or filter.max_value.value != null -%}
                 {%- assign active_filter_count = active_filter_count | plus: 1 -%}
               {%- endif -%}
             {%- else -%}
@@ -233,8 +260,15 @@
           {%- if filter_layout == 'sidebar' -%}
             <div class="collection-template__facet-filter" id="CollectionFilterDrawer">
               <div class="collection-template__facet-filter-header">
-                <span class="collection-template__facet-filter-header-title">{{ 'products.facets.filter_button' | t }}</span>
-                <button type="button" class="collection-template__close-filter" data-action="close-filter" aria-label="{{ 'accessibility.close' | t }}">
+                <span class="collection-template__facet-filter-header-title">
+                  {{- 'products.facets.filter_button' | t -}}
+                </span>
+                <button
+                  type="button"
+                  class="collection-template__close-filter"
+                  data-action="close-filter"
+                  aria-label="{{ 'accessibility.close' | t }}"
+                >
                   {%- render 'icon', name: 'close' -%}
                 </button>
               </div>
@@ -249,12 +283,31 @@
 
           {%- elsif filter_layout == 'modal' -%}
             {%- comment -%} ── Filter modal — slides from left (same style as search modal) ── {%- endcomment -%}
-            <div class="collection-filter-modal" id="CollectionFilterModal" role="dialog" aria-modal="true" aria-labelledby="filter-modal-title" aria-hidden="true">
-              <button type="button" class="collection-filter-modal__overlay" data-action="close-filter-modal" aria-label="{{ 'accessibility.close' | t }}"></button>
+            <div
+              class="collection-filter-modal"
+              id="CollectionFilterModal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="filter-modal-title"
+              aria-hidden="true"
+            >
+              <button
+                type="button"
+                class="collection-filter-modal__overlay"
+                data-action="close-filter-modal"
+                aria-label="{{ 'accessibility.close' | t }}"
+              ></button>
               <div class="collection-filter-modal__panel">
                 <div class="collection-filter-modal__header">
-                  <h2 class="collection-filter-modal__title" id="filter-modal-title">{{ 'products.facets.filter_by_label' | t }}</h2>
-                  <button type="button" class="collection-filter-modal__close" data-action="close-filter-modal" aria-label="{{ 'accessibility.close' | t }}">
+                  <h2 class="collection-filter-modal__title" id="filter-modal-title">
+                    {{ 'products.facets.filter_by_label' | t }}
+                  </h2>
+                  <button
+                    type="button"
+                    class="collection-filter-modal__close"
+                    data-action="close-filter-modal"
+                    aria-label="{{ 'accessibility.close' | t }}"
+                  >
                     {%- render 'icon', name: 'close' -%}
                   </button>
                 </div>
@@ -262,7 +315,10 @@
                   {%- render 'collection-facet-filter', collapse_filters: false -%}
                 </div>
                 <div class="collection-filter-modal__footer">
-                  <a href="{{ collection.url }}?sort_by={{ collection.sort_by | default: collection.default_sort_by }}" class="collection-filter-modal__clear-btn">
+                  <a
+                    href="{{ collection.url }}?sort_by={{ collection.sort_by | default: collection.default_sort_by }}"
+                    class="collection-filter-modal__clear-btn"
+                  >
                     {{ 'products.facets.clear_all_filters' | t }}
                   </a>
                   <button type="button" class="collection-filter-modal__apply-btn" data-action="close-filter-modal">
@@ -367,7 +423,18 @@
                   data-action="infinite-scroll"
                 >
                   <div class="collection-template__infinite-loader" aria-hidden="true">
-                    <svg class="collection-template__spinner" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                    <svg
+                      class="collection-template__spinner"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                    </svg>
                   </div>
                 </div>
               {%- endif -%}
@@ -375,7 +442,6 @@
           </div>
         </div>
       </facet-filters>
-
     {%- endpaginate -%}
   </div>
 </div>
@@ -498,8 +564,14 @@
       "id": "pagination_type",
       "label": "t:sections.main_collection.settings.pagination_type.label",
       "options": [
-        { "value": "pagination", "label": "t:sections.main_collection.settings.pagination_type.options__pagination.label" },
-        { "value": "load_more", "label": "t:sections.main_collection.settings.pagination_type.options__load_more.label" },
+        {
+          "value": "pagination",
+          "label": "t:sections.main_collection.settings.pagination_type.options__pagination.label"
+        },
+        {
+          "value": "load_more",
+          "label": "t:sections.main_collection.settings.pagination_type.options__load_more.label"
+        },
         { "value": "infinite", "label": "t:sections.main_collection.settings.pagination_type.options__infinite.label" }
       ],
       "default": "pagination"
@@ -610,9 +682,18 @@
           "id": "banner_height",
           "label": "t:sections.main_collection.blocks.collection_image.settings.banner_height.label",
           "options": [
-            { "value": "small", "label": "t:sections.main_collection.blocks.collection_image.settings.banner_height.options__small.label" },
-            { "value": "medium", "label": "t:sections.main_collection.blocks.collection_image.settings.banner_height.options__medium.label" },
-            { "value": "large", "label": "t:sections.main_collection.blocks.collection_image.settings.banner_height.options__large.label" }
+            {
+              "value": "small",
+              "label": "t:sections.main_collection.blocks.collection_image.settings.banner_height.options__small.label"
+            },
+            {
+              "value": "medium",
+              "label": "t:sections.main_collection.blocks.collection_image.settings.banner_height.options__medium.label"
+            },
+            {
+              "value": "large",
+              "label": "t:sections.main_collection.blocks.collection_image.settings.banner_height.options__large.label"
+            }
           ],
           "default": "medium"
         },
@@ -621,7 +702,10 @@
           "id": "image_ratio",
           "label": "t:sections.main_collection.blocks.collection_image.settings.image_ratio.label",
           "options": [
-            { "value": "auto", "label": "t:sections.main_collection.blocks.collection_image.settings.image_ratio.options__auto.label" },
+            {
+              "value": "auto",
+              "label": "t:sections.main_collection.blocks.collection_image.settings.image_ratio.options__auto.label"
+            },
             { "value": "16/9", "label": "16:9" },
             { "value": "4/3", "label": "4:3" },
             { "value": "3/2", "label": "3:2" },
@@ -729,8 +813,14 @@
           "id": "source",
           "label": "t:sections.main_collection.blocks.best_sellers.settings.source.label",
           "options": [
-            { "value": "current", "label": "t:sections.main_collection.blocks.best_sellers.settings.source.options__current.label" },
-            { "value": "manual", "label": "t:sections.main_collection.blocks.best_sellers.settings.source.options__manual.label" }
+            {
+              "value": "current",
+              "label": "t:sections.main_collection.blocks.best_sellers.settings.source.options__current.label"
+            },
+            {
+              "value": "manual",
+              "label": "t:sections.main_collection.blocks.best_sellers.settings.source.options__manual.label"
+            }
           ],
           "default": "current"
         },

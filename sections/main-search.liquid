@@ -5,7 +5,7 @@
 
 {%- assign search_query = search.terms | default: '' -%}
 
-<search-template class="search-template">
+<search-template class="search-template color-{{ section.settings.color_scheme }}">
   <div class="page-width">
 
     <div class="search-template__header">
@@ -23,7 +23,7 @@
 
     <div class="search-template__form-wrapper">
       <form action="{{ routes.search_url }}" method="get" class="search-template__form" role="search">
-        <input type="hidden" name="type" value="product">
+        <input type="hidden" name="type" value="product,article,page">
         <div class="search-template__input-group">
           <input
             type="search"
@@ -58,7 +58,7 @@
           </div>
 
           <ul class="product-cards search-template__products" role="list">
-            {%- for product in search.results -%}
+            {%- for item in search.results -%}
               {%- liquid
                 assign lazyload = 'lazy'
                 assign fetchpriority = 'auto'
@@ -69,9 +69,41 @@
                   assign fetchpriority = 'high'
                 endif
               -%}
-              <li class="product-cards__item" role="listitem">
-                {%- render 'product-card', product: product, lazyload: lazyload, fetchpriority: fetchpriority, show_vendor: true -%}
-              </li>
+              {%- case item.object_type -%}
+                {%- when 'product' -%}
+                  <li class="product-cards__item" role="listitem">
+                    {%- render 'product-card', product: item, lazyload: lazyload, fetchpriority: fetchpriority, show_vendor: true -%}
+                  </li>
+                {%- when 'article' -%}
+                  <li class="product-cards__item search-template__article" role="listitem">
+                    <article class="search-result-card">
+                      {%- if item.image -%}
+                        <a href="{{ item.url }}" class="search-result-card__image">
+                          <img src="{{ item.image | image_url: width: 400 }}" alt="{{ item.title | escape }}" width="200" height="200" loading="{{ lazyload }}">
+                        </a>
+                      {%- endif -%}
+                      <div class="search-result-card__content">
+                        <span class="search-result-card__type">{{ 'blogs.article.blog' | t }}</span>
+                        <h3 class="search-result-card__title"><a href="{{ item.url }}">{{ item.title | escape }}</a></h3>
+                        {%- if item.excerpt != blank -%}
+                          <p class="search-result-card__excerpt">{{ item.excerpt | strip_html | truncatewords: 20 }}</p>
+                        {%- endif -%}
+                      </div>
+                    </article>
+                  </li>
+                {%- when 'page' -%}
+                  <li class="product-cards__item search-template__page" role="listitem">
+                    <article class="search-result-card">
+                      <div class="search-result-card__content">
+                        <span class="search-result-card__type">{{ 'templates.search.page' | t }}</span>
+                        <h3 class="search-result-card__title"><a href="{{ item.url }}">{{ item.title | escape }}</a></h3>
+                        {%- if item.content != blank -%}
+                          <p class="search-result-card__excerpt">{{ item.content | strip_html | truncatewords: 20 }}</p>
+                        {%- endif -%}
+                      </div>
+                    </article>
+                  </li>
+              {%- endcase -%}
             {%- endfor -%}
           </ul>
 
@@ -120,6 +152,12 @@
   "tag": "section",
   "class": "section-main-search",
   "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
     {
       "type": "range",
       "id": "products_per_page",

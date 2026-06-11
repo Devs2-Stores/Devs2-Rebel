@@ -1,6 +1,20 @@
 (function() {
   'use strict';
 
+  var intervalIds = [];
+
+  function trackInterval(id) {
+    intervalIds.push(id);
+    return id;
+  }
+
+  function clearAllIntervals() {
+    while (intervalIds.length) {
+      var id = intervalIds.shift();
+      try { clearInterval(id); } catch (e) {}
+    }
+  }
+
   function parseDateTimeVI(timeStr) {
     if (!timeStr) return null;
     var parts = timeStr.split('/');
@@ -109,32 +123,50 @@
     var elements = document.querySelectorAll('.countdownLoop-vi');
     if (elements.length === 0) return;
 
-    setInterval(function() {
+    // Build countdown DOM once, then update only text values (avoids innerHTML XSS risk)
+    for (var j = 0; j < elements.length; j++) {
+      (function(el) {
+        var color = el.style.getPropertyValue('--countdown-color') || '#F30';
+        var textColor = el.style.getPropertyValue('--countdown-text-color') || '#F9F9F9';
+        var darker = darkenHex(color);
+        var bg = 'linear-gradient(135deg,' + color + ' 0%,' + darker + ' 100%)';
+        var labels = ['Days', 'Hours', 'Mins', 'Secs'];
+        var valueEls = [];
+
+        labels.forEach(function(label) {
+          var span = document.createElement('span');
+          span.className = 'countdown-item';
+          span.style.background = bg;
+          span.style.color = textColor;
+          var b = document.createElement('b');
+          b.textContent = '00';
+          span.appendChild(b);
+          span.appendChild(document.createTextNode(label));
+          el.appendChild(span);
+          valueEls.push(b);
+        });
+
+        el._countdownValues = valueEls;
+      })(elements[j]);
+    }
+
+    var id = setInterval(function() {
       var now = Date.now();
 
       for (var i = 0; i < elements.length; i++) {
         var el = elements[i];
+        if (!el._countdownValues || !el.isConnected) continue;
         var target = parseDateTimeVI(el.getAttribute('data-time'));
         if (!target) continue;
 
         var distance = Math.max(0, target - now);
-        var days = Math.floor(distance / 86400000);
-        var hours = Math.floor((distance % 86400000) / 3600000);
-        var minutes = Math.floor((distance % 3600000) / 60000);
-        var seconds = Math.floor((distance % 60000) / 1000);
-
-        var color = el.style.getPropertyValue('--countdown-color') || '#F30';
-        var textColor = el.style.getPropertyValue('--countdown-text-color') || '#F9F9F9';
-        var darker = darkenHex(color);
-        var style = 'style="background:linear-gradient(135deg,' + color + ' 0%,' + darker + ' 100%);color:' + textColor + ';"';
-
-        el.innerHTML =
-          '<span class="countdown-item" ' + style + '><b>' + pad(days) + '</b>Days</span>' +
-          '<span class="countdown-item" ' + style + '><b>' + pad(hours) + '</b>Hours</span>' +
-          '<span class="countdown-item" ' + style + '><b>' + pad(minutes) + '</b>Mins</span>' +
-          '<span class="countdown-item" ' + style + '><b>' + pad(seconds) + '</b>Secs</span>';
+        el._countdownValues[0].textContent = pad(Math.floor(distance / 86400000));
+        el._countdownValues[1].textContent = pad(Math.floor((distance % 86400000) / 3600000));
+        el._countdownValues[2].textContent = pad(Math.floor((distance % 3600000) / 60000));
+        el._countdownValues[3].textContent = pad(Math.floor((distance % 60000) / 1000));
       }
     }, 1000);
+    trackInterval(id);
   }
 
   function initFlashSaleSwiper() {
@@ -201,17 +233,18 @@
       }
     });
   }
-  
+
   function initFlashSaleCountdown() {
     var panels = document.querySelectorAll('[data-flash-countdown]');
     var bgTimers = document.querySelectorAll('[data-flash-bg-timer]');
     if (panels.length === 0 && bgTimers.length === 0) return;
 
-    setInterval(function() {
+    var id = setInterval(function() {
       var now = Date.now();
 
       for (var i = 0; i < panels.length; i++) {
         var panel = panels[i];
+        if (!panel.isConnected) continue;
         var target = parseDateTimeVI(panel.getAttribute('data-time'));
         if (!target) continue;
         var distance = Math.max(0, target - now);
@@ -229,6 +262,7 @@
 
       for (var j = 0; j < bgTimers.length; j++) {
         var el = bgTimers[j];
+        if (!el.isConnected) continue;
         var target2 = parseDateTimeVI(el.getAttribute('data-time'));
         if (!target2) continue;
         var dist = Math.max(0, target2 - now);
@@ -238,6 +272,7 @@
         el.textContent = pad(h) + ':' + pad(m) + ':' + pad(s);
       }
     }, 1000);
+    trackInterval(id);
   }
 
   function initLookbookHotspots() {
@@ -257,8 +292,12 @@
       }
     }
 
+    var debounced = (window.ThemeUtils && ThemeUtils.debounce)
+      ? ThemeUtils.debounce(updateTooltipFlip, 200)
+      : updateTooltipFlip;
+
     updateTooltipFlip();
-    window.addEventListener('resize', ThemeUtils.debounce(updateTooltipFlip, 200));
+    window.addEventListener('resize', debounced);
   }
 
   function initScrollFadeUp() {
@@ -280,7 +319,7 @@
         el.classList.add('is-visible');
       } else {
         observer.observe(el);
-      } 
+      }
     });
   }
 
@@ -296,4 +335,6 @@
     initScrollFadeUp();
   });
 
+  // Stop intervals when page unloads or hidden in bfcache to avoid leaks
+  window.addEventListener('pagehide', clearAllIntervals);
 })();

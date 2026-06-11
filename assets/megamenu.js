@@ -20,6 +20,10 @@
       this.checkOverflow();
     }
 
+    disconnectedCallback() {
+      if (this._boundResizeHandler) window.removeEventListener('resize', this._boundResizeHandler);
+    }
+
     bindEvents() {
       var self = this;
 
@@ -36,10 +40,11 @@
       }
 
       // Check overflow on resize
-      window.addEventListener('resize', ThemeUtils.debounce(function() {
+      this._boundResizeHandler = ThemeUtils.debounce(function() {
         self.checkOverflow();
         self.checkAllDropdowns();
-      }, 150));
+      }, 150);
+      window.addEventListener('resize', this._boundResizeHandler);
 
       // Handle dropdown overflow - flip to left if menu item is past 2/3 of viewport
       this.addEventListener('mouseenter', function(e) {
@@ -199,5 +204,5 @@
       this.updateArrows(true, maxScroll);
     }
   }
-  customElements.define('mega-menu', MegaMenu);
+  if (!customElements.get('mega-menu')) customElements.define('mega-menu', MegaMenu);
 })();

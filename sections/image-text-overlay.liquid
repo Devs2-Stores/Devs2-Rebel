@@ -1,0 +1,429 @@
+{%- comment -%}
+  Section: Image with Text Overlay
+  Mô tả: Full-width image + text overlay trên ảnh (khác IWT 2 cột).
+{%- endcomment -%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-ito color-{{ section.settings.color_scheme }}"
+  style="
+    --ito-height: {{ section.settings.section_height }}vh;
+    --ito-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+  "
+>
+  <div class="section-ito__media">
+    {%- if section.settings.image != blank -%}
+      {{ section.settings.image | image_url: width: 1920 | image_tag:
+        widths: '750, 1080, 1440, 1920', sizes: '100vw',
+        loading: 'lazy', class: 'section-ito__img'
+      }}
+    {%- elsif section.settings.image_mobile != blank -%}
+      {{ section.settings.image_mobile | image_url: width: 750 | image_tag:
+        loading: 'lazy', class: 'section-ito__img'
+      }}
+    {%- else -%}
+      <div class="section-ito__placeholder"></div>
+    {%- endif -%}
+    <div class="section-ito__overlay"></div>
+  </div>
+
+  {%- if section.settings.image_mobile != blank and section.settings.image != blank -%}
+    <div class="section-ito__media section-ito__media--mobile">
+      {{ section.settings.image_mobile | image_url: width: 750 | image_tag:
+        loading: 'lazy', class: 'section-ito__img'
+      }}
+      <div class="section-ito__overlay"></div>
+    </div>
+  {%- endif -%}
+
+  <div class="section-ito__content section-ito__content--{{ section.settings.content_position }}">
+    <div class="{% if section.settings.section_width == 'fixed' %}page-width{% endif %}">
+      <div class="section-ito__inner section-ito__inner--{{ section.settings.text_align }}" style="max-width: {{ section.settings.content_width }}rem;">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'subheading' -%}
+              <p class="section-ito__subheading subheading-size-{{ block.settings.size }}" {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
+            {%- when 'heading' -%}
+              <{{ block.settings.tag }} class="section-ito__heading heading-size-{{ block.settings.size }}" {{ block.shopify_attributes }}>{{ block.settings.text }}</{{ block.settings.tag }}>
+            {%- when 'text' -%}
+              <div class="section-ito__text content-size-{{ block.settings.size }}" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+            {%- when 'button' -%}
+              <div class="section-ito__buttons" {{ block.shopify_attributes }}>
+                {%- if block.settings.label_1 != blank -%}
+                  <a href="{{ block.settings.link_1 | default: '#' }}" class="section-ito__btn section-ito__btn--primary button-size-{{ block.settings.size }}">{{ block.settings.label_1 }}</a>
+                {%- endif -%}
+                {%- if block.settings.label_2 != blank -%}
+                  <a href="{{ block.settings.link_2 | default: '#' }}" class="section-ito__btn section-ito__btn--secondary button-size-{{ block.settings.size }}">{{ block.settings.label_2 }}</a>
+                {%- endif -%}
+              </div>
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .section-ito {
+    position: relative; min-height: var(--ito-height, 60vh);
+    display: flex; color: #fff; overflow: hidden;
+  }
+
+  .section-ito__media { position: absolute; inset: 0; }
+  .section-ito__media--mobile { display: none; }
+  @media (max-width: 749px) {
+    .section-ito__media--mobile + .section-ito__media:not(.section-ito__media--mobile) { display: none !important; }
+    .section-ito__media--mobile { display: block; }
+  }
+  .section-ito__img { width: 100%; height: 100%; object-fit: cover; }
+  .section-ito__placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #2d3436 0%, #636e72 100%);
+  }
+  .section-ito__overlay {
+    position: absolute; inset: 0;
+    background: rgba(0, 0, 0, var(--ito-overlay, 0.3));
+  }
+
+  .section-ito__content {
+    position: relative; z-index: 2; width: 100%;
+    display: flex; padding: 2rem 1.5rem;
+  }
+  .section-ito__content--top-left { align-items: flex-start; justify-content: flex-start; }
+  .section-ito__content--top-center { align-items: flex-start; justify-content: center; }
+  .section-ito__content--center-left { align-items: center; justify-content: flex-start; }
+  .section-ito__content--center { align-items: center; justify-content: center; }
+  .section-ito__content--center-right { align-items: center; justify-content: flex-end; }
+  .section-ito__content--bottom-left { align-items: flex-end; justify-content: flex-start; }
+  .section-ito__content--bottom-center { align-items: flex-end; justify-content: center; }
+
+  .section-ito__inner { display: flex; flex-direction: column; gap: 0.75rem; }
+  .section-ito__inner--left { text-align: left; }
+  .section-ito__inner--center { text-align: center; align-items: center; }
+
+  .section-ito__subheading { margin: 0; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(255,255,255,0.8); }
+  .section-ito__heading { margin: 0; color: #fff; line-height: 1.1; }
+  .section-ito__text { margin: 0; color: rgba(255,255,255,0.85); }
+  .section-ito__text p { margin: 0; }
+
+  .section-ito__buttons { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .section-ito__inner--center .section-ito__buttons { justify-content: center; }
+
+  .section-ito__btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 600; text-decoration: none; border-radius: var(--buttons-radius, 0);
+    cursor: pointer; transition: opacity 0.2s;
+  }
+  .section-ito__btn:hover { opacity: 0.85; }
+  .section-ito__btn--primary { background: #fff; color: #111; border: 1px solid #fff; }
+  .section-ito__btn--secondary { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.5); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Image with text overlay",
+  "tag": "section",
+  "class": "section-ito-wrapper",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Desktop image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile image"
+    },
+    {
+      "type": "range",
+      "id": "section_height",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "Section height",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay opacity",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content position",
+      "options": [
+        {
+          "value": "top-left",
+          "label": "Top left"
+        },
+        {
+          "value": "top-center",
+          "label": "Top center"
+        },
+        {
+          "value": "center-left",
+          "label": "Center left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "center-right",
+          "label": "Center right"
+        },
+        {
+          "value": "bottom-left",
+          "label": "Bottom left"
+        },
+        {
+          "value": "bottom-center",
+          "label": "Bottom center"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "min": 20,
+      "max": 50,
+      "step": 2,
+      "unit": "rem",
+      "label": "Max content width",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Width",
+      "options": [
+        {
+          "value": "fixed",
+          "label": "Fixed"
+        },
+        {
+          "value": "full",
+          "label": "Full"
+        }
+      ],
+      "default": "full"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "subheading",
+      "name": "Subheading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "New season"
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Size",
+          "options": [
+            {
+              "value": "xs",
+              "label": "XS"
+            },
+            {
+              "value": "sm",
+              "label": "S"
+            }
+          ],
+          "default": "sm"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "Explore our latest collection"
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Size",
+          "options": [
+            {
+              "value": "lg",
+              "label": "L"
+            },
+            {
+              "value": "xl",
+              "label": "XL"
+            },
+            {
+              "value": "2xl",
+              "label": "2XL"
+            }
+          ],
+          "default": "xl"
+        },
+        {
+          "type": "select",
+          "id": "tag",
+          "label": "Tag",
+          "options": [
+            {
+              "value": "h1",
+              "label": "H1"
+            },
+            {
+              "value": "h2",
+              "label": "H2"
+            }
+          ],
+          "default": "h2"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "Discover pieces crafted with care and designed to last."
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Size",
+          "options": [
+            {
+              "value": "sm",
+              "label": "S"
+            },
+            {
+              "value": "md",
+              "label": "M"
+            },
+            {
+              "value": "lg",
+              "label": "L"
+            }
+          ],
+          "default": "md"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label_1",
+          "label": "Button 1",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "link_1",
+          "label": "Link 1"
+        },
+        {
+          "type": "text",
+          "id": "label_2",
+          "label": "Button 2"
+        },
+        {
+          "type": "url",
+          "id": "link_2",
+          "label": "Link 2"
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Size",
+          "options": [
+            {
+              "value": "md",
+              "label": "M"
+            },
+            {
+              "value": "lg",
+              "label": "L"
+            }
+          ],
+          "default": "lg"
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with text overlay",
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "subheading"
+        },
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "button"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

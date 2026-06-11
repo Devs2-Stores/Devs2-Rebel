@@ -1,4 +1,4 @@
-/* -------------------------------------------------------------------------- */
+﻿/* -------------------------------------------------------------------------- */
 /*                              PRODUCT CARD                                  */
 /* -------------------------------------------------------------------------- */
 
@@ -30,7 +30,6 @@
           document.dispatchEvent(new CustomEvent('cart:item_added', { bubbles: true }));
         })
         .catch(function(e) {
-          console.error(e);
           window.showToast && window.showToast((themeConfig.strings.cart || {}).itemError || 'Could not add to cart', 'error');
         })
         .finally(async () => {
@@ -40,5 +39,5 @@
         });
     }
   }
-  customElements.define('product-card', ProductCard);
+  if (!customElements.get('product-card')) customElements.define('product-card', ProductCard);
 })();

@@ -480,7 +480,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 9999;
+  z-index: var(--z-overlay);
   display: none;
   opacity: 0;
   transition: opacity var(--transition-base);
@@ -540,7 +540,7 @@
   align-items: center;
   justify-content: center;
   transition: all var(--transition-fast);
-  z-index: 10001;
+  z-index: calc(var(--z-overlay) + 1);
   pointer-events: auto;
 }
 @media (max-width: 576px) {
@@ -564,7 +564,7 @@
   background: var(--color-white);
   border-bottom: 1px solid var(--border-color);
   box-shadow: var(--shadow-md);
-  z-index: 8;
+  z-index: var(--z-header);
   transform: translateY(-100%);
   opacity: 0;
   visibility: hidden;
@@ -772,7 +772,7 @@ size-guide-modal .size-guide-modal-panel .size-guide-modal-content { flex: 1; ov
   size-guide-modal .size-guide-modal-panel .size-guide-modal-content { padding: 1rem; }
 }
 size-guide-modal .size-guide-modal-panel .size-guide-modal-content::-webkit-scrollbar { width: 5px; }
-size-guide-modal .size-guide-modal-panel .size-guide-modal-content::-webkit-scrollbar-track { background: #ccc; }
+size-guide-modal .size-guide-modal-panel .size-guide-modal-content::-webkit-scrollbar-track { background: var(--color-border); }
 size-guide-modal .size-guide-modal-panel .size-guide-modal-content::-webkit-scrollbar-thumb { background: var(--color-primary); }
 size-guide-modal .size-guide-modal-panel .size-guide-modal-content h3 { font-size: var(--font-lg); font-weight: var(--font-weight-semibold); color: var(--color-gray-dark); margin: var(--space-xl) 0 var(--space-md); }
 size-guide-modal .size-guide-modal-panel .size-guide-modal-content h3:first-child { margin-top: 0; }
@@ -993,7 +993,7 @@ coupon-modal .coupon-modal-panel .coupon-modal-content { flex: 1; overflow-y: au
   coupon-modal .coupon-modal-panel .coupon-modal-content { padding: var(--space-md); }
 }
 coupon-modal .coupon-modal-panel .coupon-modal-content::-webkit-scrollbar { width: 5px; }
-coupon-modal .coupon-modal-panel .coupon-modal-content::-webkit-scrollbar-track { background: #ccc; }
+coupon-modal .coupon-modal-panel .coupon-modal-content::-webkit-scrollbar-track { background: var(--color-border); }
 coupon-modal .coupon-modal-panel .coupon-modal-content::-webkit-scrollbar-thumb { background: var(--color-primary); }
 coupon-modal .coupon-modal-panel .coupon-modal-list { display: flex; flex-direction: column; gap: var(--space-md); }
 coupon-modal .coupon-modal-panel .coupon-modal-item {
@@ -1077,7 +1077,7 @@ coupon-modal .coupon-modal-panel .coupon-modal-copy--copied:hover { background: 
   align-items: center;
   gap: 0.375rem;
   font-size: var(--font-sm);
-  color: #ef4444;
+  color: var(--color-error);
   font-weight: 600;
 }
 .stock-counter__fire-icon { width: 20px; height: 20px; animation: fireFlicker 0.8s ease-in-out infinite alternate; }
@@ -1122,9 +1122,9 @@ coupon-modal .coupon-modal-panel .coupon-modal-copy--copied:hover { background: 
 .back-in-stock__submit:hover { opacity: 0.75; }
 .back-in-stock__success {
   padding: var(--space-md);
-  background: #ecfdf5;
+  background: var(--color-success-light, #ecfdf5);
   border-radius: var(--radius-sm);
-  color: #065f46;
+  color: var(--color-success);
   font-weight: 500;
   font-size: var(--font-sm);
 }
@@ -1135,7 +1135,7 @@ coupon-modal .coupon-modal-panel .coupon-modal-copy--copied:hover { background: 
    PRODUCT VIDEO
    ═══════════════════════════════════════════════════ */
 .product-template__media-slide--video {
-  background: #000;
+  background: var(--color-black);
   display: flex;
   align-items: center;
   justify-content: center;

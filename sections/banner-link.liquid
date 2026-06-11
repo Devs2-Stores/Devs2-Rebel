@@ -22,7 +22,7 @@
 {%- endstyle -%}
 
 {%- if desktop_image -%}
-<div class="section-banner-link">
+<div class="section-banner-link color-{{ section.settings.color_scheme }}">
   <div class="{% if section.settings.container_width == 'fixed' %}page-width{% endif %}">
     {%- if link != blank -%}
       <a href="{{ link }}" class="banner-link__wrapper" aria-label="{{ image_alt }}">
@@ -72,6 +72,12 @@
     {
       "type": "header",
       "content": "t:sections.banner_link.settings.header__images.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
     },
     {
       "type": "image_picker",

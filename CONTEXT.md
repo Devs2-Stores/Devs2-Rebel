@@ -30,6 +30,7 @@
 Đọc **toàn bộ** SKILL.md files trong `.agent/skills/`:
 
 - `.agent/skills/shopify-liquid-coding/SKILL.md` — **Quan trọng nhất** — Anti-patterns, best practices
+- `.agent/skills/shopify-javascript/SKILL.md` — **JS architecture** — themeConfig, ThemeUtils, Web Components, SRA, custom events
 - `.agent/skills/shopify-create-section/SKILL.md` — Chi tiết tạo section
 - `.agent/skills/shopify-create-snippet/SKILL.md` — Chi tiết tạo snippet  
 - `.agent/skills/shopify-accessibility/SKILL.md` — WCAG accessibility rules

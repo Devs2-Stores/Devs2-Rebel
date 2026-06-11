@@ -1,3 +1,6 @@
+(function() {
+'use strict';
+
 class ContactPage extends HTMLElement {
   constructor() {
     super();
@@ -150,3 +153,5 @@ class ContactPage extends HTMLElement {
 if (typeof customElements !== 'undefined' && !customElements.get('contact-page')) {
   customElements.define('contact-page', ContactPage);
 }
+
+})();

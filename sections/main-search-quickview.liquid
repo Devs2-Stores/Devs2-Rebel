@@ -15,7 +15,7 @@
         {%- endfor -%}
         {%- else -%}
         <div class="swiper-slide">
-          <img src="{{ 'no-image.png' | asset_url }}" alt="{{ product.title | escape }}" width="800" height="1200" class="quickview-product__image">
+          <img src="{{ 'no_image.png' | asset_url }}" alt="{{ product.title | escape }}" width="800" height="1200" class="quickview-product__image">
         </div>
         {%- endif -%}
       </div>
@@ -30,7 +30,7 @@
       <div class="swiper-wrapper">
         {%- for image in product.images -%}
         <div class="swiper-slide">
-          <img src="{{ image | image_url: width: 120 }}" alt="{{ image.alt | default: product.title | escape }}" loading="lazy" class="quickview-product__thumb-image">
+          <img src="{{ image | image_url: width: 120 }}" alt="{{ image.alt | default: product.title | escape }}" width="120" height="120" loading="lazy" class="quickview-product__thumb-image">
         </div>
         {%- endfor -%}
       </div>

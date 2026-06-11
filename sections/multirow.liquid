@@ -1,0 +1,465 @@
+{%- comment -%}
+  Section: Multirow
+  Mô tả: Nhiều hàng image-with-text xen kẽ (alternating layout).
+{%- endcomment -%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-multirow color-{{ section.settings.color_scheme }}"
+  style="
+    --mr-dt: {{ section.settings.padding_top_desktop }}px;
+    --mr-db: {{ section.settings.padding_bottom_desktop }}px;
+    --mr-mt: {{ section.settings.padding_top_mobile }}px;
+    --mr-mb: {{ section.settings.padding_bottom_mobile }}px;
+  "
+>
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-multirow__head">
+        {%- if section.settings.subheading != blank -%}
+          <p class="section-multirow__subheading subheading-size-{{ section.settings.subheading_size }}">
+            {{- section.settings.subheading -}}
+          </p>
+        {%- endif -%}
+        <{{ section.settings.heading_tag }}
+          class="section-multirow__heading heading-size-{{ section.settings.heading_size }}"
+        >
+          {{- section.settings.heading -}}
+        </{{ section.settings.heading_tag }}>
+      </div>
+    {%- endif -%}
+
+    <div class="section-multirow__rows">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign is_even = forloop.index | modulo: 2
+          if section.settings.alternate_layout
+            if is_even == 0
+              assign img_order = 'right'
+            else
+              assign img_order = 'left'
+            endif
+          else
+            assign img_order = 'left'
+          endif
+        -%}
+        <div class="section-multirow__row section-multirow__row--{{ img_order }}" {{ block.shopify_attributes }}>
+          <div class="section-multirow__media">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 800 | image_tag:
+                widths: '375, 550, 750, 800',
+                sizes: '(max-width: 749px) 100vw, 50vw',
+                loading: 'lazy', decoding: 'async',
+                alt: block.settings.heading | default: shop.name,
+                class: 'section-multirow__img'
+              }}
+            {%- else -%}
+              <div class="section-multirow__placeholder">
+                {{ 'image' | placeholder_svg_tag }}
+              </div>
+            {%- endif -%}
+          </div>
+          <div class="section-multirow__content">
+            {%- if block.settings.subheading != blank -%}
+              <p class="section-multirow__item-sub subheading-size-{{ block.settings.subheading_size }}">
+                {{- block.settings.subheading -}}
+              </p>
+            {%- endif -%}
+            {%- if block.settings.heading != blank -%}
+              <h3 class="section-multirow__item-heading heading-size-{{ block.settings.heading_size }}">
+                {{- block.settings.heading -}}
+              </h3>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <div class="section-multirow__item-text content-size-{{ block.settings.text_size }}">
+                {{ block.settings.text }}
+              </div>
+            {%- endif -%}
+            {%- if block.settings.button_label != blank -%}
+              <a href="{{ block.settings.button_link | default: '#' }}" class="section-multirow__btn section-multirow__btn--{{ block.settings.button_style }} button-size-{{ block.settings.button_size }}">
+                {{- block.settings.button_label -}}
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .section-multirow {
+    padding-block: var(--mr-mt) var(--mr-mb);
+    background: rgb(var(--color-background));
+    color: rgba(var(--color-foreground), 0.85);
+  }
+  @media (min-width: 750px) {
+    .section-multirow { padding-block: var(--mr-dt) var(--mr-db); }
+  }
+  .section-multirow__head { text-align: center; margin-bottom: 2.5rem; }
+  .section-multirow__subheading {
+    margin: 0 0 0.25rem; text-transform: uppercase;
+    letter-spacing: 0.12em; color: rgb(var(--color-accent)); font-weight: 600;
+  }
+  .section-multirow__heading { margin: 0; color: rgb(var(--color-foreground)); }
+
+  .section-multirow__rows { display: flex; flex-direction: column; gap: 3rem; }
+  @media (min-width: 750px) {
+    .section-multirow__rows { gap: 4rem; }
+  }
+
+  .section-multirow__row {
+    display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: center;
+  }
+  @media (min-width: 750px) {
+    .section-multirow__row { grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .section-multirow__row--right .section-multirow__media { order: 2; }
+    .section-multirow__row--right .section-multirow__content { order: 1; }
+  }
+
+  .section-multirow__media { overflow: hidden; border-radius: 0.5rem; }
+  .section-multirow__img { width: 100%; height: auto; display: block; }
+  .section-multirow__placeholder {
+    aspect-ratio: 1; background: rgba(var(--color-foreground), 0.04);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .section-multirow__placeholder svg { width: 40%; opacity: 0.15; }
+
+  .section-multirow__content { display: flex; flex-direction: column; gap: 0.75rem; }
+  .section-multirow__item-sub {
+    margin: 0; text-transform: uppercase;
+    letter-spacing: 0.12em; color: rgb(var(--color-accent)); font-weight: 600;
+  }
+  .section-multirow__item-heading { margin: 0; color: rgb(var(--color-foreground)); line-height: 1.2; }
+  .section-multirow__item-text { margin: 0; color: rgba(var(--color-foreground), 0.7); line-height: 1.7; }
+  .section-multirow__item-text p { margin: 0; }
+
+  .section-multirow__btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 600; text-decoration: none;
+    border-radius: var(--buttons-radius, 0);
+    transition: opacity 0.2s; cursor: pointer; align-self: flex-start;
+  }
+  .section-multirow__btn:hover { opacity: 0.85; }
+  .section-multirow__btn--primary {
+    background: rgb(var(--color-button)); color: rgb(var(--color-button-text));
+    border: 1px solid rgb(var(--color-button));
+  }
+  .section-multirow__btn--secondary {
+    background: transparent; color: rgb(var(--color-foreground));
+    border: 1px solid rgba(var(--color-foreground), 0.3);
+  }
+  .section-multirow__btn--link {
+    background: none; border: none; color: rgb(var(--color-accent));
+    text-decoration: underline; text-underline-offset: 4px; padding: 0; min-width: auto !important;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Multirow",
+  "tag": "section",
+  "class": "section-multirow-wrapper",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "select",
+      "id": "subheading_size",
+      "label": "Subheading size",
+      "options": [
+        {
+          "value": "xs",
+          "label": "XS"
+        },
+        {
+          "value": "sm",
+          "label": "S"
+        },
+        {
+          "value": "md",
+          "label": "M"
+        }
+      ],
+      "default": "sm"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "sm",
+          "label": "S"
+        },
+        {
+          "value": "md",
+          "label": "M"
+        },
+        {
+          "value": "lg",
+          "label": "L"
+        },
+        {
+          "value": "xl",
+          "label": "XL"
+        }
+      ],
+      "default": "lg"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading tag",
+      "options": [
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "alternate_layout",
+      "label": "Alternate image position",
+      "default": true,
+      "info": "Odd rows: image left, even rows: image right"
+    },
+    {
+      "type": "header",
+      "content": "Desktop spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Mobile spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Top",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "type": "select",
+          "id": "subheading_size",
+          "label": "Subheading size",
+          "options": [
+            {
+              "value": "xs",
+              "label": "XS"
+            },
+            {
+              "value": "sm",
+              "label": "S"
+            },
+            {
+              "value": "md",
+              "label": "M"
+            }
+          ],
+          "default": "sm"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Row heading"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "Heading size",
+          "options": [
+            {
+              "value": "sm",
+              "label": "S"
+            },
+            {
+              "value": "md",
+              "label": "M"
+            },
+            {
+              "value": "lg",
+              "label": "L"
+            }
+          ],
+          "default": "md"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Pair text with an image to tell your brand story.</p>"
+        },
+        {
+          "type": "select",
+          "id": "text_size",
+          "label": "Text size",
+          "options": [
+            {
+              "value": "sm",
+              "label": "S"
+            },
+            {
+              "value": "md",
+              "label": "M"
+            },
+            {
+              "value": "lg",
+              "label": "L"
+            }
+          ],
+          "default": "md"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "link",
+              "label": "Link"
+            }
+          ],
+          "default": "primary"
+        },
+        {
+          "type": "select",
+          "id": "button_size",
+          "label": "Button size",
+          "options": [
+            {
+              "value": "sm",
+              "label": "S"
+            },
+            {
+              "value": "md",
+              "label": "M"
+            },
+            {
+              "value": "lg",
+              "label": "L"
+            }
+          ],
+          "default": "md"
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Multirow",
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "row"
+        },
+        {
+          "type": "row"
+        },
+        {
+          "type": "row"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

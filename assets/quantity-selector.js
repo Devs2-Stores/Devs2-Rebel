@@ -76,5 +76,5 @@
       }
     }
   }
-  customElements.define('quantity-selector', QuantitySelector);
+  if (!customElements.get('quantity-selector')) customElements.define('quantity-selector', QuantitySelector);
 })();

@@ -1,0 +1,314 @@
+{%- comment -%}
+  Section: Video
+  Mô tả: Embed YouTube hoặc tự host MP4 video.
+  Hỗ trợ: Autoplay, loop, cover poster, color scheme, responsive.
+{%- endcomment -%}
+
+{%- liquid
+  assign video_type = section.settings.video_type
+  assign yt_url = section.settings.youtube_url
+  assign mp4_video = section.settings.mp4_video
+  assign poster = section.settings.poster
+  assign autoplay = section.settings.autoplay
+  assign loop = section.settings.loop
+  assign muted = section.settings.muted
+  assign controls = section.settings.controls
+
+  comment
+    Extract YouTube ID from URL
+  endcomment
+  assign yt_id = ''
+  if yt_url != blank
+    if yt_url contains 'youtu.be/'
+      assign yt_id = yt_url | split: 'youtu.be/' | last | split: '?' | first
+    elsif yt_url contains 'v='
+      assign yt_id = yt_url | split: 'v=' | last | split: '&' | first
+    elsif yt_url contains '/embed/'
+      assign yt_id = yt_url | split: '/embed/' | last | split: '?' | first
+    endif
+  endif
+-%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-video color-{{ section.settings.color_scheme }}"
+  style="
+    --vid-dt: {{ section.settings.padding_top_desktop }}px;
+    --vid-db: {{ section.settings.padding_bottom_desktop }}px;
+    --vid-mt: {{ section.settings.padding_top_mobile }}px;
+    --vid-mb: {{ section.settings.padding_bottom_mobile }}px;
+  "
+>
+  {%- comment -%} Heading {%- endcomment -%}
+  {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+    <div class="page-width section-video__head">
+      {%- if section.settings.subheading != blank -%}
+        <p class="section-video__subheading subheading-size-{{ section.settings.subheading_size }}">
+          {{- section.settings.subheading -}}
+        </p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <{{ section.settings.heading_tag }}
+          class="section-video__heading heading-size-{{ section.settings.heading_size }}"
+        >
+          {{- section.settings.heading -}}
+        </{{ section.settings.heading_tag }}>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} Video Container {%- endcomment -%}
+  <div class="{% if section.settings.section_width == 'fixed' %}page-width{% endif %}">
+    <div class="section-video__wrapper" data-video-section>
+      {%- if video_type == 'youtube' and yt_id != blank -%}
+        {%- comment -%} YouTube — Facade pattern for performance {%- endcomment -%}
+        <div class="section-video__facade" data-yt-id="{{ yt_id }}" data-autoplay="{{ autoplay }}">
+          {%- if poster != blank -%}
+            {{ poster | image_url: width: 1920 | image_tag:
+              widths: '750, 1080, 1440, 1920',
+              sizes: '100vw',
+              alt: section.settings.heading | default: 'Video',
+              loading: 'lazy',
+              class: 'section-video__poster'
+            }}
+          {%- else -%}
+            <img
+              src="https://i.ytimg.com/vi/{{ yt_id }}/maxresdefault.jpg"
+              alt="{{ section.settings.heading | default: 'Video' | escape }}"
+              loading="lazy"
+              width="1280"
+              height="720"
+              class="section-video__poster"
+            >
+          {%- endif -%}
+          <button class="section-video__play" aria-label="{{ 'accessibility.play_video' | t }}">
+            <svg viewBox="0 0 68 48" width="68" height="48">
+              <path d="M66.5 7.7s-.7-4.7-2.8-6.8C60.7-2 57.2-2 55.6-2.2 46.4-3 34-3 34-3s-12.4 0-21.6 1C10.8-1.8 7.3-1.8 4.3 1c-2 2-2.7 6.7-2.7 6.7S.9 13.4.9 19v5.2c0 5.6.7 11.2.7 11.2s.7 4.7 2.7 6.8c3 3 7 2.8 8.8 3.2C19.4 46 34 46 34 46s12.4 0 21.6-1c1.6-.2 5.1-.2 8.1-3 2-2 2.8-6.8 2.8-6.8s.7-5.6.7-11.2V19c0-5.6-.7-11.3-.7-11.3z" fill="#212121" fill-opacity=".8"></path>
+              <path d="M28 33V14l18 9.5L28 33z" fill="#fff"></path>
+            </svg>
+          </button>
+        </div>
+
+      {%- elsif video_type == 'mp4' and mp4_video != blank -%}
+        {%- comment -%} Self-hosted MP4 {%- endcomment -%}
+        <video
+          class="section-video__player"
+          {%- if poster != blank %} poster="{{ poster | image_url: width: 1920 }}"{% endif %}
+          {%- if autoplay %} autoplay{% endif %}
+          {%- if loop %} loop{% endif %}
+          {%- if muted or autoplay %} muted{% endif %}
+          {%- if controls %} controls{% endif %}
+          playsinline
+          preload="metadata"
+        >
+          {{ mp4_video | video_tag }}
+        </video>
+
+      {%- else -%}
+        <div class="section-video__empty">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+          <p>Select a video source</p>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- comment -%} Description {%- endcomment -%}
+  {%- if section.settings.description != blank -%}
+    <div class="page-width section-video__desc">
+      <div class="section-video__desc-text content-size-{{ section.settings.description_size }}">
+        {{- section.settings.description -}}
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+{%- comment -%} YouTube Facade JS {%- endcomment -%}
+{%- if video_type == 'youtube' and yt_id != blank -%}
+<script>
+  (function() {
+    var wrapper = document.getElementById('section-{{ section.id }}');
+    if (!wrapper) return;
+    var facade = wrapper.querySelector('.section-video__facade');
+    if (!facade) return;
+
+    var ytId = facade.getAttribute('data-yt-id');
+    var auto = facade.getAttribute('data-autoplay') === 'true';
+
+    function loadYT() {
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube-nocookie.com/embed/' + ytId + '?autoplay=1&rel=0&modestbranding=1';
+      iframe.setAttribute('allow', 'autoplay; encrypted-media');
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.className = 'section-video__iframe';
+      facade.replaceWith(iframe);
+    }
+
+    if (auto) {
+      var observer = new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting) { loadYT(); observer.disconnect(); }
+      }, { threshold: 0.3 });
+      observer.observe(facade);
+    }
+
+    facade.querySelector('.section-video__play').addEventListener('click', loadYT);
+    facade.addEventListener('click', loadYT);
+  })();
+</script>
+{%- endif -%}
+
+{% stylesheet %}
+  .section-video {
+    padding-block: var(--vid-mt) var(--vid-mb);
+    background: rgb(var(--color-background));
+    color: rgba(var(--color-foreground), 0.85);
+  }
+  @media (min-width: 750px) {
+    .section-video { padding-block: var(--vid-dt) var(--vid-db); }
+  }
+
+  .section-video__head {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .section-video__subheading {
+    margin: 0 0 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgb(var(--color-accent));
+    font-weight: 600;
+  }
+  .section-video__heading {
+    margin: 0;
+    color: rgb(var(--color-foreground));
+    line-height: 1.2;
+  }
+
+  .section-video__wrapper {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    background: #000;
+  }
+
+  .section-video__facade {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+
+  .section-video__poster,
+  .section-video__player,
+  .section-video__iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 0;
+  }
+
+  .section-video__play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 2;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .section-video__facade:hover .section-video__play {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  .section-video__empty {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: rgba(var(--color-foreground), 0.3);
+  }
+
+  .section-video__desc {
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+  .section-video__desc-text {
+    margin: 0 auto;
+    max-width: 48rem;
+    color: rgba(var(--color-foreground), 0.7);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Video",
+  "tag": "section",
+  "class": "section-video-wrapper",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Heading" },
+    { "type": "inline_richtext", "id": "subheading", "label": "Subheading" },
+    {
+      "type": "select", "id": "subheading_size", "label": "Subheading size",
+      "options": [
+        { "value": "xs", "label": "Extra small" }, { "value": "sm", "label": "Small" },
+        { "value": "md", "label": "Medium" }, { "value": "lg", "label": "Large" }
+      ], "default": "sm"
+    },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading" },
+    {
+      "type": "select", "id": "heading_size", "label": "Heading size",
+      "options": [
+        { "value": "sm", "label": "Small" }, { "value": "md", "label": "Medium" },
+        { "value": "lg", "label": "Large" }, { "value": "xl", "label": "Extra large" }
+      ], "default": "lg"
+    },
+    {
+      "type": "select", "id": "heading_tag", "label": "Heading tag",
+      "options": [{ "value": "h2", "label": "H2" }, { "value": "h3", "label": "H3" }, { "value": "p", "label": "P" }],
+      "default": "h2"
+    },
+    { "type": "header", "content": "Video" },
+    {
+      "type": "select", "id": "video_type", "label": "Video type",
+      "options": [{ "value": "youtube", "label": "YouTube" }, { "value": "mp4", "label": "Shopify-hosted video" }],
+      "default": "youtube"
+    },
+    { "type": "text", "id": "youtube_url", "label": "YouTube URL", "info": "Paste full YouTube link", "visible_if": "{{ section.settings.video_type == 'youtube' }}" },
+    { "type": "video", "id": "mp4_video", "label": "Video file", "visible_if": "{{ section.settings.video_type == 'mp4' }}" },
+    { "type": "image_picker", "id": "poster", "label": "Cover image", "info": "Optional. Used as poster/thumbnail." },
+    { "type": "header", "content": "Playback" },
+    { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": false, "info": "YouTube: loads on scroll. MP4: auto muted." },
+    { "type": "checkbox", "id": "loop", "label": "Loop", "default": false },
+    { "type": "checkbox", "id": "muted", "label": "Muted", "default": true },
+    { "type": "checkbox", "id": "controls", "label": "Show controls", "default": true, "visible_if": "{{ section.settings.video_type == 'mp4' }}" },
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select", "id": "section_width", "label": "Section width",
+      "options": [{ "value": "fixed", "label": "Fixed width" }, { "value": "full", "label": "Full width" }],
+      "default": "fixed"
+    },
+    { "type": "inline_richtext", "id": "description", "label": "Description" },
+    {
+      "type": "select", "id": "description_size", "label": "Description size",
+      "options": [{ "value": "sm", "label": "Small" }, { "value": "md", "label": "Medium" }, { "value": "lg", "label": "Large" }],
+      "default": "md"
+    },
+    { "type": "header", "content": "Desktop spacing" },
+    { "type": "range", "id": "padding_top_desktop", "min": 0, "max": 150, "step": 5, "unit": "px", "label": "Top spacing", "default": 50 },
+    { "type": "range", "id": "padding_bottom_desktop", "min": 0, "max": 150, "step": 5, "unit": "px", "label": "Bottom spacing", "default": 50 },
+    { "type": "header", "content": "Mobile spacing" },
+    { "type": "range", "id": "padding_top_mobile", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Top spacing", "default": 30 },
+    { "type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Bottom spacing", "default": 30 }
+  ],
+  "presets": [{ "name": "Video", "category": "Video" }]
+}
+{% endschema %}

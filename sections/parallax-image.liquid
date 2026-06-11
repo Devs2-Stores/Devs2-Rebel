@@ -1,0 +1,150 @@
+{%- comment -%}
+  Section: Parallax Image Banner
+  Mô tả: Image background scroll chậm hơn content → hiệu ứng chiều sâu.
+{%- endcomment -%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-parallax color-{{ section.settings.color_scheme }}"
+  style="
+    --px-height: {{ section.settings.section_height }}vh;
+    --px-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+  "
+  data-parallax-section
+>
+  <div class="section-parallax__bg" data-parallax-bg>
+    {%- if section.settings.image != blank -%}
+      {{ section.settings.image | image_url: width: 2400 | image_tag:
+        widths: '1080, 1440, 1920, 2400', sizes: '100vw',
+        loading: 'lazy', class: 'section-parallax__img'
+      }}
+    {%- else -%}
+      <div class="section-parallax__ph"></div>
+    {%- endif -%}
+  </div>
+  <div class="section-parallax__overlay"></div>
+
+  <div class="section-parallax__content section-parallax__content--{{ section.settings.content_position }}">
+    <div class="page-width">
+      <div class="section-parallax__inner section-parallax__inner--{{ section.settings.text_align }}" style="max-width: {{ section.settings.content_width }}rem;">
+        {%- if section.settings.subheading != blank -%}
+          <p class="section-parallax__subheading subheading-size-{{ section.settings.subheading_size }}">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <{{ section.settings.heading_tag }} class="section-parallax__heading heading-size-{{ section.settings.heading_size }}">
+            {{- section.settings.heading -}}
+          </{{ section.settings.heading_tag }}>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <p class="section-parallax__text content-size-{{ section.settings.text_size }}">{{ section.settings.text }}</p>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link | default: '#' }}" class="section-parallax__btn section-parallax__btn--{{ section.settings.button_style }} button-size-{{ section.settings.button_size }}">
+            {{ section.settings.button_label }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var section = document.querySelector('#section-{{ section.id }}');
+  if (!section) return;
+  var bg = section.querySelector('[data-parallax-bg]');
+  var speed = {{ section.settings.parallax_speed | default: 0.4 }};
+
+  function onScroll() {
+    var rect = section.getBoundingClientRect();
+    var viewH = window.innerHeight;
+    if (rect.bottom < 0 || rect.top > viewH) return;
+    var offset = (rect.top / viewH) * speed * 100;
+    bg.style.transform = 'translate3d(0, ' + offset + 'px, 0)';
+  }
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+
+{% stylesheet %}
+  .section-parallax {
+    position: relative; height: var(--px-height, 70vh);
+    min-height: 350px; overflow: hidden;
+    display: flex; color: #fff;
+  }
+
+  .section-parallax__bg {
+    position: absolute; inset: -20% 0; z-index: 0;
+    will-change: transform;
+  }
+  .section-parallax__img { width: 100%; height: 100%; object-fit: cover; }
+  .section-parallax__ph {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  }
+  .section-parallax__overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: rgba(0, 0, 0, var(--px-overlay, 0.35));
+  }
+
+  .section-parallax__content {
+    position: relative; z-index: 2; width: 100%;
+    display: flex; padding: 2rem 1.5rem;
+  }
+  .section-parallax__content--top { align-items: flex-start; padding-top: 3rem; }
+  .section-parallax__content--center { align-items: center; }
+  .section-parallax__content--bottom { align-items: flex-end; padding-bottom: 3rem; }
+
+  .section-parallax__inner { display: flex; flex-direction: column; gap: 0.75rem; }
+  .section-parallax__inner--left { text-align: left; }
+  .section-parallax__inner--center { text-align: center; margin: 0 auto; align-items: center; }
+
+  .section-parallax__subheading { margin: 0; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(255,255,255,0.75); }
+  .section-parallax__heading { margin: 0; color: #fff; line-height: 1.1; }
+  .section-parallax__text { margin: 0; color: rgba(255,255,255,0.85); }
+
+  .section-parallax__btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 600; text-decoration: none; border-radius: var(--buttons-radius, 0);
+    cursor: pointer; transition: opacity 0.2s; margin-top: 0.25rem;
+  }
+  .section-parallax__btn:hover { opacity: 0.85; }
+  .section-parallax__btn--primary { background: #fff; color: #111; border: 1px solid #fff; }
+  .section-parallax__btn--secondary { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.5); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Parallax image",
+  "tag": "section",
+  "class": "section-parallax-wrapper",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Image" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "range", "id": "section_height", "min": 40, "max": 100, "step": 5, "unit": "vh", "label": "Height", "default": 70 },
+    { "type": "range", "id": "overlay_opacity", "min": 0, "max": 80, "step": 5, "unit": "%", "label": "Overlay opacity", "default": 35 },
+    { "type": "range", "id": "parallax_speed", "min": 1, "max": 8, "step": 1, "label": "Parallax intensity", "default": 4, "info": "1 = subtle, 8 = strong" },
+    { "type": "header", "content": "Content" },
+    { "type": "inline_richtext", "id": "subheading", "label": "Subheading", "default": "Our story" },
+    { "type": "select", "id": "subheading_size", "label": "Subheading size", "options": [{ "value": "xs", "label": "XS" },{ "value": "sm", "label": "S" }], "default": "sm" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Crafted with passion since 2015" },
+    { "type": "select", "id": "heading_size", "label": "Heading size", "options": [{ "value": "lg", "label": "L" },{ "value": "xl", "label": "XL" },{ "value": "2xl", "label": "2XL" }], "default": "xl" },
+    { "type": "select", "id": "heading_tag", "label": "Heading tag", "options": [{ "value": "h2", "label": "H2" },{ "value": "h3", "label": "H3" }], "default": "h2" },
+    { "type": "inline_richtext", "id": "text", "label": "Text", "default": "Every product tells a story of craftsmanship and dedication." },
+    { "type": "select", "id": "text_size", "label": "Text size", "options": [{ "value": "md", "label": "M" },{ "value": "lg", "label": "L" }], "default": "lg" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Learn more" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "select", "id": "button_style", "label": "Button style", "options": [{ "value": "primary", "label": "Primary" },{ "value": "secondary", "label": "Secondary" }], "default": "secondary" },
+    { "type": "select", "id": "button_size", "label": "Button size", "options": [{ "value": "md", "label": "M" },{ "value": "lg", "label": "L" }], "default": "lg" },
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "content_position", "label": "Vertical position", "options": [{ "value": "top", "label": "Top" },{ "value": "center", "label": "Center" },{ "value": "bottom", "label": "Bottom" }], "default": "center" },
+    { "type": "select", "id": "text_align", "label": "Text alignment", "options": [{ "value": "left", "label": "Left" },{ "value": "center", "label": "Center" }], "default": "center" },
+    { "type": "range", "id": "content_width", "min": 24, "max": 50, "step": 2, "unit": "rem", "label": "Max content width", "default": 36 }
+  ],
+  "presets": [{ "name": "Parallax image", "category": "Image" }]
+}
+{% endschema %}

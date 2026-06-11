@@ -72,13 +72,13 @@
     {%- if show_category -%}
       <div class="article-card__category">
         <a href="{{ blog.url }}" class="article-card__category-link">
-          {{ blog.title }}
+          {{ blog.title | escape }}
         </a>
       </div>
     {%- endif -%}
 
     <h3 class="article-card__title" itemprop="headline">
-      <a href="{{ article.url }}" title="{{ article.title | escape }}">{{ article.title }}</a>
+      <a href="{{ article.url }}" title="{{ article.title | escape }}">{{ article.title | escape }}</a>
     </h3>
 
     {%- if show_date or show_author or show_comment_count -%}
@@ -98,7 +98,7 @@
         {%- if show_author -%}
           <span class="article-card__author" itemprop="author" itemscope itemtype="https://schema.org/Person">
             {%- render 'icon', name: 'user' -%}
-            <span class="article-card__author-name" itemprop="name">{{ article.author }}</span>
+            <span class="article-card__author-name" itemprop="name">{{ article.author | escape }}</span>
           </span>
         {%- endif -%}
         {%- if show_comment_count and article.comments_count > 0 -%}
@@ -121,7 +121,7 @@
     {%- if show_tags and article.tags.size > 0 -%}
       <div class="article-card__tags">
         {%- for tag in article.tags limit: 3 -%}
-          <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="article-card__tag">{{ tag }}</a>
+          <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="article-card__tag">{{ tag | escape }}</a>
         {%- endfor -%}
       </div>
     {%- endif -%}

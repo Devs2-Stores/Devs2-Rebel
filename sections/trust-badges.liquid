@@ -1,0 +1,243 @@
+{%- comment -%}
+  Section: Trust Badges Bar
+  Mô tả: Icon strip compact — Free Shipping, Secure Pay, Easy Returns, 24/7 Support.
+{%- endcomment -%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-trust color-{{ section.settings.color_scheme }}"
+  style="
+    --tr-dt: {{ section.settings.padding_top_desktop }}px;
+    --tr-db: {{ section.settings.padding_bottom_desktop }}px;
+    --tr-mt: {{ section.settings.padding_top_mobile }}px;
+    --tr-mb: {{ section.settings.padding_bottom_mobile }}px;
+  "
+>
+  <div class="{% if section.settings.section_width == 'fixed' %}page-width{% endif %}">
+    <div class="section-trust__grid section-trust__grid--{{ section.settings.layout }}">
+      {%- for block in section.blocks -%}
+        <div class="section-trust__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.icon != blank -%}
+            <div class="section-trust__icon">
+              {{ block.settings.icon | image_url: width: 48 | image_tag: loading: 'lazy' }}
+            </div>
+          {%- elsif block.settings.emoji != blank -%}
+            <span class="section-trust__emoji">{{ block.settings.emoji }}</span>
+          {%- endif -%}
+          <div class="section-trust__text-wrap">
+            {%- if block.settings.heading != blank -%}
+              <span class="section-trust__title">{{ block.settings.heading }}</span>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <span class="section-trust__desc">{{ block.settings.text }}</span>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .section-trust {
+    padding-block: var(--tr-mt) var(--tr-mb);
+    background: rgb(var(--color-background));
+    color: rgba(var(--color-foreground), 0.85);
+  }
+  @media (min-width: 750px) {
+    .section-trust { padding-block: var(--tr-dt) var(--tr-db); }
+  }
+
+  .section-trust__grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+  }
+  @media (min-width: 750px) {
+    .section-trust__grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.5rem; }
+  }
+  .section-trust__grid--centered { justify-items: center; text-align: center; }
+  .section-trust__grid--centered .section-trust__item { flex-direction: column; align-items: center; }
+
+  .section-trust__item {
+    display: flex; align-items: center; gap: 0.625rem;
+    padding: 0.75rem;
+  }
+
+  .section-trust__icon { width: 2rem; height: 2rem; flex-shrink: 0; }
+  .section-trust__icon img { width: 100%; height: 100%; object-fit: contain; }
+  .section-trust__emoji { font-size: 1.5rem; flex-shrink: 0; line-height: 1; }
+
+  .section-trust__text-wrap { display: flex; flex-direction: column; }
+  .section-trust__title { font-size: 0.8125rem; font-weight: 700; color: rgb(var(--color-foreground)); line-height: 1.3; }
+  .section-trust__desc { font-size: 0.6875rem; color: rgba(var(--color-foreground), 0.5); line-height: 1.4; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Trust badges",
+  "tag": "section",
+  "class": "section-trust-wrapper",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "inline",
+          "label": "Inline"
+        },
+        {
+          "value": "centered",
+          "label": "Centered"
+        }
+      ],
+      "default": "inline"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Width",
+      "options": [
+        {
+          "value": "fixed",
+          "label": "Fixed"
+        },
+        {
+          "value": "full",
+          "label": "Full"
+        }
+      ],
+      "default": "fixed"
+    },
+    {
+      "type": "header",
+      "content": "Desktop spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Top",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Mobile spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Top",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 10
+    }
+  ],
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Badge",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon image"
+        },
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Emoji fallback",
+          "info": "Used if no icon image",
+          "default": "🚚"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Free Shipping"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Description",
+          "default": "On orders over $50"
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust badges",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "badge",
+          "settings": {
+            "emoji": "🚚",
+            "heading": "Free Shipping",
+            "text": "On orders over $50"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "emoji": "🔒",
+            "heading": "Secure Payment",
+            "text": "SSL encrypted checkout"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "emoji": "↩️",
+            "heading": "Easy Returns",
+            "text": "30-day return policy"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "emoji": "💬",
+            "heading": "24/7 Support",
+            "text": "We're here to help"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

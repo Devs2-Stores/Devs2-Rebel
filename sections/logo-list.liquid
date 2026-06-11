@@ -1,0 +1,361 @@
+{%- comment -%}
+  Section: Logo List / Brand Bar
+  Mô tả: Hiển thị logo đối tác/thương hiệu dạng grid hoặc marquee tự chạy.
+{%- endcomment -%}
+
+{%- liquid
+  assign layout = section.settings.layout
+  assign logo_count = section.blocks.size
+-%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-logo-list color-{{ section.settings.color_scheme }}"
+  style="
+    --ll-dt: {{ section.settings.padding_top_desktop }}px;
+    --ll-db: {{ section.settings.padding_bottom_desktop }}px;
+    --ll-mt: {{ section.settings.padding_top_mobile }}px;
+    --ll-mb: {{ section.settings.padding_bottom_mobile }}px;
+    --ll-logo-h: {{ section.settings.logo_height }}px;
+    --ll-marquee-speed: {{ section.settings.marquee_speed }}s;
+  "
+>
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-logo-list__head">
+        <{{ section.settings.heading_tag }}
+          class="section-logo-list__heading heading-size-{{ section.settings.heading_size }}"
+        >
+          {{- section.settings.heading -}}
+        </{{ section.settings.heading_tag }}>
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- if logo_count > 0 -%}
+    {%- if layout == 'marquee' -%}
+      <div class="section-logo-list__marquee">
+        <div class="section-logo-list__track">
+          {%- for i in (1..2) -%}
+            {%- for block in section.blocks -%}
+              <div class="section-logo-list__item" {{ block.shopify_attributes }}>
+                {%- if block.settings.image != blank -%}
+                  {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" class="section-logo-list__link">{%- endif -%}
+                    {{ block.settings.image | image_url: height: 120 | image_tag:
+                      loading: 'lazy', decoding: 'async',
+                      alt: block.settings.image.alt | default: 'Brand logo',
+                      class: 'section-logo-list__logo'
+                    }}
+                  {%- if block.settings.link != blank -%}</a>{%- endif -%}
+                {%- else -%}
+                  <div class="section-logo-list__ph">
+                    {{ 'image' | placeholder_svg_tag }}
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- else -%}
+      <div class="page-width">
+        <div class="section-logo-list__grid" style="--ll-cols: {{ section.settings.columns_desktop }};">
+          {%- for block in section.blocks -%}
+            <div class="section-logo-list__item" {{ block.shopify_attributes }}>
+              {%- if block.settings.image != blank -%}
+                {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" class="section-logo-list__link">{%- endif -%}
+                  {{ block.settings.image | image_url: height: 120 | image_tag:
+                    loading: 'lazy', decoding: 'async',
+                    alt: block.settings.image.alt | default: 'Brand logo',
+                    class: 'section-logo-list__logo'
+                  }}
+                {%- if block.settings.link != blank -%}</a>{%- endif -%}
+              {%- else -%}
+                <div class="section-logo-list__ph">
+                  {{ 'image' | placeholder_svg_tag }}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .section-logo-list {
+    padding-block: var(--ll-mt) var(--ll-mb);
+    background: rgb(var(--color-background));
+    overflow: hidden;
+  }
+  @media (min-width: 750px) {
+    .section-logo-list { padding-block: var(--ll-dt) var(--ll-db); }
+  }
+  .section-logo-list__head { text-align: center; margin-bottom: 2rem; }
+  .section-logo-list__heading { margin: 0; color: rgb(var(--color-foreground)); }
+
+  .section-logo-list__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    align-items: center;
+    justify-items: center;
+  }
+  @media (min-width: 750px) {
+    .section-logo-list__grid {
+      grid-template-columns: repeat(var(--ll-cols, 5), 1fr);
+      gap: 2rem;
+    }
+  }
+
+  .section-logo-list__item { display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .section-logo-list__link { display: flex; transition: opacity 0.3s; }
+  .section-logo-list__link:hover { opacity: 0.6; }
+
+  .section-logo-list__logo {
+    height: var(--ll-logo-h, 40px);
+    width: auto;
+    object-fit: contain;
+    opacity: 0.55;
+    filter: grayscale(100%);
+    transition: opacity 0.3s, filter 0.3s;
+  }
+  .section-logo-list__item:hover .section-logo-list__logo {
+    opacity: 1;
+    filter: grayscale(0%);
+  }
+
+  .section-logo-list__ph { height: var(--ll-logo-h, 40px); width: 80px; opacity: 0.12; }
+  .section-logo-list__ph svg { height: 100%; width: auto; }
+
+  @keyframes logo-marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .section-logo-list__marquee { overflow: hidden; width: 100%; }
+  .section-logo-list__marquee:hover .section-logo-list__track { animation-play-state: paused; }
+  .section-logo-list__track {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    width: fit-content;
+    animation: logo-marquee var(--ll-marquee-speed, 30s) linear infinite;
+  }
+  @media (min-width: 750px) {
+    .section-logo-list__track { gap: 4rem; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Logo list",
+  "tag": "section",
+  "class": "section-logo-list-wrapper",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "xs",
+          "label": "Extra small"
+        },
+        {
+          "value": "sm",
+          "label": "Small"
+        },
+        {
+          "value": "md",
+          "label": "Medium"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        }
+      ],
+      "default": "sm"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading tag",
+      "options": [
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "p",
+          "label": "P"
+        }
+      ],
+      "default": "h3"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "grid",
+          "label": "Grid"
+        },
+        {
+          "value": "marquee",
+          "label": "Marquee (auto scroll)"
+        }
+      ],
+      "default": "grid"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 3,
+      "max": 8,
+      "step": 1,
+      "label": "Desktop columns",
+      "default": 5,
+      "visible_if": "{{ section.settings.layout == 'grid' }}"
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Logo height",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "label": "Marquee speed",
+      "default": 30,
+      "visible_if": "{{ section.settings.layout == 'marquee' }}"
+    },
+    {
+      "type": "header",
+      "content": "Desktop spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Top spacing",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom spacing",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Mobile spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Top spacing",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom spacing",
+      "default": 25
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo image",
+          "info": "Recommended: transparent PNG"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logo list",
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

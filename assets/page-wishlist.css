@@ -10,7 +10,7 @@
 @media (min-width: 768px) {
   .wishlist-page__header h1 { font-size: 2.5rem; }
 }
-.wishlist-page__header p { font-size: 0.9375rem; color: var(--color_gray, #666); margin: 0; }
+.wishlist-page__header p { font-size: 0.9375rem; color: var(--color-gray, #666); margin: 0; }
 @media (min-width: 768px) {
   .wishlist-page__header p { font-size: 1rem; }
 }
@@ -62,7 +62,7 @@
 @media (min-width: 768px) {
   .wishlist-page__empty h2 { font-size: 1.5rem; }
 }
-.wishlist-page__empty p { font-size: 0.9375rem; color: var(--color_gray, #666); margin: 0 0 1.5rem; line-height: 1.5; }
+.wishlist-page__empty p { font-size: 0.9375rem; color: var(--color-gray, #666); margin: 0 0 1.5rem; line-height: 1.5; }
 @media (min-width: 768px) {
   .wishlist-page__empty p { font-size: 1rem; margin-bottom: 2rem; }
 }
@@ -101,7 +101,7 @@
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
-.wishlist-page__loading span { font-size: 0.9375rem; color: var(--color_gray, #666); }
+.wishlist-page__loading span { font-size: 0.9375rem; color: var(--color-gray, #666); }
 @keyframes spin {
   to { transform: rotate(360deg); }
 }

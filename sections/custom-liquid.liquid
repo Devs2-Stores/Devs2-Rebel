@@ -1,0 +1,218 @@
+{%- comment -%}
+  Section: Custom Liquid
+  Mô tả: Section cho phép merchant chèn code Liquid/HTML tùy chỉnh.
+  Hỗ trợ: Color scheme, border, corner radius, responsive spacing, custom CSS.
+{%- endcomment -%}
+
+{%- liquid
+  assign border_style = section.settings.border_style
+  assign has_border = false
+  if border_style != 'none'
+    assign has_border = true
+  endif
+-%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-custom-liquid color-{{ section.settings.color_scheme }}"
+  style="
+    --cl-dt: {{ section.settings.padding_top_desktop }}px;
+    --cl-db: {{ section.settings.padding_bottom_desktop }}px;
+    --cl-mt: {{ section.settings.padding_top_mobile }}px;
+    --cl-mb: {{ section.settings.padding_bottom_mobile }}px;
+    --cl-radius: {{ section.settings.corner_radius }}px;
+    {%- if has_border -%}
+      --cl-border-width: {{ section.settings.border_width }}px;
+      --cl-border-style: {{ border_style }};
+      --cl-border-opacity: {{ section.settings.border_opacity | divided_by: 100.0 }};
+    {%- endif -%}
+  "
+>
+  <div class="{% if section.settings.section_width == 'fixed' %}page-width{% else %}section-custom-liquid__full{% endif %}">
+    <div class="section-custom-liquid__inner{% if has_border %} section-custom-liquid__bordered{% endif %}">
+      {{ section.settings.liquid_code }}
+    </div>
+  </div>
+</div>
+
+
+
+{% stylesheet %}
+  /* ── Custom Liquid ── */
+  .section-custom-liquid {
+    padding-block-start: var(--cl-mt);
+    padding-block-end: var(--cl-mb);
+    background-color: rgb(var(--color-background));
+    color: rgba(var(--color-foreground), 0.85);
+  }
+
+  @media (min-width: 750px) {
+    .section-custom-liquid {
+      padding-block-start: var(--cl-dt);
+      padding-block-end: var(--cl-db);
+    }
+  }
+
+  .section-custom-liquid__full {
+    padding-inline: 15px;
+  }
+
+  @media (min-width: 750px) {
+    .section-custom-liquid__full {
+      padding-inline: 30px;
+    }
+  }
+
+  /* ── Border & Radius ── */
+  .section-custom-liquid__inner {
+    border-radius: var(--cl-radius, 0);
+    overflow: hidden;
+  }
+
+  .section-custom-liquid__bordered {
+    border: var(--cl-border-width, 1px) var(--cl-border-style, solid) rgba(var(--color-border), var(--cl-border-opacity, 1));
+    padding: 20px;
+  }
+
+  @media (min-width: 750px) {
+    .section-custom-liquid__bordered {
+      padding: 32px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Custom liquid",
+  "tag": "section",
+  "class": "section-custom-liquid-wrapper",
+  "settings": [
+    {
+      "type": "liquid",
+      "id": "liquid_code",
+      "label": "Liquid code",
+      "info": "Add app snippets or other code to create advanced customizations. [Learn more](https://shopify.dev/docs/api/liquid)"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Container",
+      "options": [
+        { "value": "full", "label": "Full" },
+        { "value": "fixed", "label": "Fixed" }
+      ],
+      "default": "fixed"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "border_style",
+      "label": "Border",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "solid", "label": "Solid" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1,
+      "visible_if": "{{ section.settings.border_style != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Border opacity",
+      "default": 100,
+      "visible_if": "{{ section.settings.border_style != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Corner radius",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Desktop spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Mobile spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Top",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 30
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom liquid",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

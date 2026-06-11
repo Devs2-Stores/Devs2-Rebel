@@ -11,14 +11,14 @@
 -%}
 
 {%- if flash_collection != blank and flash_collection.products.size > 0 -%}
-<section class="section-flash-sale" id="section-flash-sale-{{ section.id }}">
+<section class="section-flash-sale color-{{ section.settings.color_scheme }}" id="section-flash-sale-{{ section.id }}">
   <div class="section-flash-sale__ambient" aria-hidden="true">
     <div class="section-flash-sale__glow section-flash-sale__glow--left"></div>
     <div class="section-flash-sale__glow section-flash-sale__glow--right"></div>
   </div>
   {%- if end_date != blank -%}
   <div class="section-flash-sale__bg-timer" aria-hidden="true">
-    <span class="section-flash-sale__bg-timer-text" data-bg-timer>SALE</span>
+    <span class="section-flash-sale__bg-timer-text" data-bg-timer>{{ 'general.flash_sale.sale_label' | t }}</span>
   </div>
   {%- endif -%}
 
@@ -68,13 +68,13 @@
         <div class="swiper-wrapper">
           {%- for product in flash_collection.products limit: limit -%}
             {%- liquid
-              assign sold_count = forloop.index | times: 7 | plus: 15
-              assign stock_total = 50
+              assign variant_qty = product.selected_or_first_available_variant.inventory_quantity | default: 0
+              assign stock_total = variant_qty | plus: variant_qty | at_least: 10
             -%}
             <div class="swiper-slide">
               {%- render 'product-card-special',
                 product: product,
-                sold_count: sold_count,
+                variant_qty: variant_qty,
                 stock_total: stock_total,
                 lazyload: 'lazy'
               -%}
@@ -143,6 +143,12 @@
     {
       "type": "header",
       "content": "t:sections.flash_sale.settings.header__content.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
     },
     {
       "type": "inline_richtext",

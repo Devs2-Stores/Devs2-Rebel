@@ -43,7 +43,6 @@ global-footer { margin-top: 0 !important; }
 .stores-sidebar__search-input {
   flex: 1;
   border: none;
-  outline: none !important;
   font-size: var(--font-base);
   color: var(--color-gray-dark);
   background: transparent;
@@ -75,7 +74,7 @@ global-footer { margin-top: 0 !important; }
   background-size: 16px;
   padding-right: var(--space-2xl);
 }
-.stores-sidebar__select:focus { border-color: var(--color-primary); outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 10%, transparent); }
+.stores-sidebar__select:focus:not(:focus-visible) { border-color: var(--color-primary); outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 10%, transparent); }
 .stores-sidebar__select:disabled { opacity: .5; cursor: not-allowed; }
 .stores-sidebar__meta {
   display: flex;

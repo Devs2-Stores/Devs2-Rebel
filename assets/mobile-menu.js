@@ -15,6 +15,10 @@
       this.bindEvents();
     }
 
+    disconnectedCallback() {
+      if (this._boundEscHandler) document.removeEventListener('keydown', this._boundEscHandler);
+    }
+
     bindEvents() {
       // Close events
       if (this.overlay) {
@@ -35,11 +39,12 @@
       }.bind(this));
 
       // Escape key
-      document.addEventListener('keydown', function(e) {
+      this._boundEscHandler = function(e) {
         if (e.key === 'Escape' && this.classList.contains('show')) {
           this.close();
         }
-      }.bind(this));
+      }.bind(this);
+      document.addEventListener('keydown', this._boundEscHandler);
     }
 
     open() {
@@ -83,7 +88,7 @@
       }
     }
   }
-  customElements.define('mobile-menu', MobileMenu);
+  if (!customElements.get('mobile-menu')) customElements.define('mobile-menu', MobileMenu);
 
   // Mobile menu open handler
   document.addEventListener('DOMContentLoaded', function() {

@@ -1,0 +1,379 @@
+{%- comment -%}
+  Section: Pricing Table
+  Mô tả: 2-3 tiers cạnh nhau — Basic/Pro/Premium — highlight recommended.
+{%- endcomment -%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-pricing color-{{ section.settings.color_scheme }}"
+  style="
+    --pt-dt: {{ section.settings.padding_top_desktop }}px;
+    --pt-db: {{ section.settings.padding_bottom_desktop }}px;
+    --pt-mt: {{ section.settings.padding_top_mobile }}px;
+    --pt-mb: {{ section.settings.padding_bottom_mobile }}px;
+  "
+>
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-pricing__head">
+        {%- if section.settings.subheading != blank -%}
+          <p class="section-pricing__subheading subheading-size-{{ section.settings.subheading_size }}">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+        <{{ section.settings.heading_tag }} class="section-pricing__heading heading-size-{{ section.settings.heading_size }}">
+          {{- section.settings.heading -}}
+        </{{ section.settings.heading_tag }}>
+      </div>
+    {%- endif -%}
+
+    <div class="section-pricing__grid">
+      {%- for block in section.blocks -%}
+        <div class="section-pricing__card{% if block.settings.featured %} section-pricing__card--featured{% endif %}" {{ block.shopify_attributes }}>
+          {%- if block.settings.badge != blank -%}
+            <span class="section-pricing__badge">{{ block.settings.badge }}</span>
+          {%- endif -%}
+          <h3 class="section-pricing__tier-name">{{ block.settings.name | default: 'Plan' }}</h3>
+          <div class="section-pricing__price-row">
+            {%- if block.settings.currency != blank -%}
+              <span class="section-pricing__currency">{{ block.settings.currency }}</span>
+            {%- endif -%}
+            <span class="section-pricing__amount heading-size-xl">{{ block.settings.price }}</span>
+            {%- if block.settings.period != blank -%}
+              <span class="section-pricing__period">/ {{ block.settings.period }}</span>
+            {%- endif -%}
+          </div>
+          {%- if block.settings.description != blank -%}
+            <p class="section-pricing__desc">{{ block.settings.description }}</p>
+          {%- endif -%}
+          <ul class="section-pricing__features">
+            {%- assign features = block.settings.features | split: '|' -%}
+            {%- for feature in features -%}
+              {%- if feature != blank -%}
+                <li class="section-pricing__feature">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  {{ feature | strip }}
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+          <a href="{{ block.settings.button_link | default: '#' }}" class="section-pricing__cta{% if block.settings.featured %} section-pricing__cta--primary{% else %} section-pricing__cta--secondary{% endif %} button-size-md">
+            {{ block.settings.button_label | default: 'Get started' }}
+          </a>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .section-pricing {
+    padding-block: var(--pt-mt) var(--pt-mb);
+    background: rgb(var(--color-background));
+    color: rgba(var(--color-foreground), 0.85);
+  }
+  @media (min-width: 750px) {
+    .section-pricing { padding-block: var(--pt-dt) var(--pt-db); }
+  }
+  .section-pricing__head { text-align: center; margin-bottom: 2.5rem; }
+  .section-pricing__subheading { margin: 0 0 0.25rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgb(var(--color-accent)); font-weight: 600; }
+  .section-pricing__heading { margin: 0; color: rgb(var(--color-foreground)); }
+
+  .section-pricing__grid {
+    display: grid; grid-template-columns: 1fr; gap: 1.25rem;
+    align-items: stretch;
+  }
+  @media (min-width: 750px) {
+    .section-pricing__grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+  }
+
+  .section-pricing__card {
+    position: relative; border-radius: 0.75rem;
+    padding: 2rem 1.5rem; display: flex; flex-direction: column;
+    border: 1px solid rgba(var(--color-foreground), 0.08);
+    background: rgb(var(--color-background));
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .section-pricing__card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+  .section-pricing__card--featured {
+    border-color: rgb(var(--color-accent));
+    box-shadow: 0 0 0 1px rgb(var(--color-accent));
+  }
+
+  .section-pricing__badge {
+    position: absolute; top: -0.75rem; left: 50%; transform: translateX(-50%);
+    padding: 0.1875rem 0.75rem; border-radius: 1rem;
+    font-size: 0.625rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: rgb(var(--color-accent)); color: rgb(var(--color-background));
+  }
+
+  .section-pricing__tier-name {
+    margin: 0 0 0.75rem; font-size: 0.875rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: rgba(var(--color-foreground), 0.6);
+  }
+
+  .section-pricing__price-row { display: flex; align-items: baseline; gap: 0.125rem; margin-bottom: 0.5rem; }
+  .section-pricing__currency { font-size: 1.25rem; font-weight: 700; color: rgb(var(--color-foreground)); }
+  .section-pricing__amount { font-weight: 800; color: rgb(var(--color-foreground)); line-height: 1; }
+  .section-pricing__period { font-size: 0.8125rem; color: rgba(var(--color-foreground), 0.4); }
+
+  .section-pricing__desc { font-size: 0.8125rem; color: rgba(var(--color-foreground), 0.6); margin: 0 0 1.25rem; line-height: 1.5; }
+
+  .section-pricing__features {
+    list-style: none; padding: 0; margin: 0 0 1.5rem;
+    display: flex; flex-direction: column; gap: 0.5rem; flex: 1;
+  }
+  .section-pricing__feature {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.8125rem; color: rgba(var(--color-foreground), 0.75);
+  }
+  .section-pricing__feature svg { color: #059669; flex-shrink: 0; }
+
+  .section-pricing__cta {
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; text-decoration: none; border-radius: var(--buttons-radius, 0);
+    cursor: pointer; transition: opacity 0.2s; width: 100%; margin-top: auto;
+  }
+  .section-pricing__cta:hover { opacity: 0.85; }
+  .section-pricing__cta--primary { background: rgb(var(--color-button)); color: rgb(var(--color-button-text)); border: 1px solid rgb(var(--color-button)); }
+  .section-pricing__cta--secondary { background: transparent; color: rgb(var(--color-foreground)); border: 1px solid rgba(var(--color-foreground), 0.2); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Pricing table",
+  "tag": "section",
+  "class": "section-pricing-wrapper",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Simple pricing"
+    },
+    {
+      "type": "select",
+      "id": "subheading_size",
+      "label": "Subheading size",
+      "options": [
+        {
+          "value": "xs",
+          "label": "XS"
+        },
+        {
+          "value": "sm",
+          "label": "S"
+        }
+      ],
+      "default": "sm"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Choose your plan"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "md",
+          "label": "M"
+        },
+        {
+          "value": "lg",
+          "label": "L"
+        }
+      ],
+      "default": "lg"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Tag",
+      "options": [
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "header",
+      "content": "Desktop spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Mobile spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Top",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tier",
+      "name": "Tier",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Plan name",
+          "default": "Pro"
+        },
+        {
+          "type": "text",
+          "id": "currency",
+          "label": "Currency",
+          "default": "$"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "29"
+        },
+        {
+          "type": "text",
+          "id": "period",
+          "label": "Period",
+          "default": "month"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Perfect for growing businesses."
+        },
+        {
+          "type": "textarea",
+          "id": "features",
+          "label": "Features",
+          "default": "Unlimited products|Priority support|Advanced analytics|Custom domain|Email marketing",
+          "info": "Separate with | character"
+        },
+        {
+          "type": "checkbox",
+          "id": "featured",
+          "label": "Featured / Recommended",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge",
+          "info": "E.g. Most popular"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Get started"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pricing table",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "tier",
+          "settings": {
+            "name": "Basic",
+            "price": "9",
+            "description": "Great for getting started.",
+            "features": "5 products|Email support|Basic analytics",
+            "button_label": "Start free"
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "name": "Pro",
+            "price": "29",
+            "description": "Perfect for growing businesses.",
+            "features": "Unlimited products|Priority support|Advanced analytics|Custom domain|Email marketing",
+            "featured": true,
+            "badge": "Most popular",
+            "button_label": "Get started"
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "name": "Enterprise",
+            "price": "99",
+            "description": "For large-scale operations.",
+            "features": "Everything in Pro|Dedicated manager|API access|White label|SLA guarantee",
+            "button_label": "Contact sales"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

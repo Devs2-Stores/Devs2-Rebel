@@ -1,0 +1,75 @@
+{%- comment -%}
+  Section: Back to Top
+  Mô tả: Floating button hiện khi scroll xuống, smooth scroll lên.
+{%- endcomment -%}
+
+<button
+  id="section-{{ section.id }}"
+  class="section-btt color-{{ section.settings.color_scheme }}"
+  aria-label="{{ section.settings.label | default: 'Back to top' }}"
+  data-btt
+  style="
+    --btt-size: {{ section.settings.size }}px;
+    --btt-offset: {{ section.settings.offset }}px;
+  "
+>
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<script>
+(function() {
+  var btn = document.querySelector('[data-btt]');
+  if (!btn) return;
+  var threshold = {{ section.settings.show_after }}; 
+
+  function toggle() {
+    if (window.scrollY > threshold) { btn.classList.add('is-visible'); }
+    else { btn.classList.remove('is-visible'); }
+  }
+  window.addEventListener('scroll', toggle, { passive: true });
+  toggle();
+
+  btn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+
+{% stylesheet %}
+  .section-btt {
+    position: fixed; z-index: var(--z-float, 90);
+    bottom: var(--btt-offset, 24px); right: var(--btt-offset, 24px);
+    width: var(--btt-size, 44px); height: var(--btt-size, 44px);
+    border-radius: 50%; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    background: rgb(var(--color-button)); color: rgb(var(--color-button-text));
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    opacity: 0; transform: translateY(20px); pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s, background 0.3s;
+  }
+  .section-btt.is-visible {
+    opacity: 1; transform: translateY(0); pointer-events: auto;
+  }
+  .section-btt:hover {
+    background: rgb(var(--color-accent));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Back to top",
+  "tag": "div",
+  "class": "section-btt-wrapper",
+  "limit": 1,
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "text", "id": "label", "label": "Aria label", "default": "Back to top" },
+    { "type": "range", "id": "show_after", "min": 100, "max": 1000, "step": 50, "unit": "px", "label": "Show after scroll", "default": 300 },
+    { "type": "range", "id": "size", "min": 36, "max": 56, "step": 2, "unit": "px", "label": "Button size", "default": 44 },
+    { "type": "range", "id": "offset", "min": 12, "max": 40, "step": 4, "unit": "px", "label": "Edge offset", "default": 24 }
+  ],
+  "presets": [{ "name": "Back to top", "category": "Utility" }]
+}
+{% endschema %}

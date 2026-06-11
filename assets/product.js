@@ -1,3 +1,6 @@
+(function() {
+'use strict';
+
 // ProductTemplate Component
 class ProductTemplate extends HTMLElement {
 	constructor() {
@@ -95,7 +98,6 @@ class ProductTemplate extends HTMLElement {
 				}, 100);
 			}
 		} catch (e) {
-			console.error('Error initializing variant from URL:', e);
 		}
 	}
 
@@ -487,7 +489,7 @@ class ProductTemplate extends HTMLElement {
 				if (buyBtnContent) buyBtnContent.textContent = strings.contact || 'Contact';
 
 				// Get contact link from data attribute (set by Liquid)
-				var contactLink = this.buyButtons.getAttribute('data-contact-link') || '/pages/contact';
+				var contactLink = this.buyButtons.getAttribute('data-contact-link') || ((themeConfig.routes && themeConfig.routes.root_url) || '/') + 'pages/contact';
 
 				this.buyButtons.onclick = function() {
 					window.location.href = contactLink;
@@ -547,7 +549,6 @@ class ProductTemplate extends HTMLElement {
 				if (typeof openCartModal === 'function') openCartModal();
 			}
 		} catch (error) {
-			console.error('Add to cart error:', error);
 			if (typeof showToast === 'function') showToast(themeConfig.strings.cart.error || 'An error occurred', 'error');
 		} finally {
 			this.setButtonLoading(this.addButtons, false);
@@ -582,7 +583,6 @@ class ProductTemplate extends HTMLElement {
 				window.location.href = themeConfig.routes.checkout_url || '/checkout';
 			}
 		} catch (error) {
-			console.error('Buy now error:', error);
 			if (typeof showToast === 'function') showToast(themeConfig.strings.cart.error || 'An error occurred', 'error');
 			this.setButtonLoading(this.buyButtons, false);
 		}
@@ -734,7 +734,7 @@ class ProductTemplate extends HTMLElement {
 	}
 }
 
-customElements.define('product-template', ProductTemplate);
+if (!customElements.get('product-template')) customElements.define('product-template', ProductTemplate);
 
 // ProductStickyAdd Component
 class ProductStickyAdd extends HTMLElement {
@@ -887,7 +887,7 @@ class ProductStickyAdd extends HTMLElement {
 		if (buyBtn) buyBtn.disabled = !variant.available;
 	}
 }
-customElements.define('product-sticky-add', ProductStickyAdd);
+if (!customElements.get('product-sticky-add')) customElements.define('product-sticky-add', ProductStickyAdd);
 
 // ProductLightbox Component
 class ProductLightbox extends HTMLElement {
@@ -981,7 +981,7 @@ class ProductLightbox extends HTMLElement {
 		}
 	}
 }
-customElements.define('product-lightbox', ProductLightbox);
+if (!customElements.get('product-lightbox')) customElements.define('product-lightbox', ProductLightbox);
 
 // Initialize lightbox for product images
 (() => {
@@ -1062,7 +1062,7 @@ class SizeGuideModal extends HTMLElement {
 		if (window.ThemeUtils && ThemeUtils.releaseFocus) ThemeUtils.releaseFocus(this);
 	}
 }
-customElements.define('size-guide-modal', SizeGuideModal);
+if (!customElements.get('size-guide-modal')) customElements.define('size-guide-modal', SizeGuideModal);
 
 // CouponPreview Component
 class CouponPreview extends HTMLElement {
@@ -1084,7 +1084,7 @@ class CouponPreview extends HTMLElement {
 		this.style.cursor = 'pointer';
 	}
 }
-customElements.define('coupon-preview', CouponPreview);
+if (!customElements.get('coupon-preview')) customElements.define('coupon-preview', CouponPreview);
 
 // CouponModal Component
 class CouponModal extends HTMLElement {
@@ -1163,7 +1163,6 @@ class CouponModal extends HTMLElement {
 			navigator.clipboard.writeText(text).then(function() {
 				self.showCopyFeedback(button);
 			}).catch(function(err) {
-				console.error('Copy failed:', err);
 				self.fallbackCopy(text, button);
 			});
 		} else {
@@ -1184,7 +1183,6 @@ class CouponModal extends HTMLElement {
 			document.execCommand('copy');
 			self.showCopyFeedback(button);
 		} catch (err) {
-			console.error('Fallback copy failed:', err);
 			window.showToast((themeConfig.strings.share || {}).copyFailed || 'Copy failed', 'error');
 		}
 
@@ -1206,7 +1204,7 @@ class CouponModal extends HTMLElement {
 		}, 2000);
 	}
 }
-customElements.define('coupon-modal', CouponModal);
+if (!customElements.get('coupon-modal')) customElements.define('coupon-modal', CouponModal);
 
 // Product Template Relate Component
 class ProductTemplateRelate extends HTMLElement {
@@ -1255,7 +1253,7 @@ class ProductTemplateRelate extends HTMLElement {
 		});
 	}
 }
-customElements.define('product-template-relate', ProductTemplateRelate);
+if (!customElements.get('product-template-relate')) customElements.define('product-template-relate', ProductTemplateRelate);
 
 // ProductViewed Component
 class ProductViewed extends HTMLElement {
@@ -1365,7 +1363,7 @@ class ProductViewed extends HTMLElement {
 				image: productImage || null,
 				price: product.price,
 				compare_at_price: product.compare_at_price,
-				url: product.url || '/products/' + product.handle
+				url: product.url || ((themeConfig.routes && themeConfig.routes.all_products_url) ? themeConfig.routes.all_products_url.replace('/collections/all', '/products/') : '/products/') + product.handle
 			});
 
 			if (viewedProducts.length > this.limit) {
@@ -1374,7 +1372,6 @@ class ProductViewed extends HTMLElement {
 
 			localStorage.setItem(this.storageKey, JSON.stringify(viewedProducts));
 		} catch (error) {
-			console.error('Error saving viewed product:', error);
 		}
 	}
 
@@ -1410,4 +1407,6 @@ class ProductViewed extends HTMLElement {
 		this.style.display = 'none';
 	}
 }
-customElements.define('product-viewed', ProductViewed);
+if (!customElements.get('product-viewed')) customElements.define('product-viewed', ProductViewed);
+
+})();

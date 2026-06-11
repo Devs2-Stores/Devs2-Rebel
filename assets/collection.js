@@ -1,3 +1,6 @@
+(function() {
+'use strict';
+
 /**
  * collection.js — Shopify Native Storefront Filtering
  *
@@ -199,7 +202,6 @@ class FacetFilters extends HTMLElement {
     })
     .catch(function(err) {
       if (err.name === 'AbortError') return;
-      console.error('FacetFilters: fetch error', err);
       self.classList.remove('is-loading');
     });
   }
@@ -391,7 +393,6 @@ class FacetFilters extends HTMLElement {
         }
       })
       .catch(function(err) {
-        console.error('Load more failed:', err);
         if (triggerEl) {
           triggerEl.disabled = false;
           triggerEl.classList.remove('is-loading');
@@ -545,7 +546,7 @@ class FacetFilters extends HTMLElement {
           this.innerHTML = '<span class="facet-filter__toggle-text">Show more (' + extraCount + ')</span><span class="facet-filter__toggle-icon">+</span>';
         } else {
           this.setAttribute('aria-expanded', 'true');
-          this.innerHTML = '<span class="facet-filter__toggle-text">Show less</span><span class="facet-filter__toggle-icon">−</span>';
+          this.innerHTML = '<span class="facet-filter__toggle-text">Show less</span><span class="facet-filter__toggle-icon">âˆ’</span>';
         }
       });
 
@@ -635,7 +636,7 @@ class FacetFilters extends HTMLElement {
         var ids = self.compareItems.map(function(item) { return item.id; }).join(',');
         /* Store in sessionStorage for compare page to read */
         sessionStorage.setItem('compare_products', JSON.stringify(self.compareItems));
-        window.location.href = '/pages/compare?ids=' + ids;
+        window.location.href = ((themeConfig.routes && themeConfig.routes.root_url) || '/') + 'pages/compare?ids=' + ids;
       });
     }
   }
@@ -726,7 +727,7 @@ class FacetFilters extends HTMLElement {
 }
 
 
-customElements.define('facet-filters', FacetFilters);
+if (!customElements.get('facet-filters')) customElements.define('facet-filters', FacetFilters);
 
 
 /* ═══════════════════════════════════════════════════
@@ -750,7 +751,6 @@ class CollectionBest extends HTMLElement {
     if (typeof retries === 'undefined') retries = 0;
     if (typeof Swiper === 'undefined') {
       if (retries >= 50) {
-        console.warn('Swiper not loaded after 5s');
         return;
       }
       setTimeout(function() {
@@ -781,4 +781,6 @@ class CollectionBest extends HTMLElement {
   }
 }
 
-customElements.define('collection-best', CollectionBest);
+if (!customElements.get('collection-best')) customElements.define('collection-best', CollectionBest);
+
+})();

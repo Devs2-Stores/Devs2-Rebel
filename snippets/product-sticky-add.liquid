@@ -15,7 +15,7 @@
 				<div class="product-sticky-add__info">
 					<h3 class="product-sticky-add__title">{{ product.title | escape }}</h3>
 					<div class="product-sticky-add__variant" data-sticky-variant>
-						{{ product.selected_or_first_available_variant.title }}
+						{{ product.selected_or_first_available_variant.title | escape }}
 					</div>
 					<div class="product-sticky-add__price" data-sticky-price>
 						{%- if product.price == 0 -%}

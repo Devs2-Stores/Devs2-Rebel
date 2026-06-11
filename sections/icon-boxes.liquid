@@ -1,0 +1,376 @@
+{%- comment -%}
+  Section: Icon Boxes
+  Mô tả: Grid icon + heading + text + link — USP / Feature highlights.
+{%- endcomment -%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-icon-boxes color-{{ section.settings.color_scheme }}"
+  style="
+    --ib-dt: {{ section.settings.padding_top_desktop }}px;
+    --ib-db: {{ section.settings.padding_bottom_desktop }}px;
+    --ib-mt: {{ section.settings.padding_top_mobile }}px;
+    --ib-mb: {{ section.settings.padding_bottom_mobile }}px;
+    --ib-cols: {{ section.settings.columns_desktop }};
+  "
+>
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-icon-boxes__head">
+        {%- if section.settings.subheading != blank -%}
+          <p class="section-icon-boxes__subheading subheading-size-{{ section.settings.subheading_size }}">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+        <{{ section.settings.heading_tag }} class="section-icon-boxes__heading heading-size-{{ section.settings.heading_size }}">
+          {{- section.settings.heading -}}
+        </{{ section.settings.heading_tag }}>
+      </div>
+    {%- endif -%}
+
+    <div class="section-icon-boxes__grid section-icon-boxes__grid--{{ section.settings.style }}">
+      {%- for block in section.blocks -%}
+        <div class="section-icon-boxes__item" {{ block.shopify_attributes }}>
+          <div class="section-icon-boxes__icon-wrap section-icon-boxes__icon-wrap--{{ section.settings.icon_style }}">
+            {%- if block.settings.icon_image != blank -%}
+              {{ block.settings.icon_image | image_url: width: 64 | image_tag: loading: 'lazy', class: 'section-icon-boxes__icon-img' }}
+            {%- elsif block.settings.emoji != blank -%}
+              <span class="section-icon-boxes__emoji">{{ block.settings.emoji }}</span>
+            {%- else -%}
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            {%- endif -%}
+          </div>
+          {%- if block.settings.heading != blank -%}
+            <h3 class="section-icon-boxes__title">{{ block.settings.heading }}</h3>
+          {%- endif -%}
+          {%- if block.settings.text != blank -%}
+            <p class="section-icon-boxes__text">{{ block.settings.text }}</p>
+          {%- endif -%}
+          {%- if block.settings.link_text != blank -%}
+            <a href="{{ block.settings.link | default: '#' }}" class="section-icon-boxes__link">
+              {{ block.settings.link_text }}
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .section-icon-boxes {
+    padding-block: var(--ib-mt) var(--ib-mb);
+    background: rgb(var(--color-background));
+    color: rgba(var(--color-foreground), 0.85);
+  }
+  @media (min-width: 750px) {
+    .section-icon-boxes { padding-block: var(--ib-dt) var(--ib-db); }
+  }
+  .section-icon-boxes__head { text-align: center; margin-bottom: 2.5rem; }
+  .section-icon-boxes__subheading { margin: 0 0 0.25rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgb(var(--color-accent)); font-weight: 600; }
+  .section-icon-boxes__heading { margin: 0; color: rgb(var(--color-foreground)); }
+
+  .section-icon-boxes__grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+  }
+  @media (min-width: 750px) {
+    .section-icon-boxes__grid { grid-template-columns: repeat(var(--ib-cols, 4), 1fr); gap: 2rem; }
+  }
+  .section-icon-boxes__grid--centered .section-icon-boxes__item { align-items: center; text-align: center; }
+  .section-icon-boxes__grid--left .section-icon-boxes__item { align-items: flex-start; text-align: left; }
+
+  .section-icon-boxes__item {
+    display: flex; flex-direction: column; gap: 0.5rem;
+    padding: 1.25rem; border-radius: 0.75rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .section-icon-boxes__item:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+
+  .section-icon-boxes__icon-wrap { display: flex; align-items: center; justify-content: center; margin-bottom: 0.25rem; }
+  .section-icon-boxes__icon-wrap--circle {
+    width: 3rem; height: 3rem; border-radius: 50%;
+    background: rgba(var(--color-accent), 0.1); color: rgb(var(--color-accent));
+  }
+  .section-icon-boxes__icon-wrap--square {
+    width: 3rem; height: 3rem; border-radius: 0.5rem;
+    background: rgba(var(--color-accent), 0.1); color: rgb(var(--color-accent));
+  }
+  .section-icon-boxes__icon-wrap--none { color: rgb(var(--color-accent)); }
+
+  .section-icon-boxes__icon-img { width: 2rem; height: 2rem; object-fit: contain; }
+  .section-icon-boxes__emoji { font-size: 1.5rem; }
+
+  .section-icon-boxes__title {
+    margin: 0; font-size: 0.9375rem; font-weight: 700;
+    color: rgb(var(--color-foreground)); line-height: 1.3;
+  }
+  .section-icon-boxes__text {
+    margin: 0; font-size: 0.8125rem;
+    color: rgba(var(--color-foreground), 0.6); line-height: 1.5;
+  }
+  .section-icon-boxes__link {
+    display: inline-flex; align-items: center; gap: 0.25rem;
+    font-size: 0.8125rem; font-weight: 600; color: rgb(var(--color-accent));
+    text-decoration: none; transition: opacity 0.3s; margin-top: auto;
+  }
+  .section-icon-boxes__link:hover { opacity: 0.7; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Icon boxes",
+  "tag": "section",
+  "class": "section-icon-boxes-wrapper",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "select",
+      "id": "subheading_size",
+      "label": "Subheading size",
+      "options": [
+        {
+          "value": "xs",
+          "label": "XS"
+        },
+        {
+          "value": "sm",
+          "label": "S"
+        }
+      ],
+      "default": "sm"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "md",
+          "label": "M"
+        },
+        {
+          "value": "lg",
+          "label": "L"
+        }
+      ],
+      "default": "lg"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Tag",
+      "options": [
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "label": "Desktop columns",
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "centered",
+          "label": "Centered"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        }
+      ],
+      "default": "centered"
+    },
+    {
+      "type": "select",
+      "id": "icon_style",
+      "label": "Icon style",
+      "options": [
+        {
+          "value": "circle",
+          "label": "Circle"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "circle"
+    },
+    {
+      "type": "header",
+      "content": "Desktop spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Mobile spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Top",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "box",
+      "name": "Box",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Icon image"
+        },
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Emoji fallback",
+          "default": "🚚",
+          "info": "If no icon image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Free Shipping"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Description",
+          "default": "Free shipping on all orders over $50."
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link text"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icon boxes",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "box",
+          "settings": {
+            "emoji": "🚚",
+            "heading": "Free Shipping",
+            "text": "On all orders over $50"
+          }
+        },
+        {
+          "type": "box",
+          "settings": {
+            "emoji": "🔒",
+            "heading": "Secure Checkout",
+            "text": "256-bit SSL encryption"
+          }
+        },
+        {
+          "type": "box",
+          "settings": {
+            "emoji": "↩️",
+            "heading": "Easy Returns",
+            "text": "30-day hassle-free returns"
+          }
+        },
+        {
+          "type": "box",
+          "settings": {
+            "emoji": "⭐",
+            "heading": "5-Star Reviews",
+            "text": "Trusted by 10,000+ customers"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

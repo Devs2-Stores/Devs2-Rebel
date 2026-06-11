@@ -1,0 +1,186 @@
+{%- comment -%}
+  Section: Video Hero
+  Mô tả: Full-screen video background + text overlay — CTA hero section.
+{%- endcomment -%}
+
+{%- liquid
+  assign video_url = section.settings.video_url
+  assign has_yt = false
+  if video_url contains 'youtube.com' or video_url contains 'youtu.be'
+    assign has_yt = true
+    if video_url contains 'youtu.be/'
+      assign yt_id = video_url | split: 'youtu.be/' | last | split: '?' | first
+    else
+      assign yt_id = video_url | split: 'v=' | last | split: '&' | first
+    endif
+  endif
+-%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-video-hero color-{{ section.settings.color_scheme }}"
+  style="
+    --vh-height: {{ section.settings.section_height }}vh;
+    --vh-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+  "
+>
+  <div class="section-video-hero__media">
+    {%- if has_yt -%}
+      <iframe
+        class="section-video-hero__iframe"
+        src="https://www.youtube.com/embed/{{ yt_id }}?autoplay=1&mute=1&loop=1&playlist={{ yt_id }}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
+        allow="autoplay; encrypted-media" allowfullscreen
+        loading="lazy" title="{{ section.settings.heading | default: 'accessibility.video_hero_title' | t }}"
+      ></iframe>
+    {%- elsif section.settings.video_hosted != blank -%}
+      {{ section.settings.video_hosted | video_tag:
+        autoplay: true, loop: true, muted: true, playsinline: true,
+        controls: false, class: 'section-video-hero__video'
+      }}
+    {%- elsif section.settings.fallback_image != blank -%}
+      {{ section.settings.fallback_image | image_url: width: 1920 | image_tag:
+        widths: '750, 1080, 1440, 1920', sizes: '100vw',
+        loading: 'eager', class: 'section-video-hero__video'
+      }}
+    {%- else -%}
+      <div class="section-video-hero__placeholder"></div>
+    {%- endif -%}
+    <div class="section-video-hero__overlay"></div>
+  </div>
+
+  <div class="section-video-hero__content section-video-hero__content--{{ section.settings.text_position }}">
+    <div class="page-width">
+      <div class="section-video-hero__inner section-video-hero__inner--{{ section.settings.text_align }}">
+        {%- if section.settings.subheading != blank -%}
+          <p class="section-video-hero__subheading subheading-size-{{ section.settings.subheading_size }}">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <{{ section.settings.heading_tag }} class="section-video-hero__heading heading-size-{{ section.settings.heading_size }}">
+            {{- section.settings.heading -}}
+          </{{ section.settings.heading_tag }}>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <p class="section-video-hero__text content-size-{{ section.settings.text_size }}">{{ section.settings.text }}</p>
+        {%- endif -%}
+        {%- if section.settings.button_label_1 != blank or section.settings.button_label_2 != blank -%}
+          <div class="section-video-hero__buttons">
+            {%- if section.settings.button_label_1 != blank -%}
+              <a href="{{ section.settings.button_link_1 | default: '#' }}" class="section-video-hero__btn section-video-hero__btn--primary button-size-{{ section.settings.button_size }}">
+                {{ section.settings.button_label_1 }}
+              </a>
+            {%- endif -%}
+            {%- if section.settings.button_label_2 != blank -%}
+              <a href="{{ section.settings.button_link_2 | default: '#' }}" class="section-video-hero__btn section-video-hero__btn--secondary button-size-{{ section.settings.button_size }}">
+                {{ section.settings.button_label_2 }}
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .section-video-hero {
+    position: relative; height: var(--vh-height, 80vh);
+    min-height: 400px; overflow: hidden;
+    display: flex; color: #fff;
+  }
+
+  .section-video-hero__media {
+    position: absolute; inset: 0; z-index: 0;
+  }
+  .section-video-hero__iframe,
+  .section-video-hero__video {
+    width: 100%; height: 100%; object-fit: cover;
+    border: 0; pointer-events: none;
+  }
+  .section-video-hero__iframe {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%; min-height: 100%;
+    width: 177.78vh; height: 56.25vw;
+  }
+  .section-video-hero__placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  }
+  .section-video-hero__overlay {
+    position: absolute; inset: 0;
+    background: rgba(0, 0, 0, var(--vh-overlay, 0.4));
+  }
+
+  .section-video-hero__content {
+    position: relative; z-index: 2;
+    display: flex; align-items: center; width: 100%;
+  }
+  .section-video-hero__content--top { align-items: flex-start; padding-top: 3rem; }
+  .section-video-hero__content--center { align-items: center; }
+  .section-video-hero__content--bottom { align-items: flex-end; padding-bottom: 3rem; }
+
+  .section-video-hero__inner {
+    max-width: 40rem; display: flex; flex-direction: column; gap: 1rem;
+  }
+  .section-video-hero__inner--left { text-align: left; }
+  .section-video-hero__inner--center { text-align: center; margin: 0 auto; align-items: center; }
+
+  .section-video-hero__subheading {
+    margin: 0; text-transform: uppercase; letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.8); font-weight: 600;
+  }
+  .section-video-hero__heading { margin: 0; color: #fff; line-height: 1.1; }
+  .section-video-hero__text { margin: 0; color: rgba(255,255,255,0.85); max-width: 32rem; }
+
+  .section-video-hero__buttons { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .section-video-hero__inner--center .section-video-hero__buttons { justify-content: center; }
+  .section-video-hero__btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 600; text-decoration: none;
+    border-radius: var(--buttons-radius, 0); cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .section-video-hero__btn:hover { opacity: 0.85; }
+  .section-video-hero__btn--primary {
+    background: #fff; color: #111; border: 1px solid #fff;
+  }
+  .section-video-hero__btn--secondary {
+    background: transparent; color: #fff;
+    border: 1px solid rgba(255,255,255,0.5);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Video hero",
+  "tag": "section",
+  "class": "section-video-hero-wrapper",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Video" },
+    { "type": "text", "id": "video_url", "label": "YouTube URL", "info": "Plays muted, looping in background" },
+    { "type": "video", "id": "video_hosted", "label": "Shopify-hosted video" },
+    { "type": "image_picker", "id": "fallback_image", "label": "Fallback image", "info": "Shown if no video" },
+    { "type": "range", "id": "section_height", "min": 40, "max": 100, "step": 5, "unit": "vh", "label": "Section height", "default": 80 },
+    { "type": "range", "id": "overlay_opacity", "min": 0, "max": 80, "step": 5, "unit": "%", "label": "Overlay opacity", "default": 40 },
+    { "type": "header", "content": "Content" },
+    { "type": "inline_richtext", "id": "subheading", "label": "Subheading", "default": "Welcome to our store" },
+    { "type": "select", "id": "subheading_size", "label": "Subheading size", "options": [{ "value": "xs", "label": "XS" },{ "value": "sm", "label": "S" },{ "value": "md", "label": "M" }], "default": "sm" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Discover something new every day" },
+    { "type": "select", "id": "heading_size", "label": "Heading size", "options": [{ "value": "lg", "label": "L" },{ "value": "xl", "label": "XL" },{ "value": "2xl", "label": "2XL" }], "default": "2xl" },
+    { "type": "select", "id": "heading_tag", "label": "Heading tag", "options": [{ "value": "h1", "label": "H1" },{ "value": "h2", "label": "H2" }], "default": "h2" },
+    { "type": "inline_richtext", "id": "text", "label": "Text", "default": "Explore our curated collection of premium products designed to elevate your lifestyle." },
+    { "type": "select", "id": "text_size", "label": "Text size", "options": [{ "value": "md", "label": "M" },{ "value": "lg", "label": "L" }], "default": "lg" },
+    { "type": "header", "content": "Buttons" },
+    { "type": "text", "id": "button_label_1", "label": "Button 1 label", "default": "Shop now" },
+    { "type": "url", "id": "button_link_1", "label": "Button 1 link" },
+    { "type": "text", "id": "button_label_2", "label": "Button 2 label", "default": "Learn more" },
+    { "type": "url", "id": "button_link_2", "label": "Button 2 link" },
+    { "type": "select", "id": "button_size", "label": "Button size", "options": [{ "value": "md", "label": "M" },{ "value": "lg", "label": "L" }], "default": "lg" },
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "text_position", "label": "Vertical position", "options": [{ "value": "top", "label": "Top" },{ "value": "center", "label": "Center" },{ "value": "bottom", "label": "Bottom" }], "default": "center" },
+    { "type": "select", "id": "text_align", "label": "Text alignment", "options": [{ "value": "left", "label": "Left" },{ "value": "center", "label": "Center" }], "default": "center" }
+  ],
+  "presets": [{ "name": "Video hero", "category": "Video" }]
+}
+{% endschema %}

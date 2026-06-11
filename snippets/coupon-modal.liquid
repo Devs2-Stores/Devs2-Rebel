@@ -1,5 +1,5 @@
 <coupon-modal class="coupon-modal-wrapper hidden" role="dialog" aria-modal="true" aria-labelledby="coupon-modal-title">
-  <div class="coupon-modal-overlay" data-action="close" role="button" tabindex="0" aria-label="{{ 'accessibility.close' | t }}"></div>
+  <div class="coupon-modal-overlay" data-action="close" aria-label="{{ 'accessibility.close' | t }}"></div>
   <div class="coupon-modal-panel">
     <div class="coupon-modal-header">
       <h2 class="coupon-modal-title" id="coupon-modal-title">{{ 'products.product.coupon_code' | t }}</h2>
@@ -20,12 +20,12 @@
         <div class="coupon-modal-item">
           <div class="coupon-modal-item-left">
             {%- if settings[title] != blank -%}
-            <div class="coupon-modal-title-text">{{ settings[title] }}</div>
+            <div class="coupon-modal-title-text">{{ settings[title] | escape }}</div>
             {%- endif -%}
-            <div class="coupon-modal-code">{{ settings[code] }}</div>
-            <div class="coupon-modal-desc">{{ settings[desc] }}</div>
+            <div class="coupon-modal-code">{{ settings[code] | escape }}</div>
+            <div class="coupon-modal-desc">{{ settings[desc] | escape }}</div>
             {%- if settings[expiry] != blank -%}
-            <div class="coupon-modal-expire">HSD: {{ settings[expiry] }}</div>
+            <div class="coupon-modal-expire">HSD: {{ settings[expiry] | escape }}</div>
             {%- endif -%}
           </div>
           <button type="button" class="coupon-modal-copy" data-code="{{ settings[code] | escape }}">

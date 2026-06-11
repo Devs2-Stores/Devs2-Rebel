@@ -90,7 +90,7 @@
 }
 .megamenu__item .megamenu__trigger .megamenu__icon { flex-shrink: 0; transition: transform var(--transition-base); }
 .megamenu__item .megamenu__trigger:hover,
-.megamenu__item .megamenu__trigger:focus { color: var(--color-primary); outline: none; }
+.megamenu__item .megamenu__trigger:focus:not(:focus-visible) { color: var(--color-primary); outline: none; }
 .megamenu__item .megamenu__trigger:hover span::after,
 .megamenu__item .megamenu__trigger:focus span::after { width: 100%; }
 .megamenu__item .megamenu__trigger--text { cursor: default; color: var(--color-gray); }

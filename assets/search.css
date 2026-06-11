@@ -60,8 +60,8 @@
   font-size: var(--font-base);
   color: rgba(var(--color-foreground), 0.85);
   background: transparent;
-  outline: none;
 }
+.search-template__input:focus:not(:focus-visible) { outline: none; }
 .search-template__input::placeholder { color: rgba(var(--color-foreground), 0.35); }
 
 .search-template__submit {

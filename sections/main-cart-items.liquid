@@ -11,14 +11,14 @@
     <img src="{{ item.product.featured_image | image_url: width: 300 }}" alt="{{ item.product.title | escape }}"
        loading="lazy" decoding="async" width="{{ item.product.featured_image.width }}" height="{{ item.product.featured_image.height }}">
     {%- else -%}
-    <img src="{{ 'no-image.png' | asset_url }}" alt="{{ item.product.title | escape }}"
-       loading="lazy" decoding="async">
+    <img src="{{ 'no_image.png' | asset_url }}" alt="{{ item.product.title | escape }}"
+       loading="lazy" decoding="async" width="300" height="300">
     {%- endif -%}
   </a>
 
   <div class="cart-modal-item__info">
     <div class="cart-modal-item__details">
-      <a href="{{ item.product.url }}" title="{{ item.product.title | escape }}" class="cart-modal-item__title">{{ item.product.title }}</a>
+      <a href="{{ item.product.url }}" title="{{ item.product.title | escape }}" class="cart-modal-item__title">{{ item.product.title | escape }}</a>
 
       {%- if item.variant.title != 'Default Title' -%}
       <ul class="cart-modal-item__variant">

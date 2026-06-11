@@ -5,7 +5,7 @@
   }
 {%- endstyle -%}
 
-<div class="account-template">
+<div class="account-template color-{{ section.settings.color_scheme }}">
     <div class="page-width">
     <h1 class="account-template__title">{{ 'customer.account.title' | t }}</h1>
     <div class="account-template__grid">
@@ -25,19 +25,19 @@
             <li><strong>{{ 'customer.account.name' | t }}:</strong> <span>{{ customer.last_name }} {{ customer.first_name }}</span></li>
             <li><strong>{{ 'customer.login_page.email' | t }}:</strong> <span>{{ customer.email }}</span></li>
             {%- unless customer.default_address.phone == blank -%}
-            <li><strong>{{ 'customer.register.phone' | t }}:</strong> <span>{{ customer.default_address.phone }}</span></li>
+            <li><strong>{{ 'customer.register.phone' | t }}:</strong> <span>{{ customer.default_address.phone | escape }}</span></li>
             {%- endunless -%}
             {%- unless customer.default_address.company == blank -%}
-            <li><strong>{{ 'customer.addresses.company' | t }}:</strong> <span>{{ customer.default_address.company }}</span></li>
+            <li><strong>{{ 'customer.addresses.company' | t }}:</strong> <span>{{ customer.default_address.company | escape }}</span></li>
             {%- endunless -%}
             {%- if customer.default_address -%}
             <li>
               <strong>{{ 'customer.addresses.address1' | t }}:</strong>
               <span>
                 {%- capture addr -%}
-                {%- if customer.default_address.address1 != blank -%}{{ customer.default_address.address1 }}|{%- endif -%}
-                {%- if customer.default_address.province != blank -%}{{ customer.default_address.province }}|{%- endif -%}
-                {%- if customer.default_address.country != blank -%}{{ customer.default_address.country }}|{%- endif -%}
+                {%- if customer.default_address.address1 != blank -%}{{ customer.default_address.address1 | escape }}|{%- endif -%}
+                {%- if customer.default_address.province != blank -%}{{ customer.default_address.province | escape }}|{%- endif -%}
+                {%- if customer.default_address.country != blank -%}{{ customer.default_address.country | escape }}|{%- endif -%}
                 {%- endcapture -%}
                 {{ addr | split: '|' | join: ', ' }}
               </span>
@@ -103,16 +103,16 @@
                 {%- endif -%}
                 <p class="account-template__address-name"><strong>{{ address.last_name }} {{ address.first_name }}</strong></p>
                 {%- unless address.company == blank -%}
-                <p class="account-template__address-row"><span class="account-template__label">{{ 'customer.addresses.company' | t }}:</span> {{ address.company }}</p>
+                <p class="account-template__address-row"><span class="account-template__label">{{ 'customer.addresses.company' | t }}:</span> {{ address.company | escape }}</p>
                 {%- endunless -%}
                 {%- unless address.address1 == blank -%}
-                <p class="account-template__address-row"><span class="account-template__label">{{ 'customer.addresses.address1' | t }}:</span> {{ address.address1 }}</p>
+                <p class="account-template__address-row"><span class="account-template__label">{{ 'customer.addresses.address1' | t }}:</span> {{ address.address1 | escape }}</p>
                 {%- endunless -%}
                 {%- unless address.province == blank -%}
-                <p class="account-template__address-row"><span class="account-template__label">{{ 'customer.addresses.province' | t }}:</span> {{ address.province }}{%- unless address.country == blank -%}, {{ address.country }}{%- endunless -%}</p>
+                <p class="account-template__address-row"><span class="account-template__label">{{ 'customer.addresses.province' | t }}:</span> {{ address.province | escape }}{%- unless address.country == blank -%}, {{ address.country | escape }}{%- endunless -%}</p>
                 {%- endunless -%}
                 {%- unless address.phone == blank -%}
-                <p class="account-template__address-row"><span class="account-template__label">{{ 'customer.register.phone' | t }}:</span> {{ address.phone }}</p>
+                <p class="account-template__address-row"><span class="account-template__label">{{ 'customer.register.phone' | t }}:</span> {{ address.phone | escape }}</p>
                 {%- endunless -%}
               </div>
               {%- endfor -%}
@@ -141,6 +141,12 @@
   "tag": "section",
   "class": "section-main-customers-account",
   "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
     {
       "type": "range",
       "id": "padding_top",

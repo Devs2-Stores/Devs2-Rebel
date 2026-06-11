@@ -1,0 +1,41 @@
+{%- comment -%}
+  Snippet: Testimonial Card
+  @param {block} block - Block object from testimonials section
+{%- endcomment -%}
+
+<div class="testimonial-card">
+  {%- if block.settings.rating > 0 -%}
+    <div class="testimonial-card__stars">
+      {%- for i in (1..block.settings.rating) -%}
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  {%- if block.settings.quote != blank -%}
+    <div class="testimonial-card__quote content-size-{{ block.settings.content_size | default: 'md' }}">
+      {{ block.settings.quote }}
+    </div>
+  {%- endif -%}
+
+  {%- if block.settings.author != blank -%}
+    <div class="testimonial-card__author">
+      {%- if block.settings.avatar != blank -%}
+        {{ block.settings.avatar | image_url: width: 80 | image_tag:
+          loading: 'lazy', class: 'testimonial-card__avatar',
+          alt: block.settings.author | escape
+        }}
+      {%- else -%}
+        <div class="testimonial-card__avatar-placeholder">
+          {{ block.settings.author | slice: 0 | upcase }}
+        </div>
+      {%- endif -%}
+      <div>
+        <div class="testimonial-card__name">{{ block.settings.author | escape }}</div>
+        {%- if block.settings.author_title != blank -%}
+          <div class="testimonial-card__title">{{ block.settings.author_title | escape }}</div>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+</div>

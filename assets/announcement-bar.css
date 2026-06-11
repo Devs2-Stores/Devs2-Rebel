@@ -22,4 +22,4 @@
 .announcement-bar__text.announcement-bar__link:hover { opacity: 0.8; text-decoration: underline; }
 .announcement-bar__nav { background: transparent; }
 .announcement-bar__nav:hover:after { color: var(--color-price); }
-.announcement-bar__nav:after { color: #fff; font-size: var(--font-lg); opacity: 1; }
+.announcement-bar__nav:after { color: inherit; font-size: var(--font-lg); opacity: 1; }

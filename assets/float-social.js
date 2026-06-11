@@ -2,19 +2,25 @@
 /*                           FLOAT SOCIAL BUTTON                              */
 /* -------------------------------------------------------------------------- */
 
-customElements.define('float-social', class extends HTMLElement {
+if (!customElements.get('float-social')) customElements.define('float-social', class extends HTMLElement {
   connectedCallback() {
     this.toggle = this.querySelector('.float-social__toggle');
     this.panel = this.querySelector('.float-social__panel');
     this.isOpen = false;
     if (!this.toggle || !this.panel) return;
     this.toggle.addEventListener('click', () => this.handleToggle());
-    document.addEventListener('click', (e) => {
+    this._boundDocClick = (e) => {
       if (this.isOpen && !this.contains(e.target)) this.close();
-    });
-    document.addEventListener('keydown', (e) => {
+    };
+    this._boundDocEsc = (e) => {
       if (e.key === 'Escape' && this.isOpen) this.close();
-    });
+    };
+    document.addEventListener('click', this._boundDocClick);
+    document.addEventListener('keydown', this._boundDocEsc);
+  }
+  disconnectedCallback() {
+    if (this._boundDocClick) document.removeEventListener('click', this._boundDocClick);
+    if (this._boundDocEsc) document.removeEventListener('keydown', this._boundDocEsc);
   }
   handleToggle() {
     this.isOpen ? this.close() : this.open();

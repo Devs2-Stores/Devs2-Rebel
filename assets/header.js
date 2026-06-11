@@ -16,5 +16,5 @@
       if (isSticky) document.documentElement.style.setProperty('--header-height-sticky', headerh + 'px');
     }
   }
-  customElements.define('global-header', Header);
+  if (!customElements.get('global-header')) customElements.define('global-header', Header);
 })();

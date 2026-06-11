@@ -1,0 +1,184 @@
+{%- comment -%}
+  Section: Newsletter
+  Mô tả: Form đăng ký email — tích hợp Shopify Customer API.
+{%- endcomment -%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-newsletter color-{{ section.settings.color_scheme }}"
+  style="
+    --nl-dt: {{ section.settings.padding_top_desktop }}px;
+    --nl-db: {{ section.settings.padding_bottom_desktop }}px;
+    --nl-mt: {{ section.settings.padding_top_mobile }}px;
+    --nl-mb: {{ section.settings.padding_bottom_mobile }}px;
+  "
+>
+  <div class="page-width">
+    <div class="section-newsletter__inner section-newsletter__inner--{{ section.settings.text_align }}">
+      {%- if section.settings.subheading != blank -%}
+        <p class="section-newsletter__subheading subheading-size-{{ section.settings.subheading_size }}">
+          {{- section.settings.subheading -}}
+        </p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <{{ section.settings.heading_tag }}
+          class="section-newsletter__heading heading-size-{{ section.settings.heading_size }}"
+        >
+          {{- section.settings.heading -}}
+        </{{ section.settings.heading_tag }}>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <div class="section-newsletter__desc content-size-{{ section.settings.description_size }}">
+          {{- section.settings.description -}}
+        </div>
+      {%- endif -%}
+
+      {%- form 'customer', id: 'newsletter-form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="section-newsletter__form">
+          <input
+            type="email"
+            name="contact[email]"
+            class="section-newsletter__input"
+            placeholder="{{ 'general.newsletter.email_placeholder' | t | default: 'Enter your email' }}"
+            required
+            autocomplete="email"
+            aria-label="{{ 'general.newsletter.email_placeholder' | t | default: 'Email address' }}"
+          >
+          <button type="submit" class="section-newsletter__btn button-size-{{ section.settings.button_size }}">
+            {{ section.settings.button_label | default: 'Subscribe' }}
+          </button>
+        </div>
+        {%- if form.posted_successfully? -%}
+          <p class="section-newsletter__success">
+            {{ 'general.newsletter.success' | t | default: 'Thanks for subscribing!' }}
+          </p>
+        {%- endif -%}
+        {%- if form.errors -%}
+          <p class="section-newsletter__error">
+            {{ form.errors.messages['email'] }}
+          </p>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .section-newsletter {
+    padding-block: var(--nl-mt) var(--nl-mb);
+    background: rgb(var(--color-background));
+    color: rgba(var(--color-foreground), 0.85);
+  }
+  @media (min-width: 750px) {
+    .section-newsletter { padding-block: var(--nl-dt) var(--nl-db); }
+  }
+
+  .section-newsletter__inner {
+    max-width: 36rem; display: flex; flex-direction: column; gap: 0.75rem;
+  }
+  .section-newsletter__inner--left { text-align: left; }
+  .section-newsletter__inner--center { text-align: center; margin: 0 auto; align-items: center; }
+
+  .section-newsletter__subheading {
+    margin: 0; text-transform: uppercase;
+    letter-spacing: 0.12em; color: rgb(var(--color-accent)); font-weight: 600;
+  }
+  .section-newsletter__heading { margin: 0; color: rgb(var(--color-foreground)); line-height: 1.2; }
+  .section-newsletter__desc { margin: 0; color: rgba(var(--color-foreground), 0.7); }
+
+  .section-newsletter__form {
+    display: flex; gap: 0; margin-top: 0.5rem;
+    border: 1px solid rgba(var(--color-foreground), 0.15);
+    border-radius: var(--buttons-radius, 0);
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .section-newsletter__form:focus-within {
+    border-color: rgb(var(--color-accent));
+  }
+
+  .section-newsletter__input {
+    flex: 1; border: none; outline: none;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    background: transparent;
+    color: rgb(var(--color-foreground));
+    font-family: inherit;
+  }
+  .section-newsletter__input::placeholder {
+    color: rgba(var(--color-foreground), 0.4);
+  }
+
+  .section-newsletter__btn {
+    background: rgb(var(--color-button));
+    color: rgb(var(--color-button-text));
+    border: none; cursor: pointer;
+    font-weight: 600; white-space: nowrap;
+    transition: opacity 0.3s;
+    border-radius: 0;
+  }
+  .section-newsletter__btn:hover { opacity: 0.85; }
+
+  .section-newsletter__success {
+    margin: 0.5rem 0 0; font-size: 0.875rem; color: #059669;
+  }
+  .section-newsletter__error {
+    margin: 0.5rem 0 0; font-size: 0.875rem; color: #dc2626;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "tag": "section",
+  "class": "section-newsletter-wrapper",
+  "limit": 1,
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Content" },
+    { "type": "inline_richtext", "id": "subheading", "label": "Subheading" },
+    {
+      "type": "select", "id": "subheading_size", "label": "Subheading size",
+      "options": [{ "value": "xs", "label": "XS" },{ "value": "sm", "label": "S" },{ "value": "md", "label": "M" }],
+      "default": "sm"
+    },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Subscribe to our emails" },
+    {
+      "type": "select", "id": "heading_size", "label": "Heading size",
+      "options": [{ "value": "sm", "label": "S" },{ "value": "md", "label": "M" },{ "value": "lg", "label": "L" },{ "value": "xl", "label": "XL" }],
+      "default": "lg"
+    },
+    {
+      "type": "select", "id": "heading_tag", "label": "Heading tag",
+      "options": [{ "value": "h2", "label": "H2" },{ "value": "h3", "label": "H3" }],
+      "default": "h2"
+    },
+    { "type": "inline_richtext", "id": "description", "label": "Description", "default": "Be the first to know about new collections and exclusive offers." },
+    {
+      "type": "select", "id": "description_size", "label": "Description size",
+      "options": [{ "value": "sm", "label": "S" },{ "value": "md", "label": "M" },{ "value": "lg", "label": "L" }],
+      "default": "md"
+    },
+    { "type": "header", "content": "Form" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Subscribe" },
+    {
+      "type": "select", "id": "button_size", "label": "Button size",
+      "options": [{ "value": "sm", "label": "S" },{ "value": "md", "label": "M" },{ "value": "lg", "label": "L" }],
+      "default": "md"
+    },
+    {
+      "type": "select", "id": "text_align", "label": "Text alignment",
+      "options": [{ "value": "left", "label": "Left" },{ "value": "center", "label": "Center" }],
+      "default": "center"
+    },
+    { "type": "header", "content": "Desktop spacing" },
+    { "type": "range", "id": "padding_top_desktop", "min": 0, "max": 150, "step": 5, "unit": "px", "label": "Top", "default": 50 },
+    { "type": "range", "id": "padding_bottom_desktop", "min": 0, "max": 150, "step": 5, "unit": "px", "label": "Bottom", "default": 50 },
+    { "type": "header", "content": "Mobile spacing" },
+    { "type": "range", "id": "padding_top_mobile", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Top", "default": 30 },
+    { "type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Bottom", "default": 30 }
+  ],
+  "presets": [{ "name": "Newsletter", "category": "Custom" }]
+}
+{% endschema %}

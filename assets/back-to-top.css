@@ -3,13 +3,13 @@
   position: fixed;
   bottom: 24px;
   left: 24px;
-  z-index: 98;
+  z-index: var(--z-float);
   width: 44px;
   height: 44px;
   border: none;
   border-radius: 50%;
   background: var(--color-primary, #F30);
-  color: #fff;
+  color: rgb(var(--color-button-text));
   cursor: pointer;
   display: flex;
   align-items: center;

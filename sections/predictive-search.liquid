@@ -50,7 +50,7 @@
             {%- endif -%}
           </div>
           <div class="predictive-search__product-info">
-            <span class="predictive-search__product-title">{{ product.title }}</span>
+            <span class="predictive-search__product-title">{{ product.title | escape }}</span>
             {%- if settings.predictive_search_show_vendor and product.vendor != blank -%}
             <span class="predictive-search__product-vendor">{{ product.vendor }}</span>
             {%- endif -%}
@@ -96,7 +96,7 @@
             }}
           </div>
           {%- endif -%}
-          <span>{{ collection.title }}</span>
+          <span>{{ collection.title | escape }}</span>
         </a>
       </li>
       {%- endfor -%}
@@ -113,7 +113,7 @@
       {%- for article in predictive_search.resources.articles -%}
       <li class="predictive-search__item" role="option">
         <a href="{{ article.url }}" class="predictive-search__link predictive-search__link--article">
-          <span>{{ article.title }}</span>
+          <span>{{ article.title | escape }}</span>
         </a>
       </li>
       {%- endfor -%}

@@ -1,0 +1,351 @@
+{%- comment -%}
+  Section: Timeline / History
+  Mô tả: Vertical timeline — dùng cho About, Brand story.
+{%- endcomment -%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-timeline color-{{ section.settings.color_scheme }}"
+  style="
+    --tl-dt: {{ section.settings.padding_top_desktop }}px;
+    --tl-db: {{ section.settings.padding_bottom_desktop }}px;
+    --tl-mt: {{ section.settings.padding_top_mobile }}px;
+    --tl-mb: {{ section.settings.padding_bottom_mobile }}px;
+  "
+>
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-timeline__head">
+        {%- if section.settings.subheading != blank -%}
+          <p class="section-timeline__subheading subheading-size-{{ section.settings.subheading_size }}">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+        <{{ section.settings.heading_tag }} class="section-timeline__heading heading-size-{{ section.settings.heading_size }}">
+          {{- section.settings.heading -}}
+        </{{ section.settings.heading_tag }}>
+      </div>
+    {%- endif -%}
+
+    <div class="section-timeline__list">
+      {%- for block in section.blocks -%}
+        <div class="section-timeline__item" {{ block.shopify_attributes }}>
+          <div class="section-timeline__marker">
+            <div class="section-timeline__dot"></div>
+          </div>
+          <div class="section-timeline__content">
+            {%- if block.settings.year != blank -%}
+              <span class="section-timeline__year">{{ block.settings.year }}</span>
+            {%- endif -%}
+            {%- if block.settings.heading != blank -%}
+              <h3 class="section-timeline__item-heading heading-size-{{ block.settings.heading_size }}">
+                {{ block.settings.heading }}
+              </h3>
+            {%- endif -%}
+            {%- if block.settings.image != blank -%}
+              <div class="section-timeline__image">
+                {{ block.settings.image | image_url: width: 600 | image_tag:
+                  loading: 'lazy', class: 'section-timeline__img'
+                }}
+              </div>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <div class="section-timeline__text content-size-{{ block.settings.text_size }}">
+                {{ block.settings.text }}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .section-timeline {
+    padding-block: var(--tl-mt) var(--tl-mb);
+    background: rgb(var(--color-background));
+    color: rgba(var(--color-foreground), 0.85);
+  }
+  @media (min-width: 750px) {
+    .section-timeline { padding-block: var(--tl-dt) var(--tl-db); }
+  }
+  .section-timeline__head { text-align: center; margin-bottom: 3rem; }
+  .section-timeline__subheading { margin: 0 0 0.25rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgb(var(--color-accent)); font-weight: 600; }
+  .section-timeline__heading { margin: 0; color: rgb(var(--color-foreground)); }
+
+  .section-timeline__list {
+    max-width: 40rem; margin: 0 auto;
+    position: relative; padding-left: 2rem;
+  }
+  .section-timeline__list::before {
+    content: ''; position: absolute; left: 7px; top: 0; bottom: 0;
+    width: 2px; background: rgba(var(--color-foreground), 0.1);
+  }
+
+  .section-timeline__item {
+    position: relative; padding-bottom: 2.5rem;
+  }
+  .section-timeline__item:last-child { padding-bottom: 0; }
+
+  .section-timeline__marker {
+    position: absolute; left: -2rem; top: 0.25rem;
+  }
+  .section-timeline__dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    background: rgb(var(--color-accent));
+    border: 3px solid rgb(var(--color-background));
+    box-shadow: 0 0 0 2px rgba(var(--color-accent), 0.3);
+  }
+
+  .section-timeline__content { display: flex; flex-direction: column; gap: 0.5rem; }
+  .section-timeline__year {
+    font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: rgb(var(--color-accent));
+  }
+  .section-timeline__item-heading { margin: 0; color: rgb(var(--color-foreground)); line-height: 1.3; }
+
+  .section-timeline__image {
+    border-radius: 0.5rem; overflow: hidden; margin: 0.25rem 0;
+  }
+  .section-timeline__img { width: 100%; height: auto; display: block; }
+
+  .section-timeline__text { color: rgba(var(--color-foreground), 0.7); line-height: 1.7; }
+  .section-timeline__text p:last-child { margin-bottom: 0; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Timeline",
+  "tag": "section",
+  "class": "section-timeline-wrapper",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "select",
+      "id": "subheading_size",
+      "label": "Subheading size",
+      "options": [
+        {
+          "value": "xs",
+          "label": "XS"
+        },
+        {
+          "value": "sm",
+          "label": "S"
+        },
+        {
+          "value": "md",
+          "label": "M"
+        }
+      ],
+      "default": "sm"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our story"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "sm",
+          "label": "S"
+        },
+        {
+          "value": "md",
+          "label": "M"
+        },
+        {
+          "value": "lg",
+          "label": "L"
+        },
+        {
+          "value": "xl",
+          "label": "XL"
+        }
+      ],
+      "default": "lg"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading tag",
+      "options": [
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "header",
+      "content": "Desktop spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Mobile spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Top",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "event",
+      "name": "Event",
+      "settings": [
+        {
+          "type": "text",
+          "id": "year",
+          "label": "Year / Date",
+          "default": "2020"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "We started our journey"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "Heading size",
+          "options": [
+            {
+              "value": "xs",
+              "label": "XS"
+            },
+            {
+              "value": "sm",
+              "label": "S"
+            },
+            {
+              "value": "md",
+              "label": "M"
+            }
+          ],
+          "default": "sm"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Description",
+          "default": "<p>A brief description of this milestone.</p>"
+        },
+        {
+          "type": "select",
+          "id": "text_size",
+          "label": "Text size",
+          "options": [
+            {
+              "value": "sm",
+              "label": "S"
+            },
+            {
+              "value": "md",
+              "label": "M"
+            }
+          ],
+          "default": "sm"
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Timeline",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "event",
+          "settings": {
+            "year": "2020",
+            "heading": "The beginning"
+          }
+        },
+        {
+          "type": "event",
+          "settings": {
+            "year": "2022",
+            "heading": "Growing fast"
+          }
+        },
+        {
+          "type": "event",
+          "settings": {
+            "year": "2024",
+            "heading": "Where we are now"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

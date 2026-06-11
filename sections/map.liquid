@@ -1,0 +1,160 @@
+{%- comment -%}
+  Section: Map
+  Mô tả: Google Maps embed — cho store locator / about page.
+{%- endcomment -%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-map color-{{ section.settings.color_scheme }}"
+  style="
+    --map-dt: {{ section.settings.padding_top_desktop }}px;
+    --map-db: {{ section.settings.padding_bottom_desktop }}px;
+    --map-mt: {{ section.settings.padding_top_mobile }}px;
+    --map-mb: {{ section.settings.padding_bottom_mobile }}px;
+    --map-h: {{ section.settings.map_height }}px;
+  "
+>
+  <div class="{% if section.settings.section_width == 'fixed' %}page-width{% endif %}">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-map__head page-width">
+        {%- if section.settings.subheading != blank -%}
+          <p class="section-map__subheading subheading-size-sm">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+        <{{ section.settings.heading_tag }} class="section-map__heading heading-size-{{ section.settings.heading_size }}">
+          {{- section.settings.heading -}}
+        </{{ section.settings.heading_tag }}>
+      </div>
+    {%- endif -%}
+
+    <div class="section-map__container">
+      {%- if section.settings.map_embed != blank -%}
+        <div class="section-map__embed">
+          {{ section.settings.map_embed }}
+        </div>
+      {%- elsif section.settings.map_address != blank -%}
+        <iframe
+          class="section-map__iframe"
+          src="https://maps.google.com/maps?q={{ section.settings.map_address | url_encode }}&output=embed"
+          width="100%" height="100%"
+          style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="{{ section.settings.heading | default: 'Map' }}"
+        ></iframe>
+      {%- else -%}
+        <div class="section-map__empty">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <p>Enter an address or embed code</p>
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} Info overlay {%- endcomment -%}
+      {%- if section.settings.show_info -%}
+        <div class="section-map__info">
+          {%- if section.settings.store_name != blank -%}
+            <h3 class="section-map__info-name">{{ section.settings.store_name }}</h3>
+          {%- endif -%}
+          {%- if section.settings.map_address != blank -%}
+            <p class="section-map__info-address">{{ section.settings.map_address }}</p>
+          {%- endif -%}
+          {%- if section.settings.store_hours != blank -%}
+            <p class="section-map__info-hours">{{ section.settings.store_hours }}</p>
+          {%- endif -%}
+          {%- if section.settings.directions_link != blank -%}
+            <a href="{{ section.settings.directions_link }}" target="_blank" rel="noopener" class="section-map__info-link">
+              {{ 'general.map.get_directions' | t | default: 'Get directions' }}
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .section-map {
+    padding-block: var(--map-mt) var(--map-mb);
+    background: rgb(var(--color-background));
+  }
+  @media (min-width: 750px) {
+    .section-map { padding-block: var(--map-dt) var(--map-db); }
+  }
+  .section-map__head { text-align: center; margin-bottom: 2rem; }
+  .section-map__subheading { margin: 0 0 0.25rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgb(var(--color-accent)); font-weight: 600; }
+  .section-map__heading { margin: 0; color: rgb(var(--color-foreground)); }
+
+  .section-map__container {
+    position: relative; height: var(--map-h, 450px);
+    border-radius: 0.5rem; overflow: hidden;
+  }
+  .section-map__embed,
+  .section-map__embed iframe,
+  .section-map__iframe {
+    width: 100%; height: 100%;
+  }
+  .section-map__embed iframe { border: 0; }
+
+  .section-map__empty {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 1rem; background: rgba(var(--color-foreground), 0.04);
+    color: rgba(var(--color-foreground), 0.3);
+  }
+
+  .section-map__info {
+    position: absolute; bottom: 1.5rem; left: 1.5rem; z-index: 5;
+    background: rgb(var(--color-background));
+    border-radius: 0.5rem; padding: 1.25rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    max-width: 18rem;
+  }
+  .section-map__info-name {
+    margin: 0 0 0.25rem; font-size: 1rem; font-weight: 700;
+    color: rgb(var(--color-foreground));
+  }
+  .section-map__info-address,
+  .section-map__info-hours {
+    margin: 0 0 0.375rem; font-size: 0.8125rem;
+    color: rgba(var(--color-foreground), 0.7); line-height: 1.5;
+  }
+  .section-map__info-link {
+    display: inline-flex; align-items: center; gap: 0.25rem;
+    font-size: 0.8125rem; font-weight: 600; color: rgb(var(--color-accent));
+    transition: opacity 0.3s; margin-top: 0.25rem;
+  }
+  .section-map__info-link:hover { opacity: 0.7; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Map",
+  "tag": "section",
+  "class": "section-map-wrapper",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Heading" },
+    { "type": "inline_richtext", "id": "subheading", "label": "Subheading" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading" },
+    { "type": "select", "id": "heading_size", "label": "Heading size", "options": [{ "value": "sm", "label": "S" },{ "value": "md", "label": "M" },{ "value": "lg", "label": "L" }], "default": "lg" },
+    { "type": "select", "id": "heading_tag", "label": "Heading tag", "options": [{ "value": "h2", "label": "H2" },{ "value": "h3", "label": "H3" }], "default": "h2" },
+    { "type": "header", "content": "Map" },
+    { "type": "text", "id": "map_address", "label": "Address", "info": "Used for simple embed and info card" },
+    { "type": "html", "id": "map_embed", "label": "Embed code (HTML)", "info": "Optional. Paste Google Maps embed <iframe> for precise location." },
+    { "type": "range", "id": "map_height", "min": 200, "max": 700, "step": 50, "unit": "px", "label": "Map height", "default": 450 },
+    { "type": "header", "content": "Store info" },
+    { "type": "checkbox", "id": "show_info", "label": "Show info card", "default": true },
+    { "type": "text", "id": "store_name", "label": "Store name" },
+    { "type": "text", "id": "store_hours", "label": "Store hours", "info": "E.g. Mon-Fri: 9AM-6PM" },
+    { "type": "url", "id": "directions_link", "label": "Directions link" },
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "section_width", "label": "Width", "options": [{ "value": "fixed", "label": "Fixed" },{ "value": "full", "label": "Full" }], "default": "fixed" },
+    { "type": "header", "content": "Desktop spacing" },
+    { "type": "range", "id": "padding_top_desktop", "min": 0, "max": 150, "step": 5, "unit": "px", "label": "Top", "default": 50 },
+    { "type": "range", "id": "padding_bottom_desktop", "min": 0, "max": 150, "step": 5, "unit": "px", "label": "Bottom", "default": 50 },
+    { "type": "header", "content": "Mobile spacing" },
+    { "type": "range", "id": "padding_top_mobile", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Top", "default": 30 },
+    { "type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Bottom", "default": 30 }
+  ],
+  "presets": [{ "name": "Map", "category": "Custom" }]
+}
+{% endschema %}

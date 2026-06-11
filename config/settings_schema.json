@@ -56,16 +56,24 @@
         "id": "color_schemes",
         "definition": [
           {
-            "type": "color",
-            "id": "background",
-            "label": "t:settings_schema.colors.settings.background.label",
-            "default": "#FFFFFF"
+            "type": "header",
+            "content": "t:settings_schema.colors.settings.header__general.content"
           },
           {
-            "type": "color_background",
-            "id": "background_gradient",
-            "label": "t:settings_schema.colors.settings.background_gradient.label",
-            "info": "t:settings_schema.colors.settings.background_gradient.info"
+            "type": "color",
+            "id": "accent",
+            "label": "t:settings_schema.colors.settings.accent.label",
+            "default": "#FF3300"
+          },
+          {
+            "type": "color",
+            "id": "border",
+            "label": "t:settings_schema.colors.settings.border.label",
+            "default": "#E5E5E5"
+          },
+          {
+            "type": "header",
+            "content": "t:settings_schema.colors.settings.header__text.content"
           },
           {
             "type": "color",
@@ -75,9 +83,41 @@
           },
           {
             "type": "color",
+            "id": "subtext",
+            "label": "t:settings_schema.colors.settings.subtext.label",
+            "default": "#666666"
+          },
+          {
+            "type": "header",
+            "content": "t:settings_schema.colors.settings.header__background.content"
+          },
+          {
+            "type": "color",
+            "id": "background",
+            "label": "t:settings_schema.colors.settings.background.label",
+            "default": "#FFFFFF"
+          },
+          {
+            "type": "color",
+            "id": "background_2",
+            "label": "t:settings_schema.colors.settings.background_2.label",
+            "default": "#EDEDED"
+          },
+          {
+            "type": "color_background",
+            "id": "background_gradient",
+            "label": "t:settings_schema.colors.settings.background_gradient.label",
+            "info": "t:settings_schema.colors.settings.background_gradient.info"
+          },
+          {
+            "type": "header",
+            "content": "t:settings_schema.colors.settings.header__primary_button.content"
+          },
+          {
+            "type": "color",
             "id": "button",
             "label": "t:settings_schema.colors.settings.button_background.label",
-            "default": "#FF3300"
+            "default": "#000000"
           },
           {
             "type": "color",
@@ -86,10 +126,62 @@
             "default": "#FFFFFF"
           },
           {
+            "type": "header",
+            "content": "t:settings_schema.colors.settings.header__secondary_button.content"
+          },
+          {
+            "type": "color",
+            "id": "secondary_button",
+            "label": "t:settings_schema.colors.settings.secondary_button_background.label",
+            "default": "#EDEDED"
+          },
+          {
+            "type": "color",
+            "id": "secondary_button_border",
+            "label": "t:settings_schema.colors.settings.secondary_button_border.label",
+            "default": "#EDEDED"
+          },
+          {
             "type": "color",
             "id": "secondary_button_label",
             "label": "t:settings_schema.colors.settings.secondary_button_label.label",
             "default": "#000000"
+          },
+          {
+            "type": "header",
+            "content": "t:settings_schema.colors.settings.header__form.content"
+          },
+          {
+            "type": "color",
+            "id": "form_bg",
+            "label": "t:settings_schema.colors.settings.form_bg.label",
+            "default": "#EDEDED"
+          },
+          {
+            "type": "color",
+            "id": "form_text",
+            "label": "t:settings_schema.colors.settings.form_text.label",
+            "default": "#000000"
+          },
+          {
+            "type": "header",
+            "content": "t:settings_schema.colors.settings.header__product.content"
+          },
+          {
+            "type": "color",
+            "id": "sale_price",
+            "label": "t:settings_schema.colors.settings.sale_price.label",
+            "default": "#FF3300"
+          },
+          {
+            "type": "header",
+            "content": "t:settings_schema.colors.settings.header__other.content"
+          },
+          {
+            "type": "color",
+            "id": "progress_bar",
+            "label": "t:settings_schema.colors.settings.progress_bar.label",
+            "default": "#0DB756"
           },
           {
             "type": "color",
@@ -104,49 +196,15 @@
             "solid": "background",
             "gradient": "background_gradient"
           },
-          "links": "secondary_button_label",
+          "links": "accent",
           "icons": "text",
           "primary_button": "button",
           "on_primary_button": "button_label",
           "primary_button_border": "button",
-          "secondary_button": "background",
+          "secondary_button": "secondary_button",
           "on_secondary_button": "secondary_button_label",
-          "secondary_button_border": "secondary_button_label"
+          "secondary_button_border": "secondary_button_border"
         }
-      },
-      {
-        "type": "header",
-        "content": "t:settings_schema.colors.settings.header__status.content"
-      },
-      {
-        "type": "color",
-        "id": "color_price",
-        "label": "t:settings_schema.colors.settings.color_price.label",
-        "default": "#FF3300"
-      },
-      {
-        "type": "color",
-        "id": "color_success",
-        "label": "t:settings_schema.colors.settings.color_success.label",
-        "default": "#428445"
-      },
-      {
-        "type": "color",
-        "id": "color_error",
-        "label": "t:settings_schema.colors.settings.color_error.label",
-        "default": "#EB001B"
-      },
-      {
-        "type": "color",
-        "id": "color_warning",
-        "label": "t:settings_schema.colors.settings.color_warning.label",
-        "default": "#f59e0b"
-      },
-      {
-        "type": "color",
-        "id": "color_info",
-        "label": "t:settings_schema.colors.settings.color_info.label",
-        "default": "#3b82f6"
       }
     ]
   },
@@ -1036,7 +1094,7 @@
         "type": "color_scheme",
         "id": "sale_badge_color_scheme",
         "label": "t:settings_schema.badges.settings.sale_badge_color_scheme.label",
-        "default": "scheme-5"
+        "default": "scheme-1"
       },
       {
         "type": "color_scheme",

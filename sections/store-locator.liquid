@@ -1,0 +1,348 @@
+{%- comment -%}
+  Section: Store Locator
+  Mô tả: Multi-location list + Google Maps/custom embed.
+{%- endcomment -%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-locator color-{{ section.settings.color_scheme }}"
+  style="
+    --sl-dt: {{ section.settings.padding_top_desktop }}px;
+    --sl-db: {{ section.settings.padding_bottom_desktop }}px;
+    --sl-mt: {{ section.settings.padding_top_mobile }}px;
+    --sl-mb: {{ section.settings.padding_bottom_mobile }}px;
+  "
+>
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-locator__head">
+        {%- if section.settings.subheading != blank -%}
+          <p class="section-locator__subheading subheading-size-{{ section.settings.subheading_size }}">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+        <{{ section.settings.heading_tag }} class="section-locator__heading heading-size-{{ section.settings.heading_size }}">
+          {{- section.settings.heading -}}
+        </{{ section.settings.heading_tag }}>
+      </div>
+    {%- endif -%}
+
+    <div class="section-locator__grid">
+      {%- comment -%} Location list {%- endcomment -%}
+      <div class="section-locator__list">
+        {%- for block in section.blocks -%}
+          <div class="section-locator__store" {{ block.shopify_attributes }}>
+            <h3 class="section-locator__store-name">{{ block.settings.name | default: 'Store' }}</h3>
+            {%- if block.settings.address != blank -%}
+              <p class="section-locator__store-address">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                {{ block.settings.address }}
+              </p>
+            {%- endif -%}
+            {%- if block.settings.phone != blank -%}
+              <p class="section-locator__store-phone">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <a href="tel:{{ block.settings.phone | remove: ' ' }}">{{ block.settings.phone }}</a>
+              </p>
+            {%- endif -%}
+            {%- if block.settings.hours != blank -%}
+              <p class="section-locator__store-hours">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                {{ block.settings.hours }}
+              </p>
+            {%- endif -%}
+            {%- if block.settings.directions_url != blank -%}
+              <a href="{{ block.settings.directions_url }}" target="_blank" rel="noopener" class="section-locator__directions">
+                Get directions →
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+
+      {%- comment -%} Map {%- endcomment -%}
+      <div class="section-locator__map">
+        {%- if section.settings.map_embed != blank -%}
+          {{ section.settings.map_embed }}
+        {%- elsif section.settings.map_image != blank -%}
+          {{ section.settings.map_image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'section-locator__map-img' }}
+        {%- else -%}
+          <div class="section-locator__map-ph">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Add a map embed or image</span>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .section-locator {
+    padding-block: var(--sl-mt) var(--sl-mb);
+    background: rgb(var(--color-background));
+    color: rgba(var(--color-foreground), 0.85);
+  }
+  @media (min-width: 750px) {
+    .section-locator { padding-block: var(--sl-dt) var(--sl-db); }
+  }
+  .section-locator__head { text-align: center; margin-bottom: 2.5rem; }
+  .section-locator__subheading { margin: 0 0 0.25rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgb(var(--color-accent)); font-weight: 600; }
+  .section-locator__heading { margin: 0; color: rgb(var(--color-foreground)); }
+
+  .section-locator__grid { display: grid; gap: 2rem; }
+  @media (min-width: 990px) {
+    .section-locator__grid { grid-template-columns: 1fr 1.5fr; gap: 3rem; }
+  }
+
+  .section-locator__list {
+    display: flex; flex-direction: column; gap: 1.25rem;
+    max-height: 500px; overflow-y: auto;
+  }
+
+  .section-locator__store {
+    padding: 1.25rem; border-radius: 0.75rem;
+    border: 1px solid rgba(var(--color-foreground), 0.06);
+    display: flex; flex-direction: column; gap: 0.375rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .section-locator__store:hover {
+    border-color: rgba(var(--color-accent), 0.3);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  }
+
+  .section-locator__store-name { margin: 0; font-size: 1rem; font-weight: 700; color: rgb(var(--color-foreground)); }
+  .section-locator__store-address,
+  .section-locator__store-phone,
+  .section-locator__store-hours {
+    margin: 0; font-size: 0.8125rem; color: rgba(var(--color-foreground), 0.6);
+    display: flex; align-items: center; gap: 0.375rem;
+  }
+  .section-locator__store-phone a { color: inherit; text-decoration: none; }
+  .section-locator__store-phone a:hover { color: rgb(var(--color-accent)); }
+  .section-locator__directions {
+    font-size: 0.8125rem; font-weight: 600; color: rgb(var(--color-accent));
+    text-decoration: none; margin-top: 0.25rem;
+    transition: opacity 0.3s;
+  }
+  .section-locator__directions:hover { opacity: 0.7; }
+
+  .section-locator__map { border-radius: 0.75rem; overflow: hidden; min-height: 300px; }
+  .section-locator__map iframe { width: 100%; height: 100%; min-height: 400px; border: 0; }
+  .section-locator__map-img { width: 100%; height: 100%; object-fit: cover; }
+  .section-locator__map-ph {
+    width: 100%; height: 100%; min-height: 300px;
+    background: rgba(var(--color-foreground), 0.03);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem; color: rgba(var(--color-foreground), 0.15);
+    font-size: 0.8125rem;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Store locator",
+  "tag": "section",
+  "class": "section-locator-wrapper",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Visit us"
+    },
+    {
+      "type": "select",
+      "id": "subheading_size",
+      "label": "Subheading size",
+      "options": [
+        {
+          "value": "xs",
+          "label": "XS"
+        },
+        {
+          "value": "sm",
+          "label": "S"
+        }
+      ],
+      "default": "sm"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our stores"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "md",
+          "label": "M"
+        },
+        {
+          "value": "lg",
+          "label": "L"
+        }
+      ],
+      "default": "lg"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Tag",
+      "options": [
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "header",
+      "content": "Map"
+    },
+    {
+      "type": "html",
+      "id": "map_embed",
+      "label": "Map embed code",
+      "info": "Paste Google Maps iframe"
+    },
+    {
+      "type": "image_picker",
+      "id": "map_image",
+      "label": "Map image",
+      "info": "Fallback if no embed"
+    },
+    {
+      "type": "header",
+      "content": "Desktop spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Mobile spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Top",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "store",
+      "name": "Store",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Store name",
+          "default": "Flagship Store"
+        },
+        {
+          "type": "text",
+          "id": "address",
+          "label": "Address",
+          "default": "123 Main Street, New York, NY 10001"
+        },
+        {
+          "type": "text",
+          "id": "phone",
+          "label": "Phone",
+          "default": "+1 (555) 123-4567"
+        },
+        {
+          "type": "text",
+          "id": "hours",
+          "label": "Hours",
+          "default": "Mon-Sat 10am-7pm"
+        },
+        {
+          "type": "url",
+          "id": "directions_url",
+          "label": "Directions URL"
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Store locator",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "store",
+          "settings": {
+            "name": "Flagship Store",
+            "address": "123 Main Street, New York, NY 10001",
+            "phone": "+1 (555) 123-4567",
+            "hours": "Mon-Sat 10am-7pm"
+          }
+        },
+        {
+          "type": "store",
+          "settings": {
+            "name": "Downtown Shop",
+            "address": "456 Oak Avenue, Los Angeles, CA 90001",
+            "phone": "+1 (555) 987-6543",
+            "hours": "Mon-Sun 9am-8pm"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

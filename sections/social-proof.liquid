@@ -1,0 +1,264 @@
+{%- comment -%}
+  Section: Social Proof Ticker
+  Mô tả: "John from NY just bought..." — notification popup auto-rotate.
+{%- endcomment -%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-social-proof color-{{ section.settings.color_scheme }}"
+  data-sp-section
+  data-sp-interval="{{ section.settings.interval | times: 1000 }}"
+  data-sp-duration="{{ section.settings.display_time | times: 1000 }}"
+  data-sp-position="{{ section.settings.position }}"
+  style="display:none;"
+>
+  {%- for block in section.blocks -%}
+    <div class="section-social-proof__item" data-sp-item style="display:none;" {{ block.shopify_attributes }}>
+      {%- if block.settings.image != blank -%}
+        <div class="section-social-proof__img-wrap">
+          {{ block.settings.image | image_url: width: 80 | image_tag: loading: 'lazy', class: 'section-social-proof__img' }}
+        </div>
+      {%- endif -%}
+      <div class="section-social-proof__info">
+        <span class="section-social-proof__name">{{ block.settings.customer_name }}</span>
+        <span class="section-social-proof__action">{{ block.settings.action_text }}</span>
+        {%- if block.settings.product != blank -%}
+          <a href="{{ block.settings.product.url }}" class="section-social-proof__product">{{ block.settings.product.title | escape }}</a>
+        {%- elsif block.settings.custom_product != blank -%}
+          <span class="section-social-proof__product">{{ block.settings.custom_product }}</span>
+        {%- endif -%}
+        <span class="section-social-proof__time">{{ block.settings.time_ago }}</span>
+      </div>
+      <button class="section-social-proof__close" data-sp-close aria-label="{{ 'accessibility.close' | t }}">×</button>
+    </div>
+  {%- endfor -%}
+</div>
+
+<script>
+(function() {
+  var section = document.querySelector('[data-sp-section]');
+  if (!section) return;
+  var items = section.querySelectorAll('[data-sp-item]');
+  if (!items.length) return;
+  var interval = parseInt(section.dataset.spInterval) || 8000;
+  var duration = parseInt(section.dataset.spDuration) || 4000;
+  var idx = 0; var timer;
+  var dismissed = sessionStorage.getItem('sp_dismissed_{{ section.id }}');
+  if (dismissed) return;
+
+  section.style.display = 'block';
+
+  function show() {
+    items.forEach(function(i) { i.style.display = 'none'; i.classList.remove('is-visible'); });
+    if (idx >= items.length) idx = 0;
+    var item = items[idx];
+    item.style.display = 'flex';
+    requestAnimationFrame(function() { item.classList.add('is-visible'); });
+    setTimeout(function() {
+      item.classList.remove('is-visible');
+      setTimeout(function() { item.style.display = 'none'; idx++; }, 400);
+    }, duration);
+  }
+
+  setTimeout(function() {
+    show();
+    timer = setInterval(show, interval);
+  }, 3000);
+
+  section.querySelectorAll('[data-sp-close]').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      clearInterval(timer);
+      section.style.display = 'none';
+      sessionStorage.setItem('sp_dismissed_{{ section.id }}', '1');
+    });
+  });
+})();
+</script>
+
+{% stylesheet %}
+  .section-social-proof {
+    position: fixed; z-index: var(--z-toast, 900);
+    pointer-events: none;
+  }
+  [data-sp-position="bottom-left"] { bottom: 1.5rem; left: 1.5rem; }
+  [data-sp-position="bottom-right"] { bottom: 1.5rem; right: 1.5rem; }
+
+  .section-social-proof__item {
+    display: flex; align-items: center; gap: 0.625rem;
+    padding: 0.75rem 1rem; border-radius: 0.75rem;
+    background: rgb(var(--color-background)); color: rgb(var(--color-foreground));
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    max-width: 320px; pointer-events: auto;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.4s, transform 0.4s;
+    position: relative;
+  }
+  .section-social-proof__item.is-visible {
+    opacity: 1; transform: translateY(0);
+  }
+
+  .section-social-proof__img-wrap {
+    width: 3rem; height: 3rem; border-radius: 0.375rem;
+    overflow: hidden; flex-shrink: 0;
+  }
+  .section-social-proof__img { width: 100%; height: 100%; object-fit: cover; }
+
+  .section-social-proof__info { display: flex; flex-direction: column; gap: 1px; flex: 1; }
+  .section-social-proof__name { font-size: 0.75rem; font-weight: 700; color: rgb(var(--color-foreground)); }
+  .section-social-proof__action { font-size: 0.6875rem; color: rgba(var(--color-foreground), 0.5); }
+  .section-social-proof__product { font-size: 0.6875rem; font-weight: 600; color: rgb(var(--color-accent)); text-decoration: none; }
+  a.section-social-proof__product:hover { text-decoration: underline; }
+  .section-social-proof__time { font-size: 0.625rem; color: rgba(var(--color-foreground), 0.35); }
+
+  .section-social-proof__close {
+    position: absolute; top: 0.25rem; right: 0.5rem;
+    background: none; border: none; font-size: 1rem;
+    cursor: pointer; color: rgba(var(--color-foreground), 0.25); line-height: 1;
+    transition: color 0.2s;
+  }
+  .section-social-proof__close:hover { color: rgba(var(--color-foreground), 0.6); }
+
+  @media (max-width: 749px) {
+    .section-social-proof { left: 0.75rem !important; right: 0.75rem !important; }
+    .section-social-proof__item { max-width: 100%; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Social proof ticker",
+  "tag": "div",
+  "class": "section-sp-wrapper",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Behavior"
+    },
+    {
+      "type": "range",
+      "id": "interval",
+      "min": 5,
+      "max": 30,
+      "step": 1,
+      "unit": "s",
+      "label": "Interval between popups",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "display_time",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "unit": "s",
+      "label": "Display duration",
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "position",
+      "label": "Position",
+      "options": [
+        {
+          "value": "bottom-left",
+          "label": "Bottom left"
+        },
+        {
+          "value": "bottom-right",
+          "label": "Bottom right"
+        }
+      ],
+      "default": "bottom-left"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "notification",
+      "name": "Notification",
+      "settings": [
+        {
+          "type": "text",
+          "id": "customer_name",
+          "label": "Customer name",
+          "default": "Sarah from New York"
+        },
+        {
+          "type": "text",
+          "id": "action_text",
+          "label": "Action text",
+          "default": "just purchased"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "custom_product",
+          "label": "Custom product name",
+          "info": "If no product selected"
+        },
+        {
+          "type": "text",
+          "id": "time_ago",
+          "label": "Time ago",
+          "default": "2 minutes ago"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product image",
+          "info": "Or use product image"
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Social proof ticker",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "notification",
+          "settings": {
+            "customer_name": "Sarah from New York",
+            "action_text": "just purchased",
+            "custom_product": "Classic Leather Bag",
+            "time_ago": "2 minutes ago"
+          }
+        },
+        {
+          "type": "notification",
+          "settings": {
+            "customer_name": "James from London",
+            "action_text": "just added to cart",
+            "custom_product": "Premium Watch",
+            "time_ago": "5 minutes ago"
+          }
+        },
+        {
+          "type": "notification",
+          "settings": {
+            "customer_name": "Emma from Sydney",
+            "action_text": "just purchased",
+            "custom_product": "Silk Scarf",
+            "time_ago": "8 minutes ago"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

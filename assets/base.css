@@ -69,6 +69,10 @@ p {
 .scroll-fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .scroll-fade-up.is-visible { opacity: 1; transform: translateY(0); }
 
+@media (prefers-reduced-motion: reduce) {
+  .scroll-fade-up { transition: none; opacity: 1; transform: none; }
+}
+
 /* ── Heading Size Utilities ──────────────────────── */
 .heading-size-xs { font-size: var(--font-base); }
 .heading-size-sm { font-size: var(--font-lg); }
@@ -94,18 +98,45 @@ p {
 .content-size-md { font-size: var(--font-sm); }
 .content-size-lg { font-size: var(--font-base); }
 .content-size-xl { font-size: var(--font-lg); }
+.content-size-2xl { font-size: var(--font-xl); }
 .content-size-xs *,
 .content-size-sm *,
 .content-size-md *,
 .content-size-lg *,
 .content-size-xl * { font-size: inherit; }
+.content-size-2xl * { font-size: inherit; }
 @media (min-width: 750px) {
   .content-size-xs { font-size: var(--font-xs); }
   .content-size-sm { font-size: var(--font-sm); }
   .content-size-md { font-size: var(--font-base); }
   .content-size-lg { font-size: var(--font-lg); }
   .content-size-xl { font-size: var(--font-xl); }
+  .content-size-2xl { font-size: var(--font-2xl); }
 }
+
+/* ── Subheading Size Utilities ─────────────────── */
+.subheading-size-xs { font-size: 0.625rem; }
+.subheading-size-sm { font-size: var(--font-xs); }
+.subheading-size-md { font-size: var(--font-sm); }
+.subheading-size-lg { font-size: var(--font-base); }
+.subheading-size-xl { font-size: var(--font-lg); }
+.subheading-size-2xl { font-size: var(--font-xl); }
+@media (min-width: 750px) {
+  .subheading-size-xs { font-size: var(--font-xs); }
+  .subheading-size-sm { font-size: var(--font-sm); }
+  .subheading-size-md { font-size: var(--font-base); }
+  .subheading-size-lg { font-size: var(--font-lg); }
+  .subheading-size-xl { font-size: var(--font-xl); }
+  .subheading-size-2xl { font-size: var(--font-2xl); }
+}
+
+/* ── Button Size Utilities ─────────────────────── */
+.button-size-xs { padding: 6px 14px; font-size: 0.6875rem; min-width: 80px; }
+.button-size-sm { padding: 8px 20px; font-size: var(--font-xs); min-width: 100px; }
+.button-size-md { padding: 12px 28px; font-size: var(--font-sm); min-width: 140px; }
+.button-size-lg { padding: 16px 36px; font-size: var(--font-base); min-width: 180px; }
+.button-size-xl { padding: 20px 48px; font-size: var(--font-lg); min-width: 220px; }
+.button-size-2xl { padding: 24px 56px; font-size: var(--font-xl); min-width: 260px; }
 
 /* ── Image Shape Utilities ───────────────────────── */
 .image-shape { position: relative; overflow: hidden; }
@@ -189,4 +220,7 @@ p {
 }
 
 /* ── Focus None (skip link targets) ─────────────── */
-.focus-none:focus { outline: none; }
+.focus-none:focus:not(:focus-visible) { outline: none; }
+
+/* ── Block: Empty Space ─────────────────────────── */
+.block-empty-space { height: var(--block-spacer, 20px); }

@@ -52,6 +52,7 @@
       "name": "Slider"
     },
     "password_page": {
+      "opening_soon": "Opening soon",
       "login_form_heading": "Enter store using password:",
       "login_password_button": "Enter using password",
       "login_form_password_label": "Password",
@@ -59,7 +60,12 @@
       "login_form_error": "Wrong password!",
       "login_form_submit": "Enter",
       "admin_link_html": "Are you the store owner? <a href=\"/admin\" class=\"link underlined-link\">Log in here</a>",
-      "powered_by_shopify_html": "This shop will be powered by {{ shopify }}"
+      "powered_by_shopify_html": "This shop will be powered by {{ shopify }}",
+      "signup_form_subtext": "Be the first to know when we launch.",
+      "signup_form_email_placeholder": "Email",
+      "signup_form_email_label": "Email",
+      "signup_form_button_label": "Notify me",
+      "signup_form_success": "Thank you! We'll keep you posted."
     },
     "social": {
       "alt_text": {
@@ -87,6 +93,50 @@
       "add": "Add to wishlist",
       "remove": "Remove from wishlist",
       "title": "Wishlist"
+    },
+    "newsletter": {
+      "email_placeholder": "Enter your email",
+      "success": "Thanks for subscribing!"
+    },
+    "items": {
+      "one": "{{ count }} item",
+      "other": "{{ count }} items"
+    },
+    "countdown": {
+      "days": "Days",
+      "hours": "Hours",
+      "minutes": "Minutes",
+      "minutes_short": "Mins",
+      "seconds": "Seconds",
+      "seconds_short": "Secs"
+    },
+    "flash_sale": {
+      "sale_label": "SALE"
+    },
+    "map": {
+      "get_directions": "Get directions"
+    },
+    "recently_viewed": {
+      "empty": "No recently viewed products"
+    },
+    "view_product": "View product",
+    "contact": {
+      "success": "Thanks for contacting us. We'll get back to you soon.",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "message": "Message",
+      "send": "Send message"
+    },
+    "bundle": {
+      "total": "Bundle price",
+      "adding": "Adding...",
+      "added": "Added! ✓",
+      "error": "Error — try again"
+    },
+    "products": {
+      "one": "{{ count }} product",
+      "other": "{{ count }} products"
     }
   },
 
@@ -125,12 +175,27 @@
     "loading": "Loading...",
     "quickview": "Quick view",
     "total_reviews": "total reviews",
-    "star_reviews_info": "{{ rating_value }} out of {{ rating_max }} stars"
+    "star_reviews_info": "{{ rating_value }} out of {{ rating_max }} stars",
+    "close_popup": "Close popup",
+    "dismiss": "Dismiss",
+    "play_video": "Play video",
+    "social_link": "Social link",
+    "follow_on": "Follow us on {{ platform }}",
+    "image_lightbox": "Image lightbox",
+    "comparison_slider": "Comparison slider",
+    "view_details": "View details",
+    "toggle_compare": "Toggle compare mode",
+    "share_on": "Share on {{ platform }}",
+    "share_via_email": "Share via email",
+    "slide_number": "Slide {{ number }}",
+    "cert_alt": "{{ name }} certification",
+    "video_hero_title": "Video hero"
   },
 
   "blogs": {
     "article": {
       "blog": "Blog",
+      "read_more": "Read more",
       "read_more_title": "Read more: {{ title }}",
       "comments": {
         "one": "{{ count }} comment",
@@ -155,18 +220,18 @@
       "previous_post": "Previous article",
       "next_post": "Next article",
       "months": {
-        "january": "Tháng 1",
-        "february": "Tháng 2",
-        "march": "Tháng 3",
-        "april": "Tháng 4",
-        "may": "Tháng 5",
-        "june": "Tháng 6",
-        "july": "Tháng 7",
-        "august": "Tháng 8",
-        "september": "Tháng 9",
-        "october": "Tháng 10",
-        "november": "Tháng 11",
-        "december": "Tháng 12"
+        "january": "January",
+        "february": "February",
+        "march": "March",
+        "april": "April",
+        "may": "May",
+        "june": "June",
+        "july": "July",
+        "august": "August",
+        "september": "September",
+        "october": "October",
+        "november": "November",
+        "december": "December"
       }
     }
   },
@@ -230,6 +295,7 @@
         "unit_price": "Unit price",
         "contact": "Contact for price"
       },
+      "include_taxes": "Tax included.",
       "share": "Share this product",
       "sold_out": "Sold out",
       "unavailable": "Unavailable",
@@ -248,6 +314,7 @@
       "quick_view": "Quick view",
       "almost_sold_out": "Almost sold out",
       "sold_count": "Sold",
+      "items_left": "left",
       "type": "Type",
       "coupon_code": "Coupon code",
       "shipping_policy_html": "<a href=\"{{ link }}\">Shipping</a> calculated at checkout."
@@ -390,6 +457,8 @@
       "invoice_error": "Could not save information. Please try again.",
       "remove_confirm": "Are you sure you want to remove this item?",
       "remove": "Remove",
+      "taxes_included": "Taxes included.",
+      "shipping_policy_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">Shipping</a> calculated at checkout.",
       "taxes_included_shipping_at_checkout_without_policy": "Taxes included. Discounts and shipping calculated at checkout.",
       "headings": {
         "product": "Product",
@@ -646,6 +715,20 @@
       "expiration_date": "Expires {{ expires_on }}",
       "copy_code_success": "Code copied successfully",
       "expired": "Expired"
+    }
+  },
+
+  "recipient": {
+    "form": {
+      "checkbox": "I want to send this as a gift",
+      "email_label": "Recipient email",
+      "email": "Email address",
+      "name_label": "Recipient name (optional)",
+      "name": "Name",
+      "message_label": "Message (optional)",
+      "message": "Write a personal message",
+      "max_characters": "{{ max_chars }} characters max",
+      "send_on_label": "Send on (optional)"
     }
   }
 }

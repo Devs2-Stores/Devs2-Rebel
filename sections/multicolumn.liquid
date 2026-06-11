@@ -1,0 +1,417 @@
+{%- comment -%}
+  Section: Multicolumn
+  Mô tả: Grid linh hoạt — icon/image + heading + text per column.
+  Dùng cho USP bar, features, benefits, shipping info.
+{%- endcomment -%}
+
+{%- liquid
+  assign columns_d = section.settings.columns_desktop
+  assign columns_m = section.settings.columns_mobile
+  assign text_align = section.settings.text_align
+  assign icon_size = section.settings.icon_size
+-%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-multicolumn color-{{ section.settings.color_scheme }}"
+  style="
+    --mc-dt: {{ section.settings.padding_top_desktop }}px;
+    --mc-db: {{ section.settings.padding_bottom_desktop }}px;
+    --mc-mt: {{ section.settings.padding_top_mobile }}px;
+    --mc-mb: {{ section.settings.padding_bottom_mobile }}px;
+    --mc-cols-d: {{ columns_d }};
+    --mc-cols-m: {{ columns_m }};
+    --mc-icon-size: {{ icon_size }}px;
+  "
+>
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-multicolumn__head">
+        {%- if section.settings.subheading != blank -%}
+          <p class="section-multicolumn__subheading subheading-size-{{ section.settings.subheading_size }}">
+            {{- section.settings.subheading -}}
+          </p>
+        {%- endif -%}
+        <{{ section.settings.heading_tag }}
+          class="section-multicolumn__heading heading-size-{{ section.settings.heading_size }}"
+        >
+          {{- section.settings.heading -}}
+        </{{ section.settings.heading_tag }}>
+      </div>
+    {%- endif -%}
+
+    <div class="section-multicolumn__grid section-multicolumn__grid--{{ text_align }}">
+      {%- for block in section.blocks -%}
+        <div class="section-multicolumn__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <div class="section-multicolumn__icon">
+              {{ block.settings.image | image_url: width: 200 | image_tag:
+                loading: 'lazy', decoding: 'async',
+                alt: block.settings.image.alt | default: block.settings.heading,
+                class: 'section-multicolumn__icon-img'
+              }}
+            </div>
+          {%- endif -%}
+          {%- if block.settings.heading != blank -%}
+            <h3 class="section-multicolumn__item-heading heading-size-{{ block.settings.heading_size }}">
+              {{- block.settings.heading -}}
+            </h3>
+          {%- endif -%}
+          {%- if block.settings.text != blank -%}
+            <div class="section-multicolumn__item-text content-size-{{ block.settings.text_size }}">
+              {{- block.settings.text -}}
+            </div>
+          {%- endif -%}
+          {%- if block.settings.button_label != blank -%}
+            <a href="{{ block.settings.button_link | default: '#' }}" class="section-multicolumn__item-link">
+              {{ block.settings.button_label }}
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .section-multicolumn {
+    padding-block: var(--mc-mt) var(--mc-mb);
+    background: rgb(var(--color-background));
+    color: rgba(var(--color-foreground), 0.85);
+  }
+  @media (min-width: 750px) {
+    .section-multicolumn { padding-block: var(--mc-dt) var(--mc-db); }
+  }
+  .section-multicolumn__head { text-align: center; margin-bottom: 2.5rem; }
+  .section-multicolumn__subheading {
+    margin: 0 0 0.25rem; text-transform: uppercase;
+    letter-spacing: 0.12em; color: rgb(var(--color-accent)); font-weight: 600;
+  }
+  .section-multicolumn__heading { margin: 0; color: rgb(var(--color-foreground)); line-height: 1.2; }
+
+  .section-multicolumn__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--mc-cols-m, 1), 1fr);
+    gap: 1.5rem;
+  }
+  @media (min-width: 750px) {
+    .section-multicolumn__grid {
+      grid-template-columns: repeat(var(--mc-cols-d, 3), 1fr);
+      gap: 2rem;
+    }
+  }
+  .section-multicolumn__grid--left { text-align: left; }
+  .section-multicolumn__grid--center { text-align: center; }
+  .section-multicolumn__grid--center .section-multicolumn__item { align-items: center; }
+
+  .section-multicolumn__item {
+    display: flex; flex-direction: column; gap: 0.5rem;
+  }
+  .section-multicolumn__icon { width: var(--mc-icon-size, 48px); height: var(--mc-icon-size, 48px); flex-shrink: 0; }
+  .section-multicolumn__grid--center .section-multicolumn__icon { margin: 0 auto; }
+  .section-multicolumn__icon-img { width: 100%; height: 100%; object-fit: contain; }
+
+  .section-multicolumn__item-heading { margin: 0; color: rgb(var(--color-foreground)); }
+  .section-multicolumn__item-text { margin: 0; color: rgba(var(--color-foreground), 0.7); line-height: 1.6; }
+  .section-multicolumn__item-text p { margin: 0; }
+
+  .section-multicolumn__item-link {
+    display: inline-flex; align-items: center; gap: 0.25rem;
+    font-size: 0.875rem; font-weight: 600; color: rgb(var(--color-accent));
+    transition: opacity 0.3s;
+  }
+  .section-multicolumn__item-link:hover { opacity: 0.7; }
+  .section-multicolumn__item-link svg { transition: transform 0.3s; }
+  .section-multicolumn__item-link:hover svg { transform: translateX(3px); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Multicolumn",
+  "tag": "section",
+  "class": "section-multicolumn-wrapper",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "select",
+      "id": "subheading_size",
+      "label": "Subheading size",
+      "options": [
+        {
+          "value": "xs",
+          "label": "XS"
+        },
+        {
+          "value": "sm",
+          "label": "S"
+        },
+        {
+          "value": "md",
+          "label": "M"
+        },
+        {
+          "value": "lg",
+          "label": "L"
+        }
+      ],
+      "default": "sm"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Multicolumn"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "sm",
+          "label": "S"
+        },
+        {
+          "value": "md",
+          "label": "M"
+        },
+        {
+          "value": "lg",
+          "label": "L"
+        },
+        {
+          "value": "xl",
+          "label": "XL"
+        }
+      ],
+      "default": "lg"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading tag",
+      "options": [
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "p",
+          "label": "P"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "label": "Desktop columns",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "min": 1,
+      "max": 2,
+      "step": 1,
+      "label": "Mobile columns",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 24,
+      "max": 96,
+      "step": 8,
+      "unit": "px",
+      "label": "Icon/Image size",
+      "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Desktop spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Top spacing",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom spacing",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Mobile spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Top spacing",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom spacing",
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Icon / Image"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Column heading"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "Heading size",
+          "options": [
+            {
+              "value": "xs",
+              "label": "XS"
+            },
+            {
+              "value": "sm",
+              "label": "S"
+            },
+            {
+              "value": "md",
+              "label": "M"
+            }
+          ],
+          "default": "sm"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Pair text with an icon to focus on your chosen feature.</p>"
+        },
+        {
+          "type": "select",
+          "id": "text_size",
+          "label": "Text size",
+          "options": [
+            {
+              "value": "sm",
+              "label": "S"
+            },
+            {
+              "value": "md",
+              "label": "M"
+            },
+            {
+              "value": "lg",
+              "label": "L"
+            }
+          ],
+          "default": "sm"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Multicolumn",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "column"
+        },
+        {
+          "type": "column"
+        },
+        {
+          "type": "column"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

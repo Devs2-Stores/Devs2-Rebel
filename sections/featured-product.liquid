@@ -1,0 +1,191 @@
+{%- comment -%}
+  Section: Featured Product
+  Mô tả: Hiển thị 1 sản phẩm riêng lẻ — media + info + add-to-cart inline.
+{%- endcomment -%}
+
+{%- liquid
+  assign product = section.settings.product
+  assign variant = product.selected_or_first_available_variant
+-%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-featured-product color-{{ section.settings.color_scheme }}"
+  style="
+    --fp-dt: {{ section.settings.padding_top_desktop }}px;
+    --fp-db: {{ section.settings.padding_bottom_desktop }}px;
+    --fp-mt: {{ section.settings.padding_top_mobile }}px;
+    --fp-mb: {{ section.settings.padding_bottom_mobile }}px;
+  "
+>
+  <div class="page-width">
+    {%- if product != blank -%}
+      <div class="section-featured-product__grid section-featured-product__grid--{{ section.settings.image_position }}">
+        {%- comment -%} Media {%- endcomment -%}
+        <div class="section-featured-product__media">
+          {%- if product.featured_image -%}
+            {{ product.featured_image | image_url: width: 1000 | image_tag:
+              widths: '400, 600, 800, 1000',
+              sizes: '(max-width: 749px) 100vw, 50vw',
+              loading: 'lazy', class: 'section-featured-product__img'
+            }}
+          {%- else -%}
+            <div class="section-featured-product__ph">
+              {{ 'product-1' | placeholder_svg_tag }}
+            </div>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} Info {%- endcomment -%}
+        <div class="section-featured-product__info">
+          {%- if section.settings.subheading != blank -%}
+            <p class="section-featured-product__subheading subheading-size-{{ section.settings.subheading_size }}">
+              {{- section.settings.subheading -}}
+            </p>
+          {%- endif -%}
+
+          {%- if product.vendor != blank and section.settings.show_vendor -%}
+            <p class="section-featured-product__vendor">{{ product.vendor }}</p>
+          {%- endif -%}
+
+          <h2 class="section-featured-product__title heading-size-{{ section.settings.heading_size }}">
+            <a href="{{ product.url }}">{{ product.title | escape }}</a>
+          </h2>
+
+          <div class="section-featured-product__price">
+            {%- if variant.compare_at_price > variant.price -%}
+              <del class="section-featured-product__price-compare">{{ variant.compare_at_price | money }}</del>
+            {%- endif -%}
+            <span class="section-featured-product__price-current{% if variant.compare_at_price > variant.price %} section-featured-product__price-current--sale{% endif %}">
+              {{ variant.price | money }}
+            </span>
+          </div>
+
+          {%- if section.settings.show_description and product.description != blank -%}
+            <div class="section-featured-product__desc content-size-{{ section.settings.description_size }}">
+              {{ product.description | strip_html | truncate: 200 }}
+            </div>
+          {%- endif -%}
+
+          <form action="{{ routes.cart_add_url }}" method="post" class="section-featured-product__form">
+            <input type="hidden" name="id" value="{{ variant.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit" class="section-featured-product__btn button-size-{{ section.settings.button_size }}" {% unless product.available %}disabled{% endunless %}>
+              {%- if product.available -%}
+                {{ 'products.product_card.add_to_cart' | t | default: 'Add to cart' }}
+              {%- else -%}
+                {{ 'products.product_card.sold_out' | t | default: 'Sold out' }}
+              {%- endif -%}
+            </button>
+          </form>
+
+          {%- if section.settings.show_view_link -%}
+            <a href="{{ product.url }}" class="section-featured-product__view-link">
+              {{ 'general.view_product' | t | default: 'View full details' }}
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- else -%}
+      <div class="section-featured-product__empty">
+        <p>Select a product to display</p>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .section-featured-product {
+    padding-block: var(--fp-mt) var(--fp-mb);
+    background: rgb(var(--color-background));
+    color: rgba(var(--color-foreground), 0.85);
+  }
+  @media (min-width: 750px) {
+    .section-featured-product { padding-block: var(--fp-dt) var(--fp-db); }
+  }
+
+  .section-featured-product__grid {
+    display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center;
+  }
+  @media (min-width: 750px) {
+    .section-featured-product__grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .section-featured-product__grid--right .section-featured-product__media { order: 2; }
+    .section-featured-product__grid--right .section-featured-product__info { order: 1; }
+  }
+
+  .section-featured-product__media { overflow: hidden; border-radius: 0.5rem; }
+  .section-featured-product__img { width: 100%; height: auto; display: block; }
+  .section-featured-product__ph {
+    aspect-ratio: 1; background: rgba(var(--color-foreground), 0.04);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .section-featured-product__ph svg { width: 40%; opacity: 0.15; }
+
+  .section-featured-product__info { display: flex; flex-direction: column; gap: 0.75rem; }
+  .section-featured-product__subheading {
+    margin: 0; text-transform: uppercase; letter-spacing: 0.12em;
+    color: rgb(var(--color-accent)); font-weight: 600;
+  }
+  .section-featured-product__vendor { margin: 0; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(var(--color-foreground), 0.5); }
+  .section-featured-product__title { margin: 0; color: rgb(var(--color-foreground)); line-height: 1.2; }
+  .section-featured-product__title a { color: inherit; text-decoration: none; }
+  .section-featured-product__title a:hover { opacity: 0.8; }
+
+  .section-featured-product__price { display: flex; align-items: baseline; gap: 0.5rem; }
+  .section-featured-product__price-compare { font-size: 0.875rem; color: rgba(var(--color-foreground), 0.4); }
+  .section-featured-product__price-current { font-size: 1.125rem; font-weight: 700; color: rgb(var(--color-foreground)); }
+  .section-featured-product__price-current--sale { color: rgb(var(--color-accent)); }
+
+  .section-featured-product__desc { color: rgba(var(--color-foreground), 0.7); line-height: 1.7; }
+
+  .section-featured-product__form { margin-top: 0.25rem; }
+  .section-featured-product__btn {
+    background: rgb(var(--color-button)); color: rgb(var(--color-button-text));
+    border: 1px solid rgb(var(--color-button)); border-radius: var(--buttons-radius, 0);
+    font-weight: 600; cursor: pointer; transition: opacity 0.2s; width: 100%;
+  }
+  .section-featured-product__btn:hover { opacity: 0.85; }
+  .section-featured-product__btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .section-featured-product__view-link {
+    display: inline-flex; align-items: center; gap: 0.25rem;
+    font-size: 0.875rem; font-weight: 600; color: rgb(var(--color-accent));
+    transition: opacity 0.3s;
+  }
+  .section-featured-product__view-link:hover { opacity: 0.7; }
+
+  .section-featured-product__empty {
+    text-align: center; padding: 3rem; color: rgba(var(--color-foreground), 0.3);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Featured product",
+  "tag": "section",
+  "class": "section-featured-product-wrapper",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "header", "content": "Content" },
+    { "type": "inline_richtext", "id": "subheading", "label": "Subheading" },
+    { "type": "select", "id": "subheading_size", "label": "Subheading size", "options": [{ "value": "xs", "label": "XS" },{ "value": "sm", "label": "S" },{ "value": "md", "label": "M" }], "default": "sm" },
+    { "type": "select", "id": "heading_size", "label": "Product title size", "options": [{ "value": "md", "label": "M" },{ "value": "lg", "label": "L" },{ "value": "xl", "label": "XL" }], "default": "lg" },
+    { "type": "checkbox", "id": "show_vendor", "label": "Show vendor", "default": false },
+    { "type": "checkbox", "id": "show_description", "label": "Show description", "default": true },
+    { "type": "select", "id": "description_size", "label": "Description size", "options": [{ "value": "sm", "label": "S" },{ "value": "md", "label": "M" }], "default": "md" },
+    { "type": "checkbox", "id": "show_view_link", "label": "Show 'View full details'", "default": true },
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "image_position", "label": "Image position", "options": [{ "value": "left", "label": "Left" },{ "value": "right", "label": "Right" }], "default": "left" },
+    { "type": "select", "id": "button_size", "label": "Button size", "options": [{ "value": "sm", "label": "S" },{ "value": "md", "label": "M" },{ "value": "lg", "label": "L" }], "default": "md" },
+    { "type": "header", "content": "Desktop spacing" },
+    { "type": "range", "id": "padding_top_desktop", "min": 0, "max": 150, "step": 5, "unit": "px", "label": "Top", "default": 50 },
+    { "type": "range", "id": "padding_bottom_desktop", "min": 0, "max": 150, "step": 5, "unit": "px", "label": "Bottom", "default": 50 },
+    { "type": "header", "content": "Mobile spacing" },
+    { "type": "range", "id": "padding_top_mobile", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Top", "default": 30 },
+    { "type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Bottom", "default": 30 }
+  ],
+  "presets": [{ "name": "Featured product", "category": "Product" }]
+}
+{% endschema %}

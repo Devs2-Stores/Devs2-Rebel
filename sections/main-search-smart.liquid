@@ -15,13 +15,14 @@
          title="{{ product.title | escape }}"
          aria-label="{{ product.title | escape }}">
         <div class="search-modal-product-image">
-          <img src="{% if product.images.size > 0 %}{{ product.featured_image | image_url: width: 240 }}{% else %}{{ 'no_image_product.jpg' | asset_url }}{% endif %}"
+          <img src="{% if product.images.size > 0 %}{{ product.featured_image | image_url: width: 240 }}{% else %}{{ 'no_image.png' | asset_url }}{% endif %}"
              alt="{{ product.title | escape }}"
+             width="240" height="240"
              loading="lazy">
         </div>
         <div class="search-modal-product-info">
           <h4 class="search-modal-product-name">
-            {{ product.title }}
+            {{ product.title | escape }}
           </h4>
           {%- if product.vendor != blank -%}
           <p class="search-modal-product-vendor">

@@ -1,3 +1,6 @@
+(function() {
+'use strict';
+
 class AboutPage extends HTMLElement {
 	constructor() {
 		super();
@@ -41,3 +44,5 @@ class AboutPage extends HTMLElement {
 if (typeof customElements !== 'undefined' && !customElements.get('about-page')) {
 	customElements.define('about-page', AboutPage);
 }
+
+})();

@@ -189,17 +189,11 @@
 
     async loadData() {
       if (this.loadedData) return;
-      try {
-        const resp = await fetch('/checkout/addresses.json');
-        if (!resp.ok) throw new Error('Address API not available');
-        const rs = await resp.json();
-        this.allProvince = rs.provinces;
-        this.allDistrict = rs.districts;
-        this.allWard = rs.wards;
-        this.loadedData = true;
-      } catch (e) {
-        console.error('Failed to load address data:', e);
-      }
+      // Shopify does not have /checkout/addresses.json (Haravan-only).
+      // Province data comes from country option's data-provinces attribute instead.
+      this.allProvince = [];
+      this.allDistrict = [];
+      this.allWard = [];
     }
 
     setProvince(zone, province) {
@@ -350,13 +344,15 @@
       if (!this.newPassword || !this.confirmPassword) return;
       if (this.newPassword.value !== this.confirmPassword.value) {
         e.preventDefault();
-        alert(this.dataset.passwordMismatch || 'Passwords do not match.');
+        var msg = this.dataset.passwordMismatch || 'Passwords do not match.';
+        if (typeof showToast === 'function') showToast(msg, 'error', 3000);
         this.confirmPassword.focus();
         return false;
       }
       if (this.newPassword.value.length < 8) {
         e.preventDefault();
-        alert(this.dataset.passwordMinLength || 'Password must be at least 8 characters.');
+        var msg = this.dataset.passwordMinLength || 'Password must be at least 8 characters.';
+        if (typeof showToast === 'function') showToast(msg, 'error', 3000);
         this.newPassword.focus();
         return false;
       }

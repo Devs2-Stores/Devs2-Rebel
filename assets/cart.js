@@ -1,5 +1,8 @@
+﻿(function() {
+'use strict';
+
 /**
- * Cart Template — Main cart page component
+ * Cart Template â€” Main cart page component
  * Uses Cart API with Section Rendering for dynamic updates.
  */
 class CartTemplate extends HTMLElement {
@@ -121,7 +124,6 @@ class CartTemplate extends HTMLElement {
         updateCartMoney(cart.total_price);
       })
       .catch(function(err) {
-        console.error("Cart error:", err);
         if (typeof showToast === 'function') {
           showToast(self.getString('error') || 'Cart update error', 'error');
         }
@@ -140,7 +142,6 @@ class CartTemplate extends HTMLElement {
         return res.json();
       })
       .catch(function(err) {
-        console.error("Cart error:", err);
         if (typeof showToast === 'function') {
           showToast(self.getString('noteError') || 'Could not save note', 'error');
         }
@@ -164,7 +165,6 @@ class CartTemplate extends HTMLElement {
         return res.json();
       })
       .catch(function(err) {
-        console.error("Cart error:", err);
         if (typeof showToast === 'function') {
           showToast(self.getString('invoiceError') || 'Could not save info', 'error');
         }
@@ -270,10 +270,10 @@ class CartTemplate extends HTMLElement {
     countSpan.textContent = "(" + count + " " + caption + ")";
   }
 }
-customElements.define("cart-template", CartTemplate);
+if (!customElements.get('cart-template')) customElements.define("cart-template", CartTemplate);
 
 /**
- * Cart Item — Individual line item with delete functionality
+ * Cart Item â€” Individual line item with delete functionality
  */
 class CartItem extends HTMLElement {
   connectedCallback() {
@@ -318,4 +318,6 @@ class CartItem extends HTMLElement {
     this.remove();
   }
 }
-customElements.define("cart-item", CartItem);
+if (!customElements.get('cart-item')) customElements.define("cart-item", CartItem);
+
+})();

@@ -1,13 +1,11 @@
 
-{{- 'page-contact.css' | asset_url | stylesheet_tag -}}
-<script src="{{ 'page-contact.js' | asset_url }}" defer="defer"></script>
 <contact-page class="page-contact">
   <section class="contact-hero">
     <div class="page-width">
       <div class="contact-hero__wrap">
         <h1 class="contact-hero__title">{% if section.settings.title != blank %}{{ section.settings.title }}{% else %}{{ 'templates.contact.form.title' | t }}{% endif %}</h1>
         {%- if section.settings.description != blank -%}
-        <p class="contact-hero__description">{{ section.settings.description }}</p>
+        <p class="contact-hero__description">{{ section.settings.description | escape }}</p>
         {%- endif -%}
       </div>
     </div>
@@ -26,7 +24,7 @@
             </div>
             <div class="contact-main__info-item-content">
               <h3 class="contact-main__info-item-title">{{ 'sections.page_contact.address' | t }}</h3>
-              <p class="contact-main__info-item-text">{{ section.settings.address }}</p>
+              <p class="contact-main__info-item-text">{{ section.settings.address | escape }}</p>
             </div>
           </div>
           {%- endif -%}
@@ -38,7 +36,7 @@
             </div>
             <div class="contact-main__info-item-content">
               <h3 class="contact-main__info-item-title">{{ 'sections.page_contact.phone' | t }}</h3>
-              <a href="tel:{{ section.settings.phone | replace: ' ', '' }}" class="contact-main__info-item-text" title="{{ 'sections.page_contact.call' | t }} {{ section.settings.phone }}">{{ section.settings.phone }}</a>
+              <a href="tel:{{ section.settings.phone | replace: ' ', '' }}" class="contact-main__info-item-text" title="{{ 'sections.page_contact.call' | t }} {{ section.settings.phone | escape }}">{{ section.settings.phone | escape }}</a>
             </div>
           </div>
           {%- endif -%}
@@ -50,7 +48,7 @@
             </div>
             <div class="contact-main__info-item-content">
               <h3 class="contact-main__info-item-title">{{ 'sections.page_contact.email' | t }}</h3>
-              <a href="mailto:{{ section.settings.email }}" class="contact-main__info-item-text" title="Email {{ section.settings.email }}">{{ section.settings.email }}</a>
+              <a href="mailto:{{ section.settings.email }}" class="contact-main__info-item-text" title="Email {{ section.settings.email | escape }}">{{ section.settings.email | escape }}</a>
             </div>
           </div>
           {%- endif -%}
@@ -62,7 +60,7 @@
             </div>
             <div class="contact-main__info-item-content">
               <h3 class="contact-main__info-item-title">{{ 'sections.page_contact.hours' | t }}</h3>
-              <p class="contact-main__info-item-text">{{ section.settings.hours }}</p>
+              <p class="contact-main__info-item-text">{{ section.settings.hours | escape }}</p>
             </div>
           </div>
           {%- endif -%}

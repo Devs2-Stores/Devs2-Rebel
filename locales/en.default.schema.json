@@ -24,45 +24,81 @@
     "colors": {
       "name": "Colors",
       "settings": {
-        "background": {
-          "label": "Background"
+        "header__general": {
+          "content": "General"
         },
-        "background_gradient": {
-          "label": "Background gradient",
-          "info": "Background gradient replaces background where supported."
+        "accent": {
+          "label": "Accent color"
+        },
+        "border": {
+          "label": "Border color"
+        },
+        "header__text": {
+          "content": "Text color"
         },
         "text": {
           "label": "Text"
         },
+        "subtext": {
+          "label": "Subtext"
+        },
+        "header__background": {
+          "content": "Background"
+        },
+        "background": {
+          "label": "Background 1"
+        },
+        "background_2": {
+          "label": "Background 2"
+        },
+        "background_gradient": {
+          "label": "Background gradient",
+          "info": "Background gradient overrides Background 1 when set."
+        },
+        "header__primary_button": {
+          "content": "Primary button"
+        },
         "button_background": {
-          "label": "Primary button background"
+          "label": "Button background"
         },
         "button_label": {
-          "label": "Primary button label"
+          "label": "Button label"
+        },
+        "header__secondary_button": {
+          "content": "Secondary button"
+        },
+        "secondary_button_background": {
+          "label": "Button background"
+        },
+        "secondary_button_border": {
+          "label": "Button border"
         },
         "secondary_button_label": {
-          "label": "Secondary button label"
+          "label": "Button label"
+        },
+        "header__form": {
+          "content": "Form inputs"
+        },
+        "form_bg": {
+          "label": "Background"
+        },
+        "form_text": {
+          "label": "Text"
+        },
+        "header__product": {
+          "content": "Product"
+        },
+        "sale_price": {
+          "label": "Sale price"
+        },
+        "header__other": {
+          "content": "Other colors"
+        },
+        "progress_bar": {
+          "label": "Progress bar color"
         },
         "shadow": {
           "label": "Shadow"
-        },
-        "header__status": {
-          "content": "Status colors"
-        },
-        "color_price": {
-          "label": "Price"
-        },
-        "color_success": {
-          "label": "Success"
-        },
-        "color_error": {
-          "label": "Error"
-        },
-        "color_warning": {
-          "label": "Warning"
-        },
-        "color_info": {
-          "label": "Info"
         }
       }
     },
@@ -988,6 +1024,18 @@
         },
         "badges": {
           "name": "Badges & tags"
+        },
+        "title": {
+          "name": "Title"
+        },
+        "product_meta": {
+          "name": "Meta"
+        },
+        "price": {
+          "name": "Price"
+        },
+        "pickup_availability": {
+          "name": "Pickup availability"
         }
       }
     },
@@ -1597,6 +1645,15 @@
         },
         "show_language_selector": {
           "label": "Show language selector"
+        },
+        "header__payment": {
+          "content": "Payment & Follow"
+        },
+        "show_payment_icons": {
+          "label": "Show payment icons"
+        },
+        "show_follow_on_shop": {
+          "label": "Show Follow on Shop button"
         }
       },
       "blocks": {
@@ -2039,6 +2096,380 @@
         },
         "button_link": {
           "label": "Button link"
+        }
+      }
+    },
+    "featured_countdown": {
+      "name": "Featured countdown",
+      "settings": {
+        "color_scheme": {
+          "label": "Color scheme"
+        },
+        "content_header": {
+          "content": "Content"
+        },
+        "badge_text": {
+          "label": "Badge text"
+        },
+        "heading": {
+          "label": "Heading"
+        },
+        "heading_size": {
+          "label": "Heading size"
+        },
+        "heading_tag": {
+          "label": "Heading tag"
+        },
+        "product": {
+          "label": "Product"
+        },
+        "countdown_header": {
+          "content": "Countdown"
+        },
+        "end_date": {
+          "label": "End date",
+          "info": "Format: YYYY-MM-DD"
+        },
+        "end_time": {
+          "label": "End time",
+          "info": "Format: HH:MM"
+        },
+        "button_header": {
+          "content": "Button"
+        },
+        "button_label": {
+          "label": "Button label"
+        },
+        "button_size": {
+          "label": "Button size"
+        },
+        "padding_top_desktop": {
+          "label": "Top"
+        },
+        "padding_bottom_desktop": {
+          "label": "Bottom"
+        },
+        "padding_top_mobile": {
+          "label": "Top"
+        },
+        "padding_bottom_mobile": {
+          "label": "Bottom"
+        }
+      },
+      "presets": {
+        "featured_countdown": {
+          "name": "Featured countdown"
+        }
+      }
+    },
+    "countdown_timer": {
+      "name": "Countdown timer",
+      "settings": {
+        "color_scheme": {
+          "label": "Color scheme"
+        },
+        "content_header": {
+          "content": "Content"
+        },
+        "subheading": {
+          "label": "Subheading"
+        },
+        "subheading_size": {
+          "label": "Subheading size"
+        },
+        "heading": {
+          "label": "Heading"
+        },
+        "heading_size": {
+          "label": "Heading size"
+        },
+        "heading_tag": {
+          "label": "Heading tag"
+        },
+        "description": {
+          "label": "Description"
+        },
+        "description_size": {
+          "label": "Description size"
+        },
+        "timer_header": {
+          "content": "Timer"
+        },
+        "target_date": {
+          "label": "Target date",
+          "info": "Format: YYYY-MM-DD"
+        },
+        "target_time": {
+          "label": "Target time",
+          "info": "Format: HH:MM (24h)"
+        },
+        "button_header": {
+          "content": "Button"
+        },
+        "button_label": {
+          "label": "Button label"
+        },
+        "button_link": {
+          "label": "Button link"
+        },
+        "button_style": {
+          "label": "Button style"
+        },
+        "button_size": {
+          "label": "Button size"
+        },
+        "layout_header": {
+          "content": "Layout"
+        },
+        "alignment": {
+          "label": "Alignment"
+        },
+        "padding_top_desktop": {
+          "label": "Top"
+        },
+        "padding_bottom_desktop": {
+          "label": "Bottom"
+        },
+        "padding_top_mobile": {
+          "label": "Top"
+        },
+        "padding_bottom_mobile": {
+          "label": "Bottom"
+        }
+      },
+      "presets": {
+        "countdown_timer": {
+          "name": "Countdown timer"
+        }
+      }
+    },
+    "banner_hotspots": {
+      "name": "Banner with hotspots",
+      "settings": {
+        "color_scheme": {
+          "label": "Color scheme"
+        },
+        "heading_header": {
+          "content": "Heading"
+        },
+        "heading": {
+          "label": "Heading"
+        },
+        "heading_size": {
+          "label": "Heading size"
+        },
+        "heading_tag": {
+          "label": "Heading tag"
+        },
+        "image_header": {
+          "content": "Image"
+        },
+        "image": {
+          "label": "Background image"
+        },
+        "width": {
+          "label": "Width"
+        },
+        "padding_top_desktop": {
+          "label": "Top"
+        },
+        "padding_bottom_desktop": {
+          "label": "Bottom"
+        },
+        "padding_top_mobile": {
+          "label": "Top"
+        },
+        "padding_bottom_mobile": {
+          "label": "Bottom"
+        }
+      },
+      "blocks": {
+        "hotspot": {
+          "name": "Hotspot",
+          "settings": {
+            "x_position": {
+              "label": "Horizontal position"
+            },
+            "y_position": {
+              "label": "Vertical position"
+            },
+            "tooltip_position": {
+              "label": "Tooltip position"
+            },
+            "product": {
+              "label": "Product"
+            },
+            "custom_header": {
+              "content": "Custom tooltip (if no product)"
+            },
+            "custom_heading": {
+              "label": "Heading"
+            },
+            "custom_text": {
+              "label": "Text"
+            }
+          }
+        }
+      },
+      "presets": {
+        "banner_hotspots": {
+          "name": "Banner with hotspots"
+        }
+      }
+    },
+    "before_after": {
+      "name": "Before/After slider",
+      "settings": {
+        "color_scheme": {
+          "label": "Color scheme"
+        },
+        "heading_header": {
+          "content": "Heading"
+        },
+        "subheading": {
+          "label": "Subheading"
+        },
+        "subheading_size": {
+          "label": "Subheading size"
+        },
+        "heading": {
+          "label": "Heading"
+        },
+        "heading_size": {
+          "label": "Heading size"
+        },
+        "heading_tag": {
+          "label": "Heading tag"
+        },
+        "images_header": {
+          "content": "Images"
+        },
+        "before_image": {
+          "label": "Before image"
+        },
+        "after_image": {
+          "label": "After image"
+        },
+        "before_label": {
+          "label": "Before label"
+        },
+        "after_label": {
+          "label": "After label"
+        },
+        "padding_top_desktop": {
+          "label": "Top"
+        },
+        "padding_bottom_desktop": {
+          "label": "Bottom"
+        },
+        "padding_top_mobile": {
+          "label": "Top"
+        },
+        "padding_bottom_mobile": {
+          "label": "Bottom"
+        }
+      },
+      "presets": {
+        "before_after": {
+          "name": "Before/After slider"
+        }
+      }
+    },
+    "button_group": {
+      "name": "Button group",
+      "settings": {
+        "color_scheme": {
+          "label": "Color scheme"
+        },
+        "alignment": {
+          "label": "Alignment"
+        },
+        "padding_top_desktop": {
+          "label": "Top"
+        },
+        "padding_bottom_desktop": {
+          "label": "Bottom"
+        },
+        "padding_top_mobile": {
+          "label": "Top"
+        },
+        "padding_bottom_mobile": {
+          "label": "Bottom"
+        }
+      },
+      "blocks": {
+        "button": {
+          "name": "Button",
+          "settings": {
+            "label": {
+              "label": "Label"
+            },
+            "link": {
+              "label": "Link"
+            },
+            "style": {
+              "label": "Style"
+            },
+            "size": {
+              "label": "Size"
+            }
+          }
+        }
+      },
+      "presets": {
+        "button_group": {
+          "name": "Button group"
+        }
+      }
+    },
+    "age_verification": {
+      "name": "Age verification",
+      "settings": {
+        "color_scheme": {
+          "label": "Color scheme"
+        },
+        "logo": {
+          "label": "Logo"
+        },
+        "heading": {
+          "label": "Heading"
+        },
+        "heading_size": {
+          "label": "Heading size"
+        },
+        "text": {
+          "label": "Text"
+        },
+        "confirm_label": {
+          "label": "Confirm label"
+        },
+        "deny_label": {
+          "label": "Deny label"
+        },
+        "deny_url": {
+          "label": "Deny redirect URL"
+        },
+        "disclaimer": {
+          "label": "Disclaimer"
+        }
+      },
+      "presets": {
+        "age_verification": {
+          "name": "Age verification"
+        }
+      }
+    },
+    "complementary_products": {
+      "name": "Complementary products",
+      "settings": {
+        "heading": {
+          "label": "Heading"
+        },
+        "max_products": {
+          "label": "Maximum products to show"
+        },
+        "products": {
+          "label": "Products"
         }
       }
     }

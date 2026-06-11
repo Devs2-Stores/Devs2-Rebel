@@ -29,7 +29,7 @@
 
 {%- unless template == 'index' -%}
 {{ 'breadcrumb.css' | asset_url | stylesheet_tag }}
-<div class="section-breadcrumbs">
+<div class="section-breadcrumbs color-{{ section.settings.color_scheme }}">
   <div class="{% if section.settings.container_width == 'fixed' %}page-width{% endif %}">
     <nav class="breadcrumb-nav" aria-label="{{ 'general.breadcrumbs.aria_label' | t }}">
       <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -52,7 +52,7 @@
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
           <span class="breadcrumb__separator" aria-hidden="true">{{ section.settings.separator }}</span>
           <span itemprop="name">
-            {%- if collection.handle == 'all' -%}{{ t_all_products }}{%- else -%}{{ collection.title }}{%- endif -%}
+            {%- if collection.handle == 'all' -%}{{ t_all_products }}{%- else -%}{{ collection.title | escape }}{%- endif -%}
           </span>
           <meta itemprop="position" content="2">
         </li>
@@ -90,7 +90,7 @@
         {%- elsif template contains 'blog' and blog -%}
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
           <span class="breadcrumb__separator" aria-hidden="true">{{ section.settings.separator }}</span>
-          <span itemprop="name">{{ blog.title }}</span>
+          <span itemprop="name">{{ blog.title | escape }}</span>
           <meta itemprop="position" content="2">
         </li>
 
@@ -98,20 +98,20 @@
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
           <span class="breadcrumb__separator" aria-hidden="true">{{ section.settings.separator }}</span>
           <a itemprop="item" href="{{ blog.url }}" class="breadcrumb__link">
-            <span itemprop="name">{{ blog.title }}</span>
+            <span itemprop="name">{{ blog.title | escape }}</span>
           </a>
           <meta itemprop="position" content="2">
         </li>
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
           <span class="breadcrumb__separator" aria-hidden="true">{{ section.settings.separator }}</span>
-          <span itemprop="name">{{ article.title }}</span>
+          <span itemprop="name">{{ article.title | escape }}</span>
           <meta itemprop="position" content="3">
         </li>
 
         {%- elsif template contains 'page' and page -%}
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
           <span class="breadcrumb__separator" aria-hidden="true">{{ section.settings.separator }}</span>
-          <span itemprop="name">{{ page.title }}</span>
+          <span itemprop="name">{{ page.title | escape }}</span>
           <meta itemprop="position" content="2">
         </li>
 
@@ -160,6 +160,12 @@
   "tag": "section",
   "class": "section-breadcrumb",
   "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
     {
       "type": "select",
       "id": "container_width",

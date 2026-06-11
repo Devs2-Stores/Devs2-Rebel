@@ -1,14 +1,24 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "breadcrumb": {
-      "type": "breadcrumb"
+      "type": "breadcrumb",
+      "settings": {}
     },
     "main": {
       "type": "main-product",
-      "settings": {},
       "blocks": {
         "title": {
-          "type": "title"
+          "type": "title",
+          "settings": {}
         },
         "product_meta": {
           "type": "product_meta",
@@ -21,7 +31,8 @@
           }
         },
         "price": {
-          "type": "price"
+          "type": "price",
+          "settings": {}
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -33,10 +44,12 @@
           }
         },
         "quantity_selector": {
-          "type": "quantity_selector"
+          "type": "quantity_selector",
+          "settings": {}
         },
         "coupon": {
-          "type": "coupon"
+          "type": "coupon",
+          "settings": {}
         },
         "stock_counter": {
           "type": "stock_counter",
@@ -51,10 +64,12 @@
           }
         },
         "back_in_stock": {
-          "type": "back_in_stock"
+          "type": "back_in_stock",
+          "settings": {}
         },
         "payment_installments": {
-          "type": "payment_installments"
+          "type": "payment_installments",
+          "settings": {}
         },
         "tabs": {
           "type": "tabs",
@@ -65,7 +80,8 @@
           }
         },
         "share": {
-          "type": "share"
+          "type": "share",
+          "settings": {}
         }
       },
       "block_order": [
@@ -81,11 +97,20 @@
         "payment_installments",
         "tabs",
         "share"
-      ]
+      ],
+      "settings": {}
+    },
+    "complementary": {
+      "type": "complementary-products",
+      "settings": {
+        "heading": "Pairs well with",
+        "product_limit": 4
+      }
     }
   },
   "order": [
     "breadcrumb",
-    "main"
+    "main",
+    "complementary"
   ]
 }

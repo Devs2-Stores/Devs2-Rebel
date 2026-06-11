@@ -1,13 +1,11 @@
 
-{{- 'page-stores.css' | asset_url | stylesheet_tag -}}
-<script src="{{ 'page-stores.js' | asset_url }}" defer="defer"></script>
 <stores-page class="page-stores">
   <section class="stores-hero">
     <div class="page-width">
       <div class="stores-hero__wrap">
-        <h1 class="stores-hero__title">{% if section.settings.title != blank %}{{ section.settings.title }}{% else %}{{ 'sections.page_stores.default_title' | t }}{% endif %}</h1>
+        <h1 class="stores-hero__title">{% if section.settings.title != blank %}{{ section.settings.title | escape }}{% else %}{{ 'sections.page_stores.default_title' | t }}{% endif %}</h1>
         {%- if section.settings.description != blank -%}
-        <p class="stores-hero__description">{{ section.settings.description }}</p>
+        <p class="stores-hero__description">{{ section.settings.description | escape }}</p>
         {%- endif -%}
       </div>
     </div>
@@ -64,30 +62,30 @@
             <div class="stores-card__content">
               <h3 class="stores-card__name">
                 {%- render 'icon', name: 'store', size: '18' -%}
-                {{ block.settings.name }}
+                {{ block.settings.name | escape }}
               </h3>
               {%- if block.settings.address != blank -%}
               <div class="stores-card__info">
                 {%- render 'icon', name: 'location', size: '16' -%}
-                <span>{{ block.settings.address }}</span>
+                <span>{{ block.settings.address | escape }}</span>
               </div>
               {%- endif -%}
               {%- if block.settings.phone != blank -%}
               <div class="stores-card__info">
                 {%- render 'icon', name: 'phone', size: '16' -%}
-                <a href="tel:{{ block.settings.phone | replace: ' ', '' | replace: '.', '' }}" title="{{ 'sections.page_contact.call' | t }} {{ block.settings.phone }}">{{ block.settings.phone }}</a>
+                <a href="tel:{{ block.settings.phone | replace: ' ', '' | replace: '.', '' }}" title="{{ 'sections.page_contact.call' | t }} {{ block.settings.phone | escape }}">{{ block.settings.phone | escape }}</a>
               </div>
               {%- endif -%}
               {%- if block.settings.email != blank -%}
               <div class="stores-card__info">
                 {%- render 'icon', name: 'email', size: '16' -%}
-                <a href="mailto:{{ block.settings.email }}" title="Email {{ block.settings.email }}">{{ block.settings.email }}</a>
+                <a href="mailto:{{ block.settings.email }}" title="Email {{ block.settings.email | escape }}">{{ block.settings.email | escape }}</a>
               </div>
               {%- endif -%}
               {%- if block.settings.hours != blank -%}
               <div class="stores-card__info">
                 {%- render 'icon', name: 'calendar', size: '16' -%}
-                <span>{{ block.settings.hours }}</span>
+                <span>{{ block.settings.hours | escape }}</span>
               </div>
               {%- endif -%}
               {%- if block.settings.address != blank -%}
@@ -127,8 +125,16 @@
   "tag": "section",
   "class": "section-page-stores",
   "settings": [
-    { "type": "text", "id": "title", "label": "t:sections.page_stores.settings.title.label" },
-    { "type": "textarea", "id": "description", "label": "t:sections.page_stores.settings.description.label" }
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.page_stores.settings.title.label"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "t:sections.page_stores.settings.description.label"
+    }
   ],
   "blocks": [
     {
@@ -136,15 +142,50 @@
       "name": "t:sections.page_stores.blocks.store.name",
       "limit": 20,
       "settings": [
-        { "type": "text", "id": "name", "label": "t:sections.page_stores.blocks.store.settings.name.label" },
-        { "type": "textarea", "id": "address", "label": "t:sections.page_stores.blocks.store.settings.address.label" },
-        { "type": "text", "id": "province", "label": "t:sections.page_stores.blocks.store.settings.province.label" },
-        { "type": "text", "id": "district", "label": "t:sections.page_stores.blocks.store.settings.district.label" },
-        { "type": "text", "id": "phone", "label": "t:sections.page_stores.blocks.store.settings.phone.label" },
-        { "type": "text", "id": "email", "label": "t:sections.page_stores.blocks.store.settings.email.label" },
-        { "type": "text", "id": "hours", "label": "t:sections.page_stores.blocks.store.settings.hours.label" },
-        { "type": "html", "id": "map_embed", "label": "t:sections.page_stores.blocks.store.settings.map_embed.label" }
+        {
+          "type": "text",
+          "id": "name",
+          "label": "t:sections.page_stores.blocks.store.settings.name.label"
+        },
+        {
+          "type": "textarea",
+          "id": "address",
+          "label": "t:sections.page_stores.blocks.store.settings.address.label"
+        },
+        {
+          "type": "text",
+          "id": "province",
+          "label": "t:sections.page_stores.blocks.store.settings.province.label"
+        },
+        {
+          "type": "text",
+          "id": "district",
+          "label": "t:sections.page_stores.blocks.store.settings.district.label"
+        },
+        {
+          "type": "text",
+          "id": "phone",
+          "label": "t:sections.page_stores.blocks.store.settings.phone.label"
+        },
+        {
+          "type": "text",
+          "id": "email",
+          "label": "t:sections.page_stores.blocks.store.settings.email.label"
+        },
+        {
+          "type": "text",
+          "id": "hours",
+          "label": "t:sections.page_stores.blocks.store.settings.hours.label"
+        },
+        {
+          "type": "html",
+          "id": "map_embed",
+          "label": "t:sections.page_stores.blocks.store.settings.map_embed.label"
+        }
       ]
+    },
+    {
+      "type": "@app"
     }
   ]
 }

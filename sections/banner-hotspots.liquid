@@ -1,0 +1,410 @@
+{%- comment -%}
+  Section: Banner with Hotspots
+  Mô tả: Ảnh sản phẩm + chấm tròn clickable → tooltip info/product.
+{%- endcomment -%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-hotspot color-{{ section.settings.color_scheme }}"
+  style="
+    --hs-dt: {{ section.settings.padding_top_desktop }}px;
+    --hs-db: {{ section.settings.padding_bottom_desktop }}px;
+    --hs-mt: {{ section.settings.padding_top_mobile }}px;
+    --hs-mb: {{ section.settings.padding_bottom_mobile }}px;
+  "
+>
+  <div class="{% if section.settings.section_width == 'fixed' %}page-width{% endif %}">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-hotspot__head page-width">
+        <{{ section.settings.heading_tag }} class="section-hotspot__heading heading-size-{{ section.settings.heading_size }}">
+          {{- section.settings.heading -}}
+        </{{ section.settings.heading_tag }}>
+      </div>
+    {%- endif -%}
+
+    <div class="section-hotspot__wrapper">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1920 | image_tag:
+          widths: '750, 1080, 1440, 1920', sizes: '100vw',
+          loading: 'lazy', class: 'section-hotspot__img'
+        }}
+      {%- else -%}
+        <div class="section-hotspot__ph">{{ 'lifestyle-2' | placeholder_svg_tag }}</div>
+      {%- endif -%}
+
+      {%- for block in section.blocks -%}
+        <div
+          class="section-hotspot__dot"
+          style="--hs-x: {{ block.settings.position_x }}%; --hs-y: {{ block.settings.position_y }}%;"
+          {{ block.shopify_attributes }}
+          data-hotspot
+        >
+          <button class="section-hotspot__pulse" aria-label="{{ 'accessibility.view_details' | t }}" data-hotspot-btn>
+            <span class="section-hotspot__plus">+</span>
+          </button>
+          <div class="section-hotspot__tooltip section-hotspot__tooltip--{{ block.settings.tooltip_position }}" data-hotspot-tooltip>
+            {%- if block.settings.product != blank -%}
+              <a href="{{ block.settings.product.url }}" class="section-hotspot__tooltip-product">
+                {%- if block.settings.product.featured_image -%}
+                  {{ block.settings.product.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', class: 'section-hotspot__tooltip-img' }}
+                {%- endif -%}
+                <div class="section-hotspot__tooltip-info">
+                  <span class="section-hotspot__tooltip-title">{{ block.settings.product.title | escape }}</span>
+                  <span class="section-hotspot__tooltip-price">{{ block.settings.product.price | money }}</span>
+                </div>
+              </a>
+            {%- else -%}
+              <div class="section-hotspot__tooltip-custom">
+                {%- if block.settings.heading != blank -%}
+                  <strong>{{ block.settings.heading }}</strong>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <span>{{ block.settings.text }}</span>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var dots = document.querySelectorAll('#section-{{ section.id }} [data-hotspot]');
+  dots.forEach(function(dot) {
+    var btn = dot.querySelector('[data-hotspot-btn]');
+    var tip = dot.querySelector('[data-hotspot-tooltip]');
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var isOpen = tip.classList.contains('is-open');
+      document.querySelectorAll('[data-hotspot-tooltip].is-open').forEach(function(t) { t.classList.remove('is-open'); });
+      if (!isOpen) tip.classList.add('is-open');
+    });
+  });
+  document.addEventListener('click', function() {
+    document.querySelectorAll('[data-hotspot-tooltip].is-open').forEach(function(t) { t.classList.remove('is-open'); });
+  });
+})();
+</script>
+
+{% stylesheet %}
+  .section-hotspot {
+    padding-block: var(--hs-mt) var(--hs-mb);
+    background: rgb(var(--color-background));
+  }
+  @media (min-width: 750px) {
+    .section-hotspot { padding-block: var(--hs-dt) var(--hs-db); }
+  }
+  .section-hotspot__head { text-align: center; margin-bottom: 2rem; }
+  .section-hotspot__heading { margin: 0; color: rgb(var(--color-foreground)); }
+
+  .section-hotspot__wrapper { position: relative; border-radius: 0.5rem; overflow: hidden; }
+  .section-hotspot__img { width: 100%; height: auto; display: block; }
+  .section-hotspot__ph { aspect-ratio: 16/9; background: rgba(var(--color-foreground), 0.04); display: flex; align-items: center; justify-content: center; }
+  .section-hotspot__ph svg { width: 30%; opacity: 0.1; }
+
+  .section-hotspot__dot {
+    position: absolute;
+    left: var(--hs-x); top: var(--hs-y);
+    transform: translate(-50%, -50%);
+    z-index: 3;
+  }
+
+  @keyframes hotspot-ping {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(2.2); opacity: 0; }
+  }
+
+  .section-hotspot__pulse {
+    width: 2rem; height: 2rem; border-radius: 50%;
+    background: rgba(255,255,255,0.9); border: 2px solid rgba(0,0,0,0.1);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: transform 0.3s;
+  }
+  .section-hotspot__pulse:hover { transform: scale(1.15); }
+  .section-hotspot__pulse::before {
+    content: ''; position: absolute; inset: -4px;
+    border-radius: 50%; border: 2px solid rgba(255,255,255,0.5);
+    animation: hotspot-ping 2s ease-out infinite;
+  }
+  .section-hotspot__plus { font-size: 1.125rem; font-weight: 700; color: #333; line-height: 1; }
+
+  .section-hotspot__tooltip {
+    position: absolute; z-index: 10;
+    background: rgb(var(--color-background)); border-radius: 0.5rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    min-width: 200px; opacity: 0; pointer-events: none;
+    transform: translateY(8px); transition: opacity 0.25s, transform 0.25s;
+  }
+  .section-hotspot__tooltip.is-open {
+    opacity: 1; pointer-events: auto; transform: translateY(0);
+  }
+  .section-hotspot__tooltip--bottom { top: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(8px); }
+  .section-hotspot__tooltip--bottom.is-open { transform: translateX(-50%) translateY(0); }
+  .section-hotspot__tooltip--top { bottom: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(-8px); }
+  .section-hotspot__tooltip--top.is-open { transform: translateX(-50%) translateY(0); }
+  .section-hotspot__tooltip--left { right: calc(100% + 12px); top: 50%; transform: translateY(-50%) translateX(-8px); }
+  .section-hotspot__tooltip--left.is-open { transform: translateY(-50%) translateX(0); }
+  .section-hotspot__tooltip--right { left: calc(100% + 12px); top: 50%; transform: translateY(-50%) translateX(8px); }
+  .section-hotspot__tooltip--right.is-open { transform: translateY(-50%) translateX(0); }
+
+  .section-hotspot__tooltip-product {
+    display: flex; gap: 0.75rem; padding: 0.75rem;
+    text-decoration: none; color: inherit;
+  }
+  .section-hotspot__tooltip-img { width: 60px; height: 60px; border-radius: 0.25rem; object-fit: cover; flex-shrink: 0; }
+  .section-hotspot__tooltip-info { display: flex; flex-direction: column; gap: 0.25rem; justify-content: center; }
+  .section-hotspot__tooltip-title { font-size: 0.8125rem; font-weight: 600; color: rgb(var(--color-foreground)); line-height: 1.3; }
+  .section-hotspot__tooltip-price { font-size: 0.75rem; font-weight: 700; color: rgb(var(--color-accent)); }
+
+  .section-hotspot__tooltip-custom { padding: 0.75rem; display: flex; flex-direction: column; gap: 0.25rem; }
+  .section-hotspot__tooltip-custom strong { font-size: 0.8125rem; color: rgb(var(--color-foreground)); }
+  .section-hotspot__tooltip-custom span { font-size: 0.75rem; color: rgba(var(--color-foreground), 0.6); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:sections.banner_hotspots.name",
+  "tag": "section",
+  "class": "section-hotspot-wrapper",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.banner_hotspots.settings.color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.banner_hotspots.settings.heading_header.content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:sections.banner_hotspots.settings.heading.label",
+      "default": "Shop the look"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "t:sections.banner_hotspots.settings.heading_size.label",
+      "options": [
+        {
+          "value": "md",
+          "label": "M"
+        },
+        {
+          "value": "lg",
+          "label": "L"
+        },
+        {
+          "value": "xl",
+          "label": "XL"
+        }
+      ],
+      "default": "lg"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "t:sections.banner_hotspots.settings.heading_tag.label",
+      "options": [
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.banner_hotspots.settings.image_header.content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.banner_hotspots.settings.image.label"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:sections.banner_hotspots.settings.width.label",
+      "options": [
+        {
+          "value": "fixed",
+          "label": "Fixed"
+        },
+        {
+          "value": "full",
+          "label": "Full"
+        }
+      ],
+      "default": "fixed"
+    },
+    {
+      "type": "header",
+      "content": "Desktop spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.banner_hotspots.settings.padding_top_desktop.label",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.banner_hotspots.settings.padding_bottom_desktop.label",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Mobile spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.banner_hotspots.settings.padding_top_mobile.label",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.banner_hotspots.settings.padding_bottom_mobile.label",
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hotspot",
+      "name": "t:sections.banner_hotspots.blocks.hotspot.name",
+      "settings": [
+        {
+          "type": "range",
+          "id": "position_x",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "t:sections.banner_hotspots.blocks.hotspot.settings.x_position.label",
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "position_y",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "t:sections.banner_hotspots.blocks.hotspot.settings.y_position.label",
+          "default": 40
+        },
+        {
+          "type": "select",
+          "id": "tooltip_position",
+          "label": "t:sections.banner_hotspots.blocks.hotspot.settings.tooltip_position.label",
+          "options": [
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            },
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "bottom"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "t:sections.banner_hotspots.blocks.hotspot.settings.product.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.banner_hotspots.blocks.hotspot.settings.custom_header.content"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.banner_hotspots.blocks.hotspot.settings.custom_heading.label"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "t:sections.banner_hotspots.blocks.hotspot.settings.custom_text.label"
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.banner_hotspots.presets.banner_hotspots.name",
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "hotspot",
+          "settings": {
+            "position_x": 25,
+            "position_y": 35,
+            "heading": "Sofa",
+            "text": "Italian leather, from $899"
+          }
+        },
+        {
+          "type": "hotspot",
+          "settings": {
+            "position_x": 65,
+            "position_y": 55,
+            "heading": "Side table",
+            "text": "Walnut wood, $249"
+          }
+        },
+        {
+          "type": "hotspot",
+          "settings": {
+            "position_x": 80,
+            "position_y": 30,
+            "heading": "Lamp",
+            "text": "Brass finish, $129"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

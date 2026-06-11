@@ -1,0 +1,344 @@
+{%- comment -%}
+  Section: Featured Countdown + Product
+  Mô tả: Countdown timer + featured product combo — flash sale tối ưu.
+{%- endcomment -%}
+
+{%- assign p = section.settings.product -%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-fcp color-{{ section.settings.color_scheme }}"
+  style="
+    --fcp-dt: {{ section.settings.padding_top_desktop }}px;
+    --fcp-db: {{ section.settings.padding_bottom_desktop }}px;
+    --fcp-mt: {{ section.settings.padding_top_mobile }}px;
+    --fcp-mb: {{ section.settings.padding_bottom_mobile }}px;
+  "
+>
+  <div class="page-width">
+    <div class="section-fcp__grid">
+      {%- comment -%} Product side {%- endcomment -%}
+      <div class="section-fcp__product">
+        {%- if p != blank and p.featured_image -%}
+          <a href="{{ p.url }}" class="section-fcp__product-media">
+            {{ p.featured_image | image_url: width: 600 | image_tag:
+              loading: 'lazy', class: 'section-fcp__product-img'
+            }}
+          </a>
+        {%- else -%}
+          <div class="section-fcp__product-ph">{{ 'product-1' | placeholder_svg_tag }}</div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Content side {%- endcomment -%}
+      <div class="section-fcp__content">
+        {%- if section.settings.badge != blank -%}
+          <span class="section-fcp__badge">{{ section.settings.badge }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <{{ section.settings.heading_tag }} class="section-fcp__heading heading-size-{{ section.settings.heading_size }}">
+            {{- section.settings.heading -}}
+          </{{ section.settings.heading_tag }}>
+        {%- endif -%}
+
+        {%- if p != blank -%}
+          <div class="section-fcp__product-info">
+            <h3 class="section-fcp__product-name">{{ p.title }}</h3>
+            <div class="section-fcp__prices">
+              {%- if p.compare_at_price > p.price -%}
+                <span class="section-fcp__price-compare">{{ p.compare_at_price | money }}</span>
+              {%- endif -%}
+              <span class="section-fcp__price-current heading-size-md">{{ p.price | money }}</span>
+              {%- if p.compare_at_price > p.price -%}
+                {%- assign save_pct = p.compare_at_price | minus: p.price | times: 100 | divided_by: p.compare_at_price -%}
+                <span class="section-fcp__price-save">-{{ save_pct }}%</span>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Countdown {%- endcomment -%}
+        <div class="section-fcp__countdown" data-fcp-countdown data-end="{{ section.settings.end_date }}T{{ section.settings.end_time }}">
+          <div class="section-fcp__timer-unit"><span data-fcp-d>00</span><small>{{ 'general.countdown.days' | t }}</small></div>
+          <div class="section-fcp__timer-sep">:</div>
+          <div class="section-fcp__timer-unit"><span data-fcp-h>00</span><small>{{ 'general.countdown.hours' | t }}</small></div>
+          <div class="section-fcp__timer-sep">:</div>
+          <div class="section-fcp__timer-unit"><span data-fcp-m>00</span><small>{{ 'general.countdown.minutes_short' | t }}</small></div>
+          <div class="section-fcp__timer-sep">:</div>
+          <div class="section-fcp__timer-unit"><span data-fcp-s>00</span><small>{{ 'general.countdown.seconds_short' | t }}</small></div>
+        </div>
+
+        {%- if p != blank -%}
+          {%- form 'product', p -%}
+            <input type="hidden" name="id" value="{{ p.variants.first.id }}">
+            <button type="submit" class="section-fcp__atc button-size-{{ section.settings.button_size }}">
+              {{ section.settings.button_label | default: 'Add to cart' }}
+            </button>
+          {%- endform -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.querySelector('#section-{{ section.id }} [data-fcp-countdown]');
+  if (!el) return;
+  var end = new Date(el.getAttribute('data-end')).getTime();
+  var d = el.querySelector('[data-fcp-d]'), h = el.querySelector('[data-fcp-h]');
+  var m = el.querySelector('[data-fcp-m]'), s = el.querySelector('[data-fcp-s]');
+  function pad(n) { return n < 10 ? '0' + n : n; }
+  function tick() {
+    var now = Date.now(), diff = Math.max(0, end - now);
+    var dd = Math.floor(diff / 86400000); diff -= dd * 86400000;
+    var hh = Math.floor(diff / 3600000); diff -= hh * 3600000;
+    var mm = Math.floor(diff / 60000); diff -= mm * 60000;
+    var ss = Math.floor(diff / 1000);
+    d.textContent = pad(dd); h.textContent = pad(hh);
+    m.textContent = pad(mm); s.textContent = pad(ss);
+    if (dd + hh + mm + ss > 0) requestAnimationFrame(tick);
+  }
+  tick();
+})();
+</script>
+
+{% stylesheet %}
+  .section-fcp {
+    padding-block: var(--fcp-mt) var(--fcp-mb);
+    background: rgb(var(--color-background));
+    color: rgba(var(--color-foreground), 0.85);
+  }
+  @media (min-width: 750px) {
+    .section-fcp { padding-block: var(--fcp-dt) var(--fcp-db); }
+  }
+
+  .section-fcp__grid { display: grid; gap: 2rem; align-items: center; }
+  @media (min-width: 750px) {
+    .section-fcp__grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+  }
+
+  .section-fcp__product-media { display: block; border-radius: 0.75rem; overflow: hidden; }
+  .section-fcp__product-img {
+    width: 100%; height: auto; display: block;
+    transition: transform 0.5s;
+  }
+  .section-fcp__product-media:hover .section-fcp__product-img { transform: scale(1.03); }
+  .section-fcp__product-ph {
+    aspect-ratio: 1; background: rgba(var(--color-foreground),0.04);
+    border-radius: 0.75rem; display: flex; align-items: center; justify-content: center;
+  }
+  .section-fcp__product-ph svg { width: 30%; opacity: 0.1; }
+
+  .section-fcp__content { display: flex; flex-direction: column; gap: 1rem; }
+  .section-fcp__badge {
+    display: inline-block; align-self: flex-start;
+    padding: 0.25rem 0.75rem; border-radius: 1rem;
+    font-size: 0.6875rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: #fef2f2; color: #dc2626;
+  }
+  .section-fcp__heading { margin: 0; color: rgb(var(--color-foreground)); line-height: 1.2; }
+
+  .section-fcp__product-info { display: flex; flex-direction: column; gap: 0.375rem; }
+  .section-fcp__product-name { margin: 0; font-size: 1rem; font-weight: 600; color: rgb(var(--color-foreground)); }
+  .section-fcp__prices { display: flex; align-items: baseline; gap: 0.5rem; flex-wrap: wrap; }
+  .section-fcp__price-compare { text-decoration: line-through; color: rgba(var(--color-foreground), 0.4); font-size: 0.875rem; }
+  .section-fcp__price-current { font-weight: 800; color: rgb(var(--color-foreground)); }
+  .section-fcp__price-save {
+    padding: 0.125rem 0.5rem; border-radius: 1rem;
+    font-size: 0.6875rem; font-weight: 700; background: #dcfce7; color: #059669;
+  }
+
+  .section-fcp__countdown {
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .section-fcp__timer-unit {
+    display: flex; flex-direction: column; align-items: center; gap: 0.125rem;
+    min-width: 3.5rem; padding: 0.625rem; border-radius: 0.5rem;
+    background: rgba(var(--color-foreground), 0.04);
+  }
+  .section-fcp__timer-unit span {
+    font-size: 1.5rem; font-weight: 800; font-variant-numeric: tabular-nums;
+    color: rgb(var(--color-foreground));
+  }
+  .section-fcp__timer-unit small {
+    font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.06em;
+    color: rgba(var(--color-foreground), 0.5); font-weight: 600;
+  }
+  .section-fcp__timer-sep { font-size: 1.25rem; font-weight: 700; color: rgba(var(--color-foreground), 0.2); }
+
+  .section-fcp__atc {
+    background: rgb(var(--color-button)); color: rgb(var(--color-button-text));
+    border: 1px solid rgb(var(--color-button)); border-radius: var(--buttons-radius, 0);
+    font-weight: 700; cursor: pointer; transition: opacity 0.2s; width: 100%;
+  }
+  .section-fcp__atc:hover { opacity: 0.85; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:sections.featured_countdown.name",
+  "tag": "section",
+  "class": "section-fcp-wrapper",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.featured_countdown.settings.color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.featured_countdown.settings.content_header.content"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "t:sections.featured_countdown.settings.badge_text.label",
+      "default": "🔥 Flash sale"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:sections.featured_countdown.settings.heading.label",
+      "default": "Deal of the day"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "t:sections.featured_countdown.settings.heading_size.label",
+      "options": [
+        {
+          "value": "lg",
+          "label": "L"
+        },
+        {
+          "value": "xl",
+          "label": "XL"
+        }
+      ],
+      "default": "xl"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "t:sections.featured_countdown.settings.heading_tag.label",
+      "options": [
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:sections.featured_countdown.settings.product.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.featured_countdown.settings.countdown_header.content"
+    },
+    {
+      "type": "text",
+      "id": "end_date",
+      "label": "t:sections.featured_countdown.settings.end_date.label",
+      "default": "2026-12-31",
+      "info": "t:sections.featured_countdown.settings.end_date.info"
+    },
+    {
+      "type": "text",
+      "id": "end_time",
+      "label": "t:sections.featured_countdown.settings.end_time.label",
+      "default": "23:59",
+      "info": "t:sections.featured_countdown.settings.end_time.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.featured_countdown.settings.button_header.content"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.featured_countdown.settings.button_label.label",
+      "default": "Add to cart — Limited time!"
+    },
+    {
+      "type": "select",
+      "id": "button_size",
+      "label": "t:sections.featured_countdown.settings.button_size.label",
+      "options": [
+        {
+          "value": "md",
+          "label": "M"
+        },
+        {
+          "value": "lg",
+          "label": "L"
+        }
+      ],
+      "default": "lg"
+    },
+    {
+      "type": "header",
+      "content": "Desktop spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.featured_countdown.settings.padding_top_desktop.label",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.featured_countdown.settings.padding_bottom_desktop.label",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Mobile spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.featured_countdown.settings.padding_top_mobile.label",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.featured_countdown.settings.padding_bottom_mobile.label",
+      "default": 30
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.featured_countdown.presets.featured_countdown.name",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}

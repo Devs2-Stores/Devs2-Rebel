@@ -1,0 +1,272 @@
+{%- comment -%}
+  Section: Spacer & Divider
+  Mô tả: Tạo khoảng cách và/hoặc đường phân cách giữa các section.
+  Divider là center point, spacing canh trên dưới theo divider.
+  Border color lấy từ "border" field trong Color Scheme (--color-border).
+{%- endcomment -%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-spacer color-{{ section.settings.color_scheme }}"
+  style="
+    --spacer-dt: {{ section.settings.padding_top_desktop }}px;
+    --spacer-db: {{ section.settings.padding_bottom_desktop }}px;
+    --spacer-mt: {{ section.settings.padding_top_mobile }}px;
+    --spacer-mb: {{ section.settings.padding_bottom_mobile }}px;
+    --divider-height: {{ section.settings.divider_height }}px;
+    --divider-width: {{ section.settings.divider_width }}%;
+  "
+>
+  {%- if section.settings.show_divider -%}
+    <div class="section-spacer__line section-spacer__line--{{ section.settings.divider_align }} section-spacer__color--{{ section.settings.divider_color }} page-width">
+      {%- if section.settings.divider_style == 'gradient' -%}
+        <div class="section-spacer__hr section-spacer__hr--gradient"></div>
+      {%- elsif section.settings.divider_style == 'shadow' -%}
+        <div class="section-spacer__hr section-spacer__hr--shadow"></div>
+      {%- elsif section.settings.divider_style == 'zigzag' -%}
+        <div class="section-spacer__hr section-spacer__hr--zigzag"></div>
+      {%- else -%}
+        <hr class="section-spacer__hr section-spacer__hr--{{ section.settings.divider_style }}">
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  /* ── Spacer & Divider ── */
+  .section-spacer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-block-start: var(--spacer-mt);
+    padding-block-end: var(--spacer-mb);
+    background-color: rgb(var(--color-background));
+  }
+
+  @media (min-width: 750px) {
+    .section-spacer {
+      padding-block-start: var(--spacer-dt);
+      padding-block-end: var(--spacer-db);
+    }
+  }
+
+  /* ── Alignment ── */
+  .section-spacer__line {
+    display: flex;
+    width: 100%;
+  }
+
+  .section-spacer__line--left {
+    justify-content: flex-start;
+  }
+
+  .section-spacer__line--center {
+    justify-content: center;
+  }
+
+  .section-spacer__line--right {
+    justify-content: flex-end;
+  }
+
+  /* ── Base HR ── */
+  .section-spacer__hr {
+    border: none;
+    margin: 0;
+    width: var(--divider-width, 100%);
+  }
+
+  /* ── Divider color source ── */
+  .section-spacer__color--border { --divider-color: var(--color-border); }
+  .section-spacer__color--accent { --divider-color: var(--color-accent); }
+  .section-spacer__color--button { --divider-color: var(--color-button); }
+  .section-spacer__color--text { --divider-color: var(--color-foreground); }
+
+  /* ── Solid ── */
+  .section-spacer__hr--solid {
+    border-block-start: var(--divider-height, 1px) solid rgb(var(--divider-color));
+  }
+
+  /* ── Dashed ── */
+  .section-spacer__hr--dashed {
+    border-block-start: var(--divider-height, 1px) dashed rgb(var(--divider-color));
+  }
+
+  /* ── Dotted ── */
+  .section-spacer__hr--dotted {
+    border-block-start: var(--divider-height, 1px) dotted rgb(var(--divider-color));
+  }
+
+  /* ── Double ── */
+  .section-spacer__hr--double {
+    border-block-start: var(--divider-height, 1px) double rgb(var(--divider-color));
+    border-block-start-width: calc(var(--divider-height, 1px) * 3);
+  }
+
+  /* ── Gradient ── */
+  .section-spacer__hr--gradient {
+    height: var(--divider-height, 1px);
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgb(var(--divider-color)) 20%,
+      rgb(var(--divider-color)) 80%,
+      transparent 100%
+    );
+  }
+
+  /* ── Shadow ── */
+  .section-spacer__hr--shadow {
+    height: 0;
+    box-shadow: 0 0 calc(var(--divider-height, 1px) * 4) rgba(var(--divider-color), 0.3);
+    border-block-start: var(--divider-height, 1px) solid rgb(var(--divider-color));
+  }
+
+  /* ── Zigzag ── */
+  .section-spacer__hr--zigzag {
+    height: calc(var(--divider-height, 1px) * 6);
+    background: linear-gradient(135deg, rgb(var(--divider-color)) 25%, transparent 25%) -6px 0,
+      linear-gradient(225deg, rgb(var(--divider-color)) 25%, transparent 25%) -6px 0,
+      linear-gradient(315deg, rgb(var(--divider-color)) 25%, transparent 25%),
+      linear-gradient(45deg, rgb(var(--divider-color)) 25%, transparent 25%);
+    background-size: 12px calc(var(--divider-height, 1px) * 6);
+    background-color: rgb(var(--color-background));
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Spacer & Divider",
+  "tag": "div",
+  "class": "section-spacer-wrapper",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Divider"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_divider",
+      "label": "Show divider",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "divider_style",
+      "label": "Divider style",
+      "options": [
+        { "value": "solid", "label": "Solid" },
+        { "value": "dashed", "label": "Dashed" },
+        { "value": "dotted", "label": "Dotted" },
+        { "value": "double", "label": "Double" },
+        { "value": "gradient", "label": "Gradient fade" },
+        { "value": "shadow", "label": "Shadow" },
+        { "value": "zigzag", "label": "Zigzag" }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "select",
+      "id": "divider_align",
+      "label": "Divider alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "divider_color",
+      "label": "Divider color",
+      "options": [
+        { "value": "border", "label": "Border" },
+        { "value": "accent", "label": "Accent (red)" },
+        { "value": "button", "label": "Button" },
+        { "value": "text", "label": "Text" }
+      ],
+      "default": "border"
+    },
+    {
+      "type": "range",
+      "id": "divider_height",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Divider height",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "divider_width",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Divider width",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Desktop spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Top spacing",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom spacing",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Mobile spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Top spacing",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom spacing",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Spacer & Divider",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

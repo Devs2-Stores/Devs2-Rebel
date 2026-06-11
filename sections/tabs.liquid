@@ -1,0 +1,299 @@
+{%- comment -%}
+  Section: Tabs
+  Mô tả: Tabbed content — mỗi tab là 1 block richtext.
+{%- endcomment -%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-tabs color-{{ section.settings.color_scheme }}"
+  style="
+    --tabs-dt: {{ section.settings.padding_top_desktop }}px;
+    --tabs-db: {{ section.settings.padding_bottom_desktop }}px;
+    --tabs-mt: {{ section.settings.padding_top_mobile }}px;
+    --tabs-mb: {{ section.settings.padding_bottom_mobile }}px;
+  "
+>
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-tabs__head">
+        <{{ section.settings.heading_tag }} class="section-tabs__heading heading-size-{{ section.settings.heading_size }}">
+          {{- section.settings.heading -}}
+        </{{ section.settings.heading_tag }}>
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="section-tabs__nav" role="tablist">
+        {%- for block in section.blocks -%}
+          <button
+            class="section-tabs__trigger{% if forloop.first %} section-tabs__trigger--active{% endif %}"
+            role="tab"
+            id="tab-btn-{{ section.id }}-{{ forloop.index0 }}"
+            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+            aria-controls="tab-panel-{{ section.id }}-{{ forloop.index0 }}"
+            data-tabs-btn="{{ forloop.index0 }}"
+          >
+            {{ block.settings.tab_label | default: 'Tab' }}
+          </button>
+        {%- endfor -%}
+      </div>
+
+      {%- for block in section.blocks -%}
+        <div
+          class="section-tabs__panel{% if forloop.first %} section-tabs__panel--active{% endif %}"
+          role="tabpanel"
+          id="tab-panel-{{ section.id }}-{{ forloop.index0 }}"
+          aria-labelledby="tab-btn-{{ section.id }}-{{ forloop.index0 }}"
+          data-tabs-panel="{{ forloop.index0 }}"
+          {{ block.shopify_attributes }}
+          {% unless forloop.first %}hidden{% endunless %}
+        >
+          <div class="section-tabs__content rte content-size-{{ block.settings.content_size }}">
+            {{ block.settings.content }}
+          </div>
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+(function() {
+  var s = document.getElementById('section-{{ section.id }}');
+  if (!s) return;
+  var btns = s.querySelectorAll('[data-tabs-btn]');
+  var panels = s.querySelectorAll('[data-tabs-panel]');
+
+  btns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var idx = btn.getAttribute('data-tabs-btn');
+      btns.forEach(function(b) {
+        b.classList.remove('section-tabs__trigger--active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      panels.forEach(function(p) {
+        p.classList.remove('section-tabs__panel--active');
+        p.hidden = true;
+      });
+      btn.classList.add('section-tabs__trigger--active');
+      btn.setAttribute('aria-selected', 'true');
+      var panel = s.querySelector('[data-tabs-panel="' + idx + '"]');
+      if (panel) { panel.classList.add('section-tabs__panel--active'); panel.hidden = false; }
+    });
+  });
+})();
+</script>
+
+{% stylesheet %}
+  .section-tabs {
+    padding-block: var(--tabs-mt) var(--tabs-mb);
+    background: rgb(var(--color-background));
+    color: rgba(var(--color-foreground), 0.85);
+  }
+  @media (min-width: 750px) {
+    .section-tabs { padding-block: var(--tabs-dt) var(--tabs-db); }
+  }
+  .section-tabs__head { text-align: center; margin-bottom: 2rem; }
+  .section-tabs__heading { margin: 0; color: rgb(var(--color-foreground)); }
+
+  .section-tabs__nav {
+    display: flex; gap: 0; border-bottom: 2px solid rgba(var(--color-foreground), 0.08);
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .section-tabs__nav::-webkit-scrollbar { display: none; }
+
+  .section-tabs__trigger {
+    flex-shrink: 0; padding: 0.75rem 1.25rem;
+    background: none; border: none; border-bottom: 2px solid transparent;
+    margin-bottom: -2px; cursor: pointer;
+    font-size: 0.875rem; font-weight: 600;
+    color: rgba(var(--color-foreground), 0.5);
+    transition: color 0.3s, border-color 0.3s;
+    white-space: nowrap;
+  }
+  .section-tabs__trigger:hover { color: rgb(var(--color-foreground)); }
+  .section-tabs__trigger--active {
+    color: rgb(var(--color-accent));
+    border-bottom-color: rgb(var(--color-accent));
+  }
+
+  .section-tabs__panel { padding: 1.5rem 0; }
+  .section-tabs__panel[hidden] { display: none; }
+  .section-tabs__content { line-height: 1.7; max-width: 48rem; }
+  .section-tabs__content p:last-child { margin-bottom: 0; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Tabs",
+  "tag": "section",
+  "class": "section-tabs-wrapper",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "sm",
+          "label": "S"
+        },
+        {
+          "value": "md",
+          "label": "M"
+        },
+        {
+          "value": "lg",
+          "label": "L"
+        }
+      ],
+      "default": "lg"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading tag",
+      "options": [
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "header",
+      "content": "Desktop spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Mobile spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Top",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_label",
+          "label": "Tab label",
+          "default": "Tab"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Tab content goes here.</p>"
+        },
+        {
+          "type": "select",
+          "id": "content_size",
+          "label": "Content size",
+          "options": [
+            {
+              "value": "sm",
+              "label": "S"
+            },
+            {
+              "value": "md",
+              "label": "M"
+            },
+            {
+              "value": "lg",
+              "label": "L"
+            }
+          ],
+          "default": "md"
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tabs",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "tab",
+          "settings": {
+            "tab_label": "Details"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "tab_label": "Shipping"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "tab_label": "Returns"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

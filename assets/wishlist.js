@@ -1,3 +1,6 @@
+(function() {
+'use strict';
+
 class WishlistManager extends HTMLElement {
 	constructor() {
 		super();
@@ -207,3 +210,5 @@ class WishlistManager extends HTMLElement {
 }
 
 if (!customElements.get('wishlist-manager')) customElements.define('wishlist-manager', WishlistManager);
+
+})();

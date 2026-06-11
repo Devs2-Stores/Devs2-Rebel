@@ -5,7 +5,7 @@
   }
 {%- endstyle -%}
 
-<div class="login-template">
+<div class="login-template color-{{ section.settings.color_scheme }}">
     <div class="page-width">
     <h1 class="login-template__title">{{ 'customer.login_page.title' | t }}</h1>
     <div class="login-template__wrapper">
@@ -84,6 +84,12 @@
   "tag": "section",
   "class": "section-main-customers-login",
   "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
     {
       "type": "range",
       "id": "padding_top",

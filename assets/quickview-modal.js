@@ -1,5 +1,5 @@
-/* ============================================================================
-   QUICKVIEW MODAL — Component JS
+﻿/* ============================================================================
+   QUICKVIEW MODAL â€” Component JS
    Extracted from theme.js for code splitting
    Dependencies: ThemeUtils, themeConfig (loaded via theme.js)
    ============================================================================ */
@@ -41,11 +41,12 @@
       }
 
       // Close on ESC key
-      document.addEventListener('keydown', function(e) {
+      this._boundEscHandler = function(e) {
         if (e.key === 'Escape' && self.isOpen) {
           self.close();
         }
-      });
+      };
+      document.addEventListener('keydown', this._boundEscHandler);
 
       // Handle thumbnail clicks
       if (this.content) {
@@ -174,6 +175,10 @@
       }
     }
 
+    disconnectedCallback() {
+      if (this._boundEscHandler) document.removeEventListener('keydown', this._boundEscHandler);
+    }
+
     async open(productHandle) {
       var self = this;
       if (this.isOpen && this.currentProductHandle === productHandle) return;
@@ -235,7 +240,7 @@
 
       try {
         const html = await ThemeUtils.request({
-          url: '/search?q=filter=(handle:product=' + encodeURIComponent(handle) + ')&view=quickview',
+          url: ((themeConfig.routes && themeConfig.routes.search_url) || '/search') + '?q=filter=(handle:product=' + encodeURIComponent(handle) + ')&view=quickview',
           method: 'GET',
           parser: 'text'
         });
@@ -252,7 +257,6 @@
               themeConfig.quickview.data = this.currentProduct;
             }
           } catch (e) {
-            console.warn('ProductVariantPicker: Failed to parse JSON from script tag', e);
           }
         }
 
@@ -269,8 +273,7 @@
         this.initializeQuantitySelector();
         this.initializeSwiper();
       } catch (error) {
-        console.error('Error loading product:', error);
-        if (this.content) this.content.innerHTML = '<div class="text-center text-red-500 py-12">' + ((themeConfig.strings.variant || {}).loadError || 'Error loading product') + '</div>';
+        if (this.content) this.content.innerHTML = '<div class="text-center text-red-500 py-12">' + ThemeUtils.escapeHtml(((themeConfig.strings.variant || {}).loadError || 'Error loading product')) + '</div>';
       } finally {
         this.isLoading = false;
         this.hideLoading();
@@ -282,7 +285,6 @@
       if (!this.content) return;
       const variantPicker = this.content.querySelector('product-variant-picker, quickview-variant-picker');
       if (!variantPicker) {
-        console.warn('Quickview: Variant picker not found');
         return;
       }
       if (variantPicker && typeof variantPicker.init === 'function') variantPicker.init();
@@ -297,7 +299,6 @@
 
         // Verify variants were set correctly
         if (!variantPicker.variants || variantPicker.variants.length === 0) {
-          console.warn('Quickview: Variant picker variants not set after initialization');
           // Try to set variants directly
           if (themeConfig.quickview.data && themeConfig.quickview.data.variants) {
             variantPicker.variants = themeConfig.quickview.data.variants;
@@ -419,7 +420,6 @@
       }
 
       if (!selectedVariant) {
-        console.warn('Quickview: No variant selected');
         return;
       }
 
@@ -496,14 +496,14 @@
           '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">' +
           '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />' +
           '</svg>' +
-          ((themeConfig.strings.variant || {}).inStock || 'In stock') +
+          ThemeUtils.escapeHtml((themeConfig.strings.variant || {}).inStock || 'In stock') +
           '</span>';
       } else {
         availabilityEl.innerHTML = '<span class="inline-flex items-center gap-2 text-red-600 dark:text-red-400">' +
           '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">' +
           '<path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />' +
           '</svg>' +
-          ((themeConfig.strings.variant || {}).soldOut || 'Sold out') +
+          ThemeUtils.escapeHtml((themeConfig.strings.variant || {}).soldOut || 'Sold out') +
           '</span>';
       }
     }
@@ -553,7 +553,6 @@
 
       // Ensure themeConfig.quickview is set
       if (typeof themeConfig === 'undefined' || !themeConfig.quickview || !themeConfig.quickview.data) {
-        console.warn('Quickview: Cannot initialize variant picker images - themeConfig.quickview not set');
         return;
       }
 
@@ -600,10 +599,9 @@
                 try {
                   imageSrc = ThemeUtils.resizeImage(imageSrc);
                 } catch (e) {
-                  console.warn('Quickview: Error resizing image', e);
                 }
 
-                imgEl.innerHTML = '<img width="40" height="40" src="' + imageSrc + '" alt="' + value + '" loading="lazy" decoding="async"/>';
+                imgEl.innerHTML = '<img width="40" height="40" src="' + ThemeUtils.escapeHtml(imageSrc) + '" alt="' + ThemeUtils.escapeHtml(value) + '" loading="lazy" decoding="async"/>';
               }
             }
           }
@@ -707,7 +705,7 @@
 
       try {
         const data = await ThemeUtils.request({
-          url: '/cart/add.js',
+          url: (themeConfig.routes && themeConfig.routes.cart_add_url) || '/cart/add.js',
           method: 'POST',
           body: {
             id: this.currentVariantId,
@@ -738,7 +736,6 @@
         this.close();
 
       } catch (error) {
-        console.error('Add to cart error:', error);
         if (typeof showToast === 'function') showToast((themeConfig.strings.cart || {}).itemError || 'Could not add to cart', 'error');
       } finally {
         // Re-enable button
@@ -813,7 +810,7 @@
       });
     }
   }
-  customElements.define('quickview-modal', QuickviewModal);
+  if (!customElements.get('quickview-modal')) customElements.define('quickview-modal', QuickviewModal);
 
   // Global function to open quickview
   function openQuickview(productHandle) {

@@ -1,4 +1,4 @@
-/* -------------------------------------------------------------------------- */
+﻿/* -------------------------------------------------------------------------- */
 /*                    QUICKVIEW VARIANT PICKER (SEPARATE)                     */
 /* -------------------------------------------------------------------------- */
 
@@ -22,7 +22,6 @@
         try {
           product = JSON.parse(scriptTag.textContent.trim());
         } catch (e) {
-          console.warn('QuickviewVariantPicker: Failed to parse JSON', e);
         }
       }
 
@@ -171,14 +170,14 @@
       });
     }
   }
-  customElements.define('quickview-variant-picker', QuickviewVariantPicker);
+  if (!customElements.get('quickview-variant-picker')) customElements.define('quickview-variant-picker', QuickviewVariantPicker);
 
   class QuickviewVariantPickerItem extends HTMLElement {
     constructor() {
       super();
     }
   }
-  customElements.define('quickview-variant-picker-item', QuickviewVariantPickerItem);
+  if (!customElements.get('quickview-variant-picker-item')) customElements.define('quickview-variant-picker-item', QuickviewVariantPickerItem);
 
   class QuickviewVariantPickerImage extends HTMLElement {
     constructor() {
@@ -208,7 +207,6 @@
           try {
             product = JSON.parse(scriptTag.textContent.trim());
           } catch (e) {
-            console.warn('QuickviewVariantPickerImage: Failed to parse JSON', e);
           }
         }
       }
@@ -250,5 +248,5 @@
       this.innerHTML = '<img width="40" height="40" src="' + finalSrc + '" alt="' + safeAlt + '" loading="lazy" decoding="async"/>';
     }
   }
-  customElements.define('quickview-variant-picker-image', QuickviewVariantPickerImage);
+  if (!customElements.get('quickview-variant-picker-image')) customElements.define('quickview-variant-picker-image', QuickviewVariantPickerImage);
 })();

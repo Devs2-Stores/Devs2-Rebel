@@ -44,7 +44,7 @@
   itemtype="https://schema.org/Blog"
   style="--blog-padding-top: {{ section.settings.padding_top }}px; --blog-padding-bottom: {{ section.settings.padding_bottom }}px; --blog-columns: {{ section.settings.columns_desktop }}; --blog-columns-mobile: {{ section.settings.columns_mobile }}; --blog-column-gap: {{ section.settings.column_gap }}px; --blog-row-gap: {{ section.settings.row_gap }}px;"
 >
-  <meta itemprop="name" content="{{ blog.title }}">
+  <meta itemprop="name" content="{{ blog.title | escape }}">
   <meta itemprop="description" content="{{ blog.description | strip_html | default: page_title }}">
   <meta itemprop="url" content="{{ blog.url }}">
 
@@ -55,7 +55,7 @@
           <div class="blog-template__title">
             <h1 class="heading-size-{{ section.settings.heading_size }}">
               {%- if blog.handle != 'all' -%}
-                {{ blog.title }}
+                {{ blog.title | escape }}
                 {%- if current_tags -%}
                   &raquo; {{ current_tags.first }}
                 {%- endif -%}
@@ -131,10 +131,10 @@
                   </div>
                   <div class="blog-featured__content">
                     {%- if show_category -%}
-                      <span class="blog-featured__tag">{{ blog.title | upcase }}</span>
+                      <span class="blog-featured__tag">{{ blog.title | escape | upcase }}</span>
                     {%- endif -%}
                     <h2 class="blog-featured__title" itemprop="headline">
-                      <a href="{{ featured.url }}">{{ featured.title }}</a>
+                      <a href="{{ featured.url }}">{{ featured.title | escape }}</a>
                     </h2>
                     {%- if show_date or show_author -%}
                       <div class="blog-featured__meta">
@@ -303,7 +303,7 @@
                                 {%- endif -%}
                               </div>
                               <div class="blog-sidebar__recent-post-content">
-                                <h4 class="blog-sidebar__recent-post-title">{{ article.title }}</h4>
+                                <h4 class="blog-sidebar__recent-post-title">{{ article.title | escape }}</h4>
                                 <div class="blog-sidebar__recent-post-date">
                                   {{ article.published_at | date: '%B %d, %Y' }}
                                 </div>
@@ -363,8 +363,14 @@
       "id": "layout",
       "label": "t:sections.main_blog.settings.layout.label",
       "options": [
-        { "value": "grid", "label": "t:sections.main_blog.settings.layout.options__grid.label" },
-        { "value": "list", "label": "t:sections.main_blog.settings.layout.options__list.label" }
+        {
+          "value": "grid",
+          "label": "t:sections.main_blog.settings.layout.options__grid.label"
+        },
+        {
+          "value": "list",
+          "label": "t:sections.main_blog.settings.layout.options__list.label"
+        }
       ],
       "default": "grid"
     },
@@ -373,8 +379,14 @@
       "id": "container_width",
       "label": "t:sections.all.container_width.label",
       "options": [
-        { "value": "fixed", "label": "t:sections.all.container_width.options__fixed.label" },
-        { "value": "full", "label": "t:sections.all.container_width.options__full.label" }
+        {
+          "value": "fixed",
+          "label": "t:sections.all.container_width.options__fixed.label"
+        },
+        {
+          "value": "full",
+          "label": "t:sections.all.container_width.options__full.label"
+        }
       ],
       "default": "fixed"
     },
@@ -384,11 +396,26 @@
       "label": "t:sections.all.columns_desktop.label",
       "info": "t:sections.main_blog.settings.columns_desktop_info",
       "options": [
-        { "value": "1", "label": "1" },
-        { "value": "2", "label": "2" },
-        { "value": "3", "label": "3" },
-        { "value": "4", "label": "4" },
-        { "value": "5", "label": "5" }
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        }
       ],
       "default": "3"
     },
@@ -398,8 +425,14 @@
       "label": "t:sections.all.columns_mobile.label",
       "info": "t:sections.main_blog.settings.columns_mobile_info",
       "options": [
-        { "value": "1", "label": "1" },
-        { "value": "2", "label": "2" }
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
       ],
       "default": "1"
     },
@@ -441,10 +474,22 @@
       "id": "heading_size",
       "label": "t:sections.all.heading_size.label",
       "options": [
-        { "value": "sm", "label": "t:sections.all.heading_size.options__sm.label" },
-        { "value": "md", "label": "t:sections.all.heading_size.options__md.label" },
-        { "value": "lg", "label": "t:sections.all.heading_size.options__lg.label" },
-        { "value": "xl", "label": "t:sections.all.heading_size.options__xl.label" }
+        {
+          "value": "sm",
+          "label": "t:sections.all.heading_size.options__sm.label"
+        },
+        {
+          "value": "md",
+          "label": "t:sections.all.heading_size.options__md.label"
+        },
+        {
+          "value": "lg",
+          "label": "t:sections.all.heading_size.options__lg.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.heading_size.options__xl.label"
+        }
       ],
       "default": "md"
     },
@@ -518,11 +563,26 @@
       "id": "image_shape",
       "label": "t:sections.all.image_shape.label",
       "options": [
-        { "value": "landscape", "label": "t:sections.all.image_shape.options__landscape.label" },
-        { "value": "portrait", "label": "t:sections.all.image_shape.options__portrait.label" },
-        { "value": "square", "label": "t:sections.all.image_shape.options__square.label" },
-        { "value": "wide", "label": "t:sections.all.image_shape.options__wide.label" },
-        { "value": "auto", "label": "t:sections.all.image_shape.options__auto.label" }
+        {
+          "value": "landscape",
+          "label": "t:sections.all.image_shape.options__landscape.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.all.image_shape.options__portrait.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.all.image_shape.options__square.label"
+        },
+        {
+          "value": "wide",
+          "label": "t:sections.all.image_shape.options__wide.label"
+        },
+        {
+          "value": "auto",
+          "label": "t:sections.all.image_shape.options__auto.label"
+        }
       ],
       "default": "landscape"
     },
@@ -532,9 +592,18 @@
       "label": "t:sections.all.image_alignment.label",
       "info": "t:sections.all.image_alignment.info",
       "options": [
-        { "value": "top", "label": "t:sections.all.image_alignment.options__top.label" },
-        { "value": "center", "label": "t:sections.all.image_alignment.options__center.label" },
-        { "value": "bottom", "label": "t:sections.all.image_alignment.options__bottom.label" }
+        {
+          "value": "top",
+          "label": "t:sections.all.image_alignment.options__top.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.all.image_alignment.options__center.label"
+        },
+        {
+          "value": "bottom",
+          "label": "t:sections.all.image_alignment.options__bottom.label"
+        }
       ],
       "default": "center"
     },
@@ -586,9 +655,18 @@
           "id": "content_size",
           "label": "t:sections.main_blog.blocks.rich_text.settings.content_size.label",
           "options": [
-            { "value": "sm", "label": "t:sections.all.heading_size.options__sm.label" },
-            { "value": "md", "label": "t:sections.all.heading_size.options__md.label" },
-            { "value": "lg", "label": "t:sections.all.heading_size.options__lg.label" }
+            {
+              "value": "sm",
+              "label": "t:sections.all.heading_size.options__sm.label"
+            },
+            {
+              "value": "md",
+              "label": "t:sections.all.heading_size.options__md.label"
+            },
+            {
+              "value": "lg",
+              "label": "t:sections.all.heading_size.options__lg.label"
+            }
           ],
           "default": "md"
         },
@@ -635,9 +713,18 @@
           "id": "heading_size",
           "label": "t:sections.all.heading_size.label",
           "options": [
-            { "value": "sm", "label": "t:sections.all.heading_size.options__sm.label" },
-            { "value": "md", "label": "t:sections.all.heading_size.options__md.label" },
-            { "value": "lg", "label": "t:sections.all.heading_size.options__lg.label" }
+            {
+              "value": "sm",
+              "label": "t:sections.all.heading_size.options__sm.label"
+            },
+            {
+              "value": "md",
+              "label": "t:sections.all.heading_size.options__md.label"
+            },
+            {
+              "value": "lg",
+              "label": "t:sections.all.heading_size.options__lg.label"
+            }
           ],
           "default": "md"
         },
@@ -646,9 +733,18 @@
           "id": "content_size",
           "label": "t:sections.main_blog.blocks.sidebar_categories.settings.content_size.label",
           "options": [
-            { "value": "sm", "label": "t:sections.all.heading_size.options__sm.label" },
-            { "value": "md", "label": "t:sections.all.heading_size.options__md.label" },
-            { "value": "lg", "label": "t:sections.all.heading_size.options__lg.label" }
+            {
+              "value": "sm",
+              "label": "t:sections.all.heading_size.options__sm.label"
+            },
+            {
+              "value": "md",
+              "label": "t:sections.all.heading_size.options__md.label"
+            },
+            {
+              "value": "lg",
+              "label": "t:sections.all.heading_size.options__lg.label"
+            }
           ],
           "default": "md"
         },
@@ -699,9 +795,18 @@
           "id": "heading_size",
           "label": "t:sections.all.heading_size.label",
           "options": [
-            { "value": "sm", "label": "t:sections.all.heading_size.options__sm.label" },
-            { "value": "md", "label": "t:sections.all.heading_size.options__md.label" },
-            { "value": "lg", "label": "t:sections.all.heading_size.options__lg.label" }
+            {
+              "value": "sm",
+              "label": "t:sections.all.heading_size.options__sm.label"
+            },
+            {
+              "value": "md",
+              "label": "t:sections.all.heading_size.options__md.label"
+            },
+            {
+              "value": "lg",
+              "label": "t:sections.all.heading_size.options__lg.label"
+            }
           ],
           "default": "md"
         },
@@ -710,9 +815,18 @@
           "id": "content_size",
           "label": "t:sections.main_blog.blocks.sidebar_recent_posts.settings.content_size.label",
           "options": [
-            { "value": "sm", "label": "t:sections.all.heading_size.options__sm.label" },
-            { "value": "md", "label": "t:sections.all.heading_size.options__md.label" },
-            { "value": "lg", "label": "t:sections.all.heading_size.options__lg.label" }
+            {
+              "value": "sm",
+              "label": "t:sections.all.heading_size.options__sm.label"
+            },
+            {
+              "value": "md",
+              "label": "t:sections.all.heading_size.options__md.label"
+            },
+            {
+              "value": "lg",
+              "label": "t:sections.all.heading_size.options__lg.label"
+            }
           ],
           "default": "md"
         },
@@ -763,9 +877,18 @@
           "id": "heading_size",
           "label": "t:sections.all.heading_size.label",
           "options": [
-            { "value": "sm", "label": "t:sections.all.heading_size.options__sm.label" },
-            { "value": "md", "label": "t:sections.all.heading_size.options__md.label" },
-            { "value": "lg", "label": "t:sections.all.heading_size.options__lg.label" }
+            {
+              "value": "sm",
+              "label": "t:sections.all.heading_size.options__sm.label"
+            },
+            {
+              "value": "md",
+              "label": "t:sections.all.heading_size.options__md.label"
+            },
+            {
+              "value": "lg",
+              "label": "t:sections.all.heading_size.options__lg.label"
+            }
           ],
           "default": "md"
         },
@@ -774,9 +897,18 @@
           "id": "content_size",
           "label": "t:sections.main_blog.blocks.sidebar_tags.settings.content_size.label",
           "options": [
-            { "value": "sm", "label": "t:sections.all.heading_size.options__sm.label" },
-            { "value": "md", "label": "t:sections.all.heading_size.options__md.label" },
-            { "value": "lg", "label": "t:sections.all.heading_size.options__lg.label" }
+            {
+              "value": "sm",
+              "label": "t:sections.all.heading_size.options__sm.label"
+            },
+            {
+              "value": "md",
+              "label": "t:sections.all.heading_size.options__md.label"
+            },
+            {
+              "value": "lg",
+              "label": "t:sections.all.heading_size.options__lg.label"
+            }
           ],
           "default": "md"
         },
@@ -801,6 +933,9 @@
           "default": 0
         }
       ]
+    },
+    {
+      "type": "@app"
     }
   ]
 }

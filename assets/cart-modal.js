@@ -1,4 +1,4 @@
-/* -------------------------------------------------------------------------- */
+﻿/* -------------------------------------------------------------------------- */
 /*                                CART MODAL                                  */
 /* -------------------------------------------------------------------------- */
 
@@ -38,12 +38,14 @@
         });
       }
 
-      document.addEventListener('keydown', function(e) {
+      this._boundEscHandler = function(e) {
         if (e.key === 'Escape' && self.isOpen) self.close();
-      });
+      };
+      document.addEventListener('keydown', this._boundEscHandler);
 
       var cartEvents = (typeof themeConfig !== 'undefined' && themeConfig.cart && themeConfig.cart.events) || {};
       var qtyEvent = cartEvents.quantity_changed || 'cart-quantity-changed';
+      this._qtyEvent = qtyEvent;
 
       if (this.itemsContainer) {
         this.itemsContainer.addEventListener('click', function(e) {
@@ -55,11 +57,17 @@
         });
       }
 
-      document.addEventListener(qtyEvent, function(e) {
+      this._boundQtyHandler = function(e) {
         if (e.target.closest('cart-modal') === self && e.detail && e.detail.line && e.detail.quantity !== undefined) {
           self.updateQuantity(e.detail.line, e.detail.quantity);
         }
-      });
+      };
+      document.addEventListener(qtyEvent, this._boundQtyHandler);
+    }
+
+    disconnectedCallback() {
+      if (this._boundEscHandler) document.removeEventListener('keydown', this._boundEscHandler);
+      if (this._boundQtyHandler && this._qtyEvent) document.removeEventListener(this._qtyEvent, this._boundQtyHandler);
     }
 
     open() {
@@ -86,14 +94,14 @@
 
       try {
         const cart = await ThemeUtils.request({
-          url: '/cart.js',
+          url: (themeConfig.routes && themeConfig.routes.get_cart_url) || '/cart.js',
           method: 'GET'
         });
         this.updateTotals(cart);
 
         if (this.itemsContainer) {
           const itemHtml = await ThemeUtils.request({
-            url: '/cart?view=item',
+            url: ((themeConfig.routes && themeConfig.routes.cart_url) || '/cart') + '?view=item',
             method: 'GET',
             parser: 'text'
           });
@@ -146,11 +154,8 @@
         if (typeof updateCartData === 'function') await updateCartData(cart);
       } catch (e) {
         if (item) item.style.opacity = '1';
-        console.error('Cart update error:', e);
         if (typeof showToast === 'function') {
           showToast(themeConfig.strings.cart.error || 'Could not update cart. Please try again.', 'error', 3000);
-        } else {
-          alert(themeConfig.strings.cart.error || 'An error occurred. Please try again.');
         }
       }
     }
@@ -163,7 +168,7 @@
 
       try {
         const cart = await ThemeUtils.request({
-          url: '/cart/change.js',
+          url: (themeConfig.routes && themeConfig.routes.cart_change_url) || '/cart/change.js',
           method: 'POST',
           body: {
             line: line,
@@ -199,11 +204,8 @@
         }
       } catch (e) {
         if (item) item.style.opacity = '1';
-        console.error('Cart remove error:', e);
         if (typeof showToast === 'function') {
           showToast(themeConfig.strings.cart.error || 'Could not remove item. Please try again.', 'error', 3000);
-        } else {
-          alert(themeConfig.strings.cart.error || 'An error occurred. Please try again.');
         }
       }
     }
@@ -224,7 +226,7 @@
       }
     }
   }
-  customElements.define('cart-modal', CartModal);
+  if (!customElements.get('cart-modal')) customElements.define('cart-modal', CartModal);
 
   function openCartModal() {
     const modal = document.querySelector('cart-modal');

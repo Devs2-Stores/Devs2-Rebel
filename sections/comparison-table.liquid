@@ -1,0 +1,471 @@
+{%- comment -%}
+  Section: Comparison Table
+  Mô tả: Bảng so sánh specs nhiều sản phẩm cạnh nhau.
+{%- endcomment -%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-compare-table color-{{ section.settings.color_scheme }}"
+  style="
+    --ct-dt: {{ section.settings.padding_top_desktop }}px;
+    --ct-db: {{ section.settings.padding_bottom_desktop }}px;
+    --ct-mt: {{ section.settings.padding_top_mobile }}px;
+    --ct-mb: {{ section.settings.padding_bottom_mobile }}px;
+  "
+>
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-compare-table__head">
+        {%- if section.settings.subheading != blank -%}
+          <p class="section-compare-table__subheading subheading-size-{{ section.settings.subheading_size }}">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+        <{{ section.settings.heading_tag }} class="section-compare-table__heading heading-size-{{ section.settings.heading_size }}">
+          {{- section.settings.heading -}}
+        </{{ section.settings.heading_tag }}>
+      </div>
+    {%- endif -%}
+
+    <div class="section-compare-table__scroll">
+      <table class="section-compare-table__table">
+        <thead>
+          <tr>
+            <th class="section-compare-table__label-col"></th>
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'product_column' -%}
+                {%- assign p = block.settings.product -%}
+                <th class="section-compare-table__product-col" {{ block.shopify_attributes }}>
+                  {%- if p != blank -%}
+                    <a href="{{ p.url }}" class="section-compare-table__product-link">
+                      {%- if p.featured_image -%}
+                        {{ p.featured_image | image_url: width: 200 | image_tag: loading: 'lazy', class: 'section-compare-table__product-img' }}
+                      {%- endif -%}
+                      <span class="section-compare-table__product-title">{{ p.title }}</span>
+                      <span class="section-compare-table__product-price">{{ p.price | money }}</span>
+                    </a>
+                  {%- else -%}
+                    <span class="section-compare-table__product-title">{{ block.settings.custom_title | default: 'Product' }}</span>
+                  {%- endif -%}
+                  {%- if block.settings.badge != blank -%}
+                    <span class="section-compare-table__badge">{{ block.settings.badge }}</span>
+                  {%- endif -%}
+                </th>
+              {%- endif -%}
+            {%- endfor -%}
+          </tr>
+        </thead>
+        <tbody>
+          {%- for i in (1..10) -%}
+            {%- assign row_label_key = 'row_' | append: i | append: '_label' -%}
+            {%- assign row_label = section.settings[row_label_key] -%}
+            {%- if row_label != blank -%}
+              <tr>
+                <td class="section-compare-table__label">{{ row_label }}</td>
+                {%- for block in section.blocks -%}
+                  {%- if block.type == 'product_column' -%}
+                    {%- assign val_key = 'row_' | append: i -%}
+                    {%- assign val = block.settings[val_key] -%}
+                    <td class="section-compare-table__value">
+                      {%- if val == '✓' or val == 'yes' or val == 'Yes' -%}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" class="section-compare-table__check"><polyline points="20 6 9 17 4 12"/></svg>
+                      {%- elsif val == '✗' or val == 'no' or val == 'No' -%}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="section-compare-table__cross"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                      {%- elsif val != blank -%}
+                        {{ val }}
+                      {%- else -%}
+                        <span class="section-compare-table__dash">—</span>
+                      {%- endif -%}
+                    </td>
+                  {%- endif -%}
+                {%- endfor -%}
+              </tr>
+            {%- endif -%}
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .section-compare-table {
+    padding-block: var(--ct-mt) var(--ct-mb);
+    background: rgb(var(--color-background));
+    color: rgba(var(--color-foreground), 0.85);
+  }
+  @media (min-width: 750px) {
+    .section-compare-table { padding-block: var(--ct-dt) var(--ct-db); }
+  }
+  .section-compare-table__head { text-align: center; margin-bottom: 2.5rem; }
+  .section-compare-table__subheading { margin: 0 0 0.25rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgb(var(--color-accent)); font-weight: 600; }
+  .section-compare-table__heading { margin: 0; color: rgb(var(--color-foreground)); }
+
+  .section-compare-table__scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .section-compare-table__table {
+    width: 100%; border-collapse: collapse; min-width: 600px;
+  }
+  .section-compare-table__table thead th {
+    padding: 1rem 0.75rem; text-align: center; vertical-align: bottom;
+    border-bottom: 2px solid rgba(var(--color-foreground), 0.1);
+    position: relative;
+  }
+  .section-compare-table__label-col { width: 20%; }
+  .section-compare-table__product-col { width: auto; }
+
+  .section-compare-table__product-link {
+    display: flex; flex-direction: column; align-items: center; gap: 0.375rem;
+    text-decoration: none; color: inherit;
+  }
+  .section-compare-table__product-img {
+    width: 80px; height: 80px; object-fit: cover; border-radius: 0.375rem;
+  }
+  .section-compare-table__product-title {
+    font-size: 0.8125rem; font-weight: 700; color: rgb(var(--color-foreground));
+    text-align: center; line-height: 1.3;
+  }
+  .section-compare-table__product-price {
+    font-size: 0.75rem; font-weight: 600; color: rgb(var(--color-accent));
+  }
+  .section-compare-table__badge {
+    display: inline-block; margin-top: 0.375rem;
+    padding: 0.125rem 0.5rem; border-radius: 1rem;
+    font-size: 0.625rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: rgb(var(--color-accent)); color: rgb(var(--color-background));
+  }
+
+  .section-compare-table__table tbody td {
+    padding: 0.875rem 0.75rem; text-align: center;
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.06);
+    font-size: 0.8125rem;
+  }
+  .section-compare-table__table tbody tr:hover {
+    background: rgba(var(--color-foreground), 0.02);
+  }
+  .section-compare-table__label {
+    text-align: left !important; font-weight: 600;
+    color: rgb(var(--color-foreground));
+  }
+  .section-compare-table__check { color: #059669; }
+  .section-compare-table__cross { color: rgba(var(--color-foreground), 0.2); }
+  .section-compare-table__dash { color: rgba(var(--color-foreground), 0.2); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Comparison table",
+  "tag": "section",
+  "class": "section-compare-table-wrapper",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Find your perfect fit"
+    },
+    {
+      "type": "select",
+      "id": "subheading_size",
+      "label": "Subheading size",
+      "options": [
+        {
+          "value": "xs",
+          "label": "XS"
+        },
+        {
+          "value": "sm",
+          "label": "S"
+        }
+      ],
+      "default": "sm"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Compare products"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "sm",
+          "label": "S"
+        },
+        {
+          "value": "md",
+          "label": "M"
+        },
+        {
+          "value": "lg",
+          "label": "L"
+        }
+      ],
+      "default": "lg"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading tag",
+      "options": [
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "header",
+      "content": "Rows (up to 10)"
+    },
+    {
+      "type": "text",
+      "id": "row_1_label",
+      "label": "Row 1",
+      "default": "Material"
+    },
+    {
+      "type": "text",
+      "id": "row_2_label",
+      "label": "Row 2",
+      "default": "Waterproof"
+    },
+    {
+      "type": "text",
+      "id": "row_3_label",
+      "label": "Row 3",
+      "default": "Weight"
+    },
+    {
+      "type": "text",
+      "id": "row_4_label",
+      "label": "Row 4",
+      "default": "Warranty"
+    },
+    {
+      "type": "text",
+      "id": "row_5_label",
+      "label": "Row 5",
+      "default": "Free shipping"
+    },
+    {
+      "type": "text",
+      "id": "row_6_label",
+      "label": "Row 6"
+    },
+    {
+      "type": "text",
+      "id": "row_7_label",
+      "label": "Row 7"
+    },
+    {
+      "type": "text",
+      "id": "row_8_label",
+      "label": "Row 8"
+    },
+    {
+      "type": "text",
+      "id": "row_9_label",
+      "label": "Row 9"
+    },
+    {
+      "type": "text",
+      "id": "row_10_label",
+      "label": "Row 10"
+    },
+    {
+      "type": "header",
+      "content": "Desktop spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Mobile spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Top",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_column",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Custom title",
+          "info": "If no product selected"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge",
+          "info": "E.g. Best value, Popular"
+        },
+        {
+          "type": "header",
+          "content": "Row values (use ✓ or ✗ for icons)"
+        },
+        {
+          "type": "text",
+          "id": "row_1",
+          "label": "Row 1",
+          "default": "Premium canvas"
+        },
+        {
+          "type": "text",
+          "id": "row_2",
+          "label": "Row 2",
+          "default": "✓"
+        },
+        {
+          "type": "text",
+          "id": "row_3",
+          "label": "Row 3",
+          "default": "1.2 kg"
+        },
+        {
+          "type": "text",
+          "id": "row_4",
+          "label": "Row 4",
+          "default": "2 years"
+        },
+        {
+          "type": "text",
+          "id": "row_5",
+          "label": "Row 5",
+          "default": "✓"
+        },
+        {
+          "type": "text",
+          "id": "row_6",
+          "label": "Row 6"
+        },
+        {
+          "type": "text",
+          "id": "row_7",
+          "label": "Row 7"
+        },
+        {
+          "type": "text",
+          "id": "row_8",
+          "label": "Row 8"
+        },
+        {
+          "type": "text",
+          "id": "row_9",
+          "label": "Row 9"
+        },
+        {
+          "type": "text",
+          "id": "row_10",
+          "label": "Row 10"
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison table",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "product_column",
+          "settings": {
+            "custom_title": "Basic",
+            "row_1": "Canvas",
+            "row_2": "✗",
+            "row_3": "0.8 kg",
+            "row_4": "1 year",
+            "row_5": "✗"
+          }
+        },
+        {
+          "type": "product_column",
+          "settings": {
+            "custom_title": "Pro",
+            "badge": "Most popular",
+            "row_1": "Premium canvas",
+            "row_2": "✓",
+            "row_3": "1.2 kg",
+            "row_4": "3 years",
+            "row_5": "✓"
+          }
+        },
+        {
+          "type": "product_column",
+          "settings": {
+            "custom_title": "Elite",
+            "row_1": "Italian leather",
+            "row_2": "✓",
+            "row_3": "1.5 kg",
+            "row_4": "Lifetime",
+            "row_5": "✓"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

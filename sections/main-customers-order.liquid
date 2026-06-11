@@ -5,7 +5,7 @@
   }
 {%- endstyle -%}
 
-<div class="order-template">
+<div class="order-template color-{{ section.settings.color_scheme }}">
     <div class="page-width">
     <h1 class="order-template__title">{{ 'customer.order.title' | t }}: {{ order.name }}</h1>
     <div class="account-template__grid">
@@ -87,7 +87,7 @@
               </h4>
               <div class="order-template__detail-content">
                 <p class="order-template__detail-text">
-                  {%- if order.note != blank -%}{{ order.note }}{%- else -%}{{ 'customer.order.no_note' | t }}{%- endif -%}
+                  {%- if order.note != blank -%}{{ order.note | escape }}{%- else -%}{{ 'customer.order.no_note' | t }}{%- endif -%}
                 </p>
               </div>
             </div>
@@ -118,17 +118,28 @@
                         </a>
                         {%- endif -%}
                         <div class="order-template__product-info">
-                          <a href="{{ line_item.product.url }}" class="order-template__product-title" title="{{ line_item.title | escape }}">{{ line_item.title }}</a>
+                          <a href="{{ line_item.product.url }}" class="order-template__product-title" title="{{ line_item.title | escape }}">{{ line_item.title | escape }}</a>
                           {%- if line_item.variant.title != blank and line_item.variant.title != 'Default Title' -%}
-                          <p class="order-template__product-variant">{{ line_item.variant.title }}</p>
+                          <p class="order-template__product-variant">{{ line_item.variant.title | escape }}</p>
                           {%- endif -%}
                           {%- if line_item.sku != blank -%}
                           <p class="order-template__product-sku">{{ 'products.product.sku' | t }}: {{ line_item.sku }}</p>
                           {%- endif -%}
+                          {%- if line_item.selling_plan_allocation -%}
+                            <p class="order-template__selling-plan">{{ line_item.selling_plan_allocation.selling_plan.name }}</p>
+                          {%- endif -%}
                         </div>
                       </div>
                     </td>
-                    <td class="text-right">{{ line_item.final_price | money }}</td>
+                    <td class="text-right">
+                      {{ line_item.final_price | money }}
+                      {%- if line_item.unit_price -%}
+                        <div class="order-template__unit-price">
+                          <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+                          {{ line_item.unit_price | money }}/{{ line_item.unit_price_measurement.reference_value }}{{ line_item.unit_price_measurement.reference_unit }}
+                        </div>
+                      {%- endif -%}
+                    </td>
                     <td class="text-center">{{ line_item.quantity }}</td>
                     <td class="text-right order-template__product-total">{{ line_item.final_line_price | money }}</td>
                   </tr>
@@ -178,6 +189,12 @@
   "tag": "section",
   "class": "section-main-customers-order",
   "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
     {
       "type": "range",
       "id": "padding_top",

@@ -1,10 +1,10 @@
 {%- doc -%}
   @description Product Card Special — Flash Sale variant with stock bar and discount badge
   @param {object} product - Product object (required)
-  @param {number} [sold_count=0] - Number of items sold (simulated via forloop or metafield)
-  @param {number} [stock_total=50] - Total stock quantity
+  @param {number} [variant_qty=0] - Remaining inventory quantity from variant
+  @param {number} [stock_total=10] - Total stock baseline for progress bar
   @param {string} [lazyload='lazy'] - Loading strategy: 'lazy' or 'eager'
-  @example {%- render 'product-card-special', product: product, sold_count: 42, stock_total: 50 -%}
+  @example {%- render 'product-card-special', product: product, variant_qty: 5, stock_total: 20 -%}
 {%- enddoc -%}
 {%- assign price = product.selected_or_first_available_variant.price -%}
 {%- assign compare = product.selected_or_first_available_variant.compare_at_price -%}
@@ -12,13 +12,12 @@
 {%- if compare > price -%}{%- assign discount = compare | minus: price -%}{%- endif -%}
 {%- assign discount_percentage = 0 -%}
 {%- if discount > 0 -%}{%- assign discount_percentage = discount | times: 100 | divided_by: compare | round -%}{%- endif -%}
-{%- assign card_sold = sold_count | default: 0 | plus: 0 -%}
-{%- assign card_stock = stock_total | default: 50 | plus: 0 -%}
-{%- if card_stock <= 0 -%}{%- assign card_stock = 50 -%}{%- endif -%}
-{%- assign card_sold_pct = card_sold | times: 100 | divided_by: card_stock -%}
+{%- assign card_qty = variant_qty | default: 0 | plus: 0 -%}
+{%- assign card_stock = stock_total | default: 10 | plus: 0 -%}
+{%- if card_stock <= 0 -%}{%- assign card_stock = 10 -%}{%- endif -%}
+{%- assign card_sold_pct = card_stock | minus: card_qty | times: 100 | divided_by: card_stock -%}
 {%- if card_sold_pct > 100 -%}{%- assign card_sold_pct = 100 -%}{%- endif -%}
-{%- assign card_remaining = card_stock | minus: card_sold -%}
-{%- if card_remaining < 0 -%}{%- assign card_remaining = 0 -%}{%- endif -%}
+{%- if card_sold_pct < 0 -%}{%- assign card_sold_pct = 0 -%}{%- endif -%}
 {%- if product and product != empty -%}
 <product-card class="product-card product-card--special">
   <article class="product-card__wrapper">
@@ -70,10 +69,10 @@
         {%- endif -%}
         {%- endif -%}
       </div>
-      {%- if card_sold > 0 -%}
+      {%- if card_qty > 0 and card_sold_pct > 0 -%}
       <div class="product-card__stock">
         <div class="product-card__stock-bar">
-          <div class="product-card__stock-fill {%- if card_sold_pct >= 80 -%} product-card__stock-fill--hot{%- endif -%}" style="width: {{ card_sold_pct }}%;"></div>
+          <div class="product-card__stock-fill {%- if card_sold_pct >= 80 -%} product-card__stock-fill--hot{%- endif -%}" style="width: {{ card_sold_pct }};"></div>
         </div>
         <div class="product-card__stock-info">
           {%- if card_sold_pct >= 80 -%}
@@ -82,7 +81,7 @@
             {{ 'products.product.almost_sold_out' | t }}
           </span>
           {%- endif -%}
-          <span class="product-card__stock-sold">{{ 'products.product.sold_count' | t: count: card_sold | default: 'Sold' }} {{ card_sold }}</span>
+          <span class="product-card__stock-sold">{{ card_qty }} {{ 'products.product.items_left' | t | default: 'left' }}</span>
         </div>
       </div>
       {%- endif -%}

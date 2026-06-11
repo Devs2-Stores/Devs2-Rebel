@@ -14,7 +14,7 @@
 -%}
 
 <cart-template>
-  <div class="page-width">
+  <div class="page-width color-{{ section.settings.color_scheme }}">
     <h1 class="cart-template__title">
       {{ 'sections.cart.title' | t }}
       <span class="cart-template__count">({{ cart.item_count }} {{ 'sections.cart.caption' | t }})</span>
@@ -31,7 +31,7 @@
               <textarea name="note" id="cart-template__note-input" placeholder="{{ 'sections.cart.note' | t }}">{{ cart.note }}</textarea>
 
               {%- if section.settings.show_invoice -%}
-                <h4 class="invoice-title">{{ section.settings.invoice_title }}</h4>
+                <h4 class="invoice-title">{{ section.settings.invoice_title | escape }}</h4>
                 <label for="invoice-name" class="sr-only">{{ section.settings.invoice_company_label }}</label>
                 <input type="text" name="invoice[name]" id="invoice-name" value="{{ cart.attributes.invoice_name }}" class="invoice-input" placeholder="{{ section.settings.invoice_company_label }}">
                 <label for="invoice-taxcode" class="sr-only">{{ section.settings.invoice_tax_label }}</label>
@@ -58,7 +58,7 @@
         {%- if upsale_collection != blank and upsale_collection.products_count > 0 -%}
           <div class="cart-template__upsale">
             <section class="cart-template__upsale-products">
-              <h4>{{ section.settings.upsale_title }}</h4>
+              <h4>{{ section.settings.upsale_title | escape }}</h4>
               <ul class="upsale-list" role="list">
                 {%- for product in upsale_collection.products limit: section.settings.upsale_limit -%}
                   <li class="upsale-item" role="listitem">
@@ -75,8 +75,8 @@
                       {%- endif -%}
                     </a>
                     <div class="upsale-item__info">
-                      <a href="{{ product.url }}" class="upsale-item__title">{{ product.title }}</a>
-                      <p class="upsale-item__vendor">{{ product.vendor }}</p>
+                      <a href="{{ product.url }}" class="upsale-item__title">{{ product.title | escape }}</a>
+                      <p class="upsale-item__vendor">{{ product.vendor | escape }}</p>
                       <p class="upsale-item__price">{{ product.price | money }}</p>
                     </div>
                   </li>
@@ -96,6 +96,12 @@
   "tag": "section",
   "class": "section-main-cart",
   "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
     {
       "type": "checkbox",
       "id": "show_note",

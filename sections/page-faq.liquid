@@ -1,13 +1,11 @@
 
-{{- 'page-faq.css' | asset_url | stylesheet_tag -}}
-<script src="{{ 'page-faq.js' | asset_url }}" defer="defer"></script>
 <faq-page class="page-faq">
   <section class="faq-hero">
     <div class="page-width">
       <div class="faq-hero__wrap">
-        <h1 class="faq-hero__title">{% if section.settings.title != blank %}{{ section.settings.title }}{% else %}{{ 'sections.page_faq.default_title' | t }}{% endif %}</h1>
+        <h1 class="faq-hero__title">{% if section.settings.title != blank %}{{ section.settings.title | escape }}{% else %}{{ 'sections.page_faq.default_title' | t }}{% endif %}</h1>
         {%- if section.settings.description != blank -%}
-        <p class="faq-hero__description">{{ section.settings.description }}</p>
+        <p class="faq-hero__description">{{ section.settings.description | escape }}</p>
         {%- endif -%}
         <div class="faq-hero__search">
           <label for="faq-search" class="sr-only">{{ 'sections.page_faq.search_label' | t }}</label>
@@ -30,14 +28,14 @@
         <div class="faq-group" data-faq-group="{{ forloop.index }}" {{ group.shopify_attributes }}>
           <h2 class="faq-group__title">
             {%- render 'icon', name: 'tag', size: '20' -%}
-            {{ group.settings.title }}
+            {{ group.settings.title | escape }}
           </h2>
           <div class="faq-group__items">
             {%- for item in faq_items -%}
             {%- if item.settings.group == group.id -%}
             <details class="faq-item" data-faq-question="{{ item.settings.question | escape }}" {{ item.shopify_attributes }}>
               <summary class="faq-item__question">
-                <span class="faq-item__question-text">{{ item.settings.question }}</span>
+                <span class="faq-item__question-text">{{ item.settings.question | escape }}</span>
                 <span class="faq-item__icon">
                   {%- render 'icon', name: 'chevron-down', size: '20' -%}
                 </span>
@@ -57,7 +55,7 @@
         {%- if item.settings.group == blank -%}
         <details class="faq-item" data-faq-question="{{ item.settings.question | escape }}" {{ item.shopify_attributes }}>
           <summary class="faq-item__question">
-            <span class="faq-item__question-text">{{ item.settings.question }}</span>
+            <span class="faq-item__question-text">{{ item.settings.question | escape }}</span>
             <span class="faq-item__icon">
               {%- render 'icon', name: 'chevron-down', size: '20' -%}
             </span>
@@ -81,19 +79,19 @@
   <section class="faq-contact section-padding-bg">
     <div class="page-width">
       <div class="faq-contact__wrap">
-        <h2 class="faq-contact__title">{% if section.settings.contact_title != blank %}{{ section.settings.contact_title }}{% else %}{{ 'sections.page_faq.need_help' | t }}{% endif %}</h2>
-        <p class="faq-contact__description">{% if section.settings.contact_description != blank %}{{ section.settings.contact_description }}{% else %}{{ 'sections.page_faq.contact_us' | t }}{% endif %}</p>
+        <h2 class="faq-contact__title">{% if section.settings.contact_title != blank %}{{ section.settings.contact_title | escape }}{% else %}{{ 'sections.page_faq.need_help' | t }}{% endif %}</h2>
+        <p class="faq-contact__description">{% if section.settings.contact_description != blank %}{{ section.settings.contact_description | escape }}{% else %}{{ 'sections.page_faq.contact_us' | t }}{% endif %}</p>
         <div class="faq-contact__actions">
           {%- if section.settings.contact_phone != blank -%}
           <a href="tel:{{ section.settings.contact_phone | replace: ' ', '' }}" class="faq-contact__btn faq-contact__btn--phone">
             {%- render 'icon', name: 'phone', size: '18' -%}
-            <span>{{ section.settings.contact_phone }}</span>
+            <span>{{ section.settings.contact_phone | escape }}</span>
           </a>
           {%- endif -%}
           {%- if section.settings.contact_email != blank -%}
           <a href="mailto:{{ section.settings.contact_email }}" class="faq-contact__btn faq-contact__btn--email">
             {%- render 'icon', name: 'email', size: '18' -%}
-            <span>{{ section.settings.contact_email }}</span>
+            <span>{{ section.settings.contact_email | escape }}</span>
           </a>
           {%- endif -%}
         </div>
@@ -119,15 +117,50 @@
   "tag": "section",
   "class": "section-page-faq",
   "settings": [
-    { "type": "header", "content": "t:sections.page_faq.settings.header__hero.content" },
-    { "type": "text", "id": "title", "label": "t:sections.page_faq.settings.title.label" },
-    { "type": "textarea", "id": "description", "label": "t:sections.page_faq.settings.description.label" },
-    { "type": "header", "content": "t:sections.page_faq.settings.header__contact.content" },
-    { "type": "checkbox", "id": "show_contact", "label": "t:sections.page_faq.settings.show_contact.label", "default": true },
-    { "type": "text", "id": "contact_title", "label": "t:sections.page_faq.settings.contact_title.label" },
-    { "type": "textarea", "id": "contact_description", "label": "t:sections.page_faq.settings.contact_description.label" },
-    { "type": "text", "id": "contact_phone", "label": "t:sections.page_faq.settings.contact_phone.label" },
-    { "type": "text", "id": "contact_email", "label": "t:sections.page_faq.settings.contact_email.label" }
+    {
+      "type": "header",
+      "content": "t:sections.page_faq.settings.header__hero.content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.page_faq.settings.title.label"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "t:sections.page_faq.settings.description.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.page_faq.settings.header__contact.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_contact",
+      "label": "t:sections.page_faq.settings.show_contact.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "contact_title",
+      "label": "t:sections.page_faq.settings.contact_title.label"
+    },
+    {
+      "type": "textarea",
+      "id": "contact_description",
+      "label": "t:sections.page_faq.settings.contact_description.label"
+    },
+    {
+      "type": "text",
+      "id": "contact_phone",
+      "label": "t:sections.page_faq.settings.contact_phone.label"
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "t:sections.page_faq.settings.contact_email.label"
+    }
   ],
   "blocks": [
     {
@@ -135,7 +168,11 @@
       "name": "t:sections.page_faq.blocks.group.name",
       "limit": 5,
       "settings": [
-        { "type": "text", "id": "title", "label": "t:sections.page_faq.blocks.group.settings.title.label" }
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.page_faq.blocks.group.settings.title.label"
+        }
       ]
     },
     {
@@ -143,10 +180,26 @@
       "name": "t:sections.page_faq.blocks.question.name",
       "limit": 50,
       "settings": [
-        { "type": "text", "id": "question", "label": "t:sections.page_faq.blocks.question.settings.question.label" },
-        { "type": "richtext", "id": "answer", "label": "t:sections.page_faq.blocks.question.settings.answer.label" },
-        { "type": "text", "id": "group", "label": "t:sections.page_faq.blocks.question.settings.group.label", "info": "t:sections.page_faq.blocks.question.settings.group.info" }
+        {
+          "type": "text",
+          "id": "question",
+          "label": "t:sections.page_faq.blocks.question.settings.question.label"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "t:sections.page_faq.blocks.question.settings.answer.label"
+        },
+        {
+          "type": "text",
+          "id": "group",
+          "label": "t:sections.page_faq.blocks.question.settings.group.label",
+          "info": "t:sections.page_faq.blocks.question.settings.group.info"
+        }
       ]
+    },
+    {
+      "type": "@app"
     }
   ]
 }

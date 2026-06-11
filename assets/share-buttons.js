@@ -61,5 +61,5 @@
       }, 2000);
     }
   }
-  customElements.define('share-buttons', ShareButtons);
+  if (!customElements.get('share-buttons')) customElements.define('share-buttons', ShareButtons);
 })();

@@ -17,6 +17,12 @@
     setHTML: (el, html) => {
       if (el) el.innerHTML = html;
     },
+    escapeHtml: (str) => {
+      if (!str) return '';
+      var div = document.createElement('div');
+      div.appendChild(document.createTextNode(String(str)));
+      return div.innerHTML;
+    },
 
     request: async (input, options) => {
       var url = typeof input === 'string' ? input : (input && input.url ? input.url : '');
@@ -201,7 +207,6 @@
         ThemeUtils.updateCartCount(cart.item_count);
         ThemeUtils.updateCartMoney(cart.total_price);
       } catch (e) {
-        console.error('updateCartData failed:', e);
       }
     }
   };

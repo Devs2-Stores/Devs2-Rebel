@@ -1,4 +1,4 @@
-/* -------------------------------------------------------------------------- */
+﻿/* -------------------------------------------------------------------------- */
 /*                                SEARCH MODAL                                */
 /* -------------------------------------------------------------------------- */
 
@@ -18,10 +18,15 @@ class SearchModal extends HTMLElement {
     this.bindEvents();
   }
 
+  disconnectedCallback() {
+    if (this._boundClickHandler) document.removeEventListener('click', this._boundClickHandler);
+    if (this._boundEscHandler) document.removeEventListener('keydown', this._boundEscHandler);
+  }
+
   bindEvents() {
     var self = this;
 
-    document.addEventListener('click', function(e) {
+    this._boundClickHandler = function(e) {
       var openTrigger = e.target.closest('[data-action="open-search-modal"]');
       var closeTrigger = e.target.closest('[data-action="close-search-modal"]');
       var overlay = e.target.closest('.search-modal-overlay');
@@ -31,11 +36,13 @@ class SearchModal extends HTMLElement {
         self.open();
       }
       if (closeTrigger || overlay) self.close();
-    });
+    };
+    document.addEventListener('click', this._boundClickHandler);
 
-    document.addEventListener('keydown', function(e) {
+    this._boundEscHandler = function(e) {
       if (e.key === 'Escape' && self.isOpen()) self.close();
-    });
+    };
+    document.addEventListener('keydown', this._boundEscHandler);
 
     if (this.input) {
       this.input.addEventListener('input', function(e) {
@@ -156,7 +163,6 @@ class SearchModal extends HTMLElement {
       })
       .catch(function(error) {
         if (error.name === 'AbortError') return;
-        console.error('Search error:', error);
         var errorMsg = (typeof themeConfig !== 'undefined' && themeConfig.strings && themeConfig.strings.cart)
           ? (themeConfig.strings.cart.error || 'An error occurred. Please try again.')
           : 'An error occurred. Please try again.';
@@ -204,7 +210,7 @@ class SearchModal extends HTMLElement {
 
   displayError(message) {
     if (!this.resultsContainer) return;
-    this.resultsContainer.innerHTML = '<div class="search-modal-error"><p>' + message + '</p></div>';
+    this.resultsContainer.innerHTML = '<div class="search-modal-error"><p>' + ThemeUtils.escapeHtml(message) + '</p></div>';
   }
 
   clearResults() {
@@ -212,7 +218,7 @@ class SearchModal extends HTMLElement {
     var placeholder = (typeof themeConfig !== 'undefined' && themeConfig.strings)
       ? ''
       : '';
-    this.resultsContainer.innerHTML = '<div class="search-modal-empty"><p>' + (this.dataset.placeholder || 'Enter a keyword to search...') + '</p></div>';
+    this.resultsContainer.innerHTML = '<div class="search-modal-empty"><p>' + ThemeUtils.escapeHtml(this.dataset.placeholder || 'Enter a keyword to search...') + '</p></div>';
   }
 
   /**
@@ -244,4 +250,4 @@ class SearchModal extends HTMLElement {
     if (this.loadingEl) this.loadingEl.classList.add('hidden');
   }
 }
-customElements.define('search-modal', SearchModal);
+if (!customElements.get('search-modal')) customElements.define('search-modal', SearchModal);

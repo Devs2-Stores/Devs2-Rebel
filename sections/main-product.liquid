@@ -1,7 +1,7 @@
 {%- assign available = product.selected_or_first_available_variant.available -%}
 {%- assign selected_variant = product.selected_or_first_available_variant | default: product.variants.first -%}
 
-<product-template class="product-template">
+<product-template class="product-template color-{{ section.settings.color_scheme }}">
   <div class="page-width">
     <div class="product-template__wrapper">
       {%- comment -%} ═══ MEDIA GALLERY ═══ {%- endcomment -%}
@@ -241,6 +241,15 @@
                     -0%
                   {%- endif -%}
                 </div>
+                {%- if selected_variant.unit_price -%}
+                  <div class="product-template__unit-price">
+                    <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+                    {{ selected_variant.unit_price | money }}/{{ selected_variant.unit_price_measurement.reference_value }}{{ selected_variant.unit_price_measurement.reference_unit }}
+                  </div>
+                {%- endif -%}
+                {%- if cart.taxes_included -%}
+                  <div class="product-template__tax-notice">{{ 'products.product.include_taxes' | t }}</div>
+                {%- endif -%}
               </div>
 
             {%- when 'variant_picker' -%}
@@ -268,6 +277,13 @@
                   {{ form | payment_terms }}
                 {%- endform -%}
               </div>
+
+            {%- when 'pickup_availability' -%}
+              {%- comment -%} ═══ PICKUP AVAILABILITY ═══ {%- endcomment -%}
+              <div class="product-template__pickup-availability" {{ block.shopify_attributes }}>
+                {{ selected_variant | pickup_availability }}
+              </div>
+
             {%- when 'coupon' -%}
               {%- comment -%} ═══ COUPON ═══ {%- endcomment -%}
               <div {{ block.shopify_attributes }}>
@@ -305,6 +321,35 @@
 
             {%- when 'buy_buttons' -%}
               {%- comment -%} ═══ ACTIONS ═══ {%- endcomment -%}
+              {%- if product.gift_card? -%}
+                <div class="product-template__gift-card-recipient" {{ block.shopify_attributes }}>
+                  <details>
+                    <summary class="product-template__gift-card-toggle">
+                      <input type="checkbox" name="properties[__shopify_send_gift_card_to_recipient]" id="gift-card-recipient-toggle" form="product-form-{{ section.id }}">
+                      <label for="gift-card-recipient-toggle">{{ 'recipient.form.checkbox' | t }}</label>
+                    </summary>
+                    <div class="product-template__gift-card-fields">
+                      <div class="field">
+                        <label for="gift-card-recipient-email">{{ 'recipient.form.email_label' | t }} <span aria-hidden="true">*</span></label>
+                        <input type="email" id="gift-card-recipient-email" name="properties[Recipient email]" placeholder="{{ 'recipient.form.email' | t }}" form="product-form-{{ section.id }}">
+                      </div>
+                      <div class="field">
+                        <label for="gift-card-recipient-name">{{ 'recipient.form.name_label' | t }}</label>
+                        <input type="text" id="gift-card-recipient-name" name="properties[Recipient name]" placeholder="{{ 'recipient.form.name' | t }}" form="product-form-{{ section.id }}">
+                      </div>
+                      <div class="field">
+                        <label for="gift-card-recipient-message">{{ 'recipient.form.message_label' | t }}</label>
+                        <textarea id="gift-card-recipient-message" name="properties[Message]" placeholder="{{ 'recipient.form.message' | t }}" maxlength="200" form="product-form-{{ section.id }}"></textarea>
+                        <span class="field__info">{{ 'recipient.form.max_characters' | t: max_chars: 200 }}</span>
+                      </div>
+                      <div class="field">
+                        <label for="gift-card-recipient-send-on">{{ 'recipient.form.send_on_label' | t }}</label>
+                        <input type="date" id="gift-card-recipient-send-on" name="properties[Send on]" form="product-form-{{ section.id }}">
+                      </div>
+                    </div>
+                  </details>
+                </div>
+              {%- endif -%}
               <div class="product-template__actions" {{ block.shopify_attributes }}>
                 <div class="product-template__buttons">
                   <button
@@ -383,7 +428,7 @@
                       <input
                         type="hidden"
                         name="contact[body]"
-                        value="[Back-in-stock] {{ product.title }} - {{ selected_variant.title }} | {{ shop.url }}{{ product.url }}"
+                        value="[Back-in-stock] {{ product.title | escape }} - {{ selected_variant.title | escape }} | {{ shop.url }}{{ product.url }}"
                         data-bis-body
                       >
                       <button
@@ -519,7 +564,7 @@
                   </div>
                 {%- endif -%}
                 <div class="product-template__commitment-content">
-                  <strong class="product-template__commitment-title">{{ block.settings.text }}</strong>
+                  <strong class="product-template__commitment-title">{{ block.settings.text | escape }}</strong>
                 </div>
               </div>
 
@@ -560,10 +605,10 @@
                 {%- endif -%}
                 <div class="product-template__icon-text-content">
                   {%- if block.settings.heading != blank -%}
-                    <strong class="product-template__icon-text-heading">{{ block.settings.heading }}</strong>
+                    <strong class="product-template__icon-text-heading">{{ block.settings.heading | escape }}</strong>
                   {%- endif -%}
                   {%- if block.settings.text != blank -%}
-                    <p class="product-template__icon-text-desc">{{ block.settings.text }}</p>
+                    <p class="product-template__icon-text-desc">{{ block.settings.text | escape }}</p>
                   {%- endif -%}
                 </div>
               </div>
@@ -595,7 +640,7 @@
         {%- assign collection_relate_object = product.collections.first -%}
         <product-template-relate class="product-template__relate">
           <h2 class="global-heading" id="related-products">
-            {{ section.settings.related_title }}
+            {{ section.settings.related_title | escape }}
           </h2>
           <div class="product-template__relate-wrap swiper">
             <ul class="product-cards product-template__relate-grids swiper-wrapper">
@@ -644,6 +689,12 @@
   "class": "section-main-product",
   "settings": [
     {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
       "type": "header",
       "content": "t:sections.main_product.settings.header__media.content"
     },
@@ -682,7 +733,7 @@
   "blocks": [
     {
       "type": "title",
-      "name": "Title",
+      "name": "t:sections.main_product.blocks.title.name",
       "limit": 1,
       "settings": [
         {
@@ -690,12 +741,30 @@
           "id": "heading_size",
           "label": "t:sections.all.heading_size.label",
           "options": [
-            { "value": "xs", "label": "t:sections.all.heading_size.options__xs.label" },
-            { "value": "sm", "label": "t:sections.all.heading_size.options__sm.label" },
-            { "value": "md", "label": "t:sections.all.heading_size.options__md.label" },
-            { "value": "lg", "label": "t:sections.all.heading_size.options__lg.label" },
-            { "value": "xl", "label": "t:sections.all.heading_size.options__xl.label" },
-            { "value": "2xl", "label": "t:sections.all.heading_size.options__2xl.label" }
+            {
+              "value": "xs",
+              "label": "t:sections.all.heading_size.options__xs.label"
+            },
+            {
+              "value": "sm",
+              "label": "t:sections.all.heading_size.options__sm.label"
+            },
+            {
+              "value": "md",
+              "label": "t:sections.all.heading_size.options__md.label"
+            },
+            {
+              "value": "lg",
+              "label": "t:sections.all.heading_size.options__lg.label"
+            },
+            {
+              "value": "xl",
+              "label": "t:sections.all.heading_size.options__xl.label"
+            },
+            {
+              "value": "2xl",
+              "label": "t:sections.all.heading_size.options__2xl.label"
+            }
           ],
           "default": "lg"
         }
@@ -703,7 +772,7 @@
     },
     {
       "type": "product_meta",
-      "name": "Meta",
+      "name": "t:sections.main_product.blocks.product_meta.name",
       "limit": 1,
       "settings": [
         {
@@ -740,12 +809,12 @@
     },
     {
       "type": "price",
-      "name": "Price",
+      "name": "t:sections.main_product.blocks.price.name",
       "limit": 1
     },
     {
       "type": "variant_picker",
-      "name": "Variant picker",
+      "name": "t:sections.main_product.blocks.variant_picker.name",
       "limit": 1,
       "settings": [
         {
@@ -753,8 +822,14 @@
           "id": "picker_type",
           "label": "t:sections.main_product.blocks.variant_picker.settings.picker_type.label",
           "options": [
-            { "value": "buttons", "label": "t:sections.main_product.blocks.variant_picker.settings.picker_type.options__buttons.label" },
-            { "value": "dropdown", "label": "t:sections.main_product.blocks.variant_picker.settings.picker_type.options__dropdown.label" }
+            {
+              "value": "buttons",
+              "label": "t:sections.main_product.blocks.variant_picker.settings.picker_type.options__buttons.label"
+            },
+            {
+              "value": "dropdown",
+              "label": "t:sections.main_product.blocks.variant_picker.settings.picker_type.options__dropdown.label"
+            }
           ],
           "default": "buttons"
         },
@@ -840,6 +915,11 @@
     {
       "type": "payment_installments",
       "name": "t:sections.main_product.blocks.payment_installments.name",
+      "limit": 1
+    },
+    {
+      "type": "pickup_availability",
+      "name": "t:sections.main_product.blocks.pickup_availability.name",
       "limit": 1
     },
     {
@@ -956,8 +1036,14 @@
           "id": "layout",
           "label": "t:sections.main_product.blocks.icon_with_text.settings.layout.label",
           "options": [
-            { "value": "horizontal", "label": "t:sections.main_product.blocks.icon_with_text.settings.layout.options__horizontal.label" },
-            { "value": "vertical", "label": "t:sections.main_product.blocks.icon_with_text.settings.layout.options__vertical.label" }
+            {
+              "value": "horizontal",
+              "label": "t:sections.main_product.blocks.icon_with_text.settings.layout.options__horizontal.label"
+            },
+            {
+              "value": "vertical",
+              "label": "t:sections.main_product.blocks.icon_with_text.settings.layout.options__vertical.label"
+            }
           ],
           "default": "horizontal"
         },

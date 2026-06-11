@@ -46,7 +46,7 @@
     {%- endif -%}
   </div>
   <div class="collection-card__info">
-    <h3 class="collection-card__title card-heading-size-{{ card_heading_size }}">{{ collection.title }}</h3>
+    <h3 class="collection-card__title card-heading-size-{{ card_heading_size }}">{{ collection.title | escape }}</h3>
     {%- if show_product_count -%}
     <p class="collection-card__count">
       {%- if collection.all_products_count == 0 -%}

@@ -26,27 +26,27 @@
         {%- endif -%}
         <div class="footer-info__social-media">
           {%- if settings.social_facebook_link != blank -%}
-          <a href="{{ settings.social_facebook_link }}" title="Facebook" aria-label="Facebook" class="footer-social-media__link" target="_blank" rel="noopener noreferrer">
+          <a href="{{ settings.social_facebook_link }}" title="Facebook" aria-label="{{ 'accessibility.follow_on' | t: platform: 'Facebook' }}" class="footer-social-media__link" target="_blank" rel="noopener noreferrer">
             {%- render 'icon', name: 'facebook' -%}
           </a>
           {%- endif -%}
           {%- if settings.social_instagram_link != blank -%}
-          <a href="{{ settings.social_instagram_link }}" title="Instagram" aria-label="Instagram" class="footer-social-media__link" target="_blank" rel="noopener noreferrer">
+          <a href="{{ settings.social_instagram_link }}" title="Instagram" aria-label="{{ 'accessibility.follow_on' | t: platform: 'Instagram' }}" class="footer-social-media__link" target="_blank" rel="noopener noreferrer">
             {%- render 'icon', name: 'instagram' -%}
           </a>
           {%- endif -%}
           {%- if settings.social_youtube_link != blank -%}
-          <a href="{{ settings.social_youtube_link }}" title="YouTube" aria-label="YouTube" class="footer-social-media__link" target="_blank" rel="noopener noreferrer">
+          <a href="{{ settings.social_youtube_link }}" title="YouTube" aria-label="{{ 'accessibility.follow_on' | t: platform: 'YouTube' }}" class="footer-social-media__link" target="_blank" rel="noopener noreferrer">
             {%- render 'icon', name: 'youtube' -%}
           </a>
           {%- endif -%}
           {%- if settings.social_tiktok_link != blank -%}
-          <a href="{{ settings.social_tiktok_link }}" title="TikTok" aria-label="TikTok" class="footer-social-media__link" target="_blank" rel="noopener noreferrer">
+          <a href="{{ settings.social_tiktok_link }}" title="TikTok" aria-label="{{ 'accessibility.follow_on' | t: platform: 'TikTok' }}" class="footer-social-media__link" target="_blank" rel="noopener noreferrer">
             {%- render 'icon', name: 'tiktok' -%}
           </a>
           {%- endif -%}
           {%- if settings.social_twitter_link != blank -%}
-          <a href="{{ settings.social_twitter_link }}" title="Twitter / X" aria-label="Twitter" class="footer-social-media__link" target="_blank" rel="noopener noreferrer">
+          <a href="{{ settings.social_twitter_link }}" title="Twitter / X" aria-label="{{ 'accessibility.follow_on' | t: platform: 'X (Twitter)' }}" class="footer-social-media__link" target="_blank" rel="noopener noreferrer">
             {%- render 'icon', name: 'twitter' -%}
           </a>
           {%- endif -%}
@@ -58,7 +58,7 @@
             {%- if section.settings.cert_bct_image != blank -%}
             {{ section.settings.cert_bct_image | image_url: width: 260 | image_tag:
               width: 130, height: 50,
-              alt: 'BCT certification',
+              alt: 'accessibility.cert_alt' | t: name: 'BCT',
               class: 'footer-info__cert-img',
               loading: 'lazy'
             }}
@@ -70,7 +70,7 @@
             {%- if section.settings.cert_dmca_image != blank -%}
             {{ section.settings.cert_dmca_image | image_url: width: 260 | image_tag:
               width: 130, height: 50,
-              alt: 'DMCA certification',
+              alt: 'accessibility.cert_alt' | t: name: 'DMCA',
               class: 'footer-info__cert-img',
               loading: 'lazy'
             }}
@@ -83,20 +83,20 @@
       <div class="footer-actions">
         {%- if section.settings.newsletter_title != blank -%}
         <div class="footer_actions__slogan">
-          <h3 class="footer_actions_slogan-title">{{ section.settings.newsletter_title }}</h3>
+          <h3 class="footer_actions_slogan-title">{{ section.settings.newsletter_title | escape }}</h3>
         </div>
         {%- endif -%}
         <div class="footer-actions-menus">
           {%- for block in section.blocks -%}
           {%- if block.type == 'menu' -%}
           <div class="footer-actions-menu" {{ block.shopify_attributes }}>
-            <h3 class="footer-actions-menu__title">{{ block.settings.heading }}</h3>
+            <h3 class="footer-actions-menu__title">{{ block.settings.heading | escape }}</h3>
             <ul class="footer-actions-menu__list">
               {%- assign menu = linklists[block.settings.menu] -%}
               {%- if block.settings.menu != blank and menu.links != blank -%}
               {%- for link in menu.links -%}
               <li>
-                <a title="{{ link.title | escape }}" href="{{ link.url }}">{{ link.title }}</a>
+                <a title="{{ link.title | escape }}" href="{{ link.url }}">{{ link.title | escape }}</a>
               </li>
               {%- endfor -%}
               {%- endif -%}
@@ -109,9 +109,23 @@
     </div>
     <div class="footer-copyright">
       <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}</p>
+      {%- if section.settings.show_payment_icons -%}
+        {%- unless shop.enabled_payment_types == empty -%}
+          <ul class="footer-payment-icons" role="list">
+            {%- for type in shop.enabled_payment_types -%}
+              <li class="footer-payment-icons__item">{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>
+            {%- endfor -%}
+          </ul>
+        {%- endunless -%}
+      {%- endif -%}
+      {%- if section.settings.show_follow_on_shop -%}
+        <div class="footer-follow-on-shop">
+          {{ shop | login_button: action: 'follow' }}
+        </div>
+      {%- endif -%}
       <div class="footer-contact">
         {%- if section.settings.address != blank -%}
-        <span class="footer-contact__item">{{ section.settings.address }}</span>
+        <span class="footer-contact__item">{{ section.settings.address | escape }}</span>
         {%- endif -%}
         {%- if section.settings.email != blank -%}
         <span class="footer-contact__item"><a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></span>
@@ -120,7 +134,7 @@
         <span class="footer-contact__item"><a href="tel:{{ section.settings.phone }}">{{ section.settings.phone }}</a></span>
         {%- endif -%}
         {%- if section.settings.tax_code != blank -%}
-        <span class="footer-contact__item">{{ section.settings.tax_code }}</span>
+        <span class="footer-contact__item">{{ section.settings.tax_code | escape }}</span>
         {%- endif -%}
       </div>
     </div>
@@ -166,12 +180,6 @@
     {%- endif -%}
   </div>
 </global-footer>
-
-<script>
-  document.querySelectorAll('[data-localization-select]').forEach(function(sel) {
-    sel.addEventListener('change', function() { this.closest('form').submit(); });
-  });
-</script>
 
 {% schema %}
 {
@@ -269,6 +277,22 @@
       "id": "show_language_selector",
       "label": "t:sections.footer.settings.show_language_selector.label",
       "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header__payment.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "t:sections.footer.settings.show_payment_icons.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_follow_on_shop",
+      "label": "t:sections.footer.settings.show_follow_on_shop.label",
+      "default": false
     }
   ],
   "blocks": [
@@ -287,6 +311,9 @@
           "label": "t:sections.footer.blocks.menu.settings.menu.label"
         }
       ]
+    },
+    {
+      "type": "@app"
     }
   ],
   "default": {

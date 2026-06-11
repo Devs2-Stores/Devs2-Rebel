@@ -1,0 +1,140 @@
+{%- comment -%}
+  Section: Scroll Text Reveal
+  Mô tả: Heading lớn fade-in + scale khi scroll vào view. Apple-style cinematic.
+{%- endcomment -%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-reveal color-{{ section.settings.color_scheme }}"
+  style="
+    --rv-dt: {{ section.settings.padding_top_desktop }}px;
+    --rv-db: {{ section.settings.padding_bottom_desktop }}px;
+    --rv-mt: {{ section.settings.padding_top_mobile }}px;
+    --rv-mb: {{ section.settings.padding_bottom_mobile }}px;
+  "
+  data-reveal-section
+>
+  <div class="page-width">
+    <div class="section-reveal__inner section-reveal__inner--{{ section.settings.text_align }}">
+      {%- if section.settings.subheading != blank -%}
+        <p class="section-reveal__subheading subheading-size-{{ section.settings.subheading_size }}" data-reveal-el data-delay="0">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <{{ section.settings.heading_tag }} class="section-reveal__heading heading-size-{{ section.settings.heading_size }}" data-reveal-el data-delay="150">
+          {{- section.settings.heading -}}
+        </{{ section.settings.heading_tag }}>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="section-reveal__text content-size-{{ section.settings.text_size }}" data-reveal-el data-delay="300" style="max-width: {{ section.settings.text_width }}rem;">
+          {{ section.settings.text }}
+        </div>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_link | default: '#' }}" class="section-reveal__btn section-reveal__btn--{{ section.settings.button_style }} button-size-{{ section.settings.button_size }}" data-reveal-el data-delay="450">
+          {{ section.settings.button_label }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('#section-{{ section.id }} [data-reveal-el]').forEach(function(e) { e.classList.add('is-visible'); });
+    return;
+  }
+  var section = document.getElementById('section-{{ section.id }}');
+  if (!section) return;
+  var els = section.querySelectorAll('[data-reveal-el]');
+
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          els.forEach(function(el) {
+            var delay = parseInt(el.dataset.delay) || 0;
+            setTimeout(function() { el.classList.add('is-visible'); }, delay);
+          });
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.2 });
+    obs.observe(section);
+  } else {
+    els.forEach(function(el) { el.classList.add('is-visible'); });
+  }
+})();
+</script>
+
+{% stylesheet %}
+  .section-reveal {
+    padding-block: var(--rv-mt) var(--rv-mb);
+    background: rgb(var(--color-background));
+    color: rgba(var(--color-foreground), 0.85);
+    overflow: hidden;
+  }
+  @media (min-width: 750px) {
+    .section-reveal { padding-block: var(--rv-dt) var(--rv-db); }
+  }
+
+  .section-reveal__inner { display: flex; flex-direction: column; gap: 1rem; }
+  .section-reveal__inner--left { align-items: flex-start; text-align: left; }
+  .section-reveal__inner--center { align-items: center; text-align: center; }
+
+  .section-reveal__subheading { margin: 0; text-transform: uppercase; letter-spacing: 0.15em; color: rgb(var(--color-accent)); font-weight: 600; }
+  .section-reveal__heading { margin: 0; color: rgb(var(--color-foreground)); line-height: 1.05; }
+  .section-reveal__text { margin: 0; color: rgba(var(--color-foreground), 0.7); line-height: 1.7; }
+  .section-reveal__text p { margin: 0; }
+
+  [data-reveal-el] {
+    opacity: 0; transform: translateY(40px) scale(0.96);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  [data-reveal-el].is-visible {
+    opacity: 1; transform: translateY(0) scale(1);
+  }
+
+  .section-reveal__btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 600; text-decoration: none; border-radius: var(--buttons-radius, 0);
+    cursor: pointer; transition: opacity 0.2s; margin-top: 0.5rem;
+  }
+  .section-reveal__btn:hover { opacity: 0.85; }
+  .section-reveal__btn--primary { background: rgb(var(--color-button)); color: rgb(var(--color-button-text)); border: 1px solid rgb(var(--color-button)); }
+  .section-reveal__btn--secondary { background: transparent; color: rgb(var(--color-foreground)); border: 1px solid rgba(var(--color-foreground), 0.3); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Scroll text reveal",
+  "tag": "section",
+  "class": "section-reveal-wrapper",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Content" },
+    { "type": "inline_richtext", "id": "subheading", "label": "Subheading", "default": "Our mission" },
+    { "type": "select", "id": "subheading_size", "label": "Subheading size", "options": [{ "value": "xs", "label": "XS" },{ "value": "sm", "label": "S" }], "default": "sm" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Designed for the extraordinary" },
+    { "type": "select", "id": "heading_size", "label": "Heading size", "options": [{ "value": "xl", "label": "XL" },{ "value": "2xl", "label": "2XL" },{ "value": "3xl", "label": "3XL" }], "default": "2xl" },
+    { "type": "select", "id": "heading_tag", "label": "Heading tag", "options": [{ "value": "h2", "label": "H2" },{ "value": "p", "label": "Paragraph" }], "default": "h2" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>We create products that inspire, delight, and stand the test of time.</p>" },
+    { "type": "select", "id": "text_size", "label": "Text size", "options": [{ "value": "md", "label": "M" },{ "value": "lg", "label": "L" }], "default": "lg" },
+    { "type": "range", "id": "text_width", "min": 24, "max": 50, "step": 2, "unit": "rem", "label": "Text max width", "default": 36 },
+    { "type": "header", "content": "Button" },
+    { "type": "text", "id": "button_label", "label": "Button label" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "select", "id": "button_style", "label": "Button style", "options": [{ "value": "primary", "label": "Primary" },{ "value": "secondary", "label": "Secondary" }], "default": "primary" },
+    { "type": "select", "id": "button_size", "label": "Button size", "options": [{ "value": "md", "label": "M" },{ "value": "lg", "label": "L" }], "default": "lg" },
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "text_align", "label": "Alignment", "options": [{ "value": "left", "label": "Left" },{ "value": "center", "label": "Center" }], "default": "center" },
+    { "type": "header", "content": "Desktop spacing" },
+    { "type": "range", "id": "padding_top_desktop", "min": 0, "max": 200, "step": 10, "unit": "px", "label": "Top", "default": 100 },
+    { "type": "range", "id": "padding_bottom_desktop", "min": 0, "max": 200, "step": 10, "unit": "px", "label": "Bottom", "default": 100 },
+    { "type": "header", "content": "Mobile spacing" },
+    { "type": "range", "id": "padding_top_mobile", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Top", "default": 50 },
+    { "type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Bottom", "default": 50 }
+  ],
+  "presets": [{ "name": "Scroll text reveal", "category": "Custom" }]
+}
+{% endschema %}

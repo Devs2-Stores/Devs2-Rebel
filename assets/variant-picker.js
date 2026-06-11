@@ -22,28 +22,23 @@
         try {
           product = JSON.parse(scriptTag.textContent.trim());
         } catch (e) {
-          console.warn('ProductVariantPicker: Failed to parse JSON', e);
         }
       }
 
       if (!product) {
-        console.warn('ProductVariantPicker: Product data is empty');
         return;
       }
 
       this.selects = this.querySelectorAll('product-variant-picker-item');
       if (this.selects.length == 0) {
-        console.warn('ProductVariantPicker: No variant picker items found');
         return;
       }
 
       if (!product.variants || !Array.isArray(product.variants) || product.variants.length === 0) {
-        console.warn('ProductVariantPicker: No variants found');
         return;
       }
 
       if (!product.options || !Array.isArray(product.options) || product.options.length === 0) {
-        console.warn('ProductVariantPicker: No options found');
         return;
       }
 
@@ -116,7 +111,6 @@
       }
 
       if (optionValues.length !== this.selects.length) {
-        console.warn('ProductVariantPicker: Option values count mismatch');
         return;
       }
 
@@ -138,7 +132,6 @@
               needsUpdate = true;
             }
           } else {
-            console.warn('ProductVariantPicker: Radio button not found for value "' + optionValues[index] + '"');
           }
         }
       });
@@ -208,7 +201,6 @@
           bubbles: !isInQuickview, // Only bubble if NOT in quickview
         }));
       } else {
-        console.warn('ProductVariantPicker: Cannot dispatch variant_change event');
       }
     }
 
@@ -286,7 +278,6 @@
         try {
           product = JSON.parse(scriptTag.textContent.trim());
         } catch (e) {
-          console.warn('ProductVariantSelect: Failed to parse JSON', e);
         }
       }
 
@@ -472,7 +463,15 @@
       var finalSrc = ThemeUtils.resizeImage(imageSrc);
 
       var safeAlt = (this.value || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
-      this.innerHTML = '<img width="40" height="40" src="' + finalSrc + '" alt="' + safeAlt + '" loading="lazy" decoding="async"/>';
+      var img = document.createElement('img');
+      img.width = 40;
+      img.height = 40;
+      img.src = finalSrc;
+      img.alt = this.value || '';
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      this.textContent = '';
+      this.appendChild(img);
     }
   }
   if (!customElements.get('product-variant-picker-image')) customElements.define('product-variant-picker-image', ProductVariantPickerImage);

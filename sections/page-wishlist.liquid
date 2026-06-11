@@ -1,17 +1,16 @@
 
-{{- 'page-wishlist.css' | asset_url | stylesheet_tag -}}
 <div class="wishlist-page page-width section-padding">
   <div class="wishlist-page__header">
-    <h1>{% if section.settings.title != blank %}{{ section.settings.title }}{% else %}{{ 'sections.page_wishlist.default_title' | t }}{% endif %}</h1>
+    <h1>{% if section.settings.title != blank %}{{ section.settings.title | escape }}{% else %}{{ 'sections.page_wishlist.default_title' | t }}{% endif %}</h1>
     <p>{{ 'sections.page_wishlist.subtitle' | t }}</p>
   </div>
   <div class="wishlist-page__content">
     <div class="wishlist-page__empty" style="display: none;">
       <div class="wishlist-page__empty-icon">{%- render 'icon', name: 'heart' -%}</div>
-      <h2>{% if section.settings.empty_text != blank %}{{ section.settings.empty_text }}{% else %}{{ 'sections.page_wishlist.empty' | t }}{% endif %}</h2>
+      <h2>{% if section.settings.empty_text != blank %}{{ section.settings.empty_text | escape }}{% else %}{{ 'sections.page_wishlist.empty' | t }}{% endif %}</h2>
       <p>{{ 'sections.page_wishlist.empty_hint' | t }}</p>
       <a href="{{ section.settings.empty_button_link | default: routes.all_products_collection_url }}" class="button-primary">
-        {%- if section.settings.empty_button_text != blank -%}{{ section.settings.empty_button_text }}{%- else -%}{{ 'sections.page_wishlist.explore' | t }}{%- endif -%}
+        {%- if section.settings.empty_button_text != blank -%}{{ section.settings.empty_button_text | escape }}{%- else -%}{{ 'sections.page_wishlist.explore' | t }}{%- endif -%}
       </a>
     </div>
     <ul class="wishlist-page__products product-cards"></ul>
@@ -70,8 +69,7 @@
         }).join('');
         wishlistManager.updateAllWishlistStates();
       })
-      .catch(function(err) {
-        console.error('Wishlist load error:', err);
+      .catch(function() {
         emptyState.style.display = 'block';
         productsContainer.style.display = 'none';
       });

@@ -1,0 +1,118 @@
+{%- comment -%}
+  Section: Marquee Products
+  Mô tả: Auto-scrolling horizontal product cards — infinite.
+{%- endcomment -%}
+
+{%- liquid
+  assign collection = section.settings.collection
+  assign products_to_show = section.settings.products_to_show
+-%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-marquee-products color-{{ section.settings.color_scheme }}"
+  style="
+    --mp-dt: {{ section.settings.padding_top_desktop }}px;
+    --mp-db: {{ section.settings.padding_bottom_desktop }}px;
+    --mp-mt: {{ section.settings.padding_top_mobile }}px;
+    --mp-mb: {{ section.settings.padding_bottom_mobile }}px;
+    --mp-speed: {{ section.settings.speed }}s;
+    --mp-direction: {{ section.settings.direction }};
+  "
+>
+  {%- if section.settings.heading != blank -%}
+    <div class="page-width section-marquee-products__head">
+      <{{ section.settings.heading_tag }} class="section-marquee-products__heading heading-size-{{ section.settings.heading_size }}">
+        {{- section.settings.heading -}}
+      </{{ section.settings.heading_tag }}>
+    </div>
+  {%- endif -%}
+
+  {%- if collection != blank and collection.products.size > 0 -%}
+    <div class="section-marquee-products__track" data-mp-track>
+      <div class="section-marquee-products__list">
+        {%- for product in collection.products limit: products_to_show -%}
+          <div class="section-marquee-products__item">
+            {%- render 'product-card', product: product -%}
+          </div>
+        {%- endfor -%}
+      </div>
+      {%- comment -%} Duplicate for infinite loop {%- endcomment -%}
+      <div class="section-marquee-products__list" aria-hidden="true">
+        {%- for product in collection.products limit: products_to_show -%}
+          <div class="section-marquee-products__item">
+            {%- render 'product-card', product: product -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- else -%}
+    <p class="page-width" style="text-align:center;color:rgba(var(--color-foreground),0.3);padding:2rem;">Select a collection</p>
+  {%- endif -%}
+</div>
+
+<script>
+(function() {
+  var track = document.querySelector('#section-{{ section.id }} [data-mp-track]');
+  if (!track) return;
+  track.addEventListener('mouseenter', function() { track.style.animationPlayState = 'paused'; });
+  track.addEventListener('mouseleave', function() { track.style.animationPlayState = 'running'; });
+})();
+</script>
+
+{% stylesheet %}
+  .section-marquee-products {
+    padding-block: var(--mp-mt) var(--mp-mb);
+    background: rgb(var(--color-background));
+    overflow: hidden;
+  }
+  @media (min-width: 750px) {
+    .section-marquee-products { padding-block: var(--mp-dt) var(--mp-db); }
+  }
+  .section-marquee-products__head { text-align: center; margin-bottom: 1.5rem; }
+  .section-marquee-products__heading { margin: 0; color: rgb(var(--color-foreground)); }
+
+  .section-marquee-products__track {
+    display: flex; width: max-content;
+    animation: mpScroll var(--mp-speed, 30s) linear infinite;
+    animation-direction: var(--mp-direction, normal);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .section-marquee-products__track { animation: none; overflow-x: auto; }
+  }
+
+  @keyframes mpScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  .section-marquee-products__list { display: flex; gap: 16px; padding-right: 16px; }
+  .section-marquee-products__item { width: 220px; flex-shrink: 0; }
+  @media (min-width: 750px) {
+    .section-marquee-products__item { width: 260px; }
+    .section-marquee-products__list { gap: 20px; padding-right: 20px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Marquee products",
+  "tag": "section",
+  "class": "section-marquee-products-wrapper",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Trending now" },
+    { "type": "select", "id": "heading_size", "label": "Heading size", "options": [{ "value": "md", "label": "M" },{ "value": "lg", "label": "L" }], "default": "md" },
+    { "type": "select", "id": "heading_tag", "label": "Tag", "options": [{ "value": "h2", "label": "H2" },{ "value": "h3", "label": "H3" }], "default": "h2" },
+    { "type": "header", "content": "Behavior" },
+    { "type": "range", "id": "products_to_show", "min": 4, "max": 20, "step": 1, "label": "Products", "default": 10 },
+    { "type": "range", "id": "speed", "min": 15, "max": 60, "step": 5, "unit": "s", "label": "Speed", "default": 30, "info": "Lower = faster" },
+    { "type": "select", "id": "direction", "label": "Direction", "options": [{ "value": "normal", "label": "Left" },{ "value": "reverse", "label": "Right" }], "default": "normal" },
+    { "type": "header", "content": "Desktop spacing" },
+    { "type": "range", "id": "padding_top_desktop", "min": 0, "max": 150, "step": 5, "unit": "px", "label": "Top", "default": 50 },
+    { "type": "range", "id": "padding_bottom_desktop", "min": 0, "max": 150, "step": 5, "unit": "px", "label": "Bottom", "default": 50 },
+    { "type": "header", "content": "Mobile spacing" },
+    { "type": "range", "id": "padding_top_mobile", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Top", "default": 30 },
+    { "type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Bottom", "default": 30 }
+  ],
+  "presets": [{ "name": "Marquee products", "category": "Collection" }]
+}
+{% endschema %}

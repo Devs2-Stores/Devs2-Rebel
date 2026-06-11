@@ -73,7 +73,7 @@
         // Allow form submission normally
       } else {
         event.preventDefault();
-        alert('Please enter a valid email address.');
+        if (typeof showToast === 'function') showToast('Please enter a valid email address.', 'error', 3000);
       }
     }
 
@@ -82,5 +82,5 @@
       return emailPattern.test(email);
     }
   }
-  customElements.define('newsletter-modal', NewsletterModal);
+  if (!customElements.get('newsletter-modal')) customElements.define('newsletter-modal', NewsletterModal);
 })();

@@ -51,7 +51,7 @@ quickview-modal .quickview-modal-panel {
   bottom: 1rem;
   width: 100%;
   max-width: 52rem;
-  background: #fff;
+  background: var(--color-white);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   border-radius: 0.5rem;
   overflow: hidden;
@@ -60,7 +60,7 @@ quickview-modal .quickview-modal-panel {
   transition: transform 0.3s ease-in-out;
   transform: translateX(110%);
 }
-.dark quickview-modal .quickview-modal-panel { background: #111827; }
+.dark quickview-modal .quickview-modal-panel { background: var(--color-text); }
 @media (max-width: 768px) {
   quickview-modal .quickview-modal-panel {
     right: 0.5rem;
@@ -80,15 +80,15 @@ quickview-modal .quickview-modal-panel .quickview-modal-header {
   align-items: center;
   justify-content: space-between;
   padding: 1rem 1.25rem;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--border-color);
   flex-shrink: 0;
-  background: #fff;
+  background: var(--color-white);
 }
-.dark quickview-modal .quickview-modal-panel .quickview-modal-header { border-color: #374151; background: #111827; }
+.dark quickview-modal .quickview-modal-panel .quickview-modal-header { border-color: var(--color-gray-dark); background: var(--color-text); }
 @media (max-width: 576px) {
   quickview-modal .quickview-modal-panel .quickview-modal-header { padding: calc(0.5rem + env(safe-area-inset-top)) calc(0.75rem + env(safe-area-inset-right)) 0.5rem calc(0.75rem + env(safe-area-inset-left)); }
 }
-quickview-modal .quickview-modal-panel .quickview-modal-header .quickview-modal-title { font-size: 1.125rem; font-weight: 600; margin: 0; color: #111827; }
+quickview-modal .quickview-modal-panel .quickview-modal-header .quickview-modal-title { font-size: 1.125rem; font-weight: 600; margin: 0; color: var(--color-text); }
 .dark quickview-modal .quickview-modal-panel .quickview-modal-header .quickview-modal-title { color: white; }
 @media (max-width: 576px) {
   quickview-modal .quickview-modal-panel .quickview-modal-header .quickview-modal-title { font-size: 0.9375rem; }
@@ -97,7 +97,7 @@ quickview-modal .quickview-modal-panel .quickview-modal-header .quickview-modal-
   padding: 0.375rem;
   border-radius: 0.375rem;
   transition: background-color 150ms;
-  color: #6b7280;
+  color: var(--color-gray);
   border: none;
   background: transparent;
   cursor: pointer;
@@ -117,7 +117,7 @@ quickview-modal .quickview-modal-panel .quickview-modal-header .quickview-modal-
 /* -------------------------------------------------------------------------- */
 quickview-modal .quickview-modal-panel .quickview-modal-content { flex: 1; overflow-y: auto; min-height: 0; padding: 0; }
 quickview-modal .quickview-modal-panel .quickview-modal-content::-webkit-scrollbar { width: 5px; }
-quickview-modal .quickview-modal-panel .quickview-modal-content::-webkit-scrollbar-track { background: #ccc; }
+quickview-modal .quickview-modal-panel .quickview-modal-content::-webkit-scrollbar-track { background: var(--color-border); }
 quickview-modal .quickview-modal-panel .quickview-modal-content::-webkit-scrollbar-thumb { background: var(--color-primary, #f30); }
 quickview-modal .quickview-modal-panel .quickview-modal-content .quickview-modal-loading {
   position: absolute;
@@ -135,8 +135,8 @@ quickview-modal .quickview-modal-panel .quickview-modal-content .quickview-modal
   display: inline-block;
   width: 2rem;
   height: 2rem;
-  border: 4px solid #d1d5db;
-  border-top-color: #4b5563;
+  border: 4px solid var(--border-color);
+  border-top-color: var(--color-gray);
   border-radius: 9999px;
   animation: spin 1s linear infinite;
 }

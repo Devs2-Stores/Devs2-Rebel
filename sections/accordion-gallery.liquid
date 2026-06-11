@@ -1,0 +1,191 @@
+{%- comment -%}
+  Section: Accordion Gallery
+  Mô tả: Vertical accordion — hover/click mở rộng panel → ảnh + text.
+{%- endcomment -%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-accgal color-{{ section.settings.color_scheme }}"
+  style="
+    --ag-dt: {{ section.settings.padding_top_desktop }}px;
+    --ag-db: {{ section.settings.padding_bottom_desktop }}px;
+    --ag-mt: {{ section.settings.padding_top_mobile }}px;
+    --ag-mb: {{ section.settings.padding_bottom_mobile }}px;
+    --ag-height: {{ section.settings.section_height }}px;
+  "
+>
+  {%- if section.settings.heading != blank -%}
+    <div class="page-width section-accgal__head">
+      <{{ section.settings.heading_tag }} class="section-accgal__heading heading-size-{{ section.settings.heading_size }}">
+        {{- section.settings.heading -}}
+      </{{ section.settings.heading_tag }}>
+    </div>
+  {%- endif -%}
+
+  <div class="{% if section.settings.section_width == 'fixed' %}page-width{% endif %}">
+    <div class="section-accgal__panels">
+      {%- for block in section.blocks -%}
+        <div class="section-accgal__panel{% if forloop.first %} is-expanded{% endif %}" {{ block.shopify_attributes }}>
+          <div class="section-accgal__media">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 1200 | image_tag:
+                widths: '600, 900, 1200', loading: 'lazy',
+                class: 'section-accgal__img'
+              }}
+            {%- else -%}
+              <div class="section-accgal__ph" style="background: {% cycle '#1a1a2e', '#16213e', '#0f3460', '#533483', '#2c3e50' %};"></div>
+            {%- endif -%}
+            <div class="section-accgal__overlay" style="--ag-ov: {{ block.settings.overlay | default: 30 | divided_by: 100.0 }};"></div>
+          </div>
+          <div class="section-accgal__content">
+            {%- if block.settings.heading != blank -%}
+              <h3 class="section-accgal__title">{{ block.settings.heading | escape }}</h3>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <p class="section-accgal__text">{{ block.settings.text | escape }}</p>
+            {%- endif -%}
+            {%- if block.settings.button_label != blank -%}
+              <a href="{{ block.settings.link | default: '#' }}" class="section-accgal__btn">{{ block.settings.button_label | escape }}</a>
+            {%- endif -%}
+          </div>
+          <span class="section-accgal__label">{{ block.settings.heading | default: 'Panel' | escape }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var panels = document.querySelectorAll('#section-{{ section.id }} .section-accgal__panel');
+  panels.forEach(function(panel) {
+    panel.addEventListener('mouseenter', function() {
+      panels.forEach(function(p) { p.classList.remove('is-expanded'); });
+      panel.classList.add('is-expanded');
+    });
+    panel.addEventListener('click', function() {
+      panels.forEach(function(p) { p.classList.remove('is-expanded'); });
+      panel.classList.add('is-expanded');
+    });
+  });
+})();
+</script>
+
+{% stylesheet %}
+  .section-accgal {
+    padding-block: var(--ag-mt) var(--ag-mb);
+    background: rgb(var(--color-background));
+  }
+  @media (min-width: 750px) {
+    .section-accgal { padding-block: var(--ag-dt) var(--ag-db); }
+  }
+  .section-accgal__head { text-align: center; margin-bottom: 2rem; }
+  .section-accgal__heading { margin: 0; color: rgb(var(--color-foreground)); }
+
+  .section-accgal__panels {
+    display: flex; flex-direction: column;
+    gap: 4px; border-radius: 0.75rem; overflow: hidden;
+  }
+  @media (min-width: 750px) {
+    .section-accgal__panels { flex-direction: row; height: var(--ag-height, 500px); }
+  }
+
+  .section-accgal__panel {
+    position: relative; overflow: hidden; cursor: pointer;
+    flex: 0.5; transition: flex 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    min-height: 120px; color: #fff;
+  }
+  .section-accgal__panel.is-expanded { flex: 3; }
+
+  .section-accgal__media { position: absolute; inset: 0; }
+  .section-accgal__img { width: 100%; height: 100%; object-fit: cover; }
+  .section-accgal__ph { width: 100%; height: 100%; }
+  .section-accgal__overlay {
+    position: absolute; inset: 0;
+    background: rgba(0, 0, 0, var(--ag-ov, 0.3));
+  }
+
+  .section-accgal__content {
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+    padding: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;
+    opacity: 0; transform: translateY(10px);
+    transition: opacity 0.4s 0.2s, transform 0.4s 0.2s;
+  }
+  .section-accgal__panel.is-expanded .section-accgal__content {
+    opacity: 1; transform: translateY(0);
+  }
+
+  .section-accgal__title { margin: 0; font-size: 1.25rem; font-weight: 700; color: #fff; }
+  .section-accgal__text { margin: 0; font-size: 0.8125rem; color: rgba(255,255,255,0.8); max-width: 30rem; }
+  .section-accgal__btn {
+    display: inline-block; align-self: flex-start;
+    font-size: 0.8125rem; font-weight: 600; color: #fff;
+    border-bottom: 1px solid rgba(255,255,255,0.6);
+    text-decoration: none; padding-bottom: 2px;
+    transition: border-color 0.3s;
+  }
+  .section-accgal__btn:hover { border-color: #fff; }
+
+  .section-accgal__label {
+    position: absolute; z-index: 2;
+    font-size: 0.75rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.7);
+    transition: opacity 0.3s;
+  }
+  @media (min-width: 750px) {
+    .section-accgal__label {
+      writing-mode: vertical-lr; text-orientation: mixed;
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+    }
+    .section-accgal__panel.is-expanded .section-accgal__label { opacity: 0; }
+  }
+  @media (max-width: 749px) {
+    .section-accgal__label { top: 50%; left: 1rem; transform: translateY(-50%); }
+    .section-accgal__panel.is-expanded .section-accgal__label { opacity: 0; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Accordion gallery",
+  "tag": "section",
+  "class": "section-accgal-wrapper",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading" },
+    { "type": "select", "id": "heading_size", "label": "Heading size", "options": [{ "value": "md", "label": "M" },{ "value": "lg", "label": "L" }], "default": "lg" },
+    { "type": "select", "id": "heading_tag", "label": "Tag", "options": [{ "value": "h2", "label": "H2" },{ "value": "h3", "label": "H3" }], "default": "h2" },
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "section_height", "min": 350, "max": 700, "step": 25, "unit": "px", "label": "Desktop height", "default": 500 },
+    { "type": "select", "id": "section_width", "label": "Width", "options": [{ "value": "fixed", "label": "Fixed" },{ "value": "full", "label": "Full" }], "default": "fixed" },
+    { "type": "header", "content": "Desktop spacing" },
+    { "type": "range", "id": "padding_top_desktop", "min": 0, "max": 150, "step": 5, "unit": "px", "label": "Top", "default": 50 },
+    { "type": "range", "id": "padding_bottom_desktop", "min": 0, "max": 150, "step": 5, "unit": "px", "label": "Bottom", "default": 50 },
+    { "type": "header", "content": "Mobile spacing" },
+    { "type": "range", "id": "padding_top_mobile", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Top", "default": 30 },
+    { "type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Bottom", "default": 30 }
+  ],
+  "blocks": [{
+    "type": "panel", "name": "Panel",
+    "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "range", "id": "overlay", "min": 0, "max": 70, "step": 5, "unit": "%", "label": "Overlay", "default": 30 },
+      { "type": "text", "id": "heading", "label": "Heading", "default": "Collection" },
+      { "type": "text", "id": "text", "label": "Description" },
+      { "type": "text", "id": "button_label", "label": "Button text", "default": "Explore" },
+      { "type": "url", "id": "link", "label": "Link" }
+    ]
+  },
+  { "type": "@app" }],
+  "presets": [{
+    "name": "Accordion gallery", "category": "Image",
+    "blocks": [
+      { "type": "panel", "settings": { "heading": "Spring", "text": "Light and airy styles for the season", "button_label": "Shop spring" } },
+      { "type": "panel", "settings": { "heading": "Summer", "text": "Bold colors and breezy fabrics", "button_label": "Shop summer" } },
+      { "type": "panel", "settings": { "heading": "Autumn", "text": "Warm tones and cozy textures", "button_label": "Shop autumn" } },
+      { "type": "panel", "settings": { "heading": "Winter", "text": "Elegant layers for cold days", "button_label": "Shop winter" } }
+    ]
+  }]
+}
+{% endschema %}
