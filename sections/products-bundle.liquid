@@ -87,7 +87,8 @@
     btn.disabled = true;
     btn.textContent = '{{ "general.bundle.adding" | t | default: "Adding..." }}';
     var items = ids.map(function(id) { return { id: parseInt(id), quantity: 1 }; });
-    fetch('/cart/add.js', {
+    var addUrl = (window.themeConfig && themeConfig.routes && themeConfig.routes.cart_add_url) || '/cart/add.js';
+    fetch(addUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ items: items })
@@ -95,6 +96,8 @@
     .then(function(r) { return r.json(); })
     .then(function() {
       btn.textContent = '{{ "general.bundle.added" | t | default: "Added! ✓" }}';
+      document.dispatchEvent(new CustomEvent('cart:item_added', { bubbles: true }));
+      if (window.ThemeUtils && typeof ThemeUtils.updateCartData === 'function') ThemeUtils.updateCartData();
       setTimeout(function() {
         btn.textContent = '{{ section.settings.button_label | default: "Add all to cart" }}';
         btn.disabled = false;

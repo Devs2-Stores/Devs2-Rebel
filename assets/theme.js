@@ -82,13 +82,13 @@
     },
 
     formatMoney: (cents, format) => {
-      if (cents == null) return '0‚«';
+      if (cents == null) return '0';
       cents = cents / 100;
       if (typeof cents === 'string') cents = cents.replace(/\./g, '');
-      var formatString = format || (typeof themeConfig !== 'undefined' && themeConfig.formatMoney) || '{{amount_no_decimals}}‚«';
+      var formatString = format || (typeof themeConfig !== 'undefined' && themeConfig.formatMoney) || '{{amount_no_decimals}}';
       var patt = /\{\{\s*(\w+)\s*\}\}/;
       var match = formatString.match(patt);
-      if (!match) return cents + '‚«';
+      if (!match) return String(cents);
 
       function floatToStr(num, dec) {
         var fixed = parseFloat(num).toFixed(dec);
