@@ -759,7 +759,6 @@
     },
     "announcement_bar": {
       "name": "Announcement bar",
-      "label": "Announcement bar",
       "settings": {
         "enable": {
           "label": "Enable announcement bar"
@@ -782,18 +781,6 @@
     "header": {
       "name": "Header",
       "settings": {
-        "header__logo": {
-          "content": "Logo"
-        },
-        "logo": {
-          "label": "Logo image"
-        },
-        "logo_width": {
-          "label": "Logo width"
-        },
-        "logo_height": {
-          "label": "Logo height"
-        },
         "header__menu": {
           "content": "Menu"
         },
@@ -805,15 +792,6 @@
         },
         "sticky_enable": {
           "label": "Sticky header"
-        },
-        "header__colors": {
-          "content": "Colors"
-        },
-        "bg_color": {
-          "label": "Background color"
-        },
-        "text_color": {
-          "label": "Text color"
         },
         "header__wishlist": {
           "content": "Wishlist"
@@ -832,9 +810,6 @@
     "main_product": {
       "name": "Product",
       "settings": {
-        "header__meta": {
-          "content": "Product meta"
-        },
         "show_sku": {
           "label": "Show SKU"
         },
@@ -856,29 +831,14 @@
         "enable_lightbox": {
           "label": "Enable lightbox zoom"
         },
-        "header__actions": {
-          "content": "Actions"
-        },
-        "show_coupon": {
-          "label": "Show coupon preview"
-        },
-        "show_stock_counter": {
-          "label": "Show stock counter"
-        },
         "stock_threshold": {
           "label": "Low stock threshold"
         },
         "show_wishlist": {
           "label": "Show wishlist button"
         },
-        "show_back_in_stock": {
-          "label": "Show back in stock form"
-        },
         "contact_link": {
           "label": "Contact page link"
-        },
-        "header__tabs": {
-          "content": "Tabs"
         },
         "tab_description_name": {
           "label": "Description tab name"
@@ -888,9 +848,6 @@
         },
         "description_max_height": {
           "label": "Max description height"
-        },
-        "show_share": {
-          "label": "Show share buttons"
         },
         "header__related": {
           "content": "Related products"
@@ -1039,14 +996,7 @@
         }
       }
     },
-    "main_index": {
-      "name": "Homepage"
-    },
     "countdown": {
-      "name": "Countdown banner",
-      "presets": {
-        "name": "Countdown banner"
-      },
       "settings": {
         "heading": {
           "label": "Heading"
@@ -1163,18 +1113,11 @@
         "enable_filtering": {
           "label": "Enable filtering"
         },
-        "collapse_filters": {
-          "label": "Collapse filter sidebar by default",
-          "info": "Filter sidebar will start collapsed. Customers can toggle it open/closed."
-        },
         "enable_sorting": {
           "label": "Enable sorting"
         },
         "show_product_count": {
           "label": "Show product count"
-        },
-        "enable_view_toggle": {
-          "label": "Enable grid/list toggle"
         },
         "header__sort_options": {
           "content": "Sort options"
@@ -1399,10 +1342,6 @@
           "label": "Show table of contents",
           "info": "Customize TOC style in Theme Settings > Table of Contents."
         },
-        "show_navigation": {
-          "label": "Show previous / next navigation",
-          "info": "Show links to the previous and next articles in the same blog."
-        },
         "header__sidebar": {
           "content": "Sidebar"
         },
@@ -1589,12 +1528,6 @@
     "footer": {
       "name": "Footer",
       "settings": {
-        "header__logo": {
-          "content": "Logo"
-        },
-        "logo": {
-          "label": "Footer logo"
-        },
         "description": {
           "label": "Description"
         },
@@ -1677,18 +1610,6 @@
           "label": "Products per page"
         }
       }
-    },
-    "main_search_filter": {
-      "name": "Search filter"
-    },
-    "main_search_products": {
-      "name": "Search products"
-    },
-    "main_search_quickview": {
-      "name": "Search quick view"
-    },
-    "main_search_smart": {
-      "name": "Smart search"
     },
     "main_customers_login": {
       "name": "Customer login"

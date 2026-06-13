@@ -213,5 +213,48 @@
     --aspect-ratio-collection: 1 / 1;
     --aspect-ratio-blog: 4 / 3;
     --aspect-ratio-article: 16 / 9;
+
+    /* ═══════════ ALIASES (compat — không phá CSS hiện hành) ═══════════ */
+    /* Color aliases */
+    --color-bg-secondary: var(--color-gray-lighter);
+    --color-body: var(--color-paragraph);
+    --color-border-hover: rgba(var(--color-foreground), 0.3);
+    --color-heading: var(--color-text);
+    --color-overlay: var(--bg-overlay);
+    --color-text-secondary: var(--color-paragraph);
+    --color-error-text: var(--color-error);
+    --color-error-border: var(--color-error);
+    --color-error-bg: rgba(220, 38, 38, 0.1);
+    --color-success-text: var(--color-success);
+    --color-success-border: var(--color-success);
+    --color-success-bg: rgba(22, 163, 74, 0.1);
+    --color-success-light: rgba(22, 163, 74, 0.1);
+
+    /* Section-scoped color hooks (override per section if needed) */
+    --announcement-bg: var(--color-bg);
+    --announcement-text: var(--color-text);
+    --header-bg: var(--color-bg);
+    --header-text: var(--color-text);
+    --bg-footer: var(--color-bg);
+
+    /* Layout aliases */
+    --header-height-sticky: var(--header-height);
+    --arrow-offset: 0px;
+
+    /* Font aliases (legacy naming) */
+    --font-family-body: var(--font-body-family);
+    --fs-xs: var(--font-xs);
+    --line-height-base: var(--line-height-normal);
+
+    /* Spacing extras */
+    --space-2xs: 0.125rem;
+    --space-5xl: 3rem;
+
+    /* Radius extras */
+    --radius-xl: 16px;
+
+    /* Animation defaults */
+    --marquee-duration: 30s;
+    --read-more-height: 4.5em;
   }
 {% endstyle %}

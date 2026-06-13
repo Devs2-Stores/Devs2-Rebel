@@ -95,7 +95,30 @@
   }
 </script>
 
-<script defer src="{{ 'swiper.js' | asset_url }}"></script>
+<script>
+  /* Swiper dynamic loader — loads swiper.js + swiper.css on first request */
+  (function(){
+    var SWIPER_CSS = '{{ "swiper.css" | asset_url }}';
+    var SWIPER_JS  = '{{ "swiper.js" | asset_url }}';
+    var loading = false;
+    function load(){
+      if (loading || typeof Swiper !== 'undefined') return;
+      loading = true;
+      var l = document.createElement('link');
+      l.rel = 'stylesheet'; l.href = SWIPER_CSS;
+      document.head.appendChild(l);
+      var s = document.createElement('script');
+      s.src = SWIPER_JS;
+      s.onload = function(){ document.dispatchEvent(new Event('swiper:loaded')); };
+      document.head.appendChild(s);
+    }
+    window.swiperReady = function(cb){
+      if (typeof Swiper !== 'undefined') return cb();
+      document.addEventListener('swiper:loaded', cb, { once: true });
+      load();
+    };
+  })();
+</script>
 <script defer src="{{ 'theme.js' | asset_url }}"></script>
 <script defer src="{{ 'toast.js' | asset_url }}"></script>
 <script defer src="{{ 'back-to-top.js' | asset_url }}"></script>

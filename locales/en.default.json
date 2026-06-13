@@ -96,7 +96,8 @@
     },
     "newsletter": {
       "email_placeholder": "Enter your email",
-      "success": "Thanks for subscribing!"
+      "success": "Thanks for subscribing!",
+      "email_label": "Email"
     },
     "items": {
       "one": "{{ count }} item",
@@ -139,14 +140,11 @@
       "other": "{{ count }} products"
     }
   },
-
-
   "newsletter": {
     "label": "Email",
     "success": "Thanks for subscribing",
     "button_label": "Subscribe"
   },
-
   "accessibility": {
     "navigation": "Main navigation",
     "scroll_left": "Scroll left",
@@ -191,7 +189,6 @@
     "cert_alt": "{{ name }} certification",
     "video_hero_title": "Video hero"
   },
-
   "blogs": {
     "article": {
       "blog": "Blog",
@@ -235,12 +232,10 @@
       }
     }
   },
-
   "onboarding": {
     "product_title": "Example product title",
     "collection_title": "Your collection's name"
   },
-
   "products": {
     "product_card": {
       "view_product": "View",
@@ -372,11 +367,13 @@
       "read_more": "Read more"
     }
   },
-
-
   "templates": {
+    "404": {
+      "title": "Page not found",
+      "subtext": "404"
+    },
     "search": {
-      "no_results": "No results found for \u201c{{ terms }}\u201d. Check the spelling or use a different word or phrase.",
+      "no_results": "No results found for “{{ terms }}”. Check the spelling or use a different word or phrase.",
       "page": "Page",
       "products": "Products",
       "results_with_count": {
@@ -384,12 +381,12 @@
         "other": "{{ count }} results"
       },
       "results_with_count_and_term": {
-        "one": "{{ count }} result found for \u201c{{ terms }}\u201d",
-        "other": "{{ count }} results found for \u201c{{ terms }}\u201d"
+        "one": "{{ count }} result found for “{{ terms }}”",
+        "other": "{{ count }} results found for “{{ terms }}”"
       },
       "title": "Search results",
       "search": "Search",
-      "search_for": "Search for \u201c{{ terms }}\u201d",
+      "search_for": "Search for “{{ terms }}”",
       "placeholder": "Search products...",
       "placeholder_text": "Enter a keyword to get started",
       "results_count": "{{ count }} results found",
@@ -417,13 +414,8 @@
         "post_success": "Thanks for contacting us. We'll get back to you as soon as possible.",
         "error_heading": "Please adjust the following:"
       }
-    },
-    "404": {
-      "title": "Page not found",
-      "subtext": "404"
     }
   },
-
   "sections": {
     "countdown": {
       "days": "Days",
@@ -545,7 +537,6 @@
       "explore": "Explore products"
     }
   },
-
   "localization": {
     "country_label": "Country/region",
     "language_label": "Language",
@@ -553,7 +544,6 @@
     "update_language": "Update language",
     "update_country": "Update country/region"
   },
-
   "customer": {
     "sidebar": {
       "greeting": "Hello",
@@ -701,7 +691,6 @@
       "back_to_account": "Back to account"
     }
   },
-
   "gift_cards": {
     "issued": {
       "how_to_use_gift_card": "Use the gift card code online or QR code in-store",
@@ -717,7 +706,6 @@
       "expired": "Expired"
     }
   },
-
   "recipient": {
     "form": {
       "checkbox": "I want to send this as a gift",
