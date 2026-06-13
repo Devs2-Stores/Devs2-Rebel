@@ -746,19 +746,8 @@ class CollectionBest extends HTMLElement {
     });
   }
 
-  waitForSwiper(callback, retries) {
-    var self = this;
-    if (typeof retries === 'undefined') retries = 0;
-    if (typeof Swiper === 'undefined') {
-      if (retries >= 50) {
-        return;
-      }
-      setTimeout(function() {
-        self.waitForSwiper(callback, retries + 1);
-      }, 100);
-      return;
-    }
-    callback();
+  waitForSwiper(callback) {
+    (window.swiperReady || function(cb){ cb(); })(callback);
   }
 
   initSwiper() {

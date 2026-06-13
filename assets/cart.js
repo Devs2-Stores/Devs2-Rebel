@@ -1,8 +1,8 @@
-﻿(function() {
+(function() {
 'use strict';
 
 /**
- * Cart Template â€” Main cart page component
+ * Cart Template — Main cart page component
  * Uses Cart API with Section Rendering for dynamic updates.
  */
 class CartTemplate extends HTMLElement {
@@ -273,7 +273,7 @@ class CartTemplate extends HTMLElement {
 if (!customElements.get('cart-template')) customElements.define("cart-template", CartTemplate);
 
 /**
- * Cart Item â€” Individual line item with delete functionality
+ * Cart Item — Individual line item with delete functionality
  */
 class CartItem extends HTMLElement {
   connectedCallback() {

@@ -1,4 +1,4 @@
-﻿/* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
 /*                                CART MODAL                                  */
 /* -------------------------------------------------------------------------- */
 
@@ -131,7 +131,7 @@
 
       try {
         const cart = await ThemeUtils.request({
-          url: '/cart/change.js',
+          url: (themeConfig.routes && themeConfig.routes.cart_change_url) || '/cart/change.js',
           method: 'POST',
           body: {
             line: line,

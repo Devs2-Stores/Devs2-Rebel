@@ -251,8 +251,6 @@ class ProductTemplate extends HTMLElement {
 
 		var self = this;
 		var initSwiper = function() {
-			if (typeof Swiper === 'undefined') return;
-
 			var thumbsSwiper = null;
 			if (self.mediaThumbsEl) {
 				thumbsSwiper = new Swiper(self.mediaThumbsEl, {
@@ -284,11 +282,7 @@ class ProductTemplate extends HTMLElement {
 			});
 		};
 
-		if (typeof Swiper !== 'undefined') {
-			initSwiper();
-		} else {
-			window.addEventListener('load', initSwiper);
-		}
+		(window.swiperReady || function(cb){ cb(); })(initSwiper);
 	}
 
 	initWishlist() {
@@ -1219,11 +1213,7 @@ class ProductTemplateRelate extends HTMLElement {
 		var slideCount = swiperEl.querySelectorAll('.swiper-slide').length;
 		if (slideCount === 0) return;
 
-		if (typeof Swiper === 'undefined') {
-			setTimeout(function() { this.initSwiper(); }.bind(this), 100);
-			return;
-		}
-
+		(window.swiperReady || function(cb){ cb(); })(function(){
 		new Swiper(swiperEl, {
 			slidesPerView: 1.2,
 			spaceBetween: 16,
@@ -1250,6 +1240,7 @@ class ProductTemplateRelate extends HTMLElement {
 					spaceBetween: 24
 				}
 			}
+		});
 		});
 	}
 }
@@ -1382,11 +1373,7 @@ class ProductViewed extends HTMLElement {
 		var slideCount = swiperEl.querySelectorAll('.swiper-slide').length;
 		if (slideCount === 0) return;
 
-		if (typeof Swiper === 'undefined') {
-			setTimeout(function() { this.initSwiper(); }.bind(this), 100);
-			return;
-		}
-
+		(window.swiperReady || function(cb){ cb(); })(function(){
 		new Swiper(swiperEl, {
 			slidesPerView: 1.2,
 			spaceBetween: 16,
@@ -1400,6 +1387,7 @@ class ProductViewed extends HTMLElement {
 				768: { slidesPerView: 3, spaceBetween: 20 },
 				992: { slidesPerView: 4, spaceBetween: 24 }
 			}
+		});
 		});
 	}
 

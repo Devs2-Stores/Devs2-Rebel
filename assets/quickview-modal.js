@@ -1,5 +1,5 @@
-﻿/* ============================================================================
-   QUICKVIEW MODAL â€” Component JS
+/* ============================================================================
+   QUICKVIEW MODAL — Component JS
    Extracted from theme.js for code splitting
    Dependencies: ThemeUtils, themeConfig (loaded via theme.js)
    ============================================================================ */
@@ -273,7 +273,7 @@
         this.initializeQuantitySelector();
         this.initializeSwiper();
       } catch (error) {
-        if (this.content) this.content.innerHTML = '<div class="text-center text-red-500 py-12">' + ThemeUtils.escapeHtml(((themeConfig.strings.variant || {}).loadError || 'Error loading product')) + '</div>';
+        if (this.content) this.content.innerHTML = '<div class="quickview-modal__error" role="alert">' + ThemeUtils.escapeHtml(((themeConfig.strings.variant || {}).loadError || 'Error loading product')) + '</div>';
       } finally {
         this.isLoading = false;
         this.hideLoading();
@@ -459,10 +459,10 @@
       if (priceCurrent) {
         if (price === 0) {
           priceCurrent.textContent = (themeConfig.strings.variant || {}).contact || 'Contact';
-          priceCurrent.className = 'text-xl font-bold text-red-500';
+          priceCurrent.className = 'quickview-price-current quickview-price-current--contact';
         } else {
           priceCurrent.textContent = ThemeUtils.formatMoney(price);
-          priceCurrent.className = 'quickview-price-current text-2xl font-bold text-red-500 dark:text-red-400';
+          priceCurrent.className = 'quickview-price-current';
         }
       }
 
@@ -492,15 +492,15 @@
       if (!availabilityEl) return;
 
       if (available) {
-        availabilityEl.innerHTML = '<span class="inline-flex items-center gap-2 text-green-600 dark:text-green-400">' +
-          '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">' +
+        availabilityEl.innerHTML = '<span class="quickview-availability quickview-availability--available">' +
+          '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">' +
           '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />' +
           '</svg>' +
           ThemeUtils.escapeHtml((themeConfig.strings.variant || {}).inStock || 'In stock') +
           '</span>';
       } else {
-        availabilityEl.innerHTML = '<span class="inline-flex items-center gap-2 text-red-600 dark:text-red-400">' +
-          '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">' +
+        availabilityEl.innerHTML = '<span class="quickview-availability quickview-availability--unavailable">' +
+          '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">' +
           '<path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />' +
           '</svg>' +
           ThemeUtils.escapeHtml((themeConfig.strings.variant || {}).soldOut || 'Sold out') +
@@ -771,13 +771,17 @@
     }
 
     initializeSwiper() {
-      if (!this.content || typeof Swiper === 'undefined') return;
-
-      var self = this;
+      if (!this.content) return;
       var mainEl = this.content.querySelector('.quickview-product__slider');
-      var thumbsEl = this.content.querySelector('.quickview-product__thumbs');
-
       if (!mainEl) return;
+      var self = this;
+      (window.swiperReady || function(cb){ if (typeof Swiper !== 'undefined') cb(); })(function(){
+        self._initSwiperInner(mainEl);
+      });
+    }
+
+    _initSwiperInner(mainEl) {
+      var thumbsEl = this.content.querySelector('.quickview-product__thumbs');
 
       // Init thumbs first if exists
       var thumbsSwiper = null;

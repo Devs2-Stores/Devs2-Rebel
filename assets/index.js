@@ -67,10 +67,9 @@
   }
 
   function initSliderSwiper() {
-    if (typeof Swiper === 'undefined') return;
     var el = document.querySelector('.section-slider-swiper');
     if (!el) return;
-
+    (window.swiperReady || function(cb){ cb(); })(function(){
     new Swiper('.section-slider-swiper', {
       loop: true,
       speed: 800,
@@ -86,13 +85,13 @@
         }
       }
     });
+    });
   }
 
   function initProductsSliderSwiper() {
-    if (typeof Swiper === 'undefined') return;
     var el = document.querySelector('.section-products-slider-swiper');
     if (!el) return;
-
+    (window.swiperReady || function(cb){ cb(); })(function(){
     new Swiper('.section-products-slider-swiper', {
       slidesPerView: 1,
       spaceBetween: 10,
@@ -116,6 +115,7 @@
         nextEl: '.section-products-slider-button-next',
         prevEl: '.section-products-slider-button-prev'
       }
+    });
     });
   }
 
@@ -170,10 +170,9 @@
   }
 
   function initFlashSaleSwiper() {
-    if (typeof Swiper === 'undefined') return;
     var el = document.querySelector('.section-flash-sale__swiper');
     if (!el) return;
-
+    (window.swiperReady || function(cb){ cb(); })(function(){
     new Swiper('.section-flash-sale__swiper', {
       slidesPerView: 1.2,
       spaceBetween: 16,
@@ -198,13 +197,13 @@
         }
       }
     });
+    });
   }
 
   function initHomeBlogSwiper() {
-    if (typeof Swiper === 'undefined') return;
     var el = document.querySelector('.section-home-blog__swiper');
     if (!el) return;
-
+    (window.swiperReady || function(cb){ cb(); })(function(){
     new Swiper('.section-home-blog__swiper', {
       slidesPerView: 1.2,
       spaceBetween: 12,
@@ -231,6 +230,7 @@
         nextEl: '.section-home-blog__nav-next',
         prevEl: '.section-home-blog__nav-prev'
       }
+    });
     });
   }
 
