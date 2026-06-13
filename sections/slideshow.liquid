@@ -188,13 +188,12 @@
 
 <script>
   (function() {
-    if (typeof Swiper === 'undefined') return;
-
     var wrapper = document.getElementById('section-{{ section.id }}');
     if (!wrapper) return;
     var el = wrapper.querySelector('[data-slideshow]');
     if (!el) return;
 
+    (window.swiperReady || function(cb){ cb(); })(function(){
     var autoplay = el.getAttribute('data-autoplay') === 'true';
     var autoplaySpeed = parseInt(el.getAttribute('data-autoplay-speed'), 10) || 5000;
     var transitionSpeed = parseInt(el.getAttribute('data-transition-speed'), 10) || 800;
@@ -247,6 +246,7 @@
         counterCurrent.textContent = swiperInstance.realIndex + 1;
       });
     }
+    });
   })();
 </script>
 

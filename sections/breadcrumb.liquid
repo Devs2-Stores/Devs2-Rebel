@@ -20,7 +20,7 @@
   #shopify-section-{{ section.id }} .section-breadcrumbs {
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
-    font-size: var(--font-{{ section.settings.font_size }});
+    font-size: var(--font-{{ section.settings.font_size | default: 'sm' }});
   }
   #shopify-section-{{ section.id }} .breadcrumb {
     justify-content: {% if section.settings.text_alignment == 'center' %}center{% elsif section.settings.text_alignment == 'right' %}flex-end{% else %}flex-start{% endif %};

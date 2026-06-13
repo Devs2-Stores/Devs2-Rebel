@@ -2,7 +2,7 @@
 {{ 'float-social.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'float-social.js' | asset_url }}" defer="defer"></script>
 <float-social class="float-social" data-position="{{ settings.float_social_position | default: 'right' }}">
-  <button type="button" class="float-social__toggle" aria-label="{{ 'general.social.contact' | t }}" aria-expanded="false">
+  <button type="button" class="float-social__toggle" aria-label="{{ 'general.social.contact' | t }}" aria-expanded="false" aria-controls="float-social-panel">
     <span class="float-social__toggle-icon">
       <svg class="icon" width="24" height="24"><use href="#icon-comments" /></svg>
     </span>
@@ -12,7 +12,7 @@
     <span class="float-social__badge"></span>
   </button>
 
-  <div class="float-social__panel" aria-hidden="true">
+  <div id="float-social-panel" class="float-social__panel" aria-hidden="true">
     <div class="float-social__header">
       <p class="float-social__title">{{ settings.float_social_title | default: 'Contact us' }}</p>
       <p class="float-social__subtitle">{{ settings.float_social_subtitle | default: 'Choose a contact channel' }}</p>
@@ -22,7 +22,7 @@
       <li class="float-social__item" style="--item-index: 0;">
         <a href="tel:{{ settings.float_hotline_link }}" class="float-social__link float-social__link--hotline" title="Hotline">
           <span class="float-social__icon">
-            <img src="{{ 'float_hotline_image.png' | image_url: width: 160 | asset_url }}" alt="Hotline" width="28" height="28" loading="lazy">
+            {%- if settings.float_hotline_image != blank -%}<img src="{{ settings.float_hotline_image | image_url: width: 56 }}" alt="Hotline" width="28" height="28" loading="lazy">{%- else -%}<svg class="icon" width="28" height="28" aria-hidden="true"><use href="#icon-hotline"/></svg>{%- endif -%}
           </span>
           <span class="float-social__text">{{ settings.float_hotline_text | default: 'Hotline' }}</span>
           <span class="float-social__arrow"><svg class="icon" width="14" height="14"><use href="#icon-chevron-right" /></svg></span>
@@ -34,7 +34,7 @@
       <li class="float-social__item" style="--item-index: 1;">
         <a href="{{ settings.float_zalo_link }}" class="float-social__link float-social__link--zalo" title="Zalo" target="_blank" rel="noopener noreferrer">
           <span class="float-social__icon">
-            <img src="{{ 'float_zalo_image.png' | image_url: width: 160 | asset_url }}" alt="Zalo" width="28" height="28" loading="lazy">
+            {%- if settings.float_zalo_image != blank -%}<img src="{{ settings.float_zalo_image | image_url: width: 56 }}" alt="Zalo" width="28" height="28" loading="lazy">{%- else -%}<svg class="icon" width="28" height="28" aria-hidden="true"><use href="#icon-comments"/></svg>{%- endif -%}
           </span>
           <span class="float-social__text">{{ settings.float_zalo_text | default: 'Zalo' }}</span>
           <span class="float-social__arrow"><svg class="icon" width="14" height="14"><use href="#icon-chevron-right" /></svg></span>
@@ -46,7 +46,7 @@
       <li class="float-social__item" style="--item-index: 2;">
         <a href="{{ settings.float_facebook_link }}" class="float-social__link float-social__link--facebook" title="Facebook" target="_blank" rel="noopener noreferrer">
           <span class="float-social__icon">
-            <img src="{{ 'float_facebook_image.png' | image_url: width: 160 | asset_url }}" alt="Facebook" width="28" height="28" loading="lazy">
+            {%- if settings.float_facebook_image != blank -%}<img src="{{ settings.float_facebook_image | image_url: width: 56 }}" alt="Facebook" width="28" height="28" loading="lazy">{%- else -%}<svg class="icon" width="28" height="28" aria-hidden="true"><use href="#icon-facebook"/></svg>{%- endif -%}
           </span>
           <span class="float-social__text">{{ settings.float_facebook_text | default: 'Facebook' }}</span>
           <span class="float-social__arrow"><svg class="icon" width="14" height="14"><use href="#icon-chevron-right" /></svg></span>
@@ -58,7 +58,7 @@
       <li class="float-social__item" style="--item-index: 3;">
         <a href="{{ settings.float_messenger_link }}" class="float-social__link float-social__link--messenger" title="Messenger" target="_blank" rel="noopener noreferrer">
           <span class="float-social__icon">
-            <img src="{{ 'float_messenger_image.png' | image_url: width: 160 | asset_url }}" alt="Messenger" width="28" height="28" loading="lazy">
+            {%- if settings.float_messenger_image != blank -%}<img src="{{ settings.float_messenger_image | image_url: width: 56 }}" alt="Messenger" width="28" height="28" loading="lazy">{%- else -%}<svg class="icon" width="28" height="28" aria-hidden="true"><use href="#icon-comments"/></svg>{%- endif -%}
           </span>
           <span class="float-social__text">{{ settings.float_messenger_text | default: 'Messenger' }}</span>
           <span class="float-social__arrow"><svg class="icon" width="14" height="14"><use href="#icon-chevron-right" /></svg></span>
@@ -70,7 +70,7 @@
       <li class="float-social__item" style="--item-index: 4;">
         <a href="{{ settings.float_tiktok_link }}" class="float-social__link float-social__link--tiktok" title="TikTok" target="_blank" rel="noopener noreferrer">
           <span class="float-social__icon">
-            <img src="{{ 'float_tiktok_image.png' | image_url: width: 160 | asset_url }}" alt="TikTok" width="28" height="28" loading="lazy">
+            {%- if settings.float_tiktok_image != blank -%}<img src="{{ settings.float_tiktok_image | image_url: width: 56 }}" alt="TikTok" width="28" height="28" loading="lazy">{%- else -%}<svg class="icon" width="28" height="28" aria-hidden="true"><use href="#icon-tiktok"/></svg>{%- endif -%}
           </span>
           <span class="float-social__text">{{ settings.float_tiktok_text | default: 'TikTok' }}</span>
           <span class="float-social__arrow"><svg class="icon" width="14" height="14"><use href="#icon-chevron-right" /></svg></span>
@@ -82,7 +82,7 @@
       <li class="float-social__item" style="--item-index: 5;">
         <a href="{{ settings.float_shopee_link }}" class="float-social__link float-social__link--shopee" title="Shopee" target="_blank" rel="noopener noreferrer">
           <span class="float-social__icon">
-            <img src="{{ 'float_shopee_image.png' | image_url: width: 160 | asset_url }}" alt="Shopee" width="28" height="28" loading="lazy">
+            {%- if settings.float_shopee_image != blank -%}<img src="{{ settings.float_shopee_image | image_url: width: 56 }}" alt="Shopee" width="28" height="28" loading="lazy">{%- else -%}<svg class="icon" width="28" height="28" aria-hidden="true"><use href="#icon-tag"/></svg>{%- endif -%}
           </span>
           <span class="float-social__text">{{ settings.float_shopee_text | default: 'Shopee' }}</span>
           <span class="float-social__arrow"><svg class="icon" width="14" height="14"><use href="#icon-chevron-right" /></svg></span>
@@ -94,7 +94,7 @@
       <li class="float-social__item" style="--item-index: 6;">
         <a href="{{ settings.float_lazada_link }}" class="float-social__link float-social__link--lazada" title="Lazada" target="_blank" rel="noopener noreferrer">
           <span class="float-social__icon">
-            <img src="{{ 'float_lazada_image.png' | image_url: width: 160 | asset_url }}" alt="Lazada" width="28" height="28" loading="lazy">
+            {%- if settings.float_lazada_image != blank -%}<img src="{{ settings.float_lazada_image | image_url: width: 56 }}" alt="Lazada" width="28" height="28" loading="lazy">{%- else -%}<svg class="icon" width="28" height="28" aria-hidden="true"><use href="#icon-tag"/></svg>{%- endif -%}
           </span>
           <span class="float-social__text">{{ settings.float_lazada_text | default: 'Lazada' }}</span>
           <span class="float-social__arrow"><svg class="icon" width="14" height="14"><use href="#icon-chevron-right" /></svg></span>
@@ -106,7 +106,7 @@
       <li class="float-social__item" style="--item-index: 7;">
         <a href="{{ settings.float_telegram_link }}" class="float-social__link float-social__link--telegram" title="Telegram" target="_blank" rel="noopener noreferrer">
           <span class="float-social__icon">
-            <img src="{{ 'float_telegram_image.png' | image_url: width: 160 | asset_url }}" alt="Telegram" width="28" height="28" loading="lazy">
+            {%- if settings.float_telegram_image != blank -%}<img src="{{ settings.float_telegram_image | image_url: width: 56 }}" alt="Telegram" width="28" height="28" loading="lazy">{%- else -%}<svg class="icon" width="28" height="28" aria-hidden="true"><use href="#icon-telegram"/></svg>{%- endif -%}
           </span>
           <span class="float-social__text">{{ settings.float_telegram_text | default: 'Telegram' }}</span>
           <span class="float-social__arrow"><svg class="icon" width="14" height="14"><use href="#icon-chevron-right" /></svg></span>
@@ -118,7 +118,7 @@
       <li class="float-social__item" style="--item-index: 8;">
         <a href="mailto:{{ settings.float_email_link | strip }}" class="float-social__link float-social__link--email" title="Email">
           <span class="float-social__icon">
-            <img src="{{ 'float_email_image.png' | image_url: width: 160 | asset_url }}" alt="Email" width="28" height="28" loading="lazy">
+            {%- if settings.float_email_image != blank -%}<img src="{{ settings.float_email_image | image_url: width: 56 }}" alt="Email" width="28" height="28" loading="lazy">{%- else -%}<svg class="icon" width="28" height="28" aria-hidden="true"><use href="#icon-email"/></svg>{%- endif -%}
           </span>
           <span class="float-social__text">{{ settings.float_email_text | default: 'Email' }}</span>
           <span class="float-social__arrow"><svg class="icon" width="14" height="14"><use href="#icon-chevron-right" /></svg></span>
@@ -130,7 +130,7 @@
       <li class="float-social__item" style="--item-index: 9;">
         <a href="{{ settings.float_map_link }}" class="float-social__link float-social__link--map" title="{{ 'general.social.map' | t }}" target="_blank" rel="noopener noreferrer">
           <span class="float-social__icon">
-            <img src="{{ 'float_map_image.png' | image_url: width: 160 | asset_url }}" alt="{{ 'general.social.map' | t }}" width="28" height="28" loading="lazy">
+            {%- if settings.float_map_image != blank -%}<img src="{{ settings.float_map_image | image_url: width: 56 }}" alt="{{ 'general.social.map' | t }}" width="28" height="28" loading="lazy">{%- else -%}<svg class="icon" width="28" height="28" aria-hidden="true"><use href="#icon-location"/></svg>{%- endif -%}
           </span>
           <span class="float-social__text">{{ settings.float_map_text | default: 'Map' }}</span>
           <span class="float-social__arrow"><svg class="icon" width="14" height="14"><use href="#icon-chevron-right" /></svg></span>
@@ -142,7 +142,7 @@
       <li class="float-social__item" style="--item-index: 10;">
         <a href="{{ settings.float_instagram_link }}" class="float-social__link float-social__link--instagram" title="Instagram" target="_blank" rel="noopener noreferrer">
           <span class="float-social__icon">
-            <img src="{{ 'float_instagram_image.png' | image_url: width: 160 | asset_url }}" alt="Instagram" width="28" height="28" loading="lazy">
+            {%- if settings.float_instagram_image != blank -%}<img src="{{ settings.float_instagram_image | image_url: width: 56 }}" alt="Instagram" width="28" height="28" loading="lazy">{%- else -%}<svg class="icon" width="28" height="28" aria-hidden="true"><use href="#icon-instagram"/></svg>{%- endif -%}
           </span>
           <span class="float-social__text">{{ settings.float_instagram_text | default: 'Instagram' }}</span>
           <span class="float-social__arrow"><svg class="icon" width="14" height="14"><use href="#icon-chevron-right" /></svg></span>
@@ -154,7 +154,7 @@
       <li class="float-social__item" style="--item-index: 11;">
         <a href="{{ settings.float_youtube_link }}" class="float-social__link float-social__link--youtube" title="YouTube" target="_blank" rel="noopener noreferrer">
           <span class="float-social__icon">
-            <img src="{{ 'float_youtube_image.png' | image_url: width: 160 | asset_url }}" alt="YouTube" width="28" height="28" loading="lazy">
+            {%- if settings.float_youtube_image != blank -%}<img src="{{ settings.float_youtube_image | image_url: width: 56 }}" alt="YouTube" width="28" height="28" loading="lazy">{%- else -%}<svg class="icon" width="28" height="28" aria-hidden="true"><use href="#icon-youtube"/></svg>{%- endif -%}
           </span>
           <span class="float-social__text">{{ settings.float_youtube_text | default: 'YouTube' }}</span>
           <span class="float-social__arrow"><svg class="icon" width="14" height="14"><use href="#icon-chevron-right" /></svg></span>

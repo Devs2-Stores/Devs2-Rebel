@@ -68,7 +68,7 @@
               {{ col.title | default: block.settings.custom_title | default: 'Collection' }}
             </h3>
             {%- if section.settings.show_count and col != blank -%}
-              <span class="section-collection-list__count">{{ col.products_count }} {{ 'general.items' | t | default: 'products' }}</span>
+              <span class="section-collection-list__count">{{ 'sections.collection_list.product_count' | t: count: col.products_count }}</span>
             {%- endif -%}
           </div>
         </a>

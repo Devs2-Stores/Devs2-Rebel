@@ -108,12 +108,11 @@
 {%- if layout == 'slider' -%}
 <script>
   (function() {
-    if (typeof Swiper === 'undefined') return;
     var wrapper = document.getElementById('section-{{ section.id }}');
     if (!wrapper) return;
     var el = wrapper.querySelector('[data-fc-slider]');
     if (!el) return;
-
+    (window.swiperReady || function(cb){ cb(); })(function(){
     new Swiper(el, {
       slidesPerView: {{ columns_mobile }},
       spaceBetween: 12,
@@ -127,6 +126,7 @@
         prevEl: wrapper.querySelector('.section-featured-collection__nav--prev'),
         nextEl: wrapper.querySelector('.section-featured-collection__nav--next')
       }
+    });
     });
   })();
 </script>

@@ -64,11 +64,11 @@
 {%- if layout == 'slider' and block_count > 1 -%}
 <script>
   (function() {
-    if (typeof Swiper === 'undefined') return;
     var w = document.getElementById('section-{{ section.id }}');
     if (!w) return;
     var el = w.querySelector('[data-tm-slider]');
     if (!el) return;
+    (window.swiperReady || function(cb){ cb(); })(function(){
     new Swiper(el, {
       slidesPerView: 1,
       spaceBetween: 16,
@@ -81,6 +81,7 @@
         el: w.querySelector('.section-testimonials__pagination'),
         clickable: true
       }
+    });
     });
   })();
 </script>

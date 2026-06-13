@@ -326,3 +326,28 @@ quickview-modal .quickview-modal-panel .quickview-modal-content .quickview-modal
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+
+
+/* -------------------------------------------------------------------------- */
+/*  Dynamic Status Classes (set by quickview-modal.js)                        */
+/* -------------------------------------------------------------------------- */
+quickview-modal .quickview-price-current {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-error);
+}
+quickview-modal .quickview-price-current--contact { font-size: 1.25rem; }
+quickview-modal .quickview-availability {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-weight: var(--font-weight-medium);
+}
+quickview-modal .quickview-availability svg { flex-shrink: 0; }
+quickview-modal .quickview-availability--available { color: var(--color-success); }
+quickview-modal .quickview-availability--unavailable { color: var(--color-error); }
+quickview-modal .quickview-modal__error {
+  padding: var(--space-4xl) var(--space-lg);
+  text-align: center;
+  color: var(--color-error);
+}

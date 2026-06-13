@@ -16,11 +16,11 @@
             {%- for link in linklists[settings.header_menu].links -%}
               {%- if linklists[link.handle].links -%}
                 <li class="mobile-menu__item mobile-menu__item--has-children">
-                  <button type="button" class="mobile-menu__trigger" aria-expanded="false">
+                  <button type="button" class="mobile-menu__trigger" aria-expanded="false" aria-controls="mobile-submenu-{{ link.handle | handleize }}">
                     <span>{{ link.title }}</span>
                     {%- render 'icon', name: 'chevron-right' -%}
                   </button>
-                  <ul class="mobile-menu__submenu">
+                  <ul id="mobile-submenu-{{ link.handle | handleize }}" class="mobile-menu__submenu">
                     <li class="mobile-menu__submenu-back">
                       <button type="button" class="mobile-menu__back-btn" aria-label="{{ 'general.breadcrumbs.back' | t }}">
                         {%- render 'icon', name: 'chevron-left' -%}
@@ -33,11 +33,11 @@
                     {%- for link_1 in linklists[link.handle].links -%}
                       {%- if linklists[link_1.handle].links -%}
                         <li class="mobile-menu__item mobile-menu__item--has-children">
-                          <button type="button" class="mobile-menu__trigger" aria-expanded="false">
+                          <button type="button" class="mobile-menu__trigger" aria-expanded="false" aria-controls="mobile-submenu-{{ link_1.handle | handleize }}">
                             <span>{{ link_1.title }}</span>
                             {%- render 'icon', name: 'chevron-right' -%}
                           </button>
-                          <ul class="mobile-menu__submenu">
+                          <ul id="mobile-submenu-{{ link_1.handle | handleize }}" class="mobile-menu__submenu">
                             <li class="mobile-menu__submenu-back">
                               <button type="button" class="mobile-menu__back-btn" aria-label="{{ 'general.breadcrumbs.back' | t }}">
                                 {%- render 'icon', name: 'chevron-left' -%}

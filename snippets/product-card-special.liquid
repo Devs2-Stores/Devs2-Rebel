@@ -1,11 +1,11 @@
-{%- doc -%}
+{% doc %}
   @description Product Card Special — Flash Sale variant with stock bar and discount badge
   @param {object} product - Product object (required)
   @param {number} [variant_qty=0] - Remaining inventory quantity from variant
   @param {number} [stock_total=10] - Total stock baseline for progress bar
   @param {string} [lazyload='lazy'] - Loading strategy: 'lazy' or 'eager'
   @example {%- render 'product-card-special', product: product, variant_qty: 5, stock_total: 20 -%}
-{%- enddoc -%}
+{% enddoc %}
 {%- assign price = product.selected_or_first_available_variant.price -%}
 {%- assign compare = product.selected_or_first_available_variant.compare_at_price -%}
 {%- assign discount = 0 -%}
