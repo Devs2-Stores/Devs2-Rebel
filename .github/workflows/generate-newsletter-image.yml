@@ -1,0 +1,35 @@
+name: Generate Newsletter Image via BFL API
+
+on:
+  workflow_dispatch:  # manual trigger from GitHub UI
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Generate & Upload Image
+        env:
+          BFL_API_KEY: ${{ secrets.BFL_API_KEY }}
+          SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE }}
+          SHOPIFY_TOKEN: ${{ secrets.SHOPIFY_TOKEN }}
+          SHOPIFY_API_VERSION: ${{ secrets.SHOPIFY_API_VERSION }}
+        run: python tools/generate_newsletter_image.py
+
+      - name: Commit updated settings
+        run: |
+          git config user.name "Devs2 Bot"
+          git config user.email "bot@devs2.com"
+          git add config/settings_data.json output/newsletter-popup-banner.jpg
+          git diff --staged --quiet || git commit -m "chore: add newsletter popup image [skip ci]"
+          git push
