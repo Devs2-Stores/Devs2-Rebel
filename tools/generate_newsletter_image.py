@@ -66,15 +66,21 @@ def generate_image():
         "Vertical orientation, 3:4 aspect ratio, suitable for a popup banner."
     )
 
-    # Try multiple BFL API endpoints
+    # Try multiple BFL API endpoints - both Flux 2.0 and 1.1 Pro
     endpoints = [
-        "https://api.us1.bfl.ai/v1/flux-pro-2.0",
-        "https://api.bfl.ml/v1/flux-pro-2.0",
+        # Flux 2.0 Pro variants (newest)
+        ("https://api.us1.bfl.ai/v1/flux-pro-2.0", "Flux 2.0 Pro (US)"),
+        ("https://api.bfl.ml/v1/flux-pro-2.0", "Flux 2.0 Pro (EU)"),
+        ("https://api.us1.bfl.ai/v1/flux-2.0-pro", "Flux 2.0 Pro alt (US)"),
+        ("https://api.bfl.ml/v1/flux-2.0-pro", "Flux 2.0 Pro alt (EU)"),
+        # Flux 1.1 Pro (proven, reliable)
+        ("https://api.us1.bfl.ai/v1/flux-pro", "Flux 1.1 Pro (US)"),
+        ("https://api.bfl.ml/v1/flux-pro", "Flux 1.1 Pro (EU)"),
     ]
 
-    for endpoint in endpoints:
+    for endpoint, label in endpoints:
         try:
-            print(f"   Trying: {endpoint}")
+            print(f"   Trying: {label} ({endpoint})")
             resp = requests.post(
                 endpoint,
                 headers={
@@ -85,15 +91,15 @@ def generate_image():
                 json={
                     "prompt": prompt,
                     "width": 1024,
-                    "height": 1365,          # 3:4 portrait
-                    "steps": 50,              # max quality
+                    "height": 1365,
+                    "steps": 50,
                     "guidance": 4.0,
                     "prompt_upsampling": True,
                     "safety_tolerance": 2,
                     "output_format": "jpeg",
                     "response_format": "url",
                 },
-                timeout=120,
+                timeout=90,  # shorter timeout per endpoint
             )
 
             if resp.status_code == 200:
