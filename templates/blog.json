@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "breadcrumb": {
@@ -15,11 +6,94 @@
     },
     "main": {
       "type": "main-blog",
-      "settings": {}
+      "blocks": {
+        "recent_posts": {
+          "type": "sidebar_recent_posts",
+          "settings": {
+            "title": "Recent posts",
+            "posts_count": 3,
+            "heading_size": "md",
+            "content_size": "sm",
+            "padding_top": 0,
+            "padding_bottom": 0
+          }
+        },
+        "tags": {
+          "type": "sidebar_tags",
+          "settings": {
+            "title": "Tags",
+            "tags_count": 7,
+            "heading_size": "md",
+            "content_size": "sm",
+            "padding_top": 0,
+            "padding_bottom": 0
+          }
+        },
+        "sidebar_banner": {
+          "type": "sidebar_banner",
+          "settings": {
+            "heading": "Texture, utility, attitude",
+            "text": "Explore sculptural layers and future-ready footwear.",
+            "button_label": "Shop the edit",
+            "link": "/collections/all",
+            "padding_top": 0,
+            "padding_bottom": 0
+          }
+        }
+      },
+      "block_order": [
+        "recent_posts",
+        "tags",
+        "sidebar_banner"
+      ],
+      "settings": {
+        "layout": "grid",
+        "container_width": "fixed",
+        "columns_desktop": "2",
+        "columns_mobile": "1",
+        "column_gap": 24,
+        "row_gap": 28,
+        "articles_per_page": 6,
+        "heading_size": "md",
+        "show_featured_post": false,
+        "show_date": true,
+        "show_author": true,
+        "show_excerpt": true,
+        "show_read_more": true,
+        "show_comment_count": false,
+        "show_tags": false,
+        "show_category": true,
+        "image_shape": "landscape",
+        "image_alignment": "center",
+        "sticky_sidebar": true,
+        "padding_top": 0,
+        "padding_bottom": 40
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "subheading": "Stay connected",
+        "subheading_size": "sm",
+        "heading": "Get stories in your inbox",
+        "heading_size": "md",
+        "heading_tag": "h2",
+        "description": "Latest articles, style guides and brand updates — straight to you.",
+        "description_size": "md",
+        "button_label": "Subscribe",
+        "button_size": "md",
+        "text_align": "center",
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
     }
   },
   "order": [
     "breadcrumb",
-    "main"
+    "main",
+    "newsletter"
   ]
 }

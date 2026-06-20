@@ -1,7 +1,7 @@
-{%- comment -%}
+{%- comment %}
   Section: Featured Countdown + Product
   Mô tả: Countdown timer + featured product combo — flash sale tối ưu.
-{%- endcomment -%}
+{% endcomment -%}
 
 {%- assign p = section.settings.product -%}
 
@@ -17,7 +17,7 @@
 >
   <div class="page-width">
     <div class="section-fcp__grid">
-      {%- comment -%} Product side {%- endcomment -%}
+      {%- comment %} Product side {% endcomment -%}
       <div class="section-fcp__product">
         {%- if p != blank and p.featured_image -%}
           <a href="{{ p.url }}" class="section-fcp__product-media">
@@ -30,7 +30,7 @@
         {%- endif -%}
       </div>
 
-      {%- comment -%} Content side {%- endcomment -%}
+      {%- comment %} Content side {% endcomment -%}
       <div class="section-fcp__content">
         {%- if section.settings.badge != blank -%}
           <span class="section-fcp__badge">{{ section.settings.badge }}</span>
@@ -57,7 +57,7 @@
           </div>
         {%- endif -%}
 
-        {%- comment -%} Countdown {%- endcomment -%}
+        {%- comment %} Countdown {% endcomment -%}
         <div class="section-fcp__countdown" data-fcp-countdown data-end="{{ section.settings.end_date }}T{{ section.settings.end_time }}">
           <div class="section-fcp__timer-unit"><span data-fcp-d>00</span><small>{{ 'general.countdown.days' | t }}</small></div>
           <div class="section-fcp__timer-sep">:</div>

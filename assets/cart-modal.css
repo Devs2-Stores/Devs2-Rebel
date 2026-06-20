@@ -70,11 +70,28 @@ cart-modal .cart-modal-panel .cart-modal-header .cart-modal-close:hover { backgr
 .dark cart-modal .cart-modal-panel .cart-modal-header .cart-modal-close { color: var(--color-white); }
 .dark cart-modal .cart-modal-panel .cart-modal-header .cart-modal-close:hover { background: #1f2937; }
 cart-modal .cart-modal-panel .cart-modal-header .cart-modal-close svg { width: 1.25rem; height: 1.25rem; }
-cart-modal .cart-modal-panel .cart-modal-items { flex: 1; overflow-y: auto; min-height: 0; padding: 0.75rem 1rem; }
+cart-modal .cart-modal-panel .cart-modal-items {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
 cart-modal .cart-modal-panel .cart-modal-items::-webkit-scrollbar { width: 5px; }
 cart-modal .cart-modal-panel .cart-modal-items::-webkit-scrollbar-track { background: var(--color-border); }
 cart-modal .cart-modal-panel .cart-modal-items::-webkit-scrollbar-thumb { background: var(--color-primary, #f30); }
-cart-modal .cart-modal-panel .cart-modal-items .cart-modal-items-loading { text-align: center; padding: 3rem 0; color: var(--color-gray); }
+cart-modal .cart-modal-panel .cart-modal-items .cart-modal-items-loading {
+  flex: 1;
+  min-height: 22rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2.5rem 0;
+  color: var(--color-gray);
+}
 cart-modal .cart-modal-panel .cart-modal-items .cart-modal-items-loading.hidden { display: none; }
 .dark cart-modal .cart-modal-panel .cart-modal-items .cart-modal-items-loading { color: #9ca3af; }
 cart-modal .cart-modal-panel .cart-modal-items .cart-modal-items-loading .cart-modal-items-loading-spinner {
@@ -89,25 +106,68 @@ cart-modal .cart-modal-panel .cart-modal-items .cart-modal-items-loading .cart-m
 .dark cart-modal .cart-modal-panel .cart-modal-items .cart-modal-items-loading .cart-modal-items-loading-spinner { border-color: var(--color-gray-dark); border-top-color: var(--color-gray); }
 cart-modal .cart-modal-panel .cart-modal-items .cart-modal-items-loading .cart-modal-items-loading-text { margin-top: 1rem; font-size: 0.875rem; color: var(--color-gray); margin-bottom: 0; }
 .dark cart-modal .cart-modal-panel .cart-modal-items .cart-modal-items-loading .cart-modal-items-loading-text { color: #9ca3af; }
-cart-modal .cart-modal-panel .cart-modal-items .cart-modal-items-empty { text-align: center; padding: 3rem 0; color: var(--color-gray); }
+cart-modal .cart-modal-panel .cart-modal-items .cart-modal-items-empty {
+  flex: 1;
+  min-height: 22rem;
+  width: min(100%, 24rem);
+  margin: 0 auto;
+  padding: 2.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--color-gray);
+}
 cart-modal .cart-modal-panel .cart-modal-items .cart-modal-items-empty.hidden { display: none; }
 .dark cart-modal .cart-modal-panel .cart-modal-items .cart-modal-items-empty { color: #9ca3af; }
-cart-modal .cart-modal-panel .cart-modal-items .cart-modal-items-empty .cart-modal-items-empty-icon { width: 4rem; height: 4rem; margin: 0 auto 1rem; color: #9ca3af; }
-.dark cart-modal .cart-modal-panel .cart-modal-items .cart-modal-items-empty .cart-modal-items-empty-icon { color: var(--color-gray); }
-cart-modal .cart-modal-panel .cart-modal-items .cart-modal-items-empty .cart-modal-items-empty-text { color: var(--color-gray); margin-bottom: 1rem; margin-top: 0; }
+cart-modal .cart-modal-panel .cart-modal-items .cart-modal-items-empty .cart-modal-items-empty-image {
+  width: min(100%, 13rem);
+  height: auto;
+  display: block;
+  margin: 0 auto 1.25rem;
+  border-radius: var(--radius-md, 8px);
+}
+cart-modal .cart-modal-panel .cart-modal-items .cart-modal-items-empty .cart-modal-items-empty-text {
+  color: var(--color-gray);
+  margin: 0 0 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
 .dark cart-modal .cart-modal-panel .cart-modal-items .cart-modal-items-empty .cart-modal-items-empty-text { color: #9ca3af; }
 cart-modal .cart-modal-panel .cart-modal-items .cart-modal-items-empty .cart-modal-items-empty-button {
   display: inline-block;
-  padding: 0.625rem 1.25rem;
+  min-width: 10.25rem;
+  padding: 0.75rem 1.35rem;
   background: var(--color-primary, #f30);
   color: var(--color-white);
-  border-radius: 0.375rem;
+  border-radius: var(--buttons-radius, 0.375rem);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
+  line-height: 1.2;
   transition: opacity 0.2s;
 }
 cart-modal .cart-modal-panel .cart-modal-items .cart-modal-items-empty .cart-modal-items-empty-button:hover { opacity: 0.9; }
 cart-modal .cart-modal-panel .cart-modal-items .cart-modal-items-list { display: flex; flex-direction: column; gap: 0.5rem; }
+@media (max-width: 768px) {
+  cart-modal .cart-modal-panel .cart-modal-items {
+    padding: 1rem;
+  }
+
+  cart-modal .cart-modal-panel .cart-modal-items .cart-modal-items-empty {
+    min-height: 18rem;
+    padding: 2rem 0;
+  }
+
+  cart-modal .cart-modal-panel .cart-modal-items .cart-modal-items-loading {
+    min-height: 18rem;
+    padding: 2rem 0;
+  }
+
+  cart-modal .cart-modal-panel .cart-modal-items .cart-modal-items-empty .cart-modal-items-empty-image {
+    width: min(100%, 11.5rem);
+  }
+}
 cart-modal .cart-modal-panel .cart-modal-footer { border-top: 1px solid var(--border-color); background: var(--color-white); flex-shrink: 0; }
 .dark cart-modal .cart-modal-panel .cart-modal-footer { border-color: var(--color-gray-dark); background: var(--color-text); }
 cart-modal .cart-modal-panel .cart-modal-footer .cart-modal-summary { padding: 1rem 1.25rem; }
@@ -125,7 +185,7 @@ cart-modal .cart-modal-panel .cart-modal-footer .cart-modal-summary .cart-modal-
 .dark cart-modal .cart-modal-panel .cart-modal-footer .cart-modal-summary .cart-modal-summary-row .cart-modal-total { color: var(--color-white); }
 cart-modal .cart-modal-panel .cart-modal-footer .cart-modal-summary .cart-modal-summary-note { font-size: 0.75rem; color: var(--color-gray); text-align: center; margin: 0; }
 .dark cart-modal .cart-modal-panel .cart-modal-footer .cart-modal-summary .cart-modal-summary-note { color: #9ca3af; }
-cart-modal .cart-modal-panel .cart-modal-footer .cart-modal-actions { padding: 0 1.25rem 1rem; display: flex; gap: 0.75rem; }
+cart-modal .cart-modal-panel .cart-modal-footer .cart-modal-actions { padding: 0 1.25rem calc(1rem + env(safe-area-inset-bottom)); display: flex; gap: 0.75rem; }
 cart-modal .cart-modal-panel .cart-modal-footer .cart-modal-actions .cart-modal-action-button {
   flex: 1;
   text-align: center;

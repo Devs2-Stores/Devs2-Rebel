@@ -11,6 +11,7 @@
   assign t_from = 'products.facets.from' | t
   assign t_to = 'products.facets.to' | t
   assign currency_symbol = cart.currency.symbol | default: '$'
+  assign price_filter_style = price_filter_style | default: 'checkbox'
   if collapse_filters == nil
     assign collapse_filters = false
   endif
@@ -85,48 +86,172 @@
                   assign range_max = filter.range_max | divided_by: 100.0 | ceil
                   assign min_value = filter.min_value.value | default: 0 | divided_by: 100.0 | floor
                   assign max_value = filter.max_value.value | divided_by: 100.0 | ceil
+                  assign price_step = range_max | divided_by: 4 | ceil
+                  assign price_step_2 = price_step | times: 2
+                  assign price_step_3 = price_step | times: 3
+                  if range_max > 250
+                    assign price_step = 50
+                    assign price_step_2 = 100
+                    assign price_step_3 = 250
+                  endif
+                  assign price_step_money = price_step | times: 100
+                  assign price_step_2_money = price_step_2 | times: 100
+                  assign price_step_3_money = price_step_3 | times: 100
                 -%}
-                <div class="facet-filter__price-range">
-                  <div class="facet-filter__price-field">
-                    <label for="Filter-{{ filter.min_value.param_name | handleize }}">{{ t_from }}</label>
-                    <div class="facet-filter__price-input-wrap">
-                      <span class="facet-filter__price-currency">{{ currency_symbol }}</span>
-                      <input
-                        type="number"
-                        name="{{ filter.min_value.param_name }}"
-                        id="Filter-{{ filter.min_value.param_name | handleize }}"
-                        {%- if filter.min_value.value -%}
-                          value="{{ min_value }}"
-                        {%- endif -%}
-                        min="0"
-                        max="{{ range_max }}"
-                        placeholder="0"
-                        class="facet-filter__price-input"
-                        inputmode="numeric"
-                      >
-                    </div>
-                  </div>
-                  <span class="facet-filter__price-separator">—</span>
-                  <div class="facet-filter__price-field">
-                    <label for="Filter-{{ filter.max_value.param_name | handleize }}">{{ t_to }}</label>
-                    <div class="facet-filter__price-input-wrap">
-                      <span class="facet-filter__price-currency">{{ currency_symbol }}</span>
-                      <input
-                        type="number"
-                        name="{{ filter.max_value.param_name }}"
-                        id="Filter-{{ filter.max_value.param_name | handleize }}"
+
+                {%- if price_filter_style == 'range' -%}
+                  <div class="facet-filter__price-slider" data-price-slider data-currency-symbol="{{ currency_symbol | escape }}">
+                    <input
+                      type="hidden"
+                      name="{{ filter.min_value.param_name }}"
+                      class="facet-filter__price-input"
+                      data-price-slider-min-field
+                      {%- if filter.min_value.value -%} value="{{ min_value }}"{%- endif -%}
+                    >
+                    <input
+                      type="hidden"
+                      name="{{ filter.max_value.param_name }}"
+                      class="facet-filter__price-input"
+                      data-price-slider-max-field
+                      {%- if filter.max_value.value -%} value="{{ max_value }}"{%- endif -%}
+                    >
+                    <div class="facet-filter__price-slider-values" aria-live="polite">
+                      <span data-price-slider-min-label>{{ min_value | times: 100 | money_without_trailing_zeros }}</span>
+                      <span data-price-slider-max-label>
                         {%- if filter.max_value.value -%}
-                          value="{{ max_value }}"
+                          {{ max_value | times: 100 | money_without_trailing_zeros }}
+                        {%- else -%}
+                          {{ filter.range_max | money_without_trailing_zeros }}
                         {%- endif -%}
+                      </span>
+                    </div>
+                    <div class="facet-filter__price-slider-control">
+                      <input
+                        type="range"
                         min="0"
                         max="{{ range_max }}"
-                        placeholder="{{ range_max }}"
-                        class="facet-filter__price-input"
-                        inputmode="numeric"
+                        value="{{ min_value }}"
+                        class="facet-filter__price-range-control"
+                        data-price-slider-min
+                        aria-label="{{ t_from }} {{ filter.label | escape }}"
+                      >
+                      <input
+                        type="range"
+                        min="0"
+                        max="{{ range_max }}"
+                        value="{% if filter.max_value.value %}{{ max_value }}{% else %}{{ range_max }}{% endif %}"
+                        class="facet-filter__price-range-control"
+                        data-price-slider-max
+                        aria-label="{{ t_to }} {{ filter.label | escape }}"
                       >
                     </div>
                   </div>
-                </div>
+
+                {%- elsif price_filter_style == 'checkbox' and range_max > 0 and price_step > 0 -%}
+                  <div class="facet-filter__price-presets" aria-label="{{ filter.label | escape }} {{ 'products.facets.price_range' | t | escape }}">
+                    <input
+                      type="hidden"
+                      name="{{ filter.min_value.param_name }}"
+                      class="facet-filter__price-input"
+                      data-price-preset-min-field
+                      {%- if filter.min_value.value -%} value="{{ min_value }}"{%- endif -%}
+                    >
+                    <input
+                      type="hidden"
+                      name="{{ filter.max_value.param_name }}"
+                      class="facet-filter__price-input"
+                      data-price-preset-max-field
+                      {%- if filter.max_value.value -%} value="{{ max_value }}"{%- endif -%}
+                    >
+                    <label class="facet-filter__price-preset">
+                      <input
+                        type="checkbox"
+                        class="facet-filter__price-preset-input"
+                        data-price-preset
+                        data-min=""
+                        data-max="{{ price_step }}"
+                        {% if filter.min_value.value == nil and filter.max_value.value and max_value == price_step %}checked{% endif %}
+                      >
+                      <span>{{ 'products.facets.under' | t }} {{ price_step_money | money_without_trailing_zeros }}</span>
+                    </label>
+                    <label class="facet-filter__price-preset">
+                      <input
+                        type="checkbox"
+                        class="facet-filter__price-preset-input"
+                        data-price-preset
+                        data-min="{{ price_step }}"
+                        data-max="{{ price_step_2 }}"
+                        {% if min_value == price_step and max_value == price_step_2 %}checked{% endif %}
+                      >
+                      <span>{{ price_step_money | money_without_trailing_zeros }} - {{ price_step_2_money | money_without_trailing_zeros }}</span>
+                    </label>
+                    <label class="facet-filter__price-preset">
+                      <input
+                        type="checkbox"
+                        class="facet-filter__price-preset-input"
+                        data-price-preset
+                        data-min="{{ price_step_2 }}"
+                        data-max="{{ price_step_3 }}"
+                        {% if min_value == price_step_2 and max_value == price_step_3 %}checked{% endif %}
+                      >
+                      <span>{{ price_step_2_money | money_without_trailing_zeros }} - {{ price_step_3_money | money_without_trailing_zeros }}</span>
+                    </label>
+                    <label class="facet-filter__price-preset">
+                      <input
+                        type="checkbox"
+                        class="facet-filter__price-preset-input"
+                        data-price-preset
+                        data-min="{{ price_step_3 }}"
+                        data-max=""
+                        {% if min_value == price_step_3 and filter.max_value.value == nil %}checked{% endif %}
+                      >
+                      <span>{{ 'products.facets.over' | t }} {{ price_step_3_money | money_without_trailing_zeros }}</span>
+                    </label>
+                  </div>
+
+                {%- else -%}
+                  <div class="facet-filter__price-range">
+                    <div class="facet-filter__price-field">
+                      <label for="Filter-{{ filter.min_value.param_name | handleize }}">{{ t_from }}</label>
+                      <div class="facet-filter__price-input-wrap">
+                        <span class="facet-filter__price-currency">{{ currency_symbol }}</span>
+                        <input
+                          type="number"
+                          name="{{ filter.min_value.param_name }}"
+                          id="Filter-{{ filter.min_value.param_name | handleize }}"
+                          {%- if filter.min_value.value -%}
+                            value="{{ min_value }}"
+                          {%- endif -%}
+                          min="0"
+                          max="{{ range_max }}"
+                          placeholder="0"
+                          class="facet-filter__price-input"
+                          inputmode="numeric"
+                        >
+                      </div>
+                    </div>
+                    <span class="facet-filter__price-separator">-</span>
+                    <div class="facet-filter__price-field">
+                      <label for="Filter-{{ filter.max_value.param_name | handleize }}">{{ t_to }}</label>
+                      <div class="facet-filter__price-input-wrap">
+                        <span class="facet-filter__price-currency">{{ currency_symbol }}</span>
+                        <input
+                          type="number"
+                          name="{{ filter.max_value.param_name }}"
+                          id="Filter-{{ filter.max_value.param_name | handleize }}"
+                          {%- if filter.max_value.value -%}
+                            value="{{ max_value }}"
+                          {%- endif -%}
+                          min="0"
+                          max="{{ range_max }}"
+                          placeholder="{{ range_max }}"
+                          class="facet-filter__price-input"
+                          inputmode="numeric"
+                        >
+                      </div>
+                    </div>
+                  </div>
+                {%- endif -%}
 
               {%- when 'boolean' -%}
                 {%- for value in filter.values -%}
@@ -154,7 +279,7 @@
       </facet-filter>
     {%- endfor -%}
 
-    {%- comment -%} ── Active filter tags ── {%- endcomment -%}
+    {%- comment %} ── Active filter tags ── {% endcomment -%}
     {%- assign active_count = 0 -%}
     {%- for filter in collection.filters -%}
       {%- if filter.type == 'price_range' -%}

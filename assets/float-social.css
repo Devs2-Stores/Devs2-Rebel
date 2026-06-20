@@ -19,9 +19,9 @@
   from { opacity: 0; transform: translateX(20px); }
   to { opacity: 1; transform: translateX(0); }
 }
-.float-social { position: fixed; bottom: 24px; z-index: var(--z-float); font-family: var(--font-family-body); }
-.float-social[data-position="right"] { right: 24px; }
-.float-social[data-position="left"] { left: 24px; }
+.float-social { position: fixed; bottom: calc(24px + env(safe-area-inset-bottom)); z-index: var(--z-float); font-family: var(--font-family-body); }
+.float-social[data-position="right"] { right: calc(24px + env(safe-area-inset-right)); }
+.float-social[data-position="left"] { left: calc(24px + env(safe-area-inset-left)); }
 /* Toggle Button */
 .float-social__toggle {
   position: relative;

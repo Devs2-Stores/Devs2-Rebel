@@ -18,7 +18,16 @@
         <p class="cart-modal-items-loading-text">{{ 'accessibility.loading' | t }}</p>
       </div>
       <div class="cart-modal-items-empty hidden">
-        {%- render 'icon', name: 'cart' -%}
+        <img
+          class="cart-modal-items-empty-image"
+          src="{{ 'cart-empty-illustration.svg' | asset_url }}"
+          alt=""
+          width="520"
+          height="360"
+          loading="lazy"
+          decoding="async"
+          aria-hidden="true"
+        >
         <p class="cart-modal-items-empty-text">{{ 'sections.cart.empty' | t }}</p>
         <a href="{{ routes.all_products_collection_url }}" class="cart-modal-items-empty-button">{{ 'general.continue_shopping' | t }}</a>
       </div>

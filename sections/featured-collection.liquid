@@ -1,8 +1,8 @@
-{%- comment -%}
+{%- comment %}
   Section: Featured Collection
   Mô tả: Hiển thị sản phẩm từ 1 collection dưới dạng grid hoặc slider.
   Tái sử dụng snippet product-card.liquid.
-{%- endcomment -%}
+{% endcomment -%}
 
 {%- liquid
   assign collection = section.settings.collection
@@ -30,7 +30,7 @@
   "
 >
   <div class="page-width">
-    {%- comment -%} Header {%- endcomment -%}
+    {%- comment %} Header {% endcomment -%}
     {%- if section.settings.heading != blank or show_view_all -%}
       <div class="section-featured-collection__head">
         <div class="section-featured-collection__head-left">
@@ -56,7 +56,7 @@
       </div>
     {%- endif -%}
 
-    {%- comment -%} Products {%- endcomment -%}
+    {%- comment %} Products {% endcomment -%}
     {%- if collection != blank and collection.products.size > 0 -%}
       {%- if layout == 'slider' -%}
         <div class="section-featured-collection__slider">

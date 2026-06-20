@@ -1,8 +1,8 @@
-{%- comment -%}
+{%- comment %}
   Banner Link Section — Simple banner image with optional link.
   Supports separate desktop/mobile images.
   Can be added to any page template.
-{%- endcomment -%}
+{% endcomment -%}
 
 {{ 'banner-link.css' | asset_url | stylesheet_tag }}
 
@@ -30,7 +30,7 @@
       <div class="banner-link__wrapper">
     {%- endif -%}
 
-      {%- comment -%} Desktop Image {%- endcomment -%}
+      {%- comment %} Desktop Image {% endcomment -%}
       <div class="banner-link__desktop">
         {{ desktop_image | image_url: width: 1920 | image_tag:
           widths: '750, 1080, 1440, 1920',
@@ -42,7 +42,7 @@
         }}
       </div>
 
-      {%- comment -%} Mobile Image {%- endcomment -%}
+      {%- comment %} Mobile Image {% endcomment -%}
       <div class="banner-link__mobile">
         {{ mobile_image | image_url: width: 750 | image_tag:
           widths: '375, 550, 750',

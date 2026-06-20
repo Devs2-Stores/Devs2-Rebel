@@ -5,18 +5,48 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "menu-0": {
+        "menu-shop": {
           "type": "menu",
           "settings": {
-            "heading": "Menu",
-            "menu": "footer"
+            "heading": "Shop",
+            "menu": "footer-shop"
+          }
+        },
+        "menu-help": {
+          "type": "menu",
+          "settings": {
+            "heading": "Help",
+            "menu": "footer-help"
+          }
+        },
+        "menu-company": {
+          "type": "menu",
+          "settings": {
+            "heading": "Company",
+            "menu": "footer-company"
+          }
+        },
+        "menu-legal": {
+          "type": "menu",
+          "settings": {
+            "heading": "Legal",
+            "menu": "footer-legal"
           }
         }
       },
-      "block_order": ["menu-0"],
+      "block_order": ["menu-shop", "menu-help", "menu-company", "menu-legal"],
       "settings": {
         "color_scheme": "scheme-1",
-        "show_certs": false
+        "description": "<p>Refined defiance — luxury fashion crafted in atelier since 2015.</p>",
+        "newsletter_title": "Stay in the know",
+        "address": "12 Rue Saint-Honoré, Paris",
+        "email": "contact@devs2-rebel.com",
+        "phone": "+33 1 23 45 67 89",
+        "show_certs": false,
+        "show_country_selector": true,
+        "show_language_selector": true,
+        "show_payment_icons": true,
+        "show_follow_on_shop": false
       }
     }
   },

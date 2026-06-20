@@ -1,4 +1,4 @@
-{%- comment -%}
+{%- comment %}
   Renders an article card.
 
   Accepts:
@@ -15,7 +15,7 @@
   - show_comment_count: {Boolean} Show comment count (default: false)
   - show_tags: {Boolean} Show article tags (default: false)
   - show_category: {Boolean} Show blog name as category (default: false)
-{%- endcomment -%}
+{% endcomment -%}
 
 {%- liquid
   assign layout = layout | default: 'grid'
@@ -41,7 +41,7 @@
 
 <article class="{{ card_class }}" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-card__media">
-    <a href="{{ article.url }}" class="article-card__media-inner" title="{{ article.title | escape }}">
+    <a href="{{ article.url | escape }}" class="article-card__media-inner" title="{{ article.title | escape }}">
       {%- if article.image -%}
         {%- assign card_alt = article.image.alt | default: article.title | escape -%}
         {{-
@@ -69,16 +69,16 @@
   </div>
 
   <div class="article-card__content">
-    {%- if show_category -%}
+    {%- if show_category and blog.title != blank -%}
       <div class="article-card__category">
-        <a href="{{ blog.url }}" class="article-card__category-link">
+        <a href="{{ blog.url | escape }}" class="article-card__category-link">
           {{ blog.title | escape }}
         </a>
       </div>
     {%- endif -%}
 
     <h3 class="article-card__title" itemprop="headline">
-      <a href="{{ article.url }}" title="{{ article.title | escape }}">{{ article.title | escape }}</a>
+      <a href="{{ article.url | escape }}" title="{{ article.title | escape }}">{{ article.title | escape }}</a>
     </h3>
 
     {%- if show_date or show_author or show_comment_count -%}
@@ -95,7 +95,7 @@
             </time>
           </span>
         {%- endif -%}
-        {%- if show_author -%}
+        {%- if show_author and article.author != blank -%}
           <span class="article-card__author" itemprop="author" itemscope itemtype="https://schema.org/Person">
             {%- render 'icon', name: 'user' -%}
             <span class="article-card__author-name" itemprop="name">{{ article.author | escape }}</span>
@@ -113,7 +113,7 @@
     {%- if show_excerpt -%}
       <div class="article-card__description" itemprop="description">
         {%- if article.excerpt_or_content != blank -%}
-          {{ article.excerpt_or_content | strip_html | truncatewords: 25 }}
+          {{ article.excerpt_or_content | strip_html | truncatewords: 25 | escape }}
         {%- endif -%}
       </div>
     {%- endif -%}
@@ -121,7 +121,7 @@
     {%- if show_tags and article.tags.size > 0 -%}
       <div class="article-card__tags">
         {%- for tag in article.tags limit: 3 -%}
-          <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="article-card__tag">{{ tag | escape }}</a>
+          <a href="{{ blog.url | escape }}/tagged/{{ tag | handle }}" class="article-card__tag">{{ tag | escape }}</a>
         {%- endfor -%}
       </div>
     {%- endif -%}
@@ -129,9 +129,9 @@
     {%- if show_read_more -%}
       <div class="article-card__button">
         <a
-          href="{{ article.url }}"
+          href="{{ article.url | escape }}"
           class="article-card__read-more"
-          title="{{ 'blogs.article.read_more_title' | t: title: article.title }}"
+          title="{{ 'blogs.article.read_more_title' | t: title: article.title | escape }}"
         >
           {{ 'blogs.article.read_more_title' | t: title: '' | strip }}
           <svg

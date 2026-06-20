@@ -1,7 +1,7 @@
-{%- comment -%}
+{%- comment %}
   Section: Scroll Text Reveal
   Mô tả: Heading lớn fade-in + scale khi scroll vào view. Apple-style cinematic.
-{%- endcomment -%}
+{% endcomment -%}
 
 <div
   id="section-{{ section.id }}"
@@ -40,10 +40,6 @@
 
 <script>
 (function() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.querySelectorAll('#section-{{ section.id }} [data-reveal-el]').forEach(function(e) { e.classList.add('is-visible'); });
-    return;
-  }
   var section = document.getElementById('section-{{ section.id }}');
   if (!section) return;
   var els = section.querySelectorAll('[data-reveal-el]');

@@ -1,7 +1,7 @@
-{%- comment -%}
+{%- comment %}
   Section: Store Locator
   Mô tả: Multi-location list + Google Maps/custom embed.
-{%- endcomment -%}
+{% endcomment -%}
 
 <div
   id="section-{{ section.id }}"
@@ -26,7 +26,7 @@
     {%- endif -%}
 
     <div class="section-locator__grid">
-      {%- comment -%} Location list {%- endcomment -%}
+      {%- comment %} Location list {% endcomment -%}
       <div class="section-locator__list">
         {%- for block in section.blocks -%}
           <div class="section-locator__store" {{ block.shopify_attributes }}>
@@ -58,7 +58,7 @@
         {%- endfor -%}
       </div>
 
-      {%- comment -%} Map {%- endcomment -%}
+      {%- comment %} Map {% endcomment -%}
       <div class="section-locator__map">
         {%- if section.settings.map_embed != blank -%}
           {{ section.settings.map_embed }}

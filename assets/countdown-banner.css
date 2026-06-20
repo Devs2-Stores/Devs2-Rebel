@@ -167,9 +167,3 @@
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }
 }
-
-/* ── Reduced motion ── */
-@media (prefers-reduced-motion: reduce) {
-  .countdown-banner__btn { transition: none; }
-  .countdown-banner__btn:hover { transform: none; }
-}

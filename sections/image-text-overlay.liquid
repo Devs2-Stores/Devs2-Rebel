@@ -1,7 +1,7 @@
-{%- comment -%}
+{%- comment %}
   Section: Image with Text Overlay
   Mô tả: Full-width image + text overlay trên ảnh (khác IWT 2 cột).
-{%- endcomment -%}
+{% endcomment -%}
 
 <div
   id="section-{{ section.id }}"
@@ -11,6 +11,15 @@
     --ito-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
   "
 >
+  {%- if section.settings.image_mobile != blank and section.settings.image != blank -%}
+    <div class="section-ito__media section-ito__media--mobile">
+      {{ section.settings.image_mobile | image_url: width: 750 | image_tag:
+        loading: 'lazy', class: 'section-ito__img'
+      }}
+      <div class="section-ito__overlay"></div>
+    </div>
+  {%- endif -%}
+
   <div class="section-ito__media">
     {%- if section.settings.image != blank -%}
       {{ section.settings.image | image_url: width: 1920 | image_tag:
@@ -26,15 +35,6 @@
     {%- endif -%}
     <div class="section-ito__overlay"></div>
   </div>
-
-  {%- if section.settings.image_mobile != blank and section.settings.image != blank -%}
-    <div class="section-ito__media section-ito__media--mobile">
-      {{ section.settings.image_mobile | image_url: width: 750 | image_tag:
-        loading: 'lazy', class: 'section-ito__img'
-      }}
-      <div class="section-ito__overlay"></div>
-    </div>
-  {%- endif -%}
 
   <div class="section-ito__content section-ito__content--{{ section.settings.content_position }}">
     <div class="{% if section.settings.section_width == 'fixed' %}page-width{% endif %}">

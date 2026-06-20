@@ -18,16 +18,19 @@
   }
 {%- endstyle -%}
 
-<div class="section-padding">
+<div class="list-collections-template section-padding">
   <div class="{% if section.settings.container_width == 'fixed' %}page-width{% endif %}">
     {%- if section.settings.title != blank or section.settings.subtitle != blank -%}
-      <div class="global-heading text-align-desktop-{{ section.settings.heading_alignment_desktop }} text-align-mobile-{{ section.settings.heading_alignment_mobile }}">
+      <div class="list-collections-template__heading global-heading text-align-desktop-{{ section.settings.heading_alignment_desktop }} text-align-mobile-{{ section.settings.heading_alignment_mobile }}">
         {%- if section.settings.title != blank -%}
           <h1 class="section-heading heading-size-{{ section.settings.heading_size }}">{{ section.settings.title }}</h1>
         {%- endif -%}
         {%- if section.settings.subtitle != blank -%}
           <p class="section-subheading">{{ section.settings.subtitle }}</p>
         {%- endif -%}
+        <div class="list-collections-template__meta">
+          <span>{{ 'sections.collection_list.collections_count' | t: count: collections.size }}</span>
+        </div>
       </div>
     {%- endif -%}
 
@@ -40,7 +43,7 @@
               assign lazyload = 'eager'
             endif
           -%}
-          <li>
+          <li class="{% if forloop.first %}collection-grid__item--featured{% endif %}">
             {%- render 'collection-card',
               collection: collection,
               image_shape: section.settings.image_shape,
@@ -51,6 +54,10 @@
               columns_desktop: section.settings.columns_desktop,
               lazyload: lazyload
             -%}
+          </li>
+        {%- else -%}
+          <li class="collection-grid__empty">
+            <p>{{ 'sections.collection_list.empty' | t }}</p>
           </li>
         {%- endfor -%}
       </ul>

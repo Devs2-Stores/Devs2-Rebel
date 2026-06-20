@@ -42,7 +42,7 @@
 
 	{%- if settings.linkTwittersocial != blank -%}
 	<li class="shop-social__item">
-		<a href="{{ settings.linkTwittersocial }}" class="shop-social__link shop-social__link--twitter" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter) {{ shop.name }}" title="{{ 'general.social.follow_on' | t: platform: 'X (Twitter)' }}">
+		<a href="{{ settings.linkTwittersocial }}" class="shop-social__link shop-social__link--twitter" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter) {{ shop.name | escape }}" title="{{ 'general.social.follow_on' | t: platform: 'X (Twitter)' }}">
 			{%- render 'icon', name: 'twitter' -%}
 		</a>
 	</li>

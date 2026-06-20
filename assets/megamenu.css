@@ -5,6 +5,7 @@
   gap: 0;
   width: 100%;
   max-width: 100%;
+  z-index: 1;
 }
 @media (max-width: 1024px) {
   .megamenu { display: none; }
@@ -31,9 +32,7 @@
 .megamenu__container {
   flex: 1;
   min-width: 0;
-  overflow: hidden;
-  padding-bottom: 700px;
-  margin-bottom: -700px;
+  overflow: visible;
   pointer-events: none;
 }
 .megamenu__container > * { pointer-events: auto; }
@@ -57,11 +56,14 @@
 .megamenu__item { position: relative; flex-shrink: 0; }
 .megamenu__item.has__mega { position: static; }
 .megamenu__item:hover > .megamenu__dropdown,
-.megamenu__item:focus-within > .megamenu__dropdown { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
+.megamenu__item:focus-within > .megamenu__dropdown,
+.megamenu__item.is-open > .megamenu__dropdown { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
 .megamenu__item:hover > .megamenu__trigger,
-.megamenu__item:focus-within > .megamenu__trigger { color: var(--color-primary); }
+.megamenu__item:focus-within > .megamenu__trigger,
+.megamenu__item.is-open > .megamenu__trigger { color: var(--color-primary); }
 .megamenu__item:hover > .megamenu__trigger .icon,
-.megamenu__item:focus-within > .megamenu__trigger .icon { transform: rotate(180deg); }
+.megamenu__item:focus-within > .megamenu__trigger .icon,
+.megamenu__item.is-open > .megamenu__trigger .icon { transform: rotate(180deg); }
 .megamenu__item .megamenu__trigger {
   display: inline-flex;
   align-items: center;
@@ -108,7 +110,7 @@
   visibility: hidden;
   pointer-events: none;
   transition: opacity var(--transition-base), visibility var(--transition-base), transform var(--transition-base);
-  z-index: var(--z-dropdown);
+  z-index: var(--z-dropdown, 100);
 }
 .megamenu__item .megamenu__dropdown::before {
   content: "";

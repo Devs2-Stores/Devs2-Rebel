@@ -1,9 +1,9 @@
-{%- comment -%}
+{%- comment %}
   Section: Slideshow
   Mô tả: Hero banner slideshow sử dụng Swiper.
   Mỗi slide là 1 block với image desktop/mobile, heading, text và buttons.
   Hỗ trợ: Autoplay, color scheme per slide, text overlay position, responsive images.
-{%- endcomment -%}
+{% endcomment -%}
 
 {%- liquid
   assign section_height_desktop = section.settings.height_desktop
@@ -58,7 +58,7 @@
             aria-label="{{ forloop.index }} / {{ slide_count }}"
             {{ block.shopify_attributes }}
           >
-            {%- comment -%} Background Images {%- endcomment -%}
+            {%- comment %} Background Images {% endcomment -%}
             <div class="section-slideshow__media">
               {%- if desktop_img -%}
                 {%- liquid
@@ -95,7 +95,7 @@
               {%- endif -%}
             </div>
 
-            {%- comment -%} Overlay {%- endcomment -%}
+            {%- comment %} Overlay {% endcomment -%}
             {%- if overlay_opacity > 0 -%}
               <div
                 class="section-slideshow__overlay"
@@ -103,7 +103,7 @@
               ></div>
             {%- endif -%}
 
-            {%- comment -%} Content {%- endcomment -%}
+            {%- comment %} Content {% endcomment -%}
             {%- if has_content -%}
               <div class="section-slideshow__content section-slideshow__content--{{ text_position }} color-{{ block.settings.color_scheme }}">
                 <div class="section-slideshow__content-inner">
@@ -154,12 +154,12 @@
         {%- endfor -%}
       </div>
 
-      {%- comment -%} Pagination {%- endcomment -%}
+      {%- comment %} Pagination {% endcomment -%}
       {%- if show_pagination and slide_count > 1 -%}
         <div class="section-slideshow__pagination" aria-hidden="true"></div>
       {%- endif -%}
 
-      {%- comment -%} Slide Counter {%- endcomment -%}
+      {%- comment %} Slide Counter {% endcomment -%}
       {%- if section.settings.show_counter and slide_count > 1 -%}
         <div class="section-slideshow__counter" aria-hidden="true">
           <span class="section-slideshow__counter-current">1</span>
@@ -168,7 +168,7 @@
         </div>
       {%- endif -%}
 
-      {%- comment -%} Navigation Arrows {%- endcomment -%}
+      {%- comment %} Navigation Arrows {% endcomment -%}
       {%- if show_arrows and slide_count > 1 -%}
         <button class="section-slideshow__nav section-slideshow__nav--prev" aria-label="{{ 'accessibility.previous_slide' | t }}">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
@@ -179,7 +179,7 @@
       {%- endif -%}
     </div>
   {%- else -%}
-    {%- comment -%} Empty state for Theme Editor {%- endcomment -%}
+    {%- comment %} Empty state for Theme Editor {% endcomment -%}
     <div class="section-slideshow__empty">
       {{ 'lifestyle-1' | placeholder_svg_tag: 'section-slideshow__placeholder-svg' }}
     </div>

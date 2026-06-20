@@ -61,7 +61,7 @@
 <script src="{{ 'product-card.js' | asset_url }}" defer="defer"></script>
 <product-card class="product-card">
   <article class="product-card__wrapper">
-    {%- comment -%} ── Compare checkbox ───────────── {%- endcomment -%}
+    {%- comment %} ── Compare checkbox ───────────── {% endcomment -%}
     {%- if show_compare -%}
     <label class="product-card__compare">
       <input
@@ -76,7 +76,7 @@
       >
     </label>
     {%- endif -%}
-    {%- comment -%} ── Media ─────────────────────── {%- endcomment -%}
+    {%- comment %} ── Media ─────────────────────── {% endcomment -%}
     <div class="product-card__media">
       <a class="product-card__media-inner" href="{{ product.url }}" aria-label="{{ t_view_product }} {{ product.title | escape }}" title="{{ product.title | escape }}">
         {%- if product.featured_image -%}
@@ -111,7 +111,7 @@
             {%- endif -%}
           </div>
         {%- else -%}
-          {%- comment -%} Placeholder khi product không có ảnh {%- endcomment -%}
+          {%- comment %} Placeholder khi product không có ảnh {% endcomment -%}
           <div class="product-card__media-image image-ratio--{{ image_ratio }}">
             <div class="product-card__media-placeholder">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" aria-hidden="true">
@@ -121,7 +121,7 @@
           </div>
         {%- endif -%}
 
-        {%- comment -%} Badges {%- endcomment -%}
+        {%- comment %} Badges {% endcomment -%}
         {%- unless product.available -%}
           <div class="product-card__badge product-card__badge--soldout">{{ t_sold_out }}</div>
         {%- endunless -%}
@@ -130,7 +130,7 @@
         {%- endif -%}
       </a>
 
-      {%- comment -%} Quick actions {%- endcomment -%}
+      {%- comment %} Quick actions {% endcomment -%}
       {%- if show_quickview -%}
         <button type="button" class="product-card__quickview" data-action="open-quickview" data-product-handle="{{ product.handle }}" aria-label="{{ t_quick_view }} {{ product.title | escape }}" title="{{ t_quick_view }}">
           {%- render 'icon', name: 'eye-show' -%}
@@ -154,7 +154,7 @@
       {%- endif -%}
     </div>
 
-    {%- comment -%} ── Content ────────────────────── {%- endcomment -%}
+    {%- comment %} ── Content ────────────────────── {% endcomment -%}
     <div class="product-card__content">
       {%- if show_vendor and product.vendor != blank -%}
         <div class="product-card__vendor">{{ product.vendor | escape }}</div>

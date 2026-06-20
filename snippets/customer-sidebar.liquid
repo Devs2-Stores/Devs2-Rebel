@@ -1,7 +1,7 @@
 <customer-sidebar class="customer-sidebar">
   <div class="customer-sidebar__header">
-    <div class="customer-sidebar__avatar">
-      <span style="font-size: 2.5rem; line-height: 1;" aria-hidden="true">👋</span>
+    <div class="customer-sidebar__avatar" aria-hidden="true">
+      {%- render 'icon', name: 'user' -%}
     </div>
     <h3 class="customer-sidebar__name">
       {{ 'customer.sidebar.greeting' | t }}, <b>{{ customer.last_name }} {{ customer.first_name }}</b>

@@ -1,7 +1,7 @@
-{%- comment -%}
+{%- comment %}
   Main Search — Search results template section.
   Displays search form, results grid, pagination, and empty states.
-{%- endcomment -%}
+{% endcomment -%}
 
 {%- assign search_query = search.terms | default: '' -%}
 
@@ -109,7 +109,7 @@
 
           {%- if paginate.pages > 1 -%}
             <div class="search-template__pagination">
-              {%- render 'section-pagination' -%}
+              {%- render 'section-pagination', paginate: paginate -%}
             </div>
           {%- endif -%}
         </div>

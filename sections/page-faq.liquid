@@ -50,7 +50,7 @@
         </div>
         {%- endfor -%}
 
-        {%- comment -%} Ungrouped questions {%- endcomment -%}
+        {%- comment %} Ungrouped questions {% endcomment -%}
         {%- for item in faq_items -%}
         {%- if item.settings.group == blank -%}
         <details class="faq-item" data-faq-question="{{ item.settings.question | escape }}" {{ item.shopify_attributes }}>

@@ -69,10 +69,6 @@ p {
 .scroll-fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .scroll-fade-up.is-visible { opacity: 1; transform: translateY(0); }
 
-@media (prefers-reduced-motion: reduce) {
-  .scroll-fade-up { transition: none; opacity: 1; transform: none; }
-}
-
 /* ── Heading Size Utilities ──────────────────────── */
 .heading-size-xs { font-size: var(--font-base); }
 .heading-size-sm { font-size: var(--font-lg); }

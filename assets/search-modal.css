@@ -41,7 +41,7 @@ search-modal .search-modal-panel {
     left: 0.5rem;
     right: 0.5rem;
     top: 0.5rem;
-    bottom: 0.5rem;
+    bottom: calc(0.5rem + env(safe-area-inset-bottom));
     max-width: calc(100% - 1rem);
   }
 }

@@ -1,7 +1,7 @@
-{%- comment -%}
+{%- comment %}
   Section: Featured Product
   Mô tả: Hiển thị 1 sản phẩm riêng lẻ — media + info + add-to-cart inline.
-{%- endcomment -%}
+{% endcomment -%}
 
 {%- liquid
   assign product = section.settings.product
@@ -21,7 +21,7 @@
   <div class="page-width">
     {%- if product != blank -%}
       <div class="section-featured-product__grid section-featured-product__grid--{{ section.settings.image_position }}">
-        {%- comment -%} Media {%- endcomment -%}
+        {%- comment %} Media {% endcomment -%}
         <div class="section-featured-product__media">
           {%- if product.featured_image -%}
             {{ product.featured_image | image_url: width: 1000 | image_tag:
@@ -36,7 +36,7 @@
           {%- endif -%}
         </div>
 
-        {%- comment -%} Info {%- endcomment -%}
+        {%- comment %} Info {% endcomment -%}
         <div class="section-featured-product__info">
           {%- if section.settings.subheading != blank -%}
             <p class="section-featured-product__subheading subheading-size-{{ section.settings.subheading_size }}">

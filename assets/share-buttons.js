@@ -13,12 +13,37 @@
     bindEvents() {
       var self = this;
 
+      this.setupNativeShare();
+
       this.querySelectorAll('.share-buttons__copy').forEach(function(btn) {
         btn.addEventListener('click', function() {
           var url = this.dataset.url;
           self.copyToClipboard(url, this);
         });
       });
+
+      this.querySelectorAll('[data-native-share]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          self.openNativeShare(this);
+        });
+      });
+    }
+
+    setupNativeShare() {
+      if (navigator.share) {
+        this.classList.add('share-buttons--native');
+      }
+    }
+
+    openNativeShare(button) {
+      if (!navigator.share) return;
+
+      var shareData = {
+        title: button.dataset.title || document.title,
+        url: button.dataset.url || window.location.href
+      };
+
+      navigator.share(shareData).catch(function() {});
     }
 
     copyToClipboard(text, button) {

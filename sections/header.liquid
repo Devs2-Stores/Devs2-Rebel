@@ -34,7 +34,7 @@
         <a href="{{ wishlist_url }}" class="header__action-btn wishlist-icon-wrapper" title="{{ 'accessibility.wishlist' | t }}">
           {%- render 'icon', name: 'heart' -%}
           {%- if section.settings.show_wishlist_count -%}
-          <span class="wishlist-count" style="display: none;">0</span>
+          <span class="wishlist-count" hidden>0</span>
           {%- endif -%}
         </a>
         {%- endif -%}

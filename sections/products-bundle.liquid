@@ -1,7 +1,7 @@
-{%- comment -%}
+{%- comment %}
   Section: Products Bundle
   Mô tả: Chọn nhiều sản phẩm → hiện tổng giá + "Add all to cart" 1 click.
-{%- endcomment -%}
+{% endcomment -%}
 
 <div
   id="section-{{ section.id }}"
@@ -99,7 +99,7 @@
       document.dispatchEvent(new CustomEvent('cart:item_added', { bubbles: true }));
       if (window.ThemeUtils && typeof ThemeUtils.updateCartData === 'function') ThemeUtils.updateCartData();
       setTimeout(function() {
-        btn.textContent = '{{ section.settings.button_label | default: "Add all to cart" }}';
+        btn.textContent = {{ section.settings.button_label | default: 'Add all to cart' | json }};
         btn.disabled = false;
       }, 2000);
     })

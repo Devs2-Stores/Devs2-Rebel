@@ -1,8 +1,8 @@
-{%- comment -%}
+{%- comment %}
   Section: Image with Text
   Mô tả: Section 2 cột — image + text content.
   Hỗ trợ: Color scheme, image position (left/right), responsive, overlay.
-{%- endcomment -%}
+{% endcomment -%}
 
 <div
   id="section-{{ section.id }}"
@@ -17,7 +17,7 @@
   <div class="{% if section.settings.section_width == 'fixed' %}page-width{% endif %}">
     <div class="section-iwt__grid section-iwt__grid--{{ section.settings.image_position }}{% if section.settings.section_width == 'full' %} section-iwt__grid--full{% endif %}">
 
-      {%- comment -%} Image Column {%- endcomment -%}
+      {%- comment %} Image Column {% endcomment -%}
       <div class="section-iwt__media">
         {%- if section.settings.image != blank -%}
           {{ section.settings.image | image_url: width: 1200 | image_tag:
@@ -35,7 +35,7 @@
         {%- endif -%}
       </div>
 
-      {%- comment -%} Content Column {%- endcomment -%}
+      {%- comment %} Content Column {% endcomment -%}
       <div class="section-iwt__content section-iwt__content--{{ section.settings.text_align }}">
         {%- for block in section.blocks -%}
           {%- case block.type -%}

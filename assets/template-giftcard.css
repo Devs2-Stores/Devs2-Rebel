@@ -114,10 +114,3 @@
 .gift-card__apple-wallet {
   margin: 1rem 0;
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .gift-card__copy-button,
-  .gift-card__shop-link {
-    transition: none;
-  }
-}

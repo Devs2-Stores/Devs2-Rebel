@@ -1,7 +1,7 @@
-{%- comment -%}
+{%- comment %}
   Section: Gallery / Lookbook
   Mô tả: Grid ảnh responsive — masonry-style hoặc uniform. Có lightbox.
-{%- endcomment -%}
+{% endcomment -%}
 
 <div
   id="section-{{ section.id }}"
@@ -56,7 +56,7 @@
     </div>
   </div>
 
-  {%- comment -%} Lightbox {%- endcomment -%}
+  {%- comment %} Lightbox {% endcomment -%}
   <div class="section-gallery__lightbox" data-gallery-lightbox role="dialog" aria-modal="true" aria-label="{{ 'accessibility.image_lightbox' | t }}" hidden>
     <button class="section-gallery__lightbox-close" data-gallery-close aria-label="{{ 'accessibility.close' | t }}">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>

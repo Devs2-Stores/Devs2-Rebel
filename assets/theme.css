@@ -100,6 +100,31 @@ table {
   overflow: hidden;
   float: none;
 }
+.rte table,
+.blog-template__rich-text table,
+.blog-template__description-content table,
+.blog-template__full-description-content table,
+.collection-desc__rte table,
+.section-rich-text__text table,
+.section-tabs__content table {
+  table-layout: fixed;
+}
+.rte th,
+.rte td,
+.blog-template__rich-text th,
+.blog-template__rich-text td,
+.blog-template__description-content th,
+.blog-template__description-content td,
+.blog-template__full-description-content th,
+.blog-template__full-description-content td,
+.collection-desc__rte th,
+.collection-desc__rte td,
+.section-rich-text__text th,
+.section-rich-text__text td,
+.section-tabs__content th,
+.section-tabs__content td {
+  overflow-wrap: anywhere;
+}
 table thead th {
   background: var(--color-primary);
   color: var(--color-white);
@@ -319,16 +344,3 @@ form .form-error,
   white-space: nowrap;
   border: 0;
 }
-
-/* ── Reduced Motion ──────────────────────────────── */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-

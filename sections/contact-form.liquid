@@ -1,7 +1,7 @@
-{%- comment -%}
+{%- comment %}
   Section: Contact Form
   Mô tả: Form liên hệ global — dùng được ở bất kỳ page nào.
-{%- endcomment -%}
+{% endcomment -%}
 
 <div
   id="section-{{ section.id }}"
@@ -15,7 +15,7 @@
 >
   <div class="page-width">
     <div class="section-contact-form__grid section-contact-form__grid--{{ section.settings.layout }}">
-      {%- comment -%} Info column {%- endcomment -%}
+      {%- comment %} Info column {% endcomment -%}
       {%- if section.settings.heading != blank or section.settings.text != blank -%}
         <div class="section-contact-form__info">
           {%- if section.settings.subheading != blank -%}
@@ -51,7 +51,7 @@
         </div>
       {%- endif -%}
 
-      {%- comment -%} Form {%- endcomment -%}
+      {%- comment %} Form {% endcomment -%}
       <div class="section-contact-form__form-wrap">
         {%- form 'contact', id: 'contact-form' -%}
           {%- if form.posted_successfully? -%}

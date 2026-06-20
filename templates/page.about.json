@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "breadcrumb": {
@@ -16,10 +7,99 @@
     "main": {
       "type": "page-about",
       "settings": {}
+    },
+    "team": {
+      "type": "team",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "stats": {
+      "type": "animated-counter",
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "value": "12",
+            "suffix": "+",
+            "label": "Years of craft"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "value": "180",
+            "suffix": "K",
+            "label": "Happy customers"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "value": "42",
+            "suffix": "",
+            "label": "Countries shipped"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "value": "100",
+            "suffix": "%",
+            "label": "Sustainable sourcing"
+          }
+        }
+      },
+      "block_order": ["stat_1", "stat_2", "stat_3", "stat_4"],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "timeline": {
+      "type": "timeline",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "subheading": "Stay connected",
+        "subheading_size": "sm",
+        "heading": "Join the Devs2 Rebel community",
+        "heading_size": "lg",
+        "heading_tag": "h2",
+        "description": "Be the first to know about new collections, exclusive offers, and stories worth sharing.",
+        "description_size": "md",
+        "button_label": "Subscribe",
+        "button_size": "md",
+        "text_align": "center",
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
     }
   },
   "order": [
     "breadcrumb",
-    "main"
+    "main",
+    "team",
+    "stats",
+    "timeline",
+    "newsletter"
   ]
 }

@@ -100,9 +100,9 @@
   margin: var(--space-xl) 0;
 }
 
-.page-default__content table { width: 100%; margin: var(--space-xl) 0; border-collapse: collapse; }
+.page-default__content table { width: 100%; margin: var(--space-xl) 0; border-collapse: collapse; table-layout: fixed; }
 .page-default__content table th,
-.page-default__content table td { padding: var(--space-md); text-align: left; border: var(--border-width) solid var(--border-color); }
+.page-default__content table td { padding: var(--space-md); text-align: left; border: var(--border-width) solid var(--border-color); overflow-wrap: anywhere; }
 .page-default__content table th { background: rgba(var(--color-foreground), 0.03); font-weight: var(--font-weight-semibold); color: rgba(var(--color-foreground), 0.85); }
 
 .page-default__content hr { margin: var(--space-2xl) 0; border: none; border-top: var(--border-width) solid var(--border-color); }

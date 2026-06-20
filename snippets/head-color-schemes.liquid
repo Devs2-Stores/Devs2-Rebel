@@ -3,7 +3,7 @@
   Generates .color-{scheme.id} classes from color_scheme_group settings.
   First scheme also applies to :root as default.
   Status colors from settings_schema (color_price, color_success, etc.)
-{%- endcomment %}
+{% endcomment %}
 
 {% style %}
   {% for scheme in settings.color_schemes -%}
@@ -25,6 +25,7 @@
       --color-background-2: {{ scheme.settings.background_2.red }}, {{ scheme.settings.background_2.green }}, {{ scheme.settings.background_2.blue }};
       --color-form-bg: {{ scheme.settings.form_bg.red }}, {{ scheme.settings.form_bg.green }}, {{ scheme.settings.form_bg.blue }};
       --color-form-text: {{ scheme.settings.form_text.red }}, {{ scheme.settings.form_text.green }}, {{ scheme.settings.form_text.blue }};
+      --color-price: {{ scheme.settings.color_price.red }}, {{ scheme.settings.color_price.green }}, {{ scheme.settings.color_price.blue }};
       --color-sale-price: {{ scheme.settings.sale_price.red }}, {{ scheme.settings.sale_price.green }}, {{ scheme.settings.sale_price.blue }};
       --color-progress-bar: {{ scheme.settings.progress_bar.red }}, {{ scheme.settings.progress_bar.green }}, {{ scheme.settings.progress_bar.blue }};
       --color-link: {{ scheme.settings.accent.red }}, {{ scheme.settings.accent.green }}, {{ scheme.settings.accent.blue }};
@@ -36,7 +37,6 @@
   {% endfor %}
 
   :root {
-    --color-price: {{ settings.color_price }};
     --color-success: {{ settings.color_success }};
     --color-error: {{ settings.color_error }};
     --color-warning: {{ settings.color_warning }};

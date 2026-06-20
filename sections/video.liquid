@@ -1,8 +1,8 @@
-{%- comment -%}
+{%- comment %}
   Section: Video
   Mô tả: Embed YouTube hoặc tự host MP4 video.
   Hỗ trợ: Autoplay, loop, cover poster, color scheme, responsive.
-{%- endcomment -%}
+{% endcomment -%}
 
 {%- liquid
   assign video_type = section.settings.video_type
@@ -39,7 +39,7 @@
     --vid-mb: {{ section.settings.padding_bottom_mobile }}px;
   "
 >
-  {%- comment -%} Heading {%- endcomment -%}
+  {%- comment %} Heading {% endcomment -%}
   {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
     <div class="page-width section-video__head">
       {%- if section.settings.subheading != blank -%}
@@ -57,11 +57,11 @@
     </div>
   {%- endif -%}
 
-  {%- comment -%} Video Container {%- endcomment -%}
+  {%- comment %} Video Container {% endcomment -%}
   <div class="{% if section.settings.section_width == 'fixed' %}page-width{% endif %}">
     <div class="section-video__wrapper" data-video-section>
       {%- if video_type == 'youtube' and yt_id != blank -%}
-        {%- comment -%} YouTube — Facade pattern for performance {%- endcomment -%}
+        {%- comment %} YouTube — Facade pattern for performance {% endcomment -%}
         <div class="section-video__facade" data-yt-id="{{ yt_id }}" data-autoplay="{{ autoplay }}">
           {%- if poster != blank -%}
             {{ poster | image_url: width: 1920 | image_tag:
@@ -90,7 +90,7 @@
         </div>
 
       {%- elsif video_type == 'mp4' and mp4_video != blank -%}
-        {%- comment -%} Self-hosted MP4 {%- endcomment -%}
+        {%- comment %} Self-hosted MP4 {% endcomment -%}
         <video
           class="section-video__player"
           {%- if poster != blank %} poster="{{ poster | image_url: width: 1920 }}"{% endif %}
@@ -101,7 +101,9 @@
           playsinline
           preload="metadata"
         >
-          {{ mp4_video | video_tag }}
+          {%- for source in mp4_video.sources -%}
+            <source src="{{ source.url }}" type="{{ source.mime_type }}">
+          {%- endfor -%}
         </video>
 
       {%- else -%}
@@ -113,7 +115,7 @@
     </div>
   </div>
 
-  {%- comment -%} Description {%- endcomment -%}
+  {%- comment %} Description {% endcomment -%}
   {%- if section.settings.description != blank -%}
     <div class="page-width section-video__desc">
       <div class="section-video__desc-text content-size-{{ section.settings.description_size }}">
@@ -123,7 +125,7 @@
   {%- endif -%}
 </div>
 
-{%- comment -%} YouTube Facade JS {%- endcomment -%}
+{%- comment %} YouTube Facade JS {% endcomment -%}
 {%- if video_type == 'youtube' and yt_id != blank -%}
 <script>
   (function() {

@@ -1,7 +1,7 @@
-{%- comment -%}
+{%- comment %}
   Section: Newsletter
   Mô tả: Form đăng ký email — tích hợp Shopify Customer API.
-{%- endcomment -%}
+{% endcomment -%}
 
 <div
   id="section-{{ section.id }}"
@@ -75,7 +75,7 @@
   }
 
   .section-newsletter__inner {
-    max-width: 36rem; display: flex; flex-direction: column; gap: 0.75rem;
+    width: 100%; max-width: 36rem; display: flex; flex-direction: column; gap: 0.75rem;
   }
   .section-newsletter__inner--left { text-align: left; }
   .section-newsletter__inner--center { text-align: center; margin: 0 auto; align-items: center; }
@@ -89,6 +89,8 @@
 
   .section-newsletter__form {
     display: flex; gap: 0; margin-top: 0.5rem;
+    width: min(100%, 32rem);
+    max-width: 100%;
     border: 1px solid rgba(var(--color-foreground), 0.15);
     border-radius: var(--buttons-radius, 0);
     overflow: hidden;
@@ -100,6 +102,7 @@
 
   .section-newsletter__input {
     flex: 1; border: none; outline: none;
+    min-width: 0;
     padding: 0.75rem 1rem;
     font-size: 0.875rem;
     background: transparent;
@@ -119,6 +122,17 @@
     border-radius: 0;
   }
   .section-newsletter__btn:hover { opacity: 0.85; }
+
+  @media (max-width: 576px) {
+    .section-newsletter__form {
+      flex-direction: column;
+      width: 100%;
+    }
+    .section-newsletter__input,
+    .section-newsletter__btn {
+      width: 100%;
+    }
+  }
 
   .section-newsletter__success {
     margin: 0.5rem 0 0; font-size: 0.875rem; color: #059669;

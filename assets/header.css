@@ -1,5 +1,9 @@
 global-header { display: block; background: var(--header-bg, #ffffff); color: var(--header-text, #000000); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
-global-header[data-sticky="true"] { position: sticky; top: 0; z-index: var(--z-header, 100); }
+.shopify-section[data-sticky-header-section] {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header, 100);
+}
 global-header .header__wrapper {
   display: grid;
   grid-template-columns: auto 1fr auto;

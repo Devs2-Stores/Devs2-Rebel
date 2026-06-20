@@ -1,9 +1,558 @@
 {
   "sections": {
-    "main": {
-      "type": "main-index",
-      "settings": {}
+    "hero_slideshow": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "color_scheme": "scheme-1",
+            "overlay_opacity": 25,
+            "text_position": "bottom_left",
+            "subheading": "AW26 — REFINED DEFIANCE",
+            "subheading_size": "xs",
+            "heading": "Cut, draped, made to be worn",
+            "heading_size": "2xl",
+            "heading_tag": "h2",
+            "text": "",
+            "text_size": "md",
+            "button_size": "md",
+            "button_label_1": "Shop the collection",
+            "button_link_1": "/collections/all",
+            "button_style_1": "primary",
+            "image_desktop": "shopify://shop_images/demo-slideshow_1_desktop.jpg",
+            "image_mobile": "shopify://shop_images/demo-slideshow_1_mobile.jpg"
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "color_scheme": "scheme-1",
+            "overlay_opacity": 30,
+            "text_position": "bottom_center",
+            "subheading": "MENSWEAR",
+            "subheading_size": "xs",
+            "heading": "The tailored anti-uniform",
+            "heading_size": "2xl",
+            "heading_tag": "h2",
+            "text": "",
+            "text_size": "md",
+            "button_size": "md",
+            "button_label_1": "Discover",
+            "button_link_1": "/collections/all",
+            "button_style_1": "primary",
+            "image_desktop": "shopify://shop_images/demo-slideshow_2_desktop.jpg",
+            "image_mobile": "shopify://shop_images/demo-slideshow_2_mobile.jpg"
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "color_scheme": "scheme-1",
+            "overlay_opacity": 35,
+            "text_position": "middle_left",
+            "subheading": "ATELIER",
+            "subheading_size": "xs",
+            "heading": "Cherry red, cut close to the bone",
+            "heading_size": "xl",
+            "heading_tag": "h2",
+            "text": "",
+            "text_size": "md",
+            "button_size": "md",
+            "button_label_1": "View pieces",
+            "button_link_1": "/collections/all",
+            "button_style_1": "secondary",
+            "image_desktop": "shopify://shop_images/demo-slideshow_3_desktop.jpg",
+            "image_mobile": "shopify://shop_images/demo-slideshow_3_mobile.jpg"
+          }
+        }
+      },
+      "block_order": ["slide_1", "slide_2", "slide_3"],
+      "settings": {
+        "height_desktop": 95,
+        "height_mobile": 90,
+        "auto_slide": true,
+        "autoplay_speed": 6,
+        "transition_speed": 12,
+        "show_pagination": true,
+        "show_arrows": false,
+        "show_counter": true,
+        "accessibility_label": "Hero collection"
+      }
+    },
+
+    "scrolling_tagline": {
+      "type": "scrolling-text",
+      "blocks": {
+        "t1": { "type": "text", "settings": { "text": "REFINED DEFIANCE" } },
+        "t2": { "type": "text", "settings": { "text": "AW26 COLLECTION" } },
+        "t3": { "type": "text", "settings": { "text": "DEVS2 REBEL" } },
+        "t4": { "type": "text", "settings": { "text": "MADE IN ATELIER" } }
+      },
+      "block_order": ["t1", "t2", "t3", "t4"],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "text_size": "2xl",
+        "separator": "—",
+        "speed": 30,
+        "padding_top_desktop": 30,
+        "padding_bottom_desktop": 30,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20
+      }
+    },
+
+    "lookbook_hotspots": {
+      "type": "banner-hotspots",
+      "blocks": {
+        "hot_1": {
+          "type": "hotspot",
+          "settings": {
+            "position_x": 32,
+            "position_y": 28,
+            "tooltip_position": "right",
+            "heading": "The Crimson Coat",
+            "text": "Wool blend, hand-finished — $1,490"
+          }
+        },
+        "hot_2": {
+          "type": "hotspot",
+          "settings": {
+            "position_x": 58,
+            "position_y": 55,
+            "tooltip_position": "left",
+            "heading": "Silk Camisole",
+            "text": "Pure ivory silk — $390"
+          }
+        },
+        "hot_3": {
+          "type": "hotspot",
+          "settings": {
+            "position_x": 45,
+            "position_y": 78,
+            "tooltip_position": "top",
+            "heading": "Tailored Trousers",
+            "text": "High-rise crepe — $620"
+          }
+        }
+      },
+      "block_order": ["hot_1", "hot_2", "hot_3"],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "Shop the lookbook",
+        "heading_size": "lg",
+        "heading_tag": "h2",
+        "image": "shopify://shop_images/demo-banner_hotspots.jpg",
+        "section_width": "full",
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80
+      }
+    },
+
+    "image_text_overlay_hero": {
+      "type": "image-text-overlay",
+      "blocks": {
+        "ito_sub": {
+          "type": "subheading",
+          "settings": { "text": "THE NEW COLLECTION", "size": "xs" }
+        },
+        "ito_head": {
+          "type": "heading",
+          "settings": {
+            "text": "Quiet pieces for loud lives",
+            "size": "2xl",
+            "tag": "h2"
+          }
+        },
+        "ito_text": {
+          "type": "text",
+          "settings": {
+            "text": "Tailoring without compromise — for the considered closet.",
+            "size": "lg"
+          }
+        },
+        "ito_btn": {
+          "type": "button",
+          "settings": {
+            "label_1": "Explore collection",
+            "link_1": "/collections/all",
+            "label_2": "Read the journal",
+            "link_2": "/blogs/news",
+            "size": "lg"
+          }
+        }
+      },
+      "block_order": ["ito_sub", "ito_head", "ito_text", "ito_btn"],
+      "settings": {
+        "color_scheme": "scheme-3",
+        "image": "shopify://shop_images/demo-image_text_overlay.jpg",
+        "image_mobile": "shopify://shop_images/demo-image_text_overlay.jpg",
+        "section_height": 90,
+        "overlay_opacity": 40,
+        "content_position": "center-left",
+        "text_align": "left"
+      }
+    },
+
+    "collection_list": {
+      "type": "collection-list",
+      "blocks": {
+        "c_1": {
+          "type": "collection_card",
+          "settings": {
+            "custom_title": "Womenswear",
+            "image": "shopify://shop_images/demo-collection_women.jpg"
+          }
+        },
+        "c_2": {
+          "type": "collection_card",
+          "settings": {
+            "custom_title": "Menswear",
+            "image": "shopify://shop_images/demo-collection_men.jpg"
+          }
+        },
+        "c_3": {
+          "type": "collection_card",
+          "settings": {
+            "collection": "accessories",
+            "custom_title": "Accessories",
+            "image": "shopify://shop_images/demo-collection_accessories.jpg"
+          }
+        },
+        "c_4": {
+          "type": "collection_card",
+          "settings": {
+            "custom_title": "Footwear",
+            "image": "shopify://shop_images/demo-collection_footwear.jpg"
+          }
+        }
+      },
+      "block_order": ["c_1", "c_2", "c_3", "c_4"],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "subheading": "BY CATEGORY",
+        "subheading_size": "xs",
+        "heading": "Pick your wardrobe",
+        "heading_size": "xl",
+        "heading_tag": "h2",
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "image_ratio": "portrait",
+        "show_count": false,
+        "padding_top_desktop": 100,
+        "padding_bottom_desktop": 100,
+        "padding_top_mobile": 60,
+        "padding_bottom_mobile": 60
+      }
+    },
+
+    "layered_atelier": {
+      "type": "layered-images",
+      "blocks": {
+        "f_1": {
+          "type": "feature",
+          "settings": {
+            "heading": "Hand-finished",
+            "text": "Each garment passes through ten skilled hands before leaving the atelier."
+          }
+        },
+        "f_2": {
+          "type": "feature",
+          "settings": {
+            "heading": "Traceable craft",
+            "text": "Sourced from European mills with three generations of lineage."
+          }
+        },
+        "f_3": {
+          "type": "feature",
+          "settings": {
+            "heading": "Built to last",
+            "text": "Designed not to be replaced — repair service for life."
+          }
+        }
+      },
+      "block_order": ["f_1", "f_2", "f_3"],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "image_1": "shopify://shop_images/demo-layered_1.jpg",
+        "image_2": "shopify://shop_images/demo-layered_2.jpg",
+        "image_3": "shopify://shop_images/demo-layered_3.jpg",
+        "subheading": "THE HOUSE",
+        "subheading_size": "xs",
+        "heading": "Made by hand, made to last",
+        "heading_size": "xl",
+        "heading_tag": "h2"
+      }
+    },
+
+    "featured_piece": {
+      "type": "featured-product",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "subheading": "PIECE OF THE WEEK",
+        "subheading_size": "xs",
+        "heading_size": "xl",
+        "show_vendor": false,
+        "show_description": true,
+        "description_size": "md",
+        "show_view_link": true,
+        "image_position": "left",
+        "button_size": "lg",
+        "padding_top_desktop": 100,
+        "padding_bottom_desktop": 100,
+        "padding_top_mobile": 60,
+        "padding_bottom_mobile": 60
+      }
+    },
+
+    "parallax_atelier": {
+      "type": "parallax-image",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "image": "shopify://shop_images/demo-parallax.jpg",
+        "section_height": 80,
+        "overlay_opacity": 45,
+        "parallax_speed": 5,
+        "subheading": "EST. 2015",
+        "subheading_size": "xs",
+        "heading": "A decade of refined defiance",
+        "heading_size": "2xl",
+        "heading_tag": "h2",
+        "text": "From a single atelier in Hanoi to ateliers in Paris and New York.",
+        "text_size": "lg",
+        "button_label": "Our story",
+        "button_link": "/pages/about",
+        "button_style": "secondary",
+        "button_size": "lg",
+        "content_position": "center",
+        "text_align": "center",
+        "content_width": 40
+      }
+    },
+
+    "marquee_products": {
+      "type": "marquee-products",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "Trending now",
+        "heading_size": "md",
+        "heading_tag": "h2",
+        "products_to_show": 12,
+        "speed": 40,
+        "direction": "normal",
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+
+    "brand_story": {
+      "type": "image-with-text",
+      "blocks": {
+        "iwt_sub": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "INSIDE THE ATELIER",
+            "subheading_size": "xs"
+          }
+        },
+        "iwt_head": {
+          "type": "heading",
+          "settings": {
+            "heading": "Twelve years. One philosophy.",
+            "heading_size": "xl",
+            "heading_tag": "h2"
+          }
+        },
+        "iwt_text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Founded on the belief that luxury is not loud — it whispers, lasts, and improves with wear. Every Devs2 Rebel piece is cut by hand from rare European fabrics and finished in ateliers that have stood for generations.</p>",
+            "content_size": "md"
+          }
+        },
+        "iwt_btn": {
+          "type": "button",
+          "settings": {
+            "button_size": "lg",
+            "button_label_1": "Read more",
+            "button_link_1": "/pages/about",
+            "button_style_1": "secondary"
+          }
+        }
+      },
+      "block_order": ["iwt_sub", "iwt_head", "iwt_text", "iwt_btn"],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "image_position": "left",
+        "section_width": "full",
+        "text_align": "left",
+        "padding_top_desktop": 100,
+        "padding_bottom_desktop": 100,
+        "padding_top_mobile": 60,
+        "padding_bottom_mobile": 60,
+        "image": "shopify://shop_images/demo-image_with_text.jpg"
+      }
+    },
+
+    "before_after_craft": {
+      "type": "before-after",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "subheading": "CRAFTSMANSHIP",
+        "subheading_size": "xs",
+        "heading": "From bolt of fabric to finished piece",
+        "heading_size": "lg",
+        "heading_tag": "h2",
+        "image_before": "shopify://shop_images/demo-before_after_before.jpg",
+        "image_after": "shopify://shop_images/demo-before_after_after.jpg",
+        "label_before": "Raw fabric",
+        "label_after": "Finished piece",
+        "padding_top_desktop": 100,
+        "padding_bottom_desktop": 100,
+        "padding_top_mobile": 60,
+        "padding_bottom_mobile": 60
+      }
+    },
+
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "r_1": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "<p>The cut is absolute. Nothing else in my wardrobe fits like this.</p>",
+            "author": "Camille R.",
+            "author_title": "Editor, Paris",
+            "avatar": "shopify://shop_images/demo-testimonial_1.jpg"
+          }
+        },
+        "r_2": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "<p>I bought one coat in 2022. Three winters later, it looks better than the day it arrived.</p>",
+            "author": "Jonas K.",
+            "author_title": "Architect, Berlin",
+            "avatar": "shopify://shop_images/demo-testimonial_2.jpg"
+          }
+        },
+        "r_3": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "<p>You can feel the hands that made it. That's rare now.</p>",
+            "author": "Mei L.",
+            "author_title": "Curator, Tokyo",
+            "avatar": "shopify://shop_images/demo-testimonial_3.jpg"
+          }
+        }
+      },
+      "block_order": ["r_1", "r_2", "r_3"],
+      "settings": {
+        "color_scheme": "scheme-3",
+        "subheading": "WORN BY",
+        "subheading_size": "xs",
+        "heading": "Words from the wardrobe",
+        "heading_size": "xl",
+        "heading_tag": "h2",
+        "layout": "slider",
+        "columns_desktop": 3,
+        "padding_top_desktop": 100,
+        "padding_bottom_desktop": 100,
+        "padding_top_mobile": 60,
+        "padding_bottom_mobile": 60
+      }
+    },
+
+    "blog_journal": {
+      "type": "blog-posts",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "subheading": "THE JOURNAL",
+        "subheading_size": "xs",
+        "heading": "Notes from the atelier",
+        "heading_size": "xl",
+        "heading_tag": "h2",
+        "blog": "style-guides-wardrobe-essentials",
+        "posts_to_show": 3,
+        "columns_desktop": 3,
+        "show_date": true,
+        "show_excerpt": true,
+        "show_view_all": true,
+        "padding_top_desktop": 100,
+        "padding_bottom_desktop": 100,
+        "padding_top_mobile": 60,
+        "padding_bottom_mobile": 60
+      }
+    },
+
+    "press_logos": {
+      "type": "logo-list",
+      "blocks": {
+        "l_1": { "type": "logo", "settings": {} },
+        "l_2": { "type": "logo", "settings": {} },
+        "l_3": { "type": "logo", "settings": {} },
+        "l_4": { "type": "logo", "settings": {} },
+        "l_5": { "type": "logo", "settings": {} },
+        "l_6": { "type": "logo", "settings": {} }
+      },
+      "block_order": ["l_1", "l_2", "l_3", "l_4", "l_5", "l_6"],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "heading": "As featured in",
+        "heading_size": "sm",
+        "heading_tag": "h2",
+        "layout": "marquee",
+        "columns_desktop": 6,
+        "logo_height": 30,
+        "marquee_speed": 30,
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "color_scheme": "scheme-4",
+        "subheading": "STAY CLOSE",
+        "subheading_size": "xs",
+        "heading": "Receive first looks",
+        "heading_size": "xl",
+        "heading_tag": "h2",
+        "description": "Private invitations to drops and atelier events. No noise.",
+        "description_size": "md",
+        "button_label": "Subscribe",
+        "button_size": "lg",
+        "text_align": "center",
+        "padding_top_desktop": 100,
+        "padding_bottom_desktop": 100,
+        "padding_top_mobile": 60,
+        "padding_bottom_mobile": 60
+      }
     }
   },
-  "order": ["main"]
+
+  "order": [
+    "hero_slideshow",
+    "scrolling_tagline",
+    "lookbook_hotspots",
+    "image_text_overlay_hero",
+    "collection_list",
+    "layered_atelier",
+    "featured_piece",
+    "parallax_atelier",
+    "marquee_products",
+    "brand_story",
+    "before_after_craft",
+    "testimonials",
+    "blog_journal",
+    "press_logos",
+    "newsletter"
+  ]
 }

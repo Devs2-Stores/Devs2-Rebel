@@ -1,7 +1,7 @@
-{%- comment -%}
+{%- comment %}
   Section: Layered Images with Text
   Mô tả: 2-3 ảnh xếp chồng lệch + text bên cạnh. Subtle depth effect.
-{%- endcomment -%}
+{% endcomment -%}
 
 <div
   id="section-{{ section.id }}"
@@ -15,7 +15,7 @@
 >
   <div class="page-width">
     <div class="section-layered__grid section-layered__grid--{{ section.settings.image_position }}">
-      {%- comment -%} Layered images {%- endcomment -%}
+      {%- comment %} Layered images {% endcomment -%}
       <div class="section-layered__images">
         {%- if section.settings.image_1 != blank -%}
           <div class="section-layered__layer section-layered__layer--1">
@@ -40,7 +40,7 @@
         {%- endif -%}
       </div>
 
-      {%- comment -%} Text content {%- endcomment -%}
+      {%- comment %} Text content {% endcomment -%}
       <div class="section-layered__content">
         {%- if section.settings.subheading != blank -%}
           <p class="section-layered__subheading subheading-size-{{ section.settings.subheading_size }}">{{ section.settings.subheading }}</p>

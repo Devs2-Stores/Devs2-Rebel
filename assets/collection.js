@@ -1,6 +1,10 @@
 (function() {
 'use strict';
 
+function formatPriceNumber(value) {
+  return Math.round(value).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
 /**
  * collection.js — Shopify Native Storefront Filtering
  *
@@ -58,17 +62,96 @@ class FacetFilters extends HTMLElement {
     var self = this;
     this.filterForm.addEventListener('change', function(e) {
       if (e.target.matches('input[type="checkbox"]')) {
+        if (e.target.hasAttribute('data-price-preset')) return;
         self.debouncedSubmit();
       }
     });
 
     // Price range — debounced on input
-    var priceInputs = this.filterForm.querySelectorAll('.facet-filter__price-input');
+    this.bindPriceRangeEvents();
+  }
+
+  bindPriceRangeEvents() {
+    if (!this.filterForm) return;
+
     var self = this;
+    var priceInputs = this.filterForm.querySelectorAll('.facet-filter__price-input');
+    var pricePresets = this.filterForm.querySelectorAll('[data-price-preset]');
+    var priceSliders = this.filterForm.querySelectorAll('[data-price-slider]');
+
     priceInputs.forEach(function(input) {
       input.addEventListener('input', debounce(function() {
+        pricePresets.forEach(function(preset) { preset.checked = false; });
         self.submitFilters();
       }, 800));
+    });
+
+    pricePresets.forEach(function(preset) {
+      preset.addEventListener('change', function() {
+        pricePresets.forEach(function(otherPreset) {
+          if (otherPreset !== preset) otherPreset.checked = false;
+        });
+
+        var minInput = self.filterForm.querySelector('input[name$=".gte"]');
+        var maxInput = self.filterForm.querySelector('input[name$=".lte"]');
+
+        if (preset.checked) {
+          if (minInput) minInput.value = preset.dataset.min || '';
+          if (maxInput) maxInput.value = preset.dataset.max || '';
+        } else {
+          if (minInput) minInput.value = '';
+          if (maxInput) maxInput.value = '';
+        }
+
+        self.submitFilters();
+      });
+    });
+
+    priceSliders.forEach(function(slider) {
+      var minRange = slider.querySelector('[data-price-slider-min]');
+      var maxRange = slider.querySelector('[data-price-slider-max]');
+      var minField = slider.querySelector('[data-price-slider-min-field]');
+      var maxField = slider.querySelector('[data-price-slider-max-field]');
+      var minLabel = slider.querySelector('[data-price-slider-min-label]');
+      var maxLabel = slider.querySelector('[data-price-slider-max-label]');
+      var currency = slider.dataset.currencySymbol || '$';
+      if (!minRange || !maxRange || !minField || !maxField) return;
+
+      var syncSlider = function() {
+        var minValue = parseFloat(minRange.value) || 0;
+        var maxValue = parseFloat(maxRange.value) || 0;
+
+        if (minValue > maxValue) {
+          if (document.activeElement === minRange) {
+            maxValue = minValue;
+            maxRange.value = String(maxValue);
+          } else {
+            minValue = maxValue;
+            minRange.value = String(minValue);
+          }
+        }
+
+        minField.value = minValue > 0 ? String(minValue) : '';
+        maxField.value = maxValue > 0 ? String(maxValue) : '';
+
+        if (minLabel) minLabel.textContent = currency + formatPriceNumber(minValue);
+        if (maxLabel) maxLabel.textContent = currency + formatPriceNumber(maxValue);
+      };
+
+      var submitSlider = debounce(function() {
+        syncSlider();
+        self.submitFilters();
+      }, 700);
+
+      minRange.addEventListener('input', function() {
+        syncSlider();
+        submitSlider();
+      });
+      maxRange.addEventListener('input', function() {
+        syncSlider();
+        submitSlider();
+      });
+      syncSlider();
     });
   }
 
@@ -86,6 +169,7 @@ class FacetFilters extends HTMLElement {
     // Collect checkbox filters
     var checkboxes = this.filterForm.querySelectorAll('input[type="checkbox"]:checked');
     checkboxes.forEach(function(cb) {
+      if (!cb.name || cb.hasAttribute('data-price-preset')) return;
       params.append(cb.name, cb.value);
     });
 
@@ -93,10 +177,9 @@ class FacetFilters extends HTMLElement {
     var priceInputs = this.filterForm.querySelectorAll('.facet-filter__price-input');
     priceInputs.forEach(function(input) {
       if (input.value && input.value.trim() !== '') {
-        // Convert display dollars to cents for Shopify
-        var cents = Math.round(parseFloat(input.value) * 100);
-        if (!isNaN(cents) && cents > 0) {
-          params.set(input.name, cents.toString());
+        var priceValue = parseFloat(input.value);
+        if (!isNaN(priceValue) && priceValue > 0) {
+          params.set(input.name, priceValue.toString());
         }
       }
     });
@@ -275,16 +358,12 @@ class FacetFilters extends HTMLElement {
 
       this.filterForm.addEventListener('change', function(e) {
         if (e.target.matches('input[type="checkbox"]')) {
+          if (e.target.hasAttribute('data-price-preset')) return;
           self.debouncedSubmit();
         }
       });
 
-      var priceInputs = this.filterForm.querySelectorAll('.facet-filter__price-input');
-      priceInputs.forEach(function(input) {
-        input.addEventListener('input', debounce(function() {
-          self.submitFilters();
-        }, 800));
-      });
+      this.bindPriceRangeEvents();
     }
 
     // Active filter removes — no re-bind needed, event delegation on 'this' persists
@@ -326,7 +405,9 @@ class FacetFilters extends HTMLElement {
 
   bindFilterColumnToggle() {
     var toggleBtns = document.querySelectorAll('[data-action="toggle-filter-column"]');
-    var wrapper = this.querySelector('.collection-template__wrapper');
+    var wrapper = this.classList.contains('collection-template__wrapper')
+      ? this
+      : this.querySelector('.collection-template__wrapper');
     if (!wrapper || toggleBtns.length === 0) return;
 
     toggleBtns.forEach(function(btn) {
@@ -754,17 +835,22 @@ class CollectionBest extends HTMLElement {
     var container = this.querySelector('.collection-best__content');
     if (!container) return;
 
+    var columnsMobile = parseInt(container.getAttribute('data-columns-mobile') || '2', 10);
+    var columnsTablet = parseInt(container.getAttribute('data-columns-tablet') || columnsMobile, 10);
+    var columnsLaptop = parseInt(container.getAttribute('data-columns-laptop') || columnsTablet, 10);
+    var columnsDesktop = parseInt(container.getAttribute('data-columns-desktop') || columnsLaptop, 10);
+
     this.swiper = new Swiper(container, {
-      slidesPerView: 2,
+      slidesPerView: Math.min(columnsMobile, 4),
       spaceBetween: 10,
       pagination: {
         el: '.collection-best__content .swiper-pagination',
         clickable: true
       },
       breakpoints: {
-        640: { slidesPerView: 3, spaceBetween: 15 },
-        1024: { slidesPerView: 4, spaceBetween: 20 },
-        1280: { slidesPerView: 5, spaceBetween: 20 }
+        640: { slidesPerView: Math.min(columnsTablet, 4), spaceBetween: 15 },
+        1024: { slidesPerView: Math.min(columnsLaptop, 4), spaceBetween: 20 },
+        1280: { slidesPerView: Math.min(columnsDesktop, 4), spaceBetween: 20 }
       }
     });
   }

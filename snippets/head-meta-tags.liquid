@@ -1,7 +1,7 @@
 {%- comment %}
   Meta tags — SEO, Open Graph, Twitter Cards, JSON-LD.
   Pattern: Horizon (page_image, request.page_type, liquid block assigns).
-{%- endcomment %}
+{% endcomment %}
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -41,14 +41,14 @@
 
 <title>
   {{ page_title | escape }}
-  {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' | escape }}"{% endif -%}
-  {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-  {%- unless page_title contains shop.name %} &ndash; {{ shop.name | escape }}{% endunless -%}
+  {%- if current_tags %} – {{ 'general.title_tagged' | t }} "{{ current_tags | join: ', ' | escape }}"{% endif -%}
+  {%- if current_page != 1 %} – {{ 'general.pagination.page' | t: number: current_page }}{% endif -%}
+  {%- unless page_title contains shop.name %} – {{ shop.name | escape }}{% endunless -%}
 </title>
 
 <meta name="description" content="{{ og_description | escape }}">
 
-{%- comment %} — Open Graph — {%- endcomment %}
+{%- comment %} — Open Graph — {% endcomment %}
 <meta property="og:site_name" content="{{ shop.name | escape }}">
 <meta property="og:url" content="{{ og_url }}">
 <meta property="og:title" content="{{ og_title | escape }}">
@@ -67,14 +67,14 @@
   <meta property="og:image" content="https:{{ settings.share_image | image_url: width: 1200 }}">
 {% endif %}
 
-{% if request.page_type == 'product' %}
+{% if request.page_type == 'product' and product.available and product.price > 0 %}
   <meta property="og:price:amount" content="{{ product.price | money_without_currency | strip_html }}">
   <meta property="og:price:currency" content="{{ cart.currency.iso_code }}">
 {% endif %}
 
 <meta property="og:locale" content="{{ request.locale.iso_code | replace: '-', '_' }}">
 
-{%- comment %} — Twitter Cards — {%- endcomment %}
+{%- comment %} — Twitter Cards — {% endcomment %}
 {% if settings.social_twitter_link != blank %}
   <meta
     name="twitter:site"
@@ -90,7 +90,7 @@
   <meta name="twitter:image" content="https:{{ settings.share_image | image_url: width: 1200 }}">
 {%- endif -%}
 
-{%- comment %} — JSON-LD Structured Data — {%- endcomment %}
+{%- comment %} — JSON-LD Structured Data — {% endcomment %}
 {% if template == 'index' %}
   <script type="application/ld+json">
     {

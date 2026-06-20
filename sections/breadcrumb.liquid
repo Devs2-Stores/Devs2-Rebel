@@ -1,8 +1,8 @@
-{%- comment -%}
+{%- comment %}
   Breadcrumb Section — standalone, can be added to any page via JSON template.
   Auto-detects page type via `template` and renders appropriate breadcrumb trail.
   Includes Schema.org BreadcrumbList structured data for SEO.
-{%- endcomment -%}
+{% endcomment -%}
 
 {%- liquid
   assign t_home = 'general.breadcrumbs.home' | t
@@ -33,7 +33,7 @@
   <div class="{% if section.settings.container_width == 'fixed' %}page-width{% endif %}">
     <nav class="breadcrumb-nav" aria-label="{{ 'general.breadcrumbs.aria_label' | t }}">
       <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-        {%- comment -%} Home {%- endcomment -%}
+        {%- comment %} Home {% endcomment -%}
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
           <a itemprop="item" href="{{ routes.root_url }}" class="breadcrumb__link" title="{{ t_home }}">
             <span itemprop="name">{{ t_home }}</span>

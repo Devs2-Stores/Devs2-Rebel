@@ -9,3 +9,17 @@ node_modules/
 .gitignore
 .theme-check.yml
 .planning/
+
+# Orphan temp files from atomic write (Shopify CLI / IDE saves)
+*.tmp
+*.tmp.*
+*~
+.#*
+*.swp
+*.swo
+
+# Generator output
+tools/_generated/
+_changelogs/
+_reference/
+LICENSE.md

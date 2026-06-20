@@ -7,6 +7,10 @@
   assign default_view = section.settings.default_view | default: 'grid'
   assign pagination_type = section.settings.pagination_type | default: 'pagination'
   assign filter_layout = section.settings.filter_layout | default: 'sidebar'
+  assign is_all_collection = false
+  if collection.handle == 'all' or collection.url contains '/collections/all'
+    assign is_all_collection = true
+  endif
 
   comment
     Boolean defaults: dùng nil check vì | default: true sẽ override false
@@ -36,7 +40,7 @@
   style="--columns-desktop: {{ columns_desktop }}; --columns-mobile: {{ columns_mobile }};"
 >
   <div class="page-width">
-    {%- comment -%} ── Collection Hero: Banner + Title ── {%- endcomment -%}
+    {%- comment %} ── Collection Hero: Banner + Title ── {% endcomment -%}
     {%- liquid
       assign show_banner = false
       for block in section.blocks
@@ -55,6 +59,7 @@
         assign hero_show_title = banner_block.settings.show_title
         assign hero_show_description = banner_block.settings.show_description
         assign hero_show_count = banner_block.settings.show_count
+        assign hero_style = 'object-position: ' | append: hero_position
         assign has_content = false
         if hero_show_title or hero_show_description or hero_show_count
           assign has_content = true
@@ -79,19 +84,18 @@
               loading: 'eager',
               fetchpriority: 'high',
               class: 'collection-hero__img',
-              style: 'object-position: '
-            | append: hero_position
+              style: hero_style
           }}
         </div>
         {%- if has_content -%}
           <div class="collection-hero__content">
             {%- if hero_show_title -%}
               <h1 class="collection-hero__heading heading-size-{{ section.settings.heading_size | default: 'md' }}">
-                {%- if collection.handle != 'all' -%}
+                {%- unless is_all_collection -%}
                   {{ collection.title | escape }}
                 {%- else -%}
-                  {{ 'sections.collection_template.title' | t }}
-                {%- endif -%}
+                  {{ 'general.breadcrumbs.all_products' | t }}
+                {%- endunless -%}
               </h1>
             {%- endif -%}
             {%- if hero_show_description and collection.description != blank -%}
@@ -111,40 +115,42 @@
       {%- unless hero_show_title -%}
         <div class="collection-template__title">
           <h1 class="collection-template__heading heading-size-{{ section.settings.heading_size | default: 'md' }}">
-            {%- if collection.handle != 'all' -%}
+            {%- unless is_all_collection -%}
               {{ collection.title | escape }}
             {%- else -%}
-              {{ 'sections.collection_template.title' | t }}
-            {%- endif -%}
+              {{ 'general.breadcrumbs.all_products' | t }}
+            {%- endunless -%}
           </h1>
         </div>
       {%- endunless -%}
     {%- else -%}
       <div class="collection-template__title">
         <h1 class="collection-template__heading heading-size-{{ section.settings.heading_size | default: 'md' }}">
-          {%- if collection.handle != 'all' -%}
+          {%- unless is_all_collection -%}
             {{ collection.title | escape }}
           {%- else -%}
-            {{ 'sections.collection_template.title' | t }}
-          {%- endif -%}
+            {{ 'general.breadcrumbs.all_products' | t }}
+          {%- endunless -%}
         </h1>
       </div>
     {%- endif -%}
 
-    {%- comment -%} ── Blocks (reorderable in theme editor) ── {%- endcomment -%}
+    {%- comment %} ── Blocks (reorderable in theme editor) ── {% endcomment -%}
     {%- for block in section.blocks -%}
       {%- case block.type -%}
         {%- when 'subcollections' -%}
-          <div
-            class="collection-template__block"
-            style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;"
-            {{ block.shopify_attributes }}
-          >
-            {%- render 'collection-menu',
-              collections: block.settings.collections,
-              items_limit: block.settings.items_limit
-            -%}
-          </div>
+          {%- if block.settings.collections != blank and block.settings.collections.size > 0 -%}
+            <div
+              class="collection-template__block"
+              style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;"
+              {{ block.shopify_attributes }}
+            >
+              {%- render 'collection-menu',
+                collections: block.settings.collections,
+                items_limit: block.settings.items_limit
+              -%}
+            </div>
+          {%- endif -%}
 
         {%- when 'best_sellers' -%}
           <div
@@ -163,7 +169,7 @@
 
         {%- when 'description' -%}
           {%- if collection.description != blank -%}
-            {%- comment -%} Skip if hero already shows description to avoid duplicate content {%- endcomment -%}
+            {%- comment %} Skip if hero already shows description to avoid duplicate content {% endcomment -%}
             {%- unless hero_show_description -%}
               {%- assign desc_word_count = collection.description | strip_html | split: ' ' | size -%}
               <div
@@ -219,7 +225,7 @@
       {%- endcase -%}
     {%- endfor -%}
 
-    {%- comment -%} ── Mobile filter button ── {%- endcomment -%}
+    {%- comment %} ── Mobile filter button ── {% endcomment -%}
     {%- if enable_filtering -%}
       <div class="collection-template__mobile-filter-ctrl">
         <button
@@ -247,7 +253,7 @@
       </div>
     {%- endif -%}
 
-    {%- comment -%} ── Products grid + filter sidebar ── {%- endcomment -%}
+    {%- comment %} ── Products grid + filter sidebar ── {% endcomment -%}
     {%- paginate collection.products by products_per_page -%}
       <facet-filters
         class="collection-template__wrapper{% unless enable_filtering %} collection-template__wrapper--no-filter{% endunless %}{% if filter_layout == 'modal' and enable_filtering %} collection-template__wrapper--no-filter{% endif %}"
@@ -276,13 +282,13 @@
                 <strong>{{ 'products.facets.filter_by_label' | t }}</strong>
               </div>
               <div class="collection-template__facet-filter-content" id="FacetFiltersContainer">
-                {%- render 'collection-facet-filter' -%}
+                {%- render 'collection-facet-filter', price_filter_style: section.settings.price_filter_style -%}
               </div>
             </div>
             <div class="collection-template__filter-overlay" data-action="close-filter"></div>
 
           {%- elsif filter_layout == 'modal' -%}
-            {%- comment -%} ── Filter modal — slides from left (same style as search modal) ── {%- endcomment -%}
+            {%- comment %} ── Filter modal — slides from left (same style as search modal) ── {% endcomment -%}
             <div
               class="collection-filter-modal"
               id="CollectionFilterModal"
@@ -312,7 +318,7 @@
                   </button>
                 </div>
                 <div class="collection-filter-modal__body" id="FacetFiltersContainer">
-                  {%- render 'collection-facet-filter', collapse_filters: false -%}
+                  {%- render 'collection-facet-filter', collapse_filters: false, price_filter_style: section.settings.price_filter_style -%}
                 </div>
                 <div class="collection-filter-modal__footer">
                   <a
@@ -446,7 +452,7 @@
   </div>
 </div>
 
-{%- comment -%} ── Compare bar (fixed bottom) ── {%- endcomment -%}
+{%- comment %} ── Compare bar (fixed bottom) ── {% endcomment -%}
 <div class="compare-bar" id="CompareBar" aria-live="polite">
   <div class="compare-bar__slots" id="CompareSlots">
     {%- for i in (1..5) -%}
@@ -595,6 +601,17 @@
       "id": "enable_filtering",
       "label": "t:sections.main_collection.settings.enable_filtering.label",
       "default": true
+    },
+    {
+      "type": "select",
+      "id": "price_filter_style",
+      "label": "t:sections.main_collection.settings.price_filter_style.label",
+      "options": [
+        { "value": "input", "label": "t:sections.main_collection.settings.price_filter_style.options__input.label" },
+        { "value": "range", "label": "t:sections.main_collection.settings.price_filter_style.options__range.label" },
+        { "value": "checkbox", "label": "t:sections.main_collection.settings.price_filter_style.options__checkbox.label" }
+      ],
+      "default": "checkbox"
     },
     {
       "type": "checkbox",
@@ -838,6 +855,24 @@
           "max": 20,
           "step": 1,
           "default": 10
+        },
+        {
+          "type": "range",
+          "id": "columns_mobile",
+          "label": "Mobile columns",
+          "min": 1,
+          "max": 4,
+          "step": 1,
+          "default": 2
+        },
+        {
+          "type": "range",
+          "id": "columns_desktop",
+          "label": "Desktop columns",
+          "min": 2,
+          "max": 6,
+          "step": 1,
+          "default": 4
         },
         {
           "type": "header",

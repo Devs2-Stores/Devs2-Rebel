@@ -1,11 +1,12 @@
-{%- comment -%}
+{%- comment %}
   Share Buttons snippet
-  Uses: settings.share_facebook, share_twitter, share_pinterest, share_linkedin, share_email, share_copy
+  Uses: settings.share_facebook, share_twitter, share_pinterest, share_linkedin, share_whatsapp, share_email, share_copy
   Accepts: title (string) - label text
-{%- endcomment -%}
+{% endcomment -%}
 
 {%- assign share_url = canonical_url -%}
 {%- assign share_url_encoded = share_url | url_encode -%}
+{%- assign share_title_text = page_title -%}
 {%- assign share_title = page_title | url_encode -%}
 {%- assign share_label = title | default: settings.share_label | default: 'Share:' -%}
 
@@ -23,6 +24,20 @@
       </div>
     {%- endif -%}
 
+    <div class="share-buttons__item share-buttons__native-item" role="listitem">
+      <button
+        type="button"
+        class="share-buttons__native"
+        data-native-share
+        data-url="{{ share_url }}"
+        data-title="{{ share_title_text | escape }}"
+        title="{{ 'general.share.native_share' | t }}"
+        aria-label="{{ 'general.share.native_share' | t }}"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98"/><path d="m15.41 6.51-6.82 3.98"/></svg>
+      </button>
+    </div>
+
     {%- if settings.share_twitter -%}
       <div class="share-buttons__item" role="listitem">
         <a href="https://twitter.com/intent/tweet?url={{ share_url_encoded }}&text={{ share_title }}" target="_blank" rel="noopener noreferrer" title="{{ 'general.social.alt_text.share_on_twitter' | t }}" aria-label="{{ 'general.social.alt_text.share_on_twitter' | t }}">
@@ -34,7 +49,15 @@
     {%- if settings.share_pinterest -%}
       <div class="share-buttons__item" role="listitem">
         <a href="https://pinterest.com/pin/create/button/?url={{ share_url_encoded }}&description={{ share_title }}" target="_blank" rel="noopener noreferrer" title="{{ 'general.social.alt_text.share_on_pinterest' | t }}" aria-label="{{ 'general.social.alt_text.share_on_pinterest' | t }}">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0a12 12 0 0 0-4.373 23.178c-.07-.633-.133-1.608.028-2.3.145-.625.938-3.978.938-3.978s-.24-.479-.24-1.187c0-1.113.645-1.943 1.448-1.943.683 0 1.012.512 1.012 1.127 0 .687-.437 1.714-.663 2.668-.189.796.399 1.446 1.184 1.446 1.422 0 2.515-1.5 2.515-3.664 0-1.915-1.377-3.254-3.342-3.254-2.276 0-3.612 1.707-3.612 3.471 0 .688.265 1.425.595 1.826a.24.24 0 0 1 .056.23c-.061.252-.196.796-.222.907-.035.146-.116.177-.268.107-1-.465-1.624-1.926-1.624-3.1 0-2.523 1.835-4.84 5.286-4.84 2.775 0 4.932 1.977 4.932 4.62 0 2.757-1.739 4.976-4.151 4.976-.811 0-1.573-.421-1.834-.919l-.498 1.902c-.181.695-.669 1.566-.995 2.097A12 12 0 1 0 12 0z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-pinterest" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 2.01a8.1 8.1 0 0 1 5.666 2.353 8.09 8.09 0 0 1 1.277 9.68A7.95 7.95 0 0 1 10 18.04a8.2 8.2 0 0 1-2.276-.307c.403-.653.672-1.24.816-1.729l.567-2.2c.134.27.393.5.768.702.384.192.768.297 1.19.297q1.254 0 2.248-.72a4.7 4.7 0 0 0 1.537-1.969c.37-.89.554-1.848.537-2.813 0-1.249-.48-2.315-1.43-3.227a5.06 5.06 0 0 0-3.65-1.374c-.893 0-1.729.154-2.478.461a5.02 5.02 0 0 0-3.236 4.552c0 .72.134 1.355.413 1.902.269.538.672.922 1.22 1.152.096.039.182.039.25 0 .066-.028.114-.096.143-.192l.173-.653c.048-.144.02-.288-.105-.432a2.26 2.26 0 0 1-.548-1.565 3.803 3.803 0 0 1 3.976-3.861c1.047 0 1.863.288 2.44.855.585.576.883 1.315.883 2.228a6.8 6.8 0 0 1-.317 2.122 3.8 3.8 0 0 1-.893 1.556c-.384.384-.836.576-1.345.576-.413 0-.749-.144-1.018-.451-.259-.307-.345-.672-.25-1.085q.22-.77.452-1.537l.173-.701c.057-.25.086-.451.086-.624 0-.346-.096-.634-.269-.855-.192-.22-.451-.336-.797-.336-.432 0-.797.192-1.085.595-.288.394-.442.893-.442 1.499.005.374.063.746.173 1.104l.058.144c-.576 2.478-.913 3.938-1.037 4.36-.116.528-.154 1.153-.125 1.863A8.07 8.07 0 0 1 2 10.03c0-2.208.778-4.11 2.343-5.666A7.72 7.72 0 0 1 10 2.001z"/></svg>
+        </a>
+      </div>
+    {%- endif -%}
+
+    {%- if settings.share_whatsapp -%}
+      <div class="share-buttons__item" role="listitem">
+        <a href="https://wa.me/?text={{ share_title }}%20{{ share_url_encoded }}" target="_blank" rel="noopener noreferrer" title="{{ 'general.social.alt_text.share_on_whatsapp' | t }}" aria-label="{{ 'general.social.alt_text.share_on_whatsapp' | t }}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.52 3.48A11.86 11.86 0 0 0 12.08 0C5.5 0 .15 5.35.15 11.93c0 2.1.55 4.16 1.6 5.97L0 24l6.25-1.64a11.91 11.91 0 0 0 5.83 1.48h.01c6.58 0 11.93-5.35 11.93-11.93 0-3.18-1.24-6.17-3.5-8.43ZM12.09 21.82h-.01a9.9 9.9 0 0 1-5.05-1.38l-.36-.21-3.7.97.99-3.61-.23-.37a9.9 9.9 0 0 1-1.51-5.29c0-5.46 4.45-9.91 9.92-9.91a9.84 9.84 0 0 1 7.01 2.91 9.86 9.86 0 0 1 2.9 7c0 5.47-4.45 9.91-9.96 9.91Zm5.44-7.42c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35Z"/></svg>
         </a>
       </div>
     {%- endif -%}

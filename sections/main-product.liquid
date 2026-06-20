@@ -4,7 +4,7 @@
 <product-template class="product-template color-{{ section.settings.color_scheme }}">
   <div class="page-width">
     <div class="product-template__wrapper">
-      {%- comment -%} ═══ MEDIA GALLERY ═══ {%- endcomment -%}
+      {%- comment %} ═══ MEDIA GALLERY ═══ {% endcomment -%}
       <div class="product-template__media-wrapper{% if section.settings.enable_lightbox %} lightbox-enabled{% endif %}">
         <div class="swiper product-template__media-slider">
           <div class="swiper-wrapper">
@@ -12,8 +12,8 @@
               {%- for image in product.images -%}
                 <div class="swiper-slide product-template__media-slide">
                   <img
-                    src="{{ image | image_url: width: 1024 }}"
-                    srcset="{{ image | image_url: width: 1024 }} 1024w, {{ image | image_url: width: 2048 }} 2048w"
+                    src="{{ image | image_url: width: 800 }}"
+                    srcset="{{ image | image_url: width: 400 }} 400w, {{ image | image_url: width: 600 }} 600w, {{ image | image_url: width: 800 }} 800w, {{ image | image_url: width: 1024 }} 1024w, {{ image | image_url: width: 1600 }} 1600w, {{ image | image_url: width: 2048 }} 2048w"
                     sizes="(min-width: 992px) 40vw, 100vw"
                     alt="{{ image.alt | default: product.title | escape }}"
                     width="{{ image.width }}"
@@ -131,7 +131,7 @@
         {%- endif -%}
       </div>
 
-      {%- comment -%} ═══ PRODUCT INFO ═══ {%- endcomment -%}
+      {%- comment %} ═══ PRODUCT INFO ═══ {% endcomment -%}
       <product-template-info class="product-template__info">
         {%- for block in section.blocks -%}
           {%- case block.type -%}
@@ -208,7 +208,7 @@
               </ul>
 
             {%- when 'price' -%}
-              {%- comment -%} ═══ PRICE ═══ {%- endcomment -%}
+              {%- comment %} ═══ PRICE ═══ {% endcomment -%}
               {%- liquid
                 assign has_compare = false
                 if selected_variant.compare_at_price and selected_variant.compare_at_price > selected_variant.price
@@ -254,7 +254,7 @@
               </div>
 
             {%- when 'variant_picker' -%}
-              {%- comment -%} ═══ VARIANT PICKER ═══ {%- endcomment -%}
+              {%- comment %} ═══ VARIANT PICKER ═══ {% endcomment -%}
               <div
                 class="product-template__variant-picker"
                 style="--variant-picker-spacing: {{ block.settings.option_spacing }}px; --variant-unavailable-opacity: {{ block.settings.unavailable_opacity | divided_by: 100.0 }};"
@@ -271,7 +271,7 @@
                 {%- endif -%}
               </div>
             {%- when 'payment_installments' -%}
-              {%- comment -%} ═══ PAYMENT INSTALLMENTS ═══ {%- endcomment -%}
+              {%- comment %} ═══ PAYMENT INSTALLMENTS ═══ {% endcomment -%}
               <div class="product-template__payment-installments" {{ block.shopify_attributes }}>
                 {%- form 'product', product, id: 'product-payment-installments-form' -%}
                   <input type="hidden" name="id" value="{{ selected_variant.id }}" data-product-variant-id>
@@ -280,19 +280,19 @@
               </div>
 
             {%- when 'pickup_availability' -%}
-              {%- comment -%} ═══ PICKUP AVAILABILITY ═══ {%- endcomment -%}
+              {%- comment %} ═══ PICKUP AVAILABILITY ═══ {% endcomment -%}
               <div class="product-template__pickup-availability" {{ block.shopify_attributes }}>
                 {{ selected_variant | pickup_availability }}
               </div>
 
             {%- when 'coupon' -%}
-              {%- comment -%} ═══ COUPON ═══ {%- endcomment -%}
+              {%- comment %} ═══ COUPON ═══ {% endcomment -%}
               <div {{ block.shopify_attributes }}>
                 {%- render 'coupon-preview' -%}
               </div>
 
             {%- when 'stock_counter' -%}
-              {%- comment -%} ═══ STOCK COUNTER ═══ {%- endcomment -%}
+              {%- comment %} ═══ STOCK COUNTER ═══ {% endcomment -%}
               {%- assign inv = selected_variant.inventory_quantity -%}
               {%- assign stock_threshold = block.settings.stock_threshold -%}
               <div
@@ -307,7 +307,7 @@
               </div>
 
             {%- when 'quantity_selector' -%}
-              {%- comment -%} ═══ QUANTITY SELECTOR ═══ {%- endcomment -%}
+              {%- comment %} ═══ QUANTITY SELECTOR ═══ {% endcomment -%}
               <div class="product-template__quantity-group" {{ block.shopify_attributes }}>
                 <label class="product-template__quantity-label">{{ 'products.product.quantity.label' | t }}</label>
                 {%- render 'quantity-selector',
@@ -321,7 +321,7 @@
               </div>
 
             {%- when 'buy_buttons' -%}
-              {%- comment -%} ═══ ACTIONS ═══ {%- endcomment -%}
+              {%- comment %} ═══ ACTIONS ═══ {% endcomment -%}
               {%- if product.gift_card? -%}
                 <div class="product-template__gift-card-recipient" {{ block.shopify_attributes }}>
                   <details>
@@ -398,7 +398,7 @@
               </div>
 
             {%- when 'back_in_stock' -%}
-              {%- comment -%} ═══ BACK IN STOCK ═══ {%- endcomment -%}
+              {%- comment %} ═══ BACK IN STOCK ═══ {% endcomment -%}
               <div class="back-in-stock" data-back-in-stock style="{% if available %}display:none{% endif %}" {{ block.shopify_attributes }}>
                 <div class="back-in-stock__inner">
                   <div class="back-in-stock__header">
@@ -456,7 +456,7 @@
               </div>
 
             {%- when 'tabs' -%}
-              {%- comment -%} ═══ TABS ═══ {%- endcomment -%}
+              {%- comment %} ═══ TABS ═══ {% endcomment -%}
               <div class="product-template__tabs" {{ block.shopify_attributes }}>
                 <div class="product-template__tabs-nav" role="tablist">
                   {%- if product.description != blank -%}
@@ -544,13 +544,13 @@
               </div>
 
             {%- when 'share' -%}
-              {%- comment -%} ═══ SHARE ═══ {%- endcomment -%}
+              {%- comment %} ═══ SHARE ═══ {% endcomment -%}
               <div class="product-template__sharing" {{ block.shopify_attributes }}>
                 {%- render 'share-buttons' -%}
               </div>
 
             {%- when 'commitment' -%}
-              {%- comment -%} ═══ COMMITMENT ═══ {%- endcomment -%}
+              {%- comment %} ═══ COMMITMENT ═══ {% endcomment -%}
               <div class="product-template__commitment-item" {{ block.shopify_attributes }}>
                 {%- if block.settings.image != blank -%}
                   <div class="product-template__commitment-icon">
@@ -570,7 +570,7 @@
               </div>
 
             {%- when 'size_chart' -%}
-              {%- comment -%} ═══ SIZE CHART ═══ {%- endcomment -%}
+              {%- comment %} ═══ SIZE CHART ═══ {% endcomment -%}
               <div class="product-template__size-chart" {{ block.shopify_attributes }}>
                 <button type="button" class="product-template__size-chart-btn" data-size-guide-trigger>
                   {%- render 'icon', name: 'grid' -%}
@@ -579,7 +579,7 @@
               </div>
 
             {%- when 'separator' -%}
-              {%- comment -%} ═══ SEPARATOR ═══ {%- endcomment -%}
+              {%- comment %} ═══ SEPARATOR ═══ {% endcomment -%}
               <hr
                 class="product-template__separator"
                 style="border-color: {{ block.settings.color | default: '#e5e5e5' }}; opacity: {{ block.settings.opacity | divided_by: 100.0 }};"
@@ -587,7 +587,7 @@
               >
 
             {%- when 'icon_with_text' -%}
-              {%- comment -%} ═══ ICON WITH TEXT ═══ {%- endcomment -%}
+              {%- comment %} ═══ ICON WITH TEXT ═══ {% endcomment -%}
               <div
                 class="product-template__icon-text product-template__icon-text--{{ block.settings.layout }}"
                 {{ block.shopify_attributes }}
@@ -615,7 +615,7 @@
               </div>
 
             {%- when 'badges' -%}
-              {%- comment -%} ═══ BADGES & TAGS ═══ {%- endcomment -%}
+              {%- comment %} ═══ BADGES & TAGS ═══ {% endcomment -%}
               <div class="product-template__badges" {{ block.shopify_attributes }}>
                 {%- for tag in product.tags -%}
                   {%- assign tag_lower = tag | downcase -%}
@@ -626,7 +626,7 @@
               </div>
 
             {%- when '@app' -%}
-              {%- comment -%} ═══ APP BLOCK ═══ {%- endcomment -%}
+              {%- comment %} ═══ APP BLOCK ═══ {% endcomment -%}
               {% render block %}
 
           {%- endcase -%}
@@ -635,7 +635,7 @@
     </div>
 
 
-    {%- comment -%} ═══ RELATED PRODUCTS ═══ {%- endcomment -%}
+    {%- comment %} ═══ RELATED PRODUCTS ═══ {% endcomment -%}
     <div class="product-template__other">
       {%- if section.settings.show_related and product.collections.size > 0 -%}
         {%- assign collection_relate_object = product.collections.first -%}

@@ -1,7 +1,7 @@
-{%- comment -%}
+{%- comment %}
   Section: Map
   Mô tả: Google Maps embed — cho store locator / about page.
-{%- endcomment -%}
+{% endcomment -%}
 
 <div
   id="section-{{ section.id }}"
@@ -47,7 +47,7 @@
         </div>
       {%- endif -%}
 
-      {%- comment -%} Info overlay {%- endcomment -%}
+      {%- comment %} Info overlay {% endcomment -%}
       {%- if section.settings.show_info -%}
         <div class="section-map__info">
           {%- if section.settings.store_name != blank -%}

@@ -13,6 +13,8 @@
       this.arrowRight = this.querySelector('.megamenu__arrow--right');
       this.scrollStep = 200;
       this.scrollOffset = 0;
+      this._openItem = null;
+      this._hoverCapable = (typeof window.matchMedia === 'function') && window.matchMedia('(hover: hover)').matches;
 
       if (!this.container || !this.list) return;
 
@@ -22,6 +24,9 @@
 
     disconnectedCallback() {
       if (this._boundResizeHandler) window.removeEventListener('resize', this._boundResizeHandler);
+      if (this._boundDocClick) document.removeEventListener('click', this._boundDocClick, true);
+      if (this._boundDocKeydown) document.removeEventListener('keydown', this._boundDocKeydown);
+      if (this._boundFocusIn) document.removeEventListener('focusin', this._boundFocusIn);
     }
 
     bindEvents() {

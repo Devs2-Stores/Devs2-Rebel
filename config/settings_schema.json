@@ -2,10 +2,10 @@
   {
     "name": "theme_info",
     "theme_name": "Devs2 Rebel",
-    "theme_version": "2.0.0",
+    "theme_version": "1.0.0",
     "theme_author": "Devs2",
-    "theme_documentation_url": "https://devs2-rebel.myshopify.com",
-    "theme_support_url": "https://devs2-rebel.myshopify.com"
+    "theme_documentation_url": "https://docs.devs2.com/rebel",
+    "theme_support_url": "https://devs2.com/support"
   },
   {
     "name": "t:settings_schema.logo.name",
@@ -166,6 +166,12 @@
           {
             "type": "header",
             "content": "t:settings_schema.colors.settings.header__product.content"
+          },
+          {
+            "type": "color",
+            "id": "color_price",
+            "label": "t:settings_schema.colors.settings.color_price.label",
+            "default": "#000000"
           },
           {
             "type": "color",
@@ -1357,6 +1363,12 @@
         "id": "share_linkedin",
         "label": "t:settings_schema.share.settings.linkedin.label",
         "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "share_whatsapp",
+        "label": "t:settings_schema.share.settings.whatsapp.label",
+        "default": true
       },
       {
         "type": "checkbox",

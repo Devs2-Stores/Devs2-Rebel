@@ -12,6 +12,15 @@
           loading: 'lazy', decoding: 'async'
         }}
       </div>
+      {%- else -%}
+      <div class="newsletter-popup-banner">
+        <img
+          src="{{ 'newsletter-popup-banner.jpg' | asset_url }}"
+          alt="{{ settings.newsletter_modal_heading | default: 'Newsletter' | escape }}"
+          width="900" height="1400"
+          loading="lazy" decoding="async"
+        >
+      </div>
       {%- endif -%}
       <div class="newsletter-popup-content">
         <button type="button" data-action="close-newsletter-popup" class="newsletter-popup-close" aria-label="{{ 'accessibility.close' | t }}">

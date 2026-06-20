@@ -761,25 +761,6 @@ toggle-password { display: block; }
 toggle-password .icon-eye-show,
 toggle-password .icon-eye-hide { cursor: pointer; }
 
-/* ── Reduced Motion ────────────────────────────── */
-@media (prefers-reduced-motion: reduce) {
-  .customer-sidebar,
-  .customer-sidebar__link,
-  .account-template__order-item,
-  .account-template__address-item,
-  .account-template__address-card,
-  .addresses-template__item,
-  .orders-template__item {
-    transition: none !important;
-  }
-  .account-template__order-item:hover,
-  .account-template__address-item:hover,
-  .account-template__address-card:hover,
-  .addresses-template__item:hover,
-  .orders-template__item:hover {
-    transform: none !important;
-  }
-}
 toggle-password .icon-eye-show:hover,
 toggle-password .icon-eye-hide:hover { opacity: 0.7; }
 toggle-password .icon-eye-hide { display: none; }

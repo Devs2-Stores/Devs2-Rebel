@@ -88,6 +88,9 @@
         "header__product": {
           "content": "Product"
         },
+        "color_price": {
+          "label": "Price"
+        },
         "sale_price": {
           "label": "Sale price"
         },
@@ -383,6 +386,9 @@
         },
         "linkedin": {
           "label": "LinkedIn"
+        },
+        "whatsapp": {
+          "label": "WhatsApp"
         },
         "email": {
           "label": "Email"
@@ -1112,6 +1118,18 @@
         },
         "enable_filtering": {
           "label": "Enable filtering"
+        },
+        "price_filter_style": {
+          "label": "Price filter style",
+          "options__input": {
+            "label": "Input fields"
+          },
+          "options__range": {
+            "label": "Range slider"
+          },
+          "options__checkbox": {
+            "label": "Checkbox presets"
+          }
         },
         "enable_sorting": {
           "label": "Enable sorting"

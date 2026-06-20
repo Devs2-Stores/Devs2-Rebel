@@ -1,7 +1,7 @@
-{%- comment -%}
+{%- comment %}
   Section: Sticky Scroll Reveal
   Mô tả: Cột trái sticky, cột phải scroll qua nhiều content blocks.
-{%- endcomment -%}
+{% endcomment -%}
 
 <div
   id="section-{{ section.id }}"
@@ -15,7 +15,7 @@
 >
   <div class="page-width">
     <div class="section-sticky-scroll__grid section-sticky-scroll__grid--{{ section.settings.sticky_side }}">
-      {%- comment -%} Sticky column {%- endcomment -%}
+      {%- comment %} Sticky column {% endcomment -%}
       <div class="section-sticky-scroll__sticky">
         {%- if section.settings.sticky_image != blank -%}
           <div class="section-sticky-scroll__media">
@@ -34,7 +34,7 @@
         {%- endif -%}
       </div>
 
-      {%- comment -%} Scroll column {%- endcomment -%}
+      {%- comment %} Scroll column {% endcomment -%}
       <div class="section-sticky-scroll__scroll">
         {%- for block in section.blocks -%}
           <div class="section-sticky-scroll__item" {{ block.shopify_attributes }}>

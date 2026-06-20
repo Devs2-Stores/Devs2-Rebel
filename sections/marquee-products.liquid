@@ -1,7 +1,7 @@
-{%- comment -%}
+{%- comment %}
   Section: Marquee Products
   Mô tả: Auto-scrolling horizontal product cards — infinite.
-{%- endcomment -%}
+{% endcomment -%}
 
 {%- liquid
   assign collection = section.settings.collection
@@ -37,7 +37,7 @@
           </div>
         {%- endfor -%}
       </div>
-      {%- comment -%} Duplicate for infinite loop {%- endcomment -%}
+      {%- comment %} Duplicate for infinite loop {% endcomment -%}
       <div class="section-marquee-products__list" aria-hidden="true">
         {%- for product in collection.products limit: products_to_show -%}
           <div class="section-marquee-products__item">
@@ -47,7 +47,7 @@
       </div>
     </div>
   {%- else -%}
-    <p class="page-width" style="text-align:center;color:rgba(var(--color-foreground),0.3);padding:2rem;">Select a collection</p>
+    <p class="page-width section-marquee-products__empty">{{ 'general.select_collection' | t }}</p>
   {%- endif -%}
 </div>
 
@@ -71,16 +71,13 @@
   }
   .section-marquee-products__head { text-align: center; margin-bottom: 1.5rem; }
   .section-marquee-products__heading { margin: 0; color: rgb(var(--color-foreground)); }
+  .section-marquee-products__empty { text-align: center; color: rgba(var(--color-foreground), 0.3); padding: 2rem; }
 
   .section-marquee-products__track {
     display: flex; width: max-content;
     animation: mpScroll var(--mp-speed, 30s) linear infinite;
     animation-direction: var(--mp-direction, normal);
   }
-  @media (prefers-reduced-motion: reduce) {
-    .section-marquee-products__track { animation: none; overflow-x: auto; }
-  }
-
   @keyframes mpScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
   .section-marquee-products__list { display: flex; gap: 16px; padding-right: 16px; }

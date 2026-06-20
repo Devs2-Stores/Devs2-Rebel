@@ -1,7 +1,7 @@
-{%- comment -%}
+{%- comment %}
   Section: Scrolling Text Marquee
   Mô tả: Text chạy ngang vô hạn — tagline, thông báo, branding.
-{%- endcomment -%}
+{% endcomment -%}
 
 {%- liquid
   assign speed = section.settings.speed
@@ -39,6 +39,10 @@
   .section-marquee {
     padding-block: var(--mq-mt) var(--mq-mb);
     background: rgb(var(--color-background));
+    overflow: hidden;
+    max-width: 100%;
+  }
+  .section-marquee-wrapper {
     overflow: hidden;
   }
   @media (min-width: 750px) {

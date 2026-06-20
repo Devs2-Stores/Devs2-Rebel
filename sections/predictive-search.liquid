@@ -1,9 +1,9 @@
 {%- layout none -%}
-{%- comment -%}
+{%- comment %}
   Predictive Search Section
   Renders search suggestions using Shopify's predictive_search object.
   Called via Section Rendering API: /search/suggest?section_id=predictive-search&q=...
-{%- endcomment -%}
+{% endcomment -%}
 
 {%- if predictive_search.performed -%}
 <div id="predictive-search-results">

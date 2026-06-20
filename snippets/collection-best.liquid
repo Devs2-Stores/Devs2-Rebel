@@ -5,7 +5,9 @@
   @param {string} [source='current'] - 'current' collection or 'manual'
   @param {object} [manual_collection] - Collection object when source=manual
   @param {number} [limit=10] - Max products to show
-  @example {%- render 'collection-best', enabled: block.settings.enabled, title: block.settings.title, source: block.settings.source, manual_collection: block.settings.manual_collection, limit: block.settings.limit -%}
+  @param {number} [columns_mobile=2] - Number of products to show on mobile
+  @param {number} [columns_desktop=4] - Number of products to show on desktop
+  @example {%- render 'collection-best', enabled: block.settings.enabled, title: block.settings.title, source: block.settings.source, manual_collection: block.settings.manual_collection, limit: block.settings.limit, columns_mobile: block.settings.columns_mobile, columns_desktop: block.settings.columns_desktop -%}
 {% enddoc %}
 
 {%- liquid
@@ -15,6 +17,10 @@
   assign limit = limit | default: 10
   assign title = title | default: 'Best Sellers'
   assign source = source | default: 'current'
+  assign columns_mobile = columns_mobile | default: 2
+  assign columns_desktop = columns_desktop | default: 4
+  assign columns_tablet = columns_tablet | default: columns_desktop
+  assign columns_laptop = columns_laptop | default: columns_desktop
 -%}
 
 {%- if enabled -%}
@@ -31,7 +37,14 @@
       <div class="collection-best__header">
         <h2 class="collection-best__title">{{ title | escape }}</h2>
       </div>
-      <div class="collection-best__content swiper" style="--swiper-cols-mobile: 2; --swiper-cols-tablet: 3; --swiper-cols-laptop: 4; --swiper-cols-desktop: 5; --swiper-gap-mobile: 10px; --swiper-gap-tablet: 15px; --swiper-gap-laptop: 20px; --swiper-gap-desktop: 20px;">
+      <div
+        class="collection-best__content swiper"
+        data-columns-mobile="{{ columns_mobile }}"
+        data-columns-tablet="{{ columns_tablet }}"
+        data-columns-laptop="{{ columns_laptop }}"
+        data-columns-desktop="{{ columns_desktop }}"
+        style="--swiper-cols-mobile: {{ columns_mobile }}; --swiper-cols-tablet: {{ columns_tablet }}; --swiper-cols-laptop: {{ columns_laptop }}; --swiper-cols-desktop: {{ columns_desktop }}; --swiper-gap-mobile: 10px; --swiper-gap-tablet: 15px; --swiper-gap-laptop: 20px; --swiper-gap-desktop: 20px;"
+      >
         <div class="swiper-wrapper">
           {%- for product in target_collection.products limit: limit -%}
             <div class="swiper-slide">

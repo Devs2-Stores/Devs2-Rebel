@@ -100,13 +100,13 @@
         this.updateTotals(cart);
 
         if (this.itemsContainer) {
-          const itemHtml = await ThemeUtils.request({
-            url: ((themeConfig.routes && themeConfig.routes.cart_url) || '/cart') + '?view=item',
-            method: 'GET',
-            parser: 'text'
-          });
-          this.itemsContainer.innerHTML = itemHtml;
           const isEmpty = cart.item_count === 0;
+          if (isEmpty) {
+            this.itemsContainer.innerHTML = '';
+          } else {
+            const itemHtml = await this.fetchCartItemsHtml();
+            this.itemsContainer.innerHTML = itemHtml;
+          }
           ThemeUtils.toggleClass(this.itemsContainer, 'hidden', isEmpty);
           if (this.itemsEmpty) ThemeUtils.toggleClass(this.itemsEmpty, 'hidden', !isEmpty);
         }
@@ -118,6 +118,22 @@
         this.isLoading = false;
         this.toggleLoading(false);
       }
+    }
+
+    async fetchCartItemsHtml() {
+      const cartUrl = (themeConfig.routes && themeConfig.routes.cart_url) || '/cart';
+      const itemHtml = await ThemeUtils.request({
+        url: cartUrl + '?section_id=main-cart-items',
+        method: 'GET',
+        parser: 'text'
+      });
+      const html = String(itemHtml || '').trim();
+
+      if (!html || html.charAt(0) === '{' || html.charAt(0) === '[') {
+        throw new Error('Cart items endpoint returned non-HTML content');
+      }
+
+      return html;
     }
 
     updateQuantity(line, quantity) {

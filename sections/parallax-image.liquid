@@ -1,7 +1,7 @@
-{%- comment -%}
+{%- comment %}
   Section: Parallax Image Banner
   Mô tả: Image background scroll chậm hơn content → hiệu ứng chiều sâu.
-{%- endcomment -%}
+{% endcomment -%}
 
 <div
   id="section-{{ section.id }}"
@@ -63,7 +63,6 @@
     bg.style.transform = 'translate3d(0, ' + offset + 'px, 0)';
   }
 
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 })();
