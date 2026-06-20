@@ -19,9 +19,10 @@ ROOT = Path(__file__).resolve().parent.parent
 
 # ── Load .env ─────────────────────────────────────────────────
 def load_env():
+    """Load .env file if present (local dev). On CI, env vars are already set."""
     env_path = ROOT / ".env"
     if not env_path.exists():
-        raise FileNotFoundError(".env not found")
+        return  # CI: env vars set by workflow
     with open(env_path) as f:
         for line in f:
             line = line.strip()
