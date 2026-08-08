@@ -31,47 +31,87 @@
       </div>
     {%- endif -%}
 
+    {%- liquid
+      assign mobile_card_size = '50vw'
+      if section.settings.columns_mobile == '1'
+        assign mobile_card_size = '100vw'
+      endif
+
+      assign desktop_card_size = '33vw'
+      case section.settings.columns_desktop
+        when 2
+          assign desktop_card_size = '50vw'
+        when 3
+          assign desktop_card_size = '33vw'
+        when 4
+          assign desktop_card_size = '25vw'
+        when 5
+          assign desktop_card_size = '20vw'
+      endcase
+
+      capture card_sizes
+        echo '(max-width: 749px) '
+        echo mobile_card_size
+        echo ', '
+        echo desktop_card_size
+      endcapture
+    -%}
     <div class="section-collection-list__grid">
       {%- for block in section.blocks -%}
-        {%- assign col = block.settings.collection -%}
-        <a
-          href="{{ col.url | default: '#' }}"
-          class="section-collection-list__card section-collection-list__card--{{ section.settings.image_ratio }}"
-          {{ block.shopify_attributes }}
-        >
-          <div class="section-collection-list__media">
-            {%- if block.settings.image != blank -%}
-              {{ block.settings.image | image_url: width: 800 | image_tag:
-                widths: '300, 400, 600, 800',
-                sizes: '(max-width: 749px) 50vw, 25vw',
-                loading: 'lazy', decoding: 'async',
-                alt: col.title | default: 'Collection',
-                class: 'section-collection-list__img'
-              }}
-            {%- elsif col.featured_image -%}
-              {{ col.featured_image | image_url: width: 800 | image_tag:
-                widths: '300, 400, 600, 800',
-                sizes: '(max-width: 749px) 50vw, 25vw',
-                loading: 'lazy', decoding: 'async',
-                alt: col.title,
-                class: 'section-collection-list__img'
-              }}
-            {%- else -%}
-              <div class="section-collection-list__placeholder">
-                {{ 'collection-1' | placeholder_svg_tag }}
-              </div>
-            {%- endif -%}
-            <div class="section-collection-list__overlay"></div>
+        {%- liquid
+          assign col = block.settings.collection
+          assign card_title = col.title | default: block.settings.custom_title | default: 'Collection'
+          assign card_url = col.url | default: blank
+        -%}
+        {%- if card_url != blank -%}
+          <a
+            href="{{ card_url }}"
+            class="section-collection-list__card section-collection-list__card--{{ section.settings.image_ratio }}"
+            {{ block.shopify_attributes }}
+          >
+        {%- else -%}
+          <div
+            class="section-collection-list__card section-collection-list__card--{{ section.settings.image_ratio }} section-collection-list__card--static"
+            {{ block.shopify_attributes }}
+          >
+        {%- endif -%}
+            <div class="section-collection-list__media">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 800 | image_tag:
+                  widths: '300, 400, 600, 800',
+                  sizes: card_sizes,
+                  loading: 'lazy', decoding: 'async',
+                  alt: card_title,
+                  class: 'section-collection-list__img'
+                }}
+              {%- elsif col.featured_image -%}
+                {{ col.featured_image | image_url: width: 800 | image_tag:
+                  widths: '300, 400, 600, 800',
+                  sizes: card_sizes,
+                  loading: 'lazy', decoding: 'async',
+                  alt: card_title,
+                  class: 'section-collection-list__img'
+                }}
+              {%- else -%}
+                <div class="section-collection-list__placeholder">
+                  {{ 'collection-1' | placeholder_svg_tag }}
+                </div>
+              {%- endif -%}
+              <div class="section-collection-list__overlay"></div>
+            </div>
+            <div class="section-collection-list__info">
+              <h3 class="section-collection-list__title">
+                {{ card_title }}
+              </h3>
+              {%- if section.settings.show_count and col != blank -%}
+                <span class="section-collection-list__count">{{ 'sections.collection_list.product_count' | t: count: col.products_count }}</span>
+              {%- endif -%}
+            </div>
+        {%- if card_url != blank -%}
+          </a>
+        {%- else -%}
           </div>
-          <div class="section-collection-list__info">
-            <h3 class="section-collection-list__title">
-              {{ col.title | default: block.settings.custom_title | default: 'Collection' }}
-            </h3>
-            {%- if section.settings.show_count and col != blank -%}
-              <span class="section-collection-list__count">{{ 'sections.collection_list.product_count' | t: count: col.products_count }}</span>
-            {%- endif -%}
-          </div>
-        </a>
+        {%- endif -%}
       {%- endfor -%}
     </div>
   </div>
@@ -115,12 +155,20 @@
   .section-collection-list__card--landscape { aspect-ratio: 4 / 3; }
 
   .section-collection-list__media {
-    position: absolute; inset: 0;
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
   }
+  .section-collection-list__media img,
   .section-collection-list__img {
-    width: 100%; height: 100%; object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+    display: block;
     transition: transform 0.6s ease;
   }
+  .section-collection-list__card:hover .section-collection-list__media img,
   .section-collection-list__card:hover .section-collection-list__img {
     transform: scale(1.05);
   }

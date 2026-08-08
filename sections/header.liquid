@@ -1,5 +1,6 @@
 {{ 'header.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'header.js' | asset_url }}" defer="defer"></script>
+{%- assign wishlist_url = section.settings.wishlist_page | default: '/pages/wishlist' -%}
 <global-header class="header color-{{ section.settings.color_scheme }}" data-sticky="{{ section.settings.sticky_enable }}">
   <div class="page-width">
     <div class="header__wrapper">
@@ -30,7 +31,6 @@
           {%- render 'icon', name: 'search' -%}
         </button>
         {%- if section.settings.show_wishlist -%}
-        {%- assign wishlist_url = section.settings.wishlist_page | default: '/pages/wishlist' -%}
         <a href="{{ wishlist_url }}" class="header__action-btn wishlist-icon-wrapper" title="{{ 'accessibility.wishlist' | t }}">
           {%- render 'icon', name: 'heart' -%}
           {%- if section.settings.show_wishlist_count -%}
@@ -58,6 +58,7 @@
     </div>
   </div>
 </global-header>
+{%- render 'mobile-menu', menu_handle: section.settings.menu, show_wishlist: section.settings.show_wishlist, wishlist_url: wishlist_url -%}
 
 {% schema %}
 {

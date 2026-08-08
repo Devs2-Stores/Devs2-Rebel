@@ -1,7 +1,7 @@
 {%- comment %}
   Section: Featured Collection
-  Mô tả: Hiển thị sản phẩm từ 1 collection dưới dạng grid hoặc slider.
-  Tái sử dụng snippet product-card.liquid.
+  Shows products from one collection as a grid or slider.
+  Reuses snippets/product-card.liquid.
 {% endcomment -%}
 
 {%- liquid
@@ -239,14 +239,18 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s ease;
-    outline: none;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
   }
 
   .section-featured-collection__nav:hover {
     background: rgb(var(--color-accent));
     border-color: rgb(var(--color-accent));
     color: #fff;
+  }
+
+  .section-featured-collection__nav:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 3px;
   }
 
   .section-featured-collection__nav--prev { left: -1rem; }

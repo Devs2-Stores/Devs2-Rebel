@@ -23,7 +23,17 @@
         <h1 class="about-hero__title sr-only">{{ page.title | default: 'About us' | escape }}</h1>
         {%- endif -%}
         {%- if section.settings.hero_description != blank -%}
-        <p class="about-hero__description">{{ section.settings.hero_description }}</p>
+        <div class="about-hero__description">{{ section.settings.hero_description }}</div>
+        {%- endif -%}
+        {%- if section.settings.hero_primary_label != blank or section.settings.hero_secondary_label != blank -%}
+        <div class="about-hero__actions">
+          {%- if section.settings.hero_primary_label != blank and section.settings.hero_primary_link != blank -%}
+          <a href="{{ section.settings.hero_primary_link }}" class="about-hero__button about-hero__button--primary">{{ section.settings.hero_primary_label | escape }}</a>
+          {%- endif -%}
+          {%- if section.settings.hero_secondary_label != blank and section.settings.hero_secondary_link != blank -%}
+          <a href="{{ section.settings.hero_secondary_link }}" class="about-hero__button about-hero__button--secondary">{{ section.settings.hero_secondary_label | escape }}</a>
+          {%- endif -%}
+        </div>
         {%- endif -%}
       </div>
     </div>
@@ -81,6 +91,54 @@
         {%- if section.settings.story_content != blank -%}
         <div class="about-story__content">{{ section.settings.story_content }}</div>
         {%- endif -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- if section.settings.show_actions -%}
+  <section class="about-actions section-padding">
+    <div class="page-width">
+      <div class="about-actions__wrap">
+        {%- if section.settings.actions_subheading != blank or section.settings.actions_title != blank or section.settings.actions_description != blank -%}
+        <div class="about-actions__head">
+          {%- if section.settings.actions_subheading != blank -%}
+          <p class="about-actions__subheading">{{ section.settings.actions_subheading | escape }}</p>
+          {%- endif -%}
+          {%- if section.settings.actions_title != blank -%}
+          <h2 class="about-actions__title">{{ section.settings.actions_title | escape }}</h2>
+          {%- endif -%}
+          {%- if section.settings.actions_description != blank -%}
+          <div class="about-actions__description">{{ section.settings.actions_description }}</div>
+          {%- endif -%}
+        </div>
+        {%- endif -%}
+        <div class="about-actions__grid">
+          {%- if section.settings.action_1_title != blank or section.settings.action_1_text != blank or section.settings.action_1_label != blank -%}
+          <article class="about-actions__item">
+            {%- if section.settings.action_1_eyebrow != blank -%}<p class="about-actions__eyebrow">{{ section.settings.action_1_eyebrow | escape }}</p>{%- endif -%}
+            {%- if section.settings.action_1_title != blank -%}<h3 class="about-actions__item-title">{{ section.settings.action_1_title | escape }}</h3>{%- endif -%}
+            {%- if section.settings.action_1_text != blank -%}<p class="about-actions__item-text">{{ section.settings.action_1_text | escape }}</p>{%- endif -%}
+            {%- if section.settings.action_1_label != blank and section.settings.action_1_link != blank -%}<a href="{{ section.settings.action_1_link }}" class="about-actions__link">{{ section.settings.action_1_label | escape }}</a>{%- endif -%}
+          </article>
+          {%- endif -%}
+          {%- if section.settings.action_2_title != blank or section.settings.action_2_text != blank or section.settings.action_2_label != blank -%}
+          <article class="about-actions__item">
+            {%- if section.settings.action_2_eyebrow != blank -%}<p class="about-actions__eyebrow">{{ section.settings.action_2_eyebrow | escape }}</p>{%- endif -%}
+            {%- if section.settings.action_2_title != blank -%}<h3 class="about-actions__item-title">{{ section.settings.action_2_title | escape }}</h3>{%- endif -%}
+            {%- if section.settings.action_2_text != blank -%}<p class="about-actions__item-text">{{ section.settings.action_2_text | escape }}</p>{%- endif -%}
+            {%- if section.settings.action_2_label != blank and section.settings.action_2_link != blank -%}<a href="{{ section.settings.action_2_link }}" class="about-actions__link">{{ section.settings.action_2_label | escape }}</a>{%- endif -%}
+          </article>
+          {%- endif -%}
+          {%- if section.settings.action_3_title != blank or section.settings.action_3_text != blank or section.settings.action_3_label != blank -%}
+          <article class="about-actions__item">
+            {%- if section.settings.action_3_eyebrow != blank -%}<p class="about-actions__eyebrow">{{ section.settings.action_3_eyebrow | escape }}</p>{%- endif -%}
+            {%- if section.settings.action_3_title != blank -%}<h3 class="about-actions__item-title">{{ section.settings.action_3_title | escape }}</h3>{%- endif -%}
+            {%- if section.settings.action_3_text != blank -%}<p class="about-actions__item-text">{{ section.settings.action_3_text | escape }}</p>{%- endif -%}
+            {%- if section.settings.action_3_label != blank and section.settings.action_3_link != blank -%}<a href="{{ section.settings.action_3_link }}" class="about-actions__link">{{ section.settings.action_3_label | escape }}</a>{%- endif -%}
+          </article>
+          {%- endif -%}
+        </div>
       </div>
     </div>
   </section>
@@ -154,6 +212,30 @@
     },
     {
       "type": "header",
+      "content": "Hero actions"
+    },
+    {
+      "type": "text",
+      "id": "hero_primary_label",
+      "label": "Primary button label"
+    },
+    {
+      "type": "url",
+      "id": "hero_primary_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "hero_secondary_label",
+      "label": "Secondary button label"
+    },
+    {
+      "type": "url",
+      "id": "hero_secondary_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "header",
       "content": "t:sections.page_about.settings.header__mission.content"
     },
     {
@@ -191,6 +273,106 @@
       "type": "richtext",
       "id": "story_content",
       "label": "t:sections.page_about.settings.story_content.label"
+    },
+    {
+      "type": "header",
+      "content": "About actions"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_actions",
+      "label": "Show action cards",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "actions_subheading",
+      "label": "Section eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "actions_title",
+      "label": "Section title"
+    },
+    {
+      "type": "richtext",
+      "id": "actions_description",
+      "label": "Section description"
+    },
+    {
+      "type": "text",
+      "id": "action_1_eyebrow",
+      "label": "Card 1 eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "action_1_title",
+      "label": "Card 1 title"
+    },
+    {
+      "type": "text",
+      "id": "action_1_text",
+      "label": "Card 1 text"
+    },
+    {
+      "type": "text",
+      "id": "action_1_label",
+      "label": "Card 1 link label"
+    },
+    {
+      "type": "url",
+      "id": "action_1_link",
+      "label": "Card 1 link"
+    },
+    {
+      "type": "text",
+      "id": "action_2_eyebrow",
+      "label": "Card 2 eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "action_2_title",
+      "label": "Card 2 title"
+    },
+    {
+      "type": "text",
+      "id": "action_2_text",
+      "label": "Card 2 text"
+    },
+    {
+      "type": "text",
+      "id": "action_2_label",
+      "label": "Card 2 link label"
+    },
+    {
+      "type": "url",
+      "id": "action_2_link",
+      "label": "Card 2 link"
+    },
+    {
+      "type": "text",
+      "id": "action_3_eyebrow",
+      "label": "Card 3 eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "action_3_title",
+      "label": "Card 3 title"
+    },
+    {
+      "type": "text",
+      "id": "action_3_text",
+      "label": "Card 3 text"
+    },
+    {
+      "type": "text",
+      "id": "action_3_label",
+      "label": "Card 3 link label"
+    },
+    {
+      "type": "url",
+      "id": "action_3_link",
+      "label": "Card 3 link"
     },
     {
       "type": "header",

@@ -13,67 +13,113 @@
 
   <section class="contact-main section-padding">
     <div class="page-width">
-      <div class="contact-main__wrap">
+      <div class="contact-main__wrap" data-contact-sticky-wrap>
         <div class="contact-main__info">
-          <h2 class="contact-main__info-title">{{ 'sections.page_contact.contact_info' | t }}</h2>
+          <div class="contact-main__info-panel contact-main__sticky-target">
+            {%- if section.settings.info_eyebrow != blank -%}<p class="contact-main__eyebrow">{{ section.settings.info_eyebrow | escape }}</p>{%- endif -%}
+            <h2 class="contact-main__info-title">{{ 'sections.page_contact.contact_info' | t }}</h2>
+            {%- if section.settings.info_intro != blank -%}<p class="contact-main__info-intro">{{ section.settings.info_intro | escape }}</p>{%- endif -%}
 
-          {%- if section.settings.address != blank -%}
-          <div class="contact-main__info-item">
-            <div class="contact-main__info-item-icon">
-              {%- render 'icon', name: 'location' -%}
+            {%- if section.settings.stat_1_value != blank or section.settings.stat_2_value != blank -%}
+            <div class="contact-main__info-stats">
+              {%- if section.settings.stat_1_value != blank -%}
+              <div class="contact-main__info-stat">
+                <strong>{{ section.settings.stat_1_value | escape }}</strong>
+                {%- if section.settings.stat_1_label != blank -%}<span>{{ section.settings.stat_1_label | escape }}</span>{%- endif -%}
+              </div>
+              {%- endif -%}
+              {%- if section.settings.stat_2_value != blank -%}
+              <div class="contact-main__info-stat">
+                <strong>{{ section.settings.stat_2_value | escape }}</strong>
+                {%- if section.settings.stat_2_label != blank -%}<span>{{ section.settings.stat_2_label | escape }}</span>{%- endif -%}
+              </div>
+              {%- endif -%}
             </div>
-            <div class="contact-main__info-item-content">
-              <h3 class="contact-main__info-item-title">{{ 'sections.page_contact.address' | t }}</h3>
-              <p class="contact-main__info-item-text">{{ section.settings.address | escape }}</p>
-            </div>
-          </div>
-          {%- endif -%}
+            {%- endif -%}
 
-          {%- if section.settings.phone != blank -%}
-          <div class="contact-main__info-item">
-            <div class="contact-main__info-item-icon">
-              {%- render 'icon', name: 'phone' -%}
-            </div>
-            <div class="contact-main__info-item-content">
-              <h3 class="contact-main__info-item-title">{{ 'sections.page_contact.phone' | t }}</h3>
-              <a href="tel:{{ section.settings.phone | replace: ' ', '' }}" class="contact-main__info-item-text" title="{{ 'sections.page_contact.call' | t }} {{ section.settings.phone | escape }}">{{ section.settings.phone | escape }}</a>
-            </div>
-          </div>
-          {%- endif -%}
+            {%- liquid
+              assign contact_address = section.settings.address | strip
+              assign contact_phone = section.settings.phone | strip
+              assign contact_phone_href = contact_phone | replace: ' ', ''
+              assign contact_email = section.settings.email | strip
+              assign contact_hours = section.settings.hours | strip
+              assign has_contact_info = false
+              if contact_address != blank or contact_phone != blank or contact_email != blank or contact_hours != blank
+                assign has_contact_info = true
+              endif
+            -%}
+            {%- if has_contact_info -%}
+              <div class="contact-main__info-list">
+                {%- if contact_address != blank -%}
+                  <div class="contact-main__info-item">
+                    <div class="contact-main__info-item-icon">
+                      {%- render 'icon', name: 'location' -%}
+                    </div>
+                    <div class="contact-main__info-item-content">
+                      <h3 class="contact-main__info-item-title">{{ 'sections.page_contact.address' | t }}</h3>
+                      <p class="contact-main__info-item-text">{{ contact_address | escape }}</p>
+                    </div>
+                  </div>
+                {%- endif -%}
 
-          {%- if section.settings.email != blank -%}
-          <div class="contact-main__info-item">
-            <div class="contact-main__info-item-icon">
-              {%- render 'icon', name: 'email' -%}
-            </div>
-            <div class="contact-main__info-item-content">
-              <h3 class="contact-main__info-item-title">{{ 'sections.page_contact.email' | t }}</h3>
-              <a href="mailto:{{ section.settings.email }}" class="contact-main__info-item-text" title="Email {{ section.settings.email | escape }}">{{ section.settings.email | escape }}</a>
-            </div>
-          </div>
-          {%- endif -%}
+                {%- if contact_phone != blank -%}
+                  <div class="contact-main__info-item">
+                    <div class="contact-main__info-item-icon">
+                      {%- render 'icon', name: 'phone' -%}
+                    </div>
+                    <div class="contact-main__info-item-content">
+                      <h3 class="contact-main__info-item-title">{{ 'sections.page_contact.phone' | t }}</h3>
+                      <a href="tel:{{ contact_phone_href }}" class="contact-main__info-item-text" title="{{ 'sections.page_contact.call' | t }} {{ contact_phone | escape }}">{{ contact_phone | escape }}</a>
+                    </div>
+                  </div>
+                {%- endif -%}
 
-          {%- if section.settings.hours != blank -%}
-          <div class="contact-main__info-item">
-            <div class="contact-main__info-item-icon">
-              {%- render 'icon', name: 'calendar' -%}
-            </div>
-            <div class="contact-main__info-item-content">
-              <h3 class="contact-main__info-item-title">{{ 'sections.page_contact.hours' | t }}</h3>
-              <p class="contact-main__info-item-text">{{ section.settings.hours | escape }}</p>
-            </div>
-          </div>
-          {%- endif -%}
+                {%- if contact_email != blank -%}
+                  <div class="contact-main__info-item">
+                    <div class="contact-main__info-item-icon">
+                      {%- render 'icon', name: 'email' -%}
+                    </div>
+                    <div class="contact-main__info-item-content">
+                      <h3 class="contact-main__info-item-title">{{ 'sections.page_contact.email' | t }}</h3>
+                      <a href="mailto:{{ contact_email }}" class="contact-main__info-item-text" title="Email {{ contact_email | escape }}">{{ contact_email | escape }}</a>
+                    </div>
+                  </div>
+                {%- endif -%}
 
-          {%- if section.settings.show_social -%}
-          <div class="contact-main__info-social">
-            <h3 class="contact-main__info-social-title">{{ 'sections.page_contact.follow_us' | t }}</h3>
-            {%- render 'shop-social' -%}
+                {%- if contact_hours != blank -%}
+                  <div class="contact-main__info-item">
+                    <div class="contact-main__info-item-icon">
+                      {%- render 'icon', name: 'calendar' -%}
+                    </div>
+                    <div class="contact-main__info-item-content">
+                      <h3 class="contact-main__info-item-title">{{ 'sections.page_contact.hours' | t }}</h3>
+                      <p class="contact-main__info-item-text">{{ contact_hours | escape }}</p>
+                    </div>
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+
+            {%- if section.settings.note_title != blank or section.settings.note_text != blank -%}
+            <div class="contact-main__info-note">
+              {%- if section.settings.note_title != blank -%}<strong>{{ section.settings.note_title | escape }}</strong>{%- endif -%}
+              {%- if section.settings.note_text != blank -%}<p>{{ section.settings.note_text | escape }}</p>{%- endif -%}
+            </div>
+            {%- endif -%}
+
+            {%- if section.settings.show_social -%}
+              {%- capture contact_social_markup -%}{%- render 'shop-social' -%}{%- endcapture -%}
+              {%- if contact_social_markup != blank -%}
+                <div class="contact-main__info-social">
+                  <h3 class="contact-main__info-social-title">{{ 'sections.page_contact.follow_us' | t }}</h3>
+                  {{- contact_social_markup -}}
+                </div>
+              {%- endif -%}
+            {%- endif -%}
           </div>
-          {%- endif -%}
         </div>
 
-        <div class="contact-main__form">
+        <div class="contact-main__form contact-main__sticky-target">
           <h2 class="contact-main__form-title">{{ 'sections.page_contact.send_message' | t }}</h2>
           {% form 'contact' %}
           {%- if form.posted_successfully? -%}
@@ -162,6 +208,39 @@
     </div>
   </section>
   {%- endif -%}
+<script>
+(function() {
+  var wrap = document.querySelector('[data-contact-sticky-wrap]');
+  if (!wrap) return;
+  var targets = wrap.querySelectorAll('.contact-main__sticky-target');
+  if (targets.length < 2) return;
+
+  function syncSticky() {
+    var desktop = window.matchMedia('(min-width: 1025px)').matches;
+    targets.forEach(function(node) { node.classList.remove('is-sticky-column'); });
+    if (!desktop) return;
+
+    var left = targets[0];
+    var right = targets[1];
+    var leftHeight = left.offsetHeight;
+    var rightHeight = right.offsetHeight;
+    if (!leftHeight || !rightHeight) return;
+
+    if (leftHeight < rightHeight) {
+      left.classList.add('is-sticky-column');
+    } else if (rightHeight < leftHeight) {
+      right.classList.add('is-sticky-column');
+    }
+  }
+
+  syncSticky();
+  window.addEventListener('resize', syncSticky);
+  if (typeof ResizeObserver !== 'undefined') {
+    var ro = new ResizeObserver(syncSticky);
+    targets.forEach(function(node) { ro.observe(node); });
+  }
+})();
+</script>
 </contact-page>
 
 {% schema %}
@@ -174,10 +253,18 @@
     { "type": "text", "id": "title", "label": "t:sections.page_contact.settings.title.label" },
     { "type": "textarea", "id": "description", "label": "t:sections.page_contact.settings.description.label" },
     { "type": "header", "content": "t:sections.page_contact.settings.header__info.content" },
+    { "type": "text", "id": "info_eyebrow", "label": "Info eyebrow" },
+    { "type": "textarea", "id": "info_intro", "label": "Info intro" },
     { "type": "textarea", "id": "address", "label": "t:sections.page_contact.settings.address.label" },
     { "type": "text", "id": "phone", "label": "t:sections.page_contact.settings.phone.label" },
     { "type": "text", "id": "email", "label": "t:sections.page_contact.settings.email.label" },
     { "type": "text", "id": "hours", "label": "t:sections.page_contact.settings.hours.label" },
+    { "type": "text", "id": "stat_1_value", "label": "Stat 1 value" },
+    { "type": "text", "id": "stat_1_label", "label": "Stat 1 label" },
+    { "type": "text", "id": "stat_2_value", "label": "Stat 2 value" },
+    { "type": "text", "id": "stat_2_label", "label": "Stat 2 label" },
+    { "type": "text", "id": "note_title", "label": "Note title" },
+    { "type": "textarea", "id": "note_text", "label": "Note text" },
     { "type": "checkbox", "id": "show_social", "label": "t:sections.page_contact.settings.show_social.label", "default": true },
     { "type": "header", "content": "t:sections.page_contact.settings.header__map.content" },
     { "type": "checkbox", "id": "show_map", "label": "t:sections.page_contact.settings.show_map.label", "default": true },

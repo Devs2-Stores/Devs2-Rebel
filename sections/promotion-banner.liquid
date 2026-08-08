@@ -1,51 +1,73 @@
 {%- comment %}
-  Section: Promotion Banner 
-  Mô tả: Full-width strip dismissible — dạng CTA bar khác announcement-bar.
+  Section: Promotion Banner
+  Description: Stacked promotional strips with repeatable, reorderable blocks.
 {% endcomment -%}
 
 <div
   id="section-{{ section.id }}"
   class="section-promo color-{{ section.settings.color_scheme }}"
-  data-promo-banner
-  data-promo-id="{{ section.id }}"
   style="
     --promo-dt: {{ section.settings.padding_top_desktop }}px;
     --promo-db: {{ section.settings.padding_bottom_desktop }}px;
     --promo-mt: {{ section.settings.padding_top_mobile }}px;
     --promo-mb: {{ section.settings.padding_bottom_mobile }}px;
+    --promo-gap: {{ section.settings.block_gap }}px;
   "
 >
   <div class="page-width">
-    <div class="section-promo__inner section-promo__inner--{{ section.settings.text_align }}">
-      <div class="section-promo__content">
-        {%- if section.settings.icon != blank -%}
-          <div class="section-promo__icon">
-            {{ section.settings.icon | image_url: height: 48 | image_tag: loading: 'lazy', class: 'section-promo__icon-img' }}
+    <div class="section-promo__blocks">
+      {%- for block in section.blocks -%}
+        <div
+          class="section-promo__item"
+          {{ block.shopify_attributes }}
+          {% if section.settings.dismissible %}data-promo-banner data-promo-id="{{ block.id }}"{% endif %}
+        >
+          <div class="section-promo__inner section-promo__inner--{{ section.settings.text_align }}">
+            <div class="section-promo__content">
+              {%- if block.settings.icon != blank -%}
+                <div class="section-promo__icon">
+                  {{ block.settings.icon | image_url: height: 48 | image_tag: loading: 'lazy', class: 'section-promo__icon-img' }}
+                </div>
+              {%- endif -%}
+              <div class="section-promo__text-wrap">
+                {%- if block.settings.heading != blank -%}
+                  <p class="section-promo__heading heading-size-{{ section.settings.heading_size }}">
+                    {{- block.settings.heading -}}
+                  </p>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <p class="section-promo__text content-size-{{ section.settings.text_size }}">
+                    {{- block.settings.text -}}
+                  </p>
+                {%- endif -%}
+              </div>
+              {%- if block.settings.button_label != blank -%}
+                <a href="{{ block.settings.button_link | default: '#' }}" class="section-promo__btn section-promo__btn--{{ section.settings.button_style }} button-size-{{ section.settings.button_size }}">
+                  {{- block.settings.button_label -}}
+                </a>
+              {%- endif -%}
+            </div>
+            {%- if section.settings.dismissible -%}
+              <button class="section-promo__close" data-promo-close aria-label="{{ 'accessibility.dismiss' | t }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            {%- endif -%}
           </div>
-        {%- endif -%}
-        <div class="section-promo__text-wrap">
-          {%- if section.settings.heading != blank -%}
-            <p class="section-promo__heading heading-size-{{ section.settings.heading_size }}">
-              {{- section.settings.heading -}}
-            </p>
-          {%- endif -%}
-          {%- if section.settings.text != blank -%}
-            <p class="section-promo__text content-size-{{ section.settings.text_size }}">
-              {{- section.settings.text -}}
-            </p>
-          {%- endif -%}
         </div>
-        {%- if section.settings.button_label != blank -%}
-          <a href="{{ section.settings.button_link | default: '#' }}" class="section-promo__btn section-promo__btn--{{ section.settings.button_style }} button-size-{{ section.settings.button_size }}">
-            {{- section.settings.button_label -}}
-          </a>
-        {%- endif -%}
-      </div>
-      {%- if section.settings.dismissible -%}
-        <button class="section-promo__close" data-promo-close aria-label="{{ 'accessibility.dismiss' | t }}">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-      {%- endif -%}
+      {%- else -%}
+        {%- comment %}Fallback preview when no blocks exist{% endcomment -%}
+        <div class="section-promo__item">
+          <div class="section-promo__inner section-promo__inner--{{ section.settings.text_align }}">
+            <div class="section-promo__content">
+              <div class="section-promo__text-wrap">
+                <p class="section-promo__heading heading-size-{{ section.settings.heading_size }}">
+                  Add a promotion block to get started
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
     </div>
   </div>
 </div>
@@ -53,14 +75,17 @@
 {%- if section.settings.dismissible -%}
 <script>
 (function() {
-  var el = document.querySelector('[data-promo-banner][data-promo-id="{{ section.id }}"]');
-  if (!el) return;
-  var key = 'promo_dismissed_{{ section.id }}';
-  if (sessionStorage.getItem(key)) { el.style.display = 'none'; return; }
-  var btn = el.querySelector('[data-promo-close]');
-  if (btn) btn.addEventListener('click', function() {
-    el.style.display = 'none';
-    sessionStorage.setItem(key, '1');
+  var container = document.getElementById('section-{{ section.id }}');
+  if (!container) return;
+  container.querySelectorAll('[data-promo-banner]').forEach(function(el) {
+    var id = el.getAttribute('data-promo-id');
+    var key = 'promo_dismissed_' + id;
+    if (sessionStorage.getItem(key)) { el.style.display = 'none'; return; }
+    var btn = el.querySelector('[data-promo-close]');
+    if (btn) btn.addEventListener('click', function() {
+      el.style.display = 'none';
+      sessionStorage.setItem(key, '1');
+    });
   });
 })();
 </script>
@@ -74,6 +99,14 @@
   }
   @media (min-width: 750px) {
     .section-promo { padding-block: var(--promo-dt) var(--promo-db); }
+  }
+
+  .section-promo__blocks {
+    display: flex; flex-direction: column; gap: var(--promo-gap, 8px);
+  }
+
+  .section-promo__item {
+    position: relative;
   }
 
   .section-promo__inner {
@@ -127,20 +160,16 @@
   "class": "section-promo-wrapper",
   "settings": [
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" },
-    { "type": "header", "content": "Content" },
-    { "type": "image_picker", "id": "icon", "label": "Icon / Image" },
-    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "🔥 Limited time offer" },
+    { "type": "header", "content": "Typography" },
     { "type": "select", "id": "heading_size", "label": "Heading size", "options": [{ "value": "xs", "label": "XS" },{ "value": "sm", "label": "S" },{ "value": "md", "label": "M" }], "default": "sm" },
-    { "type": "inline_richtext", "id": "text", "label": "Text", "default": "Get 20% off your first order with code WELCOME20" },
     { "type": "select", "id": "text_size", "label": "Text size", "options": [{ "value": "sm", "label": "S" },{ "value": "md", "label": "M" }], "default": "sm" },
-    { "type": "header", "content": "Button" },
-    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop now" },
-    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "header", "content": "Button defaults" },
     { "type": "select", "id": "button_style", "label": "Button style", "options": [{ "value": "primary", "label": "Primary" },{ "value": "secondary", "label": "Secondary" }], "default": "primary" },
     { "type": "select", "id": "button_size", "label": "Button size", "options": [{ "value": "xs", "label": "XS" },{ "value": "sm", "label": "S" },{ "value": "md", "label": "M" }], "default": "sm" },
     { "type": "header", "content": "Layout" },
     { "type": "select", "id": "text_align", "label": "Alignment", "options": [{ "value": "left", "label": "Left" },{ "value": "center", "label": "Center" }], "default": "center" },
-    { "type": "checkbox", "id": "dismissible", "label": "Allow dismiss", "default": true },
+    { "type": "checkbox", "id": "dismissible", "label": "Allow dismiss per block", "default": false },
+    { "type": "range", "id": "block_gap", "min": 0, "max": 24, "step": 2, "unit": "px", "label": "Gap between blocks", "default": 8 },
     { "type": "header", "content": "Desktop spacing" },
     { "type": "range", "id": "padding_top_desktop", "min": 0, "max": 60, "step": 5, "unit": "px", "label": "Top", "default": 15 },
     { "type": "range", "id": "padding_bottom_desktop", "min": 0, "max": 60, "step": 5, "unit": "px", "label": "Bottom", "default": 15 },
@@ -148,6 +177,28 @@
     { "type": "range", "id": "padding_top_mobile", "min": 0, "max": 40, "step": 5, "unit": "px", "label": "Top", "default": 10 },
     { "type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 40, "step": 5, "unit": "px", "label": "Bottom", "default": 10 }
   ],
-  "presets": [{ "name": "Promotion banner", "category": "Custom" }]
+  "blocks": [
+    {
+      "type": "promo_item",
+      "name": "Promotion",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon / Image" },
+        { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Limited time offer" },
+        { "type": "inline_richtext", "id": "text", "label": "Text", "default": "Get 20% off your first order with code WELCOME20" },
+        { "type": "header", "content": "Button" },
+        { "type": "text", "id": "button_label", "label": "Button label" },
+        { "type": "url", "id": "button_link", "label": "Button link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promotion banner",
+      "category": "Custom",
+      "blocks": [
+        { "type": "promo_item" }
+      ]
+    }
+  ]
 }
 {% endschema %}

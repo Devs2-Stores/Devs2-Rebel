@@ -411,48 +411,57 @@
 .facet-filter__price-separator { color: var(--color-gray, #999); padding-block-end: 0.5rem; }
 .facet-filter__price-presets {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 0.5rem;
   margin-block-start: 0.75rem;
 }
 .facet-filter__price-preset {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  min-height: 2.75rem;
+  gap: 0.5rem;
   cursor: pointer;
+  font-size: 0.875rem;
+  transition: color 0.2s;
+  min-height: auto;
 }
+.facet-filter__price-preset:hover { color: var(--color-primary); }
 .facet-filter__price-preset input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  position: static;
+  width: 1rem;
+  height: 1rem;
+  overflow: visible;
+  clip: auto;
+  accent-color: var(--color-primary);
+  flex-shrink: 0;
 }
-.facet-filter__price-preset span {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.75rem;
-  padding: 0.5625rem 0.875rem;
-  border: 1px solid var(--color-border, #ddd);
-  border-radius: 999px;
-  background: rgb(var(--color-background));
-  color: rgba(var(--color-foreground), 0.72);
-  font-size: 0.8125rem;
-  line-height: 1.2;
-  transition: border-color 0.2s, background 0.2s, color 0.2s;
-}
-.facet-filter__price-preset:hover span {
-  border-color: var(--color-primary);
-  color: rgb(var(--color-foreground));
-}
-.facet-filter__price-preset input:focus-visible + span {
+.facet-filter__price-preset input:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
+.facet-filter__price-preset span {
+  display: inline;
+  min-height: auto;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  transition: none;
+}
+.facet-filter__price-preset:hover span {
+  border-color: transparent;
+  color: inherit;
+}
+.facet-filter__price-preset input:focus-visible + span {
+  outline: none;
+}
 .facet-filter__price-preset input:checked + span {
-  border-color: var(--color-primary);
-  background: var(--color-primary);
-  color: var(--color-white);
+  border-color: transparent;
+  background: transparent;
+  color: inherit;
+  font-weight: 600;
 }
 .facet-filter__price-slider {
   display: grid;

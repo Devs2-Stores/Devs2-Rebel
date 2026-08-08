@@ -1,9 +1,3 @@
-/* ═══════════════════════════════════════════════════
-   THEME CSS
-   Component styles, layout, and page-specific rules.
-   Reset: reset.css | Typography & Utilities: base.css
-   ═══════════════════════════════════════════════════ */
-
 hr { margin: var(--space-md) 0; }
 a,
 button,
@@ -38,6 +32,12 @@ input,
 button,
 select,
 textarea { box-sizing: border-box; box-shadow: none; border: none; outline: none; }
+:where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]), select, textarea) {
+  border-radius: var(--inputs-radius);
+}
+:where(button, a.button-primary, a.button-secondary, [class*="__btn"], .button-primary, .button-secondary) {
+  border-radius: var(--buttons-radius);
+}
 input:disabled,
 button:disabled,
 select:disabled,
@@ -76,6 +76,59 @@ textarea:focus-visible,
 .button-primary.active { background: var(--color-primary); border-color: var(--color-primary); color: var(--color-white); }
 .button-primary.active:hover { background: transparent; color: var(--color-primary); }
 .button-primary.loading { opacity: 0.5; }
+.button-secondary {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  padding: var(--space-xs) var(--space-lg);
+  min-height: 2.75rem;
+  text-align: center;
+  border-radius: var(--radius-sm);
+  border: var(--border-width) solid currentColor;
+  cursor: pointer;
+  background: transparent;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast);
+}
+:where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .compare-bar__btn, .faq-contact__btn, .product-card__quickview, .product-card__add-btn, .product-card__wishlist) {
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast), filter var(--transition-fast);
+}
+:where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .compare-bar__btn, .faq-contact__btn, .product-card__quickview, .product-card__add-btn, .product-card__wishlist):hover:not(:disabled):not([aria-disabled="true"]):not(.loading):not(.is-loading) {
+  transform: var(--button-hover-transform, translateY(-1px));
+  box-shadow: var(--shadow-md, 0 8px 20px rgba(0, 0, 0, 0.12));
+}
+:where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .compare-bar__btn, .faq-contact__btn, .product-card__quickview, .product-card__add-btn, .product-card__wishlist):active:not(:disabled):not([aria-disabled="true"]) {
+  transform: var(--button-active-transform, translateY(0) scale(0.985));
+  box-shadow: var(--shadow-sm, 0 2px 8px rgba(0, 0, 0, 0.08));
+}
+:where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .compare-bar__btn, .faq-contact__btn, .product-card__quickview, .product-card__add-btn, .product-card__wishlist):focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-primary) 18%, transparent);
+}
+:where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .compare-bar__btn, .faq-contact__btn, .product-card__quickview, .product-card__add-btn, .product-card__wishlist):disabled,
+:where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .compare-bar__btn, .faq-contact__btn, .product-card__quickview, .product-card__add-btn, .product-card__wishlist)[aria-disabled="true"] {
+  opacity: 0.55;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+  filter: saturate(0.75);
+}
+:where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .compare-bar__btn, .faq-contact__btn, .product-card__quickview, .product-card__add-btn, .product-card__wishlist).loading,
+:where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .compare-bar__btn, .faq-contact__btn, .product-card__quickview, .product-card__add-btn, .product-card__wishlist).is-loading {
+  pointer-events: none;
+  opacity: 0.72;
+  transform: none !important;
+  box-shadow: none !important;
+}
+.button-primary:focus-visible,
+.button-primary.active:focus-visible {
+  outline-color: var(--color-primary);
+}
+.button-primary.active:active:not(:disabled) {
+  transform: translateY(0) scale(0.985);
+}
 .tagged {
   display: inline-block;
   padding: var(--space-sm) var(--space-lg);

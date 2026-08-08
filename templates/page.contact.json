@@ -15,7 +15,25 @@
     },
     "main": {
       "type": "page-contact",
-      "settings": {}
+      "settings": {
+        "title": "Contact form",
+        "description": "Visit the studio, request a private appointment, or send your notes for sizing, styling, and wholesale enquiries.",
+        "address": "12 Rue Saint-Honore, Paris",
+        "phone": "+33 1 23 45 67 89",
+        "email": "contact@devs2-rebel.com",
+        "hours": "Mon - Fri, 10:00 - 18:00",
+        "show_social": true,
+        "show_map": false,
+        "map_embed": "",
+        "info_eyebrow": "Atelier support",
+        "info_intro": "Visit the studio, request a private appointment, or send your notes for sizing, styling, and wholesale enquiries.",
+        "stat_1_value": "24h",
+        "stat_1_label": "Average reply",
+        "stat_2_value": "1:1",
+        "stat_2_label": "Private appointments",
+        "note_title": "Appointments & wholesale",
+        "note_text": "Include preferred date, order volume, or collection interest in your message so the team can route it directly."
+      }
     }
   },
   "order": [

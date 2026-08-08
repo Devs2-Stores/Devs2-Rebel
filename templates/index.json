@@ -13,7 +13,7 @@
             "subheading_size": "xs",
             "heading": "Cut, draped, made to be worn",
             "heading_size": "2xl",
-            "heading_tag": "h2",
+            "heading_tag": "h1",
             "text": "",
             "text_size": "md",
             "button_size": "md",
@@ -67,7 +67,11 @@
           }
         }
       },
-      "block_order": ["slide_1", "slide_2", "slide_3"],
+      "block_order": [
+        "slide_1",
+        "slide_2",
+        "slide_3"
+      ],
       "settings": {
         "height_desktop": 95,
         "height_mobile": 90,
@@ -80,16 +84,40 @@
         "accessibility_label": "Hero collection"
       }
     },
-
     "scrolling_tagline": {
       "type": "scrolling-text",
       "blocks": {
-        "t1": { "type": "text", "settings": { "text": "REFINED DEFIANCE" } },
-        "t2": { "type": "text", "settings": { "text": "AW26 COLLECTION" } },
-        "t3": { "type": "text", "settings": { "text": "DEVS2 REBEL" } },
-        "t4": { "type": "text", "settings": { "text": "MADE IN ATELIER" } }
+        "t1": {
+          "type": "text",
+          "settings": {
+            "text": "REFINED DEFIANCE"
+          }
+        },
+        "t2": {
+          "type": "text",
+          "settings": {
+            "text": "AW26 COLLECTION"
+          }
+        },
+        "t3": {
+          "type": "text",
+          "settings": {
+            "text": "DEVS2 REBEL"
+          }
+        },
+        "t4": {
+          "type": "text",
+          "settings": {
+            "text": "MADE IN ATELIER"
+          }
+        }
       },
-      "block_order": ["t1", "t2", "t3", "t4"],
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
       "settings": {
         "color_scheme": "scheme-1",
         "text_size": "2xl",
@@ -101,42 +129,51 @@
         "padding_bottom_mobile": 20
       }
     },
-
     "lookbook_hotspots": {
       "type": "banner-hotspots",
       "blocks": {
         "hot_1": {
           "type": "hotspot",
           "settings": {
-            "position_x": 32,
-            "position_y": 28,
+            "position_x": 18,
+            "position_y": 56,
             "tooltip_position": "right",
             "heading": "The Crimson Coat",
-            "text": "Wool blend, hand-finished — $1,490"
+            "text": "Wool blend, hand-finished — $1,490",
+            "product": "",
+            "product_handle": ""
           }
         },
         "hot_2": {
           "type": "hotspot",
           "settings": {
-            "position_x": 58,
-            "position_y": 55,
-            "tooltip_position": "left",
+            "position_x": 50,
+            "position_y": 52,
+            "tooltip_position": "bottom",
             "heading": "Silk Camisole",
-            "text": "Pure ivory silk — $390"
+            "text": "Pure ivory silk — $390",
+            "product": "",
+            "product_handle": ""
           }
         },
         "hot_3": {
           "type": "hotspot",
           "settings": {
-            "position_x": 45,
-            "position_y": 78,
-            "tooltip_position": "top",
+            "position_x": 84,
+            "position_y": 56,
+            "tooltip_position": "left",
             "heading": "Tailored Trousers",
-            "text": "High-rise crepe — $620"
+            "text": "High-rise crepe — $620",
+            "product": "",
+            "product_handle": ""
           }
         }
       },
-      "block_order": ["hot_1", "hot_2", "hot_3"],
+      "block_order": [
+        "hot_1",
+        "hot_2",
+        "hot_3"
+      ],
       "settings": {
         "color_scheme": "scheme-1",
         "heading": "Shop the lookbook",
@@ -145,16 +182,19 @@
         "image": "shopify://shop_images/demo-banner_hotspots.jpg",
         "section_width": "full",
         "padding_top_desktop": 80,
-        "padding_bottom_desktop": 80
+        "padding_bottom_desktop": 80,
+        "custom_image_url": "https://cdn.shopify.com/s/files/1/0697/7575/3325/files/devs2-lookbook-hotspots-20260621.jpg?v=1782028141"
       }
     },
-
     "image_text_overlay_hero": {
       "type": "image-text-overlay",
       "blocks": {
         "ito_sub": {
           "type": "subheading",
-          "settings": { "text": "THE NEW COLLECTION", "size": "xs" }
+          "settings": {
+            "text": "THE NEW COLLECTION",
+            "size": "xs"
+          }
         },
         "ito_head": {
           "type": "heading",
@@ -182,7 +222,12 @@
           }
         }
       },
-      "block_order": ["ito_sub", "ito_head", "ito_text", "ito_btn"],
+      "block_order": [
+        "ito_sub",
+        "ito_head",
+        "ito_text",
+        "ito_btn"
+      ],
       "settings": {
         "color_scheme": "scheme-3",
         "image": "shopify://shop_images/demo-image_text_overlay.jpg",
@@ -190,10 +235,12 @@
         "section_height": 90,
         "overlay_opacity": 40,
         "content_position": "center-left",
-        "text_align": "left"
+        "text_align": "left",
+        "custom_image_url": "https://cdn.shopify.com/s/files/1/0697/7575/3325/files/devs2-hero-slide-1-desktop-20260620.jpg?v=1781966449",
+        "custom_image_mobile_url": "https://cdn.shopify.com/s/files/1/0697/7575/3325/files/devs2-hero-slide-1-mobile-20260620.jpg?v=1781966453",
+        "heading_alt": "Editorial fashion campaign image"
       }
     },
-
     "collection_list": {
       "type": "collection-list",
       "blocks": {
@@ -227,7 +274,12 @@
           }
         }
       },
-      "block_order": ["c_1", "c_2", "c_3", "c_4"],
+      "block_order": [
+        "c_1",
+        "c_2",
+        "c_3",
+        "c_4"
+      ],
       "settings": {
         "color_scheme": "scheme-1",
         "subheading": "BY CATEGORY",
@@ -245,7 +297,6 @@
         "padding_bottom_mobile": 60
       }
     },
-
     "layered_atelier": {
       "type": "layered-images",
       "blocks": {
@@ -271,7 +322,11 @@
           }
         }
       },
-      "block_order": ["f_1", "f_2", "f_3"],
+      "block_order": [
+        "f_1",
+        "f_2",
+        "f_3"
+      ],
       "settings": {
         "color_scheme": "scheme-1",
         "image_1": "shopify://shop_images/demo-layered_1.jpg",
@@ -284,7 +339,6 @@
         "heading_tag": "h2"
       }
     },
-
     "featured_piece": {
       "type": "featured-product",
       "settings": {
@@ -301,10 +355,10 @@
         "padding_top_desktop": 100,
         "padding_bottom_desktop": 100,
         "padding_top_mobile": 60,
-        "padding_bottom_mobile": 60
+        "padding_bottom_mobile": 60,
+        "product": "the-complete-snowboard"
       }
     },
-
     "parallax_atelier": {
       "type": "parallax-image",
       "settings": {
@@ -329,7 +383,6 @@
         "content_width": 40
       }
     },
-
     "marquee_products": {
       "type": "marquee-products",
       "settings": {
@@ -343,10 +396,10 @@
         "padding_top_desktop": 60,
         "padding_bottom_desktop": 60,
         "padding_top_mobile": 40,
-        "padding_bottom_mobile": 40
+        "padding_bottom_mobile": 40,
+        "collection": "all"
       }
     },
-
     "brand_story": {
       "type": "image-with-text",
       "blocks": {
@@ -382,7 +435,12 @@
           }
         }
       },
-      "block_order": ["iwt_sub", "iwt_head", "iwt_text", "iwt_btn"],
+      "block_order": [
+        "iwt_sub",
+        "iwt_head",
+        "iwt_text",
+        "iwt_btn"
+      ],
       "settings": {
         "color_scheme": "scheme-2",
         "image_position": "left",
@@ -395,7 +453,6 @@
         "image": "shopify://shop_images/demo-image_with_text.jpg"
       }
     },
-
     "before_after_craft": {
       "type": "before-after",
       "settings": {
@@ -415,7 +472,6 @@
         "padding_bottom_mobile": 60
       }
     },
-
     "testimonials": {
       "type": "testimonials",
       "blocks": {
@@ -450,7 +506,11 @@
           }
         }
       },
-      "block_order": ["r_1", "r_2", "r_3"],
+      "block_order": [
+        "r_1",
+        "r_2",
+        "r_3"
+      ],
       "settings": {
         "color_scheme": "scheme-3",
         "subheading": "WORN BY",
@@ -466,7 +526,6 @@
         "padding_bottom_mobile": 60
       }
     },
-
     "blog_journal": {
       "type": "blog-posts",
       "settings": {
@@ -488,18 +547,42 @@
         "padding_bottom_mobile": 60
       }
     },
-
     "press_logos": {
       "type": "logo-list",
       "blocks": {
-        "l_1": { "type": "logo", "settings": {} },
-        "l_2": { "type": "logo", "settings": {} },
-        "l_3": { "type": "logo", "settings": {} },
-        "l_4": { "type": "logo", "settings": {} },
-        "l_5": { "type": "logo", "settings": {} },
-        "l_6": { "type": "logo", "settings": {} }
+        "l_1": {
+          "type": "logo",
+          "settings": {}
+        },
+        "l_2": {
+          "type": "logo",
+          "settings": {}
+        },
+        "l_3": {
+          "type": "logo",
+          "settings": {}
+        },
+        "l_4": {
+          "type": "logo",
+          "settings": {}
+        },
+        "l_5": {
+          "type": "logo",
+          "settings": {}
+        },
+        "l_6": {
+          "type": "logo",
+          "settings": {}
+        }
       },
-      "block_order": ["l_1", "l_2", "l_3", "l_4", "l_5", "l_6"],
+      "block_order": [
+        "l_1",
+        "l_2",
+        "l_3",
+        "l_4",
+        "l_5",
+        "l_6"
+      ],
       "settings": {
         "color_scheme": "scheme-2",
         "heading": "As featured in",
@@ -515,7 +598,6 @@
         "padding_bottom_mobile": 40
       }
     },
-
     "newsletter": {
       "type": "newsletter",
       "settings": {
@@ -537,19 +619,18 @@
       }
     }
   },
-
   "order": [
     "hero_slideshow",
     "scrolling_tagline",
-    "lookbook_hotspots",
-    "image_text_overlay_hero",
     "collection_list",
-    "layered_atelier",
     "featured_piece",
-    "parallax_atelier",
     "marquee_products",
-    "brand_story",
+    "lookbook_hotspots",
     "before_after_craft",
+    "brand_story",
+    "layered_atelier",
+    "image_text_overlay_hero",
+    "parallax_atelier",
     "testimonials",
     "blog_journal",
     "press_logos",

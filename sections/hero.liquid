@@ -1,0 +1,1151 @@
+{%- comment %}
+  Section: Hero
+  Full-width hero banner with image/video background, overlay, countdown, and block-based content.
+{% endcomment -%}
+
+{%- liquid
+  assign desktop_img = section.settings.image_desktop
+  assign mobile_img = section.settings.image_mobile | default: desktop_img
+  assign img_alt = section.settings.image_alt | default: shop.name
+  assign overlay_opacity = section.settings.overlay_opacity | divided_by: 100.0
+  assign custom_url = section.settings.custom_image_url
+  assign custom_mobile_url = section.settings.custom_image_mobile_url | default: custom_url
+  assign text_align = section.settings.text_align
+  assign has_content = false
+  for block in section.blocks
+    if block.type != 'empty_space' and block.type != '@app'
+      assign has_content = true
+      break
+    endif
+  endfor
+-%}
+
+<div
+  id="section-{{ section.id }}"
+  class="section-hero color-{{ section.settings.color_scheme }}"
+  style="
+    --hero-height-d: {{ section.settings.height_desktop }}vh;
+    --hero-height-m: {{ section.settings.height_mobile }}vh;
+    --hero-overlay: {{ overlay_opacity }};
+    --hero-content-max: {{ section.settings.content_max_width }}px;
+    --hero-pt-d: {{ section.settings.padding_top_desktop }}px;
+    --hero-pb-d: {{ section.settings.padding_bottom_desktop }}px;
+    --hero-pt-m: {{ section.settings.padding_top_mobile }}px;
+    --hero-pb-m: {{ section.settings.padding_bottom_mobile }}px;
+  "
+>
+  {%- comment %} Mobile-only media (art direction) {% endcomment -%}
+  {%- if custom_mobile_url != blank and custom_url != blank -%}
+    <div class="section-hero__media section-hero__media--mobile">
+      <img
+        src="{{ custom_mobile_url | escape }}"
+        alt="{{ img_alt | escape }}"
+        width="750"
+        height="1000"
+        loading="eager"
+        decoding="async"
+        class="section-hero__img"
+      >
+    </div>
+  {%- elsif mobile_img != blank and desktop_img != blank and mobile_img != desktop_img -%}
+    <div class="section-hero__media section-hero__media--mobile">
+      {{ mobile_img | image_url: width: 750 | image_tag:
+        loading: 'eager',
+        class: 'section-hero__img',
+        alt: img_alt
+      }}
+    </div>
+  {%- endif -%}
+
+  {%- comment %} Main media (desktop, or fallback for both) {% endcomment -%}
+  <div class="section-hero__media">
+    {%- if section.settings.video_url != blank -%}
+      <video
+        class="section-hero__video"
+        autoplay
+        muted
+        loop
+        playsinline
+        poster="{{ desktop_img | image_url: width: 1920 }}"
+      >
+        <source src="{{ section.settings.video_url }}" type="video/mp4">
+      </video>
+    {%- elsif custom_url != blank -%}
+      <img
+        src="{{ custom_url | escape }}"
+        alt="{{ img_alt | escape }}"
+        width="1920"
+        height="1080"
+        loading="eager"
+        decoding="async"
+        class="section-hero__img"
+      >
+    {%- elsif desktop_img != blank -%}
+      {%- liquid
+        assign fetch_priority = 'high'
+        if section.index > 1
+          assign fetch_priority = 'auto'
+        endif
+      -%}
+      {{ desktop_img | image_url: width: 1920 | image_tag:
+        widths: '750, 1080, 1440, 1920, 2560',
+        sizes: '100vw',
+        alt: img_alt,
+        loading: 'eager',
+        fetchpriority: fetch_priority,
+        decoding: 'async',
+        class: 'section-hero__img'
+      }}
+    {%- elsif mobile_img != blank -%}
+      {{ mobile_img | image_url: width: 750 | image_tag:
+        loading: 'eager',
+        class: 'section-hero__img',
+        alt: img_alt
+      }}
+    {%- else -%}
+      <div class="section-hero__placeholder">
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'section-hero__placeholder-svg' }}
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- comment %} Overlay {% endcomment -%}
+  {%- if overlay_opacity > 0 -%}
+    <div class="section-hero__overlay{% if section.settings.overlay_gradient %} section-hero__overlay--gradient{% endif %}"></div>
+  {%- endif -%}
+
+  {%- comment %} Content blocks {% endcomment -%}
+  <div class="section-hero__content section-hero__content--{{ section.settings.content_position }}">
+    <div class="section-hero__inner section-hero__inner--{{ text_align }}">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+
+          {%- when 'subheading' -%}
+            <p
+              class="section-hero__subheading subheading-size-{{ block.settings.subheading_size }}"
+              {{ block.shopify_attributes }}
+            >
+              {{- block.settings.subheading -}}
+            </p>
+
+          {%- when 'heading' -%}
+            {%- liquid
+              assign heading_tag = block.settings.heading_tag
+              if template.name == 'index' and section.index == 1
+                assign heading_tag = 'h1'
+              endif
+            -%}
+            <{{ heading_tag }}
+              class="section-hero__heading heading-size-{{ block.settings.heading_size }}"
+              {{ block.shopify_attributes }}
+            >
+              {{- block.settings.heading -}}
+            </{{ heading_tag }}>
+
+          {%- when 'text' -%}
+            <div
+              class="section-hero__text rte content-size-{{ block.settings.content_size }}"
+              {{ block.shopify_attributes }}
+            >
+              {{- block.settings.text -}}
+            </div>
+
+          {%- when 'button' -%}
+            <div class="section-hero__buttons" {{ block.shopify_attributes }}>
+              {%- if block.settings.button_label_1 != blank -%}
+                <a
+                  href="{{ block.settings.button_link_1 | default: '#' }}"
+                  class="section-hero__btn section-hero__btn--{{ block.settings.button_style_1 }} button-size-{{ block.settings.button_size }}"
+                >
+                  {{- block.settings.button_label_1 -}}
+                </a>
+              {%- endif -%}
+              {%- if block.settings.button_label_2 != blank -%}
+                <a
+                  href="{{ block.settings.button_link_2 | default: '#' }}"
+                  class="section-hero__btn section-hero__btn--{{ block.settings.button_style_2 }} button-size-{{ block.settings.button_size }}"
+                >
+                  {{- block.settings.button_label_2 -}}
+                </a>
+              {%- endif -%}
+            </div>
+
+          {%- when 'countdown' -%}
+            <div
+              class="section-hero__countdown"
+              {{ block.shopify_attributes }}
+              data-countdown-end="{{ block.settings.end_date }}"
+              data-countdown-label-days="{{ block.settings.label_days }}"
+              data-countdown-label-hours="{{ block.settings.label_hours }}"
+              data-countdown-label-mins="{{ block.settings.label_mins }}"
+              data-countdown-label-secs="{{ block.settings.label_secs }}"
+            >
+              <div class="section-hero__countdown-item">
+                <span class="section-hero__countdown-value" data-countdown="days">00</span>
+                <span class="section-hero__countdown-label">{{ block.settings.label_days }}</span>
+              </div>
+              <span class="section-hero__countdown-sep">:</span>
+              <div class="section-hero__countdown-item">
+                <span class="section-hero__countdown-value" data-countdown="hours">00</span>
+                <span class="section-hero__countdown-label">{{ block.settings.label_hours }}</span>
+              </div>
+              <span class="section-hero__countdown-sep">:</span>
+              <div class="section-hero__countdown-item">
+                <span class="section-hero__countdown-value" data-countdown="mins">00</span>
+                <span class="section-hero__countdown-label">{{ block.settings.label_mins }}</span>
+              </div>
+              <span class="section-hero__countdown-sep">:</span>
+              <div class="section-hero__countdown-item">
+                <span class="section-hero__countdown-value" data-countdown="secs">00</span>
+                <span class="section-hero__countdown-label">{{ block.settings.label_secs }}</span>
+              </div>
+            </div>
+
+          {%- when 'empty_space' -%}
+            <div
+              class="section-hero__spacer"
+              style="--spacer-height: {{ block.settings.spacing }}px;"
+              {{ block.shopify_attributes }}
+            ></div>
+
+          {%- when '@app' -%}
+            {%- render block -%}
+
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{%- if has_content == false and request.design_mode -%}
+  <div style="text-align: center; padding: 1rem; color: rgb(var(--color-foreground)); font-size: 0.875rem;">
+    {{ 'Add blocks to build your hero content.' }}
+  </div>
+{%- endif -%}
+
+<script>
+  (function() {
+    var countdowns = document.querySelectorAll('#section-{{ section.id }} .section-hero__countdown');
+    if (!countdowns.length) return;
+
+    countdowns.forEach(function(el) {
+      var endDate = new Date(el.dataset.countdownEnd).getTime();
+      if (isNaN(endDate)) return;
+
+      var daysEl = el.querySelector('[data-countdown="days"]');
+      var hoursEl = el.querySelector('[data-countdown="hours"]');
+      var minsEl = el.querySelector('[data-countdown="mins"]');
+      var secsEl = el.querySelector('[data-countdown="secs"]');
+
+      function tick() {
+        var now = Date.now();
+        var diff = Math.max(0, endDate - now);
+
+        var days = Math.floor(diff / 86400000);
+        var hours = Math.floor((diff % 86400000) / 3600000);
+        var mins = Math.floor((diff % 3600000) / 60000);
+        var secs = Math.floor((diff % 60000) / 1000);
+
+        if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+        if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+        if (minsEl) minsEl.textContent = String(mins).padStart(2, '0');
+        if (secsEl) secsEl.textContent = String(secs).padStart(2, '0');
+
+        if (diff > 0) {
+          requestAnimationFrame(function() { setTimeout(tick, 1000); });
+        }
+      }
+
+      tick();
+    });
+  })();
+</script>
+
+{% stylesheet %}
+  /* ── Hero ── */
+  .section-hero {
+    position: relative;
+    min-height: var(--hero-height-m, 60vh);
+    display: flex;
+    color: #fff;
+    overflow: hidden;
+    padding-block-start: var(--hero-pt-m);
+    padding-block-end: var(--hero-pb-m);
+  }
+
+  @media (min-width: 750px) {
+    .section-hero {
+      min-height: var(--hero-height-d, 80vh);
+      padding-block-start: var(--hero-pt-d);
+      padding-block-end: var(--hero-pb-d);
+    }
+  }
+
+  /* ── Media ── */
+  .section-hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .section-hero__media--mobile {
+    display: none;
+  }
+
+  @media (max-width: 749px) {
+    .section-hero__media--mobile + .section-hero__media:not(.section-hero__media--mobile) {
+      display: none;
+    }
+    .section-hero__media--mobile {
+      display: block;
+    }
+  }
+
+  .section-hero__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .section-hero__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .section-hero__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  }
+
+  .section-hero__placeholder-svg {
+    width: 50%;
+    max-width: 600px;
+    opacity: 0.15;
+    color: #fff;
+  }
+
+  /* ── Overlay ── */
+  .section-hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, var(--hero-overlay, 0.3));
+    pointer-events: none;
+  }
+
+  .section-hero__overlay--gradient {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, calc(var(--hero-overlay, 0.3) * 1.6)),
+      rgba(0, 0, 0, calc(var(--hero-overlay, 0.3) * 0.4))
+    );
+  }
+
+  /* ── Content ── */
+  .section-hero__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: grid;
+    padding: 1.5rem;
+  }
+
+  @media (min-width: 750px) {
+    .section-hero__content {
+      padding: 3rem 4rem;
+    }
+  }
+
+  .section-hero__inner {
+    max-width: var(--hero-content-max, 700px);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .section-hero__inner--left   { text-align: left; }
+  .section-hero__inner--center { text-align: center; align-items: center; }
+  .section-hero__inner--right  { text-align: right; align-items: flex-end; }
+
+  /* ── Content Position (9-point grid) ── */
+  .section-hero__content--top-left      { align-items: start;   justify-items: start;   }
+  .section-hero__content--top-center    { align-items: start;   justify-items: center;  }
+  .section-hero__content--top-right     { align-items: start;   justify-items: end;     }
+  .section-hero__content--middle-left   { align-items: center;  justify-items: start;   }
+  .section-hero__content--middle-center { align-items: center;  justify-items: center;  }
+  .section-hero__content--middle-right  { align-items: center;  justify-items: end;     }
+  .section-hero__content--bottom-left   { align-items: end;     justify-items: start;   }
+  .section-hero__content--bottom-center { align-items: end;     justify-items: center;  }
+  .section-hero__content--bottom-right  { align-items: end;     justify-items: end;     }
+
+  /* ── Typography ── */
+  .section-hero__subheading {
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.82);
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  .section-hero__heading {
+    margin: 0;
+    color: #fff;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+  }
+
+  .section-hero__text {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .section-hero__text p {
+    margin: 0;
+  }
+
+  .section-hero__text a {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .section-hero__text a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* ── Spacer ── */
+  .section-hero__spacer {
+    height: var(--spacer-height, 20px);
+    width: 100%;
+  }
+
+  /* ── Buttons ── */
+  .section-hero__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-block-start: 0.25rem;
+  }
+
+  .section-hero__inner--center .section-hero__buttons {
+    justify-content: center;
+  }
+
+  .section-hero__inner--right .section-hero__buttons {
+    justify-content: flex-end;
+  }
+
+  .section-hero__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    border-radius: var(--buttons-radius, 0);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    cursor: pointer;
+  }
+
+  .section-hero__btn:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+  }
+
+  .section-hero__btn--primary {
+    background: #fff;
+    color: #111;
+    border: 2px solid #fff;
+  }
+
+  .section-hero__btn--secondary {
+    background: transparent;
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+  }
+
+  .section-hero__btn--secondary:hover {
+    background: #fff;
+    color: #111;
+    border-color: #fff;
+  }
+
+  .section-hero__btn--link {
+    background: none;
+    border: none;
+    color: #fff;
+    padding: 12px 4px;
+    min-width: auto;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .section-hero__btn--link:hover {
+    opacity: 0.75;
+    transform: none;
+  }
+
+  /* ── Countdown ── */
+  .section-hero__countdown {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-block-start: 0.5rem;
+  }
+
+  .section-hero__inner--center .section-hero__countdown {
+    justify-content: center;
+  }
+
+  .section-hero__inner--right .section-hero__countdown {
+    justify-content: flex-end;
+  }
+
+  .section-hero__countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 3.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    backdrop-filter: blur(8px);
+  }
+
+  .section-hero__countdown-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .section-hero__countdown-label {
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 0.25rem;
+  }
+
+  .section-hero__countdown-sep {
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.4);
+    padding-bottom: 1rem;
+  }
+
+  @media (max-width: 749px) {
+    .section-hero__countdown {
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
+
+    .section-hero__countdown-item {
+      min-width: 2.75rem;
+      padding: 0.4rem 0.5rem;
+    }
+
+    .section-hero__countdown-value {
+      font-size: 1.15rem;
+    }
+
+    .section-hero__countdown-label {
+      font-size: 0.55rem;
+    }
+
+    .section-hero__countdown-sep {
+      font-size: 1rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Hero",
+  "tag": "section",
+  "class": "section-hero-wrapper",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Desktop image",
+      "info": "Recommended: 1920 x 1080px"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile image",
+      "info": "Optional. Falls back to desktop image."
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text",
+      "info": "Describes the image for accessibility and SEO."
+    },
+    {
+      "type": "header",
+      "content": "Image URL override"
+    },
+    {
+      "type": "url",
+      "id": "custom_image_url",
+      "label": "Desktop image URL",
+      "info": "Overrides the image picker. Use for external/CDN images."
+    },
+    {
+      "type": "url",
+      "id": "custom_image_mobile_url",
+      "label": "Mobile image URL",
+      "info": "Optional. Falls back to desktop URL.",
+      "visible_if": "{{ section.settings.custom_image_url != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Video"
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "Background video URL (.mp4)",
+      "info": "Takes priority over image. Paste a direct .mp4 link."
+    },
+    {
+      "type": "header",
+      "content": "Dimensions"
+    },
+    {
+      "type": "select",
+      "id": "height_desktop",
+      "label": "Desktop height",
+      "options": [
+        { "value": "40", "label": "Short (40vh)" },
+        { "value": "60", "label": "Medium (60vh)" },
+        { "value": "80", "label": "Tall (80vh)" },
+        { "value": "100", "label": "Full screen (100vh)" }
+      ],
+      "default": "80"
+    },
+    {
+      "type": "select",
+      "id": "height_mobile",
+      "label": "Mobile height",
+      "options": [
+        { "value": "40", "label": "Short (40vh)" },
+        { "value": "60", "label": "Medium (60vh)" },
+        { "value": "80", "label": "Tall (80vh)" },
+        { "value": "100", "label": "Full screen (100vh)" }
+      ],
+      "default": "60"
+    },
+    {
+      "type": "header",
+      "content": "Overlay"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay opacity",
+      "default": 30,
+      "info": "Darkens the background to improve text readability."
+    },
+    {
+      "type": "checkbox",
+      "id": "overlay_gradient",
+      "label": "Use gradient overlay",
+      "default": false,
+      "info": "Fades from darker at bottom to lighter at top.",
+      "visible_if": "{{ section.settings.overlay_opacity > 0 }}"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content position",
+      "options": [
+        { "value": "top-left", "label": "Top left" },
+        { "value": "top-center", "label": "Top center" },
+        { "value": "top-right", "label": "Top right" },
+        { "value": "middle-left", "label": "Middle left" },
+        { "value": "middle-center", "label": "Middle center" },
+        { "value": "middle-right", "label": "Middle right" },
+        { "value": "bottom-left", "label": "Bottom left" },
+        { "value": "bottom-center", "label": "Bottom center" },
+        { "value": "bottom-right", "label": "Bottom right" }
+      ],
+      "default": "middle-center"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "min": 300,
+      "max": 1000,
+      "step": 50,
+      "unit": "px",
+      "label": "Content max width",
+      "default": 700
+    },
+    {
+      "type": "header",
+      "content": "Color scheme"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Desktop spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Mobile spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "subheading",
+      "name": "Subheading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "New collection"
+        },
+        {
+          "type": "select",
+          "id": "subheading_size",
+          "label": "Size",
+          "options": [
+            { "value": "xs", "label": "Extra small" },
+            { "value": "sm", "label": "Small" },
+            { "value": "md", "label": "Medium" },
+            { "value": "lg", "label": "Large" },
+            { "value": "xl", "label": "Extra large" }
+          ],
+          "default": "sm"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Welcome to our store"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "Size",
+          "options": [
+            { "value": "md", "label": "Medium" },
+            { "value": "lg", "label": "Large" },
+            { "value": "xl", "label": "Extra large" },
+            { "value": "2xl", "label": "2X large" }
+          ],
+          "default": "xl"
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "Heading tag (SEO)",
+          "options": [
+            { "value": "h1", "label": "H1" },
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "p", "label": "Paragraph" }
+          ],
+          "default": "h2",
+          "info": "First hero on the homepage auto-uses H1 for SEO."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Content",
+          "default": "<p>Discover our latest collection of refined pieces.</p>"
+        },
+        {
+          "type": "select",
+          "id": "content_size",
+          "label": "Size",
+          "options": [
+            { "value": "xs", "label": "Extra small" },
+            { "value": "sm", "label": "Small" },
+            { "value": "md", "label": "Medium" },
+            { "value": "lg", "label": "Large" },
+            { "value": "xl", "label": "Extra large" }
+          ],
+          "default": "md"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "button_size",
+          "label": "Button size",
+          "options": [
+            { "value": "sm", "label": "Small" },
+            { "value": "md", "label": "Medium" },
+            { "value": "lg", "label": "Large" },
+            { "value": "xl", "label": "Extra large" }
+          ],
+          "default": "md"
+        },
+        {
+          "type": "header",
+          "content": "Button 1"
+        },
+        {
+          "type": "text",
+          "id": "button_label_1",
+          "label": "Label",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "button_link_1",
+          "label": "Link"
+        },
+        {
+          "type": "select",
+          "id": "button_style_1",
+          "label": "Style",
+          "options": [
+            { "value": "primary", "label": "Primary (solid white)" },
+            { "value": "secondary", "label": "Secondary (outline)" },
+            { "value": "link", "label": "Link" }
+          ],
+          "default": "primary"
+        },
+        {
+          "type": "header",
+          "content": "Button 2"
+        },
+        {
+          "type": "text",
+          "id": "button_label_2",
+          "label": "Label",
+          "info": "Leave empty to hide."
+        },
+        {
+          "type": "url",
+          "id": "button_link_2",
+          "label": "Link",
+          "visible_if": "{{ block.settings.button_label_2 != blank }}"
+        },
+        {
+          "type": "select",
+          "id": "button_style_2",
+          "label": "Style",
+          "options": [
+            { "value": "primary", "label": "Primary (solid white)" },
+            { "value": "secondary", "label": "Secondary (outline)" },
+            { "value": "link", "label": "Link" }
+          ],
+          "default": "secondary",
+          "visible_if": "{{ block.settings.button_label_2 != blank }}"
+        }
+      ]
+    },
+    {
+      "type": "countdown",
+      "name": "Countdown timer",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "end_date",
+          "label": "End date (ISO format)",
+          "info": "Format: YYYY-MM-DDTHH:MM:SS. Example: 2026-12-31T23:59:59",
+          "default": "2026-12-31T23:59:59"
+        },
+        {
+          "type": "text",
+          "id": "label_days",
+          "label": "Days label",
+          "default": "Days"
+        },
+        {
+          "type": "text",
+          "id": "label_hours",
+          "label": "Hours label",
+          "default": "Hrs"
+        },
+        {
+          "type": "text",
+          "id": "label_mins",
+          "label": "Minutes label",
+          "default": "Min"
+        },
+        {
+          "type": "text",
+          "id": "label_secs",
+          "label": "Seconds label",
+          "default": "Sec"
+        }
+      ]
+    },
+    {
+      "type": "empty_space",
+      "name": "Empty space",
+      "settings": [
+        {
+          "type": "range",
+          "id": "spacing",
+          "min": 4,
+          "max": 80,
+          "step": 4,
+          "unit": "px",
+          "label": "Spacing",
+          "default": 20
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero — centered",
+      "category": "Banners",
+      "blocks": [
+        {
+          "type": "subheading",
+          "settings": {
+            "subheading": "New arrivals"
+          }
+        },
+        {
+          "type": "heading",
+          "settings": {
+            "heading": "Welcome to our store",
+            "heading_size": "xl"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "text": "<p>Discover our latest collection crafted with care.</p>"
+          }
+        },
+        {
+          "type": "button",
+          "settings": {
+            "button_label_1": "Shop now",
+            "button_style_1": "primary",
+            "button_label_2": "Learn more",
+            "button_style_2": "secondary"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hero — bottom left",
+      "category": "Banners",
+      "blocks": [
+        {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Limited edition"
+          }
+        },
+        {
+          "type": "heading",
+          "settings": {
+            "heading": "The season's essential pieces",
+            "heading_size": "2xl"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "text": "<p>Thoughtfully designed. Responsibly made.</p>"
+          }
+        },
+        {
+          "type": "button",
+          "settings": {
+            "button_label_1": "Explore collection",
+            "button_style_1": "primary",
+            "button_size": "lg"
+          }
+        }
+      ],
+      "settings": {
+        "content_position": "bottom-left",
+        "text_align": "left",
+        "overlay_gradient": true,
+        "height_desktop": "80"
+      }
+    },
+    {
+      "name": "Hero — top left",
+      "category": "Banners",
+      "blocks": [
+        {
+          "type": "heading",
+          "settings": {
+            "heading": "Sale up to 50% off",
+            "heading_size": "2xl"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "text": "<p>Selected items. Limited time only.</p>"
+          }
+        },
+        {
+          "type": "button",
+          "settings": {
+            "button_label_1": "Shop sale",
+            "button_style_1": "primary",
+            "button_label_2": "View all",
+            "button_style_2": "link"
+          }
+        }
+      ],
+      "settings": {
+        "content_position": "top-left",
+        "text_align": "left",
+        "overlay_opacity": 20,
+        "height_desktop": "60",
+        "height_mobile": "40"
+      }
+    },
+    {
+      "name": "Hero — countdown",
+      "category": "Banners",
+      "blocks": [
+        {
+          "type": "heading",
+          "settings": {
+            "heading": "Launching soon",
+            "heading_size": "2xl"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "text": "<p>Be the first to know when we drop.</p>"
+          }
+        },
+        {
+          "type": "countdown"
+        },
+        {
+          "type": "button",
+          "settings": {
+            "button_label_1": "Notify me",
+            "button_style_1": "primary"
+          }
+        }
+      ],
+      "settings": {
+        "text_align": "center",
+        "overlay_opacity": 40,
+        "height_desktop": "100",
+        "height_mobile": "80"
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -1,3 +1,8 @@
+{%- liquid
+  assign resolved_menu_handle = menu_handle | default: settings.header_menu
+  assign resolved_show_wishlist = show_wishlist | default: true, allow_false: true
+  assign resolved_wishlist_url = wishlist_url | default: '/pages/wishlist'
+-%}
 {{ 'mobile-menu.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'mobile-menu.js' | asset_url }}" defer="defer"></script>
 <mobile-menu class="mobile-menu" role="dialog" aria-modal="true" aria-label="{{ 'accessibility.navigation' | t }}">
@@ -12,8 +17,8 @@
     <div class="mobile-menu__body">
       <nav class="mobile-menu__nav">
         <ul class="mobile-menu__list">
-          {%- if settings.header_menu != blank -%}
-            {%- for link in linklists[settings.header_menu].links -%}
+          {%- if resolved_menu_handle != blank -%}
+            {%- for link in linklists[resolved_menu_handle].links -%}
               {%- if linklists[link.handle].links -%}
                 <li class="mobile-menu__item mobile-menu__item--has-children">
                   <button type="button" class="mobile-menu__trigger" aria-expanded="false" aria-controls="mobile-submenu-{{ link.handle | handleize }}">
@@ -78,12 +83,8 @@
           {%- render 'icon', name: 'user' -%}
           <span>{{ 'customer.account.title' | t }}</span>
         </a>
-        {%- if settings.wishlist_enable != false -%}
-          {%- assign wishlist_url = '/pages/wishlist' -%}
-          {%- if settings.wishlist_page != blank -%}
-            {%- assign wishlist_url = pages[settings.wishlist_page].url -%}
-          {%- endif -%}
-          <a href="{{ wishlist_url }}" class="mobile-menu__action-link">
+        {%- if resolved_show_wishlist -%}
+          <a href="{{ resolved_wishlist_url }}" class="mobile-menu__action-link">
             {%- render 'icon', name: 'heart' -%}
             <span>{{ 'general.wishlist.title' | t }}</span>
           </a>

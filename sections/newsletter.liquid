@@ -1,6 +1,6 @@
 {%- comment %}
   Section: Newsletter
-  Mô tả: Form đăng ký email — tích hợp Shopify Customer API.
+  Newsletter signup form.
 {% endcomment -%}
 
 <div
@@ -92,7 +92,7 @@
     width: min(100%, 32rem);
     max-width: 100%;
     border: 1px solid rgba(var(--color-foreground), 0.15);
-    border-radius: var(--buttons-radius, 0);
+    border-radius: var(--inputs-radius);
     overflow: hidden;
     transition: border-color 0.3s;
   }
@@ -101,7 +101,9 @@
   }
 
   .section-newsletter__input {
-    flex: 1; border: none; outline: none;
+    flex: 1; border: none;
+    outline: 2px solid transparent;
+    outline-offset: -2px;
     min-width: 0;
     padding: 0.75rem 1rem;
     font-size: 0.875rem;
@@ -113,13 +115,17 @@
     color: rgba(var(--color-foreground), 0.4);
   }
 
+  .section-newsletter__input:focus-visible {
+    outline-color: rgba(var(--color-accent), 0.35);
+  }
+
   .section-newsletter__btn {
     background: rgb(var(--color-button));
     color: rgb(var(--color-button-text));
     border: none; cursor: pointer;
     font-weight: 600; white-space: nowrap;
     transition: opacity 0.3s;
-    border-radius: 0;
+    border-radius: var(--inputs-radius);
   }
   .section-newsletter__btn:hover { opacity: 0.85; }
 

@@ -11,10 +11,6 @@
   assign show_tags = section.settings.show_tags | default: false, allow_false: true
   assign show_category = section.settings.show_category | default: false, allow_false: true
   assign sticky_sidebar = section.settings.sticky_sidebar | default: true, allow_false: true
-
-  comment
-    Check if featured_post is enabled — collect the featured article ID
-  endcomment
   assign featured_id = null
   assign has_sidebar = false
   if section.settings.show_featured_post
@@ -78,7 +74,6 @@
             </div>
           {%- endif -%}
 
-          {%- comment %} Render content blocks {% endcomment -%}
           {%- for block in section.blocks -%}
             {%- case block.type -%}
               {%- when 'rich_text' -%}
@@ -92,7 +87,6 @@
             {%- endcase -%}
           {%- endfor -%}
 
-          {%- comment %} Featured Post (section setting) — page 1 only {% endcomment -%}
           {%- if section.settings.show_featured_post and paginate.current_page == 1 -%}
             {%- assign featured = blog.articles.first -%}
             {%- if featured -%}
@@ -184,7 +178,6 @@
             {%- if blog.articles_count > 0 -%}
               <ul class="blog-template__articles blog-template__articles--{{ layout }}">
                 {%- for article in blog.articles -%}
-                  {%- comment %} Skip the featured article only on page 1 {% endcomment -%}
                   {%- if article.id == featured_id and paginate.current_page == 1 -%}
                     {%- continue -%}
                   {%- endif -%}
@@ -236,7 +229,6 @@
           {%- endif -%}
         </div>
 
-        {%- comment %} Sidebar — auto-rendered when sidebar blocks exist {% endcomment -%}
         {%- if has_sidebar -%}
           <aside class="blog-template__sidebar {% if sticky_sidebar %}blog-template__sidebar--sticky{% endif %}">
             {%- assign rendered_sidebar_blocks = 0 -%}
@@ -383,7 +375,7 @@
                         {%- else -%}
                           <img
                             class="blog-sidebar__banner-image"
-                            src="{{ 'newsletter-popup-banner.jpg' | asset_url }}"
+                            src="{{ 'blog-sidebar-editorial.svg' | asset_url }}"
                             alt="{{ banner_alt | escape }}"
                             loading="lazy"
                             width="600"
@@ -457,9 +449,9 @@
                 </div>
               {%- endif -%}
               <div class="blog-sidebar__section blog-sidebar__banner-section">
-                <a href="/collections/all" class="blog-sidebar__banner" aria-label="Texture, utility, attitude">
+                <a href="{{ routes.all_products_collection_url }}" class="blog-sidebar__banner" aria-label="Texture, utility, attitude">
                   <div class="blog-sidebar__banner-media">
-                    <img class="blog-sidebar__banner-image" src="{{ 'newsletter-popup-banner.jpg' | asset_url }}" alt="Texture, utility, attitude" loading="lazy" width="600" height="840">
+                    <img class="blog-sidebar__banner-image" src="{{ 'blog-sidebar-editorial.svg' | asset_url }}" alt="Texture, utility, attitude" loading="lazy" width="600" height="840">
                   </div>
                   <div class="blog-sidebar__banner-content">
                     <h3 class="blog-sidebar__banner-heading">Texture, utility, attitude</h3>

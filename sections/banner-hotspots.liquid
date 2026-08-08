@@ -22,8 +22,11 @@
       </div>
     {%- endif -%}
 
+    {%- assign custom_image_url = section.settings.custom_image_url -%}
     <div class="section-hotspot__wrapper">
-      {%- if section.settings.image != blank -%}
+      {%- if custom_image_url != blank -%}
+        <img src="{{ custom_image_url | escape }}" alt="{{ section.settings.heading | default: shop.name | escape }}" width="1920" height="1080" loading="lazy" decoding="async" class="section-hotspot__img">
+      {%- elsif section.settings.image != blank -%}
         {{ section.settings.image | image_url: width: 1920 | image_tag:
           widths: '750, 1080, 1440, 1920', sizes: '100vw',
           loading: 'lazy', class: 'section-hotspot__img'
@@ -33,6 +36,10 @@
       {%- endif -%}
 
       {%- for block in section.blocks -%}
+        {%- liquid
+          assign hotspot_product = block.settings.product
+          assign hotspot_product_handle = block.settings.product_handle
+        -%}
         <div
           class="section-hotspot__dot"
           style="--hs-x: {{ block.settings.position_x }}%; --hs-y: {{ block.settings.position_y }}%;"
@@ -42,15 +49,15 @@
           <button class="section-hotspot__pulse" aria-label="{{ 'accessibility.view_details' | t }}" data-hotspot-btn>
             <span class="section-hotspot__plus">+</span>
           </button>
-          <div class="section-hotspot__tooltip section-hotspot__tooltip--{{ block.settings.tooltip_position }}" data-hotspot-tooltip>
-            {%- if block.settings.product != blank -%}
-              <a href="{{ block.settings.product.url }}" class="section-hotspot__tooltip-product">
-                {%- if block.settings.product.featured_image -%}
-                  {{ block.settings.product.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', class: 'section-hotspot__tooltip-img' }}
+          <div class="section-hotspot__tooltip section-hotspot__tooltip--{{ block.settings.tooltip_position }}" data-hotspot-tooltip data-product-handle="{{ hotspot_product_handle | escape }}">
+            {%- if hotspot_product != blank -%}
+              <a href="{{ hotspot_product.url }}" class="section-hotspot__tooltip-product">
+                {%- if hotspot_product.featured_image -%}
+                  {{ hotspot_product.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', class: 'section-hotspot__tooltip-img' }}
                 {%- endif -%}
                 <div class="section-hotspot__tooltip-info">
-                  <span class="section-hotspot__tooltip-title">{{ block.settings.product.title | escape }}</span>
-                  <span class="section-hotspot__tooltip-price">{{ block.settings.product.price | money }}</span>
+                  <span class="section-hotspot__tooltip-title">{{ hotspot_product.title | escape }}</span>
+                  <span class="section-hotspot__tooltip-price">{{ hotspot_product.price | money }}</span>
                 </div>
               </a>
             {%- else -%}
@@ -73,6 +80,80 @@
 <script>
 (function() {
   var dots = document.querySelectorAll('#section-{{ section.id }} [data-hotspot]');
+  var productCache = {};
+
+  function formatHotspotMoney(cents) {
+    if (typeof window.formatMoney === 'function') return window.formatMoney(cents);
+    return cents;
+  }
+
+  function getProductImage(product) {
+    if (!product) return '';
+    if (typeof product.featured_image === 'string') return product.featured_image;
+    if (product.featured_image && typeof product.featured_image === 'object') {
+      return product.featured_image.src || product.featured_image.url || '';
+    }
+    return '';
+  }
+
+  function renderTooltipProduct(tip, product) {
+    if (!tip || !product) return;
+    var link = document.createElement('a');
+    var productUrl = product.url || (product.handle ? '/products/' + encodeURIComponent(product.handle) : '#');
+    var imageSrc = getProductImage(product);
+    var price = product.priceText || (product.price != null ? formatHotspotMoney(product.price) : '');
+    link.href = productUrl;
+    link.className = 'section-hotspot__tooltip-product';
+
+    if (imageSrc) {
+      var image = document.createElement('img');
+      image.className = 'section-hotspot__tooltip-img';
+      image.src = imageSrc;
+      image.alt = product.title || '';
+      image.width = 60;
+      image.height = 60;
+      image.loading = 'lazy';
+      image.decoding = 'async';
+      link.appendChild(image);
+    }
+
+    var info = document.createElement('div');
+    info.className = 'section-hotspot__tooltip-info';
+
+    var title = document.createElement('span');
+    title.className = 'section-hotspot__tooltip-title';
+    title.textContent = product.title || '';
+    info.appendChild(title);
+
+    var priceEl = document.createElement('span');
+    priceEl.className = 'section-hotspot__tooltip-price';
+    priceEl.textContent = price;
+    info.appendChild(priceEl);
+
+    link.appendChild(info);
+    tip.replaceChildren(link);
+    tip.setAttribute('data-product-loaded', 'true');
+  }
+
+  function hydrateTooltip(tip) {
+    var handle = tip && tip.getAttribute('data-product-handle');
+    if (!tip || !handle || tip.getAttribute('data-product-loaded') === 'true') return Promise.resolve();
+    if (productCache[handle]) {
+      renderTooltipProduct(tip, productCache[handle]);
+      return Promise.resolve();
+    }
+    var root = (window.themeConfig && window.themeConfig.routes && window.themeConfig.routes.root_url) || '/';
+    return fetch(root + 'products/' + encodeURIComponent(handle) + '.js')
+      .then(function(res) { if (!res.ok) throw new Error('Failed to load product ' + handle); return res.json(); })
+      .then(function(product) {
+        productCache[handle] = product;
+        renderTooltipProduct(tip, product);
+      })
+      .catch(function() {
+        if (tip) tip.setAttribute('data-product-load-error', 'true');
+      });
+  }
+
   dots.forEach(function(dot) {
     var btn = dot.querySelector('[data-hotspot-btn]');
     var tip = dot.querySelector('[data-hotspot-tooltip]');
@@ -80,7 +161,11 @@
       e.stopPropagation();
       var isOpen = tip.classList.contains('is-open');
       document.querySelectorAll('[data-hotspot-tooltip].is-open').forEach(function(t) { t.classList.remove('is-open'); });
-      if (!isOpen) tip.classList.add('is-open');
+      if (!isOpen) {
+        hydrateTooltip(tip).finally(function() {
+          tip.classList.add('is-open');
+        });
+      }
     });
   });
   document.addEventListener('click', function() {
@@ -233,6 +318,11 @@
       "label": "t:sections.banner_hotspots.settings.image.label"
     },
     {
+      "type": "url",
+      "id": "custom_image_url",
+      "label": "Desktop image URL override"
+    },
+    {
       "type": "select",
       "id": "section_width",
       "label": "t:sections.banner_hotspots.settings.width.label",
@@ -350,6 +440,11 @@
           "type": "product",
           "id": "product",
           "label": "t:sections.banner_hotspots.blocks.hotspot.settings.product.label"
+        },
+        {
+          "type": "text",
+          "id": "product_handle",
+          "label": "Product handle fallback"
         },
         {
           "type": "header",

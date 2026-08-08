@@ -1,6 +1,6 @@
 {%- comment %}
   Section: Gallery / Lookbook
-  Mô tả: Grid ảnh responsive — masonry-style hoặc uniform. Có lightbox.
+  Responsive image gallery with optional lightbox.
 {% endcomment -%}
 
 <div
@@ -126,6 +126,12 @@
     display: block; width: 100%; height: 100%;
     border: none; padding: 0; background: none; cursor: pointer;
     position: relative;
+  }
+
+  .section-gallery__link:focus-visible,
+  .section-gallery__lightbox-close:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 3px;
   }
   .section-gallery__img {
     width: 100%; height: 100%; object-fit: cover; display: block;

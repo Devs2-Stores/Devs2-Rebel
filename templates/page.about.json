@@ -6,7 +6,92 @@
     },
     "main": {
       "type": "page-about",
-      "settings": {}
+      "settings": {
+        "hero_image_desktop": "shopify://shop_images/demo-slideshow_1_desktop.jpg",
+        "hero_image_mobile": "shopify://shop_images/demo-slideshow_1_mobile.jpg",
+        "hero_subtitle": "Inside the atelier",
+        "hero_title": "Inside Devs2 Rebel",
+        "hero_description": "<p>A study in structure, proportion, and quiet defiance. We build a wardrobe around tactile materials, exacting cuts, and pieces that reward repeat wear.</p>",
+        "show_mission": true,
+        "mission_title": "A sharper kind of luxury",
+        "mission_description": "<p>Devs2 Rebel designs clothing for a considered wardrobe: fewer pieces, stronger silhouettes, and materials chosen for texture, memory, and longevity.</p>",
+        "show_story": true,
+        "story_title": "What we make, and why",
+        "story_content": "<p>We work between tailoring discipline and modern ease. Collections begin with proportion studies, fabric tests, and a simple question: will this still feel right years from now?</p><p>The result is a restrained luxury language with depth, movement, and clarity rather than noise.</p>",
+        "show_gallery": true,
+        "gallery_title": "Studio details",
+        "hero_primary_label": "Explore collections",
+        "hero_primary_link": "/collections",
+        "hero_secondary_label": "Book an appointment",
+        "hero_secondary_link": "/pages/contact",
+        "show_actions": true,
+        "actions_subheading": "Atelier support",
+        "actions_title": "Continue with the studio",
+        "actions_description": "<p>Move from brand story into something concrete: plan a fitting, follow the journal, or browse the current wardrobe edit.</p>",
+        "action_1_eyebrow": "Private visits",
+        "action_1_title": "Book a studio appointment",
+        "action_1_text": "Request a private fitting, sizing guidance, or a wardrobe consultation with the atelier team.",
+        "action_1_label": "Contact the atelier",
+        "action_1_link": "/pages/contact",
+        "action_2_eyebrow": "Editorial notes",
+        "action_2_title": "Read the journal",
+        "action_2_text": "Follow styling essays, material studies, and the way each collection is intended to be worn.",
+        "action_2_label": "Open the journal",
+        "action_2_link": "/blogs/style-guides-wardrobe-essentials",
+        "action_3_eyebrow": "Current wardrobe",
+        "action_3_title": "Shop the collections",
+        "action_3_text": "Browse the latest edit across tailoring, outerwear, and layered essentials built around repeat wear.",
+        "action_3_label": "View all collections",
+        "action_3_link": "/collections"
+      },
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "image": "shopify://shop_images/demo-layered_1.jpg",
+            "title": "Material first",
+            "description": "<p>We start from fabric hand-feel and drape before sketching silhouettes, so each piece holds its own structure and movement.</p>",
+            "reverse": false
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "image": "shopify://shop_images/demo-image_with_text.jpg",
+            "title": "Designed to be reworn",
+            "description": "<p>Each collection is edited to layer with what came before, building a wardrobe system instead of isolated statements.</p>",
+            "reverse": true
+          }
+        },
+        "gallery_1": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/demo-layered_2.jpg",
+            "alt": "Fabric study"
+          }
+        },
+        "gallery_2": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/demo-before_after_before.jpg",
+            "alt": "Atelier process"
+          }
+        },
+        "gallery_3": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/demo-before_after_after.jpg",
+            "alt": "Finished garment"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "gallery_1",
+        "gallery_2",
+        "gallery_3"
+      ]
     },
     "team": {
       "type": "team",
@@ -15,8 +100,51 @@
         "padding_top_desktop": 60,
         "padding_bottom_desktop": 60,
         "padding_top_mobile": 40,
-        "padding_bottom_mobile": 40
-      }
+        "padding_bottom_mobile": 40,
+        "subheading": "People",
+        "subheading_size": "sm",
+        "heading": "The studio team",
+        "heading_size": "lg",
+        "heading_tag": "h2",
+        "columns_desktop": 3
+      },
+      "blocks": {
+        "member_1": {
+          "type": "member",
+          "settings": {
+            "name": "Linh Tran",
+            "role": "Creative director",
+            "bio": "Shapes the silhouette language and seasonal point of view.",
+            "social_1": "https://instagram.com/devs2rebel",
+            "image": "shopify://shop_images/demo-testimonial_1.jpg"
+          }
+        },
+        "member_2": {
+          "type": "member",
+          "settings": {
+            "name": "Mina Vo",
+            "role": "Head of atelier",
+            "bio": "Leads fittings, construction, and finishing standards across the line.",
+            "social_1": "https://instagram.com/devs2rebel",
+            "image": "shopify://shop_images/demo-testimonial_2.jpg"
+          }
+        },
+        "member_3": {
+          "type": "member",
+          "settings": {
+            "name": "Julien Moreau",
+            "role": "Brand partnerships",
+            "bio": "Works with editors, buyers, and collaborators to extend the studio story.",
+            "social_1": "https://instagram.com/devs2rebel",
+            "image": "shopify://shop_images/demo-testimonial_3.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "member_1",
+        "member_2",
+        "member_3"
+      ]
     },
     "stats": {
       "type": "animated-counter",
@@ -26,7 +154,8 @@
           "settings": {
             "value": "12",
             "suffix": "+",
-            "label": "Years of craft"
+            "label": "Years of craft",
+            "number": 12
           }
         },
         "stat_2": {
@@ -34,7 +163,8 @@
           "settings": {
             "value": "180",
             "suffix": "K",
-            "label": "Happy customers"
+            "label": "Happy customers",
+            "number": 180
           }
         },
         "stat_3": {
@@ -42,7 +172,8 @@
           "settings": {
             "value": "42",
             "suffix": "",
-            "label": "Countries shipped"
+            "label": "Countries shipped",
+            "number": 42
           }
         },
         "stat_4": {
@@ -50,17 +181,29 @@
           "settings": {
             "value": "100",
             "suffix": "%",
-            "label": "Sustainable sourcing"
+            "label": "Sustainable sourcing",
+            "number": 100
           }
         }
       },
-      "block_order": ["stat_1", "stat_2", "stat_3", "stat_4"],
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4"
+      ],
       "settings": {
         "color_scheme": "scheme-2",
         "padding_top_desktop": 60,
         "padding_bottom_desktop": 60,
         "padding_top_mobile": 40,
-        "padding_bottom_mobile": 40
+        "padding_bottom_mobile": 40,
+        "subheading": "Measured growth",
+        "subheading_size": "sm",
+        "heading": "Built with patience",
+        "heading_size": "md",
+        "heading_tag": "h2",
+        "number_size": "2xl"
       }
     },
     "timeline": {
@@ -70,28 +213,105 @@
         "padding_top_desktop": 60,
         "padding_bottom_desktop": 60,
         "padding_top_mobile": 40,
-        "padding_bottom_mobile": 40
-      }
+        "padding_bottom_mobile": 40,
+        "subheading": "Milestones",
+        "subheading_size": "sm",
+        "heading": "A timeline of refinement",
+        "heading_size": "lg",
+        "heading_tag": "h2"
+      },
+      "blocks": {
+        "event_1": {
+          "type": "event",
+          "settings": {
+            "year": "2015",
+            "heading": "The first capsule",
+            "heading_size": "sm",
+            "text": "<p>Devs2 Rebel began as a tightly edited capsule built around tailoring, drape, and wardrobe permanence.</p>"
+          }
+        },
+        "event_2": {
+          "type": "event",
+          "settings": {
+            "year": "2020",
+            "heading": "Atelier expansion",
+            "heading_size": "sm",
+            "image": "shopify://shop_images/demo-layered_3.jpg",
+            "text": "<p>The studio expanded production control, fittings, and textile development to sharpen consistency.</p>"
+          }
+        },
+        "event_3": {
+          "type": "event",
+          "settings": {
+            "year": "2026",
+            "heading": "A global wardrobe language",
+            "heading_size": "sm",
+            "text": "<p>Collections now speak to customers across climates and cities without losing the original atelier restraint.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "event_1",
+        "event_2",
+        "event_3"
+      ]
     },
-    "newsletter": {
-      "type": "newsletter",
+    "contact_handoff": {
+      "type": "contact-form",
       "settings": {
         "color_scheme": "scheme-2",
-        "subheading": "Stay connected",
+        "subheading": "Atelier contact",
         "subheading_size": "sm",
-        "heading": "Join the Devs2 Rebel community",
+        "heading": "Plan a conversation with the studio",
         "heading_size": "lg",
         "heading_tag": "h2",
-        "description": "Be the first to know about new collections, exclusive offers, and stories worth sharing.",
-        "description_size": "md",
-        "button_label": "Subscribe",
+        "text": "<p>Use this form for private appointments, press requests, wholesale introductions, and sizing questions tied to the current collection.</p>",
+        "text_size": "md",
+        "show_phone": true,
+        "button_label": "Send your note",
         "button_size": "md",
-        "text_align": "center",
+        "layout": "side-by-side",
         "padding_top_desktop": 60,
         "padding_bottom_desktop": 60,
         "padding_top_mobile": 40,
         "padding_bottom_mobile": 40
-      }
+      },
+      "blocks": {
+        "info_1": {
+          "type": "info_item",
+          "settings": {
+            "label": "Appointments",
+            "value": "Private fittings by request, Tuesday to Saturday"
+          }
+        },
+        "info_2": {
+          "type": "info_item",
+          "settings": {
+            "label": "Editorial & press",
+            "value": "press@devs2-rebel.com"
+          }
+        },
+        "info_3": {
+          "type": "info_item",
+          "settings": {
+            "label": "Wholesale",
+            "value": "showroom@devs2-rebel.com"
+          }
+        },
+        "info_4": {
+          "type": "info_item",
+          "settings": {
+            "label": "Studio line",
+            "value": "+33 1 23 45 67 89"
+          }
+        }
+      },
+      "block_order": [
+        "info_1",
+        "info_2",
+        "info_3",
+        "info_4"
+      ]
     }
   },
   "order": [
@@ -100,6 +320,6 @@
     "team",
     "stats",
     "timeline",
-    "newsletter"
+    "contact_handoff"
   ]
 }

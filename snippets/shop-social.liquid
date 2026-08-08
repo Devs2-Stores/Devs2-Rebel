@@ -1,58 +1,66 @@
-{{ 'shop-social.css' | asset_url | stylesheet_tag }}
-<ul class="shop-social">
-	{%- if settings.linkFbsocial != blank -%}
-	<li class="shop-social__item">
-		<a href="{{ settings.linkFbsocial }}" class="shop-social__link shop-social__link--facebook" target="_blank" rel="noopener noreferrer" aria-label="{{ 'accessibility.follow_on' | t: platform: 'Facebook' }}" title="{{ 'general.social.follow_on' | t: platform: 'Facebook' }}">
-			{%- render 'icon', name: 'facebook' -%}
-		</a>
-	</li>
-	{%- endif -%}
+{%- liquid
+  assign has_shop_social_links = false
+  if settings.social_facebook_link != blank or settings.social_instagram_link != blank or settings.social_youtube_link != blank or settings.social_tiktok_link != blank or settings.social_pinterest_link != blank or settings.social_twitter_link != blank or settings.social_linkedin_link != blank
+    assign has_shop_social_links = true
+  endif
+-%}
+{%- if has_shop_social_links -%}
+  {{ 'shop-social.css' | asset_url | stylesheet_tag }}
+  <ul class="shop-social">
+    {%- if settings.social_facebook_link != blank -%}
+      <li class="shop-social__item">
+        <a href="{{ settings.social_facebook_link }}" class="shop-social__link shop-social__link--facebook" target="_blank" rel="noopener noreferrer" aria-label="{{ 'accessibility.follow_on' | t: platform: 'Facebook' }}" title="{{ 'general.social.follow_on' | t: platform: 'Facebook' }}">
+          {%- render 'icon', name: 'facebook' -%}
+        </a>
+      </li>
+    {%- endif -%}
 
-	{%- if settings.linkInsocial != blank -%}
-	<li class="shop-social__item">
-		<a href="{{ settings.linkInsocial }}" class="shop-social__link shop-social__link--instagram" target="_blank" rel="noopener noreferrer" aria-label="{{ 'accessibility.follow_on' | t: platform: 'Instagram' }}" title="{{ 'general.social.follow_on' | t: platform: 'Instagram' }}">
-			{%- render 'icon', name: 'instagram' -%}
-		</a>
-	</li>
-	{%- endif -%}
+    {%- if settings.social_instagram_link != blank -%}
+      <li class="shop-social__item">
+        <a href="{{ settings.social_instagram_link }}" class="shop-social__link shop-social__link--instagram" target="_blank" rel="noopener noreferrer" aria-label="{{ 'accessibility.follow_on' | t: platform: 'Instagram' }}" title="{{ 'general.social.follow_on' | t: platform: 'Instagram' }}">
+          {%- render 'icon', name: 'instagram' -%}
+        </a>
+      </li>
+    {%- endif -%}
 
-	{%- if settings.linkYtsocial != blank -%}
-	<li class="shop-social__item">
-		<a href="{{ settings.linkYtsocial }}" class="shop-social__link shop-social__link--youtube" target="_blank" rel="noopener noreferrer" aria-label="{{ 'accessibility.follow_on' | t: platform: 'YouTube' }}" title="{{ 'general.social.follow_on' | t: platform: 'YouTube' }}">
-			{%- render 'icon', name: 'youtube' -%}
-		</a>
-	</li>
-	{%- endif -%}
+    {%- if settings.social_youtube_link != blank -%}
+      <li class="shop-social__item">
+        <a href="{{ settings.social_youtube_link }}" class="shop-social__link shop-social__link--youtube" target="_blank" rel="noopener noreferrer" aria-label="{{ 'accessibility.follow_on' | t: platform: 'YouTube' }}" title="{{ 'general.social.follow_on' | t: platform: 'YouTube' }}">
+          {%- render 'icon', name: 'youtube' -%}
+        </a>
+      </li>
+    {%- endif -%}
 
-	{%- if settings.linkTwsocial != blank -%}
-	<li class="shop-social__item">
-		<a href="{{ settings.linkTwsocial }}" class="shop-social__link shop-social__link--tiktok" target="_blank" rel="noopener noreferrer" aria-label="{{ 'accessibility.follow_on' | t: platform: 'TikTok' }}" title="{{ 'general.social.follow_on' | t: platform: 'TikTok' }}">
-			{%- render 'icon', name: 'tiktok' -%}
-		</a>
-	</li>
-	{%- endif -%}
+    {%- if settings.social_tiktok_link != blank -%}
+      <li class="shop-social__item">
+        <a href="{{ settings.social_tiktok_link }}" class="shop-social__link shop-social__link--tiktok" target="_blank" rel="noopener noreferrer" aria-label="{{ 'accessibility.follow_on' | t: platform: 'TikTok' }}" title="{{ 'general.social.follow_on' | t: platform: 'TikTok' }}">
+          {%- render 'icon', name: 'tiktok' -%}
+        </a>
+      </li>
+    {%- endif -%}
 
-	{%- if settings.linkPisocial != blank -%}
-	<li class="shop-social__item">
-		<a href="{{ settings.linkPisocial }}" class="shop-social__link shop-social__link--pinterest" target="_blank" rel="noopener noreferrer" aria-label="{{ 'accessibility.follow_on' | t: platform: 'Pinterest' }}" title="{{ 'general.social.follow_on' | t: platform: 'Pinterest' }}">
-			{%- render 'icon', name: 'pinterest' -%}
-		</a>
-	</li>
-	{%- endif -%}
+    {%- if settings.social_pinterest_link != blank -%}
+      <li class="shop-social__item">
+        <a href="{{ settings.social_pinterest_link }}" class="shop-social__link shop-social__link--pinterest" target="_blank" rel="noopener noreferrer" aria-label="{{ 'accessibility.follow_on' | t: platform: 'Pinterest' }}" title="{{ 'general.social.follow_on' | t: platform: 'Pinterest' }}">
+          {%- render 'icon', name: 'pinterest' -%}
+        </a>
+      </li>
+    {%- endif -%}
 
-	{%- if settings.linkTwittersocial != blank -%}
-	<li class="shop-social__item">
-		<a href="{{ settings.linkTwittersocial }}" class="shop-social__link shop-social__link--twitter" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter) {{ shop.name | escape }}" title="{{ 'general.social.follow_on' | t: platform: 'X (Twitter)' }}">
-			{%- render 'icon', name: 'twitter' -%}
-		</a>
-	</li>
-	{%- endif -%}
+    {%- if settings.social_twitter_link != blank -%}
+      <li class="shop-social__item">
+        <a href="{{ settings.social_twitter_link }}" class="shop-social__link shop-social__link--twitter" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter) {{ shop.name | escape }}" title="{{ 'general.social.follow_on' | t: platform: 'X (Twitter)' }}">
+          {%- render 'icon', name: 'twitter' -%}
+        </a>
+      </li>
+    {%- endif -%}
 
-	{%- if settings.linkLinkedinsocial != blank -%}
-	<li class="shop-social__item">
-		<a href="{{ settings.linkLinkedinsocial }}" class="shop-social__link shop-social__link--linkedin" target="_blank" rel="noopener noreferrer" aria-label="{{ 'accessibility.follow_on' | t: platform: 'LinkedIn' }}" title="{{ 'general.social.follow_on' | t: platform: 'LinkedIn' }}">
-			{%- render 'icon', name: 'linkedin' -%}
-		</a>
-	</li>
-	{%- endif -%}
-</ul>
+    {%- if settings.social_linkedin_link != blank -%}
+      <li class="shop-social__item">
+        <a href="{{ settings.social_linkedin_link }}" class="shop-social__link shop-social__link--linkedin" target="_blank" rel="noopener noreferrer" aria-label="{{ 'accessibility.follow_on' | t: platform: 'LinkedIn' }}" title="{{ 'general.social.follow_on' | t: platform: 'LinkedIn' }}">
+          {%- render 'icon', name: 'linkedin' -%}
+        </a>
+      </li>
+    {%- endif -%}
+  </ul>
+{%- endif -%}

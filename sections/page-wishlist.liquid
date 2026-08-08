@@ -1,11 +1,21 @@
-
 <div class="wishlist-page page-width section-padding">
   <div class="wishlist-page__header">
     <h1>{% if section.settings.title != blank %}{{ section.settings.title | escape }}{% else %}{{ 'sections.page_wishlist.default_title' | t }}{% endif %}</h1>
     <p>{{ 'sections.page_wishlist.subtitle' | t }}</p>
   </div>
   <div class="wishlist-page__content">
-    <div class="wishlist-page__empty" style="display: none;">
+    <div
+      class="wishlist-page__empty"
+      style="display: none;"
+      data-empty-title="{% if section.settings.empty_text != blank %}{{ section.settings.empty_text | escape }}{% else %}{{ 'sections.page_wishlist.empty' | t | escape }}{% endif %}"
+      data-empty-hint="{{ 'sections.page_wishlist.empty_hint' | t | escape }}"
+      data-empty-button-text="{% if section.settings.empty_button_text != blank %}{{ section.settings.empty_button_text | escape }}{% else %}{{ 'sections.page_wishlist.explore' | t | escape }}{% endif %}"
+      data-empty-button-link="{{ section.settings.empty_button_link | default: routes.all_products_collection_url }}"
+      data-legacy-title="Refresh your saved items"
+      data-legacy-hint="Visit a product or collection page once to refresh older wishlist entries, then return here."
+      data-legacy-button-text="Browse products"
+      data-legacy-button-link="{{ routes.all_products_collection_url }}"
+    >
       <div class="wishlist-page__empty-icon">{%- render 'icon', name: 'heart' -%}</div>
       <h2>{% if section.settings.empty_text != blank %}{{ section.settings.empty_text | escape }}{% else %}{{ 'sections.page_wishlist.empty' | t }}{% endif %}</h2>
       <p>{{ 'sections.page_wishlist.empty_hint' | t }}</p>
@@ -20,59 +30,84 @@
   customElements.whenDefined('wishlist-manager').then(function() {
     var wishlistManager = document.querySelector('wishlist-manager');
     if (!wishlistManager) return;
+    wishlistManager.backfillWishlistHandles();
+
     var wishlist = wishlistManager.getWishlist();
     var productsContainer = document.querySelector('.wishlist-page__products');
     var emptyState = document.querySelector('.wishlist-page__empty');
 
+    function setEmptyStateContent(mode) {
+      if (!emptyState) return;
+      var title = emptyState.querySelector('h2');
+      var hint = emptyState.querySelector('p');
+      var button = emptyState.querySelector('a');
+      var prefix = mode === 'legacy' ? 'legacy' : 'empty';
+
+      if (title) title.textContent = emptyState.dataset[prefix + 'Title'] || '';
+      if (hint) hint.textContent = emptyState.dataset[prefix + 'Hint'] || '';
+      if (button) {
+        button.textContent = emptyState.dataset[prefix + 'ButtonText'] || '';
+        button.href = emptyState.dataset[prefix + 'ButtonLink'] || '{{ routes.all_products_collection_url }}';
+      }
+    }
+
+    function showEmptyState(mode) {
+      setEmptyStateContent(mode);
+      if (emptyState) emptyState.style.display = 'block';
+      if (productsContainer) productsContainer.style.display = 'none';
+    }
+
     if (wishlist.length === 0) {
-      emptyState.style.display = 'block';
-      productsContainer.style.display = 'none';
+      showEmptyState('empty');
       return;
     }
 
+    var hasLegacyWishlist = wishlist.some(function(item) {
+      return typeof item === 'string' || !item.handle;
+    });
+
     var handles = wishlist
-      .map(function(item) { return typeof item === 'string' ? '' : (item.handle || ''); })
+      .map(function(item) {
+        if (typeof item === 'string') return '';
+        return item.handle || '';
+      })
       .filter(function(h) { return h !== ''; });
 
     if (handles.length === 0) {
-      emptyState.style.display = 'block';
-      productsContainer.style.display = 'none';
+      showEmptyState(hasLegacyWishlist ? 'legacy' : 'empty');
       return;
     }
 
-    emptyState.style.display = 'none';
-    productsContainer.style.display = 'grid';
+    if (emptyState) emptyState.style.display = 'none';
+    if (productsContainer) productsContainer.style.display = 'grid';
 
-    var fetchPromises = handles.map(function(handle) {
-      return fetch('/products/' + encodeURIComponent(handle) + '?view=card')
+    productsContainer.innerHTML = '';
+
+    var completedRequests = 0;
+    var renderedCards = 0;
+
+    handles.forEach(function(handle) {
+      fetch('/products/' + encodeURIComponent(handle) + '?view=card')
         .then(function(res) {
           if (!res.ok) throw new Error('Not found');
           return res.text();
         })
         .then(function(html) {
-          if (html && html.trim().length > 0) return html.trim();
+          if (!html || html.trim().length === 0) return;
+          renderedCards += 1;
+          productsContainer.insertAdjacentHTML('beforeend', '<li class="product-cards__item">' + html.trim() + '</li>');
+          wishlistManager.updateAllWishlistStates();
+        })
+        .catch(function() {
           return null;
         })
-        .catch(function() { return null; });
+        .finally(function() {
+          completedRequests += 1;
+          if (completedRequests === handles.length && renderedCards === 0) {
+            showEmptyState(hasLegacyWishlist ? 'legacy' : 'empty');
+          }
+        });
     });
-
-    Promise.all(fetchPromises)
-      .then(function(results) {
-        var validResults = results.filter(function(html) { return html; });
-        if (validResults.length === 0) {
-          emptyState.style.display = 'block';
-          productsContainer.style.display = 'none';
-          return;
-        }
-        productsContainer.innerHTML = validResults.map(function(html) {
-          return '<li class="product-cards__item">' + html + '</li>';
-        }).join('');
-        wishlistManager.updateAllWishlistStates();
-      })
-      .catch(function() {
-        emptyState.style.display = 'block';
-        productsContainer.style.display = 'none';
-      });
 
     window.addEventListener('wishlist-changed', function(e) {
       var removedId = e.detail && e.detail.productId;
@@ -85,8 +120,7 @@
       }
       var currentWishlist = wishlistManager.getWishlist();
       if (currentWishlist.length === 0) {
-        emptyState.style.display = 'block';
-        productsContainer.style.display = 'none';
+        showEmptyState('empty');
       }
     });
   });

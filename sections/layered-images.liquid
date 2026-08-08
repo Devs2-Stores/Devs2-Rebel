@@ -72,8 +72,8 @@
           </div>
         {%- endfor -%}
 
-        {%- if section.settings.button_label != blank -%}
-          <a href="{{ section.settings.button_link | default: '#' }}" class="section-layered__btn section-layered__btn--{{ section.settings.button_style }} button-size-{{ section.settings.button_size }}">
+        {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+          <a href="{{ section.settings.button_link }}" class="section-layered__btn section-layered__btn--{{ section.settings.button_style }} button-size-{{ section.settings.button_size }}">
             {{ section.settings.button_label }}
           </a>
         {%- endif -%}
@@ -87,6 +87,7 @@
     padding-block: var(--ly-mt) var(--ly-mb);
     background: rgb(var(--color-background));
     color: rgba(var(--color-foreground), 0.85);
+    overflow: hidden;
   }
   @media (min-width: 750px) {
     .section-layered { padding-block: var(--ly-dt) var(--ly-db); }
@@ -100,11 +101,21 @@
   }
 
   .section-layered__images {
-    position: relative; min-height: 350px;
+    position: relative;
+    min-height: 430px;
     padding: 2rem;
   }
+  @media (min-width: 750px) {
+    .section-layered__images {
+      min-height: 520px;
+      padding: 2.5rem;
+    }
+  }
   @media (min-width: 990px) {
-    .section-layered__images { min-height: 450px; padding: 3rem; }
+    .section-layered__images {
+      min-height: 620px;
+      padding: 3rem;
+    }
   }
 
   .section-layered__layer {

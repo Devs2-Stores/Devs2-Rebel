@@ -52,12 +52,18 @@
           {%- if block.settings.social_1 != blank or block.settings.social_2 != blank -%}
             <div class="section-team__socials">
               {%- if block.settings.social_1 != blank -%}
-                <a href="{{ block.settings.social_1 }}" target="_blank" rel="noopener" class="section-team__social-link" aria-label="{{ 'accessibility.social_link' | t }}">
+                {%- assign social_1_url = block.settings.social_1 | downcase -%}
+                {%- assign social_1_label = 'Instagram' -%}
+                {%- if social_1_url contains 'facebook.com' -%}{%- assign social_1_label = 'Facebook' -%}{%- elsif social_1_url contains 'x.com' or social_1_url contains 'twitter.com' -%}{%- assign social_1_label = 'X' -%}{%- elsif social_1_url contains 'tiktok.com' -%}{%- assign social_1_label = 'TikTok' -%}{%- elsif social_1_url contains 'youtube.com' or social_1_url contains 'youtu.be' -%}{%- assign social_1_label = 'YouTube' -%}{%- elsif social_1_url contains 'linkedin.com' -%}{%- assign social_1_label = 'LinkedIn' -%}{%- endif -%}
+                <a href="{{ block.settings.social_1 }}" target="_blank" rel="noopener" class="section-team__social-link" aria-label="Follow {{ block.settings.name | default: 'team member' | escape }} on {{ social_1_label }}">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                 </a>
               {%- endif -%}
               {%- if block.settings.social_2 != blank -%}
-                <a href="{{ block.settings.social_2 }}" target="_blank" rel="noopener" class="section-team__social-link" aria-label="{{ 'accessibility.social_link' | t }}">
+                {%- assign social_2_url = block.settings.social_2 | downcase -%}
+                {%- assign social_2_label = 'Instagram' -%}
+                {%- if social_2_url contains 'facebook.com' -%}{%- assign social_2_label = 'Facebook' -%}{%- elsif social_2_url contains 'x.com' or social_2_url contains 'twitter.com' -%}{%- assign social_2_label = 'X' -%}{%- elsif social_2_url contains 'tiktok.com' -%}{%- assign social_2_label = 'TikTok' -%}{%- elsif social_2_url contains 'youtube.com' or social_2_url contains 'youtu.be' -%}{%- assign social_2_label = 'YouTube' -%}{%- elsif social_2_url contains 'linkedin.com' -%}{%- assign social_2_label = 'LinkedIn' -%}{%- endif -%}
+                <a href="{{ block.settings.social_2 }}" target="_blank" rel="noopener" class="section-team__social-link" aria-label="Follow {{ block.settings.name | default: 'team member' | escape }} on {{ social_2_label }}">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
                 </a>
               {%- endif -%}
@@ -109,12 +115,19 @@
   .section-team__role { margin: 0; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgb(var(--color-accent)); font-weight: 600; }
   .section-team__bio { margin: 0; font-size: 0.8125rem; color: rgba(var(--color-foreground), 0.6); line-height: 1.5; max-width: 18rem; }
 
-  .section-team__socials { display: flex; gap: 0.5rem; margin-top: 0.25rem; }
+  .section-team__socials { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
   .section-team__social-link {
-    color: rgba(var(--color-foreground), 0.4);
-    transition: color 0.3s;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 2.75rem; height: 2.75rem;
+    border-radius: 999px;
+    border: 1px solid rgba(var(--color-foreground), 0.12);
+    background: rgba(var(--color-foreground), 0.03);
+    color: rgba(var(--color-foreground), 0.56);
+    transition: color 0.3s, background-color 0.3s, border-color 0.3s, transform 0.2s;
   }
-  .section-team__social-link:hover { color: rgb(var(--color-accent)); }
+  .section-team__social-link svg { width: 16px; height: 16px; }
+  .section-team__social-link:hover { color: rgb(var(--color-accent)); border-color: rgba(var(--color-accent), 0.35); background: rgba(var(--color-accent), 0.08); transform: translateY(-1px); }
+  .section-team__social-link:focus-visible { outline: 2px solid rgba(var(--color-accent), 0.35); outline-offset: 3px; }
 {% endstylesheet %}
 
 {% schema %}

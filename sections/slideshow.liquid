@@ -1,8 +1,6 @@
 {%- comment %}
   Section: Slideshow
-  Mô tả: Hero banner slideshow sử dụng Swiper.
-  Mỗi slide là 1 block với image desktop/mobile, heading, text và buttons.
-  Hỗ trợ: Autoplay, color scheme per slide, text overlay position, responsive images.
+  Hero banner slideshow powered by Swiper.
 {% endcomment -%}
 
 {%- liquid
@@ -45,6 +43,10 @@
             assign img_alt = desktop_img.alt | default: block.settings.heading | default: shop.name
             assign text_position = block.settings.text_position
             assign overlay_opacity = block.settings.overlay_opacity | divided_by: 100.0
+            assign slide_heading_tag = block.settings.heading_tag
+            if template.name == 'index' and forloop.first
+              assign slide_heading_tag = 'h1'
+            endif
             assign has_content = false
             if block.settings.heading != blank or block.settings.subheading != blank or block.settings.text != blank or block.settings.button_label_1 != blank
               assign has_content = true
@@ -114,11 +116,11 @@
                   {%- endif -%}
 
                   {%- if block.settings.heading != blank -%}
-                    <{{ block.settings.heading_tag }}
+                    <{{ slide_heading_tag }}
                       class="section-slideshow__heading heading-size-{{ block.settings.heading_size }}"
                     >
                       {{- block.settings.heading -}}
-                    </{{ block.settings.heading_tag }}>
+                    </{{ slide_heading_tag }}>
                   {%- endif -%}
 
                   {%- if block.settings.text != blank -%}
@@ -192,7 +194,6 @@
     if (!wrapper) return;
     var el = wrapper.querySelector('[data-slideshow]');
     if (!el) return;
-
     (window.swiperReady || function(cb){ cb(); })(function(){
     var autoplay = el.getAttribute('data-autoplay') === 'true';
     var autoplaySpeed = parseInt(el.getAttribute('data-autoplay-speed'), 10) || 5000;
@@ -255,9 +256,12 @@
   .section-slideshow {
     position: relative;
     width: 100%;
+    height: var(--slideshow-height-m, 60vh);
     overflow: hidden;
   }
 
+  .section-slideshow__swiper,
+  .section-slideshow .swiper-wrapper,
   .section-slideshow__slide {
     position: relative;
     height: var(--slideshow-height-m, 60vh);
@@ -265,6 +269,12 @@
   }
 
   @media (min-width: 750px) {
+    .section-slideshow {
+      height: var(--slideshow-height-d, 80vh);
+    }
+
+    .section-slideshow__swiper,
+    .section-slideshow .swiper-wrapper,
     .section-slideshow__slide {
       height: var(--slideshow-height-d, 80vh);
     }
@@ -322,6 +332,7 @@
     z-index: 2;
     display: grid;
     padding: 2rem 1.5rem;
+    background: transparent;
   }
 
   @media (min-width: 750px) {
@@ -331,10 +342,25 @@
   }
 
   .section-slideshow__content-inner {
-    max-width: 38rem;
+    max-width: 42rem;
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    padding: 1.5rem 1.75rem;
+    border-radius: 0.75rem;
+    background:
+      linear-gradient(135deg, rgba(16, 16, 16, 0.62) 0%, rgba(16, 16, 16, 0.34) 58%, rgba(16, 16, 16, 0.12) 100%);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+  }
+
+  @media (max-width: 749px) {
+    .section-slideshow__content-inner {
+      max-width: min(100%, 22rem);
+      padding: 1rem 1rem 1.125rem;
+      border-radius: 0.625rem;
+    }
   }
 
   /* ── Text Position ── */
@@ -410,23 +436,23 @@
     text-transform: uppercase;
     letter-spacing: 0.15em;
     font-weight: 600;
-    color: rgba(var(--color-foreground), 0.75);
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.82);
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.42);
   }
 
   .section-slideshow__heading {
     margin: 0;
-    color: rgb(var(--color-foreground));
+    color: #fff;
     line-height: 1.1;
     letter-spacing: -0.02em;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    text-shadow: 0 3px 18px rgba(0, 0, 0, 0.38);
   }
 
   .section-slideshow__text {
     margin: 0;
-    color: rgba(var(--color-foreground), 0.85);
+    color: rgba(255, 255, 255, 0.88);
     line-height: 1.6;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
   }
 
   /* ── Buttons ── */
@@ -478,20 +504,20 @@
 
   .section-slideshow__btn--secondary {
     background: transparent;
-    color: rgb(var(--color-foreground));
-    border: 2px solid rgba(var(--color-foreground), 0.5);
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.7);
   }
 
   .section-slideshow__btn--secondary:hover {
-    background: rgb(var(--color-foreground));
-    color: rgb(var(--color-background));
-    border-color: rgb(var(--color-foreground));
+    background: #fff;
+    color: rgb(24, 24, 24);
+    border-color: #fff;
   }
 
   .section-slideshow__btn--link {
     background: none;
     border: none;
-    color: rgb(var(--color-foreground));
+    color: #fff;
     padding: 12px 4px;
     min-width: auto !important;
     text-decoration: underline;
@@ -516,13 +542,17 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s ease;
-    outline: none;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
   }
 
   .section-slideshow__nav:hover {
     background: rgba(255, 255, 255, 0.3);
     border-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .section-slideshow__nav:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
   }
 
   .section-slideshow__nav--prev { left: 1rem; }
