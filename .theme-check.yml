@@ -47,7 +47,6 @@ UndefinedObject:
     - "snippets/collection-facet-filter.liquid"
     - "snippets/countdown-banner.liquid"
     - "snippets/product-card.liquid"
-    - "snippets/product-card-special.liquid"
     - "snippets/product-variant-dropdown.liquid"
     - "layout/password.liquid"
 
@@ -58,13 +57,11 @@ OrphanedSnippet:
   ignore:
     - "snippets/skip-to-content-link.liquid"
 
-# RemoteAsset: 3 trường hợp intentional/false positive
+# RemoteAsset: intentional/false positive cases
 # - sections/gallery.liquid: SVG inline base64 placeholder cho lightbox
-# - sections/main-search-smart.liquid: false positive (chuỗi `else no_image.png | asset_url` bị bắt nhầm)
 # - sections/video.liquid: YouTube i.ytimg.com thumbnail (nếu giữ embed YouTube native)
 RemoteAsset:
   enabled: true
   ignore:
     - "sections/gallery.liquid"
-    - "sections/main-search-smart.liquid"
     - "sections/video.liquid"

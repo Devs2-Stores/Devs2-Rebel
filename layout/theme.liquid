@@ -17,7 +17,8 @@
   </head>
 
   <body class="gradient{% if settings.animations_reveal_on_scroll %} animate--enabled{% endif %}">
-    {%- render 'skip-to-content-link', href: '#MainContent', text: 'accessibility.skip_to_text' | t -%}
+    {%- assign skip_to_content_text = 'accessibility.skip_to_text' | t -%}
+    {%- render 'skip-to-content-link', href: '#MainContent', text: skip_to_content_text -%}
     {%- render 'icons-sprite' -%}
 
     {%- sections 'header-group' -%}
@@ -30,7 +31,6 @@
     {%- render 'cart-modal' -%}
     {%- render 'search-modal' -%}
     {%- render 'quickview-modal' -%}
-    {%- render 'mobile-menu' -%}
     {%- render 'float-social' -%}
     <div class="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
     <div class="overlay"></div>
