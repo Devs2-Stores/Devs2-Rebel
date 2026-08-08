@@ -1,5 +1,6 @@
 {%- assign available = product.selected_or_first_available_variant.available -%}
 {%- assign selected_variant = product.selected_or_first_available_variant | default: product.variants.first -%}
+{%- assign product_media_sizes = '(max-width: 749px) calc(100vw - 30px), (max-width: 991px) calc(100vw - 60px), (min-width: 1600px) 580px, 34vw' -%}
 
 <product-template class="product-template color-{{ section.settings.color_scheme }}">
   <div class="page-width">
@@ -11,21 +12,33 @@
             {%- if product.images.size > 0 -%}
               {%- for image in product.images -%}
                 <div class="swiper-slide product-template__media-slide">
-                  <img
-                    src="{{ image | image_url: width: 800 }}"
-                    srcset="{{ image | image_url: width: 400 }} 400w, {{ image | image_url: width: 600 }} 600w, {{ image | image_url: width: 800 }} 800w, {{ image | image_url: width: 1024 }} 1024w, {{ image | image_url: width: 1600 }} 1600w, {{ image | image_url: width: 2048 }} 2048w"
-                    sizes="(min-width: 992px) 40vw, 100vw"
-                    alt="{{ image.alt | default: product.title | escape }}"
-                    width="{{ image.width }}"
-                    height="{{ image.height }}"
-                    loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-                    decoding="async"
-                    {% if forloop.first %}
-                      fetchpriority="high"
-                    {% endif %}
-                    class="product-template__media-image"
-                    data-product-featured-image
-                  >
+                  {%- liquid
+                    assign media_alt = image.alt | default: product.title | escape
+                    assign media_loading = 'lazy'
+                    assign media_fetchpriority = 'low'
+                    assign media_preload = false
+                    assign media_zoom_src = image | image_url: width: 2048
+                    if forloop.first
+                      assign media_loading = 'eager'
+                      assign media_fetchpriority = 'high'
+                      assign media_preload = true
+                    endif
+                  -%}
+                  {{
+                    image
+                    | image_url: width: 1512
+                    | image_tag:
+                      widths: '360, 540, 720, 900, 1080, 1296, 1512',
+                      sizes: product_media_sizes,
+                      alt: media_alt,
+                      loading: media_loading,
+                      fetchpriority: media_fetchpriority,
+                      preload: media_preload,
+                      decoding: 'async',
+                      class: 'product-template__media-image',
+                      data-zoom-src: media_zoom_src,
+                      data-product-featured-image: 'true'
+                  }}
                 </div>
               {%- endfor -%}
               {%- for media in product.media -%}
@@ -649,12 +662,6 @@
                 {%- liquid
                   assign lazyload = 'lazy'
                   assign fetchpriority = 'auto'
-                  if forloop.index <= 3
-                    assign lazyload = 'eager'
-                  endif
-                  if forloop.first
-                    assign fetchpriority = 'high'
-                  endif
                 -%}
                 <li class="product-cards__item swiper-slide">
                   {%- render 'product-card',

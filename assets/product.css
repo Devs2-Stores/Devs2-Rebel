@@ -11,7 +11,8 @@
 @media (max-width: 992px) {
   .product-template__media-slider { margin-bottom: var(--space-sm); }
 }
-.product-template__media-slider .swiper-slide { background: var(--color-gray-light); border-radius: var(--radius-md); overflow: hidden; }
+.product-template__media-slider .swiper-wrapper { display: flex; }
+.product-template__media-slider .swiper-slide { flex: 0 0 100%; width: 100%; background: var(--color-gray-light); border-radius: var(--radius-md); overflow: hidden; }
 .product-template__media-slider .product-template__media-image {
   width: 100%;
   height: auto;

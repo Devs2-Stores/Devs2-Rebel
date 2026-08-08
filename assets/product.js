@@ -986,7 +986,7 @@ if (!customElements.get('product-lightbox')) customElements.define('product-ligh
 		if (!productTemplate || !lightbox) return;
 
 		const images = productTemplate.querySelectorAll('.product-template__media-image');
-		const imageUrls = Array.from(images).map(img => img.src);
+		const imageUrls = Array.from(images).map(img => img.dataset.zoomSrc || img.currentSrc || img.src);
 
 		images.forEach((img, index) => {
 			img.style.cursor = 'pointer';

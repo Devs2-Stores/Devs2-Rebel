@@ -9,6 +9,7 @@ class WishlistManager extends HTMLElement {
 
 	connectedCallback() {
 		this.migrateOldFormat();
+		this.backfillWishlistHandles();
 		this.initEventListeners();
 		this.updateAllWishlistStates();
 		this.updateWishlistCount();
@@ -44,6 +45,42 @@ class WishlistManager extends HTMLElement {
 			}
 		} catch (e) {
 			// ignore
+		}
+	}
+
+	backfillWishlistHandles() {
+		var wishlist = this.getWishlist();
+		if (!Array.isArray(wishlist) || wishlist.length === 0) return;
+
+		var handleById = {};
+		document.querySelectorAll('[data-action="add-wishlist"][data-product-id][data-product-handle]').forEach(function(btn) {
+			var productId = btn.dataset.productId;
+			var productHandle = btn.dataset.productHandle;
+			if (productId && productHandle) {
+				handleById[String(productId)] = productHandle;
+			}
+		});
+
+		var didChange = false;
+		var normalized = wishlist.map(function(item) {
+			var normalizedItem = (typeof item === 'string' || typeof item === 'number')
+				? { id: String(item), handle: '' }
+				: { id: String(item.id || ''), handle: item.handle || '' };
+
+			if (!normalizedItem.handle && handleById[normalizedItem.id]) {
+				normalizedItem.handle = handleById[normalizedItem.id];
+				didChange = true;
+			}
+
+			if (typeof item === 'string' || typeof item === 'number') {
+				didChange = true;
+			}
+
+			return normalizedItem;
+		});
+
+		if (didChange) {
+			this.saveWishlist(normalized);
 		}
 	}
 
@@ -201,7 +238,7 @@ class WishlistManager extends HTMLElement {
 
 	dispatchWishlistChangeEvent(productId) {
 		window.dispatchEvent(new CustomEvent('wishlist-changed', {
-			detail: { 
+			detail: {
 				wishlist: this.getWishlist(),
 				productId: productId
 			}

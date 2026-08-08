@@ -1,4 +1,4 @@
-{%- for product in search.results limit: 1 -%}
+{%- layout none -%}
 {%- liquid
   assign available = product.selected_or_first_available_variant.available
   assign selected_variant = product.selected_or_first_available_variant | default: product.variants.first
@@ -110,4 +110,3 @@
     </a>
   </div>
 </div>
-{%- endfor -%}

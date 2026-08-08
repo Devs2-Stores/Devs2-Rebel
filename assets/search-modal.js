@@ -8,6 +8,7 @@ class SearchModal extends HTMLElement {
     this.searchTimeout = null;
     this.debounceDelay = 300;
     this.searchController = null;
+    this.searchRequestId = 0;
   }
 
   connectedCallback() {
@@ -106,6 +107,7 @@ class SearchModal extends HTMLElement {
       this.searchController.abort();
       this.searchController = null;
     }
+    this.searchRequestId += 1;
   }
 
   isOpen() {
@@ -135,7 +137,9 @@ class SearchModal extends HTMLElement {
     if (this.searchController) {
       this.searchController.abort();
     }
-    this.searchController = new AbortController();
+    var requestId = ++this.searchRequestId;
+    var controller = new AbortController();
+    this.searchController = controller;
 
     var fetchUrl;
     if (this.isPredictiveEnabled()) {
@@ -149,29 +153,31 @@ class SearchModal extends HTMLElement {
       });
       fetchUrl = this.getRootUrl() + 'search/suggest?' + params.toString();
     } else {
-      // Fallback: standard search with alternate template
-      fetchUrl = this.getRootUrl() + 'search?type=product&q=' + encodeURIComponent(query) + '&view=smart';
+      this.displayFallbackSearchLink(query);
+      this.hideLoading();
+      if (this.searchController === controller) this.searchController = null;
+      return;
     }
 
-    fetch(fetchUrl, { signal: this.searchController.signal })
+    fetch(fetchUrl, { signal: controller.signal })
       .then(function(response) {
         if (!response.ok) throw new Error('Search request failed');
         return response.text();
       })
       .then(function(html) {
+        if (requestId !== self.searchRequestId || self.searchController !== controller) return;
         self.displayResults(html);
       })
       .catch(function(error) {
         if (error.name === 'AbortError') return;
+        if (requestId !== self.searchRequestId || self.searchController !== controller) return;
         var errorMsg = (typeof themeConfig !== 'undefined' && themeConfig.strings && themeConfig.strings.cart)
           ? (themeConfig.strings.cart.error || 'An error occurred. Please try again.')
           : 'An error occurred. Please try again.';
         self.displayError(errorMsg);
       })
       .finally(function() {
-        if (self.searchController && self.searchController.signal.aborted) {
-          return;
-        }
+        if (requestId !== self.searchRequestId || self.searchController !== controller) return;
         self.hideLoading();
         self.searchController = null;
       });
@@ -211,6 +217,13 @@ class SearchModal extends HTMLElement {
   displayError(message) {
     if (!this.resultsContainer) return;
     this.resultsContainer.innerHTML = '<div class="search-modal-error"><p>' + ThemeUtils.escapeHtml(message) + '</p></div>';
+  }
+
+  displayFallbackSearchLink(query) {
+    if (!this.resultsContainer) return;
+    var searchUrl = this.getRootUrl() + 'search?type=product&q=' + encodeURIComponent(query);
+    this.resultsContainer.innerHTML = '<div class="search-modal-empty"><p>' + ThemeUtils.escapeHtml(this.dataset.fallback || 'Search suggestions are unavailable.') + '</p><a href="' + ThemeUtils.escapeHtml(searchUrl) + '">' + ThemeUtils.escapeHtml(this.dataset.fallbackLink || 'View search results') + '</a></div>';
+    if (this.input) this.input.setAttribute('aria-expanded', 'true');
   }
 
   clearResults() {
