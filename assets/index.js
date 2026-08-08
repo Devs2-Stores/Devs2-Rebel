@@ -169,37 +169,6 @@
     trackInterval(id);
   }
 
-  function initFlashSaleSwiper() {
-    var el = document.querySelector('.section-flash-sale__swiper');
-    if (!el) return;
-    (window.swiperReady || function(cb){ cb(); })(function(){
-    new Swiper('.section-flash-sale__swiper', {
-      slidesPerView: 1.2,
-      spaceBetween: 16,
-      speed: 600,
-      freeMode: true,
-      breakpoints: {
-        480: {
-          slidesPerView: 1.5,
-          spaceBetween: 16
-        },
-        640: {
-          slidesPerView: 2.2,
-          spaceBetween: 20
-        },
-        1024: {
-          slidesPerView: 3.2,
-          spaceBetween: 24
-        },
-        1280: {
-          slidesPerView: 4.2,
-          spaceBetween: 24
-        }
-      }
-    });
-    });
-  }
-
   function initHomeBlogSwiper() {
     var el = document.querySelector('.section-home-blog__swiper');
     if (!el) return;
@@ -232,47 +201,6 @@
       }
     });
     });
-  }
-
-  function initFlashSaleCountdown() {
-    var panels = document.querySelectorAll('[data-flash-countdown]');
-    var bgTimers = document.querySelectorAll('[data-flash-bg-timer]');
-    if (panels.length === 0 && bgTimers.length === 0) return;
-
-    var id = setInterval(function() {
-      var now = Date.now();
-
-      for (var i = 0; i < panels.length; i++) {
-        var panel = panels[i];
-        if (!panel.isConnected) continue;
-        var target = parseDateTimeVI(panel.getAttribute('data-time'));
-        if (!target) continue;
-        var distance = Math.max(0, target - now);
-        var hrs = Math.floor(distance / 3600000);
-        var min = Math.floor((distance % 3600000) / 60000);
-        var sec = Math.floor((distance % 60000) / 1000);
-
-        var hrsEl = panel.querySelector('[data-flash-hrs]');
-        var minEl = panel.querySelector('[data-flash-min]');
-        var secEl = panel.querySelector('[data-flash-sec]');
-        if (hrsEl) hrsEl.textContent = pad(hrs);
-        if (minEl) minEl.textContent = pad(min);
-        if (secEl) secEl.textContent = pad(sec);
-      }
-
-      for (var j = 0; j < bgTimers.length; j++) {
-        var el = bgTimers[j];
-        if (!el.isConnected) continue;
-        var target2 = parseDateTimeVI(el.getAttribute('data-time'));
-        if (!target2) continue;
-        var dist = Math.max(0, target2 - now);
-        var h = Math.floor(dist / 3600000);
-        var m = Math.floor((dist % 3600000) / 60000);
-        var s = Math.floor((dist % 60000) / 1000);
-        el.textContent = pad(h) + ':' + pad(m) + ':' + pad(s);
-      }
-    }, 1000);
-    trackInterval(id);
   }
 
   function initLookbookHotspots() {
@@ -328,9 +256,7 @@
     initSliderSwiper();
     initProductsSliderSwiper();
     initCountdownVI();
-    initFlashSaleSwiper();
     initHomeBlogSwiper();
-    initFlashSaleCountdown();
     initLookbookHotspots();
     initScrollFadeUp();
   });
