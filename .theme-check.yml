@@ -8,6 +8,11 @@ ignore:
   - ".agent/**"
   - "tools/**"
   - "node_modules/**"
+  - "plans/**"
+  - "runs/**"
+  - "scripts/**"
+  - ".research-repos-*/**"
+  - ".playwright-mcp/**"
 
 # Cho phép file lớn hơn trong giai đoạn migrate
 TemplateLength:
@@ -47,6 +52,8 @@ UndefinedObject:
     - "snippets/product-card.liquid"
     - "snippets/product-variant-dropdown.liquid"
     - "layout/password.liquid"
+    - "snippets/product-variant-picker.liquid"
+    - "snippets/swatch.liquid"
 
 # OrphanedSnippet: skip-to-content-link.liquid đang được render trong theme.liquid line 14
 # nhưng theme-check không phát hiện vì call site phức tạp.

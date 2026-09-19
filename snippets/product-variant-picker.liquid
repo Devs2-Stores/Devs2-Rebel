@@ -2,7 +2,7 @@
   @description Product variant selector using button pills or native Category Swatches
   @param {boolean} [cross_out_unavailable=false] - Strike-through unavailable variants
 {%- enddoc -%}
-
+{%- assign cross_out_unavailable = cross_out_unavailable | default: false, allow_false: true -%}
 {%- if product.variants.size > 1 -%}
 {{ 'variant-picker.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'variant-picker.js' | asset_url }}" defer="defer"></script>
@@ -75,6 +75,7 @@
             >
               {%- if is_swatch_option -%}
                 {%- if has_native_swatch -%}
+                  {%- render 'swatch', swatch: value.swatch -%}
                   <span class="visually-hidden">{{ value | escape }}</span>
                 {%- else -%}
                   <product-variant-picker-image class="variant-picker__item-image" data-option="{{ option_position }}" data-value="{{ value | escape }}"></product-variant-picker-image>

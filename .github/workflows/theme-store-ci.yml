@@ -24,3 +24,17 @@ jobs:
 
       - name: Validate Locale Integrity & Parity
         run: node scripts/validate-locales.mjs
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2
+
+      - name: Install Theme Check
+        run: gem install theme-check
+
+      - name: Run Shopify Theme Check
+        run: theme-check --fail-level error
+
+      - name: Package Distribution Theme ZIP
+        run: python scripts/package-theme.py

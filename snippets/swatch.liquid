@@ -5,6 +5,7 @@
 {%- enddoc -%}
 
 {%- liquid
+  assign shape = shape | default: 'circle'
   assign swatch_value = null
   assign swatch_focal_point = null
   if swatch.image

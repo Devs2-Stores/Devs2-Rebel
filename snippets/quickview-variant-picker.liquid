@@ -58,6 +58,7 @@
             >
               {%- if is_swatch_option -%}
                 {%- if has_native_swatch -%}
+                  {%- render 'swatch', swatch: value.swatch -%}
                   <span class="visually-hidden">{{ value | escape }}</span>
                 {%- else -%}
                   <quickview-variant-picker-image class="variant-picker__item-image" data-option="{{ option_position }}" data-value="{{ value | escape }}"></quickview-variant-picker-image>
