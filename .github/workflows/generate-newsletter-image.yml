@@ -1,4 +1,4 @@
-name: Generate Newsletter Image via BFL API
+name: Newsletter image workflow (retired)
 
 on:
   workflow_dispatch:
@@ -9,5 +9,4 @@ jobs:
     steps:
       - name: Disabled for release-readiness stabilization
         run: |
-          echo "BFL newsletter image generation is disabled for this release."
-          echo "Restore the removed generator in a separate plan if generation is required again."
+          echo "Newsletter image generation is retired. Use ai-image-studio with Wan."

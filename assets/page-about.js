@@ -1,48 +1,52 @@
 (function() {
 'use strict';
 
-class AboutPage extends HTMLElement {
-	constructor() {
-		super();
-		this.observerOptions = {
-			threshold: 0.1,
-			rootMargin: '0px 0px -50px 0px'
-		};
-	}
-
-	connectedCallback() {
-		this.initAnimations();
-	}
-
-	initAnimations() {
-		const observer = new IntersectionObserver((entries) => {
-			entries.forEach((entry) => {
-				if (entry.isIntersecting) {
-					entry.target.classList.add('is-visible');
-					observer.unobserve(entry.target);
-				}
-			});
-		}, this.observerOptions);
-
-		const animatedElements = this.querySelectorAll('.about-features__item, .about-gallery__item');
-		animatedElements.forEach((el) => {
-			el.style.opacity = '0';
-			el.style.transform = 'translateY(30px)';
-			el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-			observer.observe(el);
+function revealElements(elements) {
+	if (!('IntersectionObserver' in window) || !elements.length) return;
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			if (!entry.isIntersecting) return;
+			entry.target.classList.add('is-visible');
+			observer.unobserve(entry.target);
 		});
+	}, {
+		threshold: 0.08,
+		rootMargin: '0px 0px -40px 0px'
+	});
 
-		if (!document.getElementById('about-page-animation-style')) {
-			const style = document.createElement('style');
-			style.id = 'about-page-animation-style';
-			style.textContent = '.is-visible { opacity: 1 !important; transform: translateY(0) !important; }';
-			document.head.appendChild(style);
-		}
+	elements.forEach((element) => {
+		element.classList.add('about-reveal-item');
+		observer.observe(element);
+	});
+}
+
+class AboutPage extends HTMLElement {
+	connectedCallback() {
+		revealElements(Array.from(this.querySelectorAll('.about-features__item, .about-gallery__item')));
 	}
 }
 
 if (typeof customElements !== 'undefined' && !customElements.get('about-page')) {
 	customElements.define('about-page', AboutPage);
+}
+
+function initComposedAboutPage() {
+	const selectors = [
+		'.section-rich-text-wrapper',
+		'.section-iwt-wrapper',
+		'.section-team-wrapper',
+		'.section-stats-wrapper',
+		'.section-timeline-wrapper',
+		'.section-testimonials-wrapper',
+		'.section-page-content-wrapper'
+	];
+	revealElements(Array.from(document.querySelectorAll(selectors.join(','))));
+}
+
+if (document.readyState === 'loading') {
+	document.addEventListener('DOMContentLoaded', initComposedAboutPage, { once: true });
+} else {
+	initComposedAboutPage();
 }
 
 })();

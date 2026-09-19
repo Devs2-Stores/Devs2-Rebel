@@ -9,9 +9,6 @@
   assign show_toc = section.settings.show_toc | default: true, allow_false: true
   assign sticky_sidebar = section.settings.sticky_sidebar | default: true, allow_false: true
 
-  comment
-    Check if any sidebar blocks exist
-  endcomment
   assign has_sidebar = false
   for block in section.blocks
     case block.type
@@ -33,9 +30,8 @@
   itemtype="https://schema.org/BlogPosting"
   style="--article-padding-top: {{ section.settings.padding_top }}px; --article-padding-bottom: {{ section.settings.padding_bottom }}px;"
 >
-  {%- comment %} Schema.org metadata {% endcomment -%}
   <meta itemprop="dateModified" content="{{ article.updated_at | default: article.published_at | date: '%Y-%m-%d' }}">
-  <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization" style="display: none;">
+  <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization" hidden>
     <meta itemprop="name" content="{{ shop.name }}">
     {%- if settings.logo != blank -%}
       <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
@@ -52,7 +48,6 @@
   <div class="{% if container_width == 'fixed' %}page-width{% endif %}">
     <div class="article-template__layout {% unless has_sidebar %}article-template__layout--no-sidebar{% endunless %}">
       <div class="article-template__main">
-        {%- comment %} Hero image {% endcomment -%}
         {%- if show_image and article.image -%}
           <div class="article-template__media" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
             <meta itemprop="url" content="{{ article.image | image_url: width: 2048 }}">
@@ -73,7 +68,6 @@
           </div>
         {%- endif -%}
 
-        {%- comment %} Article header {% endcomment -%}
         <div class="article-template__header">
           <h1 class="article-template__title heading-size-{{ heading_size }}" itemprop="headline">
             {{ article.title | escape }}
@@ -98,7 +92,7 @@
             {%- if show_date -%}
               <span class="article-template__info-date">
                 {%- render 'icon', name: 'calendar', size: '16' -%}
-                <time itemprop="datePublished" datetime="{{ article.published_at | date: '%Y-%m-%dT%H:%M' }}">
+                <time itemprop="datePublished" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
                   {{- article.published_at | date: '%B %d, %Y' -}}
                 </time>
               </span>
@@ -113,17 +107,14 @@
           </div>
         </div>
 
-        {%- comment %} Table of contents {% endcomment -%}
         {%- if show_toc -%}
           {%- render 'content-toc' -%}
         {%- endif -%}
 
-        {%- comment %} Article body {% endcomment -%}
-        <div class="article-template__content" itemprop="articleBody">
+        <div class="article-template__content rte" itemprop="articleBody">
           {{ article.content }}
         </div>
 
-        {%- comment %} Render content blocks (share buttons, navigation) {% endcomment -%}
         {%- for block in section.blocks -%}
           {%- case block.type -%}
             {%- when 'share_buttons' -%}
@@ -299,14 +290,12 @@
           {%- endcase -%}
         {%- endfor -%}
 
-        {%- comment %} Comments section {% endcomment -%}
         {%- if blog.comments_enabled? -%}
           <section
             id="comments"
             class="article-template__comments"
             aria-label="{{ 'blogs.article.comments_label' | t }}"
           >
-            {%- comment %} Comment Form {% endcomment -%}
             <div id="comment-form" class="article-template__comments-form">
               <h3 class="article-template__comments-form-title">
                 {{ 'blogs.article.comment_form_title' | t }}
@@ -401,7 +390,6 @@
               {%- endform -%}
             </div>
 
-            {%- comment %} Comments list with pagination {% endcomment -%}
             <div class="article-template__comments-list">
               <h3 class="article-template__comments-list-title">
                 {%- render 'icon', name: 'comments', size: '20' -%}
@@ -454,7 +442,6 @@
         {%- endif -%}
       </div>
 
-      {%- comment %} Sidebar — auto-rendered when sidebar blocks exist {% endcomment -%}
       {%- if has_sidebar -%}
         <aside class="article-template__sidebar {% if sticky_sidebar %}article-template__sidebar--sticky{% endif %}">
           {%- for block in section.blocks -%}
@@ -467,8 +454,14 @@
                     style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;"
                     {{ block.shopify_attributes }}
                   >
+                    {%- liquid
+                      assign sidebar_title = block.settings.title
+                      if sidebar_title == blank
+                        assign sidebar_title = 'blogs.sidebar.related_posts' | t
+                      endif
+                    -%}
                     <h3 class="blog-sidebar__title heading-size-{{ block.settings.heading_size | default: 'sm' }}">
-                      {{ block.settings.title | default: 'Related posts' }}
+                      {{ sidebar_title | escape }}
                     </h3>
                     <ul class="blog-sidebar__recent-posts">
                       {%- assign related_count = 0 -%}
@@ -533,8 +526,14 @@
                     style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;"
                     {{ block.shopify_attributes }}
                   >
+                    {%- liquid
+                      assign sidebar_title = block.settings.title
+                      if sidebar_title == blank
+                        assign sidebar_title = 'blogs.sidebar.tags' | t
+                      endif
+                    -%}
                     <h3 class="blog-sidebar__title heading-size-{{ block.settings.heading_size | default: 'sm' }}">
-                      {{ block.settings.title | default: 'Tags' }}
+                      {{ sidebar_title | escape }}
                     </h3>
                     <div class="blog-sidebar__tags">
                       {%- for tag in article.tags limit: sidebar_tags_limit -%}
@@ -543,7 +542,7 @@
                           class="blog-sidebar__tag {% if current_tags contains tag %}active{% endif %}"
                           title="{{ tag | escape }}"
                         >
-                          {{ tag }}
+                          {{ tag | escape }}
                         </a>
                       {%- endfor -%}
                     </div>

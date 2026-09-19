@@ -64,10 +64,7 @@ global-header .header__actions .header__action-btn {
 }
 global-header .header__actions .header__action-btn svg { width: 1.5rem; height: 1.5rem; }
 global-header .header__actions .header__action-btn:hover { color: var(--color-primary); transform: scale(1.1); }
-global-header .header__actions .header__cart-btn .cart-count,
-global-header .header__actions .header__cart-btn .wishlist-count,
-global-header .header__actions .wishlist-icon-wrapper .cart-count,
-global-header .header__actions .wishlist-icon-wrapper .wishlist-count {
+global-header .header__actions .header__cart-btn .cart-count {
   position: absolute;
   top: 0;
   right: 0;

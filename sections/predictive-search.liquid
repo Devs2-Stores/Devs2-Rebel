@@ -9,7 +9,7 @@
 <div id="predictive-search-results">
 
   {%- if predictive_search.resources.queries.size > 0 -%}
-  <div class="predictive-search__group">
+  <div class="predictive-search__group predictive-search__group--suggestions" data-search-group="suggestions">
     <h3 class="predictive-search__group-title" id="ps-queries">
       {{ 'templates.search.suggestions' | t }}
     </h3>
@@ -27,13 +27,13 @@
   {%- endif -%}
 
   {%- if predictive_search.resources.products.size > 0 -%}
-  <div class="predictive-search__group">
+  <div class="predictive-search__group predictive-search__group--products" data-search-group="products">
     <h3 class="predictive-search__group-title" id="ps-products">
       {{ 'templates.search.products' | t }}
     </h3>
     <ul class="predictive-search__list predictive-search__list--products" role="group" aria-labelledby="ps-products">
       {%- for product in predictive_search.resources.products -%}
-      <li class="predictive-search__item" role="option">
+      <li class="predictive-search__item{% unless product.available %} predictive-search__item--sold-out{% endunless %}" role="option">
         <a href="{{ product.url }}" class="predictive-search__link predictive-search__link--product">
           <div class="predictive-search__product-image">
             {%- if product.featured_image != blank -%}
@@ -44,13 +44,16 @@
                 class: 'predictive-search__img'
               }}
             {%- else -%}
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" aria-hidden="true" width="40" height="40" style="opacity:.3">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" aria-hidden="true" width="40" height="40" class="predictive-search__placeholder-icon">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3.75 21h16.5A1.5 1.5 0 0 0 21.75 19.5V4.5A1.5 1.5 0 0 0 20.25 3H3.75A1.5 1.5 0 0 0 2.25 4.5v15A1.5 1.5 0 0 0 3.75 21Z" />
               </svg>
             {%- endif -%}
           </div>
           <div class="predictive-search__product-info">
             <span class="predictive-search__product-title">{{ product.title | escape }}</span>
+            {%- unless product.available -%}
+            <span class="predictive-search__product-status">{{ 'products.product.sold_out' | t }}</span>
+            {%- endunless -%}
             {%- if settings.predictive_search_show_vendor and product.vendor != blank -%}
             <span class="predictive-search__product-vendor">{{ product.vendor }}</span>
             {%- endif -%}
@@ -78,7 +81,7 @@
   {%- endif -%}
 
   {%- if predictive_search.resources.collections.size > 0 -%}
-  <div class="predictive-search__group">
+  <div class="predictive-search__group predictive-search__group--collections" data-search-group="pages">
     <h3 class="predictive-search__group-title" id="ps-collections">
       {{ 'templates.search.collections' | t }}
     </h3>
@@ -105,15 +108,37 @@
   {%- endif -%}
 
   {%- if predictive_search.resources.articles.size > 0 -%}
-  <div class="predictive-search__group">
+  <div class="predictive-search__group predictive-search__group--articles" data-search-group="articles">
     <h3 class="predictive-search__group-title" id="ps-articles">
-      {{ 'templates.search.pages' | t }}
+      {{ 'templates.search.articles' | t }}
     </h3>
     <ul class="predictive-search__list" role="group" aria-labelledby="ps-articles">
       {%- for article in predictive_search.resources.articles -%}
       <li class="predictive-search__item" role="option">
         <a href="{{ article.url }}" class="predictive-search__link predictive-search__link--article">
-          <span>{{ article.title | escape }}</span>
+          <span>
+            <strong>{{ article.title | escape }}</strong>
+            {%- if article.blog != blank -%}
+            <small class="predictive-search__article-blog">{{ article.blog.title | escape }}</small>
+            {%- endif -%}
+          </span>
+        </a>
+      </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+  {%- endif -%}
+
+  {%- if predictive_search.resources.pages.size > 0 -%}
+  <div class="predictive-search__group predictive-search__group--pages" data-search-group="pages">
+    <h3 class="predictive-search__group-title" id="ps-pages">
+      {{ 'templates.search.pages' | t }}
+    </h3>
+    <ul class="predictive-search__list" role="group" aria-labelledby="ps-pages">
+      {%- for page in predictive_search.resources.pages -%}
+      <li class="predictive-search__item" role="option">
+        <a href="{{ page.url }}" class="predictive-search__link predictive-search__link--page">
+          <span>{{ page.title | escape }}</span>
         </a>
       </li>
       {%- endfor -%}
@@ -122,23 +147,94 @@
   {%- endif -%}
 
   {%- liquid
-    assign total = predictive_search.resources.products.size | plus: predictive_search.resources.collections.size | plus: predictive_search.resources.articles.size | plus: predictive_search.resources.queries.size
+    assign search_terms_downcase = predictive_search.terms | downcase
+    assign blog_result_count = 0
+    assign predictive_content_menu = settings.predictive_search_featured_menu | default: linklists['main-menu']
+    for link in predictive_content_menu.links
+      assign link_title_downcase = link.title | downcase
+      if link.url contains '/blogs' and link_title_downcase contains search_terms_downcase
+        assign blog_result_count = blog_result_count | plus: 1
+      endif
+      for child_link in link.links
+        assign child_title_downcase = child_link.title | downcase
+        if child_link.url contains '/blogs' and child_title_downcase contains search_terms_downcase
+          assign blog_result_count = blog_result_count | plus: 1
+        endif
+      endfor
+    endfor
+  -%}
+  {%- capture blog_results -%}
+    {%- for link in predictive_content_menu.links -%}
+      {%- assign link_title_downcase = link.title | downcase -%}
+      {%- if link.url contains '/blogs' and link_title_downcase contains search_terms_downcase -%}
+        <li class="predictive-search__item" role="option"><a href="{{ link.url }}" class="predictive-search__link predictive-search__link--blog"><span>{{ link.title | escape }}</span></a></li>
+      {%- endif -%}
+      {%- for child_link in link.links -%}
+        {%- assign child_title_downcase = child_link.title | downcase -%}
+        {%- if child_link.url contains '/blogs' and child_title_downcase contains search_terms_downcase -%}
+          <li class="predictive-search__item" role="option"><a href="{{ child_link.url }}" class="predictive-search__link predictive-search__link--blog"><span>{{ child_link.title | escape }}</span></a></li>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+  {%- if blog_result_count > 0 -%}
+  <div class="predictive-search__group predictive-search__group--blogs" data-search-group="articles">
+    <h3 class="predictive-search__group-title" id="ps-blogs">{{ 'templates.search.blogs' | t }}</h3>
+    <ul class="predictive-search__list" role="group" aria-labelledby="ps-blogs">
+      {{ blog_results }}
+    </ul>
+  </div>
+  {%- endif -%}
+
+  {%- liquid
+    assign total = predictive_search.resources.products.size | plus: predictive_search.resources.collections.size | plus: predictive_search.resources.articles.size | plus: predictive_search.resources.pages.size | plus: predictive_search.resources.queries.size | plus: blog_result_count
   -%}
   {%- if total == 0 -%}
   <div class="predictive-search__no-results">
-    <p>{{ 'templates.search.no_results_title' | t }}</p>
+    <p>{{ 'templates.search.no_results_for' | t: terms: predictive_search.terms }}</p>
+    {%- assign recommendation_collection = settings.predictive_search_recommendation_collection | default: collections.all -%}
+    {%- if recommendation_collection.products.size > 0 -%}
+    <div class="predictive-search__recommendations">
+      <h3>{{ 'templates.search.recommended_products' | t }}</h3>
+      <ul class="predictive-search__recommendation-list">
+        {%- for product in recommendation_collection.products limit: 4 -%}
+        <li>
+          <a href="{{ product.url }}" class="predictive-search__recommendation-link">
+            {%- if product.featured_image != blank -%}
+              {%- assign recommendation_alt = product.featured_image.alt | default: product.title -%}
+              {{ product.featured_image | image_url: width: 120 | image_tag:
+                loading: 'lazy',
+                widths: '80, 120',
+                sizes: '60px',
+                alt: recommendation_alt,
+                class: 'predictive-search__recommendation-image'
+              }}
+            {%- endif -%}
+            <span>{{ product.title | escape }}</span>
+          </a>
+        </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+    {%- endif -%}
   </div>
+  {%- endif -%}
+
+  {%- if total > 0 -%}
+    <a class="predictive-search__view-all" href="{{ routes.search_url }}?q={{ predictive_search.terms | url_encode }}&type=product,article,page">
+      {{ 'templates.search.view_all_results' | t: count: total, terms: predictive_search.terms }}
+    </a>
   {%- endif -%}
 
 </div>
 
 <span class="predictive-search__status sr-only" role="status" aria-live="polite">
   {%- liquid
-    assign total_results = predictive_search.resources.products.size | plus: predictive_search.resources.collections.size | plus: predictive_search.resources.articles.size
+    assign total_results = predictive_search.resources.products.size | plus: predictive_search.resources.collections.size | plus: predictive_search.resources.articles.size | plus: predictive_search.resources.pages.size | plus: blog_result_count
     if total_results > 0
       echo 'templates.search.results_count' | t: count: total_results
     else
-      echo 'templates.search.no_results_title' | t
+      echo 'templates.search.no_results_for' | t: terms: predictive_search.terms
     endif
   -%}
 </span>

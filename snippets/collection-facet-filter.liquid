@@ -57,30 +57,67 @@
             {%- case filter.type -%}
 
               {%- when 'list' -%}
-                <div class="facet-filter__content-list" data-collapse-limit="5">
-                  {%- for value in filter.values -%}
-                    <facet-filter-item
-                      class="facet-filter-item{% if value.count == 0 and value.active == false %} facet-filter-item--disabled{% endif %}"
-                    >
-                      <label
-                        for="Filter-{{ filter.param_name | handleize }}-{{ forloop.index }}"
-                        class="facet-filter-item__label"
+                {%- if filter.presentation == 'swatch' -%}
+                  <div class="facet-filter__swatch-list">
+                    {%- for value in filter.values -%}
+                      {%- liquid
+                        assign swatch_bg = ''
+                        if value.swatch.image
+                          assign img_url = value.swatch.image | image_url: width: 50
+                          assign swatch_bg = 'background-image: url(' | append: img_url | append: '); background-size: cover; background-position: center;'
+                        elsif value.swatch.color
+                          assign swatch_bg = 'background-color: ' | append: value.swatch.color | append: ';'
+                        else
+                          assign swatch_bg = 'background-color: ' | append: value.label | handleize | append: ';'
+                        endif
+                      -%}
+                      <facet-filter-item
+                        class="facet-filter-item facet-filter-item--swatch{% if value.count == 0 and value.active == false %} facet-filter-item--disabled{% endif %}"
                       >
-                        <input
-                          type="checkbox"
-                          name="{{ filter.param_name }}"
-                          value="{{ value.value | escape }}"
-                          id="Filter-{{ filter.param_name | handleize }}-{{ forloop.index }}"
-                          {% if value.active %}checked{% endif %}
-                          {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                        <label
+                          for="Filter-{{ filter.param_name | handleize }}-{{ forloop.index }}"
+                          class="facet-filter-swatch__label"
+                          title="{{ value.label | escape }} ({{ value.count }})"
                         >
-                        <span>{{ value.label | escape }}</span>
-                        <span class="facet-filter-item__count">({{ value.count }})</span>
-                      </label>
-                    </facet-filter-item>
-                  {%- endfor -%}
-                </div>
-
+                          <input
+                            type="checkbox"
+                            name="{{ filter.param_name }}"
+                            value="{{ value.value | escape }}"
+                            id="Filter-{{ filter.param_name | handleize }}-{{ forloop.index }}"
+                            {% if value.active %}checked{% endif %}
+                            {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                          >
+                          <span class="facet-filter-swatch__circle" style="{{ swatch_bg }}"></span>
+                          <span class="facet-filter-swatch__name">{{ value.label | escape }}</span>
+                        </label>
+                      </facet-filter-item>
+                    {%- endfor -%}
+                  </div>
+                {%- else -%}
+                  <div class="facet-filter__content-list" data-collapse-limit="5">
+                    {%- for value in filter.values -%}
+                      <facet-filter-item
+                        class="facet-filter-item{% if value.count == 0 and value.active == false %} facet-filter-item--disabled{% endif %}"
+                      >
+                        <label
+                          for="Filter-{{ filter.param_name | handleize }}-{{ forloop.index }}"
+                          class="facet-filter-item__label"
+                        >
+                          <input
+                            type="checkbox"
+                            name="{{ filter.param_name }}"
+                            value="{{ value.value | escape }}"
+                            id="Filter-{{ filter.param_name | handleize }}-{{ forloop.index }}"
+                            {% if value.active %}checked{% endif %}
+                            {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                          >
+                          <span>{{ value.label | escape }}</span>
+                          <span class="facet-filter-item__count">({{ value.count }})</span>
+                        </label>
+                      </facet-filter-item>
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
               {%- when 'price_range' -%}
                 {%- liquid
                   assign range_max = filter.range_max | divided_by: 100.0 | ceil

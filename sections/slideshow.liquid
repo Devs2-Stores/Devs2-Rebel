@@ -44,8 +44,8 @@
             assign text_position = block.settings.text_position
             assign overlay_opacity = block.settings.overlay_opacity | divided_by: 100.0
             assign slide_heading_tag = block.settings.heading_tag
-            if template.name == 'index' and forloop.first
-              assign slide_heading_tag = 'h1'
+            if template.name == 'index' and slide_heading_tag == 'h1'
+              assign slide_heading_tag = 'h2'
             endif
             assign has_content = false
             if block.settings.heading != blank or block.settings.subheading != blank or block.settings.text != blank or block.settings.button_label_1 != blank

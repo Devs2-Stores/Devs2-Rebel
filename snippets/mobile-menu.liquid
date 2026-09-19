@@ -1,8 +1,4 @@
-{%- liquid
-  assign resolved_menu_handle = menu_handle | default: settings.header_menu
-  assign resolved_show_wishlist = show_wishlist | default: true, allow_false: true
-  assign resolved_wishlist_url = wishlist_url | default: '/pages/wishlist'
--%}
+{%- assign resolved_menu_handle = menu_handle | default: settings.header_menu -%}
 {{ 'mobile-menu.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'mobile-menu.js' | asset_url }}" defer="defer"></script>
 <mobile-menu class="mobile-menu" role="dialog" aria-modal="true" aria-label="{{ 'accessibility.navigation' | t }}">
@@ -79,14 +75,17 @@
     </div>
     <div class="mobile-menu__footer">
       <div class="mobile-menu__actions">
-        <a href="{{ routes.account_url }}" class="mobile-menu__action-link">
-          {%- render 'icon', name: 'user' -%}
-          <span>{{ 'customer.account.title' | t }}</span>
-        </a>
-        {%- if resolved_show_wishlist -%}
-          <a href="{{ resolved_wishlist_url }}" class="mobile-menu__action-link">
-            {%- render 'icon', name: 'heart' -%}
-            <span>{{ 'general.wishlist.title' | t }}</span>
+        {%- if shop.customer_accounts_enabled -%}
+          <shopify-account menu="{{ customer_account_menu }}">
+            <span slot="signed-out-avatar" class="mobile-menu__action-link">
+              {%- render 'icon', name: 'user' -%}
+              <span>{{ 'customer.account.title' | t }}</span>
+            </span>
+          </shopify-account>
+        {%- else -%}
+          <a href="{{ routes.account_url }}" class="mobile-menu__action-link">
+            {%- render 'icon', name: 'user' -%}
+            <span>{{ 'customer.account.title' | t }}</span>
           </a>
         {%- endif -%}
       </div>

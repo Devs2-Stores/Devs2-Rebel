@@ -11,7 +11,7 @@
     <div class="search-template__header">
       <h1 class="search-template__title">
         {%- if search_query != blank -%}
-          {{ 'templates.search.results_with_count_and_term' | t: terms: search_query, count: search.results_count }}
+          {{ 'templates.search.search_for' | t: terms: search_query }}
         {%- else -%}
           {{ 'templates.search.title' | t }}
         {%- endif -%}
@@ -28,7 +28,7 @@
           <input
             type="search"
             name="q"
-            value="{{ search_query }}"
+            value="{{ search_query | escape }}"
             placeholder="{{ 'templates.search.placeholder' | t }}"
             class="search-template__input"
             autocomplete="off"
@@ -45,18 +45,28 @@
     {%- if search.performed -%}
       {%- if search.results_count > 0 -%}
         {%- paginate search.results by section.settings.products_per_page -%}
-        <div class="search-template__results">
-          <div class="search-template__results-header">
-            <span class="search-template__results-info">
-              {%- assign start_count = paginate.current_offset | plus: 1 -%}
-              {%- assign end_count = paginate.current_offset | plus: paginate.page_size -%}
-              {%- if end_count > search.results_count -%}
-                {%- assign end_count = search.results_count -%}
-              {%- endif -%}
-              {{ 'templates.search.results_showing' | t: from: start_count, to: end_count, total: search.results_count }}
-            </span>
+        <div class="search-template__results" data-search-results data-section-id="{{ section.id }}">
+          {%- assign has_products = false -%}
+          {%- assign product_count = 0 -%}
+          {%- assign article_count = 0 -%}
+          {%- assign page_count = 0 -%}
+          {%- for item in search.results -%}
+            {%- if item.object_type == 'product' -%}{%- assign has_products = true -%}{%- assign product_count = product_count | plus: 1 -%}{%- endif -%}
+            {%- if item.object_type == 'article' -%}{%- assign article_count = article_count | plus: 1 -%}{%- endif -%}
+            {%- if item.object_type == 'page' -%}{%- assign page_count = page_count | plus: 1 -%}{%- endif -%}
+          {%- endfor -%}
+          <div class="search-template__tabs" role="tablist" aria-label="Search result types">
+            <button type="button" class="search-template__tab" role="tab" aria-controls="search-products-panel" data-search-tab="products" aria-selected="false"{% if product_count == 0 %} disabled{% endif %}>Products <span>{{ product_count }}</span></button>
+            <button type="button" class="search-template__tab" role="tab" aria-controls="search-articles-panel" data-search-tab="articles" aria-selected="false"{% if article_count == 0 %} disabled{% endif %}>Articles <span>{{ article_count }}</span></button>
+            <button type="button" class="search-template__tab" role="tab" aria-controls="search-pages-panel" data-search-tab="pages" aria-selected="false"{% if page_count == 0 %} disabled{% endif %}>Pages <span>{{ page_count }}</span></button>
           </div>
-
+          <div class="search-template__results-header" aria-live="polite">
+            <span class="search-template__results-info" data-search-tab-count="products" hidden>{{ 'templates.search.results_count' | t: count: product_count }}</span>
+            <span class="search-template__results-info" data-search-tab-count="articles" hidden>{{ 'templates.search.results_count' | t: count: article_count }}</span>
+            <span class="search-template__results-info" data-search-tab-count="pages" hidden>{{ 'templates.search.results_count' | t: count: page_count }}</span>
+          </div>
+          {%- if has_products -%}
+          <section id="search-products-panel" class="search-template__product-group" role="tabpanel" aria-labelledby="search-products-tab" data-search-panel="products">
           <ul class="product-cards search-template__products" role="list">
             {%- for item in search.results -%}
               {%- liquid
@@ -74,38 +84,49 @@
                   <li class="product-cards__item" role="listitem">
                     {%- render 'product-card', product: item, lazyload: lazyload, fetchpriority: fetchpriority, show_vendor: true -%}
                   </li>
-                {%- when 'article' -%}
-                  <li class="product-cards__item search-template__article" role="listitem">
-                    <article class="search-result-card">
-                      {%- if item.image -%}
-                        <a href="{{ item.url }}" class="search-result-card__image">
-                          <img src="{{ item.image | image_url: width: 400 }}" alt="{{ item.title | escape }}" width="200" height="200" loading="{{ lazyload }}">
-                        </a>
-                      {%- endif -%}
-                      <div class="search-result-card__content">
-                        <span class="search-result-card__type">{{ 'blogs.article.blog' | t }}</span>
-                        <h3 class="search-result-card__title"><a href="{{ item.url }}">{{ item.title | escape }}</a></h3>
-                        {%- if item.excerpt != blank -%}
-                          <p class="search-result-card__excerpt">{{ item.excerpt | strip_html | truncatewords: 20 }}</p>
-                        {%- endif -%}
-                      </div>
-                    </article>
-                  </li>
-                {%- when 'page' -%}
-                  <li class="product-cards__item search-template__page" role="listitem">
-                    <article class="search-result-card">
-                      <div class="search-result-card__content">
-                        <span class="search-result-card__type">{{ 'templates.search.page' | t }}</span>
-                        <h3 class="search-result-card__title"><a href="{{ item.url }}">{{ item.title | escape }}</a></h3>
-                        {%- if item.content != blank -%}
-                          <p class="search-result-card__excerpt">{{ item.content | strip_html | truncatewords: 20 }}</p>
-                        {%- endif -%}
-                      </div>
-                    </article>
-                  </li>
               {%- endcase -%}
             {%- endfor -%}
           </ul>
+          </section>
+          {%- endif -%}
+
+          {%- assign has_articles = false -%}
+          {%- for item in search.results -%}{%- if item.object_type == 'article' -%}{%- assign has_articles = true -%}{%- break -%}{%- endif -%}{%- endfor -%}
+          {%- if has_articles -%}
+            <section id="search-articles-panel" class="search-template__content-group" role="tabpanel" aria-labelledby="search-articles-tab" data-search-panel="articles">
+              <ul class="search-template__content-list" role="list">
+                {%- for item in search.results -%}{%- if item.object_type == 'article' -%}
+                  {%- assign content_loading = 'lazy' -%}
+                  {%- if forloop.index <= 3 -%}{%- assign content_loading = 'eager' -%}{%- endif -%}
+                  <li class="search-template__content-item" role="listitem">
+                    {%- render 'article-card', article: item, layout: 'grid', lazyload: content_loading, show_category: true -%}
+                  </li>
+                {%- endif -%}{%- endfor -%}
+              </ul>
+            </section>
+          {%- endif -%}
+
+          {%- assign has_pages = false -%}
+          {%- for item in search.results -%}{%- if item.object_type == 'page' -%}{%- assign has_pages = true -%}{%- break -%}{%- endif -%}{%- endfor -%}
+          {%- if has_pages -%}
+            <section id="search-pages-panel" class="search-template__content-group" role="tabpanel" aria-labelledby="search-pages-tab" data-search-panel="pages">
+              <ul class="search-template__content-list" role="list">
+                {%- for item in search.results -%}{%- if item.object_type == 'page' -%}
+                  <li class="search-template__content-item" role="listitem">
+                    <a class="search-page-result" href="{{ item.url }}">
+                      <span class="search-page-result__content">
+                        <strong class="search-page-result__title">{{ item.title | escape }}</strong>
+                        {%- if item.content != blank -%}
+                          <span class="search-page-result__excerpt">{{ item.content | strip_html | truncatewords: 24 | escape }}</span>
+                        {%- endif -%}
+                      </span>
+                      <span class="search-page-result__arrow" aria-hidden="true">&rarr;</span>
+                    </a>
+                  </li>
+                {%- endif -%}{%- endfor -%}
+              </ul>
+            </section>
+          {%- endif -%}
 
           {%- if paginate.pages > 1 -%}
             <div class="search-template__pagination">
@@ -119,9 +140,9 @@
           <div class="search-template__empty-icon">
             {%- render 'icon', name: 'search' -%}
           </div>
-          <h2 class="search-template__empty-title">{{ 'templates.search.no_results_title' | t: terms: search_query }}</h2>
+          <h2 class="search-template__empty-title">{{ 'templates.search.no_results_title' | t }}: {{ search_query | escape }}</h2>
           <p class="search-template__empty-text">
-            {{ 'templates.search.no_results' | t: terms: search_query }}
+            {{ 'templates.search.no_results' | t }}: <strong>{{ search_query | escape }}</strong>
           </p>
           <div class="search-template__empty-suggestions">
             <p><strong>{{ 'templates.search.suggestions' | t }}:</strong></p>
@@ -131,6 +152,19 @@
               <li>{{ 'templates.search.suggestion_3' | t }}</li>
             </ul>
           </div>
+          {%- if section.settings.featured_collection != blank -%}
+            <div class="search-template__empty-featured">
+              <h2>{{ section.settings.featured_collection.title | escape }}</h2>
+              <ul class="product-cards search-template__products" role="list">
+                {%- for product in section.settings.featured_collection.products limit: 4 -%}
+                  <li class="product-cards__item" role="listitem">
+                    {%- render 'product-card', product: product, lazyload: 'lazy', show_vendor: true -%}
+                  </li>
+                {%- endfor -%}
+              </ul>
+              <a class="search-template__featured-link" href="{{ section.settings.featured_collection.url }}">{{ 'general.continue_shopping' | t }}</a>
+            </div>
+          {%- endif -%}
         </div>
       {%- endif -%}
     {%- else -%}
@@ -165,7 +199,12 @@
       "min": 8,
       "max": 36,
       "step": 4,
-      "default": 20
+      "default": 24
+    },
+    {
+      "type": "collection",
+      "id": "featured_collection",
+      "label": "Featured collection for empty search"
     }
   ]
 }

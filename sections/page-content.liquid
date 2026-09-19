@@ -1,0 +1,74 @@
+{%- assign container_width = section.settings.container_width | default: 'fixed' -%}
+
+{%- if page.content != blank -%}
+  <div
+    class="section-page-content color-{{ section.settings.color_scheme }}"
+    style="--page-content-pt: {{ section.settings.padding_top }}px; --page-content-pb: {{ section.settings.padding_bottom }}px;"
+  >
+    <div class="{% if container_width == 'fixed' %}page-width{% endif %}">
+      <div class="section-page-content__inner rte">
+        {{ page.content }}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .section-page-content {
+    padding-block: var(--page-content-pt) var(--page-content-pb);
+    background: rgb(var(--color-background));
+    color: rgba(var(--color-foreground), 0.78);
+  }
+  .section-page-content__inner { max-width: 52rem; margin-inline: auto; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:sections.page_content.name",
+  "tag": "section",
+  "class": "section-page-content-wrapper",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "t:sections.all.container_width.label",
+      "options": [
+        { "value": "fixed", "label": "t:sections.all.container_width.options__fixed.label" },
+        { "value": "full", "label": "t:sections.all.container_width.options__full.label" }
+      ],
+      "default": "fixed"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:sections.all.padding_top.label",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:sections.all.padding_bottom.label",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.page_content.name"
+    }
+  ]
+}
+{% endschema %}

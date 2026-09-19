@@ -156,8 +156,10 @@
 }
 .account-template__grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
 @media (min-width: 1280px) {
-  .account-template__grid { grid-template-columns: 250px 1fr; gap: 2rem; }
+  .account-template__grid { grid-template-columns: minmax(0, 1fr) 18rem; gap: 2rem; align-items: start; }
 }
+.account-template__details-column { min-width: 0; }
+.account-template__details-column .customer-sidebar { position: static; }
 .account-template__wrapper {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
   border: 1px solid rgba(var(--color-foreground), 0.08);
@@ -192,6 +194,8 @@
 .account-template__section-title .icon svg { width: 1.25rem; height: 1.25rem; }
 .account-template__info-list { list-style: none; padding: 0; margin: 0; }
 .account-template__info-list li { margin-bottom: 0.25rem; }
+.account-template__info-list address { margin-top: 0.25rem; font-style: normal; }
+.account-template__info-list + .button-primary { margin-top: 1rem; }
 .account-template__order-list,
 .account-template__address-list { display: grid; grid-template-columns: 1fr; gap: 1rem; }
 @media (min-width: 768px) {
@@ -317,26 +321,36 @@
 .account-template__address-actions { display: flex; flex-direction: column; gap: 0.5rem; }
 .account-template__address-add { margin-top: 1rem; }
 .account-template__order-table {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+.account-template__order-table-wrapper {
+  overflow-x: auto;
   border: 1px solid rgba(var(--color-foreground), 0.15);
   border-radius: 0.5rem;
   overflow: hidden;
 }
 .dark .account-template__order-table { border-color: rgba(var(--color-foreground), 0.15); }
-.account-template__order-row {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.5rem;
+.account-template__order-table th,
+.account-template__order-table td {
   padding: 0.875rem 1rem;
   border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
-  transition: background 0.15s;
 }
-.account-template__order-row:last-child { border-bottom: none; }
-.account-template__order-row:hover { background: rgba(var(--color-foreground), 0.02); }
-@media (min-width: 768px) {
-  .account-template__order-row { grid-template-columns: 1fr auto auto; align-items: center; gap: 1rem; }
+.account-template__order-table tr:last-child td { border-bottom: none; }
+.account-template__order-table tbody tr:hover { background: rgba(var(--color-foreground), 0.02); }
+.account-template__order-table th { font-size: 0.8rem; text-transform: uppercase; letter-spacing: .04em; }
+.account-template__status { display: inline-block; padding: .2rem .5rem; border-radius: 999px; font-size: .75rem; font-weight: 600; }
+.account-template__status--paid, .account-template__status--fulfilled { background: #dcfce7; color: #166534; }
+.account-template__status--pending, .account-template__status--authorized, .account-template__status--partially_paid, .account-template__status--unfulfilled, .account-template__status--partial { background: #fef3c7; color: #92400e; }
+.account-template__status--refunded, .account-template__status--partially_refunded, .account-template__status--voided, .account-template__status--cancelled, .account-template__status--expired, .account-template__status--restocked { background: #fee2e2; color: #991b1b; }
+@media (max-width: 767px) {
+  .account-template__order-table-wrapper { border: 0; overflow: visible; }
+  .account-template__order-table, .account-template__order-table tbody, .account-template__order-table tr, .account-template__order-table td { display: block; width: 100%; }
+  .account-template__order-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .account-template__order-table tr { padding: .75rem 1rem; border: 1px solid rgba(var(--color-foreground), .15); border-radius: .5rem; margin-bottom: .75rem; }
+  .account-template__order-table td { display: flex; justify-content: space-between; gap: 1rem; padding: .45rem 0; border-bottom: 0; }
+  .account-template__order-table td::before { content: attr(data-label); font-weight: 600; color: rgba(var(--color-foreground), .6); }
 }
 .account-template__order-row-main { display: flex; flex-direction: column; gap: 0.2rem; min-width: 0; }
 .account-template__order-row-statuses { display: flex; flex-direction: column; gap: 0.2rem; min-width: 10rem; }

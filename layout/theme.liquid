@@ -23,6 +23,9 @@
 
     {%- sections 'header-group' -%}
     <main id="MainContent" class="content-for-layout focus-none" tabindex="-1">
+      {%- if request.page_type == 'index' -%}
+        <h1 class="visually-hidden">{{- shop.name -}}</h1>
+      {%- endif -%}
       {{ content_for_layout }}
     </main>
     {%- sections 'footer-group' -%}
@@ -44,8 +47,6 @@
         <use href="#icon-chevron-right" />
       </svg>
     </button>
-    <wishlist-manager></wishlist-manager>
-
     <ul hidden>
       <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
       <li id="a11y-new-window-message">{{ 'accessibility.link_messages.new_window' | t }}</li>

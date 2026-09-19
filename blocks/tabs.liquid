@@ -1,0 +1,40 @@
+{% doc %}
+  Tabs container block.
+
+  Renders a tablist nav and a content area. Child `tab` blocks render
+  their own panel plus a nav-button template that JavaScript moves into
+  the nav container.
+{% enddoc %}
+
+<div class="product-template__tabs" {{ block.shopify_attributes }}>
+  <div class="product-template__tabs-nav" role="tablist" data-tabs-nav></div>
+  <div class="product-template__tabs-content">
+    {% content_for 'blocks' %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main_product.blocks.tabs.name",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "tab"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main_product.blocks.tabs.name",
+      "blocks": [
+        {
+          "type": "tab",
+          "settings": {
+            "title": "Description",
+            "content_type": "description"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

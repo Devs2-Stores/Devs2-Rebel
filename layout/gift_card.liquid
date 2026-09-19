@@ -1,0 +1,21 @@
+{%- assign gift_card_color_scheme = settings.color_schemes | first -%}
+{%- assign formatted_balance = gift_card.balance | money_without_trailing_zeros | strip_html -%}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ gift_card_color_scheme.settings.background }}">
+    <meta name="description" content="{{ 'gift_cards.issued.subtext' | t | escape }}">
+    <title>{{ 'gift_cards.issued.title' | t: value: formatted_balance, shop: shop.name }}</title>
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
+    <script src="{{ 'vendor/qrcode.js' | shopify_asset_url }}" defer></script>
+    {{ content_for_header }}
+    {{ 'gift-card.css' | asset_url | stylesheet_tag }}
+  </head>
+  <body class="gift-card-page">
+    {{ content_for_layout }}
+  </body>
+</html>

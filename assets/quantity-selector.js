@@ -19,6 +19,7 @@
       if (!this.input) return;
 
       this.min = parseInt(this.input.min) || 1;
+      this.max = parseInt(this.input.max) || 999;
       this.step = parseInt(this.input.step) || 1;
 
       var self = this;
@@ -39,6 +40,10 @@
       var action = event.currentTarget.dataset.action;
 
       if (action === 'increase') {
+        if (previousValue >= this.max) {
+          this.reportMaximum();
+          return;
+        }
         this.input.stepUp();
       } else if (action === 'decrease') {
         var currentValue = parseInt(this.input.value) || this.min;
@@ -53,6 +58,9 @@
       var currentValue = parseInt(this.input.value);
       if (isNaN(currentValue) || currentValue < this.min) {
         this.input.value = this.min;
+      } else if (currentValue > this.max) {
+        this.input.value = this.max;
+        this.reportMaximum();
       }
       this.onButtonUpdates();
 
@@ -70,10 +78,20 @@
 
     onButtonUpdates() {
       var decreaseBtn = this.querySelector('[data-action="decrease"]');
+      var increaseBtn = this.querySelector('[data-action="increase"]');
+      var currentValue = parseInt(this.input.value) || this.min;
       if (decreaseBtn) {
-        var currentValue = parseInt(this.input.value) || this.min;
         decreaseBtn.disabled = currentValue <= this.min;
       }
+      if (increaseBtn) increaseBtn.disabled = currentValue >= this.max;
+    }
+
+    reportMaximum() {
+      var message = themeConfig.strings.cart.quantityError.replace('[quantity]', this.max);
+      var lineItem = this.closest('[data-line-item]');
+      var error = lineItem ? lineItem.querySelector('[data-quantity-error]') : null;
+      if (error) error.textContent = message;
+      if (typeof showToast === 'function') showToast(message, 'error', 3000);
     }
   }
   if (!customElements.get('quantity-selector')) customElements.define('quantity-selector', QuantitySelector);

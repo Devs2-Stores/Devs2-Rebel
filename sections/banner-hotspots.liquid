@@ -22,11 +22,8 @@
       </div>
     {%- endif -%}
 
-    {%- assign custom_image_url = section.settings.custom_image_url -%}
     <div class="section-hotspot__wrapper">
-      {%- if custom_image_url != blank -%}
-        <img src="{{ custom_image_url | escape }}" alt="{{ section.settings.heading | default: shop.name | escape }}" width="1920" height="1080" loading="lazy" decoding="async" class="section-hotspot__img">
-      {%- elsif section.settings.image != blank -%}
+      {%- if section.settings.image != blank -%}
         {{ section.settings.image | image_url: width: 1920 | image_tag:
           widths: '750, 1080, 1440, 1920', sizes: '100vw',
           loading: 'lazy', class: 'section-hotspot__img'
@@ -316,11 +313,6 @@
       "type": "image_picker",
       "id": "image",
       "label": "t:sections.banner_hotspots.settings.image.label"
-    },
-    {
-      "type": "url",
-      "id": "custom_image_url",
-      "label": "Desktop image URL override"
     },
     {
       "type": "select",

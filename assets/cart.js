@@ -1,323 +1,218 @@
 (function() {
-'use strict';
+  'use strict';
 
-/**
- * Cart Template — Main cart page component
- * Uses Cart API with Section Rendering for dynamic updates.
- */
-class CartTemplate extends HTMLElement {
-  connectedCallback() {
-    this.cartData = this.querySelector(".cart-template__data");
-    this.cartEmpty = this.querySelector(".cart-template__empty");
-    this.cartTitle = this.querySelector(".cart-template__title");
-    this.noteInput = this.querySelector("#cart-template__note-input");
-    this.invoiceInputs = this.querySelectorAll("[name^='invoice']");
-    this.pendingUpdate = null;
-    this.updatingLine = null;
-    this.sectionId = this.getSectionId();
+  class CartTemplate extends HTMLElement {
+    connectedCallback() {
+      if (this._initialized) return;
+      this._initialized = true;
+      this.sectionId = this.getSectionId();
+      this.pendingUpdate = null;
+      this.updateController = null;
+      this.cacheElements();
 
-    var cartEvents = (typeof themeConfig !== 'undefined' && themeConfig.cart && themeConfig.cart.events)
-      ? themeConfig.cart.events
-      : { quantity_changed: 'cart-quantity-changed', item_delete: 'cart-item-deleted' };
+      var cartEvents = (themeConfig.cart && themeConfig.cart.events) || {};
+      this.quantityEvent = cartEvents.quantity_changed || 'cart-quantity-changed';
+      this.updatedEvent = cartEvents.updated || 'cart:updated';
 
-    var self = this;
-
-    this.addEventListener(cartEvents.quantity_changed, function(e) {
-      self.debouncedUpdate(e.detail);
-    });
-    this.addEventListener(cartEvents.item_delete, function(e) {
-      self.updateCart(e.detail);
-    });
-
-    if (this.noteInput) {
-      this.noteInput.addEventListener("change", function() {
-        self.updateNote();
-      });
+      this.addEventListener(this.quantityEvent, this.handleQuantityChange.bind(this));
+      this.addEventListener(cartEvents.item_delete || 'cart-item-deleted', this.handleDelete.bind(this));
+      this.addEventListener('change', this.handleFieldChange.bind(this));
+      document.addEventListener(this.updatedEvent, this.handleExternalUpdate.bind(this));
     }
 
-    if (this.invoiceInputs.length) {
-      this.invoiceInputs.forEach(function(input) {
-        input.addEventListener("change", function() {
-          self.updateInvoice();
-        });
-      });
+    cacheElements() {
+      this.cartData = this.querySelector('.cart-template__data');
+      this.cartEmpty = this.querySelector('.cart-template__empty');
+      this.noteInput = this.querySelector('#cart-template__note-input');
+      this.invoiceInputs = this.querySelectorAll("[name^='attributes[invoice']");
     }
-  }
 
-  /**
-   * Get the section ID for Section Rendering API
-   */
-  getSectionId() {
-    var sectionEl = this.closest('.shopify-section');
-    if (sectionEl) return sectionEl.id.replace('shopify-section-', '');
-    return null;
-  }
+    getSectionId() {
+      var section = this.closest('.shopify-section');
+      return section ? section.id.replace('shopify-section-', '') : null;
+    }
 
-  /**
-   * Get locale-aware cart route
-   */
-  getCartRoute(endpoint) {
-    if (typeof themeConfig !== 'undefined' && themeConfig.routes) {
-      switch (endpoint) {
-        case 'change': return themeConfig.routes.cart_change_url;
-        case 'update': return themeConfig.routes.cart_update_url;
-        default: return themeConfig.routes.cart_url;
+    getCartRoute(endpoint) {
+      var routes = themeConfig.routes || {};
+      if (endpoint === 'change') return routes.cart_change_url || '/cart/change.js';
+      if (endpoint === 'update') return routes.cart_update_url || '/cart/update.js';
+      return routes.cart_url || '/cart';
+    }
+
+    getString(key) {
+      return ((themeConfig.strings || {}).cart || {})[key] || '';
+    }
+
+    handleQuantityChange(event) {
+      if (!event.detail) return;
+      clearTimeout(this.pendingUpdate);
+      var detail = event.detail;
+      var self = this;
+      this.pendingUpdate = setTimeout(function() {
+        self.updateCart(detail);
+      }, 400);
+    }
+
+    handleDelete(event) {
+      if (event.detail) this.updateCart(event.detail);
+    }
+
+    handleFieldChange(event) {
+      if (event.target.matches('#cart-template__note-input')) this.updateNote();
+      if (event.target.matches("[name^='attributes[invoice']")) this.updateInvoice();
+    }
+
+    handleExternalUpdate(event) {
+      if (!event.detail || event.detail.source === this || !event.detail.cart) return;
+      this.refreshSection().catch(function(error) {
+        this.showError(error.message);
+      }.bind(this));
+    }
+
+    async updateCart(params) {
+      var line = Number(params.line);
+      var quantity = Number(params.quantity);
+      if (!line || Number.isNaN(quantity)) return;
+
+      if (this.updateController) this.updateController.abort();
+      this.updateController = new AbortController();
+      var controller = this.updateController;
+      this.setUpdating(true);
+
+      try {
+        var config = fetchConfig();
+        config.signal = controller.signal;
+        config.body = JSON.stringify({ line: line, quantity: quantity });
+        var response = await fetch(this.getCartRoute('change'), config);
+        var cart = await this.parseCartResponse(response);
+        var updatedItem = cart.items[line - 1];
+
+        if (quantity > 0 && updatedItem && updatedItem.quantity !== quantity) {
+          this.showQuantityError(updatedItem.quantity);
+        }
+
+        await this.refreshSection(controller.signal);
+        await updateCartData(cart, { source: this });
+      } catch (error) {
+        if (error.name === 'AbortError') return;
+        this.restoreQuantity(line);
+        this.showError(error.message || this.getString('error'));
+      } finally {
+        if (this.updateController === controller) {
+          this.updateController = null;
+          this.setUpdating(false);
+        }
       }
     }
-    // Fallback to Shopify.routes.root
-    var root = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) ? window.Shopify.routes.root : '/';
-    return root + 'cart/' + endpoint + '.js';
-  }
 
-  /**
-   * Get i18n strings
-   */
-  getString(key) {
-    if (typeof themeConfig !== 'undefined' && themeConfig.strings && themeConfig.strings.cart) {
-      return themeConfig.strings.cart[key] || '';
-    }
-    return '';
-  }
-
-  debouncedUpdate(detail) {
-    this.updatingLine = detail.line;
-    clearTimeout(this.pendingUpdate);
-    var self = this;
-    this.pendingUpdate = setTimeout(function() {
-      self.updateCart(detail);
-    }, 400);
-  }
-
-  updateCart(params) {
-    var line = params.line;
-    var quantity = params.quantity;
-    if (!line || isNaN(quantity)) return;
-
-    var body = {
-      line: line,
-      quantity: quantity
-    };
-
-    // Request Section Rendering for re-render
-    if (this.sectionId) {
-      body.sections = [this.sectionId];
+    async refreshSection(signal) {
+      if (!this.sectionId) throw new Error(this.getString('error'));
+      var separator = this.getCartRoute().indexOf('?') === -1 ? '?' : '&';
+      var response = await fetch(this.getCartRoute() + separator + 'section_id=' + encodeURIComponent(this.sectionId), {
+        headers: { Accept: 'text/html' },
+        signal: signal
+      });
+      if (!response.ok) throw new Error(this.getString('error'));
+      this.renderSection(await response.text());
     }
 
-    var config = fetchConfig();
-    config.body = JSON.stringify(body);
-    var self = this;
+    async updateNote() {
+      if (!this.noteInput) return;
+      await this.updateCartFields({ note: this.noteInput.value }, 'noteError');
+    }
 
-    fetch(this.getCartRoute('change'), config)
-      .then(function(res) {
-        if (!res.ok) throw new Error("Cart update failed");
-        return res.json();
-      })
-      .then(function(cart) {
-        if (cart.sections && self.sectionId && cart.sections[self.sectionId]) {
-          self.renderSection(cart.sections[self.sectionId]);
-        } else {
-          self.refreshUI(cart);
-        }
-        self.updatingLine = null;
-        // Update global cart count/money
-        updateCartCount(cart.item_count);
-        updateCartMoney(cart.total_price);
-      })
-      .catch(function(err) {
-        if (typeof showToast === 'function') {
-          showToast(self.getString('error') || 'Cart update error', 'error');
-        }
+    async updateInvoice() {
+      var attributes = {};
+      this.invoiceInputs.forEach(function(input) {
+        var key = input.name.replace('attributes[', '').replace(']', '');
+        attributes[key] = input.value;
       });
-  }
+      await this.updateCartFields({ attributes: attributes }, 'invoiceError');
+    }
 
-  updateNote() {
-    var note = this.noteInput.value;
-    var config = fetchConfig();
-    config.body = JSON.stringify({ note: note });
-    var self = this;
+    async updateCartFields(body, errorKey) {
+      try {
+        var config = fetchConfig();
+        config.body = JSON.stringify(body);
+        var response = await fetch(this.getCartRoute('update'), config);
+        var cart = await this.parseCartResponse(response);
+        await updateCartData(cart, { source: this });
+      } catch (error) {
+        this.showError(error.message || this.getString(errorKey));
+      }
+    }
 
-    fetch(this.getCartRoute('update'), config)
-      .then(function(res) {
-        if (!res.ok) throw new Error("Cart update failed");
-        return res.json();
-      })
-      .catch(function(err) {
-        if (typeof showToast === 'function') {
-          showToast(self.getString('noteError') || 'Could not save note', 'error');
-        }
-      });
-  }
+    async parseCartResponse(response) {
+      var data = await response.json();
+      if (!response.ok) throw new Error(data.description || data.message || this.getString('error'));
+      return data;
+    }
 
-  updateInvoice() {
-    var attributes = {};
-    this.invoiceInputs.forEach(function(input) {
-      var name = input.name.replace("invoice[", "").replace("]", "");
-      attributes["invoice_" + name] = input.value;
-    });
+    renderSection(sectionHtml) {
+      var documentFragment = new DOMParser().parseFromString(sectionHtml, 'text/html');
+      var newContent = documentFragment.querySelector('cart-template');
+      if (!newContent) throw new Error(this.getString('error'));
 
-    var config = fetchConfig();
-    config.body = JSON.stringify({ attributes: attributes });
-    var self = this;
-
-    fetch(this.getCartRoute('update'), config)
-      .then(function(res) {
-        if (!res.ok) throw new Error("Cart update failed");
-        return res.json();
-      })
-      .catch(function(err) {
-        if (typeof showToast === 'function') {
-          showToast(self.getString('invoiceError') || 'Could not save info', 'error');
-        }
-      });
-  }
-
-  /**
-   * Render section HTML from Section Rendering API response
-   */
-  renderSection(sectionHtml) {
-    var parser = new DOMParser();
-    var doc = parser.parseFromString(sectionHtml, 'text/html');
-    var newContent = doc.querySelector('cart-template');
-
-    if (newContent) {
-      // Preserve note input value if user is typing
       var noteValue = this.noteInput ? this.noteInput.value : null;
       var invoiceValues = {};
       this.invoiceInputs.forEach(function(input) {
         invoiceValues[input.name] = input.value;
       });
 
-      // Replace inner HTML
       this.innerHTML = newContent.innerHTML;
+      this.cacheElements();
 
-      // Re-query DOM references
-      this.cartData = this.querySelector(".cart-template__data");
-      this.cartEmpty = this.querySelector(".cart-template__empty");
-      this.cartTitle = this.querySelector(".cart-template__title");
-      this.noteInput = this.querySelector("#cart-template__note-input");
-      this.invoiceInputs = this.querySelectorAll("[name^='invoice']");
-
-      // Restore form values
-      if (this.noteInput && noteValue !== null) {
-        this.noteInput.value = noteValue;
-      }
-      var self = this;
+      if (this.noteInput && noteValue !== null) this.noteInput.value = noteValue;
       this.invoiceInputs.forEach(function(input) {
-        if (invoiceValues[input.name] !== undefined) {
-          input.value = invoiceValues[input.name];
-        }
+        if (invoiceValues[input.name] !== undefined) input.value = invoiceValues[input.name];
       });
+    }
 
-      // Re-bind events
-      if (this.noteInput) {
-        this.noteInput.addEventListener("change", function() {
-          self.updateNote();
-        });
-      }
-      if (this.invoiceInputs.length) {
-        this.invoiceInputs.forEach(function(input) {
-          input.addEventListener("change", function() {
-            self.updateInvoice();
-          });
-        });
-      }
+    restoreQuantity(line) {
+      var lineItem = this.querySelector('[data-line-item="' + line + '"]');
+      var input = lineItem ? lineItem.querySelector('input[type="number"]') : null;
+      if (input && input.dataset.confirmedValue) input.value = input.dataset.confirmedValue;
+    }
+
+    showQuantityError(quantity) {
+      this.showError(this.getString('quantityError').replace('[quantity]', quantity));
+    }
+
+    showError(message) {
+      if (typeof showToast === 'function') showToast(message || this.getString('error'), 'error', 3000);
+    }
+
+    setUpdating(isUpdating) {
+      this.classList.toggle('is-updating', isUpdating);
+      this.setAttribute('aria-busy', String(isUpdating));
     }
   }
+  if (!customElements.get('cart-template')) customElements.define('cart-template', CartTemplate);
 
-  /**
-   * Fallback: manual DOM refresh when Section Rendering unavailable
-   */
-  refreshUI(cart) {
-    var lineItems = this.querySelectorAll("[data-line-item]");
-    lineItems.forEach(function(el, i) {
-      el.dataset.lineItem = String(i + 1);
-    });
-
-    this.updateTitleCount(cart.item_count);
-
-    var self = this;
-    cart.items.forEach(function(item, index) {
-      var lineNum = index + 1;
-      var lineEl = self.querySelector("[data-line-item='" + lineNum + "']");
-      if (!lineEl) return;
-
-      var priceEl = lineEl.querySelector(".cart-item__price");
-      if (priceEl) priceEl.textContent = formatMoney(item.line_price);
-
-      var input = lineEl.querySelector("input[type='number']");
-      if (input && lineNum !== self.updatingLine) {
-        input.value = item.quantity;
-      }
-    });
-
-    if (cart.item_count === 0) {
-      this.cartData.style.display = "none";
-      this.cartEmpty.style.display = "block";
-    } else {
-      this.cartData.style.display = "block";
-      this.cartEmpty.style.display = "none";
-    }
-  }
-
-  updateTitleCount(count) {
-    var countSpan = this.cartTitle ? this.cartTitle.querySelector("span") : null;
-    if (!countSpan) return;
-
-    // Use i18n caption from Liquid-rendered template
-    var caption = (typeof themeConfig !== 'undefined' && themeConfig.strings && themeConfig.strings.cart && themeConfig.strings.cart.caption)
-      ? themeConfig.strings.cart.caption
-      : 'items';
-    countSpan.textContent = "(" + count + " " + caption + ")";
-  }
-}
-if (!customElements.get('cart-template')) customElements.define("cart-template", CartTemplate);
-
-/**
- * Cart Item — Individual line item with delete functionality
- */
-class CartItem extends HTMLElement {
-  connectedCallback() {
-    this.buttonsDelete = this.querySelectorAll("[data-action='delete-item']");
-    if (this.buttonsDelete.length) {
+  class CartItem extends HTMLElement {
+    connectedCallback() {
+      if (this._initialized) return;
+      this._initialized = true;
       var self = this;
-      this.buttonsDelete.forEach(function(btn) {
-        btn.addEventListener("click", function(e) {
-          self.handleDelete(e);
+      this.querySelectorAll("[data-action='delete-item']").forEach(function(button) {
+        button.addEventListener('click', function(event) {
+          self.handleDelete(event);
         });
       });
     }
-  }
 
-  handleDelete(event) {
-    event.preventDefault();
-
-    // Use i18n confirm message
-    var confirmMsg = (typeof themeConfig !== 'undefined' && themeConfig.strings && themeConfig.strings.cart)
-      ? themeConfig.strings.cart.removeConfirm
-      : 'Are you sure you want to remove this item?';
-    if (!confirm(confirmMsg)) return;
-
-    var lineItem = this.closest("[data-line-item]");
-    var line = lineItem ? parseInt(lineItem.dataset.lineItem) : null;
-    if (!line) return;
-
-    var deleteEventName = (typeof themeConfig !== 'undefined' && themeConfig.cart && themeConfig.cart.events && themeConfig.cart.events.item_delete)
-      ? themeConfig.cart.events.item_delete
-      : 'cart-item-deleted';
-
-    this.dispatchEvent(
-      new CustomEvent(deleteEventName, {
+    handleDelete(event) {
+      event.preventDefault();
+      var message = ((themeConfig.strings || {}).cart || {}).removeConfirm;
+      if (message && !window.confirm(message)) return;
+      var line = Number(this.dataset.lineItem);
+      if (!line) return;
+      var eventName = ((themeConfig.cart || {}).events || {}).item_delete || 'cart-item-deleted';
+      this.dispatchEvent(new CustomEvent(eventName, {
         bubbles: true,
-        detail: {
-          line: line,
-          quantity: 0
-        },
-      }),
-    );
-
-    this.remove();
+        detail: { line: line, quantity: 0 }
+      }));
+    }
   }
-}
-if (!customElements.get('cart-item')) customElements.define("cart-item", CartItem);
-
+  if (!customElements.get('cart-item')) customElements.define('cart-item', CartItem);
 })();

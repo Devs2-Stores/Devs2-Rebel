@@ -1,17 +1,28 @@
 {{ 'content-toc.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'content-toc.js' | asset_url }}" defer="defer"></script>
-<content-toc class="toc" data-heading-levels="{{ settings.toc_heading_levels | default: 'h2h3' }}"{% if content_selector %} content-selector="{{ content_selector }}"{% endif %}{% if settings.toc_show_numbers == true %} data-show-numbers{% endif %}{% if settings.toc_collapsed == true %} data-collapsible{% endif %} style="--toc-bg: {{ settings.toc_bg_color | default: '#f3f4f6' }}; --toc-text: {{ settings.toc_text_color | default: '#1f2937' }}; --toc-active: {{ settings.toc_active_color | default: '#FF3300' }};">
-	<div class="toc__title">{{ settings.toc_title }}</div>
+{%- liquid
+  assign toc_trigger_label = 'accessibility.open_menu' | t
+  assign toc_label = settings.toc_title | default: 'Table of Contents'
+  if settings.toc_title != blank
+    assign toc_trigger_label = toc_trigger_label | append: ' ' | append: settings.toc_title
+  endif
+-%}
+<content-toc class="toc" role="navigation" aria-label="{{ toc_label | escape }}" aria-busy="true" data-heading-levels="{{ settings.toc_heading_levels | default: 'h2h3' }}"{% if content_selector %} content-selector="{{ content_selector }}"{% endif %}{% if settings.toc_show_numbers == true %} data-show-numbers{% endif %}{% if settings.toc_collapsed == true %} data-collapsible{% endif %} style="--toc-bg: {{ settings.toc_bg_color | default: '#f3f4f6' }}; --toc-text: {{ settings.toc_text_color | default: '#1f2937' }}; --toc-active: {{ settings.toc_active_color | default: '#FF3300' }};">
+	{% if settings.toc_collapsed == true %}
+		<button type="button" class="toc__title toc__toggle" aria-expanded="true">{{ toc_label | escape }}</button>
+	{% else %}
+		<div class="toc__title">{{ toc_label | escape }}</div>
+	{% endif %}
 </content-toc>
 {%- if settings.toc_floating_enable == true -%}
-<toc-floating class="toc-floating" style="--toc-bg: {{ settings.toc_bg_color | default: '#f3f4f6' }}; --toc-text: {{ settings.toc_text_color | default: '#1f2937' }}; --toc-active: {{ settings.toc_active_color | default: '#FF3300' }};" aria-label="{{ settings.toc_title }}">
+<toc-floating class="toc-floating" style="--toc-bg: {{ settings.toc_bg_color | default: '#f3f4f6' }}; --toc-text: {{ settings.toc_text_color | default: '#1f2937' }}; --toc-active: {{ settings.toc_active_color | default: '#FF3300' }};" {% if settings.toc_title != blank %} aria-label="{{ settings.toc_title | escape }}"{% endif %}>
 	<div class="toc-floating__overlay"></div>
-	<button type="button" class="toc-floating__trigger" aria-label="{{ 'accessibility.open_menu' | t }} {{ settings.toc_title }}">
+	<button type="button" class="toc-floating__trigger" aria-label="{{ toc_trigger_label | escape }}" aria-expanded="false" aria-controls="floating-table-of-contents">
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
 	</button>
-	<div class="toc-floating__panel">
+	<div id="floating-table-of-contents" class="toc-floating__panel" role="navigation" aria-label="{{ toc_label | escape }}">
 		<div class="toc-floating__header">
-			<span class="toc-floating__title">{{ settings.toc_title }}</span>
+			<span class="toc-floating__title">{{ settings.toc_title | escape }}</span>
 			<button type="button" class="toc-floating__close" aria-label="{{ 'accessibility.close' | t }}">&times;</button>
 		</div>
 	</div>

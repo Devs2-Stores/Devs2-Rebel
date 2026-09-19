@@ -8,6 +8,11 @@
   class Header extends HTMLElement {
     connectedCallback() {
       this.setHeightToRoot();
+      this.resizeObserver = new ResizeObserver(() => this.setHeightToRoot());
+      this.resizeObserver.observe(this);
+    }
+    disconnectedCallback() {
+      if (this.resizeObserver) this.resizeObserver.disconnect();
     }
     setHeightToRoot() {
       var headerh = this.getBoundingClientRect().height;

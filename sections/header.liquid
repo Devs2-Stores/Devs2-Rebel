@@ -1,6 +1,5 @@
 {{ 'header.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'header.js' | asset_url }}" defer="defer"></script>
-{%- assign wishlist_url = section.settings.wishlist_page | default: '/pages/wishlist' -%}
 <global-header class="header color-{{ section.settings.color_scheme }}" data-sticky="{{ section.settings.sticky_enable }}">
   <div class="page-width">
     <div class="header__wrapper">
@@ -30,17 +29,17 @@
         <button type="button" class="header__action-btn" data-action="open-search-modal" aria-label="{{ 'accessibility.search' | t }}">
           {%- render 'icon', name: 'search' -%}
         </button>
-        {%- if section.settings.show_wishlist -%}
-        <a href="{{ wishlist_url }}" class="header__action-btn wishlist-icon-wrapper" title="{{ 'accessibility.wishlist' | t }}">
-          {%- render 'icon', name: 'heart' -%}
-          {%- if section.settings.show_wishlist_count -%}
-          <span class="wishlist-count" hidden>0</span>
-          {%- endif -%}
-        </a>
+        {%- if shop.customer_accounts_enabled -%}
+          <shopify-account menu="{{ section.settings.customer_account_menu }}">
+            <span slot="signed-out-avatar" class="header__action-btn">
+              {%- render 'icon', name: 'user' -%}
+            </span>
+          </shopify-account>
+        {%- else -%}
+          <a href="{{ routes.account_url }}" class="header__action-btn" aria-label="{{ 'accessibility.account' | t }}">
+            {%- render 'icon', name: 'user' -%}
+          </a>
         {%- endif -%}
-        <a href="{{ routes.account_url }}" class="header__action-btn" aria-label="{{ 'accessibility.account' | t }}">
-          {%- render 'icon', name: 'user' -%}
-        </a>
         <button type="button" class="header__action-btn header__cart-btn" data-action="open-cart-sidebar" aria-label="{{ 'accessibility.open_cart' | t }}">
           {%- render 'icon', name: 'cart' -%}
           <span class="cart-count" aria-live="polite" aria-atomic="true">{{ cart.item_count }}</span>
@@ -58,7 +57,7 @@
     </div>
   </div>
 </global-header>
-{%- render 'mobile-menu', menu_handle: section.settings.menu, show_wishlist: section.settings.show_wishlist, wishlist_url: wishlist_url -%}
+{%- render 'mobile-menu', menu_handle: section.settings.menu, customer_account_menu: section.settings.customer_account_menu -%}
 
 {% schema %}
 {
@@ -85,6 +84,16 @@
     },
     {
       "type": "header",
+      "content": "t:sections.header.settings.header__account.content"
+    },
+    {
+      "type": "link_list",
+      "id": "customer_account_menu",
+      "label": "t:sections.header.settings.customer_account_menu.label",
+      "default": "customer-account-main-menu"
+    },
+    {
+      "type": "header",
       "content": "t:sections.header.settings.header__behavior.content"
     },
     {
@@ -92,27 +101,6 @@
       "id": "sticky_enable",
       "label": "t:sections.header.settings.sticky_enable.label",
       "default": true
-    },
-    {
-      "type": "header",
-      "content": "t:sections.header.settings.header__wishlist.content"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_wishlist",
-      "label": "t:sections.header.settings.show_wishlist.label",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_wishlist_count",
-      "label": "t:sections.header.settings.show_wishlist_count.label",
-      "default": true
-    },
-    {
-      "type": "url",
-      "id": "wishlist_page",
-      "label": "t:sections.header.settings.wishlist_page.label"
     }
   ],
   "enabled_on": {

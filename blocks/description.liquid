@@ -1,0 +1,55 @@
+{% doc %}
+  Description block.
+
+  Renders the product description with an optional read-more toggle.
+{% enddoc %}
+
+{%- if product.description != blank -%}
+  <div class="product-template__description" {{ block.shopify_attributes }}>
+    <div class="product-template__description-wrapper" data-description-wrapper>
+      <div class="product-template__description-content is-collapsed" data-description-content>
+        {{ product.description }}
+      </div>
+      <button
+        class="product-template__description-toggle"
+        data-description-toggle
+        data-readmore-enabled="{{ block.settings.description_readmore }}"
+        data-max-height="{{ block.settings.description_max_height }}"
+      >
+        <span data-toggle-text-more>{{ 'products.product.read_more' | t }}</span>
+        <span data-toggle-text-less class="hidden">{{ 'products.product.read_less' | t }}</span>
+        {%- render 'icon', name: 'chevron-right' -%}
+      </button>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.main_product.blocks.description.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "description_readmore",
+      "label": "t:sections.main_product.settings.description_readmore.label",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "description_max_height",
+      "label": "t:sections.main_product.settings.description_max_height.label",
+      "min": 100,
+      "max": 600,
+      "step": 50,
+      "default": 300,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main_product.blocks.description.name"
+    }
+  ]
+}
+{% endschema %}

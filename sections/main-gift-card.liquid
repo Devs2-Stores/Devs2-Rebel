@@ -1,0 +1,53 @@
+{%- assign is_unavailable = false -%}
+{%- if gift_card.enabled == false or gift_card.expired -%}{%- assign is_unavailable = true -%}{%- endif -%}
+{%- assign formatted_initial_value = gift_card.initial_value | money -%}
+<main class="gift-card"{% if is_unavailable %} data-unavailable{% endif %}>
+  <div class="gift-card__shell">
+    <header class="gift-card__header">
+      <p class="gift-card__eyebrow">{{ shop.name | escape }}</p>
+      <h1>{{ gift_card.balance | money }}</h1>
+      {%- if gift_card.initial_value -%}<p class="gift-card__initial">{{ 'gift_cards.issued.initial_value' | t: value: formatted_initial_value }}</p>{%- endif -%}
+      {%- if gift_card.balance == 0 -%}<p class="gift-card__status">{{ 'gift_cards.issued.depleted' | t }}</p>{%- elsif gift_card.enabled == false -%}<p class="gift-card__status">{{ 'gift_cards.issued.disabled' | t }}</p>{%- elsif gift_card.expired -%}<p class="gift-card__status">{{ 'gift_cards.issued.expired' | t }}</p>{%- endif -%}
+      {%- if gift_card.expires_on -%}
+        {%- assign gift_card_expiration_date = gift_card.expires_on | date: '%B %e, %Y' -%}
+        <p class="gift-card__expiration">{{ 'gift_cards.issued.expiration_date' | t: expires_on: gift_card_expiration_date }}</p>
+      {%- endif -%}
+    </header>
+    <section class="gift-card__body" aria-label="Gift card details">
+      {%- if gift_card.qr_identifier != blank -%}
+        <div class="gift-card__qr" id="qr-code" data-identifier="{{ gift_card.qr_identifier | escape }}" aria-label="{{ 'gift_cards.issued.qr_image_alt' | t }}"></div>
+      {%- endif -%}
+      <p class="gift-card__label">{{ 'gift_cards.issued.gift_card_code' | t }}</p>
+      <p class="gift-card__code" id="gift-card-code">{{ gift_card.code | format_code }}</p>
+      <p class="gift-card__hint">{{ 'gift_cards.issued.how_to_use_gift_card' | t }}</p>
+      {%- if gift_card.pass_url -%}
+        <a href="{{ gift_card.pass_url }}" class="gift-card__wallet"><img src="{{ 'gift-card/add-to-apple-wallet.svg' | shopify_asset_url }}" width="120" height="40" alt="{{ 'gift_cards.issued.add_to_apple_wallet' | t }}"></a>
+      {%- endif -%}
+      <div class="gift-card__actions">
+        <button type="button" class="gift-card__button" data-copy>{{ 'gift_cards.issued.copy_code' | t }}</button>
+        <button type="button" class="gift-card__button gift-card__button--quiet" data-print>{{ 'gift_cards.issued.print' | t }}</button>
+        <a href="{{ shop.url }}" class="gift-card__button gift-card__button--secondary">{{ 'gift_cards.issued.start_shopping' | t }}</a>
+      </div>
+      <p class="gift-card__feedback" data-feedback role="status" aria-live="polite"></p>
+    </section>
+  </div>
+</main>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const root = document.querySelector('.gift-card');
+    const qr = document.querySelector('#qr-code');
+    if (qr?.dataset.identifier && window.QRCode) new QRCode(qr, { text: qr.dataset.identifier, width: 144, height: 144, imageAltText: qr.getAttribute('aria-label') });
+    const feedback = document.querySelector('[data-feedback]');
+    const copyButton = document.querySelector('[data-copy]');
+    copyButton?.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(document.querySelector('#gift-card-code').textContent.trim()); copyButton.textContent = {{ 'gift_cards.issued.copied' | t | json }}; feedback.textContent = {{ 'gift_cards.issued.copy_code_success' | t | json }}; setTimeout(() => { copyButton.textContent = {{ 'gift_cards.issued.copy_code' | t | json }}; }, 2200); } catch (error) { feedback.textContent = {{ 'gift_cards.issued.copy_code_error' | t | json }}; }
+    });
+    document.querySelector('[data-print]')?.addEventListener('click', () => window.print());
+    if (root?.hasAttribute('data-unavailable')) qr?.setAttribute('aria-hidden', 'true');
+  });
+</script>
+{% schema %}
+{
+  "name": "Gift card"
+}
+{% endschema %}

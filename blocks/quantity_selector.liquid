@@ -1,0 +1,35 @@
+{% doc %}
+  Quantity selector block.
+
+  Renders the quantity input bound to the product form.
+{% enddoc %}
+
+{%- liquid
+  assign selected_variant = product.selected_or_first_available_variant | default: product.variants.first
+  assign product_form_id = 'product-form-' | append: section.id
+-%}
+
+<div class="product-template__quantity-group" {{ block.shopify_attributes }}>
+  <label class="product-template__quantity-label">{{ 'products.product.quantity.label' | t }}</label>
+  {%- render 'quantity-selector',
+    form_id: product_form_id,
+    name: 'quantity',
+    product: product,
+    variant: selected_variant,
+    value: 1,
+    min: 1,
+    step: 1
+  -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main_product.blocks.quantity_selector.name",
+  "tag": null,
+  "presets": [
+    {
+      "name": "t:sections.main_product.blocks.quantity_selector.name"
+    }
+  ]
+}
+{% endschema %}

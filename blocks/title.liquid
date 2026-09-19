@@ -1,0 +1,58 @@
+{% doc %}
+  Product title block.
+
+  Renders the product title with a configurable heading size.
+{% enddoc %}
+
+<h1
+  class="product-template__title heading-size-{{ block.settings.heading_size }}"
+  {{ block.shopify_attributes }}
+>
+  {{ product.title | escape }}
+</h1>
+
+{% schema %}
+{
+  "name": "t:sections.main_product.blocks.title.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "t:sections.all.heading_size.label",
+      "options": [
+        {
+          "value": "xs",
+          "label": "t:sections.all.heading_size.options__xs.label"
+        },
+        {
+          "value": "sm",
+          "label": "t:sections.all.heading_size.options__sm.label"
+        },
+        {
+          "value": "md",
+          "label": "t:sections.all.heading_size.options__md.label"
+        },
+        {
+          "value": "lg",
+          "label": "t:sections.all.heading_size.options__lg.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.heading_size.options__xl.label"
+        },
+        {
+          "value": "2xl",
+          "label": "t:sections.all.heading_size.options__2xl.label"
+        }
+      ],
+      "default": "lg"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main_product.blocks.title.name"
+    }
+  ]
+}
+{% endschema %}

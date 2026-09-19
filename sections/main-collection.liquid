@@ -32,6 +32,12 @@
   endif
 -%}
 
+{%- paginate collection.products by products_per_page -%}
+{%- assign show_collection_description = false -%}
+{%- if paginate.current_page == 1 -%}
+  {%- assign show_collection_description = true -%}
+{%- endif -%}
+
 <div
   class="collection-template"
   id="CollectionMain"
@@ -98,7 +104,7 @@
                 {%- endunless -%}
               </h1>
             {%- endif -%}
-            {%- if hero_show_description and collection.description != blank -%}
+            {%- if hero_show_description and collection.description != blank and show_collection_description -%}
               <div class="collection-hero__description">
                 {{ collection.description | strip_html | truncatewords: 30 }}
               </div>
@@ -168,7 +174,7 @@
           </div>
 
         {%- when 'description' -%}
-          {%- if collection.description != blank -%}
+          {%- if collection.description != blank and show_collection_description -%}
             {%- comment %} Skip if hero already shows description to avoid duplicate content {% endcomment -%}
             {%- unless hero_show_description -%}
               {%- assign desc_word_count = collection.description | strip_html | split: ' ' | size -%}
@@ -254,7 +260,6 @@
     {%- endif -%}
 
     {%- comment %} ── Products grid + filter sidebar ── {% endcomment -%}
-    {%- paginate collection.products by products_per_page -%}
       <facet-filters
         class="collection-template__wrapper{% unless enable_filtering %} collection-template__wrapper--no-filter{% endunless %}{% if filter_layout == 'modal' and enable_filtering %} collection-template__wrapper--no-filter{% endif %}"
         data-section-id="{{ section.id }}"
@@ -400,6 +405,9 @@
               {%- else -%}
                 <li class="product-cards__item product-cards__item--empty">
                   <p>{{ 'sections.collection_template.empty' | t }}</p>
+                  {%- if active_filter_count > 0 -%}
+                    <a href="{{ collection.url }}" class="theme-btn" data-filter-remove>{{ 'products.facets.clear_all_filters' | t }}</a>
+                  {%- endif -%}
                 </li>
               {%- endfor -%}
             </ul>
@@ -448,29 +456,10 @@
           </div>
         </div>
       </facet-filters>
-    {%- endpaginate -%}
   </div>
 </div>
+{%- endpaginate -%}
 
-{%- comment %} ── Compare bar (fixed bottom) ── {% endcomment -%}
-<div class="compare-bar" id="CompareBar" aria-live="polite">
-  <div class="compare-bar__slots" id="CompareSlots">
-    {%- for i in (1..5) -%}
-      <div class="compare-bar__slot" data-slot="{{ i }}"></div>
-    {%- endfor -%}
-  </div>
-  <div class="compare-bar__info">
-    <span id="CompareCount">{{ 'products.facets.compare' | t }} (<span data-compare-count>0</span>/5)</span>
-  </div>
-  <div class="compare-bar__actions">
-    <button type="button" class="compare-bar__btn compare-bar__btn--primary" id="CompareBtn" disabled>
-      {{ 'products.facets.compare' | t }}
-    </button>
-    <button type="button" class="compare-bar__btn compare-bar__btn--clear" data-action="clear-compare">
-      {{ 'products.facets.clear_all' | t }}
-    </button>
-  </div>
-</div>
 
 {% schema %}
 {

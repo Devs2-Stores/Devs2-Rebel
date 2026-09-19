@@ -1,0 +1,21 @@
+{% doc %}
+  Share block.
+
+  Renders social share buttons for the product.
+{% enddoc %}
+
+<div class="product-template__sharing" {{ block.shopify_attributes }}>
+  {%- render 'share-buttons' -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main_product.blocks.share.name",
+  "tag": null,
+  "presets": [
+    {
+      "name": "t:sections.main_product.blocks.share.name"
+    }
+  ]
+}
+{% endschema %}

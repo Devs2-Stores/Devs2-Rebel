@@ -68,21 +68,39 @@
     if (!w) return;
     var el = w.querySelector('[data-tm-slider]');
     if (!el) return;
-    (window.swiperReady || function(cb){ cb(); })(function(){
-    new Swiper(el, {
-      slidesPerView: 1,
-      spaceBetween: 16,
-      speed: 600,
-      breakpoints: {
-        750: { slidesPerView: 2, spaceBetween: 20 },
-        1024: { slidesPerView: {{ section.settings.columns_desktop | at_most: 3 }}, spaceBetween: 24 }
-      },
-      pagination: {
-        el: w.querySelector('.section-testimonials__pagination'),
-        clickable: true
-      }
-    });
-    });
+    var initialized = false;
+    var initialize = function() {
+      if (initialized) return;
+      initialized = true;
+      (window.swiperReady || function(cb){ cb(); })(function(){
+     new Swiper(el, {
+          slidesPerView: 1,
+          spaceBetween: 16,
+          speed: 600,
+          breakpoints: {
+            750: { slidesPerView: 2, spaceBetween: 20 },
+            1024: { slidesPerView: {{ section.settings.columns_desktop | at_most: 3 }}, spaceBetween: 24 }
+          },
+       pagination: {
+         el: w.querySelector('.section-testimonials__pagination'),
+         clickable: true,
+         renderBullet: function(index, className) {
+           return '<button type="button" class="' + className + '" aria-label="' + {{ 'sections.testimonials.settings.pagination_label' | t | json }} + ' ' + (index + 1) + '"></button>';
+         }
+       }
+        });
+      });
+    };
+    if (!('IntersectionObserver' in window)) {
+      initialize();
+      return;
+    }
+    var observer = new IntersectionObserver(function(entries) {
+      if (!entries[0].isIntersecting) return;
+      observer.disconnect();
+      initialize();
+    }, { rootMargin: '300px 0px' });
+    observer.observe(w);
   })();
 </script>
 {%- endif -%}
@@ -121,12 +139,24 @@
     display: flex; justify-content: center; gap: 6px; margin-top: 1.5rem;
   }
   .section-testimonials__pagination .swiper-pagination-bullet {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: rgba(var(--color-foreground), 0.2); opacity: 1;
-    transition: background 0.3s, transform 0.3s; cursor: pointer;
+    position: relative;
+    width: 44px; height: 44px; border: 0; padding: 0;
+    border-radius: 50%; background: transparent; opacity: 1;
+    transition: transform 0.3s; cursor: pointer;
+  }
+  .section-testimonials__pagination .swiper-pagination-bullet::before {
+    content: ''; position: absolute; inset: 17px;
+    border-radius: 50%; background: rgba(var(--color-foreground), 0.2);
+    transition: background 0.3s, transform 0.3s;
   }
   .section-testimonials__pagination .swiper-pagination-bullet-active {
+    transform: scale(1.05);
+  }
+  .section-testimonials__pagination .swiper-pagination-bullet-active::before {
     background: rgb(var(--color-accent)); transform: scale(1.3);
+  }
+  .section-testimonials__pagination .swiper-pagination-bullet:focus-visible {
+    outline: 2px solid rgb(var(--color-accent)); outline-offset: 2px;
   }
 
   /* ── Card (inline — also used by snippet) ── */

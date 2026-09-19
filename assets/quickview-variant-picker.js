@@ -15,16 +15,9 @@
     }
 
     init() {
-      var product = null;
-      var scriptTag = this.querySelector('script[type="application/json"]');
+      if (this.initialized) return;
 
-      if (scriptTag && scriptTag.textContent) {
-        try {
-          product = JSON.parse(scriptTag.textContent.trim());
-        } catch (e) {
-        }
-      }
-
+      var product = typeof themeConfig !== 'undefined' && themeConfig.quickview && themeConfig.quickview.data;
       if (!product) return;
 
       this.selects = this.querySelectorAll('quickview-variant-picker-item');
@@ -36,6 +29,7 @@
       this.variants = product.variants;
       this.optionsCount = product.options.length;
       this.selectedVariant = null;
+      this.initialized = true;
 
       var self = this;
       this.querySelectorAll('input[type="radio"]').forEach(function(input) {
@@ -47,18 +41,13 @@
 
       var emptySelectedValues = Array(this.optionsCount).fill(null);
       this.updateAvailability(emptySelectedValues);
-
-      setTimeout(function() {
-        self.selectFirstAvailableVariant();
-        setTimeout(function() {
-          var selectedValues = Array.from(self.selects).map(function(select) {
-            var checkedInput = select.querySelector('input[type="radio"]:checked');
-            return checkedInput ? checkedInput.value : null;
-          });
-          self.updateAvailability(selectedValues);
-          self.updateSelectedValueDisplay();
-        }, 50);
-      }, 100);
+      self.selectFirstAvailableVariant();
+      var selectedValues = Array.from(self.selects).map(function(select) {
+        var checkedInput = select.querySelector('input[type="radio"]:checked');
+        return checkedInput ? checkedInput.value : null;
+      });
+      self.updateAvailability(selectedValues);
+      self.updateSelectedValueDisplay();
     }
 
     updateSelectedValueDisplay() {
@@ -107,10 +96,7 @@
         }
       });
       if (needsUpdate) {
-        var that = this;
-        setTimeout(function() {
-          that.handleChange();
-        }, 50);
+        this.handleChange();
       }
     }
 

@@ -1,0 +1,88 @@
+{% doc %}
+  Icon with text block.
+
+  Renders an icon image beside a heading and description.
+{% enddoc %}
+
+<div
+  class="product-template__icon-text product-template__icon-text--{{ block.settings.layout }}"
+  {{ block.shopify_attributes }}
+>
+  {%- if block.settings.icon != blank -%}
+    <div class="product-template__icon-text-icon">
+      <img
+        src="{{ block.settings.icon | image_url: width: 96 }}"
+        alt="{{ block.settings.heading | escape }}"
+        width="{{ block.settings.icon_size }}"
+        height="{{ block.settings.icon_size }}"
+        loading="lazy"
+        decoding="async"
+      >
+    </div>
+  {%- endif -%}
+  <div class="product-template__icon-text-content">
+    {%- if block.settings.heading != blank -%}
+      <strong class="product-template__icon-text-heading">{{ block.settings.heading | escape }}</strong>
+    {%- endif -%}
+    {%- if block.settings.text != blank -%}
+      <p class="product-template__icon-text-desc">{{ block.settings.text | escape }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main_product.blocks.icon_with_text.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "t:sections.main_product.blocks.icon_with_text.settings.layout.label",
+      "options": [
+        {
+          "value": "horizontal",
+          "label": "t:sections.main_product.blocks.icon_with_text.settings.layout.options__horizontal.label"
+        },
+        {
+          "value": "vertical",
+          "label": "t:sections.main_product.blocks.icon_with_text.settings.layout.options__vertical.label"
+        }
+      ],
+      "default": "horizontal"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon",
+      "label": "t:sections.main_product.blocks.icon_with_text.settings.icon.label"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "t:sections.main_product.blocks.icon_with_text.settings.icon_size.label",
+      "min": 16,
+      "max": 64,
+      "step": 4,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.main_product.blocks.icon_with_text.settings.heading.label",
+      "default": "Free shipping"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "t:sections.main_product.blocks.icon_with_text.settings.text.label",
+      "default": "Orders over $50 ship free"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main_product.blocks.icon_with_text.name"
+    }
+  ]
+}
+{% endschema %}

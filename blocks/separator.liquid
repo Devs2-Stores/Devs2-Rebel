@@ -1,0 +1,41 @@
+{% doc %}
+  Separator block.
+
+  Renders a horizontal rule with configurable color and opacity.
+{% enddoc %}
+
+<hr
+  class="product-template__separator"
+  style="border-color: {{ block.settings.color | default: '#e5e5e5' }}; opacity: {{ block.settings.opacity | divided_by: 100.0 }};"
+  {{ block.shopify_attributes }}
+>
+
+{% schema %}
+{
+  "name": "t:sections.main_product.blocks.separator.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "color",
+      "id": "color",
+      "label": "t:sections.main_product.blocks.separator.settings.color.label",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "range",
+      "id": "opacity",
+      "label": "t:sections.main_product.blocks.separator.settings.opacity.label",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "default": 100,
+      "unit": "%"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main_product.blocks.separator.name"
+    }
+  ]
+}
+{% endschema %}

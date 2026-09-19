@@ -194,7 +194,7 @@
       });
     },
 
-    updateCartData: async (cart) => {
+    updateCartData: async (cart, options) => {
       try {
         if (!cart || (!cart.item_count && cart.item_count !== 0) || (!cart.total_price && cart.total_price !== 0)) {
           if (themeConfig.routes && themeConfig.routes.get_cart_url) {
@@ -206,6 +206,12 @@
         }
         ThemeUtils.updateCartCount(cart.item_count);
         ThemeUtils.updateCartMoney(cart.total_price);
+        document.dispatchEvent(new CustomEvent(((themeConfig.cart || {}).events || {}).updated || 'cart:updated', {
+          detail: {
+            cart: cart,
+            source: options && options.source ? options.source : null
+          }
+        }));
       } catch (e) {
       }
     }

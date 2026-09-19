@@ -1,0 +1,170 @@
+{% doc %}
+  Tab block (nested inside `tabs`).
+
+  Renders one tab panel plus a nav-button template. JavaScript moves the
+  button into the parent tabs nav container and wires the panel toggle.
+  Content source is selected via `content_type`.
+{% enddoc %}
+
+{%- liquid
+  assign has_content = false
+  case block.settings.content_type
+    when 'description'
+      if product.description != blank
+        assign has_content = true
+      endif
+    when 'page'
+      if block.settings.page != blank
+        assign has_content = true
+      endif
+    when 'richtext'
+      if block.settings.richtext != blank
+        assign has_content = true
+      endif
+    when 'custom_liquid'
+      if block.settings.custom_liquid != blank
+        assign has_content = true
+      endif
+  endcase
+-%}
+
+{%- if has_content -%}
+  <div
+    class="product-template__tab-panel"
+    data-panel="tab-{{ block.id }}"
+    role="tabpanel"
+    aria-labelledby="tab-tab-{{ block.id }}"
+    id="panel-tab-{{ block.id }}"
+    {{ block.shopify_attributes }}
+  >
+    <template data-tab-nav>
+      <button
+        class="product-template__tab-btn"
+        data-tab="tab-{{ block.id }}"
+        role="tab"
+        aria-selected="false"
+        aria-controls="panel-tab-{{ block.id }}"
+        id="tab-tab-{{ block.id }}"
+        type="button"
+      >
+        {%- if block.settings.icon != blank -%}
+          <img
+            src="{{ block.settings.icon | image_url: width: 40 }}"
+            alt=""
+            width="20"
+            height="20"
+            loading="lazy"
+            decoding="async"
+            class="product-template__tab-icon"
+          >
+        {%- endif -%}
+        <span>{{ block.settings.title | default: 'Tab' }}</span>
+      </button>
+    </template>
+    <div class="product-template__description-wrapper" data-description-wrapper>
+      <div class="product-template__description-content is-collapsed" data-description-content>
+        {%- case block.settings.content_type -%}
+          {%- when 'description' -%}
+            {{ product.description }}
+          {%- when 'page' -%}
+            {{ block.settings.page.content }}
+          {%- when 'richtext' -%}
+            <div class="rte">{{ block.settings.richtext }}</div>
+          {%- when 'custom_liquid' -%}
+            {{ block.settings.custom_liquid }}
+        {%- endcase -%}
+      </div>
+      <button
+        class="product-template__description-toggle"
+        data-description-toggle
+        data-readmore-enabled="{{ block.settings.description_readmore }}"
+        data-max-height="{{ block.settings.description_max_height }}"
+        type="button"
+      >
+        <span data-toggle-text-more>{{ 'products.product.read_more' | t }}</span>
+        <span data-toggle-text-less class="hidden">{{ 'products.product.read_less' | t }}</span>
+        {%- render 'icon', name: 'chevron-right' -%}
+      </button>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.main_product.blocks.tab.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.main_product.blocks.tab.settings.title.label",
+      "default": "Tab"
+    },
+    {
+      "type": "select",
+      "id": "content_type",
+      "label": "t:sections.main_product.blocks.tab.settings.content_type.label",
+      "options": [
+        {
+          "value": "description",
+          "label": "t:sections.main_product.blocks.tab.settings.content_type.options__description.label"
+        },
+        {
+          "value": "page",
+          "label": "t:sections.main_product.blocks.tab.settings.content_type.options__page.label"
+        },
+        {
+          "value": "richtext",
+          "label": "t:sections.main_product.blocks.tab.settings.content_type.options__richtext.label"
+        },
+        {
+          "value": "custom_liquid",
+          "label": "t:sections.main_product.blocks.tab.settings.content_type.options__custom_liquid.label"
+        }
+      ],
+      "default": "page"
+    },
+    {
+      "type": "page",
+      "id": "page",
+      "label": "t:sections.main_product.blocks.tab.settings.page.label"
+    },
+    {
+      "type": "richtext",
+      "id": "richtext",
+      "label": "t:sections.main_product.blocks.tab.settings.richtext.label"
+    },
+    {
+      "type": "liquid",
+      "id": "custom_liquid",
+      "label": "t:sections.main_product.blocks.tab.settings.custom_liquid.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon",
+      "label": "t:sections.main_product.blocks.tab.settings.icon.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "description_readmore",
+      "label": "t:sections.main_product.settings.description_readmore.label",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "description_max_height",
+      "label": "t:sections.main_product.settings.description_max_height.label",
+      "min": 100,
+      "max": 600,
+      "step": 50,
+      "default": 300,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main_product.blocks.tab.name"
+    }
+  ]
+}
+{% endschema %}

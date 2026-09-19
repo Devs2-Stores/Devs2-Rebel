@@ -15,13 +15,13 @@
   assign image_shape = image_shape | default: 'square'
   assign image_position = image_position | default: 'middle-center'
   assign card_heading_size = card_heading_size | default: 'md'
-  if show_product_count == nil
-    assign show_product_count = true
-  endif
+  assign show_product_count = show_product_count | default: true, allow_false: true
   assign columns_mobile = columns_mobile | default: '2'
   assign columns_desktop = columns_desktop | default: 3
   assign lazyload = lazyload | default: 'lazy'
+  assign fetchpriority = fetchpriority | default: 'auto'
   assign collection_image = collection.image | default: collection.products.first.featured_image
+  assign product_count = collection.products_count | default: collection.all_products_count
 -%}
 
 <a href="{{ collection.url | escape }}" class="collection-card" title="{{ collection.title | escape }}">
@@ -37,6 +37,7 @@
         sizes: sizes_attr,
         alt: image_alt,
         loading: lazyload,
+        fetchpriority: fetchpriority,
         decoding: 'async'
     }}
     {%- else -%}
@@ -50,10 +51,10 @@
       <h3 class="collection-card__title card-heading-size-{{ card_heading_size }}">{{ collection.title | escape }}</h3>
       {%- if show_product_count -%}
       <p class="collection-card__count">
-        {%- if collection.all_products_count == 0 -%}
+        {%- if product_count == 0 -%}
           {{ 'sections.collection_list.no_products' | t }}
         {%- else -%}
-          {{ 'sections.collection_list.product_count' | t: count: collection.all_products_count }}
+          {{ 'sections.collection_list.product_count' | t: count: product_count }}
         {%- endif -%}
       </p>
       {%- endif -%}

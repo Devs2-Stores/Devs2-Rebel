@@ -29,6 +29,7 @@
         item_add: "cart-item-added",
         item_update: "cart-item-updated",
         item_remove: "cart-item-removed",
+        updated: "cart:updated"
       },
       auto_open_sidebar: true
     },
@@ -38,6 +39,7 @@
         error: `{{ 'sections.cart.cart_error' | t }}`,
         quantityError: `{{ 'sections.cart.cart_quantity_error' | t: quantity: '[quantity]' }}`,
         noteError: `{{ 'sections.cart.note_error' | t }}`,
+        noteSaved: `{{ 'sections.cart.note_saved' | t }}`,
         invoiceError: `{{ 'sections.cart.invoice_error' | t }}`,
         removeConfirm: `{{ 'sections.cart.remove_confirm' | t }}`,
         caption: `{{ 'sections.cart.caption' | t }}`,
@@ -57,18 +59,11 @@
         selectAllOptions: `{{ 'products.product.select_all_options' | t }}`,
         loadError: `{{ 'products.product.load_error' | t }}`
       },
-      wishlist: {
-        added: `{{ 'general.wishlist.added' | t }}`,
-        removed: `{{ 'general.wishlist.removed' | t }}`,
-        add: `{{ 'general.wishlist.add' | t }}`,
-        remove: `{{ 'general.wishlist.remove' | t }}`
-      },
       share: {
         success: `{{ 'general.share.success_message' | t }}`,
         copyFailed: `{{ 'general.share.copy_failed' | t }}`,
         copied: `{{ 'general.share.copied' | t }}`,
-        copyArticleLink: `{{ 'general.share.copy_article_link' | t }}`,
-        couponCopied: `{{ 'general.share.coupon_copied' | t }}`
+        copyArticleLink: `{{ 'general.share.copy_article_link' | t }}`
       },
       accessibility: {
         close: `{{ 'accessibility.close' | t }}`,
@@ -133,10 +128,10 @@
   <script defer src="{{ 'cart.js' | asset_url }}"></script>
 {%- elsif template contains 'customer' -%}
   <script defer src="{{ 'customer.js' | asset_url }}"></script>
-{%- elsif template == 'page.contact' -%}
-  <script defer src="{{ 'page-contact.js' | asset_url }}"></script>
 {%- elsif template == 'page.about' -%}
   <script defer src="{{ 'page-about.js' | asset_url }}"></script>
+{%- elsif template == 'page.contact' -%}
+  <script defer src="{{ 'page-contact.js' | asset_url }}"></script>
 {%- elsif template == 'page.stores' -%}
   <script defer src="{{ 'page-stores.js' | asset_url }}"></script>
 {%- elsif template == 'page.faq' -%}
@@ -145,4 +140,28 @@
   <script defer src="{{ 'search.js' | asset_url }}"></script>
 {%- endif -%}
 
-<script defer src="{{ 'wishlist.js' | asset_url }}"></script>
+<script type="speculationrules">
+{
+  "prerender": [
+    {
+      "source": "document",
+      "where": {
+        "and": [
+          { "href_matches": "/*" },
+          { "not": { "href_matches": ["/cart", "/cart/*", "/checkout", "/account", "/account/*", "/search*"] } }
+        ]
+      },
+      "eagerness": "moderate"
+    }
+  ],
+  "prefetch": [
+    {
+      "source": "document",
+      "where": {
+        "href_matches": ["/collections/*", "/products/*", "/blogs/*"]
+      },
+      "eagerness": "conservative"
+    }
+  ]
+}
+</script>

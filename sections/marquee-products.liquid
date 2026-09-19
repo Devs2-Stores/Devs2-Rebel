@@ -25,6 +25,11 @@
       <{{ section.settings.heading_tag }} class="section-marquee-products__heading heading-size-{{ section.settings.heading_size }}">
         {{- section.settings.heading -}}
       </{{ section.settings.heading_tag }}>
+      {%- if collection != blank -%}
+        <a href="{{ collection.url }}" class="section-marquee-products__view-all">
+          {{- 'general.view_all' | t -}}
+        </a>
+      {%- endif -%}
     </div>
   {%- endif -%}
 
@@ -33,7 +38,7 @@
       <div class="section-marquee-products__list">
         {%- for product in collection.products limit: products_to_show -%}
           <div class="section-marquee-products__item">
-            {%- render 'product-card', product: product -%}
+            {%- render 'product-card', product: product, lazyload: 'lazy', fetchpriority: 'auto' -%}
           </div>
         {%- endfor -%}
       </div>
@@ -41,13 +46,19 @@
       <div class="section-marquee-products__list" aria-hidden="true">
         {%- for product in collection.products limit: products_to_show -%}
           <div class="section-marquee-products__item">
-            {%- render 'product-card', product: product -%}
+            {%- render 'product-card', product: product, lazyload: 'lazy', fetchpriority: 'auto' -%}
           </div>
         {%- endfor -%}
       </div>
     </div>
   {%- else -%}
-    <p class="page-width section-marquee-products__empty">{{ 'general.select_collection' | t }}</p>
+    <div class="section-marquee-products__placeholder-list page-width" aria-hidden="true">
+      {%- for i in (1..4) -%}
+        <div class="section-marquee-products__placeholder-card">
+          {{- 'product-' | append: i | placeholder_svg_tag: 'section-marquee-products__placeholder-svg' -}}
+        </div>
+      {%- endfor -%}
+    </div>
   {%- endif -%}
 </div>
 
@@ -69,9 +80,15 @@
   @media (min-width: 750px) {
     .section-marquee-products { padding-block: var(--mp-dt) var(--mp-db); }
   }
-  .section-marquee-products__head { text-align: center; margin-bottom: 1.5rem; }
+  .section-marquee-products__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
   .section-marquee-products__heading { margin: 0; color: rgb(var(--color-foreground)); }
-  .section-marquee-products__empty { text-align: center; color: rgba(var(--color-foreground), 0.3); padding: 2rem; }
+  .section-marquee-products__view-all { color: rgb(var(--color-foreground)); white-space: nowrap; }
 
   .section-marquee-products__track {
     display: flex; width: max-content;
@@ -82,9 +99,36 @@
 
   .section-marquee-products__list { display: flex; gap: 16px; padding-right: 16px; }
   .section-marquee-products__item { width: 220px; flex-shrink: 0; }
+  .section-marquee-products__placeholder-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .section-marquee-products__placeholder-card {
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: rgba(var(--color-foreground), 0.04);
+  }
+  .section-marquee-products__placeholder-svg { width: 100%; height: 100%; }
+  @media (max-width: 749px) {
+    .section-marquee-products { overflow: visible; }
+    .section-marquee-products__track {
+      width: 100%;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      animation: none;
+      padding-inline: 1.5rem;
+    }
+    .section-marquee-products__track::-webkit-scrollbar { display: none; }
+    .section-marquee-products__list { flex: 0 0 auto; }
+    .section-marquee-products__list[aria-hidden="true"] { display: none; }
+    .section-marquee-products__item { scroll-snap-align: start; }
+  }
   @media (min-width: 750px) {
     .section-marquee-products__item { width: 260px; }
     .section-marquee-products__list { gap: 20px; padding-right: 20px; }
+    .section-marquee-products__placeholder-list { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
   }
 {% endstylesheet %}
 
@@ -100,7 +144,7 @@
     { "type": "select", "id": "heading_size", "label": "Heading size", "options": [{ "value": "md", "label": "M" },{ "value": "lg", "label": "L" }], "default": "md" },
     { "type": "select", "id": "heading_tag", "label": "Tag", "options": [{ "value": "h2", "label": "H2" },{ "value": "h3", "label": "H3" }], "default": "h2" },
     { "type": "header", "content": "Behavior" },
-    { "type": "range", "id": "products_to_show", "min": 4, "max": 20, "step": 1, "label": "Products", "default": 10 },
+    { "type": "range", "id": "products_to_show", "min": 4, "max": 12, "step": 1, "label": "Products", "default": 10 },
     { "type": "range", "id": "speed", "min": 15, "max": 60, "step": 5, "unit": "s", "label": "Speed", "default": 30, "info": "Lower = faster" },
     { "type": "select", "id": "direction", "label": "Direction", "options": [{ "value": "normal", "label": "Left" },{ "value": "reverse", "label": "Right" }], "default": "normal" },
     { "type": "header", "content": "Desktop spacing" },

@@ -1,17 +1,33 @@
-
-<faq-page class="page-faq">
+<faq-page class="page-faq" data-section-id="{{ section.id }}">
+  {%- assign faq_question_blocks = section.blocks | where: 'type', 'question' -%}
   <section class="faq-hero">
     <div class="page-width">
       <div class="faq-hero__wrap">
-        <h1 class="faq-hero__title">{% if section.settings.title != blank %}{{ section.settings.title | escape }}{% else %}{{ 'sections.page_faq.default_title' | t }}{% endif %}</h1>
+        <p class="faq-hero__eyebrow">{{ 'sections.page_faq.eyebrow' | t }}</p>
+        <h1 class="faq-hero__title">
+          {%- if section.settings.title != blank -%}
+            {{ section.settings.title | escape }}
+          {%- elsif page.title != blank -%}
+            {{ page.title | escape }}
+          {%- else -%}
+            {{ 'sections.page_faq.default_title' | t }}
+          {%- endif -%}
+        </h1>
         {%- if section.settings.description != blank -%}
-        <p class="faq-hero__description">{{ section.settings.description | escape }}</p>
+          <div class="faq-hero__description">{{ section.settings.description }}</div>
         {%- endif -%}
         <div class="faq-hero__search">
-          <label for="faq-search" class="sr-only">{{ 'sections.page_faq.search_label' | t }}</label>
+          <label for="faq-search-{{ section.id }}" class="sr-only">{{ 'sections.page_faq.search_label' | t }}</label>
           <div class="faq-hero__search-box">
             {%- render 'icon', name: 'search', size: '20' -%}
-            <input type="text" id="faq-search" class="faq-hero__search-input" placeholder="{{ 'sections.page_faq.search_placeholder' | t }}" autocomplete="off">
+            <input
+              type="search"
+              id="faq-search-{{ section.id }}"
+              class="faq-hero__search-input"
+              placeholder="{{ 'sections.page_faq.search_placeholder' | t }}"
+              autocomplete="off"
+              data-faq-search
+            >
           </div>
         </div>
       </div>
@@ -21,95 +37,127 @@
   <section class="faq-main section-padding">
     <div class="page-width">
       <div class="faq-main__wrap">
-        {%- assign faq_groups = section.blocks | where: 'type', 'group' -%}
-        {%- assign faq_items = section.blocks | where: 'type', 'question' -%}
-
-        {%- for group in faq_groups -%}
-        <div class="faq-group" data-faq-group="{{ forloop.index }}" {{ group.shopify_attributes }}>
-          <h2 class="faq-group__title">
-            {%- render 'icon', name: 'tag', size: '20' -%}
-            {{ group.settings.title | escape }}
-          </h2>
-          <div class="faq-group__items">
-            {%- for item in faq_items -%}
-            {%- if item.settings.group == group.id -%}
-            <details class="faq-item" data-faq-question="{{ item.settings.question | escape }}" {{ item.shopify_attributes }}>
-              <summary class="faq-item__question">
-                <span class="faq-item__question-text">{{ item.settings.question | escape }}</span>
-                <span class="faq-item__icon">
-                  {%- render 'icon', name: 'chevron-down', size: '20' -%}
-                </span>
-              </summary>
-              <div class="faq-item__answer">
-                {{ item.settings.answer }}
-              </div>
-            </details>
-            {%- endif -%}
+        {%- if faq_question_blocks.size > 0 -%}
+          <div class="faq-list">
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when 'heading' -%}
+                  {%- if block.settings.title != blank -%}
+                    <h2 class="faq-group-heading" {{ block.shopify_attributes }}>{{ block.settings.title | escape }}</h2>
+                  {%- endif -%}
+                {%- when 'question' -%}
+                  {%- if block.settings.question != blank and block.settings.answer != blank -%}
+                    <details
+                      class="faq-item"
+                      data-faq-item
+                      data-faq-question="{{ block.settings.question | strip_html | escape }}"
+                      data-faq-answer="{{ block.settings.answer | strip_html | escape }}"
+                      {{ block.shopify_attributes }}
+                    >
+                      <summary class="faq-item__question">
+                        <h3 class="faq-item__question-text">{{ block.settings.question | escape }}</h3>
+                        <span class="faq-item__icon" aria-hidden="true">
+                          {%- render 'icon', name: 'chevron-down', size: '20' -%}
+                        </span>
+                      </summary>
+                      <div class="faq-item__answer rte">{{ block.settings.answer }}</div>
+                    </details>
+                  {%- endif -%}
+                {%- when '@app' -%}
+                  {%- render block -%}
+              {%- endcase -%}
             {%- endfor -%}
           </div>
-        </div>
-        {%- endfor -%}
 
-        {%- comment %} Ungrouped questions {% endcomment -%}
-        {%- for item in faq_items -%}
-        {%- if item.settings.group == blank -%}
-        <details class="faq-item" data-faq-question="{{ item.settings.question | escape }}" {{ item.shopify_attributes }}>
-          <summary class="faq-item__question">
-            <span class="faq-item__question-text">{{ item.settings.question | escape }}</span>
-            <span class="faq-item__icon">
-              {%- render 'icon', name: 'chevron-down', size: '20' -%}
-            </span>
-          </summary>
-          <div class="faq-item__answer">
-            {{ item.settings.answer }}
+          <div class="faq-empty" data-faq-empty hidden aria-live="polite">
+            <p>{{ 'sections.page_faq.no_results' | t }}</p>
           </div>
-        </details>
+        {%- elsif request.design_mode -%}
+          <div class="faq-editor-empty">{{ 'sections.page_faq.editor_empty' | t }}</div>
         {%- endif -%}
-        {%- endfor -%}
-
-        <div class="faq-empty" id="faq-empty" style="display: none;">
-          {%- render 'icon', name: 'sad', size: '48' -%}
-          <p>{{ 'sections.page_faq.no_results' | t }}</p>
-        </div>
       </div>
     </div>
   </section>
 
   {%- if section.settings.show_contact -%}
-  <section class="faq-contact section-padding-bg">
-    <div class="page-width">
-      <div class="faq-contact__wrap">
-        <h2 class="faq-contact__title">{% if section.settings.contact_title != blank %}{{ section.settings.contact_title | escape }}{% else %}{{ 'sections.page_faq.need_help' | t }}{% endif %}</h2>
-        <p class="faq-contact__description">{% if section.settings.contact_description != blank %}{{ section.settings.contact_description | escape }}{% else %}{{ 'sections.page_faq.contact_us' | t }}{% endif %}</p>
-        <div class="faq-contact__actions">
-          {%- if section.settings.contact_phone != blank -%}
-          <a href="tel:{{ section.settings.contact_phone | replace: ' ', '' }}" class="faq-contact__btn faq-contact__btn--phone">
-            {%- render 'icon', name: 'phone', size: '18' -%}
-            <span>{{ section.settings.contact_phone | escape }}</span>
-          </a>
-          {%- endif -%}
-          {%- if section.settings.contact_email != blank -%}
-          <a href="mailto:{{ section.settings.contact_email }}" class="faq-contact__btn faq-contact__btn--email">
-            {%- render 'icon', name: 'email', size: '18' -%}
-            <span>{{ section.settings.contact_email | escape }}</span>
-          </a>
-          {%- endif -%}
+    <section class="faq-contact section-padding-bg">
+      <div class="page-width">
+        <div class="faq-contact__wrap">
+          <p class="faq-contact__eyebrow">{{ 'sections.page_faq.support_eyebrow' | t }}</p>
+          <h2 class="faq-contact__title">
+            {%- if section.settings.contact_title != blank -%}
+              {{ section.settings.contact_title | escape }}
+            {%- else -%}
+              {{ 'sections.page_faq.need_help' | t }}
+            {%- endif -%}
+          </h2>
+          <div class="faq-contact__description">
+            {%- if section.settings.contact_description != blank -%}
+              {{ section.settings.contact_description }}
+            {%- else -%}
+              <p>{{ 'sections.page_faq.contact_us' | t }}</p>
+            {%- endif -%}
+          </div>
+          <div class="faq-contact__actions">
+            {%- if section.settings.contact_phone != blank -%}
+              <a href="tel:{{ section.settings.contact_phone | replace: ' ', '' | escape }}" class="faq-contact__btn faq-contact__btn--primary">
+                {%- render 'icon', name: 'phone', size: '18' -%}
+                <span>{{ section.settings.contact_phone | escape }}</span>
+              </a>
+            {%- endif -%}
+            {%- if section.settings.contact_email != blank -%}
+              <a href="mailto:{{ section.settings.contact_email | escape }}" class="faq-contact__btn faq-contact__btn--secondary">
+                {%- render 'icon', name: 'email', size: '18' -%}
+                <span>{{ section.settings.contact_email | escape }}</span>
+              </a>
+            {%- endif -%}
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
   {%- endif -%}
 
   {%- if page.content != blank -%}
-  <section class="faq-content section-padding">
-    <div class="page-width">
-      <div class="faq-content__wrap">
-        {{ page.content }}
+    <section class="faq-content section-padding">
+      <div class="page-width">
+        <div class="faq-content__wrap rte">{{ page.content }}</div>
       </div>
-    </div>
-  </section>
+    </section>
   {%- endif -%}
 </faq-page>
+
+{%- assign faq_questions = section.blocks | where: 'type', 'question' -%}
+{%- assign faq_schema_count = 0 -%}
+{%- for block in faq_questions -%}
+  {%- if block.settings.question != blank and block.settings.answer != blank -%}
+    {%- assign faq_schema_count = faq_schema_count | plus: 1 -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- if faq_schema_count > 0 -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {%- assign faq_schema_index = 0 -%}
+        {%- for block in faq_questions -%}
+          {%- if block.settings.question != blank and block.settings.answer != blank -%}
+            {%- if faq_schema_index > 0 -%},{%- endif -%}
+            {
+              "@type": "Question",
+              "name": {{ block.settings.question | strip_html | json }},
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": {{ block.settings.answer | strip_html | json }}
+              }
+            }
+            {%- assign faq_schema_index = faq_schema_index | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+{%- endif -%}
 
 {% schema %}
 {
@@ -127,7 +175,7 @@
       "label": "t:sections.page_faq.settings.title.label"
     },
     {
-      "type": "textarea",
+      "type": "richtext",
       "id": "description",
       "label": "t:sections.page_faq.settings.description.label"
     },
@@ -147,7 +195,7 @@
       "label": "t:sections.page_faq.settings.contact_title.label"
     },
     {
-      "type": "textarea",
+      "type": "richtext",
       "id": "contact_description",
       "label": "t:sections.page_faq.settings.contact_description.label"
     },
@@ -164,14 +212,14 @@
   ],
   "blocks": [
     {
-      "type": "group",
-      "name": "t:sections.page_faq.blocks.group.name",
-      "limit": 5,
+      "type": "heading",
+      "name": "t:sections.page_faq.blocks.heading.name",
+      "limit": 10,
       "settings": [
         {
           "type": "text",
           "id": "title",
-          "label": "t:sections.page_faq.blocks.group.settings.title.label"
+          "label": "t:sections.page_faq.blocks.heading.settings.title.label"
         }
       ]
     },
@@ -189,17 +237,22 @@
           "type": "richtext",
           "id": "answer",
           "label": "t:sections.page_faq.blocks.question.settings.answer.label"
-        },
-        {
-          "type": "text",
-          "id": "group",
-          "label": "t:sections.page_faq.blocks.question.settings.group.label",
-          "info": "t:sections.page_faq.blocks.question.settings.group.info"
         }
       ]
     },
     {
       "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.page_faq.name",
+      "blocks": [
+        { "type": "heading" },
+        { "type": "question" },
+        { "type": "question" },
+        { "type": "question" }
+      ]
     }
   ]
 }

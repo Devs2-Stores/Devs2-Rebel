@@ -16,6 +16,8 @@ class SearchModal extends HTMLElement {
     this.resultsContainer = this.querySelector('.search-modal-results-content');
     this.loadingEl = this.querySelector('.search-modal-loading');
     this.form = this.querySelector('.search-modal-form');
+    this.clearButton = this.querySelector('.search-modal-clear');
+    this.initialResultsMarkup = this.resultsContainer ? this.resultsContainer.innerHTML : '';
     this.bindEvents();
   }
 
@@ -47,6 +49,7 @@ class SearchModal extends HTMLElement {
 
     if (this.input) {
       this.input.addEventListener('input', function(e) {
+        self.updateClearButton(e.target.value);
         self.handleSearch(e.target.value);
       });
 
@@ -60,6 +63,12 @@ class SearchModal extends HTMLElement {
           if (self.input.value.trim().length === 0) e.preventDefault();
         });
       }
+    }
+
+    if (this.clearButton) {
+      this.clearButton.addEventListener('click', function() {
+        self.clearSearch();
+      });
     }
   }
 
@@ -96,6 +105,7 @@ class SearchModal extends HTMLElement {
       this.input.value = '';
       this.input.setAttribute('aria-expanded', 'false');
     }
+    this.updateClearButton('');
     this.clearResults();
     ThemeUtils.unlockScroll();
     ThemeUtils.releaseFocus(this);
@@ -129,6 +139,29 @@ class SearchModal extends HTMLElement {
     }, this.debounceDelay);
   }
 
+  updateClearButton(value) {
+    if (!this.clearButton) return;
+    this.clearButton.classList.toggle('hidden', value.length === 0);
+  }
+
+  clearSearch() {
+    if (!this.input) return;
+    this.input.value = '';
+    this.input.setAttribute('aria-expanded', 'false');
+    this.updateClearButton('');
+    this.clearResults();
+    if (this.searchTimeout) {
+      clearTimeout(this.searchTimeout);
+      this.searchTimeout = null;
+    }
+    if (this.searchController) {
+      this.searchController.abort();
+      this.searchController = null;
+    }
+    this.searchRequestId += 1;
+    this.input.focus();
+  }
+
   performSearch(query) {
     var self = this;
     if (!this.resultsContainer) return;
@@ -147,7 +180,7 @@ class SearchModal extends HTMLElement {
       var params = new URLSearchParams({
         'q': query,
         'section_id': 'predictive-search',
-        'resources[type]': 'product,collection,article,query',
+        'resources[type]': 'product,collection,article,page,query',
         'resources[limit]': '6',
         'resources[options][unavailable_products]': 'last'
       });
@@ -206,6 +239,8 @@ class SearchModal extends HTMLElement {
       this.input.setAttribute('aria-expanded', 'true');
     }
 
+    this.setupResultTabs();
+
     // Close modal on result click
     this.resultsContainer.querySelectorAll('a').forEach(function(link) {
       link.addEventListener('click', function() {
@@ -228,10 +263,90 @@ class SearchModal extends HTMLElement {
 
   clearResults() {
     if (!this.resultsContainer) return;
-    var placeholder = (typeof themeConfig !== 'undefined' && themeConfig.strings)
-      ? ''
-      : '';
-    this.resultsContainer.innerHTML = '<div class="search-modal-empty"><p>' + ThemeUtils.escapeHtml(this.dataset.placeholder || 'Enter a keyword to search...') + '</p></div>';
+    this.resultsContainer.innerHTML = this.initialResultsMarkup;
+  }
+
+  setupResultTabs() {
+    var self = this;
+    var root = this.resultsContainer && this.resultsContainer.querySelector('#predictive-search-results');
+    if (!root || root.querySelector('.predictive-search__tabs')) return;
+    var groups = Array.from(root.querySelectorAll('[data-search-group]'));
+    if (!groups.length) return;
+    var tabs = [
+      { key: 'products', label: this.dataset.tabProducts || 'Products' },
+      { key: 'articles', label: this.dataset.tabArticles || 'Articles' },
+      { key: 'pages', label: this.dataset.tabPages || 'Pages' }
+    ];
+    var hasCategoryResults = tabs.some(function(tab) {
+      return groups.some(function(group) { return group.dataset.searchGroup === tab.key; });
+    });
+    if (!hasCategoryResults) return;
+    root.classList.add('predictive-search-results--tabbed');
+    var suggestions = groups.filter(function(group) { return group.dataset.searchGroup === 'suggestions'; });
+    var tablist = document.createElement('div');
+    tablist.className = 'predictive-search__tabs';
+    tablist.setAttribute('role', 'tablist');
+    tablist.setAttribute('aria-label', this.dataset.tabsLabel || 'Search result categories');
+    var panels = document.createElement('div');
+    panels.className = 'predictive-search__tab-panels';
+    var selectedKey = null;
+    tabs.forEach(function(tab) {
+      var matchingGroups = groups.filter(function(group) { return group.dataset.searchGroup === tab.key; });
+      if (!matchingGroups.length) return;
+      var panel = document.createElement('div');
+      panel.className = 'predictive-search__tab-panel';
+      panel.id = 'search-panel-' + tab.key;
+      panel.dataset.searchPanel = tab.key;
+      panel.setAttribute('role', 'tabpanel');
+      panel.setAttribute('aria-labelledby', 'search-tab-' + tab.key);
+      matchingGroups.forEach(function(group) { panel.appendChild(group); });
+      panels.appendChild(panel);
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'predictive-search__tab';
+      button.id = 'search-tab-' + tab.key;
+      button.dataset.searchTab = tab.key;
+      button.setAttribute('role', 'tab');
+      button.setAttribute('aria-controls', 'search-panel-' + tab.key);
+      button.setAttribute('aria-selected', selectedKey === null ? 'true' : 'false');
+      button.tabIndex = selectedKey === null ? 0 : -1;
+      button.textContent = tab.label;
+      button.addEventListener('click', function() { self.activateSearchTab(tab.key); });
+      button.addEventListener('keydown', self.handleTabKeydown.bind(self));
+      tablist.appendChild(button);
+      if (selectedKey === null) selectedKey = tab.key;
+    });
+    if (suggestions.length) {
+      suggestions[suggestions.length - 1].after(tablist);
+      tablist.after(panels);
+    } else {
+      root.insertBefore(tablist, root.firstChild);
+      root.insertBefore(panels, tablist.nextSibling);
+    }
+    if (selectedKey) this.activateSearchTab(selectedKey);
+  }
+
+  activateSearchTab(key) {
+    var root = this.resultsContainer && this.resultsContainer.querySelector('#predictive-search-results');
+    if (!root) return;
+    root.querySelectorAll('.predictive-search__tab').forEach(function(tab) {
+      var selected = tab.dataset.searchTab === key;
+      tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+      tab.tabIndex = selected ? 0 : -1;
+    });
+    root.querySelectorAll('.predictive-search__tab-panel').forEach(function(panel) {
+      panel.hidden = panel.dataset.searchPanel !== key;
+    });
+  }
+
+  handleTabKeydown(event) {
+    var tabs = Array.from(event.currentTarget.parentNode.querySelectorAll('[role="tab"]'));
+    var index = tabs.indexOf(event.currentTarget);
+    var next = event.key === 'ArrowRight' ? (index + 1) % tabs.length : event.key === 'ArrowLeft' ? (index - 1 + tabs.length) % tabs.length : event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : -1;
+    if (next < 0) return;
+    event.preventDefault();
+    tabs[next].focus();
+    this.activateSearchTab(tabs[next].dataset.searchTab);
   }
 
   /**

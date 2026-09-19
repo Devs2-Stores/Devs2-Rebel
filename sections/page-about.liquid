@@ -1,15 +1,23 @@
-
-<about-page class="page-about">
+<about-page
+  class="page-about color-{{ section.settings.color_scheme }}"
+  style="--about-hero-position-desktop: {{ section.settings.hero_focal_point_desktop }}; --about-hero-position-mobile: {{ section.settings.hero_focal_point_mobile }};"
+>
   <section class="about-hero">
     <div class="about-hero__background">
-      {%- if section.settings.hero_image_desktop != blank -%}
+      {%- assign hero_image_desktop = section.settings.hero_image_desktop | default: section.settings.hero_image_mobile -%}
+      {%- assign hero_alt = section.settings.hero_title | default: page.title -%}
+      {%- if hero_image_desktop != blank -%}
       <picture>
         {%- if section.settings.hero_image_mobile != blank -%}
-        <source media="(max-width: 767px)" srcset="{{ section.settings.hero_image_mobile | image_url: width: 800 }}" width="800" height="600">
+        <source media="(max-width: 767px)" srcset="{{ section.settings.hero_image_mobile | image_url: width: 375 }} 375w, {{ section.settings.hero_image_mobile | image_url: width: 550 }} 550w, {{ section.settings.hero_image_mobile | image_url: width: 750 }} 750w, {{ section.settings.hero_image_mobile | image_url: width: 900 }} 900w" sizes="100vw">
         {%- endif -%}
-        <source media="(min-width: 768px)" srcset="{{ section.settings.hero_image_desktop | image_url: width: 1920 }}" width="1920" height="600">
-        <img src="{{ section.settings.hero_image_desktop | image_url: width: 1920 }}" alt="{{ section.settings.hero_title | escape }}" width="1920" height="600" loading="eager" fetchpriority="high">
+        <source media="(min-width: 768px)" srcset="{{ hero_image_desktop | image_url: width: 750 }} 750w, {{ hero_image_desktop | image_url: width: 1100 }} 1100w, {{ hero_image_desktop | image_url: width: 1500 }} 1500w, {{ hero_image_desktop | image_url: width: 1920 }} 1920w" sizes="100vw">
+        {{ hero_image_desktop | image_url: width: 1920 | image_tag: widths: '750, 1100, 1500, 1920', sizes: '100vw', loading: 'eager', fetchpriority: 'high', class: 'about-hero__image', alt: hero_alt }}
       </picture>
+      {%- else -%}
+        <div class="about-hero__placeholder" aria-hidden="true">
+          {{ 'lifestyle-1' | placeholder_svg_tag }}
+        </div>
       {%- endif -%}
     </div>
     <div class="about-hero__content">
@@ -62,8 +70,9 @@
         {%- for block in feature_blocks -%}
         <div class="about-features__item{% if block.settings.reverse %} about-features__item--reverse{% endif %}" {{ block.shopify_attributes }}>
           {%- if block.settings.image != blank -%}
+          {%- assign feature_alt = block.settings.title | default: block.settings.image.alt -%}
           <div class="about-features__item-image">
-            <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.title | escape }}" width="600" height="400" loading="lazy">
+            {{ block.settings.image | image_url: width: 1200 | image_tag: widths: '400, 600, 800, 1000, 1200', sizes: '(min-width: 1025px) 50vw, 100vw', loading: 'lazy', class: 'about-features__image', alt: feature_alt }}
           </div>
           {%- endif -%}
           <div class="about-features__item-content">
@@ -154,8 +163,9 @@
       <div class="about-gallery__grid">
         {%- for block in gallery_blocks -%}
         {%- if block.settings.image != blank -%}
+        {%- assign gallery_alt = block.settings.alt | default: block.settings.image.alt -%}
         <div class="about-gallery__item" {{ block.shopify_attributes }}>
-          <img src="{{ block.settings.image | image_url: width: 400 }}" alt="{{ block.settings.alt | default: block.settings.image.alt | escape }}" width="400" height="500" loading="lazy">
+          {{ block.settings.image | image_url: width: 800 | image_tag: widths: '320, 480, 640, 800', sizes: '(min-width: 1025px) 33vw, (min-width: 641px) 50vw, 100vw', loading: 'lazy', class: 'about-gallery__image', alt: gallery_alt }}
         </div>
         {%- endif -%}
         {%- endfor -%}
@@ -163,6 +173,14 @@
     </div>
   </section>
   {%- endif -%}
+
+  {%- for block in section.blocks -%}
+    {%- if block.type == '@app' -%}
+      <div class="about-app-block" {{ block.shopify_attributes }}>
+        {%- render block -%}
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
 
   {%- if page.content != blank -%}
   <section class="about-content section-padding">
@@ -182,6 +200,12 @@
   "class": "section-page-about",
   "settings": [
     {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
       "type": "header",
       "content": "t:sections.page_about.settings.header__hero.content"
     },
@@ -194,6 +218,32 @@
       "type": "image_picker",
       "id": "hero_image_mobile",
       "label": "t:sections.page_about.settings.hero_image_mobile.label"
+    },
+    {
+      "type": "select",
+      "id": "hero_focal_point_desktop",
+      "label": "t:sections.page_about.settings.hero_focal_point_desktop.label",
+      "options": [
+        { "value": "center center", "label": "t:sections.page_about.settings.hero_focal_point.options__center.label" },
+        { "value": "left center", "label": "t:sections.page_about.settings.hero_focal_point.options__left.label" },
+        { "value": "right center", "label": "t:sections.page_about.settings.hero_focal_point.options__right.label" },
+        { "value": "center top", "label": "t:sections.page_about.settings.hero_focal_point.options__top.label" },
+        { "value": "center bottom", "label": "t:sections.page_about.settings.hero_focal_point.options__bottom.label" }
+      ],
+      "default": "center center"
+    },
+    {
+      "type": "select",
+      "id": "hero_focal_point_mobile",
+      "label": "t:sections.page_about.settings.hero_focal_point_mobile.label",
+      "options": [
+        { "value": "center center", "label": "t:sections.page_about.settings.hero_focal_point.options__center.label" },
+        { "value": "left center", "label": "t:sections.page_about.settings.hero_focal_point.options__left.label" },
+        { "value": "right center", "label": "t:sections.page_about.settings.hero_focal_point.options__right.label" },
+        { "value": "center top", "label": "t:sections.page_about.settings.hero_focal_point.options__top.label" },
+        { "value": "center bottom", "label": "t:sections.page_about.settings.hero_focal_point.options__bottom.label" }
+      ],
+      "default": "center center"
     },
     {
       "type": "text",
@@ -212,27 +262,27 @@
     },
     {
       "type": "header",
-      "content": "Hero actions"
+      "content": "t:sections.page_about.settings.header__hero_actions.content"
     },
     {
       "type": "text",
       "id": "hero_primary_label",
-      "label": "Primary button label"
+      "label": "t:sections.page_about.settings.hero_primary_label.label"
     },
     {
       "type": "url",
       "id": "hero_primary_link",
-      "label": "Primary button link"
+      "label": "t:sections.page_about.settings.hero_primary_link.label"
     },
     {
       "type": "text",
       "id": "hero_secondary_label",
-      "label": "Secondary button label"
+      "label": "t:sections.page_about.settings.hero_secondary_label.label"
     },
     {
       "type": "url",
       "id": "hero_secondary_link",
-      "label": "Secondary button link"
+      "label": "t:sections.page_about.settings.hero_secondary_link.label"
     },
     {
       "type": "header",
@@ -276,103 +326,103 @@
     },
     {
       "type": "header",
-      "content": "About actions"
+      "content": "t:sections.page_about.settings.header__actions.content"
     },
     {
       "type": "checkbox",
       "id": "show_actions",
-      "label": "Show action cards",
+      "label": "t:sections.page_about.settings.show_actions.label",
       "default": true
     },
     {
       "type": "text",
       "id": "actions_subheading",
-      "label": "Section eyebrow"
+      "label": "t:sections.page_about.settings.actions_subheading.label"
     },
     {
       "type": "text",
       "id": "actions_title",
-      "label": "Section title"
+      "label": "t:sections.page_about.settings.actions_title.label"
     },
     {
       "type": "richtext",
       "id": "actions_description",
-      "label": "Section description"
+      "label": "t:sections.page_about.settings.actions_description.label"
     },
     {
       "type": "text",
       "id": "action_1_eyebrow",
-      "label": "Card 1 eyebrow"
+      "label": "t:sections.page_about.settings.action_1_eyebrow.label"
     },
     {
       "type": "text",
       "id": "action_1_title",
-      "label": "Card 1 title"
+      "label": "t:sections.page_about.settings.action_1_title.label"
     },
     {
       "type": "text",
       "id": "action_1_text",
-      "label": "Card 1 text"
+      "label": "t:sections.page_about.settings.action_1_text.label"
     },
     {
       "type": "text",
       "id": "action_1_label",
-      "label": "Card 1 link label"
+      "label": "t:sections.page_about.settings.action_1_label.label"
     },
     {
       "type": "url",
       "id": "action_1_link",
-      "label": "Card 1 link"
+      "label": "t:sections.page_about.settings.action_1_link.label"
     },
     {
       "type": "text",
       "id": "action_2_eyebrow",
-      "label": "Card 2 eyebrow"
+      "label": "t:sections.page_about.settings.action_2_eyebrow.label"
     },
     {
       "type": "text",
       "id": "action_2_title",
-      "label": "Card 2 title"
+      "label": "t:sections.page_about.settings.action_2_title.label"
     },
     {
       "type": "text",
       "id": "action_2_text",
-      "label": "Card 2 text"
+      "label": "t:sections.page_about.settings.action_2_text.label"
     },
     {
       "type": "text",
       "id": "action_2_label",
-      "label": "Card 2 link label"
+      "label": "t:sections.page_about.settings.action_2_label.label"
     },
     {
       "type": "url",
       "id": "action_2_link",
-      "label": "Card 2 link"
+      "label": "t:sections.page_about.settings.action_2_link.label"
     },
     {
       "type": "text",
       "id": "action_3_eyebrow",
-      "label": "Card 3 eyebrow"
+      "label": "t:sections.page_about.settings.action_3_eyebrow.label"
     },
     {
       "type": "text",
       "id": "action_3_title",
-      "label": "Card 3 title"
+      "label": "t:sections.page_about.settings.action_3_title.label"
     },
     {
       "type": "text",
       "id": "action_3_text",
-      "label": "Card 3 text"
+      "label": "t:sections.page_about.settings.action_3_text.label"
     },
     {
       "type": "text",
       "id": "action_3_label",
-      "label": "Card 3 link label"
+      "label": "t:sections.page_about.settings.action_3_label.label"
     },
     {
       "type": "url",
       "id": "action_3_link",
-      "label": "Card 3 link"
+      "label": "t:sections.page_about.settings.action_3_link.label"
     },
     {
       "type": "header",

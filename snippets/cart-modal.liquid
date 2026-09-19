@@ -1,7 +1,7 @@
 {{- 'cart-modal.css' | asset_url | stylesheet_tag -}}
 <script src="{{ 'cart-modal.js' | asset_url }}" defer="defer"></script>
 
-<cart-modal class="cart-modal-wrapper" role="dialog" aria-modal="true" aria-labelledby="cart-modal-title">
+<cart-modal class="cart-modal-wrapper" role="dialog" aria-modal="true" aria-labelledby="cart-modal-title" aria-hidden="true">
   <button type="button" class="cart-modal-overlay" data-action="close-cart-modal" aria-label="{{ 'accessibility.close' | t }}"></button>
   <div class="cart-modal-panel">
     <div class="cart-modal-header">
@@ -33,23 +33,29 @@
       </div>
       <div class="cart-modal-items-list"></div>
     </div>
-    <div class="cart-modal-footer">
+    <form action="{{ routes.cart_url }}" method="post" class="cart-modal-footer">
+      <div class="cart-modal-note">
+        <label for="cart-modal-note">{{ 'sections.cart.note' | t }}</label>
+        <textarea id="cart-modal-note" name="note" placeholder="{{ 'sections.cart.note' | t }}">{{ cart.note | escape }}</textarea>
+        <p class="cart-modal-note__status" data-note-status role="status" aria-live="polite"></p>
+      </div>
       <div class="cart-modal-summary">
+        <ul class="cart-modal-discounts" role="list" hidden></ul>
         <div class="cart-modal-summary-row">
           <span class="cart-modal-summary-label">{{ 'sections.cart.estimated_total' | t }}:</span>
-          <span class="cart-modal-total cart-price">{%- if cart.total_price == 0 -%}{{ 'products.product.contact' | t }}{%- else -%}{{ cart.total_price | money }}{%- endif -%}</span>
+          <span class="cart-modal-total cart-price">{{ cart.total_price | money }}</span>
         </div>
         <p class="cart-modal-summary-note">{{ 'sections.cart.taxes_included_shipping_at_checkout_without_policy' | t }}</p>
       </div>
       <div class="cart-modal-actions">
         <a href="{{ routes.cart_url }}" class="cart-modal-action-button cart-modal-action-view">{{ 'general.cart.view_empty_cart' | t }}</a>
-        <a href="{{ routes.cart_url }}/checkout" class="cart-modal-action-button cart-modal-action-checkout">
+        <button type="submit" name="checkout" class="cart-modal-action-button cart-modal-action-checkout">
           <span class="cart-modal-action-checkout-inner">
             {%- render 'icon', name: 'cart' -%}
             {{ 'sections.cart.checkout' | t }}
           </span>
-        </a>
+        </button>
       </div>
-    </div>
+    </form>
   </div>
 </cart-modal>

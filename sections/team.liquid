@@ -26,7 +26,7 @@
       </div>
     {%- endif -%}
 
-    <div class="section-team__grid">
+    <div class="section-team__grid{% if section.blocks.size == 5 and section.settings.columns_desktop == 4 %} section-team__grid--five{% endif %}">
       {%- for block in section.blocks -%}
         <div class="section-team__member" {{ block.shopify_attributes }}>
           <div class="section-team__avatar-wrap">
@@ -96,6 +96,7 @@
     .section-team__grid {
       grid-template-columns: repeat(var(--team-cols-d, 4), 1fr); gap: 2rem;
     }
+    .section-team__grid--five .section-team__member:last-child { grid-column: 2 / span 2; }
   }
 
   .section-team__member { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }

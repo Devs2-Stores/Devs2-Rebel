@@ -91,13 +91,9 @@
             {%- assign featured = blog.articles.first -%}
             {%- if featured -%}
               <div class="blog-featured">
-                <article class="blog-featured__card" itemscope itemtype="https://schema.org/BlogPosting">
+                <article class="blog-featured__card">
                   <div class="blog-featured__media">
-                    <a
-                      href="{{ featured.url | escape }}"
-                      class="blog-featured__media-inner"
-                      title="{{ featured.title | escape }}"
-                    >
+                    <div class="blog-featured__media-inner">
                       {%- if featured.image -%}
                         {%- assign fp_alt = featured.image.alt | default: featured.title | escape -%}
                         {%- assign fp_class = 'blog-featured__image blog-featured__image--'
@@ -127,13 +123,13 @@
                           height="640"
                         >
                       {%- endif -%}
-                    </a>
+                    </div>
                   </div>
                   <div class="blog-featured__content">
                     {%- if show_category -%}
                       <span class="blog-featured__tag">{{ blog.title | escape | upcase }}</span>
                     {%- endif -%}
-                    <h2 class="blog-featured__title" itemprop="headline">
+                    <h2 class="blog-featured__title">
                       <a href="{{ featured.url | escape }}">{{ featured.title | escape }}</a>
                     </h2>
                     {%- if show_date or show_author -%}
@@ -143,14 +139,13 @@
                             {%- render 'icon', name: 'calendar' -%}
                             <time
                               datetime="{{ featured.published_at | date: '%Y-%m-%dT%H:%M' }}"
-                              itemprop="datePublished"
                             >
                               {{ featured.published_at | date: '%B %d, %Y' }}
                             </time>
                           </span>
                         {%- endif -%}
                         {%- if show_author and featured.author != blank -%}
-                          <span class="blog-featured__author" itemprop="author">
+                          <span class="blog-featured__author">
                             {%- render 'icon', name: 'user' -%}
                             <span>{{ featured.author | escape }}</span>
                           </span>
@@ -163,9 +158,9 @@
                       </p>
                     {%- endif -%}
                     {%- if show_read_more -%}
-                      <a href="{{ featured.url | escape }}" class="blog-featured__button">
+                      <span class="blog-featured__button" aria-hidden="true">
                         {{ 'blogs.article.read_more_title' | t: title: '' | strip }}
-                      </a>
+                      </span>
                     {%- endif -%}
                   </div>
                 </article>
@@ -184,7 +179,7 @@
                   {%- liquid
                     assign lazyload = 'lazy'
                     assign fetchpriority = 'auto'
-                    if forloop.index <= 3
+                    if forloop.index <= 4
                       assign lazyload = 'eager'
                     endif
                     if forloop.first
@@ -216,17 +211,32 @@
                 </div>
               {%- endif -%}
             {%- else -%}
-              <p>{{ 'blogs.article.no_articles' | t }}</p>
+              <div class="blog-template__empty">
+                <h2>{{ 'blogs.article.no_articles' | t }}</h2>
+                <a href="{{ routes.root_url }}" class="blog-template__empty-link">{{ 'general.breadcrumbs.home' | t }}</a>
+              </div>
             {%- endif -%}
           </div>
 
-          {%- if blog.description != blank -%}
-            <div class="blog-template__full-description">
-              <div class="blog-template__full-description-content">
-                {{ blog.description }}
-              </div>
-            </div>
-          {%- endif -%}
+          <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "ItemList",
+              "name": {{ blog.title | json }},
+              "url": {{ canonical_url | json }},
+              "numberOfItems": {{ blog.articles.size }},
+              "itemListElement": [
+                {%- for article in blog.articles -%}
+                  {
+                    "@type": "ListItem",
+                    "position": {{ forloop.index }},
+                    "url": "{{ shop.url }}{{ article.url }}",
+                    "name": {{ article.title | json }}
+                  }{%- unless forloop.last -%},{%- endunless -%}
+                {%- endfor -%}
+              ]
+            }
+          </script>
         </div>
 
         {%- if has_sidebar -%}
@@ -243,8 +253,14 @@
                       style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;"
                       {{ block.shopify_attributes }}
                     >
+                      {%- liquid
+                        assign sidebar_title = block.settings.title
+                        if sidebar_title == blank
+                          assign sidebar_title = 'blogs.sidebar.categories' | t
+                        endif
+                      -%}
                       <h3 class="blog-sidebar__title heading-size-{{ block.settings.heading_size | default: 'md' }}">
-                        {{ block.settings.title | default: 'Categories' | escape }}
+                        {{ sidebar_title | escape }}
                       </h3>
                       <ul class="blog-sidebar__categories content-size-{{ block.settings.content_size | default: 'md' }}">
                         {%- for link in sidebar_menu.links -%}
@@ -271,8 +287,14 @@
                       style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;"
                       {{ block.shopify_attributes }}
                     >
+                      {%- liquid
+                        assign sidebar_title = block.settings.title
+                        if sidebar_title == blank
+                          assign sidebar_title = 'blogs.sidebar.recent_posts' | t
+                        endif
+                      -%}
                       <h3 class="blog-sidebar__title heading-size-{{ block.settings.heading_size | default: 'md' }}">
-                        {{ block.settings.title | default: 'Recent Posts' | escape }}
+                        {{ sidebar_title | escape }}
                       </h3>
                       <ul class="blog-sidebar__recent-posts content-size-{{ block.settings.content_size | default: 'md' }}">
                         {%- for article in blog.articles limit: recent_limit -%}
@@ -327,8 +349,14 @@
                       style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;"
                       {{ block.shopify_attributes }}
                     >
+                      {%- liquid
+                        assign sidebar_title = block.settings.title
+                        if sidebar_title == blank
+                          assign sidebar_title = 'blogs.sidebar.tags' | t
+                        endif
+                      -%}
                       <h3 class="blog-sidebar__title heading-size-{{ block.settings.heading_size | default: 'md' }}">
-                        {{ block.settings.title | default: 'Tags' | escape }}
+                        {{ sidebar_title | escape }}
                       </h3>
                       <div class="blog-sidebar__tags content-size-{{ block.settings.content_size | default: 'md' }}">
                         {%- for tag in blog.all_tags limit: sidebar_tags_limit -%}
@@ -360,8 +388,8 @@
                     {%- else -%}
                       <div class="blog-sidebar__banner">
                     {%- endif -%}
-                      <div class="blog-sidebar__banner-media">
-                        {%- if block.settings.image != blank -%}
+                      {%- if block.settings.image != blank -%}
+                        <div class="blog-sidebar__banner-media">
                           {{-
                             block.settings.image
                             | image_url: width: 600
@@ -372,17 +400,8 @@
                               alt: banner_alt,
                               loading: 'lazy'
                           -}}
-                        {%- else -%}
-                          <img
-                            class="blog-sidebar__banner-image"
-                            src="{{ 'blog-sidebar-editorial.svg' | asset_url }}"
-                            alt="{{ banner_alt | escape }}"
-                            loading="lazy"
-                            width="600"
-                            height="840"
-                          >
-                        {%- endif -%}
-                      </div>
+                        </div>
+                      {%- endif -%}
                       {%- if block.settings.heading != blank or block.settings.text != blank or block.settings.button_label != blank -%}
                         <div class="blog-sidebar__banner-content">
                           {%- if block.settings.heading != blank -%}
@@ -406,7 +425,7 @@
             {%- endfor -%}
             {%- if rendered_sidebar_blocks == 0 -%}
               <div class="blog-sidebar__section">
-                <h3 class="blog-sidebar__title heading-size-md">Recent posts</h3>
+                <h3 class="blog-sidebar__title heading-size-md">{{ 'blogs.sidebar.recent_posts' | t }}</h3>
                 <ul class="blog-sidebar__recent-posts content-size-sm">
                   {%- for article in blog.articles limit: 3 -%}
                     <li class="blog-sidebar__recent-post">
@@ -438,7 +457,7 @@
               </div>
               {%- if blog.all_tags.size > 0 -%}
                 <div class="blog-sidebar__section">
-                  <h3 class="blog-sidebar__title heading-size-md">Tags</h3>
+                  <h3 class="blog-sidebar__title heading-size-md">{{ 'blogs.sidebar.tags' | t }}</h3>
                   <div class="blog-sidebar__tags content-size-sm">
                     {%- for tag in blog.all_tags limit: 10 -%}
                       <a href="{{ blog.url | escape }}/tagged/{{ tag | handle }}" class="blog-sidebar__tag {% if current_tags contains tag %}active{% endif %}" title="{{ tag | escape }}">
@@ -448,18 +467,6 @@
                   </div>
                 </div>
               {%- endif -%}
-              <div class="blog-sidebar__section blog-sidebar__banner-section">
-                <a href="{{ routes.all_products_collection_url }}" class="blog-sidebar__banner" aria-label="Texture, utility, attitude">
-                  <div class="blog-sidebar__banner-media">
-                    <img class="blog-sidebar__banner-image" src="{{ 'blog-sidebar-editorial.svg' | asset_url }}" alt="Texture, utility, attitude" loading="lazy" width="600" height="840">
-                  </div>
-                  <div class="blog-sidebar__banner-content">
-                    <h3 class="blog-sidebar__banner-heading">Texture, utility, attitude</h3>
-                    <p class="blog-sidebar__banner-text">Explore sculptural layers and future-ready footwear.</p>
-                    <span class="blog-sidebar__banner-button">Shop the edit</span>
-                  </div>
-                </a>
-              </div>
             {%- endif -%}
           </aside>
         {%- endif -%}
@@ -583,7 +590,7 @@
       "min": 3,
       "max": 24,
       "step": 3,
-      "default": 6
+      "default": 12
     },
     {
       "type": "header",

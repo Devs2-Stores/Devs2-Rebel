@@ -33,7 +33,7 @@ class FacetFilters extends HTMLElement {
     this.filterForm = this.querySelector('#FacetFilterForm');
     this.sortSelect = this.querySelector('#SortBy, .collection-sort__select');
 
-    this.debouncedSubmit = debounce(this.submitFilters.bind(this), 500);
+    this.debouncedSubmit = debounce(this.submitFilters.bind(this), 300);
 
     this.paginationType = this.dataset.paginationType || 'pagination';
     this.filterLayout = this.dataset.filterLayout || 'sidebar';
@@ -49,8 +49,14 @@ class FacetFilters extends HTMLElement {
     this.bindViewToggle();
     this.bindActiveFilterRemove();
     this.initCollapsibleLists();
-    this.bindCompare();
     this.bindDescToggle();
+    var self = this;
+    this.handlePopState = function() { self.fetchAndRender(window.location.href, false); };
+    window.addEventListener('popstate', this.handlePopState);
+  }
+
+  disconnectedCallback() {
+    if (this.handlePopState) window.removeEventListener('popstate', this.handlePopState);
   }
 
   /* ── Filter form ────────────────────────────────── */
@@ -83,7 +89,7 @@ class FacetFilters extends HTMLElement {
       input.addEventListener('input', debounce(function() {
         pricePresets.forEach(function(preset) { preset.checked = false; });
         self.submitFilters();
-      }, 800));
+      }, 300));
     });
 
     pricePresets.forEach(function(preset) {
@@ -141,7 +147,7 @@ class FacetFilters extends HTMLElement {
       var submitSlider = debounce(function() {
         syncSlider();
         self.submitFilters();
-      }, 700);
+      }, 300);
 
       minRange.addEventListener('input', function() {
         syncSlider();
@@ -249,7 +255,8 @@ class FacetFilters extends HTMLElement {
 
   /* ── Section Rendering — core fetch + render ────── */
 
-  fetchAndRender(url) {
+  fetchAndRender(url, updateHistory) {
+    if (updateHistory === undefined) updateHistory = true;
     // Cancel previous request
     if (this.abortController) this.abortController.abort();
     this.abortController = new AbortController();
@@ -276,7 +283,7 @@ class FacetFilters extends HTMLElement {
       // Update URL without reload
       var cleanUrl = new URL(url, window.location.origin);
       cleanUrl.searchParams.delete('section_id');
-      window.history.pushState({}, '', cleanUrl.toString());
+      if (updateHistory) window.history.pushState({}, '', cleanUrl.toString());
 
       self.classList.remove('is-loading');
 
@@ -652,134 +659,6 @@ class FacetFilters extends HTMLElement {
 
     var top = target.getBoundingClientRect().top + window.scrollY - offset - 20;
     window.scrollTo({ top: top, behavior: 'smooth' });
-  }
-
-  /* ── Compare products ─────────────────────────── */
-
-  bindCompare() {
-    var self = this;
-    this.compareItems = [];
-    this.compareMax = 5;
-    this.compareMode = false;
-
-    var toggleBtn = document.querySelector('[data-action="toggle-compare"]');
-    if (toggleBtn) {
-      toggleBtn.addEventListener('click', function() {
-        self.compareMode = !self.compareMode;
-        this.classList.toggle('is-active', self.compareMode);
-        var productsContainer = document.getElementById('CollectionProducts');
-        if (productsContainer) {
-          productsContainer.classList.toggle('compare-mode', self.compareMode);
-        }
-        if (!self.compareMode) {
-          self.clearCompare();
-        }
-      });
-    }
-
-    /* Delegate checkbox changes */
-    document.addEventListener('change', function(e) {
-      if (!e.target.matches('.product-card__compare-input')) return;
-      var cb = e.target;
-      var id = cb.dataset.compareId;
-
-      if (cb.checked) {
-        if (self.compareItems.length >= self.compareMax) {
-          cb.checked = false;
-          return;
-        }
-        self.compareItems.push({
-          id: id,
-          title: cb.dataset.compareTitle,
-          image: cb.dataset.compareImage,
-          price: cb.dataset.comparePrice,
-          url: cb.dataset.compareUrl
-        });
-      } else {
-        self.compareItems = self.compareItems.filter(function(item) { return item.id !== id; });
-      }
-      self.updateCompareBar();
-    });
-
-    /* Clear button */
-    var clearBtn = document.querySelector('[data-action="clear-compare"]');
-    if (clearBtn) {
-      clearBtn.addEventListener('click', function() {
-        self.clearCompare();
-      });
-    }
-
-    /* Compare button — open compare page/popup */
-    var compareBtn = document.getElementById('CompareBtn');
-    if (compareBtn) {
-      compareBtn.addEventListener('click', function() {
-        if (self.compareItems.length < 2) return;
-        var ids = self.compareItems.map(function(item) { return item.id; }).join(',');
-        /* Store in sessionStorage for compare page to read */
-        sessionStorage.setItem('compare_products', JSON.stringify(self.compareItems));
-        window.location.href = ((themeConfig.routes && themeConfig.routes.root_url) || '/') + 'pages/compare?ids=' + ids;
-      });
-    }
-  }
-
-  updateCompareBar() {
-    var bar = document.getElementById('CompareBar');
-    var slots = document.querySelectorAll('.compare-bar__slot');
-    var countEl = document.querySelector('[data-compare-count]');
-    var compareBtn = document.getElementById('CompareBtn');
-
-    if (!bar) return;
-
-    /* Show/hide bar */
-    bar.classList.toggle('is-visible', this.compareItems.length > 0);
-
-    /* Update counter */
-    if (countEl) countEl.textContent = this.compareItems.length;
-
-    /* Enable compare btn if >= 2 items */
-    if (compareBtn) compareBtn.disabled = this.compareItems.length < 2;
-
-    /* Update slots */
-    slots.forEach(function(slot, index) {
-      slot.innerHTML = '';
-      slot.classList.remove('is-filled');
-      if (this.compareItems[index]) {
-        var item = this.compareItems[index];
-        slot.classList.add('is-filled');
-        var img = document.createElement('img');
-        img.src = item.image;
-        img.alt = item.title;
-        img.width = 52;
-        img.height = 52;
-        slot.appendChild(img);
-
-        var removeBtn = document.createElement('button');
-        removeBtn.className = 'compare-bar__slot-remove';
-        removeBtn.innerHTML = '×';
-        removeBtn.type = 'button';
-        removeBtn.dataset.removeId = item.id;
-        removeBtn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          this.removeCompareItem(item.id);
-        }.bind(this));
-        slot.appendChild(removeBtn);
-      }
-    }.bind(this));
-  }
-
-  removeCompareItem(id) {
-    this.compareItems = this.compareItems.filter(function(item) { return item.id !== id; });
-    /* Uncheck the checkbox */
-    var cb = document.querySelector('.product-card__compare-input[data-compare-id="' + id + '"]');
-    if (cb) cb.checked = false;
-    this.updateCompareBar();
-  }
-
-  clearCompare() {
-    this.compareItems = [];
-    var checkboxes = document.querySelectorAll('.product-card__compare-input:checked');
-    checkboxes.forEach(function(cb) { cb.checked = false; });
-    this.updateCompareBar();
   }
 
   /* ── Description read more / show less ─────────── */

@@ -1,0 +1,64 @@
+{% doc %}
+  Product price block.
+
+  Renders current price, compare-at price, sale percentage, unit price,
+  and tax notice for the selected variant.
+{% enddoc %}
+
+{%- liquid
+  assign selected_variant = product.selected_or_first_available_variant | default: product.variants.first
+  assign has_compare = false
+  if selected_variant.compare_at_price and selected_variant.compare_at_price > selected_variant.price
+    assign has_compare = true
+  endif
+-%}
+
+<div class="product-template__price-box" {{ block.shopify_attributes }}>
+  <div class="product-template__price-current" data-product-price>
+    {%- if selected_variant.price == 0 -%}
+      {{ 'products.product.price.contact' | t }}
+    {%- else -%}
+      {{ selected_variant.price | money }}
+    {%- endif -%}
+  </div>
+  <div
+    class="product-template__price-compare"
+    data-product-compare
+    style="display: {%- if has_compare -%}block{%- else -%}none{%- endif -%};"
+  >
+    {{- selected_variant.compare_at_price | money -}}
+  </div>
+  <div
+    class="product-template__price-sale"
+    data-product-sale
+    style="display: {%- if has_compare -%}block{%- else -%}none{%- endif -%};"
+  >
+    {%- if has_compare -%}
+      {%- assign percent = selected_variant.compare_at_price | minus: selected_variant.price | times: 100.0 | divided_by: selected_variant.compare_at_price | round -%}
+      -{{ percent }}%
+    {%- else -%}
+      -0%
+    {%- endif -%}
+  </div>
+  {%- if selected_variant.unit_price -%}
+    <div class="product-template__unit-price">
+      <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+      {{ selected_variant.unit_price | money }}/{{ selected_variant.unit_price_measurement.reference_value }}{{ selected_variant.unit_price_measurement.reference_unit }}
+    </div>
+  {%- endif -%}
+  {%- if cart.taxes_included -%}
+    <div class="product-template__tax-notice">{{ 'products.product.include_taxes' | t }}</div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main_product.blocks.price.name",
+  "tag": null,
+  "presets": [
+    {
+      "name": "t:sections.main_product.blocks.price.name"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,53 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "settings": {}
+    },
+    "main": {
+      "type": "main-list-collections",
+      "settings": {
+        "title": "Shop the collections",
+        "subtitle": "Explore curated edits built around texture, proportion, and everyday utility.",
+        "heading_size": "lg",
+        "heading_alignment_desktop": "left",
+        "heading_alignment_mobile": "left",
+        "image_shape": "landscape",
+        "image_position": "middle-center",
+        "card_heading_size": "md",
+        "show_product_count": true,
+        "container_width": "fixed",
+        "columns_desktop": "3",
+        "columns_mobile": "1",
+        "column_gap": "lg",
+        "sort": "alphabetical",
+        "per_page": 12
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "subheading": "Stay connected",
+        "subheading_size": "sm",
+        "heading": "Subscribe to our newsletter",
+        "heading_size": "lg",
+        "heading_tag": "h2",
+        "description": "Be the first to know about new collections and exclusive offers.",
+        "description_size": "md",
+        "button_label": "Subscribe",
+        "button_size": "md",
+        "text_align": "center",
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main",
+    "newsletter"
+  ]
+}

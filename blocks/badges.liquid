@@ -1,0 +1,26 @@
+{% doc %}
+  Badges block.
+
+  Renders product tags as badge chips, skipping hidden/system tags.
+{% enddoc %}
+
+<div class="product-template__badges" {{ block.shopify_attributes }}>
+  {%- for tag in product.tags -%}
+    {%- assign tag_lower = tag | downcase -%}
+    {%- unless tag_lower contains '_' or tag_lower contains 'hidden' -%}
+      <span class="product-template__badge">{{ tag }}</span>
+    {%- endunless -%}
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main_product.blocks.badges.name",
+  "tag": null,
+  "presets": [
+    {
+      "name": "t:sections.main_product.blocks.badges.name"
+    }
+  ]
+}
+{% endschema %}

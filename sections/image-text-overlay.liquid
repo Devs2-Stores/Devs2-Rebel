@@ -11,15 +11,7 @@
     --ito-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
   "
 >
-  {%- assign custom_image_url = section.settings.custom_image_url -%}
-  {%- assign custom_image_mobile_url = section.settings.custom_image_mobile_url | default: custom_image_url -%}
-
-  {%- if custom_image_mobile_url != blank and custom_image_url != blank -%}
-    <div class="section-ito__media section-ito__media--mobile">
-      <img src="{{ custom_image_mobile_url | escape }}" alt="{{ section.settings.heading_alt | default: shop.name | escape }}" width="750" height="1000" loading="lazy" decoding="async" class="section-ito__img">
-      <div class="section-ito__overlay"></div>
-    </div>
-  {%- elsif section.settings.image_mobile != blank and section.settings.image != blank -%}
+  {%- if section.settings.image_mobile != blank and section.settings.image != blank -%}
     <div class="section-ito__media section-ito__media--mobile">
       {{ section.settings.image_mobile | image_url: width: 750 | image_tag:
         loading: 'lazy', class: 'section-ito__img'
@@ -29,9 +21,7 @@
   {%- endif -%}
 
   <div class="section-ito__media">
-    {%- if custom_image_url != blank -%}
-      <img src="{{ custom_image_url | escape }}" alt="{{ section.settings.heading_alt | default: shop.name | escape }}" width="1920" height="1080" loading="lazy" decoding="async" class="section-ito__img">
-    {%- elsif section.settings.image != blank -%}
+    {%- if section.settings.image != blank -%}
       {{ section.settings.image | image_url: width: 1920 | image_tag:
         widths: '750, 1080, 1440, 1920', sizes: '100vw',
         loading: 'lazy', class: 'section-ito__img'
@@ -154,16 +144,6 @@
       "type": "image_picker",
       "id": "image_mobile",
       "label": "Mobile image"
-    },
-    {
-      "type": "url",
-      "id": "custom_image_url",
-      "label": "Desktop image URL override"
-    },
-    {
-      "type": "url",
-      "id": "custom_image_mobile_url",
-      "label": "Mobile image URL override"
     },
     {
       "type": "text",

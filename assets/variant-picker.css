@@ -63,7 +63,8 @@
   width: 2.5rem;
   height: 2.5rem;
   overflow: hidden;
-  border: 1px solid transparent;
+  border: 1px solid rgba(var(--color-foreground), 0.15);
+  border-radius: 50%;
 }
 .variant-picker__item-label--image img { width: 100%; height: 100%; object-fit: cover; }
 

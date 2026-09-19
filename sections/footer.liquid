@@ -53,18 +53,6 @@
         </div>
         {%- if section.settings.show_certs -%}
         <div class="footer-info__certs">
-          {%- if section.settings.cert_bct_link != blank -%}
-          <a href="{{ section.settings.cert_bct_link }}" class="footer-info__cert-item" target="_blank" rel="noopener noreferrer">
-            {%- if section.settings.cert_bct_image != blank -%}
-            {{ section.settings.cert_bct_image | image_url: width: 260 | image_tag:
-              width: 130, height: 50,
-              alt: 'accessibility.cert_alt' | t: name: 'BCT',
-              class: 'footer-info__cert-img',
-              loading: 'lazy'
-            }}
-            {%- endif -%}
-          </a>
-          {%- endif -%}
           {%- if section.settings.cert_dmca_link != blank -%}
           <a href="{{ section.settings.cert_dmca_link }}" class="footer-info__cert-item" target="_blank" rel="noopener noreferrer">
             {%- if section.settings.cert_dmca_image != blank -%}
@@ -244,16 +232,6 @@
     },
     {
       "type": "image_picker",
-      "id": "cert_bct_image",
-      "label": "t:sections.footer.settings.cert_bct_image.label"
-    },
-    {
-      "type": "url",
-      "id": "cert_bct_link",
-      "label": "t:sections.footer.settings.cert_bct_link.label"
-    },
-    {
-      "type": "image_picker",
       "id": "cert_dmca_image",
       "label": "t:sections.footer.settings.cert_dmca_image.label"
     },
@@ -292,7 +270,7 @@
       "type": "checkbox",
       "id": "show_follow_on_shop",
       "label": "t:sections.footer.settings.show_follow_on_shop.label",
-      "default": false
+      "default": true
     }
   ],
   "blocks": [

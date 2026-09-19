@@ -1,0 +1,118 @@
+{% doc %}
+  Product meta block.
+
+  Renders SKU, barcode, vendor, type, and availability rows for the
+  selected variant.
+{% enddoc %}
+
+{%- liquid
+  assign selected_variant = product.selected_or_first_available_variant | default: product.variants.first
+  assign available = product.selected_or_first_available_variant.available
+-%}
+
+<ul class="product-template__meta" {{ block.shopify_attributes }}>
+  {%- liquid
+    assign meta_count = 0
+  -%}
+  {%- if block.settings.show_sku -%}
+    {%- if meta_count > 0 -%}
+      <li class="product-template__meta-separator">|</li>
+    {%- endif -%}
+    <li class="product-template__meta-item">
+      <span class="product-template__meta-label">{{ 'products.product.sku' | t }}:</span>
+      <strong data-product-sku>{{- selected_variant.sku | default: 'N/A' -}}</strong>
+    </li>
+    {%- assign meta_count = meta_count | plus: 1 -%}
+  {%- endif -%}
+  {%- if block.settings.show_barcode -%}
+    {%- if meta_count > 0 -%}
+      <li class="product-template__meta-separator">|</li>
+    {%- endif -%}
+    <li class="product-template__meta-item">
+      <span class="product-template__meta-label">{{ 'products.product.barcode' | t }}:</span>
+      <strong data-product-barcode>{{- selected_variant.barcode | default: 'N/A' -}}</strong>
+    </li>
+    {%- assign meta_count = meta_count | plus: 1 -%}
+  {%- endif -%}
+  {%- if block.settings.show_vendor and product.vendor != blank -%}
+    {%- if meta_count > 0 -%}
+      <li class="product-template__meta-separator">|</li>
+    {%- endif -%}
+    <li class="product-template__meta-item">
+      <span class="product-template__meta-label">{{ 'products.product.vendor' | t }}:</span>
+      <strong>{{ product.vendor | link_to_vendor }}</strong>
+    </li>
+    {%- assign meta_count = meta_count | plus: 1 -%}
+  {%- endif -%}
+  {%- if block.settings.show_type and product.type != blank -%}
+    {%- if meta_count > 0 -%}
+      <li class="product-template__meta-separator">|</li>
+    {%- endif -%}
+    <li class="product-template__meta-item">
+      <span class="product-template__meta-label">{{ 'products.product.type' | t }}:</span>
+      <strong>{{ product.type | link_to_type }}</strong>
+    </li>
+    {%- assign meta_count = meta_count | plus: 1 -%}
+  {%- endif -%}
+  {%- if block.settings.show_availability -%}
+    {%- if meta_count > 0 -%}
+      <li class="product-template__meta-separator">|</li>
+    {%- endif -%}
+    <li class="product-template__meta-item">
+      <span class="product-template__meta-label">{{ 'products.product.availability' | t }}:</span>
+      {%- if available -%}
+        <strong data-product-available class="product-template__status--available">
+          {{- 'products.product.inventory_in_stock' | t -}}
+        </strong>
+      {%- else -%}
+        <strong data-product-available class="product-template__status--unavailable">
+          {{- 'products.product.inventory_out_of_stock' | t -}}
+        </strong>
+      {%- endif -%}
+    </li>
+  {%- endif -%}
+</ul>
+
+{% schema %}
+{
+  "name": "t:sections.main_product.blocks.product_meta.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_sku",
+      "label": "t:sections.main_product.settings.show_sku.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_barcode",
+      "label": "t:sections.main_product.settings.show_barcode.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "t:sections.main_product.settings.show_vendor.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_type",
+      "label": "t:sections.main_product.settings.show_type.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_availability",
+      "label": "t:sections.main_product.settings.show_availability.label",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main_product.blocks.product_meta.name"
+    }
+  ]
+}
+{% endschema %}

@@ -90,7 +90,10 @@
         return;
       }
 
+      var requestedVariantId = new URLSearchParams(window.location.search).get('variant');
       var firstAvailableVariant = this.variants.find(function(variant) {
+        return requestedVariantId && variant && String(variant.id) === requestedVariantId;
+      }) || this.variants.find(function(variant) {
         return variant && variant.available;
       });
 
@@ -314,7 +317,10 @@
     selectFirstAvailableVariant() {
       if (!this.variants || this.variants.length === 0) return;
 
-      var firstAvailable = this.variants.find(function(v) { return v && v.available; });
+      var requestedVariantId = new URLSearchParams(window.location.search).get('variant');
+      var firstAvailable = this.variants.find(function(v) {
+        return requestedVariantId && v && String(v.id) === requestedVariantId;
+      }) || this.variants.find(function(v) { return v && v.available; });
       if (!firstAvailable) return;
 
       var self = this;

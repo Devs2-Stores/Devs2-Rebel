@@ -1211,6 +1211,26 @@
         "default": false,
         "label": "t:settings_schema.search_input.settings.predictive_search_show_price.label",
         "info": "t:settings_schema.search_input.settings.predictive_search_show_price.info"
+      },
+      {
+        "type": "text",
+        "id": "predictive_search_trending_terms",
+        "default": "New arrivals, Best sellers, Sale",
+        "label": "t:settings_schema.search_input.settings.predictive_search_trending_terms.label",
+        "info": "t:settings_schema.search_input.settings.predictive_search_trending_terms.info"
+      },
+      {
+        "type": "link_list",
+        "id": "predictive_search_featured_menu",
+        "default": "main-menu",
+        "label": "t:settings_schema.search_input.settings.predictive_search_featured_menu.label",
+        "info": "t:settings_schema.search_input.settings.predictive_search_featured_menu.info"
+      },
+      {
+        "type": "collection",
+        "id": "predictive_search_recommendation_collection",
+        "label": "t:settings_schema.search_input.settings.predictive_search_recommendation_collection.label",
+        "info": "t:settings_schema.search_input.settings.predictive_search_recommendation_collection.info"
       }
     ]
   },
@@ -1496,16 +1516,6 @@
         "id": "product_size_guide_button",
         "label": "t:settings_schema.product.settings.size_guide_button.label",
         "default": "Size guide"
-      },
-      {
-        "type": "header",
-        "content": "t:settings_schema.product.settings.header__coupon.content"
-      },
-      {
-        "type": "text",
-        "id": "product_coupon_label",
-        "label": "t:settings_schema.product.settings.coupon_label.label",
-        "default": "Discount code"
       }
     ]
   },
@@ -1857,21 +1867,6 @@
         "id": "float_youtube_text",
         "label": "t:settings_schema.float_social.settings.channel_text.label",
         "default": "YouTube"
-      }
-    ]
-  },
-  {
-    "name": "t:settings_schema.integrations.name",
-    "settings": [
-      {
-        "type": "header",
-        "content": "t:settings_schema.integrations.settings.header__recaptcha.content"
-      },
-      {
-        "type": "text",
-        "id": "recaptcha_site_key",
-        "label": "t:settings_schema.integrations.settings.recaptcha_site_key.label",
-        "info": "t:settings_schema.integrations.settings.recaptcha_site_key.info"
       }
     ]
   }

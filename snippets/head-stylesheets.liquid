@@ -33,8 +33,7 @@
   {{ 'customer.css' | asset_url | stylesheet_tag }}
 {%- elsif template contains 'search' -%}
   {{ 'search.css' | asset_url | stylesheet_tag }}
-{%- elsif template == 'page.wishlist' -%}
-  {{ 'page-wishlist.css' | asset_url | stylesheet_tag }}
+  {{ 'article-card.css' | asset_url | stylesheet_tag }}
 {%- elsif template == 'page.about' -%}
   {{ 'page-about.css' | asset_url | stylesheet_tag }}
 {%- elsif template == 'page.contact' -%}

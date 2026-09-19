@@ -26,12 +26,10 @@ AssetSizeJavaScript:
 DeprecatedTag:
   enabled: false
 
-# pickup_availability là Liquid filter chuẩn của Shopify (Online Store 2.0).
-# Theme-check version cũ chưa biết, disable cảnh báo false positive.
+# UnknownFilter: giữ bật — filter ảo pickup_availability đã được thay bằng
+# sections/pickup-availability.liquid + <pickup-availability> custom element.
 UnknownFilter:
   enabled: true
-  ignore:
-    - "sections/main-product.liquid"
 
 # UndefinedObject: Shopify CLI 4.1.0 theme-check chưa parse được {% doc %} Liquid Doc Format.
 # 10 snippet dưới đây đã có {% doc %} đầy đủ params (verify: .agent/tools/check_doc_coverage.mjs).

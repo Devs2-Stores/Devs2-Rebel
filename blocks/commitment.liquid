@@ -1,0 +1,48 @@
+{% doc %}
+  Commitment block.
+
+  Renders an icon + text commitment item (e.g. free shipping, warranty).
+{% enddoc %}
+
+<div class="product-template__commitment-item" {{ block.shopify_attributes }}>
+  {%- if block.settings.image != blank -%}
+    <div class="product-template__commitment-icon">
+      <img
+        src="{{ block.settings.image | image_url: width: 96 }}"
+        alt="{{ block.settings.text | escape }}"
+        width="48"
+        height="48"
+        loading="lazy"
+        decoding="async"
+      >
+    </div>
+  {%- endif -%}
+  <div class="product-template__commitment-content">
+    <strong class="product-template__commitment-title">{{ block.settings.text | escape }}</strong>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main_product.blocks.commitment.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.main_product.blocks.commitment.settings.image.label"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "t:sections.main_product.blocks.commitment.settings.text.label",
+      "default": "Product commitment"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main_product.blocks.commitment.name"
+    }
+  ]
+}
+{% endschema %}

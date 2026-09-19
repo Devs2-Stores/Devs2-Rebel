@@ -1,78 +1,69 @@
-/**
- * FAQ Page
- * - Vietnamese diacritics-insensitive search
- * - Show/hide questions + groups based on query
- */
 (function() {
   'use strict';
 
-  function removeDiacritics(str) {
-    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/gi, 'd');
-  }
-
-  function normalize(str) {
-    return removeDiacritics((str || '').toLowerCase().trim());
+  function normalize(value) {
+    return (value || '')
+      .toLocaleLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/đ/g, 'd')
+      .trim();
   }
 
   class FaqPage extends HTMLElement {
     connectedCallback() {
-      this.searchInput = this.querySelector('#faq-search');
-      this.groups = Array.from(this.querySelectorAll('.faq-group'));
-      this.items = Array.from(this.querySelectorAll('.faq-item'));
-      this.emptyEl = this.querySelector('#faq-empty');
+      this.searchInput = this.querySelector('[data-faq-search]');
+      this.items = Array.from(this.querySelectorAll('[data-faq-item]'));
+      this.headings = Array.from(this.querySelectorAll('.faq-group-heading'));
+      this.emptyElement = this.querySelector('[data-faq-empty]');
 
-      if (!this.items.length) return;
+      if (!this.searchInput || !this.items.length) return;
 
-      this.buildData();
-      this.bindEvents();
-    }
+      var currentHeading = null;
+      Array.from(this.querySelector('.faq-list').children).forEach(function(element) {
+        if (element.classList.contains('faq-group-heading')) {
+          currentHeading = element;
+          return;
+        }
 
-    buildData() {
-      this.faqData = this.items.map(function(item) {
-        return {
-          el: item,
-          group: item.closest('.faq-group'),
-          text: normalize(item.dataset.faqQuestion)
-        };
+        if (element.hasAttribute('data-faq-item')) {
+          element.faqSearchContent = normalize(element.dataset.faqQuestion + ' ' + element.dataset.faqAnswer);
+          element.faqHeading = currentHeading;
+        }
       });
-    }
 
-    bindEvents() {
-      var self = this;
-      var timer;
-      this.searchInput.addEventListener('input', function() {
-        clearTimeout(timer);
-        timer = setTimeout(function() {
-          self.filter();
-        }, 200);
-      });
+      this.searchInput.addEventListener('input', this.filter.bind(this));
+      this.items.forEach(function(item) {
+        item.addEventListener('toggle', function() {
+          if (!item.open) return;
+          this.items.forEach(function(otherItem) {
+            if (otherItem !== item) otherItem.removeAttribute('open');
+          });
+        }.bind(this));
+      }, this);
     }
 
     filter() {
       var query = normalize(this.searchInput.value);
       var visibleCount = 0;
 
-      this.faqData.forEach(function(faq) {
-        if (!query || faq.text.indexOf(query) !== -1) {
-          faq.el.classList.remove('is-hidden');
-          visibleCount++;
-        } else {
-          faq.el.classList.add('is-hidden');
-          faq.el.removeAttribute('open');
-        }
-      });
+      this.items.forEach(function(item) {
+        var isVisible = !query || item.faqSearchContent.indexOf(query) !== -1;
 
-      // Hide groups with no visible items
-      this.groups.forEach(function(group) {
-        var hasVisible = group.querySelector('.faq-item:not(.is-hidden)');
-        group.classList.toggle('is-hidden', !hasVisible);
-      });
+        item.hidden = !isVisible;
+        if (!isVisible) item.removeAttribute('open');
+        if (isVisible) visibleCount += 1;
+      }, this);
 
-      this.emptyEl.style.display = visibleCount === 0 ? '' : 'none';
+      this.headings.forEach(function(heading) {
+        heading.hidden = !this.items.some(function(item) {
+          return item.faqHeading === heading && !item.hidden;
+        });
+      }, this);
+
+      if (this.emptyElement) this.emptyElement.hidden = visibleCount > 0;
     }
   }
 
-  if (!customElements.get('faq-page')) {
-    customElements.define('faq-page', FaqPage);
-  }
+  if (!customElements.get('faq-page')) customElements.define('faq-page', FaqPage);
 })();

@@ -1,16 +1,50 @@
 {%- comment %}
 Accepts:
-- form: {String} Form ID
-- product: {Object} Variant object
+- form: {String} Form ID (deprecated alias of form_id)
+- form_id: {String} Form ID to associate the input with
+- name: {String} Input name (default 'quantity'; cart contexts pass 'updates[]')
+- product: {Object} Product object
 - variant: {Object} Variant object
 - value: {Number} Value
 - min: {Number} Min (optional)
 - step: {Number} Step (optional)
 {% endcomment -%}
 
-{%- assign min = min | default: 1 -%}
-{%- assign step = step | default: 1 -%}
-{%- assign input_id = 'quantity-' | append: variant.id -%}
+{%- liquid
+  if cart_item != blank
+    assign min = min | default: variant.quantity_rule.min | default: 1
+    assign step = step | default: variant.quantity_rule.increment | default: 1
+    assign quantity_max = max | default: variant.quantity_rule.max
+
+    if variant.inventory_management != blank and variant.inventory_policy == 'deny'
+      assign other_line_quantity = 0
+      for existing_item in cart.items
+        if existing_item.variant_id == variant.id and existing_item.key != cart_item.key
+          assign other_line_quantity = other_line_quantity | plus: existing_item.quantity
+        endif
+      endfor
+      assign inventory_max = variant.inventory_quantity | minus: other_line_quantity
+      if quantity_max == blank or inventory_max < quantity_max
+        assign quantity_max = inventory_max
+      endif
+    endif
+  else
+    assign min = min | default: 1
+    assign step = step | default: 1
+    assign quantity_max = max | default: 999
+  endif
+
+  assign quantity_max = quantity_max | default: 999
+  if quantity_max < min
+    assign quantity_max = min
+  endif
+  assign input_id = 'quantity-' | append: variant.id
+  assign input_name = name | default: 'quantity'
+  assign input_form = form_id | default: form
+  if id_suffix != blank
+    assign input_id = input_id | append: '-' | append: id_suffix
+  endif
+-%}
 {{ 'quantity-selector.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'quantity-selector.js' | asset_url }}" defer="defer"></script>
 <quantity-selector class="quantity-selector">
@@ -22,13 +56,14 @@ Accepts:
 			   id="{{ input_id }}"
 			   type="number"
 			   aria-label="{{ 'products.product.quantity.input_label' | t: product: product.title }}"
-			   {%- if form != blank %} form="{{ form }}"{% endif %}
+			   {%- if input_form != blank %} form="{{ input_form }}"{% endif %}
 			   data-product-id="{{ product.id }}"
 			   data-variant-id="{{ variant.id }}"
-			   name="updates[{{ variant.id }}]"
+			   name="{{ input_name }}"
 			   value="{{ value }}"
+			   data-confirmed-value="{{ value }}"
 			   min="{{ min }}"
-			   max="999"
+			   max="{{ quantity_max }}"
 			   step="{{ step }}"
 			   autocomplete="off"
 			   inputmode="numeric"

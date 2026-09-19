@@ -1,22 +1,3 @@
-{%- comment %}
-  Renders an article card.
-
-  Accepts:
-  - article: {Object} Article Liquid object (required)
-  - layout: {String} "grid" or "list" (default: "grid")
-  - lazyload: {String} "lazy" or "eager" (default: "lazy")
-  - fetchpriority: {String} "high", "low", "auto" (default: "auto")
-  - image_shape: {String} "landscape", "portrait", "square", "wide", "auto" (default: "landscape")
-  - image_alignment: {String} Image object-position: "top", "center", "bottom" (default: "center")
-  - show_author: {Boolean} Show author (default: true)
-  - show_date: {Boolean} Show date (default: true)
-  - show_excerpt: {Boolean} Show excerpt (default: true)
-  - show_read_more: {Boolean} Show read more button (default: true)
-  - show_comment_count: {Boolean} Show comment count (default: false)
-  - show_tags: {Boolean} Show article tags (default: false)
-  - show_category: {Boolean} Show blog name as category (default: false)
-{% endcomment -%}
-
 {%- liquid
   assign layout = layout | default: 'grid'
   assign lazyload = lazyload | default: 'lazy'
@@ -39,9 +20,9 @@
   assign card_class = card_class | append: ' article-card--pos-' | append: image_alignment
 -%}
 
-<article class="{{ card_class }}" itemscope itemtype="https://schema.org/BlogPosting">
+<article class="{{ card_class }}">
   <div class="article-card__media">
-    <a href="{{ article.url | escape }}" class="article-card__media-inner" title="{{ article.title | escape }}">
+    <div class="article-card__media-inner">
       {%- if article.image -%}
         {%- assign card_alt = article.image.alt | default: article.title | escape -%}
         {{-
@@ -65,7 +46,7 @@
           height="480"
         >
       {%- endif -%}
-    </a>
+    </div>
   </div>
 
   <div class="article-card__content">
@@ -77,18 +58,14 @@
       </div>
     {%- endif -%}
 
-    <h3 class="article-card__title" itemprop="headline">
+    <h3 class="article-card__title">
       <a href="{{ article.url | escape }}" title="{{ article.title | escape }}">{{ article.title | escape }}</a>
     </h3>
 
     {%- if show_date or show_author or show_comment_count -%}
       <div class="article-card__meta">
         {%- if show_date -%}
-          <span
-            class="article-card__date"
-            itemprop="datePublished"
-            content="{{ article.published_at | date: '%Y-%m-%d' }}"
-          >
+          <span class="article-card__date">
             {%- render 'icon', name: 'calendar' -%}
             <time datetime="{{ article.published_at | date: '%Y-%m-%dT%H:%M' }}">
               {{- article.published_at | date: '%B %d, %Y' -}}
@@ -96,14 +73,14 @@
           </span>
         {%- endif -%}
         {%- if show_author and article.author != blank -%}
-          <span class="article-card__author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+          <span class="article-card__author">
             {%- render 'icon', name: 'user' -%}
-            <span class="article-card__author-name" itemprop="name">{{ article.author | escape }}</span>
+            <span class="article-card__author-name">{{ article.author | escape }}</span>
           </span>
         {%- endif -%}
         {%- if show_comment_count and article.comments_count > 0 -%}
           <span class="article-card__comments">
-            {%- render 'icon', name: 'chat' -%}
+            {%- render 'icon', name: 'comments' -%}
             <span>{{ article.comments_count }}</span>
           </span>
         {%- endif -%}
@@ -111,7 +88,7 @@
     {%- endif -%}
 
     {%- if show_excerpt -%}
-      <div class="article-card__description" itemprop="description">
+      <div class="article-card__description">
         {%- if article.excerpt_or_content != blank -%}
           {{ article.excerpt_or_content | strip_html | truncatewords: 25 | escape }}
         {%- endif -%}
@@ -127,12 +104,8 @@
     {%- endif -%}
 
     {%- if show_read_more -%}
-      <div class="article-card__button">
-        <a
-          href="{{ article.url | escape }}"
-          class="article-card__read-more"
-          title="{{ 'blogs.article.read_more_title' | t: title: article.title | escape }}"
-        >
+      <div class="article-card__button" aria-hidden="true">
+        <span class="article-card__read-more">
           {{ 'blogs.article.read_more_title' | t: title: '' | strip }}
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -148,7 +121,7 @@
           >
             <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
           </svg>
-        </a>
+        </span>
       </div>
     {%- endif -%}
   </div>

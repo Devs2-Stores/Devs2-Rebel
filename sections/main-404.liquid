@@ -1,25 +1,94 @@
+{%- liquid
+  assign container_width = section.settings.container_width | default: 'fixed'
+  assign eyebrow = section.settings.eyebrow | default: 'templates.404.eyebrow' | t
+  assign title = section.settings.title | default: 'templates.404.title' | t
+  assign content = section.settings.content | default: 'templates.404.content' | t
+  assign search_label = section.settings.search_label | default: 'templates.404.search_label' | t
+  assign search_placeholder = section.settings.search_placeholder | default: 'templates.404.search_placeholder' | t
+  assign search_button = section.settings.search_button | default: 'templates.404.search_button' | t
+  assign primary_label = section.settings.primary_label | default: 'templates.404.primary_label' | t
+  assign secondary_label = section.settings.secondary_label | default: 'templates.404.secondary_label' | t
+  assign suggestions_label = section.settings.suggestions_label | default: 'templates.404.suggestions_label' | t
+-%}
 
-<div class="error-404-template">
-  <div class="page-width">
-    <div class="error-404-template__box">
-      <div class="error-404-template__icon">
-        {%- render 'icon', name: '404', class: 'icon-404' -%}
+<div class="error-404 color-{{ section.settings.color_scheme }}">
+  <div class="{% if container_width == 'fixed' %}page-width{% endif %}">
+    <div class="error-404__shell">
+      <div class="error-404__visual" aria-hidden="true">
+        <span class="error-404__code">404</span>
+        <span class="error-404__orbit error-404__orbit--one"></span>
+        <span class="error-404__orbit error-404__orbit--two"></span>
+        <span class="error-404__spark error-404__spark--one"></span>
+        <span class="error-404__spark error-404__spark--two"></span>
       </div>
-      <h1 class="error-404-template__title">{{ section.settings.title | escape }}</h1>
-      <p class="error-404-template__content">{{ section.settings.content | escape }}</p>
-      <div class="error-404-template__actions">
-        <a class="error-404-template__back" href="{{ routes.root_url }}">
-          {%- render 'icon', name: 'arrow', class: 'icon-arrow' -%}
-          {{ section.settings.back_text | escape }}
-        </a>
-        <a class="error-404-template__products button-primary active" href="{{ section.settings.products_link | default: routes.all_products_collection_url }}">
-          {{ section.settings.products_text | escape }}
-          {%- render 'icon', name: 'cart', class: 'icon-cart' -%}
-        </a>
+
+      <div class="error-404__content">
+        {%- if eyebrow != blank -%}
+          <p class="error-404__eyebrow">{{ eyebrow | escape }}</p>
+        {%- endif -%}
+
+        <h1 class="error-404__title">{{ title | escape }}</h1>
+
+        {%- if content != blank -%}
+          <div class="error-404__text rte">{{ content }}</div>
+        {%- endif -%}
+
+        <form class="error-404__search" action="{{ routes.search_url }}" method="get" role="search">
+          <label class="visually-hidden" for="Search-404-{{ section.id }}">{{ search_label | escape }}</label>
+          <input
+            id="Search-404-{{ section.id }}"
+            class="error-404__search-input"
+            type="search"
+            name="q"
+            value=""
+            placeholder="{{ search_placeholder | escape }}"
+            autocomplete="off"
+          >
+          <button class="error-404__search-button" type="submit" aria-label="{{ search_label | escape }}">
+            {%- render 'icon', name: 'search' -%}
+            <span>{{ search_button | escape }}</span>
+          </button>
+        </form>
+
+        <div class="error-404__actions">
+          <a class="error-404__button error-404__button--primary button-primary active" href="{{ section.settings.primary_link | default: routes.root_url }}">
+            {{ primary_label | escape }}
+            {%- render 'icon', name: 'arrow', class: 'icon-arrow' -%}
+          </a>
+          <a class="error-404__button error-404__button--secondary button-secondary" href="{{ section.settings.secondary_link | default: routes.all_products_collection_url }}">
+            {{ secondary_label | escape }}
+          </a>
+        </div>
+
+        {%- if section.settings.menu != blank and section.settings.menu.links.size > 0 -%}
+          <nav class="error-404__suggestions" aria-label="{{ suggestions_label | escape }}">
+            <span class="error-404__suggestions-label">{{ suggestions_label | escape }}</span>
+            <ul class="error-404__links" role="list">
+              {%- for link in section.settings.menu.links -%}
+                <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </nav>
+        {%- endif -%}
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: 'page_not_found',
+    page_location: {{ canonical_url | json }},
+    page_referrer: document.referrer
+  });
+  document.dispatchEvent(new CustomEvent('theme:404-view', {
+    detail: {
+      location: {{ canonical_url | json }},
+      referrer: document.referrer
+    }
+  }));
+</script>
 
 {% schema %}
 {
@@ -28,33 +97,80 @@
   "class": "section-main-404",
   "settings": [
     {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "t:sections.all.container_width.label",
+      "options": [
+        { "value": "fixed", "label": "t:sections.all.container_width.options__fixed.label" },
+        { "value": "full", "label": "t:sections.all.container_width.options__full.label" }
+      ],
+      "default": "fixed"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "t:sections.main_404.settings.eyebrow.label"
+    },
+    {
       "type": "text",
       "id": "title",
-      "label": "t:sections.main_404.settings.title.label",
-      "default": "Page not found"
+      "label": "t:sections.main_404.settings.title.label"
     },
     {
-      "type": "textarea",
+      "type": "richtext",
       "id": "content",
-      "label": "t:sections.main_404.settings.content.label",
-      "default": "The page you are looking for does not exist."
+      "label": "t:sections.main_404.settings.content.label"
     },
     {
       "type": "text",
-      "id": "back_text",
-      "label": "t:sections.main_404.settings.back_text.label",
-      "default": "Back to home"
+      "id": "search_label",
+      "label": "t:sections.main_404.settings.search_label.label"
     },
     {
       "type": "text",
-      "id": "products_text",
-      "label": "t:sections.main_404.settings.products_text.label",
-      "default": "View products"
+      "id": "search_placeholder",
+      "label": "t:sections.main_404.settings.search_placeholder.label"
+    },
+    {
+      "type": "text",
+      "id": "search_button",
+      "label": "t:sections.main_404.settings.search_button.label"
+    },
+    {
+      "type": "text",
+      "id": "primary_label",
+      "label": "t:sections.main_404.settings.primary_label.label"
     },
     {
       "type": "url",
-      "id": "products_link",
-      "label": "t:sections.main_404.settings.products_link.label"
+      "id": "primary_link",
+      "label": "t:sections.main_404.settings.primary_link.label"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "t:sections.main_404.settings.secondary_label.label"
+    },
+    {
+      "type": "url",
+      "id": "secondary_link",
+      "label": "t:sections.main_404.settings.secondary_link.label"
+    },
+    {
+      "type": "text",
+      "id": "suggestions_label",
+      "label": "t:sections.main_404.settings.suggestions_label.label"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "t:sections.main_404.settings.menu.label"
     }
   ]
 }

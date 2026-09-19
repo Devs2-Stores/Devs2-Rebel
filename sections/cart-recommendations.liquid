@@ -1,0 +1,92 @@
+{{ 'cart-recommendations.css' | asset_url | stylesheet_tag }}
+{{ 'product-card.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-card.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'cart-recommendations.js' | asset_url }}" defer="defer"></script>
+
+{%- assign first_cart_product = cart.items.first.product -%}
+{%- assign container_width = section.settings.container_width | default: 'fixed' -%}
+
+<cart-recommendations
+  data-url="{{ routes.product_recommendations_url | default: '/recommendations/products' }}"
+  data-section-id="{{ section.id }}"
+  data-product-id="{{ first_cart_product.id }}"
+  data-limit="{{ section.settings.product_limit }}"
+  data-intent="{{ section.settings.intent }}"
+  {% unless recommendations.performed and recommendations.products_count > 0 %}hidden{% endunless %}
+>
+  {%- if recommendations.performed and recommendations.products_count > 0 -%}
+    <section class="cart-recommendations color-{{ section.settings.color_scheme }}" data-recommendation-products>
+      <div class="{% if container_width == 'fixed' %}page-width{% endif %}">
+        <h2 class="cart-recommendations__heading">{{ 'sections.cart_recommendations.heading' | t }}</h2>
+        <div class="cart-recommendations__grid">
+          {%- for product in recommendations.products limit: section.settings.product_limit -%}
+            {%- render 'product-card',
+              product: product,
+              show_vendor: false,
+              show_secondary_image: false,
+              show_quickview: false,
+              image_ratio: 'portrait'
+            -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+</cart-recommendations>
+
+{% schema %}
+{
+  "name": "t:sections.cart_recommendations.name",
+  "tag": "section",
+  "class": "section-cart-recommendations",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "t:sections.all.container_width.label",
+      "options": [
+        {
+          "value": "fixed",
+          "label": "t:sections.all.container_width.options__fixed.label"
+        },
+        {
+          "value": "full",
+          "label": "t:sections.all.container_width.options__full.label"
+        }
+      ],
+      "default": "fixed"
+    },
+    {
+      "type": "select",
+      "id": "intent",
+      "label": "t:sections.cart_recommendations.settings.intent.label",
+      "options": [
+        {
+          "value": "related",
+          "label": "t:sections.cart_recommendations.settings.intent.options.related"
+        },
+        {
+          "value": "complementary",
+          "label": "t:sections.cart_recommendations.settings.intent.options.complementary"
+        }
+      ],
+      "default": "related"
+    },
+    {
+      "type": "range",
+      "id": "product_limit",
+      "label": "t:sections.cart_recommendations.settings.product_limit.label",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    }
+  ]
+}
+{% endschema %}

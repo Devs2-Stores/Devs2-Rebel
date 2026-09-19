@@ -1,0 +1,26 @@
+name: Shopify Theme Store CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: AST Validation & Quality Gates
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Validate Schema Range Math
+        run: node scripts/validate-schema-ranges.mjs
+
+      - name: Validate Locale Integrity & Parity
+        run: node scripts/validate-locales.mjs

@@ -1,23 +1,36 @@
-{%- if recommendations.performed and recommendations.products_count > 0 -%}
-  <div class="complementary-products">
-    {%- if section.settings.heading != blank -%}
-      <h2 class="complementary-products__heading global-heading">{{ section.settings.heading | escape }}</h2>
-    {%- endif -%}
-    <div class="complementary-products__grid">
-      <ul class="product-cards complementary-products__list" role="list">
-        {%- for product in recommendations.products limit: section.settings.product_limit -%}
-          {%- liquid
-            assign lazyload = 'lazy'
-            assign fetchpriority = 'auto'
-          -%}
-          <li class="product-cards__item" role="listitem">
-            {%- render 'product-card', product: product, lazyload: lazyload, fetchpriority: fetchpriority, show_vendor: true -%}
-          </li>
-        {%- endfor -%}
-      </ul>
+{{ 'product-card.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-card.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'product-recommendations.js' | asset_url }}" defer="defer"></script>
+
+<product-recommendations
+  data-url="{{ routes.product_recommendations_url | default: '/recommendations/products' }}"
+  data-section-id="{{ section.id }}"
+  data-product-id="{{ product.id }}"
+  data-limit="{{ section.settings.product_limit }}"
+  data-intent="complementary"
+  {% unless recommendations.performed and recommendations.products_count > 0 %}hidden{% endunless %}
+>
+  {%- if recommendations.performed and recommendations.products_count > 0 -%}
+    <div class="complementary-products" data-recommendation-products>
+      {%- if section.settings.heading != blank -%}
+        <h2 class="complementary-products__heading global-heading">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      <div class="complementary-products__grid">
+        <ul class="product-cards complementary-products__list" role="list">
+          {%- for product in recommendations.products limit: section.settings.product_limit -%}
+            {%- liquid
+              assign lazyload = 'lazy'
+              assign fetchpriority = 'auto'
+            -%}
+            <li class="product-cards__item" role="listitem">
+              {%- render 'product-card', product: product, lazyload: lazyload, fetchpriority: fetchpriority, show_vendor: true -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
     </div>
-  </div>
-{%- endif -%}
+  {%- endif -%}
+</product-recommendations>
 
 {% schema %}
 {

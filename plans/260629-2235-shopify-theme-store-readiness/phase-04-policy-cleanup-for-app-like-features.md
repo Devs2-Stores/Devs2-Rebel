@@ -12,6 +12,19 @@ dependencies: [1, 2, 3]
 
 Reduce Shopify Theme Store review risk from features that can look like app replacements, fake urgency, or broken demo routes.
 
+## Policy decisions
+
+| Surface | Decision | Required action before Theme Store QA |
+|---|---|---|
+| Account access | Keep and implement Shopify's account component in desktop and mobile headers. | Add a merchant-configurable customer-account menu and render `<shopify-account>` when customer accounts are enabled. |
+| Related and complementary products | Keep. | Replace collection-first and inert rendering with Product Recommendations endpoint section responses. |
+| Variant swatches | Keep and implement. | Render native `swatch.image` and `swatch.color` values with text fallback. |
+| Product comparison | Remove. | Remove the incomplete toggle, bar, route, and related persistence because no comparison destination is implemented. |
+| Countdown | Default off. | Render only with an explicit merchant date and remove zero-timer and generic flash-sale defaults. |
+| Back in stock | Remove from the default product template. | Do not promise automated notifications without an implemented notification service. |
+| Coupon preview | Remove from the default product template. | Restore only when a complete merchant-configured discount contract exists. |
+| Wishlist | Default off unless explicitly retained as a local-browser feature. | Do not imply account synchronization or app-backed persistence. |
+
 ## Requirements
 
 - Functional: wishlist, compare, back-in-stock, coupon, countdown, recently-viewed, and promotion behavior must have a clear keep/remove/default-off decision.

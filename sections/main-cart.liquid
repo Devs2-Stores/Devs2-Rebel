@@ -4,12 +4,13 @@
 {% endcomment -%}
 
 {%- liquid
-  if cart.item_count > 0
-    assign cart_data_attr = ''
-    assign cart_empty_attr = 'style="display: none;"'
-  else
-    assign cart_data_attr = 'style="display: none;"'
-    assign cart_empty_attr = ''
+  assign show_upsale = section.settings.show_upsale | default: false, allow_false: true
+  assign has_upsale = false
+  if show_upsale and section.settings.upsale_collection != blank
+    assign upsale_collection = collections[section.settings.upsale_collection]
+    if upsale_collection != blank and upsale_collection.products_count > 0
+      assign has_upsale = true
+    endif
   endif
 -%}
 
@@ -20,24 +21,24 @@
       <span class="cart-template__count">({{ cart.item_count }} {{ 'sections.cart.caption' | t }})</span>
     </h1>
 
-    <div class="cart-template__wrapper">
-      <div class="cart-template__data" {{ cart_data_attr }}>
+    <div class="cart-template__wrapper{% if has_upsale %} cart-template__wrapper--with-upsale{% endif %}">
+      <div class="cart-template__data"{% if cart.item_count == 0 %} hidden{% endif %}>
         {%- render 'cart-items' -%}
         <div class="cart-template__footer">
           {%- if section.settings.show_note -%}
             <div class="cart-template__note">
               <h4>{{ 'sections.cart.note' | t }}</h4>
               <label for="cart-template__note-input" class="sr-only">{{ 'sections.cart.note' | t }}</label>
-              <textarea name="note" id="cart-template__note-input" placeholder="{{ 'sections.cart.note' | t }}">{{ cart.note }}</textarea>
+              <textarea name="note" id="cart-template__note-input" form="cart" placeholder="{{ 'sections.cart.note' | t }}">{{ cart.note | escape }}</textarea>
 
               {%- if section.settings.show_invoice -%}
                 <h4 class="invoice-title">{{ section.settings.invoice_title | escape }}</h4>
-                <label for="invoice-name" class="sr-only">{{ section.settings.invoice_company_label }}</label>
-                <input type="text" name="invoice[name]" id="invoice-name" value="{{ cart.attributes.invoice_name }}" class="invoice-input" placeholder="{{ section.settings.invoice_company_label }}">
-                <label for="invoice-taxcode" class="sr-only">{{ section.settings.invoice_tax_label }}</label>
-                <input type="text" name="invoice[taxcode]" id="invoice-taxcode" value="{{ cart.attributes.invoice_taxcode }}" class="invoice-input" placeholder="{{ section.settings.invoice_tax_label }}">
-                <label for="invoice-address" class="sr-only">{{ section.settings.invoice_address_label }}</label>
-                <input type="text" name="invoice[address]" id="invoice-address" value="{{ cart.attributes.invoice_address }}" class="invoice-input" placeholder="{{ section.settings.invoice_address_label }}">
+                <label for="invoice-name" class="sr-only">{{ section.settings.invoice_company_label | escape }}</label>
+                <input type="text" name="attributes[invoice_name]" id="invoice-name" value="{{ cart.attributes.invoice_name | escape }}" class="invoice-input" form="cart" placeholder="{{ section.settings.invoice_company_label | escape }}">
+                <label for="invoice-taxcode" class="sr-only">{{ section.settings.invoice_tax_label | escape }}</label>
+                <input type="text" name="attributes[invoice_taxcode]" id="invoice-taxcode" value="{{ cart.attributes.invoice_taxcode | escape }}" class="invoice-input" form="cart" placeholder="{{ section.settings.invoice_tax_label | escape }}">
+                <label for="invoice-address" class="sr-only">{{ section.settings.invoice_address_label | escape }}</label>
+                <input type="text" name="attributes[invoice_address]" id="invoice-address" value="{{ cart.attributes.invoice_address | escape }}" class="invoice-input" form="cart" placeholder="{{ section.settings.invoice_address_label | escape }}">
               {%- endif -%}
             </div>
           {%- endif -%}
@@ -45,7 +46,7 @@
         </div>
       </div>
 
-      <div class="cart-template__empty" {{ cart_empty_attr }}>
+      <div class="cart-template__empty"{% if cart.item_count > 0 %} hidden{% endif %}>
         <span class="empty-icon">{%- render 'icon', name: 'sad' -%}</span>
         <p class="empty-text">{{ 'sections.cart.empty' | t }}</p>
         <a href="{{ routes.all_products_collection_url }}" class="button-primary active">
@@ -53,38 +54,29 @@
         </a>
       </div>
 
-      {%- if section.settings.show_upsale and section.settings.upsale_collection != blank -%}
-        {%- assign upsale_collection = collections[section.settings.upsale_collection] -%}
-        {%- if upsale_collection != blank and upsale_collection.products_count > 0 -%}
-          <div class="cart-template__upsale">
-            <section class="cart-template__upsale-products">
-              <h4>{{ section.settings.upsale_title | escape }}</h4>
-              <ul class="upsale-list" role="list">
-                {%- for product in upsale_collection.products limit: section.settings.upsale_limit -%}
-                  <li class="upsale-item" role="listitem">
-                    <a href="{{ product.url }}" class="upsale-item__image" aria-label="{{ product.title | escape }}">
-                      {%- if product.featured_image -%}
-                        <img
-                          src="{{ product.featured_image | image_url: width: 240 }}"
-                          alt="{{ product.title | escape }}"
-                          loading="lazy"
-                          decoding="async"
-                          width="120"
-                          height="120"
-                        >
-                      {%- endif -%}
-                    </a>
-                    <div class="upsale-item__info">
-                      <a href="{{ product.url }}" class="upsale-item__title">{{ product.title | escape }}</a>
-                      <p class="upsale-item__vendor">{{ product.vendor | escape }}</p>
-                      <p class="upsale-item__price">{{ product.price | money }}</p>
-                    </div>
-                  </li>
-                {%- endfor -%}
-              </ul>
-            </section>
-          </div>
-        {%- endif -%}
+      {%- if has_upsale -%}
+        <div class="cart-template__upsale">
+          <section class="cart-template__upsale-products">
+            <h4>{{ section.settings.upsale_title | escape }}</h4>
+            <ul class="upsale-list" role="list">
+              {%- for product in upsale_collection.products limit: section.settings.upsale_limit -%}
+                <li class="upsale-item" role="listitem">
+                  <a href="{{ product.url }}" class="upsale-item__image" aria-label="{{ product.title | escape }}">
+                    {%- if product.featured_image -%}
+                      {%- assign upsale_alt = product.featured_image.alt | default: product.title | escape -%}
+                      {{ product.featured_image | image_url: width: 240 | image_tag: widths: '120, 180, 240', sizes: '80px', alt: upsale_alt, loading: 'lazy', decoding: 'async' }}
+                    {%- endif -%}
+                  </a>
+                  <div class="upsale-item__info">
+                    <a href="{{ product.url }}" class="upsale-item__title">{{ product.title | escape }}</a>
+                    <p class="upsale-item__vendor">{{ product.vendor | escape }}</p>
+                    <p class="upsale-item__price">{{ product.price | money }}</p>
+                  </div>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </section>
+        </div>
       {%- endif -%}
     </div>
   </div>
@@ -118,25 +110,25 @@
       "type": "text",
       "id": "invoice_title",
       "label": "t:sections.main_cart.settings.invoice_title.label",
-      "default": "Invoice information (optional)"
+      "default": "t:sections.main_cart.settings.invoice_title.default"
     },
     {
       "type": "text",
       "id": "invoice_company_label",
       "label": "t:sections.main_cart.settings.invoice_company_label.label",
-      "default": "Company name"
+      "default": "t:sections.main_cart.settings.invoice_company_label.default"
     },
     {
       "type": "text",
       "id": "invoice_tax_label",
       "label": "t:sections.main_cart.settings.invoice_tax_label.label",
-      "default": "Tax code"
+      "default": "t:sections.main_cart.settings.invoice_tax_label.default"
     },
     {
       "type": "text",
       "id": "invoice_address_label",
       "label": "t:sections.main_cart.settings.invoice_address_label.label",
-      "default": "Invoice address"
+      "default": "t:sections.main_cart.settings.invoice_address_label.default"
     },
     {
       "type": "header",
@@ -157,7 +149,7 @@
       "type": "text",
       "id": "upsale_title",
       "label": "t:sections.main_cart.settings.upsale_title.label",
-      "default": "You may also like"
+      "default": "t:sections.main_cart.settings.upsale_title.default"
     },
     {
       "type": "range",

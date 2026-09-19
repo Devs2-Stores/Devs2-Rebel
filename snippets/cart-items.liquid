@@ -1,92 +1,56 @@
 <cart-items role="list">
-  <form action="{{ routes.cart_url }}" method="POST" id="cart-template__data-form" novalidate>
-    <div class="cart-template__data-head">
+  <form action="{{ routes.cart_url }}" method="post" id="cart" novalidate>
+    <div class="cart-template__data-head" aria-hidden="true">
       <span class="head-image">{{ 'sections.cart.headings.image' | t }}</span>
       <span class="head-info">{{ 'sections.cart.headings.product' | t }}</span>
     </div>
     {%- for item in cart.items -%}
-    <cart-item data-var-id="{{ item.variant_id }}" data-product-id="{{ item.product.id }}" data-line-item="{{ forloop.index }}" role="listitem">
-      <a class="cart-item__image" href="{{ item.product.url }}">
-        {%- if item.image -%}
-        {%- assign cart_item_image = item.image | image_url: width: 160 -%}
-        <img src="{{ cart_item_image }}" alt="{{ item.product.title | escape }}" width="80" height="80" loading="lazy">
-        {%- elsif item.product.featured_image -%}
-        {%- assign cart_item_image = item.product.featured_image | image_url: width: 160 -%}
-        <img src="{{ cart_item_image }}" alt="{{ item.product.title | escape }}" width="80" height="80" loading="lazy">
-        {%- else -%}
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" aria-hidden="true" width="80" height="80" style="opacity:.3;padding:1rem">
-          <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3.75 21h16.5A1.5 1.5 0 0 0 21.75 19.5V4.5A1.5 1.5 0 0 0 20.25 3H3.75A1.5 1.5 0 0 0 2.25 4.5v15A1.5 1.5 0 0 0 3.75 21Z" />
-        </svg>
-        {%- endif -%}
-      </a>
-      <div class="cart-item__info">
-        <div>
-          <a href="{{ item.product.url }}" class="cart-item__title">{{ item.product.title | escape }}</a>
-          {%- if item.variant.title != 'Default Title' -%}
-          <ul class="cart-item__variants">
-            {%- for option in item.product.options -%}
-            <li>{{ option }}: {{ item.variant.options[forloop.index0] }}</li>
-            {%- endfor -%}
-          </ul>
+      <cart-item data-var-id="{{ item.variant_id }}" data-product-id="{{ item.product.id }}" data-line-item="{{ forloop.index }}" role="listitem">
+        <a class="cart-item__image" href="{{ item.url }}" aria-label="{{ item.product.title | escape }}">
+          {%- if item.image != blank -%}
+            {%- assign cart_item_alt = item.image.alt | default: item.product.title | escape -%}
+            {{
+              item.image
+              | image_url: width: 320
+              | image_tag:
+                widths: '120, 160, 240, 320',
+                sizes: '(max-width: 749px) 90px, 16vw',
+                alt: cart_item_alt,
+                loading: 'lazy',
+                decoding: 'async'
+            }}
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'cart-item__placeholder' }}
           {%- endif -%}
-          {%- if item.selling_plan_allocation -%}
-            <p class="cart-item__selling-plan">{{ item.selling_plan_allocation.selling_plan.name }}</p>
-          {%- endif -%}
-          {%- if item.line_level_discount_allocations != blank -%}
-            <ul class="cart-item__discounts" role="list">
-              {%- for discount_allocation in item.line_level_discount_allocations -%}
-                <li class="cart-item__discount">
-                  <svg aria-hidden="true" focusable="false" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.5 1.5h3.75l5.25 5.25-3.75 3.75L1.5 5.25V1.5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><circle cx="4.125" cy="3.875" r=".375" fill="currentColor"/></svg>
-                  {{ discount_allocation.discount_application.title }} (-{{ discount_allocation.amount | money }})
-                </li>
-              {%- endfor -%}
-            </ul>
-          {%- endif -%}
-          <div class="cart-item__price-mobile">
-            {%- if item.price == 0 -%}
-            <strong class="cart-item__price">{{ 'products.product.price.contact' | t }}</strong>
-            {%- else -%}
-            <strong class="cart-item__price">{{ item.price | money }}</strong>
-            {%- if item.variant.compare_at_price > item.price -%}
-            <del class="cart-item__compare-price">{{ item.variant.compare_at_price | money }}</del>
-            {%- endif -%}
-            {%- endif -%}
-            {%- if item.unit_price -%}
-              <span class="cart-item__unit-price">
-                <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
-                {{ item.unit_price | money }}/{{ item.unit_price_measurement.reference_value }}{{ item.unit_price_measurement.reference_unit }}
-              </span>
-            {%- endif -%}
+        </a>
+        <div class="cart-item__info">
+          <div>
+            <a href="{{ item.url }}" class="cart-item__title">{{ item.product.title | escape }}</a>
+            {%- render 'cart-line-details', item: item -%}
+            <div class="cart-item__price-mobile">
+              {%- render 'cart-line-price', item: item -%}
+            </div>
+          </div>
+          <div class="cart-item__quantity">
+            <span class="sr-only">{{ 'products.product.quantity.label' | t }}</span>
+            {%- render 'quantity-selector',
+              form: 'cart',
+              name: 'updates[]',
+              product: item.product,
+              variant: item.variant,
+              cart_item: item,
+              id_suffix: forloop.index,
+              value: item.quantity
+            -%}
+            <button type="button" data-action="delete-item" title="{{ 'sections.cart.remove_title' | t: title: item.product.title }}" class="cart-item__delete" aria-label="{{ 'sections.cart.remove_title' | t: title: item.product.title }}">{{ 'sections.cart.remove' | t }}</button>
+            <p class="cart-item__quantity-error" data-quantity-error role="alert"></p>
           </div>
         </div>
-        <div class="cart-item__quantity">
-          <label class="sr-only">{{ 'products.product.quantity.label' | t }}</label>
-          {%- if item.price > 0 -%}
-          {%- render 'quantity-selector', form: "cart-template__data-form", product: item.product, variant: item.variant, value: item.quantity, min: 1, step: 1 -%}
-          {%- endif -%}
+        <div class="cart-item__actions">
+          {%- render 'cart-line-price', item: item -%}
           <button type="button" data-action="delete-item" title="{{ 'sections.cart.remove_title' | t: title: item.product.title }}" class="cart-item__delete" aria-label="{{ 'sections.cart.remove_title' | t: title: item.product.title }}">{{ 'sections.cart.remove' | t }}</button>
         </div>
-      </div>
-      <div class="cart-item__actions">
-        <span>
-          {%- if item.price == 0 -%}
-          <strong class="cart-item__price">{{ 'products.product.price.contact' | t }}</strong>
-          {%- else -%}
-          <strong class="cart-item__price">{{ item.price | money }}</strong>
-          {%- if item.variant.compare_at_price > item.price -%}
-          <del class="cart-item__compare-price">{{ item.variant.compare_at_price | money }}</del>
-          {%- endif -%}
-          {%- endif -%}
-          {%- if item.unit_price -%}
-            <span class="cart-item__unit-price">
-              <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
-              {{ item.unit_price | money }}/{{ item.unit_price_measurement.reference_value }}{{ item.unit_price_measurement.reference_unit }}
-            </span>
-          {%- endif -%}
-        </span>
-        <button type="button" data-action="delete-item" title="{{ 'sections.cart.remove_title' | t: title: item.product.title }}" class="cart-item__delete" aria-label="{{ 'sections.cart.remove_title' | t: title: item.product.title }}">{{ 'sections.cart.remove' | t }}</button>
-      </div>
-    </cart-item>
+      </cart-item>
     {%- endfor -%}
   </form>
 </cart-items>

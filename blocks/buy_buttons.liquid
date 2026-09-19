@@ -1,0 +1,111 @@
+{% doc %}
+  Buy buttons block.
+
+  Renders the product form with add-to-cart, buy-now, gift-card recipient
+  fields, and dynamic checkout buttons.
+{% enddoc %}
+
+{%- liquid
+  assign selected_variant = product.selected_or_first_available_variant | default: product.variants.first
+  assign available = product.selected_or_first_available_variant.available
+  assign product_form_id = 'product-form-' | append: section.id
+-%}
+
+<div class="product-template__buy-buttons" {{ block.shopify_attributes }}>
+  {%- if product.gift_card? -%}
+    <div class="product-template__gift-card-recipient">
+      <details>
+        <summary class="product-template__gift-card-toggle">
+          <input type="checkbox" name="properties[__shopify_send_gift_card_to_recipient]" id="gift-card-recipient-toggle" form="{{ product_form_id }}">
+          <input type="hidden" name="properties[__shopify_offset]" data-gift-card-offset form="{{ product_form_id }}" disabled>
+          <label for="gift-card-recipient-toggle">{{ 'recipient.form.checkbox' | t }}</label>
+        </summary>
+        <div class="product-template__gift-card-fields">
+          <div class="field">
+            <label for="gift-card-recipient-email">{{ 'recipient.form.email_label' | t }} <span aria-hidden="true">*</span></label>
+            <input type="email" id="gift-card-recipient-email" name="properties[Recipient email]" placeholder="{{ 'recipient.form.email' | t }}" form="{{ product_form_id }}" data-gift-card-field required disabled>
+          </div>
+          <div class="field">
+            <label for="gift-card-recipient-name">{{ 'recipient.form.name_label' | t }}</label>
+            <input type="text" id="gift-card-recipient-name" name="properties[Recipient name]" placeholder="{{ 'recipient.form.name' | t }}" form="{{ product_form_id }}" data-gift-card-field disabled>
+          </div>
+          <div class="field">
+            <label for="gift-card-recipient-message">{{ 'recipient.form.message_label' | t }}</label>
+            <textarea id="gift-card-recipient-message" name="properties[Message]" placeholder="{{ 'recipient.form.message' | t }}" maxlength="200" form="{{ product_form_id }}" data-gift-card-field disabled></textarea>
+            <span class="field__info">{{ 'recipient.form.max_characters' | t: max_chars: 200 }}</span>
+          </div>
+          <div class="field">
+            <label for="gift-card-recipient-send-on">{{ 'recipient.form.send_on_label' | t }}</label>
+            <input type="date" id="gift-card-recipient-send-on" name="properties[Send on]" form="{{ product_form_id }}" data-gift-card-field disabled>
+          </div>
+        </div>
+      </details>
+    </div>
+  {%- endif -%}
+  {%- form 'product', product, id: product_form_id, class: 'product-template__actions' -%}
+    <input type="hidden" name="id" value="{{ selected_variant.id }}" data-product-variant-id>
+    {%- assign selling_plan_allocation = selected_variant.selling_plan_allocations.first -%}
+    <input type="hidden" name="selling_plan" value="{{ selling_plan_allocation.selling_plan.id }}" data-product-selling-plan {% if selling_plan_allocation == blank %}disabled{% endif %}>
+    <div class="product-template__buttons">
+      <button
+        {% unless available %}
+          disabled
+        {% endunless %}
+        id="product-template__add"
+        data-product-add
+        type="submit"
+        name="add"
+        class="button-primary product-template__add-btn"
+        aria-label="{{ 'products.product.add_to_cart' | t }}"
+      >
+        <span class="button-spinner hidden"></span>
+        <span class="button-content">
+          {%- render 'icon', name: 'cart' -%}
+          <span>{{ 'products.product.add_to_cart' | t }}</span>
+        </span>
+      </button>
+      {%- unless block.settings.show_dynamic_checkout -%}
+        <button
+          {% unless available %}disabled{% endunless %}
+          id="product-template__buy"
+          data-product-buy
+          data-contact-link="{{ block.settings.contact_link | default: '/pages/contact' }}"
+          type="button"
+          class="button-primary active product-template__buy-btn"
+          aria-label="{{ 'products.product.buy_now' | t }}"
+        >
+          <span class="button-spinner hidden"></span>
+          <span class="button-content">{{ 'products.product.buy_now' | t }}</span>
+        </button>
+      {%- endunless -%}
+    </div>
+    {%- if block.settings.show_dynamic_checkout -%}
+      <div class="product-template__dynamic-checkout">{{ form | payment_button }}</div>
+    {%- endif -%}
+  {%- endform -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main_product.blocks.buy_buttons.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "url",
+      "id": "contact_link",
+      "label": "t:sections.main_product.settings.contact_link.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dynamic_checkout",
+      "label": "t:sections.main_product.blocks.buy_buttons.settings.show_dynamic_checkout.label",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main_product.blocks.buy_buttons.name"
+    }
+  ]
+}
+{% endschema %}

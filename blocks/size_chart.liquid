@@ -1,0 +1,32 @@
+{% doc %}
+  Size chart block.
+
+  Renders a button that opens the size-guide modal.
+{% enddoc %}
+
+<div class="product-template__size-chart" {{ block.shopify_attributes }}>
+  <button type="button" class="product-template__size-chart-btn" data-size-guide-trigger>
+    {%- render 'icon', name: 'grid' -%}
+    <span>{{ block.settings.button_label | default: settings.product_size_guide_button | default: 'products.product.size_guide' | t }}</span>
+  </button>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main_product.blocks.size_chart.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.main_product.blocks.size_chart.settings.button_label.label",
+      "default": "Size guide"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main_product.blocks.size_chart.name"
+    }
+  ]
+}
+{% endschema %}

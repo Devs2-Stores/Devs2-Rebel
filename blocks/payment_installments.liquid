@@ -1,0 +1,28 @@
+{% doc %}
+  Payment installments block.
+
+  Renders Shop Pay / payment terms messaging for the selected variant.
+{% enddoc %}
+
+{%- liquid
+  assign selected_variant = product.selected_or_first_available_variant | default: product.variants.first
+-%}
+
+<div class="product-template__payment-installments" {{ block.shopify_attributes }}>
+  {%- form 'product', product, id: 'product-payment-installments-form' -%}
+    <input type="hidden" name="id" value="{{ selected_variant.id }}" data-product-variant-id>
+    {{ form | payment_terms }}
+  {%- endform -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main_product.blocks.payment_installments.name",
+  "tag": null,
+  "presets": [
+    {
+      "name": "t:sections.main_product.blocks.payment_installments.name"
+    }
+  ]
+}
+{% endschema %}

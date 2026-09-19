@@ -301,6 +301,18 @@
         "predictive_search_show_price": {
           "label": "Show price",
           "info": "Visible when search suggestions are enabled."
+        },
+        "predictive_search_featured_menu": {
+          "label": "Quick search links menu",
+          "info": "Display quick search links menu below search input"
+        },
+        "predictive_search_recommendation_collection": {
+          "label": "Recommended products collection",
+          "info": "Display recommended products when search input is empty"
+        },
+        "predictive_search_trending_terms": {
+          "label": "Trending search terms",
+          "info": "Comma-separated list of popular search queries"
         }
       }
     },
@@ -793,6 +805,12 @@
         "menu": {
           "label": "Menu"
         },
+        "header__account": {
+          "content": "Customer account"
+        },
+        "customer_account_menu": {
+          "label": "Account menu"
+        },
         "header__behavior": {
           "content": "Behavior"
         },
@@ -846,26 +864,11 @@
         "contact_link": {
           "label": "Contact page link"
         },
-        "tab_description_name": {
-          "label": "Description tab name"
-        },
         "description_readmore": {
           "label": "Enable read more toggle"
         },
         "description_max_height": {
           "label": "Max description height"
-        },
-        "header__related": {
-          "content": "Related products"
-        },
-        "show_related": {
-          "label": "Show related products"
-        },
-        "related_title": {
-          "label": "Related products title"
-        },
-        "related_limit": {
-          "label": "Number of related products"
         }
       },
       "blocks": {
@@ -886,8 +889,49 @@
             "title": {
               "label": "Tab title"
             },
+            "content_type": {
+              "label": "Content type",
+              "options__description": {
+                "label": "Product description"
+              },
+              "options__page": {
+                "label": "Page"
+              },
+              "options__richtext": {
+                "label": "Rich text"
+              },
+              "options__custom_liquid": {
+                "label": "Custom Liquid"
+              }
+            },
             "page": {
               "label": "Page content"
+            },
+            "richtext": {
+              "label": "Rich text content"
+            },
+            "custom_liquid": {
+              "label": "Custom Liquid content"
+            },
+            "icon": {
+              "label": "Icon"
+            }
+          }
+        },
+        "description": {
+          "name": "Description"
+        },
+        "rating": {
+          "name": "Rating"
+        },
+        "collapsible_row": {
+          "name": "Collapsible row",
+          "settings": {
+            "heading": {
+              "label": "Heading"
+            },
+            "content": {
+              "label": "Content"
             }
           }
         },
@@ -917,7 +961,12 @@
           }
         },
         "buy_buttons": {
-          "name": "Buy buttons"
+          "name": "Buy buttons",
+          "settings": {
+            "show_dynamic_checkout": {
+              "label": "Show dynamic checkout button"
+            }
+          }
         },
         "quantity_selector": {
           "name": "Quantity selector"
@@ -1272,16 +1321,20 @@
           "label": "Show invoice fields"
         },
         "invoice_title": {
-          "label": "Invoice section title"
+          "label": "Invoice section title",
+          "default": "VAT Invoice"
         },
         "invoice_company_label": {
-          "label": "Company name placeholder"
+          "label": "Company name placeholder",
+          "default": "Company name"
         },
         "invoice_tax_label": {
-          "label": "Tax code placeholder"
+          "label": "Tax code placeholder",
+          "default": "Tax code"
         },
         "invoice_address_label": {
-          "label": "Invoice address placeholder"
+          "label": "Invoice address placeholder",
+          "default": "Company address"
         },
         "header__upsale": {
           "content": "Upsell products"
@@ -1293,7 +1346,8 @@
           "label": "Upsell collection"
         },
         "upsale_title": {
-          "label": "Upsell section title"
+          "label": "Upsell section title",
+          "default": "You may also like"
         },
         "upsale_limit": {
           "label": "Number of upsell products"
@@ -1325,6 +1379,36 @@
         },
         "products_link": {
           "label": "Products button link"
+        },
+        "eyebrow": {
+          "label": "Eyebrow"
+        },
+        "search_label": {
+          "label": "Search accessibility label"
+        },
+        "search_placeholder": {
+          "label": "Search placeholder"
+        },
+        "search_button": {
+          "label": "Search button text"
+        },
+        "primary_label": {
+          "label": "Primary button text"
+        },
+        "primary_link": {
+          "label": "Primary button link"
+        },
+        "secondary_label": {
+          "label": "Secondary button text"
+        },
+        "secondary_link": {
+          "label": "Secondary button link"
+        },
+        "suggestions_label": {
+          "label": "Suggested links heading"
+        },
+        "menu": {
+          "label": "Suggested links menu"
         }
       }
     },
@@ -1703,6 +1787,104 @@
         },
         "gallery_title": {
           "label": "Gallery title"
+        },
+        "hero_focal_point_desktop": {
+          "label": "Desktop focal point"
+        },
+        "hero_focal_point_mobile": {
+          "label": "Mobile focal point"
+        },
+        "hero_focal_point": {
+          "options__center": {
+            "label": "Center"
+          },
+          "options__left": {
+            "label": "Left"
+          },
+          "options__right": {
+            "label": "Right"
+          },
+          "options__top": {
+            "label": "Top"
+          },
+          "options__bottom": {
+            "label": "Bottom"
+          }
+        },
+        "header__hero_actions": {
+          "content": "Hero actions"
+        },
+        "hero_primary_label": {
+          "label": "Primary button label"
+        },
+        "hero_primary_link": {
+          "label": "Primary button link"
+        },
+        "hero_secondary_label": {
+          "label": "Secondary button label"
+        },
+        "hero_secondary_link": {
+          "label": "Secondary button link"
+        },
+        "header__actions": {
+          "content": "About actions"
+        },
+        "show_actions": {
+          "label": "Show action cards"
+        },
+        "actions_subheading": {
+          "label": "Section eyebrow"
+        },
+        "actions_title": {
+          "label": "Section title"
+        },
+        "actions_description": {
+          "label": "Section description"
+        },
+        "action_1_eyebrow": {
+          "label": "Card 1 eyebrow"
+        },
+        "action_1_title": {
+          "label": "Card 1 title"
+        },
+        "action_1_text": {
+          "label": "Card 1 text"
+        },
+        "action_1_label": {
+          "label": "Card 1 link label"
+        },
+        "action_1_link": {
+          "label": "Card 1 link"
+        },
+        "action_2_eyebrow": {
+          "label": "Card 2 eyebrow"
+        },
+        "action_2_title": {
+          "label": "Card 2 title"
+        },
+        "action_2_text": {
+          "label": "Card 2 text"
+        },
+        "action_2_label": {
+          "label": "Card 2 link label"
+        },
+        "action_2_link": {
+          "label": "Card 2 link"
+        },
+        "action_3_eyebrow": {
+          "label": "Card 3 eyebrow"
+        },
+        "action_3_title": {
+          "label": "Card 3 title"
+        },
+        "action_3_text": {
+          "label": "Card 3 text"
+        },
+        "action_3_label": {
+          "label": "Card 3 link label"
+        },
+        "action_3_link": {
+          "label": "Card 3 link"
         }
       },
       "blocks": {
@@ -1840,6 +2022,23 @@
         },
         "per_page": {
           "label": "Collections per page"
+        },
+        "collection_source": {
+          "label": "Collection source",
+          "options__all": {
+            "label": "All collections"
+          },
+          "options__menu": {
+            "label": "Selected menu"
+          }
+        },
+        "collection_menu": {
+          "label": "Collections menu",
+          "info": "Only collection links are displayed. Keep this menu to 50 links or fewer because selected menus are not paginated."
+        },
+        "excluded_handles": {
+          "label": "Excluded collection handles",
+          "info": "Applies to All collections. Separate handles with commas, for example: all, frontpage."
         }
       }
     },
@@ -1881,6 +2080,56 @@
         },
         "map_embed": {
           "label": "Map embed code"
+        },
+        "info_eyebrow": {
+          "label": "Information eyebrow"
+        },
+        "info_intro": {
+          "label": "Information introduction"
+        },
+        "stat_1_value": {
+          "label": "First statistic value"
+        },
+        "stat_1_label": {
+          "label": "First statistic label"
+        },
+        "stat_2_value": {
+          "label": "Second statistic value"
+        },
+        "stat_2_label": {
+          "label": "Second statistic label"
+        },
+        "note_title": {
+          "label": "Note title"
+        },
+        "note_text": {
+          "label": "Note text"
+        }
+      },
+      "blocks": {
+        "text_field": {
+          "name": "Text field"
+        },
+        "select_field": {
+          "name": "Dropdown field"
+        },
+        "checkbox_field": {
+          "name": "Checkbox field"
+        },
+        "settings": {
+          "label": {
+            "label": "Field label"
+          },
+          "placeholder": {
+            "label": "Placeholder"
+          },
+          "options": {
+            "label": "Options",
+            "info": "Enter one option per line."
+          },
+          "required": {
+            "label": "Required"
+          }
         }
       }
     },
@@ -1938,6 +2187,14 @@
               "info": "Enter the group block ID to assign this question to a group"
             }
           }
+        },
+        "heading": {
+          "name": "Topic heading",
+          "settings": {
+            "title": {
+              "label": "Topic title"
+            }
+          }
         }
       }
     },
@@ -1978,6 +2235,29 @@
             },
             "map_embed": {
               "label": "Map embed code"
+            },
+            "address_region": {
+              "label": "State / Region"
+            },
+            "postal_code": {
+              "label": "Postal / ZIP code"
+            },
+            "country": {
+              "label": "Country"
+            },
+            "store_image": {
+              "label": "Store image",
+              "info": "Featured photo of store storefront"
+            },
+            "map_url": {
+              "label": "Map directions URL",
+              "info": "Google Maps link for directions"
+            },
+            "latitude": {
+              "label": "Latitude"
+            },
+            "longitude": {
+              "label": "Longitude"
             }
           }
         }
@@ -2409,6 +2689,79 @@
         },
         "products": {
           "label": "Products"
+        }
+      }
+    },
+    "product_recommendations": {
+      "name": "Product recommendations",
+      "settings": {
+        "heading": {
+          "label": "Heading"
+        },
+        "product_limit": {
+          "label": "Maximum products to show"
+        }
+      }
+    },
+    "cart_recommendations": {
+      "name": "Cart recommendations",
+      "settings": {
+        "intent": {
+          "label": "Intent",
+          "options": {
+            "related": "Related products",
+            "complementary": "Complementary products"
+          }
+        },
+        "product_limit": {
+          "label": "Maximum products to show"
+        }
+      }
+    },
+    "cart": {},
+    "featured_blog": {},
+    "featured_collection": {},
+    "collection_list": {},
+    "collection_template": {},
+    "page_content": {
+      "name": "Page content"
+    },
+    "hero": {
+      "settings": {
+        "focal_point_desktop": {
+          "label": "Desktop focal point"
+        },
+        "focal_point_mobile": {
+          "label": "Mobile focal point"
+        },
+        "focal_point": {
+          "options__center": {
+            "label": "Center"
+          },
+          "options__left": {
+            "label": "Left"
+          },
+          "options__right": {
+            "label": "Right"
+          },
+          "options__top": {
+            "label": "Top"
+          },
+          "options__bottom": {
+            "label": "Bottom"
+          }
+        }
+      }
+    },
+    "testimonials": {
+      "settings": {
+        "pagination_label": "Go to testimonial"
+      }
+    },
+    "main_password": {
+      "settings": {
+        "show_newsletter": {
+          "label": "Show newsletter signup"
         }
       }
     }

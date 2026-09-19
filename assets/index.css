@@ -206,60 +206,6 @@
 .section-group-banners .section-group-banners-item-link:hover img { transform: scale(1.15); }
 .section-group-banners .section-group-banners-item-link img { transition: all 0.5s ease; }
 .section-group-banners .section-group-banners-item-button { position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%); }
-.section-countdown-banner .section-countdown-banner-container { position: relative; overflow: hidden; }
-.section-countdown-banner .section-countdown-banner-background img { width: 100%; }
-.section-countdown-banner .section-countdown-banner-content {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-}
-.section-countdown-banner .section-countdown-banner-content-inner { max-width: 42rem; padding: 1.5rem 0; }
-@media (min-width: 1024px) {
-  .section-countdown-banner .section-countdown-banner-content-inner { padding: 2.5rem 0; }
-}
-@media (min-width: 1280px) {
-  .section-countdown-banner .section-countdown-banner-content-inner { padding: 4rem 0; }
-}
-.section-countdown-banner .section-countdown-banner-content-heading { margin-bottom: 1rem; color: var(--color-white); }
-@media (min-width: 1024px) {
-  .section-countdown-banner .section-countdown-banner-content-heading { margin-bottom: 1.5rem; }
-}
-.section-countdown-banner .section-countdown-banner-content-description { margin-bottom: 1.5rem; color: rgba(255, 255, 255, 0.9); font-size: 1rem; }
-@media (min-width: 1024px) {
-  .section-countdown-banner .section-countdown-banner-content-description { margin-bottom: 2rem; font-size: 1.125rem; }
-}
-.section-countdown-banner .section-countdown-banner-content-countdown { margin-bottom: 1.5rem; }
-@media (min-width: 1024px) {
-  .section-countdown-banner .section-countdown-banner-content-countdown { margin-bottom: 2rem; }
-}
-.section-countdown-banner .countdownLoop-vi { display: inline-flex; gap: 1rem; flex-wrap: wrap; }
-.section-countdown-banner .countdownLoop-vi .countdown-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.75rem;
-  font-weight: 400;
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.25rem;
-  width: 70px;
-  color: var(--color-white) !important;
-}
-@media (min-width: 640px) {
-  .section-countdown-banner .countdownLoop-vi .countdown-item { width: 80px; }
-}
-.section-countdown-banner .countdownLoop-vi .countdown-item b {
-  font-size: 1.25rem;
-  font-weight: 700;
-  line-height: 1.25;
-  margin-bottom: 0.25rem;
-  color: var(--color-white);
-}
-@media (min-width: 640px) {
-  .section-countdown-banner .countdownLoop-vi .countdown-item b { font-size: 1.5rem; color: var(--color-white); }
-}
 .section-instagram .section-instagram-head { margin-bottom: 2rem; }
 .section-instagram .section-instagram-items { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
 @media (max-width: 767px) {

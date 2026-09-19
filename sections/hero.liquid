@@ -32,6 +32,8 @@
     --hero-pb-d: {{ section.settings.padding_bottom_desktop }}px;
     --hero-pt-m: {{ section.settings.padding_top_mobile }}px;
     --hero-pb-m: {{ section.settings.padding_bottom_mobile }}px;
+    --hero-object-position-d: {{ section.settings.focal_point_desktop }};
+    --hero-object-position-m: {{ section.settings.focal_point_mobile }};
   "
 >
   {%- comment %} Mobile-only media (art direction) {% endcomment -%}
@@ -131,8 +133,8 @@
           {%- when 'heading' -%}
             {%- liquid
               assign heading_tag = block.settings.heading_tag
-              if template.name == 'index' and section.index == 1
-                assign heading_tag = 'h1'
+              if template.name == 'index' and heading_tag == 'h1'
+                assign heading_tag = 'h2'
               endif
             -%}
             <{{ heading_tag }}
@@ -305,6 +307,11 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: var(--hero-object-position-m, center center);
+  }
+
+  @media (min-width: 750px) {
+    .section-hero__img { object-position: var(--hero-object-position-d, center center); }
   }
 
   .section-hero__video {
@@ -594,6 +601,32 @@
       "id": "image_mobile",
       "label": "Mobile image",
       "info": "Optional. Falls back to desktop image."
+    },
+    {
+      "type": "select",
+      "id": "focal_point_desktop",
+      "label": "t:sections.hero.settings.focal_point_desktop.label",
+      "options": [
+        { "value": "center center", "label": "t:sections.hero.settings.focal_point.options__center.label" },
+        { "value": "left center", "label": "t:sections.hero.settings.focal_point.options__left.label" },
+        { "value": "right center", "label": "t:sections.hero.settings.focal_point.options__right.label" },
+        { "value": "center top", "label": "t:sections.hero.settings.focal_point.options__top.label" },
+        { "value": "center bottom", "label": "t:sections.hero.settings.focal_point.options__bottom.label" }
+      ],
+      "default": "center center"
+    },
+    {
+      "type": "select",
+      "id": "focal_point_mobile",
+      "label": "t:sections.hero.settings.focal_point_mobile.label",
+      "options": [
+        { "value": "center center", "label": "t:sections.hero.settings.focal_point.options__center.label" },
+        { "value": "left center", "label": "t:sections.hero.settings.focal_point.options__left.label" },
+        { "value": "right center", "label": "t:sections.hero.settings.focal_point.options__right.label" },
+        { "value": "center top", "label": "t:sections.hero.settings.focal_point.options__top.label" },
+        { "value": "center bottom", "label": "t:sections.hero.settings.focal_point.options__bottom.label" }
+      ],
+      "default": "center center"
     },
     {
       "type": "text",

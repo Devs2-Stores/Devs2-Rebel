@@ -1,0 +1,79 @@
+{% doc %}
+  Variant picker block.
+
+  Renders the button or dropdown variant picker for the product.
+{% enddoc %}
+
+<div
+  class="product-template__variant-picker"
+  style="--variant-picker-spacing: {{ block.settings.option_spacing }}px; --variant-unavailable-opacity: {{ block.settings.unavailable_opacity | divided_by: 100.0 }};"
+  {{ block.shopify_attributes }}
+>
+  {%- liquid
+    assign picker_type = block.settings.picker_type
+    assign cross_out = block.settings.cross_out_unavailable
+  -%}
+  {%- if picker_type == 'dropdown' -%}
+    {%- render 'product-variant-dropdown', cross_out_unavailable: cross_out -%}
+  {%- else -%}
+    {%- render 'product-variant-picker', cross_out_unavailable: cross_out -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main_product.blocks.variant_picker.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "picker_type",
+      "label": "t:sections.main_product.blocks.variant_picker.settings.picker_type.label",
+      "options": [
+        {
+          "value": "buttons",
+          "label": "t:sections.main_product.blocks.variant_picker.settings.picker_type.options__buttons.label"
+        },
+        {
+          "value": "dropdown",
+          "label": "t:sections.main_product.blocks.variant_picker.settings.picker_type.options__dropdown.label"
+        }
+      ],
+      "default": "buttons"
+    },
+    {
+      "type": "checkbox",
+      "id": "cross_out_unavailable",
+      "label": "t:sections.main_product.blocks.variant_picker.settings.cross_out_unavailable.label",
+      "info": "t:sections.main_product.blocks.variant_picker.settings.cross_out_unavailable.info",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "unavailable_opacity",
+      "label": "t:sections.main_product.blocks.variant_picker.settings.unavailable_opacity.label",
+      "info": "t:sections.main_product.blocks.variant_picker.settings.unavailable_opacity.info",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "default": 50,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "option_spacing",
+      "label": "t:sections.main_product.blocks.variant_picker.settings.option_spacing.label",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "default": 16,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main_product.blocks.variant_picker.name"
+    }
+  ]
+}
+{% endschema %}

@@ -119,55 +119,7 @@
     });
   }
 
-  function initCountdownVI() {
-    var elements = document.querySelectorAll('.countdownLoop-vi');
-    if (elements.length === 0) return;
 
-    // Build countdown DOM once, then update only text values (avoids innerHTML XSS risk)
-    for (var j = 0; j < elements.length; j++) {
-      (function(el) {
-        var color = el.style.getPropertyValue('--countdown-color') || '#F30';
-        var textColor = el.style.getPropertyValue('--countdown-text-color') || '#F9F9F9';
-        var darker = darkenHex(color);
-        var bg = 'linear-gradient(135deg,' + color + ' 0%,' + darker + ' 100%)';
-        var labels = ['Days', 'Hours', 'Mins', 'Secs'];
-        var valueEls = [];
-
-        labels.forEach(function(label) {
-          var span = document.createElement('span');
-          span.className = 'countdown-item';
-          span.style.background = bg;
-          span.style.color = textColor;
-          var b = document.createElement('b');
-          b.textContent = '00';
-          span.appendChild(b);
-          span.appendChild(document.createTextNode(label));
-          el.appendChild(span);
-          valueEls.push(b);
-        });
-
-        el._countdownValues = valueEls;
-      })(elements[j]);
-    }
-
-    var id = setInterval(function() {
-      var now = Date.now();
-
-      for (var i = 0; i < elements.length; i++) {
-        var el = elements[i];
-        if (!el._countdownValues || !el.isConnected) continue;
-        var target = parseDateTimeVI(el.getAttribute('data-time'));
-        if (!target) continue;
-
-        var distance = Math.max(0, target - now);
-        el._countdownValues[0].textContent = pad(Math.floor(distance / 86400000));
-        el._countdownValues[1].textContent = pad(Math.floor((distance % 86400000) / 3600000));
-        el._countdownValues[2].textContent = pad(Math.floor((distance % 3600000) / 60000));
-        el._countdownValues[3].textContent = pad(Math.floor((distance % 60000) / 1000));
-      }
-    }, 1000);
-    trackInterval(id);
-  }
 
   function initHomeBlogSwiper() {
     var el = document.querySelector('.section-home-blog__swiper');
@@ -255,7 +207,6 @@
     initProductBannerTabs();
     initSliderSwiper();
     initProductsSliderSwiper();
-    initCountdownVI();
     initHomeBlogSwiper();
     initLookbookHotspots();
     initScrollFadeUp();

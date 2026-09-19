@@ -1,0 +1,39 @@
+{% doc %}
+  Collapsible row block.
+
+  Renders a heading + richtext content inside a details/summary toggle.
+{% enddoc %}
+
+{%- if block.settings.heading != blank and block.settings.content != blank -%}
+  <details class="product-template__collapsible" {{ block.shopify_attributes }}>
+    <summary class="product-template__collapsible-summary">
+      <span>{{ block.settings.heading | escape }}</span>
+      {%- render 'icon', name: 'chevron-right' -%}
+    </summary>
+    <div class="product-template__collapsible-content rte">{{ block.settings.content }}</div>
+  </details>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.main_product.blocks.collapsible_row.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.main_product.blocks.collapsible_row.settings.heading.label"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "t:sections.main_product.blocks.collapsible_row.settings.content.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main_product.blocks.collapsible_row.name"
+    }
+  ]
+}
+{% endschema %}

@@ -1,7 +1,7 @@
 {{- 'search-modal.css' | asset_url | stylesheet_tag -}}
 <script src="{{ 'search-modal.js' | asset_url }}" defer="defer"></script>
 
-<search-modal class="search-modal-wrapper" role="dialog" aria-modal="true" aria-labelledby="search-modal-title" data-placeholder="{{ 'templates.search.enter_keyword' | t }}">
+<search-modal class="search-modal-wrapper" role="dialog" aria-modal="true" aria-labelledby="search-modal-title" data-placeholder="{{ 'templates.search.enter_keyword' | t }}" data-tab-products="{{ 'templates.search.products' | t }}" data-tab-articles="{{ 'templates.search.articles' | t }}" data-tab-pages="{{ 'templates.search.pages' | t }}" data-tabs-label="{{ 'templates.search.tabs_label' | t }}">
 	<button type="button" class="search-modal-overlay" data-action="close-search-modal" aria-label="{{ 'accessibility.close' | t }}"></button>
 	<div class="search-modal-panel">
 		<div class="search-modal-header">
@@ -16,6 +16,9 @@
 					<input type="hidden" name="type" value="product,article,page">
 					<label for="search-modal-input" class="sr-only">{{ 'general.search.search' | t }}</label>
 					<input type="text" name="q" id="search-modal-input" class="search-modal-input" placeholder="{{ 'templates.search.placeholder' | t }}" autocomplete="off" autofocus role="combobox" aria-expanded="false" aria-controls="predictive-search-results" aria-haspopup="listbox">
+					<button type="button" class="search-modal-clear hidden" data-action="clear-search" aria-label="{{ 'general.search.reset' | t }}">
+						{%- render 'icon', name: 'close' -%}
+					</button>
 					<button type="submit" class="search-modal-submit" aria-label="{{ 'accessibility.search' | t }}">
 						{%- render 'icon', name: 'search' -%}
 					</button>
@@ -24,8 +27,35 @@
 		</div>
 		<div class="search-modal-results" aria-live="polite" aria-atomic="false">
 			<div class="search-modal-results-content" role="listbox">
-				<div class="search-modal-empty">
-					<p>{{ 'templates.search.enter_keyword' | t }}</p>
+				<div class="search-modal-initial">
+					{%- assign trending_terms = settings.predictive_search_trending_terms | split: ',' -%}
+					{%- assign predictive_content_menu = settings.predictive_search_featured_menu | default: linklists['main-menu'] -%}
+					{%- if settings.predictive_search_trending_terms != blank -%}
+					<div class="search-modal-initial__group">
+						<h3>{{ 'templates.search.trending_searches' | t }}</h3>
+						<ul class="search-modal-initial__links">
+							{%- for term in trending_terms -%}
+								{%- assign trimmed_term = term | strip -%}
+								{%- if trimmed_term != blank -%}
+								<li><a href="{{ routes.search_url }}?q={{ trimmed_term | url_encode }}">{{ trimmed_term | escape }}</a></li>
+								{%- endif -%}
+							{%- endfor -%}
+						</ul>
+					</div>
+					{%- endif -%}
+					{%- if predictive_content_menu.links.size > 0 -%}
+					<div class="search-modal-initial__group">
+						<h3>{{ 'templates.search.featured_categories' | t }}</h3>
+						<ul class="search-modal-initial__links">
+							{%- for link in predictive_content_menu.links -%}
+							<li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+							{%- endfor -%}
+						</ul>
+					</div>
+					{%- endif -%}
+					{%- if settings.predictive_search_trending_terms == blank and predictive_content_menu.links.size == 0 -%}
+					<p class="search-modal-initial__placeholder">{{ 'templates.search.enter_keyword' | t }}</p>
+					{%- endif -%}
 				</div>
 			</div>
 		</div>

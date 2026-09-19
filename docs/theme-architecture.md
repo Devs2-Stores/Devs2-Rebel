@@ -2,13 +2,15 @@
 
 ## Overview
 
-Devs2 Rebel is a Shopify Online Store 2.0 base theme on the `devs2` branch. It is configured as a verified base theme in [.workspace-context.json](../.workspace-context.json). The deployable surface is the standard Shopify theme directories; `_reference/`, `node_modules/`, plans, and documentation are excluded from upload by [.shopifyignore](../.shopifyignore).
+Devs2 Rebel is a Shopify Online Store 2.0 base theme on the `main` Git branch. It is configured as a verified base theme in [.workspace-context.json](../.workspace-context.json). The deployable surface is the standard Shopify theme directories; `_reference/`, `node_modules/`, plans, and documentation are excluded from upload by [.shopifyignore](../.shopifyignore).
 
 ## Request Path
 
 `layout/theme.liquid` is the global shell. It renders metadata, fonts, styles, configuration, deferred scripts, header/footer section groups, and global overlays (newsletter, cart, search, quickview, social, toast, and back-to-top). `layout/password.liquid` is the separate password-page shell.
 
 JSON templates under [`templates/`](../templates/) select ordered sections for storefront routes. Section files under [`sections/`](../sections/) own editor-configurable page blocks; reusable Liquid fragments live under [`snippets/`](../snippets/). The active template is the authority for which sections render on a route.
+
+Quick view uses [`templates/product.quickview.liquid`](../templates/product.quickview.liquid) as its only product fragment, fetched from the current product route with `?view=quickview`. The global modal owns the fetched product payload and the quick-view picker consumes that payload; no search-context section owns this response.
 
 ## Asset Boundaries
 

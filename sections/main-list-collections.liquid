@@ -1,13 +1,33 @@
 {%- liquid
-  case section.settings.sort
-    when 'products_high', 'products_low'
-      assign collections = collections | sort: 'all_products_count'
-    when 'date', 'date_reversed'
-      assign collections = collections | sort: 'published_at'
-  endcase
-
-  if section.settings.sort == 'products_high' or section.settings.sort == 'date_reversed' or section.settings.sort == 'alphabetical_reversed'
-    assign collections = collections | reverse
+  assign collection_source = section.settings.collection_source | default: 'all'
+  assign excluded_handles = section.settings.excluded_handles | downcase | replace: ' ', '' | split: ','
+  assign collection_menu = linklists[section.settings.collection_menu]
+  assign item_list_entries = ''
+  assign displayed_count = 0
+  assign source_total = 0
+  assign columns_desktop = section.settings.columns_desktop | default: 3 | plus: 0
+  if collection_source == 'all'
+    case section.settings.sort
+      when 'products_high', 'products_low'
+        assign collections = collections | sort: 'all_products_count'
+      when 'date', 'date_reversed'
+        assign collections = collections | sort: 'published_at'
+    endcase
+    if section.settings.sort == 'products_high' or section.settings.sort == 'date_reversed' or section.settings.sort == 'alphabetical_reversed'
+      assign collections = collections | reverse
+    endif
+    for source_collection in collections
+      assign source_handle = source_collection.handle | downcase
+      unless excluded_handles contains source_handle
+        assign source_total = source_total | plus: 1
+      endunless
+    endfor
+  else
+    for source_link in collection_menu.links
+      if source_link.type == 'collection_link' and source_link.object != blank
+        assign source_total = source_total | plus: 1
+      endif
+    endfor
   endif
 -%}
 
@@ -20,30 +40,40 @@
 
 <div class="list-collections-template section-padding">
   <div class="{% if section.settings.container_width == 'fixed' %}page-width{% endif %}">
-    {%- if section.settings.title != blank or section.settings.subtitle != blank -%}
-      <div class="list-collections-template__heading global-heading text-align-desktop-{{ section.settings.heading_alignment_desktop }} text-align-mobile-{{ section.settings.heading_alignment_mobile }}">
-        {%- if section.settings.title != blank -%}
-          <h1 class="section-heading heading-size-{{ section.settings.heading_size }}">{{ section.settings.title }}</h1>
-        {%- endif -%}
-        {%- if section.settings.subtitle != blank -%}
-          <p class="section-subheading">{{ section.settings.subtitle }}</p>
-        {%- endif -%}
-        <div class="list-collections-template__meta">
-          <span>{{ 'sections.collection_list.collections_count' | t: count: collections.size }}</span>
-        </div>
-      </div>
+    {%- assign heading_title = section.settings.title -%}
+    {%- if heading_title == blank -%}
+      {%- assign heading_title = 'sections.main_list_collections.default_title' | t -%}
     {%- endif -%}
+    <div class="list-collections-template__heading global-heading text-align-desktop-{{ section.settings.heading_alignment_desktop }} text-align-mobile-{{ section.settings.heading_alignment_mobile }}">
+      <h1 class="section-heading heading-size-{{ section.settings.heading_size }}">{{ heading_title }}</h1>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="section-subheading">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+      <div class="list-collections-template__meta"><span>{{ 'sections.collection_list.collections_count' | t: count: source_total }}</span></div>
+    </div>
 
-    {%- paginate collections by section.settings.per_page -%}
+    {%- if collection_source == 'all' -%}
+      {%- paginate collections by section.settings.per_page -%}
       <ul class="collection-grid column-gap-{{ section.settings.column_gap }}" role="list">
         {%- for collection in collections -%}
           {%- liquid
-            assign lazyload = 'lazy'
-            if forloop.index <= section.settings.columns_desktop
-              assign lazyload = 'eager'
+            assign collection_handle = collection.handle | downcase
+            assign is_excluded = false
+            if excluded_handles contains collection_handle
+              assign is_excluded = true
             endif
           -%}
-          <li class="{% if forloop.first %}collection-grid__item--featured{% endif %}">
+          {%- unless is_excluded -%}
+          {%- assign lazyload = 'lazy' -%}
+          {%- if displayed_count < columns_desktop -%}{%- assign lazyload = 'eager' -%}{%- endif -%}
+          {%- assign displayed_count = displayed_count | plus: 1 -%}
+          {%- assign fetchpriority = 'auto' -%}
+          {%- if displayed_count == 1 -%}{%- assign fetchpriority = 'high' -%}{%- endif -%}
+          {%- capture item_url -%}{{ shop.url }}{{ collection.url }}{%- endcapture -%}
+          {%- capture item_entry -%}{"@type":"ListItem","position":{{ displayed_count }},"name":{{ collection.title | json }},"url":{{ item_url | json }}}{%- endcapture -%}
+          {%- if item_list_entries != blank -%}{%- assign item_list_entries = item_list_entries | append: ',' -%}{%- endif -%}
+          {%- assign item_list_entries = item_list_entries | append: item_entry -%}
+          <li class="{% if displayed_count == 1 %}collection-grid__item--featured{% endif %}">
             {%- render 'collection-card',
               collection: collection,
               image_shape: section.settings.image_shape,
@@ -52,22 +82,46 @@
               show_product_count: section.settings.show_product_count,
               columns_mobile: section.settings.columns_mobile,
               columns_desktop: section.settings.columns_desktop,
-              lazyload: lazyload
+              lazyload: lazyload,
+              fetchpriority: fetchpriority
             -%}
           </li>
-        {%- else -%}
-          <li class="collection-grid__empty">
-            <p>{{ 'sections.collection_list.empty' | t }}</p>
-          </li>
+          {%- endunless -%}
         {%- endfor -%}
       </ul>
+      {%- if displayed_count == 0 -%}<div class="collection-grid__empty"><p>{{ 'sections.collection_list.empty' | t }}</p></div>{%- endif -%}
 
       {%- if paginate.pages > 1 -%}
         {%- render 'section-pagination', paginate: paginate -%}
       {%- endif -%}
-    {%- endpaginate -%}
+      {%- endpaginate -%}
+    {%- else -%}
+      <ul class="collection-grid column-gap-{{ section.settings.column_gap }}" role="list">
+        {%- for link in collection_menu.links -%}
+          {%- if link.type == 'collection_link' and link.object != blank -%}
+            {%- assign collection = link.object -%}
+            {%- assign lazyload = 'lazy' -%}
+            {%- if displayed_count <= columns_desktop -%}{%- assign lazyload = 'eager' -%}{%- endif -%}
+            {%- assign fetchpriority = 'auto' -%}
+            {%- if displayed_count == 1 -%}{%- assign fetchpriority = 'high' -%}{%- endif -%}
+            {%- capture item_url -%}{{ shop.url }}{{ collection.url }}{%- endcapture -%}
+            {%- capture item_entry -%}{"@type":"ListItem","position":{{ displayed_count }},"name":{{ collection.title | json }},"url":{{ item_url | json }}}{%- endcapture -%}
+            {%- if item_list_entries != blank -%}{%- assign item_list_entries = item_list_entries | append: ',' -%}{%- endif -%}
+            {%- assign item_list_entries = item_list_entries | append: item_entry -%}
+            <li class="{% if displayed_count == 1 %}collection-grid__item--featured{% endif %}">
+              {%- render 'collection-card', collection: collection, image_shape: section.settings.image_shape, image_position: section.settings.image_position, card_heading_size: section.settings.card_heading_size, show_product_count: section.settings.show_product_count, columns_mobile: section.settings.columns_mobile, columns_desktop: section.settings.columns_desktop, lazyload: lazyload, fetchpriority: fetchpriority -%}
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+      {%- if displayed_count == 0 -%}<div class="collection-grid__empty"><p>{{ 'sections.collection_list.empty' | t }}</p></div>{%- endif -%}
+    {%- endif -%}
   </div>
 </div>
+
+<script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"ItemList","name":{{ section.settings.title | default: page_title | json }},"numberOfItems":{{ displayed_count }},"itemListElement":[{{ item_list_entries }}]}
+</script>
 
 {% schema %}
 {
@@ -77,6 +131,29 @@
     {
       "type": "header",
       "content": "t:sections.main_list_collections.settings.header__heading.content"
+    },
+    {
+      "type": "select",
+      "id": "collection_source",
+      "label": "t:sections.main_list_collections.settings.collection_source.label",
+      "options": [
+        { "value": "all", "label": "t:sections.main_list_collections.settings.collection_source.options__all.label" },
+        { "value": "menu", "label": "t:sections.main_list_collections.settings.collection_source.options__menu.label" }
+      ],
+      "default": "all"
+    },
+    {
+      "type": "link_list",
+      "id": "collection_menu",
+      "label": "t:sections.main_list_collections.settings.collection_menu.label",
+      "info": "t:sections.main_list_collections.settings.collection_menu.info"
+    },
+    {
+      "type": "textarea",
+      "id": "excluded_handles",
+      "label": "t:sections.main_list_collections.settings.excluded_handles.label",
+      "info": "t:sections.main_list_collections.settings.excluded_handles.info",
+      "default": "all, frontpage"
     },
     {
       "type": "inline_richtext",

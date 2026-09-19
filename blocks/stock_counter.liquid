@@ -1,0 +1,46 @@
+{% doc %}
+  Stock counter block.
+
+  Shows a low-stock notice when the selected variant inventory is at or
+  below the configured threshold.
+{% enddoc %}
+
+{%- liquid
+  assign selected_variant = product.selected_or_first_available_variant | default: product.variants.first
+  assign inv = selected_variant.inventory_quantity
+  assign stock_threshold = block.settings.stock_threshold
+-%}
+
+<div
+  class="product-template__stock-counter{% if inv > 0 and inv <= stock_threshold %} is-visible{% endif %}"
+  data-stock-counter
+  data-threshold="{{ stock_threshold }}"
+  {{ block.shopify_attributes }}
+>
+  <span class="stock-counter__text">
+    {{ 'products.product.inventory_low_stock_show_count' | t: quantity: inv }}
+  </span>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main_product.blocks.stock_counter.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "range",
+      "id": "stock_threshold",
+      "label": "t:sections.main_product.settings.stock_threshold.label",
+      "min": 3,
+      "max": 30,
+      "step": 1,
+      "default": 10
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main_product.blocks.stock_counter.name"
+    }
+  ]
+}
+{% endschema %}

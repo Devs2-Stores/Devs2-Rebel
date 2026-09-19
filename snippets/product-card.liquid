@@ -5,11 +5,9 @@
   @param {boolean} [show_secondary_image=true] - Hiển thị ảnh thứ 2 khi hover
   @param {boolean} [show_quickview=true] - Hiển thị nút xem nhanh
   @param {boolean} [show_add_to_cart=true] - Hiển thị nút thêm giỏ hàng
-  @param {boolean} [show_wishlist=true] - Hiển thị nút yêu thích
   @param {string} [lazyload='lazy'] - Loading strategy: lazy hoặc eager
   @param {string} [fetchpriority='auto'] - Fetch priority: auto hoặc high
   @param {string} [image_ratio='portrait'] - Tỷ lệ ảnh: adapt, portrait, square, landscape
-  @param {boolean} [show_compare=false] - Hiển thị checkbox so sánh sản phẩm
   @example {% render 'product-card', product: product, show_vendor: true %}
 {% enddoc %}
 
@@ -31,10 +29,6 @@
   if show_add_to_cart == nil
     assign show_add_to_cart = true
   endif
-  if show_wishlist == nil
-    assign show_wishlist = true
-  endif
-
   assign lazyload = lazyload | default: 'lazy'
   assign fetchpriority = fetchpriority | default: 'auto'
   assign image_ratio = image_ratio | default: 'portrait'
@@ -51,9 +45,13 @@
   assign t_view_product = 'products.product_card.view_product' | t
   assign t_quick_view = 'products.product_card.quick_view' | t
   assign t_add_to_cart = 'products.product_card.add_to_cart' | t
-  assign t_add_wishlist = 'products.product_card.add_to_wishlist' | t
   assign t_sold_out = 'products.product_card.sold_out' | t
+  assign t_new = 'products.product_card.new' | t
   assign t_contact = 'products.product_card.contact_price' | t
+  assign is_new = false
+  if product.tags contains 'new' or product.tags contains 'New'
+    assign is_new = true
+  endif
 -%}
 
 {%- if product and product != empty -%}
@@ -61,21 +59,6 @@
 <script src="{{ 'product-card.js' | asset_url }}" defer="defer"></script>
 <product-card class="product-card">
   <article class="product-card__wrapper">
-    {%- comment %} ── Compare checkbox ───────────── {% endcomment -%}
-    {%- if show_compare -%}
-    <label class="product-card__compare">
-      <input
-        type="checkbox"
-        class="product-card__compare-input"
-        data-compare-id="{{ product.id }}"
-        data-compare-title="{{ product.title | escape }}"
-        data-compare-image="{{ product.featured_image | image_url: width: 200 }}"
-        data-compare-price="{{ variant.price | money }}"
-        data-compare-url="{{ product.url }}"
-        aria-label="{{ 'products.facets.compare' | t }} {{ product.title | escape }}"
-      >
-    </label>
-    {%- endif -%}
     {%- comment %} ── Media ─────────────────────── {% endcomment -%}
     <div class="product-card__media">
       <a class="product-card__media-inner" href="{{ product.url }}" aria-label="{{ t_view_product }} {{ product.title | escape }}" title="{{ product.title | escape }}">
@@ -125,6 +108,9 @@
         {%- unless product.available -%}
           <div class="product-card__badge product-card__badge--soldout">{{ t_sold_out }}</div>
         {%- endunless -%}
+        {%- if is_new and product.available -%}
+          <div class="product-card__badge product-card__badge--new">{{ t_new }}</div>
+        {%- endif -%}
         {%- if discount_percentage > 0 and product.available -%}
           <div class="product-card__badge product-card__badge--discount">-{{ discount_percentage }}%</div>
         {%- endif -%}
@@ -147,11 +133,6 @@
         </form>
       {%- endif -%}
 
-      {%- if show_wishlist -%}
-        <button type="button" class="product-card__wishlist" data-action="add-wishlist" data-product-id="{{ product.id }}" data-product-handle="{{ product.handle }}" aria-label="{{ t_add_wishlist }} {{ product.title | escape }}" title="{{ t_add_wishlist }}">
-          {%- render 'icon', name: 'heart' -%}
-        </button>
-      {%- endif -%}
     </div>
 
     {%- comment %} ── Content ────────────────────── {% endcomment -%}
@@ -164,11 +145,60 @@
         <a href="{{ product.url }}" title="{{ product.title | escape }}">{{ product.title | escape }}</a>
       </h3>
 
+      {%- if product.options_with_values != blank -%}
+        {%- for option in product.options_with_values -%}
+          {%- assign option_name = option.name | downcase -%}
+          {%- assign has_swatches = false -%}
+          {%- if option_name contains 'color' or option_name contains 'colour' or option_name contains 'pattern' -%}
+            {%- assign has_swatches = true -%}
+          {%- else -%}
+            {%- for val in option.values -%}
+              {%- if val.swatch != blank -%}
+                {%- assign has_swatches = true -%}
+                {%- break -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+          {%- if has_swatches -%}
+            <div class="product-card__swatches" aria-label="{{ option.name | escape }}">
+              {%- for swatch_value in option.values limit: 6 -%}
+                {%- assign option_key = 'option' | append: option.position -%}
+                {%- assign swatch_variant = product.variants | where: option_key, swatch_value | first -%}
+                {%- assign swatch_image = swatch_variant.featured_image | default: product.featured_image -%}
+                {%- liquid
+                  assign swatch_style = ''
+                  if swatch_value.swatch.image
+                    assign img_url = swatch_value.swatch.image | image_url: width: 80
+                    assign swatch_style = 'background-image: url(' | append: img_url | append: '); background-size: cover; background-position: center;'
+                  elsif swatch_value.swatch.color
+                    assign swatch_style = 'background-color: ' | append: swatch_value.swatch.color | append: ';'
+                  elsif swatch_image != blank
+                    assign img_url = swatch_image | image_url: width: 80
+                    assign swatch_style = 'background-image: url(' | append: img_url | append: '); background-size: cover; background-position: center;'
+                  endif
+                -%}
+                <a
+                  href="{{ swatch_variant.url | default: product.url }}"
+                  class="product-card__swatch"
+                  title="{{ swatch_value | escape }}"
+                  aria-label="{{ swatch_value | escape }}"
+                  {% if swatch_style != '' %}style="{{ swatch_style }}"{% endif %}
+                ></a>
+              {%- endfor -%}
+            </div>
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+
       <div class="product-card__price">
         {%- if price == 0 -%}
           <span class="product-card__price-contact">{{ t_contact }}</span>
-        {%- elsif product.price_varies -%}
-          <span class="product-card__price-range">
+          {%- elsif product.price_varies -%}
+            {%- if product.compare_at_price_max > product.price_min -%}
+              <del class="product-card__price-compare">{{ product.compare_at_price_max | money }}</del>
+            {%- endif -%}
+            <span class="product-card__price-range">
             {{ product.price_min | money }} – {{ product.price_max | money }}
           </span>
         {%- else -%}

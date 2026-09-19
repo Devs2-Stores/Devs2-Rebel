@@ -1,5 +1,11 @@
 
-<stores-page class="page-stores">
+<stores-page
+  class="page-stores"
+  data-all-districts="{{ 'sections.page_stores.all_districts' | t | escape }}"
+  data-count-template="{{ 'sections.page_stores.count' | t | escape }}"
+  data-open-label="{{ 'sections.page_stores.open_now' | t | escape }}"
+  data-closed-label="{{ 'sections.page_stores.closed_now' | t | escape }}"
+>
   <section class="stores-hero">
     <div class="page-width">
       <div class="stores-hero__wrap">
@@ -36,7 +42,7 @@
               </select>
             </div>
             <div class="stores-sidebar__meta">
-              <span class="stores-sidebar__count" id="stores-count"></span>
+              <span class="stores-sidebar__count" id="stores-count" role="status" aria-live="polite"></span>
               <button type="button" class="stores-sidebar__clear" id="stores-clear" style="display:none">
                 {%- render 'icon', name: 'close', size: '12' -%}
                 <span>{{ 'sections.page_stores.clear_filter' | t }}</span>
@@ -53,22 +59,27 @@
                data-store-address="{{ block.settings.address | escape }}"
                data-store-province="{{ block.settings.province | escape }}"
                data-store-district="{{ block.settings.district | escape }}"
+               data-store-hours="{{ block.settings.hours | escape }}"
                {{ block.shopify_attributes }}>
-            {%- if block.settings.map_embed != blank -%}
-            <div class="stores-card__map">
-              {{ block.settings.map_embed }}
+            {%- assign store_image_alt = 'sections.page_stores.store_image_alt' | t: store: block.settings.name -%}
+            <div class="stores-card__media is-loading" data-store-image>
+              <span class="stores-card__media-fallback" aria-hidden="true">
+                {%- render 'icon', name: 'store', size: '28' -%}
+              </span>
+              {%- if block.settings.store_image != blank -%}
+                {{- block.settings.store_image | image_url: width: 960 | image_tag: widths: '320, 480, 640, 800, 960', sizes: '(min-width: 1200px) 33vw, (min-width: 769px) 50vw, 100vw', loading: 'lazy', alt: store_image_alt -}}
+              {%- endif -%}
             </div>
-            {%- endif -%}
             <div class="stores-card__content">
               <h3 class="stores-card__name">
                 {%- render 'icon', name: 'store', size: '18' -%}
                 {{ block.settings.name | escape }}
               </h3>
               {%- if block.settings.address != blank -%}
-              <div class="stores-card__info">
+               <address class="stores-card__info">
                 {%- render 'icon', name: 'location', size: '16' -%}
                 <span>{{ block.settings.address | escape }}</span>
-              </div>
+               </address>
               {%- endif -%}
               {%- if block.settings.phone != blank -%}
               <div class="stores-card__info">
@@ -86,20 +97,43 @@
               <div class="stores-card__info">
                 {%- render 'icon', name: 'calendar', size: '16' -%}
                 <span>{{ block.settings.hours | escape }}</span>
+                <span class="stores-card__status" data-store-status aria-live="polite"></span>
               </div>
               {%- endif -%}
               {%- if block.settings.address != blank -%}
-              <a href="https://www.google.com/maps/search/{{ block.settings.address | url_encode }}" target="_blank" rel="noopener noreferrer" class="stores-card__direction" title="{{ 'sections.page_stores.get_directions' | t }}">
+              <a href="https://maps.google.com/?daddr={{ block.settings.address | url_encode }}" target="_blank" rel="noopener noreferrer" class="stores-card__direction" title="{{ 'sections.page_stores.view_map' | t }}">
                 {%- render 'icon', name: 'location', size: '16' -%}
-                <span>{{ 'sections.page_stores.get_directions' | t }}</span>
+                <span>{{ 'sections.page_stores.view_map' | t }}</span>
               </a>
               {%- endif -%}
             </div>
           </div>
+          {%- if block.settings.name != blank and block.settings.address != blank -%}
+          <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "name": {{ block.settings.name | json }},
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": {{ block.settings.address | json }}{%- if block.settings.address_region != blank -%},
+                "addressRegion": {{ block.settings.address_region | json }}{%- endif -%}{%- if block.settings.postal_code != blank -%},
+                "postalCode": {{ block.settings.postal_code | json }}{%- endif -%}{%- if block.settings.country != blank -%},
+                "addressCountry": {{ block.settings.country | json }}{%- endif -%}
+              }{%- if block.settings.phone != blank -%},
+              "telephone": {{ block.settings.phone | json }}{%- endif -%}{%- if block.settings.latitude != blank and block.settings.longitude != blank -%},
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": {{ block.settings.latitude | json }},
+                "longitude": {{ block.settings.longitude | json }}
+              }{%- endif -%}
+            }
+          </script>
+          {%- endif -%}
           {%- endif -%}
           {%- endfor -%}
 
-          <div class="stores-empty" id="stores-empty" style="display:none">
+          <div class="stores-empty" id="stores-empty" role="status" aria-live="polite" style="display:none">
             {%- render 'icon', name: 'sad', size: '48' -%}
             <p>{{ 'sections.page_stores.no_results' | t }}</p>
           </div>
@@ -140,7 +174,7 @@
     {
       "type": "store",
       "name": "t:sections.page_stores.blocks.store.name",
-      "limit": 20,
+      "limit": 50,
       "settings": [
         {
           "type": "text",
@@ -164,6 +198,21 @@
         },
         {
           "type": "text",
+          "id": "address_region",
+          "label": "t:sections.page_stores.blocks.store.settings.address_region.label"
+        },
+        {
+          "type": "text",
+          "id": "postal_code",
+          "label": "t:sections.page_stores.blocks.store.settings.postal_code.label"
+        },
+        {
+          "type": "text",
+          "id": "country",
+          "label": "t:sections.page_stores.blocks.store.settings.country.label"
+        },
+        {
+          "type": "text",
           "id": "phone",
           "label": "t:sections.page_stores.blocks.store.settings.phone.label"
         },
@@ -178,9 +227,26 @@
           "label": "t:sections.page_stores.blocks.store.settings.hours.label"
         },
         {
-          "type": "html",
-          "id": "map_embed",
-          "label": "t:sections.page_stores.blocks.store.settings.map_embed.label"
+          "type": "image_picker",
+          "id": "store_image",
+          "label": "t:sections.page_stores.blocks.store.settings.store_image.label",
+          "info": "t:sections.page_stores.blocks.store.settings.store_image.info"
+        },
+        {
+          "type": "url",
+          "id": "map_url",
+          "label": "t:sections.page_stores.blocks.store.settings.map_url.label",
+          "info": "t:sections.page_stores.blocks.store.settings.map_url.info"
+        },
+        {
+          "type": "text",
+          "id": "latitude",
+          "label": "t:sections.page_stores.blocks.store.settings.latitude.label"
+        },
+        {
+          "type": "text",
+          "id": "longitude",
+          "label": "t:sections.page_stores.blocks.store.settings.longitude.label"
         }
       ]
     },

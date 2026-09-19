@@ -3,7 +3,6 @@ a,
 button,
 .link { cursor: pointer; }
 .hidden { display: none; }
-.grecaptcha-badge { display: none !important; }
 .line-clamp-1 {
   overflow: hidden;
   display: -webkit-box;
@@ -91,32 +90,32 @@ textarea:focus-visible,
   background: transparent;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast);
 }
-:where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .compare-bar__btn, .faq-contact__btn, .product-card__quickview, .product-card__add-btn, .product-card__wishlist) {
+:where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .faq-contact__btn, .product-card__quickview, .product-card__add-btn) {
   transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast), filter var(--transition-fast);
 }
-:where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .compare-bar__btn, .faq-contact__btn, .product-card__quickview, .product-card__add-btn, .product-card__wishlist):hover:not(:disabled):not([aria-disabled="true"]):not(.loading):not(.is-loading) {
+:where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .faq-contact__btn, .product-card__quickview, .product-card__add-btn):hover:not(:disabled):not([aria-disabled="true"]):not(.loading):not(.is-loading) {
   transform: var(--button-hover-transform, translateY(-1px));
   box-shadow: var(--shadow-md, 0 8px 20px rgba(0, 0, 0, 0.12));
 }
-:where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .compare-bar__btn, .faq-contact__btn, .product-card__quickview, .product-card__add-btn, .product-card__wishlist):active:not(:disabled):not([aria-disabled="true"]) {
+:where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .faq-contact__btn, .product-card__quickview, .product-card__add-btn):active:not(:disabled):not([aria-disabled="true"]) {
   transform: var(--button-active-transform, translateY(0) scale(0.985));
   box-shadow: var(--shadow-sm, 0 2px 8px rgba(0, 0, 0, 0.08));
 }
-:where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .compare-bar__btn, .faq-contact__btn, .product-card__quickview, .product-card__add-btn, .product-card__wishlist):focus-visible {
+:where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .faq-contact__btn, .product-card__quickview, .product-card__add-btn):focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 3px;
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-primary) 18%, transparent);
 }
-:where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .compare-bar__btn, .faq-contact__btn, .product-card__quickview, .product-card__add-btn, .product-card__wishlist):disabled,
-:where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .compare-bar__btn, .faq-contact__btn, .product-card__quickview, .product-card__add-btn, .product-card__wishlist)[aria-disabled="true"] {
+:where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .faq-contact__btn, .product-card__quickview, .product-card__add-btn):disabled,
+:where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .faq-contact__btn, .product-card__quickview, .product-card__add-btn)[aria-disabled="true"] {
   opacity: 0.55;
   cursor: not-allowed !important;
   transform: none !important;
   box-shadow: none !important;
   filter: saturate(0.75);
 }
-:where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .compare-bar__btn, .faq-contact__btn, .product-card__quickview, .product-card__add-btn, .product-card__wishlist).loading,
-:where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .compare-bar__btn, .faq-contact__btn, .product-card__quickview, .product-card__add-btn, .product-card__wishlist).is-loading {
+:where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .faq-contact__btn, .product-card__quickview, .product-card__add-btn).loading,
+:where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .faq-contact__btn, .product-card__quickview, .product-card__add-btn).is-loading {
   pointer-events: none;
   opacity: 0.72;
   transform: none !important;
@@ -156,7 +155,6 @@ table {
 .rte table,
 .blog-template__rich-text table,
 .blog-template__description-content table,
-.blog-template__full-description-content table,
 .collection-desc__rte table,
 .section-rich-text__text table,
 .section-tabs__content table {
@@ -168,8 +166,6 @@ table {
 .blog-template__rich-text td,
 .blog-template__description-content th,
 .blog-template__description-content td,
-.blog-template__full-description-content th,
-.blog-template__full-description-content td,
 .collection-desc__rte th,
 .collection-desc__rte td,
 .section-rich-text__text th,

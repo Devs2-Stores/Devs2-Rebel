@@ -29,3 +29,14 @@ _reference/
 
 # Migration changelogs
 _changelogs/
+
+# Nested git dir (worktree metadata, never commit)
+.git-nested/
+
+# Agent scratch / automation artifacts
+.antigravity/
+.playwright-mcp/
+.research-repos-*/
+runs/
+page_home.html
+shopify-theme-checklist.html
