@@ -25,6 +25,8 @@ Keep CSS mobile-first and component-scoped. Reuse Shopify image filters (`image_
 
 The browser configuration exposes Shopify cart, search, checkout, and product routes. Cart, product variant selection, collection filtering, predictive search, quickview, customer forms, and modals are coordinated through `themeConfig`, custom elements, and `localStorage`/`sessionStorage` where the feature requires client persistence. When changing one of these flows, inspect its paired section/snippet, asset, and template before editing.
 
+Product card quick-add forms (`snippets/product-card.liquid`) carry the add-to-cart URL on the submit button's `formaction`, not on the form's `action`. Shopify's storefront `shop_events_listener` binds and fires a "Viewed Product Variant" analytics event for every form whose `action` contains `/cart/add` on page load. With one form per card, that cost about 17 ms of throttled main-thread time per card (about 600 ms on a 30-card collection) and recorded a variant view for every listed product. `product-card.js` posts to `themeConfig.routes.cart_add_url`, and without JavaScript the button still submits to `/cart/add`. Do not move the URL back to `action`.
+
 ## Verification
 
 Theme Check is configured by [`.theme-check.yml`](../.theme-check.yml). Run the repository-approved Shopify Theme Check command only with user approval, as required by the theme contract. Browser preview validation is required for changes crossing product, collection, cart, search, modal, customer, or editor settings contracts.

@@ -7,7 +7,6 @@
 
   class Header extends HTMLElement {
     connectedCallback() {
-      this.setHeightToRoot();
       this.resizeObserver = new ResizeObserver(() => this.setHeightToRoot());
       this.resizeObserver.observe(this);
     }

@@ -136,10 +136,10 @@
       {%- endif -%}
 
       {%- if show_add_to_cart -%}
-        <form class="product-card__add-form" action="{{ routes.cart_add_url }}" method="POST">
+        <form class="product-card__add-form" method="POST">
           <input type="hidden" name="id" value="{{ variant.id }}">
           <input type="hidden" name="quantity" value="1">
-          <button type="submit" class="product-card__add-btn" aria-label="{{ t_add_to_cart }} {{ product.title | escape }}" title="{{ t_add_to_cart }}" {%- unless product.available -%}disabled{%- endunless -%}>
+          <button type="submit" formaction="{{ routes.cart_add_url }}" class="product-card__add-btn" aria-label="{{ t_add_to_cart }} {{ product.title | escape }}" title="{{ t_add_to_cart }}" {%- unless product.available -%}disabled{%- endunless -%}>
             {%- render 'icon', name: 'cart' -%}
           </button>
         </form>

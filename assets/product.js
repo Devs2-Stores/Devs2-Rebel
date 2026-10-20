@@ -214,8 +214,8 @@ class ProductTemplate extends HTMLElement {
 				render();
 			});
 
-			render();
 			if ('ResizeObserver' in window) new ResizeObserver(render).observe(descContent);
+			else render();
 		});
 	}
 
@@ -241,6 +241,7 @@ class ProductTemplate extends HTMLElement {
 			}
 
 			self.mainSwiper = new Swiper(self.mediaSliderEl, {
+				initialSlide: self._pendingSlide || 0,
 				spaceBetween: 10,
 				speed: 300,
 				loop: false,
@@ -255,13 +256,22 @@ class ProductTemplate extends HTMLElement {
 			});
 		};
 
-		(window.swiperReady || function(cb){ cb(); })(initSwiper);
+		if (self.mediaThumbsEl) {
+			self.mediaThumbsEl.addEventListener('click', function(e) {
+				if (self.mainSwiper) return;
+				var slide = e.target.closest('.swiper-slide');
+				if (!slide) return;
+				self._pendingSlide = Array.prototype.indexOf.call(slide.parentElement.children, slide);
+			});
+		}
+
+		(window.swiperReady || function(cb){ cb(); })(initSwiper, self.mediaSliderEl);
 	}
 
 	refreshUI(variant) {
 		this.updateVariantInputs(variant);
 		if (variant) {
-			this.updateFeaturedImage(variant.image);
+			this.updateFeaturedImage(variant.featured_media || variant.featured_image);
 			this.updateSku(variant.sku);
 			this.updateBarcode(variant.barcode);
 			this.updateAvailable(variant.available);
@@ -316,7 +326,7 @@ class ProductTemplate extends HTMLElement {
 	}
 
 	updateFeaturedImage(image) {
-		if (!image || !this.mainSwiper) return;
+		if (!image) return;
 
 		const mediaId = image.id ? String(image.id) : null;
 		const imageSrc = typeof image === 'string' ? image : (image.src || image.url || (image.preview_image && image.preview_image.src));
@@ -327,15 +337,20 @@ class ProductTemplate extends HTMLElement {
 
 		for (let i = 0; i < slides.length; i++) {
 			if (mediaId && slides[i].dataset.mediaId === mediaId) {
-				this.mainSwiper.slideTo(i);
+				this._showSlide(i);
 				break;
 			}
 			const slideImg = slides[i].querySelector('img');
 			if (imageSrc && slideImg && getFilename(slideImg.src) === getFilename(imageSrc)) {
-				this.mainSwiper.slideTo(i);
+				this._showSlide(i);
 				break;
 			}
 		}
+	}
+
+	_showSlide(index) {
+		if (this.mainSwiper) this.mainSwiper.slideTo(index);
+		else this._pendingSlide = index;
 	}
 
 	metaUnavailableText() {
