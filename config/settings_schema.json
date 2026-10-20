@@ -1572,32 +1572,6 @@
       },
       {
         "type": "header",
-        "content": "t:settings_schema.float_social.settings.header__zalo.content"
-      },
-      {
-        "type": "checkbox",
-        "id": "float_zalo_enable",
-        "label": "t:settings_schema.float_social.settings.channel_enable.label",
-        "default": false
-      },
-      {
-        "type": "image_picker",
-        "id": "float_zalo_image",
-        "label": "t:settings_schema.float_social.settings.channel_icon.label"
-      },
-      {
-        "type": "text",
-        "id": "float_zalo_link",
-        "label": "t:settings_schema.float_social.settings.channel_link.label"
-      },
-      {
-        "type": "text",
-        "id": "float_zalo_text",
-        "label": "t:settings_schema.float_social.settings.channel_text.label",
-        "default": "t:settings_schema.float_social.settings.channel_text.default__zalo"
-      },
-      {
-        "type": "header",
         "content": "t:settings_schema.float_social.settings.header__facebook.content"
       },
       {
@@ -1673,58 +1647,6 @@
         "id": "float_tiktok_text",
         "label": "t:settings_schema.float_social.settings.channel_text.label",
         "default": "t:settings_schema.float_social.settings.channel_text.default__tiktok"
-      },
-      {
-        "type": "header",
-        "content": "t:settings_schema.float_social.settings.header__shopee.content"
-      },
-      {
-        "type": "checkbox",
-        "id": "float_shopee_enable",
-        "label": "t:settings_schema.float_social.settings.channel_enable.label",
-        "default": false
-      },
-      {
-        "type": "image_picker",
-        "id": "float_shopee_image",
-        "label": "t:settings_schema.float_social.settings.channel_icon.label"
-      },
-      {
-        "type": "text",
-        "id": "float_shopee_link",
-        "label": "t:settings_schema.float_social.settings.channel_link.label"
-      },
-      {
-        "type": "text",
-        "id": "float_shopee_text",
-        "label": "t:settings_schema.float_social.settings.channel_text.label",
-        "default": "t:settings_schema.float_social.settings.channel_text.default__shopee"
-      },
-      {
-        "type": "header",
-        "content": "t:settings_schema.float_social.settings.header__lazada.content"
-      },
-      {
-        "type": "checkbox",
-        "id": "float_lazada_enable",
-        "label": "t:settings_schema.float_social.settings.channel_enable.label",
-        "default": false
-      },
-      {
-        "type": "image_picker",
-        "id": "float_lazada_image",
-        "label": "t:settings_schema.float_social.settings.channel_icon.label"
-      },
-      {
-        "type": "text",
-        "id": "float_lazada_link",
-        "label": "t:settings_schema.float_social.settings.channel_link.label"
-      },
-      {
-        "type": "text",
-        "id": "float_lazada_text",
-        "label": "t:settings_schema.float_social.settings.channel_text.label",
-        "default": "t:settings_schema.float_social.settings.channel_text.default__lazada"
       },
       {
         "type": "header",

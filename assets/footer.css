@@ -111,26 +111,6 @@ global-footer .footer-info .footer-info__social-media .footer-social-media__link
   width: 1.125rem;
   height: 1.125rem;
 }
-global-footer .footer-info .footer-info__certs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: var(--space-lg);
-}
-global-footer .footer-info .footer-info__certs .footer-info__cert-item {
-  border: 1px solid var(--color-hairline);
-  border-radius: var(--buttons-radius);
-  padding: 0.5rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-global-footer .footer-info .footer-info__certs .footer-info__cert-img {
-  display: block;
-  height: 44px;
-  width: auto;
-  max-width: 140px;
-}
 global-footer .footer-actions .footer_actions__slogan {
   display: flex;
   flex-direction: column;

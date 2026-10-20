@@ -1,6 +1,5 @@
 {%- comment %}
   Section: Related Blog Posts
-  Mô tả: Grid bài viết blog — cho homepage hoặc landing page.
 {% endcomment -%}
 
 {%- liquid
@@ -78,14 +77,6 @@
         <p>{{ 'sections.featured_blog.empty' | t }}</p>
       </div>
     {%- endif -%}
-    {%- capture app_blocks -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
-      {%- endfor -%}
-    {%- endcapture -%}
-    {%- if app_blocks != blank -%}
-      <div class="section-apps">{{ app_blocks }}</div>
-    {%- endif -%}
   </div>
 </div>
 
@@ -116,7 +107,7 @@
     letter-spacing: var(--heading-tracking);
   }
   .section-blog-posts__view-all {
-    display: inline-flex; align-items: center; gap: 0.25rem;
+    display: inline-flex; align-items: center; gap: 0.25rem; min-height: 1.5rem;
     font-size: 0.875rem; font-weight: 500; color: var(--color-ink);
     text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 0.25em;
     transition: text-decoration-color var(--duration-default) ease;
@@ -350,11 +341,6 @@
       "unit": "px",
       "label": "t:sections.blog_posts.settings.padding_bottom_mobile.label",
       "default": 30
-    }
-  ],
-  "blocks": [
-    {
-      "type": "@app"
     }
   ],
   "presets": [

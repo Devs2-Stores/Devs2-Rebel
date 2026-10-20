@@ -1,7 +1,5 @@
 {%- comment %}
   Section: Image with Text
-  Mô tả: Section 2 cột — image + text content.
-  Hỗ trợ: Color scheme, image position (left/right), responsive, overlay.
 {% endcomment -%}
 
 <div
@@ -96,14 +94,6 @@
         {%- endfor -%}
       </div>
     </div>
-    {%- capture app_blocks -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
-      {%- endfor -%}
-    {%- endcapture -%}
-    {%- if app_blocks != blank -%}
-      <div class="section-apps">{{ app_blocks }}</div>
-    {%- endif -%}
   </div>
 </div>
 
@@ -691,9 +681,6 @@
           "default": 20
         }
       ]
-    },
-    {
-      "type": "@app"
     }
   ],
   "presets": [

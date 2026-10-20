@@ -1,6 +1,6 @@
 {% doc %}
-  @description Product card component — hiển thị sản phẩm với ảnh, tên, giá, badge, quick actions
-  @param {product} product - Đối tượng product (bắt buộc)
+  @description Product card component with image, title, price, badges and quick actions
+  @param {product} product - Product object (required)
   @param {boolean} [show_vendor] - Show vendor/brand. Default: false
   @param {boolean} [show_secondary_image] - Show the second image on hover. Default: true
   @param {boolean} [show_quickview] - Show the quick view button. Default: true
@@ -13,8 +13,7 @@
 
 {%- liquid
   comment
-    Boolean defaults: dùng nil check thay vì | default: true
-    vì | default: true sẽ override giá trị false
+    Boolean defaults use a nil check because | default: true would override false
   endcomment
 
   if show_vendor == nil
@@ -105,7 +104,6 @@
             {%- endif -%}
           </div>
         {%- else -%}
-          {%- comment %} Placeholder khi product không có ảnh {% endcomment -%}
           <div class="product-card__media-image image-ratio--{{ image_ratio }}">
             <div class="product-card__media-placeholder">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" aria-hidden="true">
@@ -213,7 +211,7 @@
               <del class="product-card__price-compare">{{ product.compare_at_price_max | money }}</del>
             {%- endif -%}
             <span class="product-card__price-range">
-            {{ product.price_min | money }} – {% if settings.currency_code_enabled %}{{ product.price_max | money_with_currency }}{% else %}{{ product.price_max | money }}{% endif %}
+            {% if settings.currency_code_enabled %}{{ product.price_min | money_with_currency }} – {{ product.price_max | money_with_currency }}{% else %}{{ product.price_min | money }} – {{ product.price_max | money }}{% endif %}
           </span>
         {%- else -%}
           {%- if compare > price -%}

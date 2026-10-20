@@ -11,7 +11,7 @@ global-header {
 }
 global-header .header__wrapper {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: var(--space-sm);
   min-height: 3.75rem;
@@ -140,7 +140,7 @@ global-header .header__mobile-actions .header__cart-btn .cart-count {
   padding: 0 0.25rem;
   background: var(--color-primary);
   color: rgb(var(--color-button-text));
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   font-weight: var(--font-weight-semibold);
   border-radius: var(--radius-full);
   line-height: 1;

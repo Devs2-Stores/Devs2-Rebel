@@ -1,6 +1,5 @@
 {%- comment %}
   Section: Trust Badges Bar
-  Mô tả: Icon strip compact — Free Shipping, Secure Pay, Easy Returns, 24/7 Support.
 {% endcomment -%}
 
 <div
@@ -16,7 +15,6 @@
   <div class="{% if section.settings.section_width == 'fixed' %}page-width{% endif %}">
     <div class="section-trust__grid section-trust__grid--{{ section.settings.layout }}">
       {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
         <div class="section-trust__item" {{ block.shopify_attributes }}>
           {%- if block.settings.icon != blank -%}
             <div class="section-trust__icon">
@@ -36,14 +34,6 @@
         </div>
       {%- endfor -%}
     </div>
-    {%- capture app_blocks -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
-      {%- endfor -%}
-    {%- endcapture -%}
-    {%- if app_blocks != blank -%}
-      <div class="section-apps">{{ app_blocks }}</div>
-    {%- endif -%}
   </div>
 </div>
 
@@ -203,9 +193,6 @@
           "default": "t:sections.trust_badges.blocks.badge.settings.text.default"
         }
       ]
-    },
-    {
-      "type": "@app"
     }
   ],
   "presets": [

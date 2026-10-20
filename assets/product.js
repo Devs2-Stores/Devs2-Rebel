@@ -17,7 +17,6 @@ class ProductTemplate extends HTMLElement {
 		this.initVariantFromURL();
 		this.initMedia();
 		this.initVideoSlides();
-		this.initBackInStock();
 		this.initSellingPlans();
 	}
 
@@ -269,7 +268,6 @@ class ProductTemplate extends HTMLElement {
 			this.updatePrice(variant.price, variant.compare_at_price);
 			this.updatePurchaseButtons(variant.available);
 			this.updateStockCounter(variant);
-			this.updateBackInStock(variant);
 			this.updatePickupAvailability(variant);
 			this.updateQuantityRules(variant);
 		} else {
@@ -360,9 +358,9 @@ class ProductTemplate extends HTMLElement {
 
 		var strings = (typeof themeConfig !== 'undefined' && themeConfig.strings && themeConfig.strings.variant) ? themeConfig.strings.variant : {};
 		const states = {
-			null: { class: 'product-template__status--unavailable', text: strings.contact || 'Contact' },
-			true: { class: 'product-template__status--available', text: strings.inStock || 'In stock' },
-			false: { class: 'product-template__status--unavailable', text: strings.soldOut || 'Sold out' }
+			null: { class: 'product-template__status--unavailable', text: strings.contact },
+			true: { class: 'product-template__status--available', text: strings.inStock },
+			false: { class: 'product-template__status--unavailable', text: strings.soldOut }
 		};
 
 		const state = states[available == null ? 'null' : available];
@@ -380,15 +378,15 @@ class ProductTemplate extends HTMLElement {
 			if (isAvailable) {
 				this.addButtons.disabled = false;
 				this.addButtons.classList.remove('sold-out');
-				if (addBtnContent) addBtnContent.textContent = strings.addToCart || 'Add to cart';
+				if (addBtnContent) addBtnContent.textContent = strings.addToCart;
 			} else if (available === false) {
 				this.addButtons.disabled = true;
 				this.addButtons.classList.add('sold-out');
-				if (addBtnContent) addBtnContent.textContent = strings.soldOut || 'Sold out';
+				if (addBtnContent) addBtnContent.textContent = strings.soldOut;
 			} else {
 				this.addButtons.disabled = true;
 				this.addButtons.classList.remove('sold-out');
-				if (addBtnContent) addBtnContent.textContent = strings.unavailable || 'Unavailable';
+				if (addBtnContent) addBtnContent.textContent = strings.unavailable;
 			}
 		}
 		var dynamicCheckout = this.querySelector('[data-dynamic-checkout]');
@@ -403,12 +401,12 @@ class ProductTemplate extends HTMLElement {
 				this.buyButtons.classList.remove('sold-out');
 				this.buyButtons.classList.remove('contact-link');
 				this.buyButtons.onclick = null;
-				if (buyBtnContent) buyBtnContent.textContent = strings.buyNow || 'Mua ngay';
+				if (buyBtnContent) buyBtnContent.textContent = strings.buyNow;
 			} else {
 				this.buyButtons.disabled = false;
 				this.buyButtons.classList.add('sold-out');
 				this.buyButtons.classList.add('contact-link');
-				if (buyBtnContent) buyBtnContent.textContent = strings.contact || 'Contact';
+				if (buyBtnContent) buyBtnContent.textContent = strings.contact;
 
 				// Get contact link from data attribute (set by Liquid)
 				var storeRoot = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) ? window.Shopify.routes.root : '/';
@@ -426,7 +424,7 @@ class ProductTemplate extends HTMLElement {
 		var strings = (typeof themeConfig !== 'undefined' && themeConfig.strings && themeConfig.strings.variant) ? themeConfig.strings.variant : {};
 
 		if (price == 0 || price == null) {
-			this.priceEl.textContent = strings.contact || 'Contact';
+			this.priceEl.textContent = strings.contact;
 			this.priceEl.classList.remove('product-template__price-current--sale');
 			if (this.compareEl) this.compareEl.hidden = true;
 			if (this.saleEl) this.saleEl.hidden = true;
@@ -534,11 +532,11 @@ class ProductTemplate extends HTMLElement {
 	validateVariant() {
 		var strings = (typeof themeConfig !== 'undefined' && themeConfig.strings && themeConfig.strings.variant) ? themeConfig.strings.variant : {};
 		if (!this.currentVariant) {
-			if (typeof showToast === 'function') showToast(strings.unavailable || 'Please select a variant', 'warning');
+			if (typeof showToast === 'function') showToast(strings.unavailable, 'warning');
 			return false;
 		}
 		if (!this.currentVariant.available) {
-			if (typeof showToast === 'function') showToast(strings.soldOut || 'Sold out', 'warning');
+			if (typeof showToast === 'function') showToast(strings.soldOut, 'warning');
 			return false;
 		}
 		return true;
@@ -593,95 +591,52 @@ class ProductTemplate extends HTMLElement {
 		}
 	}
 
-
-	// ── Back-in-stock Alert ──────────────────────────────────────
-	initBackInStock() {}
-
-	updateBackInStock(variant) {
-		var bisContainer = this.querySelector('[data-back-in-stock]');
-		if (!bisContainer) return;
-
-		// Update body field with current variant
-		var bisBody = bisContainer.querySelector('[data-bis-body]');
-		if (bisBody && variant) {
-			var product = this._productData || {};
-			bisBody.value = '[Back-in-stock] ' + (product.title || '') + ' - ' + (variant.title || '') + ' | ' + window.location.href;
-		}
-
-		bisContainer.hidden = !variant || !!variant.available;
-	}
-
 	// ── Product Video Slides ─────────────────────────────────────
 	initVideoSlides() {
 		var self = this;
 		var videoSlides = this.querySelectorAll('.product-template__media-slide--external_video');
 		if (!videoSlides.length) return;
 
-		this._ytPlayers = [];
+		this._videoFrames = [];
+		videoSlides.forEach(function(slide) {
+			var iframe = slide.querySelector('.product-template__video-iframe');
+			if (!iframe || slide.getAttribute('data-video-host') !== 'youtube') return;
+			if (iframe.src && iframe.src.indexOf('enablejsapi=1') === -1) {
+				iframe.src = iframe.src + (iframe.src.indexOf('?') === -1 ? '?' : '&') + 'enablejsapi=1';
+			}
+			self._videoFrames.push({ slide: slide, iframe: iframe });
+		});
+		if (!this._videoFrames.length) return;
 
-		// Load YouTube IFrame API if not already loaded
-		if (!window.YT || !window.YT.Player) {
-			var tag = document.createElement('script');
-			tag.src = 'https://www.youtube.com/iframe_api';
-			document.head.appendChild(tag);
-		}
-
-		function initPlayers() {
-			videoSlides.forEach(function(slide) {
-				var iframe = slide.querySelector('.product-template__video-iframe');
-				if (!iframe || slide.getAttribute('data-video-host') !== 'youtube') return;
-
-				// Give iframe a unique ID
-				if (!iframe.id) iframe.id = 'yt-player-' + Math.random().toString(36).substr(2, 9);
-
-				var player = new YT.Player(iframe.id, {
-					events: {
-						onReady: function(e) {
-							player._ready = true;
-							e.target.mute();
-						}
-					}
+		var checkSwiper = setInterval(function() {
+			if (self.mainSwiper) {
+				clearInterval(checkSwiper);
+				self.mainSwiper.on('slideChange', function() {
+					self._handleVideoSlideChange();
 				});
-				self._ytPlayers.push({ slide: slide, player: player });
-			});
+			}
+		}, 200);
+	}
 
-			// Hook into Swiper slideChange
-			var checkSwiper = setInterval(function() {
-				if (self.mainSwiper) {
-					clearInterval(checkSwiper);
-					self.mainSwiper.on('slideChange', function() {
-						self._handleVideoSlideChange();
-					});
-				}
-			}, 200);
-		}
-
-		if (window.YT && window.YT.Player) {
-			initPlayers();
-		} else {
-			var prevCallback = window.onYouTubeIframeAPIReady;
-			window.onYouTubeIframeAPIReady = function() {
-				if (prevCallback) prevCallback();
-				initPlayers();
-			};
-		}
+	_postVideoCommand(iframe, func) {
+		if (!iframe.contentWindow) return;
+		iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: func, args: '' }), '*');
 	}
 
 	_handleVideoSlideChange() {
-		if (!this._ytPlayers || !this._ytPlayers.length) return;
+		if (!this._videoFrames || !this._videoFrames.length) return;
 		var slides = this.querySelectorAll('.product-template__media-slide');
 		var activeIndex = this.mainSwiper ? this.mainSwiper.activeIndex : 0;
 		var activeSlide = slides[activeIndex];
+		var self = this;
 
-		this._ytPlayers.forEach(function(entry) {
-			if (!entry.player || !entry.player._ready) return;
-			try {
-				if (entry.slide === activeSlide) {
-					entry.player.playVideo();
-				} else {
-					entry.player.pauseVideo();
-				}
-			} catch (e) {}
+		this._videoFrames.forEach(function(entry) {
+			if (entry.slide === activeSlide) {
+				self._postVideoCommand(entry.iframe, 'mute');
+				self._postVideoCommand(entry.iframe, 'playVideo');
+			} else {
+				self._postVideoCommand(entry.iframe, 'pauseVideo');
+			}
 		});
 	}
 	initSellingPlans() {
@@ -858,7 +813,7 @@ class ProductStickyAdd extends HTMLElement {
 		if (priceEl) {
 			var strings = (typeof themeConfig !== 'undefined' && themeConfig.strings && themeConfig.strings.variant) ? themeConfig.strings.variant : {};
 			priceEl.textContent = (variant.price == 0 || variant.price == null) 
-				? (strings.contact || 'Contact')
+				? strings.contact
 			: ThemeUtils.formatMoney(variant.price, themeConfig.priceFormat);
 		}
 

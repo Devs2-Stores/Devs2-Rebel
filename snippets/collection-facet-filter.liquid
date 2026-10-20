@@ -37,7 +37,7 @@
     {%- for filter in results.filters -%}
       {%- liquid
         comment
-          Auto-expand filter nếu có active values dù collapse_filters = true
+          Auto-expand a filter that has active values even when collapse_filters is true
         endcomment
         assign has_active = false
         if filter.type == 'price_range'

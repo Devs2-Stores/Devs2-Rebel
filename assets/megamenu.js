@@ -60,14 +60,14 @@
         }
 
         // Check submenu
-        var parent = e.target.closest('.megamenu__simple-parent, .megamenu__link-parent');
+        var parent = e.target.closest('.megamenu__simple-parent');
         if (parent) {
           self.checkSubmenuOverflow(parent);
         }
       }, true);
 
       this.addEventListener('focusin', function(e) {
-        var parent = e.target.closest('.megamenu__simple-parent, .megamenu__link-parent');
+        var parent = e.target.closest('.megamenu__simple-parent');
         if (parent && e.target.parentElement === parent) self.checkSubmenuOverflow(parent);
       });
 
@@ -149,7 +149,7 @@
     }
 
     checkSubmenuOverflow(parent) {
-      var submenu = parent.querySelector('.megamenu__simple-sub, .megamenu__sublinks');
+      var submenu = parent.querySelector('.megamenu__simple-sub');
       if (!submenu) return;
 
       // Reset first

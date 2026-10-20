@@ -1,6 +1,6 @@
 {%- comment %}
   Section: Hero
-  Full-width hero banner with image/video background, overlay, countdown, and block-based content.
+  Full-width hero banner with image background, overlay, countdown, and block-based content.
 {% endcomment -%}
 
 {%- liquid
@@ -8,12 +8,10 @@
   assign mobile_img = section.settings.image_mobile | default: desktop_img
   assign img_alt = section.settings.image_alt | default: shop.name
   assign overlay_opacity = section.settings.overlay_opacity | divided_by: 100.0
-  assign custom_url = section.settings.custom_image_url
-  assign custom_mobile_url = section.settings.custom_image_mobile_url | default: custom_url
   assign text_align = section.settings.text_align
   assign has_content = false
   for block in section.blocks
-    if block.type != 'empty_space' and block.type != '@app'
+    if block.type != 'empty_space'
       assign has_content = true
       break
     endif
@@ -27,9 +25,7 @@
     assign hero_loading = 'lazy'
   endif
   assign has_mobile_art = false
-  if custom_url != blank and custom_mobile_url != custom_url
-    assign has_mobile_art = true
-  elsif custom_url == blank and desktop_img != blank and mobile_img != desktop_img
+  if desktop_img != blank and mobile_img != desktop_img
     assign has_mobile_art = true
   endif
 -%}
@@ -50,99 +46,42 @@
     --hero-object-position-m: {{ mobile_img.presentation.focal_point | default: desktop_img.presentation.focal_point | default: '50.0% 50.0%' }};
   "
 >
-  {%- if section.settings.video_url != blank -%}
-    {%- if has_mobile_art -%}
-      <div class="section-hero__media section-hero__media--mobile">
-        {%- if custom_url != blank -%}
-          <img
-            src="{{ custom_mobile_url | escape }}"
-            alt="{{ img_alt | escape }}"
-            width="750"
-            height="1000"
-            loading="{{ hero_loading }}"
-            fetchpriority="{{ fetch_priority }}"
-            decoding="async"
-            class="section-hero__img"
+  <div class="section-hero__media">
+    {%- if desktop_img != blank -%}
+      <picture>
+        {%- if has_mobile_art -%}
+          <source
+            media="(max-width: 749px)"
+            srcset="{{ mobile_img | image_url: width: 375 }} 375w, {{ mobile_img | image_url: width: 550 }} 550w, {{ mobile_img | image_url: width: 750 }} 750w, {{ mobile_img | image_url: width: 1100 }} 1100w, {{ mobile_img | image_url: width: 1500 }} 1500w"
+            sizes="100vw"
           >
-        {%- else -%}
-          {{ mobile_img | image_url: width: 1500 | image_tag:
-            widths: '375, 550, 750, 1100, 1500',
-            sizes: '100vw',
-            loading: hero_loading,
-            fetchpriority: fetch_priority,
-            decoding: 'async',
-            class: 'section-hero__img',
-            alt: img_alt
-          }}
         {%- endif -%}
-      </div>
-    {%- endif -%}
-    <div class="section-hero__media">
-      <video
-        class="section-hero__video"
-        autoplay
-        muted
-        loop
-        playsinline
-        poster="{{ desktop_img | image_url: width: 1920 }}"
-      >
-        <source src="{{ section.settings.video_url }}" type="video/mp4">
-      </video>
-    </div>
-  {%- else -%}
-    <div class="section-hero__media">
-      {%- if custom_url != blank -%}
-        <picture>
-          {%- if has_mobile_art -%}
-            <source media="(max-width: 749px)" srcset="{{ custom_mobile_url | escape }}">
-          {%- endif -%}
-          <img
-            src="{{ custom_url | escape }}"
-            alt="{{ img_alt | escape }}"
-            width="1920"
-            height="1080"
-            loading="{{ hero_loading }}"
-            fetchpriority="{{ fetch_priority }}"
-            decoding="async"
-            class="section-hero__img"
-          >
-        </picture>
-      {%- elsif desktop_img != blank -%}
-        <picture>
-          {%- if has_mobile_art -%}
-            <source
-              media="(max-width: 749px)"
-              srcset="{{ mobile_img | image_url: width: 375 }} 375w, {{ mobile_img | image_url: width: 550 }} 550w, {{ mobile_img | image_url: width: 750 }} 750w, {{ mobile_img | image_url: width: 1100 }} 1100w, {{ mobile_img | image_url: width: 1500 }} 1500w"
-              sizes="100vw"
-            >
-          {%- endif -%}
-          {{ desktop_img | image_url: width: 1920 | image_tag:
-            widths: '750, 1080, 1440, 1920, 2560',
-            sizes: '100vw',
-            alt: img_alt,
-            loading: hero_loading,
-            fetchpriority: fetch_priority,
-            decoding: 'async',
-            class: 'section-hero__img'
-          }}
-        </picture>
-      {%- elsif mobile_img != blank -%}
-        {{ mobile_img | image_url: width: 1500 | image_tag:
-          widths: '375, 550, 750, 1100, 1500',
+        {{ desktop_img | image_url: width: 1920 | image_tag:
+          widths: '750, 1080, 1440, 1920, 2560',
           sizes: '100vw',
+          alt: img_alt,
           loading: hero_loading,
           fetchpriority: fetch_priority,
           decoding: 'async',
-          class: 'section-hero__img',
-          alt: img_alt
+          class: 'section-hero__img'
         }}
-      {%- else -%}
-        <div class="section-hero__placeholder">
-          {{ 'lifestyle-1' | placeholder_svg_tag: 'section-hero__placeholder-svg' }}
-        </div>
-      {%- endif -%}
-    </div>
-  {%- endif -%}
+      </picture>
+    {%- elsif mobile_img != blank -%}
+      {{ mobile_img | image_url: width: 1500 | image_tag:
+        widths: '375, 550, 750, 1100, 1500',
+        sizes: '100vw',
+        loading: hero_loading,
+        fetchpriority: fetch_priority,
+        decoding: 'async',
+        class: 'section-hero__img',
+        alt: img_alt
+      }}
+    {%- else -%}
+      <div class="section-hero__placeholder">
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'section-hero__placeholder-svg' }}
+      </div>
+    {%- endif -%}
+  </div>
 
   {%- comment %} Overlay {% endcomment -%}
   {%- if overlay_opacity > 0 -%}
@@ -244,9 +183,6 @@
               {{ block.shopify_attributes }}
             ></div>
 
-          {%- when '@app' -%}
-            {%- render block -%}
-
         {%- endcase -%}
       {%- endfor -%}
     </div>
@@ -331,19 +267,6 @@
     z-index: 0;
   }
 
-  .section-hero__media--mobile {
-    display: none;
-  }
-
-  @media (max-width: 749px) {
-    .section-hero__media--mobile + .section-hero__media:not(.section-hero__media--mobile) {
-      display: none;
-    }
-    .section-hero__media--mobile {
-      display: block;
-    }
-  }
-
   .section-hero__img {
     width: 100%;
     height: 100%;
@@ -353,12 +276,6 @@
 
   @media (min-width: 750px) {
     .section-hero__img { object-position: var(--hero-object-position-d, center center); }
-  }
-
-  .section-hero__video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
   }
 
   .section-hero__placeholder {
@@ -663,33 +580,6 @@
       "id": "image_alt",
       "label": "t:sections.hero.settings.image_alt.label",
       "info": "t:sections.hero.settings.image_alt.info"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.hero.settings.header__image_url_override.content"
-    },
-    {
-      "type": "url",
-      "id": "custom_image_url",
-      "label": "t:sections.hero.settings.custom_image_url.label",
-      "info": "t:sections.hero.settings.custom_image_url.info"
-    },
-    {
-      "type": "url",
-      "id": "custom_image_mobile_url",
-      "label": "t:sections.hero.settings.custom_image_mobile_url.label",
-      "info": "t:sections.hero.settings.custom_image_mobile_url.info",
-      "visible_if": "{{ section.settings.custom_image_url != blank }}"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.hero.settings.header__video.content"
-    },
-    {
-      "type": "url",
-      "id": "video_url",
-      "label": "t:sections.hero.settings.video_url.label",
-      "info": "t:sections.hero.settings.video_url.info"
     },
     {
       "type": "header",
@@ -1160,8 +1050,7 @@
           "type": "text",
           "id": "end_date",
           "label": "t:sections.hero.blocks.countdown.settings.end_date.label",
-          "info": "t:sections.hero.blocks.countdown.settings.end_date.info",
-          "default": "2027-12-31T23:59:59"
+          "info": "t:sections.hero.blocks.countdown.settings.end_date.info"
         },
         {
           "type": "text",
@@ -1204,9 +1093,6 @@
           "default": 20
         }
       ]
-    },
-    {
-      "type": "@app"
     }
   ],
   "presets": [

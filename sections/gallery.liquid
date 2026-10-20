@@ -32,7 +32,6 @@
     <div class="section-gallery__grid section-gallery__grid--{{ section.settings.layout }}">
       {%- assign gallery_index = 0 -%}
       {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
         <div class="section-gallery__item" {{ block.shopify_attributes }} data-gallery-item>
           {%- if block.settings.image != blank -%}
             {%- if block.settings.link != blank -%}
@@ -59,14 +58,6 @@
         {%- assign gallery_index = gallery_index | plus: 1 -%}
       {%- endfor -%}
     </div>
-    {%- capture app_blocks -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
-      {%- endfor -%}
-    {%- endcapture -%}
-    {%- if app_blocks != blank -%}
-      <div class="section-apps">{{ app_blocks }}</div>
-    {%- endif -%}
   </div>
 
   {%- comment %} Lightbox {% endcomment -%}
@@ -390,9 +381,6 @@
           "info": "t:sections.gallery.blocks.image.settings.link.info"
         }
       ]
-    },
-    {
-      "type": "@app"
     }
   ],
   "presets": [

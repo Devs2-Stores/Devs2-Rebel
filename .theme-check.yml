@@ -1,7 +1,7 @@
-# .theme-check.yml — Cấu hình Shopify Theme Check
+# .theme-check.yml - Shopify Theme Check configuration
 extends: :default
 
-# Loại trừ thư mục không thuộc theme thực sự
+# Exclude directories that are not part of the theme
 ignore:
   - "_reference/**"
   - "_changelogs/**"
@@ -14,8 +14,10 @@ ignore:
   - "scripts/**"
   - ".research-repos-*/**"
   - ".playwright-mcp/**"
+  - ".antifan/**"
+  - "specs/**"
 
-# Cho phép file lớn hơn trong giai đoạn migrate
+# Allow larger templates and assets
 TemplateLength:
   enabled: true
   max_length: 600
@@ -31,14 +33,13 @@ AssetSizeJavaScript:
 DeprecatedTag:
   enabled: true
 
-# UnknownFilter: giữ bật — filter ảo pickup_availability đã được thay bằng
-# sections/pickup-availability.liquid + <pickup-availability> custom element.
+# UnknownFilter stays on: pickup availability is rendered by
+# sections/pickup-availability.liquid and the <pickup-availability> element.
 UnknownFilter:
   enabled: true
 
-# UndefinedObject: Shopify CLI 4.1.0 theme-check chưa parse được {% doc %} Liquid Doc Format.
-# 10 snippet dưới đây đã có {% doc %} đầy đủ params (verify: .agent/tools/check_doc_coverage.mjs).
-# Ignore tới khi tooling cập nhật.
+# UndefinedObject: older Theme Check versions do not parse {% doc %} LiquidDoc params.
+# These snippets declare their params with {% doc %}.
 UndefinedObject:
   enabled: true
   ignore:
@@ -58,16 +59,16 @@ UndefinedObject:
     - "snippets/collection-filter-drawer.liquid"
     - "snippets/collection-active-filters.liquid"
 
-# OrphanedSnippet: skip-to-content-link.liquid đang được render trong theme.liquid line 14
-# nhưng theme-check không phát hiện vì call site phức tạp.
+# OrphanedSnippet: skip-to-content-link.liquid is rendered from layout/theme.liquid,
+# but Theme Check does not detect that call site.
 OrphanedSnippet:
   enabled: true
   ignore:
     - "snippets/skip-to-content-link.liquid"
 
-# RemoteAsset: intentional/false positive cases
-# - sections/gallery.liquid: SVG inline base64 placeholder cho lightbox
-# - sections/video.liquid: YouTube i.ytimg.com thumbnail (nếu giữ embed YouTube native)
+# RemoteAsset: intentional cases
+# - sections/gallery.liquid: inline base64 SVG placeholder for the lightbox
+# - sections/video.liquid: protocol-relative YouTube thumbnail poster
 RemoteAsset:
   enabled: true
   ignore:

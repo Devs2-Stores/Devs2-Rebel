@@ -20,16 +20,6 @@ function revealElements(elements) {
 	});
 }
 
-class AboutPage extends HTMLElement {
-	connectedCallback() {
-		revealElements(Array.from(this.querySelectorAll('.about-features__item, .about-gallery__item')));
-	}
-}
-
-if (typeof customElements !== 'undefined' && !customElements.get('about-page')) {
-	customElements.define('about-page', AboutPage);
-}
-
 function initComposedAboutPage() {
 	const selectors = [
 		'.section-rich-text-wrapper',

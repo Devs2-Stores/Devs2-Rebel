@@ -1,6 +1,5 @@
 {%- comment %}
   Section: Testimonials
-  Mô tả: Đánh giá khách hàng — slider hoặc grid. Avatar + stars + quote.
 {% endcomment -%}
 
 {%- liquid
@@ -40,7 +39,6 @@
           <div class="section-testimonials__swiper swiper" data-tm-slider>
             <div class="swiper-wrapper">
               {%- for block in section.blocks -%}
-                {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
                 <div class="swiper-slide" {{ block.shopify_attributes }}>
                   {%- render 'testimonial-card', block: block -%}
                 </div>
@@ -52,21 +50,12 @@
       {%- else -%}
         <div class="section-testimonials__grid" style="--tm-cols: {{ section.settings.columns_desktop }};">
           {%- for block in section.blocks -%}
-            {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
             <div {{ block.shopify_attributes }}>
               {%- render 'testimonial-card', block: block -%}
             </div>
           {%- endfor -%}
         </div>
       {%- endif -%}
-    {%- endif -%}
-    {%- capture app_blocks -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
-      {%- endfor -%}
-    {%- endcapture -%}
-    {%- if app_blocks != blank -%}
-      <div class="section-apps">{{ app_blocks }}</div>
     {%- endif -%}
   </div>
 </div>
@@ -414,9 +403,6 @@
           "label": "t:sections.testimonials.blocks.testimonial.settings.avatar.label"
         }
       ]
-    },
-    {
-      "type": "@app"
     }
   ],
   "presets": [

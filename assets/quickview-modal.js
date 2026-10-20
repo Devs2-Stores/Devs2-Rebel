@@ -236,7 +236,7 @@
             themeConfig.quickview.data = null;
           }
           if (this.content) {
-            this.content.innerHTML = '<div class="quickview-modal__error" role="alert">' + ThemeUtils.escapeHtml(((themeConfig.strings.variant || {}).loadError || 'Error loading product')) + '</div>';
+            this.content.innerHTML = '<div class="quickview-modal__error" role="alert">' + ThemeUtils.escapeHtml((themeConfig.strings.variant || {}).loadError) + '</div>';
           }
         }
         console.error('Quickview error:', error);
@@ -269,7 +269,7 @@
 
       if (priceCurrent) {
         if (price === 0) {
-          priceCurrent.textContent = (themeConfig.strings.variant || {}).contact || 'Contact';
+          priceCurrent.textContent = (themeConfig.strings.variant || {}).contact;
         } else {
           priceCurrent.textContent = ThemeUtils.formatMoney(price, themeConfig.priceFormat);
         }
@@ -309,8 +309,8 @@
       if (!availabilityEl) return;
 
       availabilityEl.textContent = available
-        ? ((themeConfig.strings.variant || {}).inStock || 'In stock')
-        : ((themeConfig.strings.variant || {}).soldOut || 'Sold out');
+        ? (themeConfig.strings.variant || {}).inStock
+        : (themeConfig.strings.variant || {}).soldOut;
       availabilityEl.className = available
         ? 'quickview-product__status--available'
         : 'quickview-product__status--unavailable';
@@ -328,13 +328,13 @@
 
       if (price === 0) {
         addBtn.disabled = false;
-        if (addBtnText) addBtnText.textContent = (themeConfig.strings.variant || {}).contact || 'Contact';
+        if (addBtnText) addBtnText.textContent = (themeConfig.strings.variant || {}).contact;
       } else if (available) {
         addBtn.disabled = false;
-        if (addBtnText) addBtnText.textContent = (themeConfig.strings.variant || {}).addToCart || 'Add to cart';
+        if (addBtnText) addBtnText.textContent = (themeConfig.strings.variant || {}).addToCart;
       } else {
         addBtn.disabled = true;
-        if (addBtnText) addBtnText.textContent = (themeConfig.strings.variant || {}).soldOut || 'Sold out';
+        if (addBtnText) addBtnText.textContent = (themeConfig.strings.variant || {}).soldOut;
       }
     }
 
@@ -367,7 +367,7 @@
       }
 
       if (!this.currentVariantId) {
-        if (typeof showToast === 'function') showToast((themeConfig.strings.variant || {}).selectAllOptions || 'Please select all options', 'error');
+        if (typeof showToast === 'function') showToast((themeConfig.strings.variant || {}).selectAllOptions, 'error');
         return;
       }
 
@@ -383,7 +383,7 @@
       // Disable button and show loading
       if (addBtn) {
         addBtn.disabled = true;
-        if (addBtnText) addBtnText.textContent = (themeConfig.strings.variant || {}).adding || 'Adding...';
+        if (addBtnText) addBtnText.textContent = (themeConfig.strings.variant || {}).adding;
       }
 
       try {
@@ -421,7 +421,7 @@
         }
 
       } catch (error) {
-        if (typeof showToast === 'function') showToast((themeConfig.strings.cart || {}).itemError || 'Could not add to cart', 'error');
+        if (typeof showToast === 'function') showToast((themeConfig.strings.cart || {}).itemError, 'error');
       } finally {
         // Re-enable button
         if (addBtn) {

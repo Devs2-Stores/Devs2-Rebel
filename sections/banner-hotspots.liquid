@@ -1,6 +1,5 @@
 {%- comment %}
   Section: Banner with Hotspots
-  Mô tả: Ảnh sản phẩm + chấm tròn clickable → tooltip info/product.
 {% endcomment -%}
 
 <div
@@ -35,7 +34,6 @@
       {%- endif -%}
 
       {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
         {%- liquid
           assign hotspot_product = block.settings.product
           assign hotspot_product_handle = block.settings.product_handle
@@ -74,14 +72,6 @@
         </div>
       {%- endfor -%}
     </div>
-    {%- capture app_blocks -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
-      {%- endfor -%}
-    {%- endcapture -%}
-    {%- if app_blocks != blank -%}
-      <div class="section-apps">{{ app_blocks }}</div>
-    {%- endif -%}
   </div>
 </div>
 
@@ -466,9 +456,6 @@
           "label": "t:sections.banner_hotspots.blocks.hotspot.settings.custom_text.label"
         }
       ]
-    },
-    {
-      "type": "@app"
     }
   ],
   "presets": [

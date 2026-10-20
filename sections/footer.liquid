@@ -66,34 +66,17 @@
           </a>
           {%- endif -%}
           {%- if settings.social_twitter_link != blank -%}
-          <a href="{{ settings.social_twitter_link }}" title="Twitter / X" aria-label="{{ 'accessibility.follow_on' | t: platform: 'X (Twitter)' }}" class="footer-social-media__link" target="_blank" rel="noopener noreferrer">
+          <a href="{{ settings.social_twitter_link }}" title="{{ 'general.social.follow_on' | t: platform: 'X (Twitter)' }}" aria-label="{{ 'accessibility.follow_on' | t: platform: 'X (Twitter)' }}" class="footer-social-media__link" target="_blank" rel="noopener noreferrer">
             {%- render 'icon', name: 'twitter' -%}
           </a>
           {%- endif -%}
         </div>
-        {%- if section.settings.show_certs -%}
-        <div class="footer-info__certs">
-          {%- if section.settings.cert_dmca_link != blank -%}
-          <a href="{{ section.settings.cert_dmca_link }}" class="footer-info__cert-item" target="_blank" rel="noopener noreferrer">
-            {%- if section.settings.cert_dmca_image != blank -%}
-            {%- assign cert_alt = 'accessibility.cert_alt' | t: name: 'DMCA' -%}
-            {{ section.settings.cert_dmca_image | image_url: width: 260 | image_tag:
-              width: 130, height: 50,
-              alt: cert_alt,
-              class: 'footer-info__cert-img',
-              loading: 'lazy'
-            }}
-            {%- endif -%}
-          </a>
-          {%- endif -%}
-        </div>
-        {%- endif -%}
       </div>
       <div class="footer-actions">
         {%- if section.settings.newsletter_title != blank or section.settings.newsletter_enable -%}
         <div class="footer_actions__slogan">
           {%- if section.settings.newsletter_title != blank -%}
-          <h3 class="footer_actions_slogan-title">{{ section.settings.newsletter_title | escape }}</h3>
+          <h2 class="footer_actions_slogan-title">{{ section.settings.newsletter_title | escape }}</h2>
           {%- endif -%}
           {%- if section.settings.newsletter_enable -%}
           {%- form 'customer', id: 'FooterNewsletter', class: 'footer-newsletter' -%}
@@ -123,37 +106,28 @@
         {%- endif -%}
         <div class="footer-actions-menus">
           {%- for block in section.blocks -%}
-          {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
           {%- if block.type == 'menu' -%}
+          {%- assign menu = linklists[block.settings.menu] -%}
+          {%- if block.settings.menu != blank and menu.links != blank -%}
           <div class="footer-actions-menu" {{ block.shopify_attributes }}>
-            <h3 class="footer-actions-menu__title">
+            <h2 class="footer-actions-menu__title">
               <button type="button" class="footer-actions-menu__toggle" aria-expanded="false" aria-controls="FooterMenu-{{ section.id }}-{{ block.id }}">{{ block.settings.heading | escape }}</button>
               <span class="footer-actions-menu__label">{{ block.settings.heading | escape }}</span>
-            </h3>
+            </h2>
             <ul class="footer-actions-menu__list" id="FooterMenu-{{ section.id }}-{{ block.id }}">
-              {%- assign menu = linklists[block.settings.menu] -%}
-              {%- if block.settings.menu != blank and menu.links != blank -%}
               {%- for link in menu.links -%}
               <li>
                 <a title="{{ link.title | escape }}" href="{{ link.url }}">{{ link.title | escape }}</a>
               </li>
               {%- endfor -%}
-              {%- endif -%}
             </ul>
           </div>
+          {%- endif -%}
           {%- endif -%}
           {%- endfor -%}
         </div>
       </div>
     </div>
-    {%- capture app_blocks -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
-      {%- endfor -%}
-    {%- endcapture -%}
-    {%- if app_blocks != blank -%}
-      <div class="section-apps">{{ app_blocks }}</div>
-    {%- endif -%}
     <div class="footer-bottom">
       <div class="footer-copyright">
         <p class="footer-copyright__text">&copy; {{ 'now' | date: '%Y' }} {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}</p>
@@ -294,26 +268,6 @@
     },
     {
       "type": "header",
-      "content": "t:sections.footer.settings.header__certs.content"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_certs",
-      "label": "t:sections.footer.settings.show_certs.label",
-      "default": false
-    },
-    {
-      "type": "image_picker",
-      "id": "cert_dmca_image",
-      "label": "t:sections.footer.settings.cert_dmca_image.label"
-    },
-    {
-      "type": "url",
-      "id": "cert_dmca_link",
-      "label": "t:sections.footer.settings.cert_dmca_link.label"
-    },
-    {
-      "type": "header",
       "content": "t:sections.footer.settings.header__localization.content"
     },
     {
@@ -362,9 +316,6 @@
           "default": "footer"
         }
       ]
-    },
-    {
-      "type": "@app"
     }
   ],
   "default": {

@@ -1,6 +1,5 @@
 {%- comment %}
   Section: Animated Counter / Stats
-  Mô tả: Numbers đếm từ 0 → target khi scroll vào view.
 {% endcomment -%}
 
 <div
@@ -28,7 +27,6 @@
     {%- assign stat_count = section.blocks | where: 'type', 'stat' | size -%}
     <div class="section-stats__grid" style="--st-cols: {{ stat_count | at_most: 5 }};">
       {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
         <div class="section-stats__item" {{ block.shopify_attributes }} data-stat data-target="{{ block.settings.number }}" data-prefix="{{ block.settings.prefix | escape }}" data-suffix="{{ block.settings.suffix | escape }}">
           {%- if block.settings.icon != blank -%}
             <div class="section-stats__icon">
@@ -44,14 +42,6 @@
         </div>
       {%- endfor -%}
     </div>
-    {%- capture app_blocks -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
-      {%- endfor -%}
-    {%- endcapture -%}
-    {%- if app_blocks != blank -%}
-      <div class="section-apps">{{ app_blocks }}</div>
-    {%- endif -%}
   </div>
 </div>
 
@@ -329,9 +319,6 @@
           "default": "t:sections.animated_counter.blocks.stat.settings.label.default"
         }
       ]
-    },
-    {
-      "type": "@app"
     }
   ],
   "presets": [

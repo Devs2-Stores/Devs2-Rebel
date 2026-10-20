@@ -1,6 +1,5 @@
 {%- comment %}
   Section: Timeline / History
-  Mô tả: Vertical timeline — dùng cho About, Brand story.
 {% endcomment -%}
 
 <div
@@ -27,7 +26,6 @@
 
     <div class="section-timeline__list">
       {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
         <div class="section-timeline__item" {{ block.shopify_attributes }}>
           <div class="section-timeline__marker">
             <div class="section-timeline__dot"></div>
@@ -57,14 +55,6 @@
         </div>
       {%- endfor -%}
     </div>
-    {%- capture app_blocks -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
-      {%- endfor -%}
-    {%- endcapture -%}
-    {%- if app_blocks != blank -%}
-      <div class="section-apps">{{ app_blocks }}</div>
-    {%- endif -%}
   </div>
 </div>
 
@@ -340,9 +330,6 @@
           "default": "sm"
         }
       ]
-    },
-    {
-      "type": "@app"
     }
   ],
   "presets": [

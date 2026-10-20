@@ -1,6 +1,5 @@
 {%- comment %}
   Section: Team / About Us Grid
-  Mô tả: Grid thành viên — avatar + name + role + social links.
 {% endcomment -%}
 
 <div
@@ -29,7 +28,6 @@
     {%- assign member_count = section.blocks | where: 'type', 'member' | size -%}
     <div class="section-team__grid{% if member_count == 5 and section.settings.columns_desktop == 4 %} section-team__grid--five{% endif %}">
       {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
         <div class="section-team__member" {{ block.shopify_attributes }}>
           <div class="section-team__avatar-wrap">
             {%- if block.settings.image != blank -%}
@@ -101,14 +99,6 @@
         </div>
       {%- endfor -%}
     </div>
-    {%- capture app_blocks -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
-      {%- endfor -%}
-    {%- endcapture -%}
-    {%- if app_blocks != blank -%}
-      <div class="section-apps">{{ app_blocks }}</div>
-    {%- endif -%}
   </div>
 </div>
 
@@ -376,9 +366,6 @@
           "label": "t:sections.team.blocks.member.settings.social_2.label"
         }
       ]
-    },
-    {
-      "type": "@app"
     }
   ],
   "presets": [

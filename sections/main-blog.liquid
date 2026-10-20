@@ -464,14 +464,6 @@
         {%- endif -%}
       </div>
     {%- endpaginate -%}
-    {%- capture app_blocks -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
-      {%- endfor -%}
-    {%- endcapture -%}
-    {%- if app_blocks != blank -%}
-      <div class="section-apps">{{ app_blocks }}</div>
-    {%- endif -%}
   </div>
 </div>
 
@@ -1116,9 +1108,6 @@
           "default": 0
         }
       ]
-    },
-    {
-      "type": "@app"
     }
   ]
 }

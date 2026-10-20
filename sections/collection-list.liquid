@@ -1,6 +1,5 @@
 {%- comment %}
   Section: Collection List
-  Mô tả: Grid các collection cards — navigate giữa nhiều danh mục.
 {% endcomment -%}
 
 <div
@@ -58,7 +57,6 @@
     -%}
     <div class="section-collection-list__grid">
       {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
         {%- liquid
           assign col = block.settings.collection
           assign card_title = block.settings.custom_title | default: col.title
@@ -85,7 +83,7 @@
                   widths: '300, 400, 600, 800',
                   sizes: card_sizes,
                   loading: 'lazy', decoding: 'async',
-                  alt: card_title,
+                  alt: '',
                   class: 'section-collection-list__img'
                 }}
               {%- elsif col.featured_image -%}
@@ -93,7 +91,7 @@
                   widths: '300, 400, 600, 800',
                   sizes: card_sizes,
                   loading: 'lazy', decoding: 'async',
-                  alt: card_title,
+                  alt: '',
                   class: 'section-collection-list__img'
                 }}
               {%- else -%}
@@ -118,14 +116,6 @@
         {%- endif -%}
       {%- endfor -%}
     </div>
-    {%- capture app_blocks -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
-      {%- endfor -%}
-    {%- endcapture -%}
-    {%- if app_blocks != blank -%}
-      <div class="section-apps">{{ app_blocks }}</div>
-    {%- endif -%}
   </div>
 </div>
 
@@ -427,9 +417,6 @@
           "info": "t:sections.collection_list.blocks.collection_card.settings.custom_title.info"
         }
       ]
-    },
-    {
-      "type": "@app"
     }
   ],
   "presets": [

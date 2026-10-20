@@ -23,6 +23,9 @@
   font-weight: var(--font-weight-medium);
 }
 .section-breadcrumbs .breadcrumb__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.5rem;
   color: var(--color-muted);
   text-decoration: none;
   transition: color var(--transition-fast);

@@ -283,15 +283,15 @@
       "name": "Search behavior",
       "settings": {
         "predictive_search_enabled": {
-          "label": "Enable search suggestions"
+          "label": "Show search suggestions"
         },
         "predictive_search_show_vendor": {
           "label": "Show vendor",
-          "info": "Visible when search suggestions are enabled."
+          "info": "Visible when search suggestions are shown."
         },
         "predictive_search_show_price": {
           "label": "Show price",
-          "info": "Visible when search suggestions are enabled."
+          "info": "Visible when search suggestions are shown."
         },
         "predictive_search_featured_menu": {
           "label": "Quick search links menu",
@@ -336,7 +336,7 @@
           "label": "Show vendor"
         },
         "show_cart_note": {
-          "label": "Enable cart note"
+          "label": "Show cart note"
         },
         "cart_drawer": {
           "header": "Cart drawer",
@@ -354,7 +354,7 @@
           "content": "These settings apply to all article pages where TOC is enabled."
         },
         "title": {
-          "label": "Title",
+          "label": "Heading",
           "default": "Table of Contents"
         },
         "heading_levels": {
@@ -411,7 +411,7 @@
       "name": "Newsletter popup",
       "settings": {
         "enable": {
-          "label": "Enable newsletter popup"
+          "label": "Show newsletter popup"
         },
         "image": {
           "label": "Popup image"
@@ -454,7 +454,7 @@
       "name": "Floating contact buttons",
       "settings": {
         "enable": {
-          "label": "Enable floating contact"
+          "label": "Show floating contact"
         },
         "position": {
           "label": "Position",
@@ -466,15 +466,15 @@
           }
         },
         "title": {
-          "label": "Panel title",
+          "label": "Panel heading",
           "default": "Contact us"
         },
         "subtitle": {
-          "label": "Panel subtitle",
+          "label": "Panel subheading",
           "default": "Choose your preferred channel"
         },
         "channel_enable": {
-          "label": "Enable"
+          "label": "Show channel"
         },
         "channel_icon": {
           "label": "Icon"
@@ -489,19 +489,13 @@
           "default__map": "Map",
           "default__email": "Email",
           "default__telegram": "Telegram",
-          "default__lazada": "Lazada",
-          "default__shopee": "Shopee",
           "default__tiktok": "TikTok",
           "default__messenger": "Messenger",
           "default__facebook": "Facebook",
-          "default__zalo": "Zalo",
           "default__hotline": "Hotline"
         },
         "header__hotline": {
           "content": "Hotline"
-        },
-        "header__zalo": {
-          "content": "Zalo"
         },
         "header__facebook": {
           "content": "Facebook"
@@ -511,12 +505,6 @@
         },
         "header__tiktok": {
           "content": "TikTok"
-        },
-        "header__shopee": {
-          "content": "Shopee"
-        },
-        "header__lazada": {
-          "content": "Lazada"
         },
         "header__telegram": {
           "content": "Telegram"
@@ -588,13 +576,13 @@
           "content": "Sticky add to cart"
         },
         "sticky_addtocart": {
-          "label": "Enable sticky add-to-cart bar"
+          "label": "Show sticky add-to-cart bar"
         },
         "header__size_guide": {
           "content": "Size guide"
         },
         "size_guide_enable": {
-          "label": "Enable size guide"
+          "label": "Show size guide"
         },
         "size_guide_page": {
           "label": "Size guide page"
@@ -776,7 +764,7 @@
       "name": "Announcement bar",
       "settings": {
         "enable": {
-          "label": "Enable announcement bar"
+          "label": "Show announcement bar"
         }
       },
       "blocks": {
@@ -839,7 +827,7 @@
           "content": "Media"
         },
         "enable_lightbox": {
-          "label": "Enable lightbox zoom"
+          "label": "Show lightbox zoom"
         },
         "stock_threshold": {
           "label": "Low stock threshold"
@@ -848,7 +836,7 @@
           "label": "Contact page link"
         },
         "description_readmore": {
-          "label": "Enable read more toggle"
+          "label": "Show read more toggle"
         },
         "description_max_height": {
           "label": "Max description height"
@@ -871,7 +859,7 @@
           "name": "Custom tab",
           "settings": {
             "title": {
-              "label": "Tab title",
+              "label": "Tab heading",
               "default": "Tab"
             },
             "content_type": {
@@ -959,9 +947,6 @@
         "stock_counter": {
           "name": "Stock counter"
         },
-        "back_in_stock": {
-          "name": "Back in stock"
-        },
         "payment_installments": {
           "name": "Payment installments"
         },
@@ -1011,11 +996,11 @@
             },
             "heading": {
               "label": "Heading",
-              "default": "Free shipping"
+              "default": "Shipping"
             },
             "text": {
               "label": "Text",
-              "default": "Orders over $50 ship free"
+              "default": "Add details about your shipping policy"
             }
           }
         },
@@ -1023,7 +1008,7 @@
           "name": "Badges and tags"
         },
         "title": {
-          "name": "Title"
+          "name": "Heading"
         },
         "product_meta": {
           "name": "Meta"
@@ -1040,15 +1025,15 @@
       "settings": {
         "heading": {
           "label": "Heading",
-          "default": "FLASH SALE"
+          "default": "New drop"
         },
         "subheading": {
           "label": "Subheading",
-          "default": "Up to 50% off on selected items"
+          "default": "Add a short message about your offer"
         },
         "button_text": {
           "label": "Button text",
-          "default": "SHOP NOW"
+          "default": "Shop now"
         },
         "button_link": {
           "label": "Button link"
@@ -1154,7 +1139,7 @@
           }
         },
         "enable_filtering": {
-          "label": "Enable filtering"
+          "label": "Show filtering"
         },
         "price_filter_style": {
           "label": "Price filter style",
@@ -1162,14 +1147,14 @@
             "label": "Input fields"
           },
           "options__range": {
-            "label": "Range slider"
+            "label": "Range"
           },
           "options__checkbox": {
             "label": "Checkbox presets"
           }
         },
         "enable_sorting": {
-          "label": "Enable sorting"
+          "label": "Show sorting"
         },
         "show_product_count": {
           "label": "Show product count"
@@ -1299,8 +1284,8 @@
               "label": "Show best sellers"
             },
             "title": {
-              "label": "Title",
-              "default": "Best Sellers"
+              "label": "Heading",
+              "default": "Best sellers"
             },
             "source": {
               "label": "Product source",
@@ -1344,8 +1329,8 @@
           "label": "Show invoice fields"
         },
         "invoice_title": {
-          "label": "Invoice section title",
-          "default": "VAT Invoice"
+          "label": "Invoice section heading",
+          "default": "VAT invoice"
         },
         "invoice_company_label": {
           "label": "Company name placeholder",
@@ -1369,7 +1354,7 @@
           "label": "Upsell collection"
         },
         "upsale_title": {
-          "label": "Upsell section title",
+          "label": "Upsell section heading",
           "default": "You may also like"
         },
         "upsale_limit": {
@@ -1390,7 +1375,7 @@
       "name": "404",
       "settings": {
         "title": {
-          "label": "Title"
+          "label": "Heading"
         },
         "content": {
           "label": "Content"
@@ -1637,7 +1622,7 @@
           "settings": {
             "title": {
               "label": "Heading",
-              "default": "Recent Posts"
+              "default": "Recent posts"
             },
             "posts_count": {
               "label": "Posts to show"
@@ -1670,11 +1655,11 @@
             },
             "heading": {
               "label": "Heading",
-              "default": "Texture, utility, attitude"
+              "default": "Latest drop"
             },
             "text": {
               "label": "Text",
-              "default": "Explore sculptural layers and future-ready footwear."
+              "default": "Explore outerwear, layers, and everyday essentials."
             },
             "button_label": {
               "label": "Button label",
@@ -1697,7 +1682,7 @@
           "content": "Newsletter"
         },
         "newsletter_title": {
-          "label": "Newsletter title"
+          "label": "Newsletter heading"
         },
         "newsletter_enable": {
           "label": "Show email signup",
@@ -1716,19 +1701,7 @@
           "label": "Phone"
         },
         "tax_code": {
-          "label": "Tax code"
-        },
-        "header__certs": {
-          "content": "Certifications"
-        },
-        "show_certs": {
-          "label": "Show certifications"
-        },
-        "cert_dmca_image": {
-          "label": "DMCA certificate image"
-        },
-        "cert_dmca_link": {
-          "label": "DMCA certificate link"
+          "label": "Tax ID"
         },
         "header__localization": {
           "content": "Localization"
@@ -1795,167 +1768,6 @@
     "main_customers_reset": {
       "name": "Reset password"
     },
-    "page_about": {
-      "name": "About us",
-      "settings": {
-        "header__hero": {
-          "content": "Hero banner"
-        },
-        "hero_image_desktop": {
-          "label": "Desktop image"
-        },
-        "hero_image_mobile": {
-          "label": "Mobile image"
-        },
-        "hero_subtitle": {
-          "label": "Subtitle"
-        },
-        "hero_title": {
-          "label": "Title"
-        },
-        "hero_description": {
-          "label": "Description"
-        },
-        "header__mission": {
-          "content": "Mission"
-        },
-        "show_mission": {
-          "label": "Show mission"
-        },
-        "mission_title": {
-          "label": "Mission title"
-        },
-        "mission_description": {
-          "label": "Mission description"
-        },
-        "header__story": {
-          "content": "Our story"
-        },
-        "show_story": {
-          "label": "Show story"
-        },
-        "story_title": {
-          "label": "Story title"
-        },
-        "story_content": {
-          "label": "Story content"
-        },
-        "header__gallery": {
-          "content": "Gallery"
-        },
-        "show_gallery": {
-          "label": "Show gallery"
-        },
-        "gallery_title": {
-          "label": "Gallery title"
-        },
-        "header__hero_actions": {
-          "content": "Hero actions"
-        },
-        "hero_primary_label": {
-          "label": "Primary button label"
-        },
-        "hero_primary_link": {
-          "label": "Primary button link"
-        },
-        "hero_secondary_label": {
-          "label": "Secondary button label"
-        },
-        "hero_secondary_link": {
-          "label": "Secondary button link"
-        },
-        "header__actions": {
-          "content": "About actions"
-        },
-        "show_actions": {
-          "label": "Show action cards"
-        },
-        "actions_subheading": {
-          "label": "Section eyebrow"
-        },
-        "actions_title": {
-          "label": "Section title"
-        },
-        "actions_description": {
-          "label": "Section description"
-        },
-        "action_1_eyebrow": {
-          "label": "Card 1 eyebrow"
-        },
-        "action_1_title": {
-          "label": "Card 1 title"
-        },
-        "action_1_text": {
-          "label": "Card 1 text"
-        },
-        "action_1_label": {
-          "label": "Card 1 link label"
-        },
-        "action_1_link": {
-          "label": "Card 1 link"
-        },
-        "action_2_eyebrow": {
-          "label": "Card 2 eyebrow"
-        },
-        "action_2_title": {
-          "label": "Card 2 title"
-        },
-        "action_2_text": {
-          "label": "Card 2 text"
-        },
-        "action_2_label": {
-          "label": "Card 2 link label"
-        },
-        "action_2_link": {
-          "label": "Card 2 link"
-        },
-        "action_3_eyebrow": {
-          "label": "Card 3 eyebrow"
-        },
-        "action_3_title": {
-          "label": "Card 3 title"
-        },
-        "action_3_text": {
-          "label": "Card 3 text"
-        },
-        "action_3_label": {
-          "label": "Card 3 link label"
-        },
-        "action_3_link": {
-          "label": "Card 3 link"
-        }
-      },
-      "blocks": {
-        "feature": {
-          "name": "Feature",
-          "settings": {
-            "image": {
-              "label": "Image"
-            },
-            "title": {
-              "label": "Title"
-            },
-            "description": {
-              "label": "Description"
-            },
-            "reverse": {
-              "label": "Reverse layout"
-            }
-          }
-        },
-        "gallery_image": {
-          "name": "Gallery image",
-          "settings": {
-            "image": {
-              "label": "Image"
-            },
-            "alt": {
-              "label": "Alt text"
-            }
-          }
-        }
-      }
-    },
     "breadcrumb": {
       "name": "Breadcrumb",
       "settings": {
@@ -1983,11 +1795,11 @@
           "content": "Heading"
         },
         "title": {
-          "label": "Title",
+          "label": "Heading",
           "default": "Collections"
         },
         "subtitle": {
-          "label": "Subtitle"
+          "label": "Subheading"
         },
         "heading_alignment_desktop": {
           "label": "Desktop heading alignment"
@@ -2075,7 +1887,7 @@
           "content": "Hero"
         },
         "title": {
-          "label": "Title"
+          "label": "Heading"
         },
         "description": {
           "label": "Description"
@@ -2126,7 +1938,7 @@
           "label": "Second statistic label"
         },
         "note_title": {
-          "label": "Note title"
+          "label": "Note heading"
         },
         "note_text": {
           "label": "Note text"
@@ -2166,7 +1978,7 @@
           "content": "Hero"
         },
         "title": {
-          "label": "Title"
+          "label": "Heading"
         },
         "description": {
           "label": "Description"
@@ -2178,7 +1990,7 @@
           "label": "Show contact section"
         },
         "contact_title": {
-          "label": "Contact title"
+          "label": "Contact heading"
         },
         "contact_description": {
           "label": "Contact description"
@@ -2206,7 +2018,7 @@
           "name": "Topic heading",
           "settings": {
             "title": {
-              "label": "Topic title"
+              "label": "Heading"
             }
           }
         }
@@ -2216,7 +2028,7 @@
       "name": "Store locator",
       "settings": {
         "title": {
-          "label": "Title"
+          "label": "Heading"
         },
         "description": {
           "label": "Description"
@@ -2384,7 +2196,7 @@
       }
     },
     "before_after": {
-      "name": "Before/after slider",
+      "name": "Before and after",
       "settings": {
         "color_scheme": {
           "label": "Color scheme"
@@ -2459,7 +2271,7 @@
       },
       "presets": {
         "before_after": {
-          "name": "Before/after slider"
+          "name": "Before and after"
         }
       }
     },
@@ -2475,7 +2287,7 @@
         },
         "products": {
           "label": "Products",
-          "info": "Shown instead of automatic recommendations. Leave empty to use the products set up in the Search & Discovery app."
+          "info": "Shown instead of automatic recommendations. Leave empty to use the products set up in the Search and Discovery app."
         }
       }
     },
@@ -2713,7 +2525,7 @@
               "info": "Overrides collection image"
             },
             "custom_title": {
-              "label": "Custom title",
+              "label": "Custom heading",
               "info": "Overrides collection title"
             }
           }
@@ -2744,24 +2556,6 @@
         "image_alt": {
           "label": "Image alt text",
           "info": "Describes the image for accessibility and SEO."
-        },
-        "header__image_url_override": {
-          "content": "Image URL override"
-        },
-        "custom_image_url": {
-          "label": "Desktop image URL",
-          "info": "Overrides the image picker. Use for external/CDN images."
-        },
-        "custom_image_mobile_url": {
-          "label": "Mobile image URL",
-          "info": "Optional. Falls back to desktop URL."
-        },
-        "header__video": {
-          "content": "Video"
-        },
-        "video_url": {
-          "label": "Background video URL (.mp4)",
-          "info": "Takes priority over image. Paste a direct .mp4 link."
         },
         "header__dimensions": {
           "content": "Dimensions"
@@ -2929,7 +2723,7 @@
               }
             },
             "header__button_1": {
-              "content": "Button 1"
+              "content": "First button"
             },
             "button_label_1": {
               "label": "Label",
@@ -2947,7 +2741,7 @@
               }
             },
             "header__button_2": {
-              "content": "Button 2"
+              "content": "Second button"
             },
             "button_label_2": {
               "label": "Label",
@@ -3096,11 +2890,11 @@
             },
             "quote": {
               "label": "Quote",
-              "default": "<p>This product exceeded my expectations! Amazing quality and fast shipping.</p>"
+              "default": "<p>Share a customer review here.</p>"
             },
             "author": {
               "label": "Author name",
-              "default": "Jane Doe"
+              "default": "Customer name"
             },
             "author_title": {
               "label": "Author title",
@@ -3210,7 +3004,7 @@
             },
             "label": {
               "label": "Label",
-              "default": "Happy customers"
+              "default": "Describe this number"
             }
           }
         }
@@ -3450,7 +3244,7 @@
         },
         "text": {
           "label": "Description",
-          "default": "<p>Have a question or feedback? Fill out the form and we'll respond within 24 hours.</p>"
+          "default": "<p>Tell visitors how to get in touch and what to include in their message.</p>"
         },
         "text_size": {
           "label": "Text size",
@@ -3871,11 +3665,11 @@
             },
             "heading": {
               "label": "Heading",
-              "default": "Free Shipping"
+              "default": "Shipping"
             },
             "text": {
               "label": "Description",
-              "default": "Free shipping on all orders over $50."
+              "default": "Add details about your shipping policy."
             },
             "link_text": {
               "label": "Link text"
@@ -4011,17 +3805,17 @@
           "name": "Buttons",
           "settings": {
             "label_1": {
-              "label": "Button 1",
+              "label": "First button label",
               "default": "Shop now"
             },
             "link_1": {
-              "label": "Link 1"
+              "label": "First button link"
             },
             "label_2": {
-              "label": "Button 2"
+              "label": "Second button label"
             },
             "link_2": {
-              "label": "Link 2"
+              "label": "Second button link"
             },
             "size": {
               "label": "Size",
@@ -4176,14 +3970,14 @@
               }
             },
             "button_label_1": {
-              "label": "Button 1 label",
+              "label": "First button label",
               "default": "Learn more"
             },
             "button_link_1": {
-              "label": "Button 1 link"
+              "label": "First button link"
             },
             "button_style_1": {
-              "label": "Button 1 style",
+              "label": "First button style",
               "options": {
                 "primary": "Primary",
                 "secondary": "Secondary (outline)",
@@ -4191,13 +3985,13 @@
               }
             },
             "button_label_2": {
-              "label": "Button 2 label"
+              "label": "Second button label"
             },
             "button_link_2": {
-              "label": "Button 2 link"
+              "label": "Second button link"
             },
             "button_style_2": {
-              "label": "Button 2 style",
+              "label": "Second button style",
               "options": {
                 "primary": "Primary",
                 "secondary": "Secondary (outline)",
@@ -4231,13 +4025,13 @@
           "content": "Images"
         },
         "image_1": {
-          "label": "Image 1 (large)"
+          "label": "Large image"
         },
         "image_2": {
-          "label": "Image 2 (medium)"
+          "label": "Medium image"
         },
         "image_3": {
-          "label": "Image 3 (small)"
+          "label": "Small image"
         },
         "header__content": {
           "content": "Content"
@@ -4255,7 +4049,7 @@
         },
         "heading": {
           "label": "Heading",
-          "default": "Made with love & intention"
+          "default": "Made with intention"
         },
         "heading_size": {
           "label": "Heading size",
@@ -4345,11 +4139,11 @@
             },
             "heading": {
               "label": "Heading",
-              "default": "Handcrafted"
+              "default": "Feature"
             },
             "text": {
               "label": "Text",
-              "default": "Each piece is made by hand with care and precision."
+              "default": "Describe what makes your product stand out."
             }
           }
         }
@@ -4433,7 +4227,7 @@
           "settings": {
             "image": {
               "label": "Logo image",
-              "info": "Recommended: transparent PNG"
+              "info": "Recommended: transparent .png"
             },
             "link": {
               "label": "Link"
@@ -4781,7 +4575,7 @@
         },
         "heading": {
           "label": "Heading",
-          "default": "Crafted with passion since 2015"
+          "default": "Crafted with intention"
         },
         "heading_size": {
           "label": "Heading size",
@@ -4944,11 +4738,11 @@
             },
             "heading": {
               "label": "Heading",
-              "default": "Limited time offer"
+              "default": "Current offer"
             },
             "text": {
               "label": "Text",
-              "default": "Get 20% off your first order with code WELCOME20"
+              "default": "Add details about your offer"
             },
             "header__button": {
               "content": "Button"
@@ -5100,7 +4894,7 @@
               }
             },
             "header__button_1": {
-              "content": "Button 1"
+              "content": "First button"
             },
             "button_label_1": {
               "label": "Label",
@@ -5118,7 +4912,7 @@
               }
             },
             "header__button_2": {
-              "content": "Button 2"
+              "content": "Second button"
             },
             "button_label_2": {
               "label": "Label"
@@ -5201,7 +4995,7 @@
           "settings": {
             "text": {
               "label": "Text",
-              "default": "Free shipping on orders over $50"
+              "default": "Add a short announcement"
             }
           }
         }
@@ -5355,14 +5149,14 @@
               }
             },
             "button_label_1": {
-              "label": "Button 1 label",
+              "label": "First button label",
               "default": "Shop now"
             },
             "button_link_1": {
-              "label": "Button 1 link"
+              "label": "First button link"
             },
             "button_style_1": {
-              "label": "Button 1 style",
+              "label": "First button style",
               "options": {
                 "primary": "Primary (solid)",
                 "secondary": "Secondary (outline)",
@@ -5370,13 +5164,13 @@
               }
             },
             "button_label_2": {
-              "label": "Button 2 label"
+              "label": "Second button label"
             },
             "button_link_2": {
-              "label": "Button 2 link"
+              "label": "Second button link"
             },
             "button_style_2": {
-              "label": "Button 2 style",
+              "label": "Second button style",
               "options": {
                 "primary": "Primary (solid)",
                 "secondary": "Secondary (outline)",
@@ -5610,20 +5404,20 @@
             },
             "name": {
               "label": "Name",
-              "default": "Jane Doe"
+              "default": "Team member name"
             },
             "role": {
               "label": "Role",
-              "default": "Founder & CEO"
+              "default": "Job role"
             },
             "bio": {
               "label": "Bio"
             },
             "social_1": {
-              "label": "Social link 1"
+              "label": "First social media link"
             },
             "social_2": {
-              "label": "Social link 2"
+              "label": "Second social media link"
             }
           }
         }
@@ -5787,11 +5581,11 @@
             },
             "heading": {
               "label": "Heading",
-              "default": "Free Shipping"
+              "default": "Shipping"
             },
             "text": {
               "label": "Description",
-              "default": "On orders over $50"
+              "default": "Add details about your shipping policy."
             }
           }
         }

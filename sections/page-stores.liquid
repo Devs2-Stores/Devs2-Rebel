@@ -54,7 +54,6 @@
 
         <div class="stores-grid" id="stores-grid">
           {%- for block in section.blocks -%}
-          {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
           {%- if block.type == 'store' -%}
           <div class="stores-card"
                data-store-name="{{ block.settings.name | escape }}"
@@ -149,14 +148,6 @@
           </div>
         </div>
       </div>
-      {%- capture app_blocks -%}
-        {%- for block in section.blocks -%}
-          {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
-        {%- endfor -%}
-      {%- endcapture -%}
-      {%- if app_blocks != blank -%}
-        <div class="section-apps">{{ app_blocks }}</div>
-      {%- endif -%}
     </div>
   </section>
 
@@ -273,9 +264,6 @@
           "label": "t:sections.page_stores.blocks.store.settings.longitude.label"
         }
       ]
-    },
-    {
-      "type": "@app"
     }
   ]
 }

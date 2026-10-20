@@ -262,9 +262,3 @@ p {
     transform: perspective(60rem) rotateX(2deg) translateY(-0.25rem);
   }
 }
-
-.section-apps {
-  display: grid;
-  gap: var(--stack-gap);
-  margin-block-start: var(--section-head-gap);
-}

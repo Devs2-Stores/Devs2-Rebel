@@ -1,6 +1,6 @@
 {%- liquid
   assign has_shop_social_links = false
-  if settings.social_facebook_link != blank or settings.social_instagram_link != blank or settings.social_youtube_link != blank or settings.social_tiktok_link != blank or settings.social_pinterest_link != blank or settings.social_twitter_link != blank or settings.social_linkedin_link != blank
+  if settings.social_facebook_link != blank or settings.social_instagram_link != blank or settings.social_youtube_link != blank or settings.social_tiktok_link != blank or settings.social_pinterest_link != blank or settings.social_twitter_link != blank
     assign has_shop_social_links = true
   endif
 -%}
@@ -51,14 +51,6 @@
       <li class="shop-social__item">
       <a href="{{ settings.social_twitter_link }}" class="shop-social__link shop-social__link--twitter" target="_blank" rel="noopener noreferrer" aria-label="{{ 'accessibility.follow_on' | t: platform: 'X (Twitter)' }}" title="{{ 'general.social.follow_on' | t: platform: 'X (Twitter)' }}">
           {%- render 'icon', name: 'twitter' -%}
-        </a>
-      </li>
-    {%- endif -%}
-
-    {%- if settings.social_linkedin_link != blank -%}
-      <li class="shop-social__item">
-        <a href="{{ settings.social_linkedin_link }}" class="shop-social__link shop-social__link--linkedin" target="_blank" rel="noopener noreferrer" aria-label="{{ 'accessibility.follow_on' | t: platform: 'LinkedIn' }}" title="{{ 'general.social.follow_on' | t: platform: 'LinkedIn' }}">
-          {%- render 'icon', name: 'linkedin' -%}
         </a>
       </li>
     {%- endif -%}

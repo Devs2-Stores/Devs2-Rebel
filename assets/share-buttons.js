@@ -75,14 +75,14 @@
 
     showCopiedState(button) {
       button.classList.add('copied');
-      button.setAttribute('aria-label', (themeConfig.strings.share || {}).success || 'Link copied');
+      button.setAttribute('aria-label', (themeConfig.strings.share || {}).success);
 
       if (typeof showToast === 'function') {
-        showToast((themeConfig.strings.share || {}).success || 'Link copied', 'success');
+        showToast((themeConfig.strings.share || {}).success, 'success');
       }
       setTimeout(function() {
         button.classList.remove('copied');
-        button.setAttribute('aria-label', (themeConfig.strings.share || {}).copyArticleLink || 'Copy link');
+        button.setAttribute('aria-label', (themeConfig.strings.share || {}).copyArticleLink);
       }, 2000);
     }
   }

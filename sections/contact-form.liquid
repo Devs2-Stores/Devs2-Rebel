@@ -31,7 +31,6 @@
           {%- endif -%}
           <div class="section-contact-form__info-list">
           {%- for block in section.blocks -%}
-            {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
             {%- if block.type == 'info_item' -%}
               <div class="section-contact-form__info-item" {{ block.shopify_attributes }}>
                 {%- if block.settings.icon != blank -%}
@@ -97,14 +96,6 @@
         {%- endform -%}
       </div>
     </div>
-    {%- capture app_blocks -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
-      {%- endfor -%}
-    {%- endcapture -%}
-    {%- if app_blocks != blank -%}
-      <div class="section-apps">{{ app_blocks }}</div>
-    {%- endif -%}
   </div>
 </div>
 
@@ -417,9 +408,6 @@
           "default": "hello@example.com"
         }
       ]
-    },
-    {
-      "type": "@app"
     }
   ],
   "presets": [

@@ -1,4 +1,4 @@
-# .shopifyignore — Không push lên Shopify store
+# .shopifyignore - files that must not be pushed to the Shopify store
 *.md
 .git/
 .github/
@@ -33,9 +33,9 @@ plans/
 runs/
 page_home.html
 shopify-theme-checklist.html
-newsletter-popup-banner.jpg
-editorial-fashion-banner.jpg
-store-location-demo-*.jpg
+scratch/
+.antifan/
+specs/
 
 # Development and build scripts
 scripts/

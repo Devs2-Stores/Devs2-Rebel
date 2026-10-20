@@ -10,8 +10,8 @@
   if panel_subtitle == blank
     assign panel_subtitle = 'general.social.panel_subtitle' | t
   endif
-  assign channels = 'hotline,zalo,facebook,messenger,tiktok,shopee,lazada,telegram,email,map,instagram,youtube' | split: ','
-  assign channel_icons = 'icon-hotline,icon-comments,icon-facebook,icon-comments,icon-tiktok,icon-tag,icon-tag,icon-telegram,icon-email,icon-location,icon-instagram,icon-youtube' | split: ','
+  assign channels = 'hotline,facebook,messenger,tiktok,telegram,email,map,instagram,youtube' | split: ','
+  assign channel_icons = 'icon-hotline,icon-facebook,icon-comments,icon-tiktok,icon-telegram,icon-email,icon-location,icon-instagram,icon-youtube' | split: ','
   assign item_index = 0
 -%}
 <float-social class="float-social" data-position="{{ settings.float_social_position | default: 'right' }}">
@@ -50,18 +50,12 @@
               case channel
                 when 'hotline'
                   assign channel_label = 'general.social.channels.hotline' | t
-                when 'zalo'
-                  assign channel_label = 'general.social.channels.zalo' | t
                 when 'facebook'
                   assign channel_label = 'general.social.channels.facebook' | t
                 when 'messenger'
                   assign channel_label = 'general.social.channels.messenger' | t
                 when 'tiktok'
                   assign channel_label = 'general.social.channels.tiktok' | t
-                when 'shopee'
-                  assign channel_label = 'general.social.channels.shopee' | t
-                when 'lazada'
-                  assign channel_label = 'general.social.channels.lazada' | t
                 when 'telegram'
                   assign channel_label = 'general.social.channels.telegram' | t
                 when 'email'

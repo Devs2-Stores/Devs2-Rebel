@@ -54,7 +54,6 @@
     >
       <div class="swiper-wrapper">
         {%- for block in section.blocks -%}
-          {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
           {%- liquid
             assign slide_index = slide_index | plus: 1
             assign desktop_img = block.settings.image_desktop
@@ -204,14 +203,6 @@
     <div class="section-slideshow__empty">
       {{ 'lifestyle-1' | placeholder_svg_tag: 'section-slideshow__placeholder-svg' }}
     </div>
-  {%- endif -%}
-  {%- capture app_blocks -%}
-    {%- for block in section.blocks -%}
-      {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
-    {%- endfor -%}
-  {%- endcapture -%}
-  {%- if app_blocks != blank -%}
-    <div class="section-apps">{{ app_blocks }}</div>
   {%- endif -%}
 </div>
 
@@ -1226,9 +1217,6 @@
           "default": "secondary"
         }
       ]
-    },
-    {
-      "type": "@app"
     }
   ],
   "presets": [

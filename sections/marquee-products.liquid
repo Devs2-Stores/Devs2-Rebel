@@ -1,6 +1,5 @@
 {%- comment %}
   Section: Marquee Products
-  Mô tả: Horizontal product card carousel with prev/next controls.
 {% endcomment -%}
 
 {%- liquid
@@ -126,6 +125,9 @@
     gap: 1.25rem;
   }
   .section-marquee-products__view-all {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.5rem;
     color: var(--color-ink);
     font-size: 0.875rem;
     font-weight: 500;

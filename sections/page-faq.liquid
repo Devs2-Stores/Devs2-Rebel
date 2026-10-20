@@ -63,8 +63,6 @@
                       <div class="faq-item__answer rte">{{ block.settings.answer }}</div>
                     </details>
                   {%- endif -%}
-                {%- when '@app' -%}
-                  {%- render block -%}
               {%- endcase -%}
             {%- endfor -%}
           </div>
@@ -239,9 +237,6 @@
           "label": "t:sections.page_faq.blocks.question.settings.answer.label"
         }
       ]
-    },
-    {
-      "type": "@app"
     }
   ],
   "presets": [

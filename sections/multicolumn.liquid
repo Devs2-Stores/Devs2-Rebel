@@ -1,7 +1,5 @@
 {%- comment %}
   Section: Multicolumn
-  Mô tả: Grid linh hoạt — icon/image + heading + text per column.
-  Dùng cho USP bar, features, benefits, shipping info.
 {% endcomment -%}
 
 {%- liquid
@@ -42,7 +40,6 @@
 
     <div class="section-multicolumn__grid section-multicolumn__grid--{{ text_align }}">
       {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
         <div class="section-multicolumn__item" {{ block.shopify_attributes }}>
           {%- if block.settings.image != blank -%}
             <div class="section-multicolumn__icon">
@@ -73,14 +70,6 @@
         </div>
       {%- endfor -%}
     </div>
-    {%- capture app_blocks -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
-      {%- endfor -%}
-    {%- endcapture -%}
-    {%- if app_blocks != blank -%}
-      <div class="section-apps">{{ app_blocks }}</div>
-    {%- endif -%}
   </div>
 </div>
 
@@ -417,9 +406,6 @@
           "label": "t:sections.multicolumn.blocks.column.settings.button_link.label"
         }
       ]
-    },
-    {
-      "type": "@app"
     }
   ],
   "presets": [

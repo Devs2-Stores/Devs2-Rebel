@@ -1,4 +1,4 @@
-{%- assign resolved_menu_handle = menu_handle | default: settings.header_menu -%}
+{%- assign resolved_menu_handle = menu_handle | default: 'main-menu' -%}
 {{ 'mobile-menu.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'mobile-menu.js' | asset_url }}" defer="defer"></script>
 <mobile-menu class="mobile-menu" role="dialog" aria-modal="true" aria-label="{{ 'accessibility.navigation' | t }}">

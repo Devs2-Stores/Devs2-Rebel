@@ -1,7 +1,5 @@
 {%- comment %}
   Section: Video
-  Mô tả: Embed YouTube hoặc tự host MP4 video.
-  Hỗ trợ: Autoplay, loop, cover poster, color scheme, responsive.
 {% endcomment -%}
 
 {%- liquid
@@ -83,7 +81,7 @@
             {{ 'lifestyle-1' | placeholder_svg_tag: 'section-video__poster placeholder-svg' }}
           {%- else -%}
             <img
-              src="https://i.ytimg.com/vi/{{ yt_id }}/maxresdefault.jpg"
+              src="//i.ytimg.com/vi/{{ yt_id }}/maxresdefault.jpg"
               alt="{{ poster_alt | escape }}"
               loading="lazy"
               width="1280"
@@ -155,9 +153,9 @@
     function loadYT() {
       var iframe = document.createElement('iframe');
       if (videoHost === 'vimeo') {
-        iframe.src = 'https://player.vimeo.com/video/' + ytId + '?autoplay=1' + (mute ? '&muted=1' : '') + (loop ? '&loop=1' : '');
+        iframe.src = '//player.vimeo.com/video/' + ytId + '?autoplay=1' + (mute ? '&muted=1' : '') + (loop ? '&loop=1' : '');
       } else {
-        iframe.src = 'https://www.youtube-nocookie.com/embed/' + ytId + '?autoplay=1&rel=0&modestbranding=1' + (mute ? '&mute=1' : '') + (loop ? '&loop=1&playlist=' + ytId : '');
+        iframe.src = '//www.youtube-nocookie.com/embed/' + ytId + '?autoplay=1&rel=0&modestbranding=1' + (mute ? '&mute=1' : '') + (loop ? '&loop=1&playlist=' + ytId : '');
       }
       iframe.setAttribute('allow', 'autoplay; encrypted-media');
       iframe.setAttribute('allowfullscreen', '');

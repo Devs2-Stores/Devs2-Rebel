@@ -71,6 +71,10 @@
         moreLoaded: `{{ 'products.facets.more_products_loaded' | t }}`,
         loadError: `{{ 'products.facets.load_error' | t }}`
       },
+      search: {
+        unavailable: `{{ 'templates.search.suggestions_unavailable' | t }}`,
+        viewResults: `{{ 'templates.search.view_search_results' | t }}`
+      },
       accessibility: {
         close: `{{ 'accessibility.close' | t }}`,
         imageAvailable: `{{ 'products.product.media.image_available' | t: index: '[index]' }}`,
@@ -153,7 +157,7 @@
       "where": {
         "and": [
           { "href_matches": "/*" },
-          { "not": { "href_matches": ["/cart", "/cart/*", "/checkout", "/account", "/account/*", "/search*"] } }
+          { "not": { "href_matches": ["/cart", "/cart/*", "/checkout", "/checkout/*", "/account", "/account/*", "/search*", "/*/cart", "/*/cart/*", "/*/checkout", "/*/checkout/*", "/*/account", "/*/account/*", "/*/search*"] } }
         ]
       },
       "eagerness": "moderate"

@@ -64,7 +64,7 @@
 
       var closeBtn = document.createElement('button');
       closeBtn.className = 'toast-close';
-      closeBtn.setAttribute('aria-label', (typeof themeConfig !== 'undefined' && themeConfig.strings && themeConfig.strings.accessibility) ? themeConfig.strings.accessibility.close : 'Close');
+      closeBtn.setAttribute('aria-label', themeConfig.strings.accessibility.close);
       closeBtn.textContent = '\u00d7';
       closeBtn.addEventListener('click', function() {
         self.remove(wrapper);

@@ -1,6 +1,5 @@
 {%- comment %}
   Section: Icon Boxes
-  Mô tả: Grid icon + heading + text + link — USP / Feature highlights.
 {% endcomment -%}
 
 <div
@@ -28,7 +27,6 @@
 
     <div class="section-icon-boxes__grid section-icon-boxes__grid--{{ section.settings.style }}">
       {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
         <div class="section-icon-boxes__item" {{ block.shopify_attributes }}>
           <div class="section-icon-boxes__icon-wrap section-icon-boxes__icon-wrap--{{ section.settings.icon_style }}">
             {%- if block.settings.icon_image != blank -%}
@@ -54,14 +52,6 @@
         </div>
       {%- endfor -%}
     </div>
-    {%- capture app_blocks -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
-      {%- endfor -%}
-    {%- endcapture -%}
-    {%- if app_blocks != blank -%}
-      <div class="section-apps">{{ app_blocks }}</div>
-    {%- endif -%}
   </div>
 </div>
 
@@ -341,9 +331,6 @@
           "label": "t:sections.icon_boxes.blocks.box.settings.link.label"
         }
       ]
-    },
-    {
-      "type": "@app"
     }
   ],
   "presets": [

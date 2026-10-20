@@ -1,7 +1,5 @@
 {%- comment %}
   Section: Rich Text
-  Mô tả: Section global hiển thị heading, text, và buttons.
-  Sử dụng blocks để linh hoạt thêm/xóa/sắp xếp nội dung.
 {% endcomment -%}
 
 <div
@@ -72,9 +70,6 @@
               style="--block-spacer: {{ block.settings.spacing }}px;"
               {{ block.shopify_attributes }}
             ></div>
-
-          {%- when '@app' -%}
-            {%- render block -%}
 
         {%- endcase -%}
       {%- endfor -%}
@@ -637,9 +632,6 @@
           "default": 20
         }
       ]
-    },
-    {
-      "type": "@app"
     }
   ],
   "presets": [

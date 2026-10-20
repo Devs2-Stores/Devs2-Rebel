@@ -1,6 +1,5 @@
 {%- comment %}
   Section: Collapsible Content / FAQ
-  Mô tả: Accordion — dùng cho FAQ, chính sách, shipping info.
 {% endcomment -%}
 
 <div
@@ -32,7 +31,6 @@
     <div class="section-collapsible__list">
       {%- assign row_index = 0 -%}
       {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
         {%- assign row_index = row_index | plus: 1 -%}
         {%- if block.settings.heading == blank -%}{%- continue -%}{%- endif -%}
         <details class="section-collapsible__item" {{ block.shopify_attributes }}{% if section.settings.open_first and row_index == 1 %} open{% endif %}>
@@ -50,14 +48,6 @@
         </details>
       {%- endfor -%}
     </div>
-    {%- capture app_blocks -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
-      {%- endfor -%}
-    {%- endcapture -%}
-    {%- if app_blocks != blank -%}
-      <div class="section-apps">{{ app_blocks }}</div>
-    {%- endif -%}
   </div>
 </div>
 
@@ -329,9 +319,6 @@
           "default": "md"
         }
       ]
-    },
-    {
-      "type": "@app"
     }
   ],
   "presets": [

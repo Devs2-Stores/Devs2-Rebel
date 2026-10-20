@@ -1,6 +1,5 @@
 {%- comment %}
   Section: Featured Product
-  Mô tả: Hiển thị 1 sản phẩm riêng lẻ — media + info + add-to-cart inline.
 {% endcomment -%}
 
 {%- liquid
@@ -108,17 +107,25 @@
             </div>
           {%- endif -%}
 
-          <form action="{{ routes.cart_add_url }}" method="post" class="section-featured-product__form">
-            <input type="hidden" name="id" value="{{ variant.id }}">
-            <input type="hidden" name="quantity" value="1">
-            <button type="submit" class="button-primary active section-featured-product__btn button-size-{{ section.settings.button_size }}" {% unless product.available %}disabled{% endunless %}>
-              {%- if product.available -%}
-                {{ 'products.product_card.add_to_cart' | t }}
-              {%- else -%}
-                {{ 'products.product_card.sold_out' | t }}
-              {%- endif -%}
-            </button>
-          </form>
+          {%- if product.has_only_default_variant -%}
+            <form action="{{ routes.cart_add_url }}" method="post" class="section-featured-product__form">
+              <input type="hidden" name="id" value="{{ variant.id }}">
+              <input type="hidden" name="quantity" value="1">
+              <button type="submit" class="button-primary active section-featured-product__btn button-size-{{ section.settings.button_size }}" {% unless product.available %}disabled{% endunless %}>
+                {%- if product.available -%}
+                  {{ 'products.product_card.add_to_cart' | t }}
+                {%- else -%}
+                  {{ 'products.product_card.sold_out' | t }}
+                {%- endif -%}
+              </button>
+            </form>
+          {%- else -%}
+            <div class="section-featured-product__form">
+              <a href="{{ product.url }}" class="button-primary active section-featured-product__btn button-size-{{ section.settings.button_size }}">
+                {{- 'products.product.choose_options' | t -}}
+              </a>
+            </div>
+          {%- endif -%}
 
           {%- if section.settings.show_view_link -%}
             <a href="{{ product.url }}" class="section-featured-product__view-link">
@@ -130,9 +137,26 @@
           {% content_for 'blocks' %}
         </div>
       </div>
-    {%- elsif request.design_mode -%}
-      <div class="section-featured-product__empty">
-        <p>{{ 'sections.featured_product.empty' | t }}</p>
+    {%- else -%}
+      <div class="section-featured-product__grid section-featured-product__grid--{{ section.settings.image_position }}">
+        <div class="section-featured-product__media">
+          <div class="section-featured-product__ph">
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        </div>
+        <div class="section-featured-product__info">
+          {%- if section.settings.subheading != blank -%}
+            <p class="section-featured-product__subheading subheading-size-{{ section.settings.subheading_size }}">
+              {{- section.settings.subheading -}}
+            </p>
+          {%- endif -%}
+          <h2 class="section-featured-product__title heading-size-{{ section.settings.heading_size }}">
+            {{- 'sections.featured_product.placeholder_title' | t -}}
+          </h2>
+          {%- if request.design_mode -%}
+            <p class="section-featured-product__empty">{{ 'sections.featured_product.empty' | t }}</p>
+          {%- endif -%}
+        </div>
       </div>
     {%- endif -%}
   </div>
@@ -381,8 +405,7 @@
   }
 
   .section-featured-product__empty {
-    text-align: center;
-    padding: var(--space-5xl);
+    margin: 0;
     color: var(--color-muted);
   }
 {% endstylesheet %}

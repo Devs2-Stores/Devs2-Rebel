@@ -237,14 +237,14 @@
       if (!this.newPassword || !this.confirmPassword) return;
       if (this.newPassword.value !== this.confirmPassword.value) {
         e.preventDefault();
-        var msg = this.dataset.passwordMismatch || 'Passwords do not match.';
+        var msg = this.dataset.passwordMismatch;
         if (typeof showToast === 'function') showToast(msg, 'error', 3000);
         this.confirmPassword.focus();
         return false;
       }
       if (this.newPassword.value.length < 8) {
         e.preventDefault();
-        var msg = this.dataset.passwordMinLength || 'Password must be at least 8 characters.';
+        var msg = this.dataset.passwordMinLength;
         if (typeof showToast === 'function') showToast(msg, 'error', 3000);
         this.newPassword.focus();
         return false;
@@ -271,7 +271,7 @@
       const deleteBtn = e.target.closest('[data-action="delete-address"]');
       if (deleteBtn) {
         const addressId = deleteBtn.dataset.addressId;
-        const confirmMsg = deleteBtn.dataset.confirm || 'Are you sure you wish to delete this address?';
+        const confirmMsg = deleteBtn.dataset.confirm;
         if (confirm(confirmMsg)) {
           const form = document.createElement('form');
           form.method = 'POST';

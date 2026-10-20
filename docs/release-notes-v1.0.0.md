@@ -4,7 +4,7 @@ Initial release of Rebel, a Shopify Online Store 2.0 theme with one style preset
 
 ## Included
 
-- JSON templates for every storefront page, section groups for header and footer, and `@app` support in the main product and featured product sections.
+- JSON templates for every storefront page, section groups for header and footer, and `@app` support in the main product, featured product and collection sections.
 - Product media of every type (image, video, external video, 3D model) in the product page, featured product and quick view.
 - Search and collection filtering through Shopify Storefront Filtering, with active filter chips and sort.
 - Cart page and drawer with line-level discounts, unit prices, selling plans, taxes and shipping policy notes, order notes and accelerated checkout buttons.

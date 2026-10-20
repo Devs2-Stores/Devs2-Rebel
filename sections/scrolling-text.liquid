@@ -1,6 +1,5 @@
 {%- comment %}
   Section: Scrolling Text Marquee
-  Mô tả: Text chạy ngang vô hạn — tagline, thông báo, branding.
 {% endcomment -%}
 
 {%- liquid
@@ -23,7 +22,6 @@
     {%- for i in (1..3) -%}
       <div class="section-marquee__segment" aria-hidden="{% if i > 1 %}true{% else %}false{% endif %}">
         {%- for block in section.blocks -%}
-          {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
           {%- if block.settings.text != blank -%}
             <span class="section-marquee__item heading-size-{{ section.settings.text_size }}" {{ block.shopify_attributes }}>
               {{- block.settings.text -}}
@@ -34,14 +32,6 @@
       </div>
     {%- endfor -%}
   </div>
-  {%- capture app_blocks -%}
-    {%- for block in section.blocks -%}
-      {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
-    {%- endfor -%}
-  {%- endcapture -%}
-  {%- if app_blocks != blank -%}
-    <div class="section-apps">{{ app_blocks }}</div>
-  {%- endif -%}
 </div>
 
 {% stylesheet %}
@@ -213,9 +203,6 @@
           "default": "t:sections.scrolling_text.blocks.text.settings.text.default"
         }
       ]
-    },
-    {
-      "type": "@app"
     }
   ],
   "presets": [

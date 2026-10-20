@@ -1,28 +1,18 @@
 {%- comment %}
   Section: Logo List / Brand Bar
-  Mô tả: Hiển thị logo đối tác/thương hiệu dạng grid hoặc marquee tự chạy.
 {% endcomment -%}
 
 {%- liquid
   assign layout = section.settings.layout
   assign logo_count = 0
   for block in section.blocks
-    if block.type == '@app'
-      continue
-    endif
     if block.settings.image != blank or request.design_mode
       assign logo_count = logo_count | plus: 1
     endif
   endfor
 -%}
 
-{%- capture app_blocks -%}
-  {%- for block in section.blocks -%}
-    {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
-  {%- endfor -%}
-{%- endcapture -%}
-
-{%- if logo_count > 0 or app_blocks != blank or request.design_mode -%}
+{%- if logo_count > 0 or request.design_mode -%}
 <div
   id="section-{{ section.id }}"
   class="section-logo-list color-{{ section.settings.color_scheme }}"
@@ -53,7 +43,6 @@
         <div class="section-logo-list__track">
           {%- for i in (1..2) -%}
             {%- for block in section.blocks -%}
-              {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
               {%- unless block.settings.image != blank or request.design_mode -%}{%- continue -%}{%- endunless -%}
               <div class="section-logo-list__item"{% if i == 1 %} {{ block.shopify_attributes }}{% else %} aria-hidden="true" inert{% endif %}>
                 {%- if block.settings.image != blank -%}
@@ -80,7 +69,6 @@
       <div class="page-width">
         <div class="section-logo-list__grid" style="--ll-cols: {{ section.settings.columns_desktop }};">
           {%- for block in section.blocks -%}
-            {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
             {%- unless block.settings.image != blank or request.design_mode -%}{%- continue -%}{%- endunless -%}
             <div class="section-logo-list__item" {{ block.shopify_attributes }}>
               {%- if block.settings.image != blank -%}
@@ -103,11 +91,6 @@
         </div>
       </div>
     {%- endif -%}
-  {%- endif -%}
-  {%- if app_blocks != blank -%}
-    <div class="page-width">
-      <div class="section-apps">{{ app_blocks }}</div>
-    </div>
   {%- endif -%}
 </div>
 {%- endif -%}
@@ -364,9 +347,6 @@
           "label": "t:sections.logo_list.blocks.logo.settings.link.label"
         }
       ]
-    },
-    {
-      "type": "@app"
     }
   ],
   "presets": [

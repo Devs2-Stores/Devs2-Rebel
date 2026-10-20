@@ -1,6 +1,5 @@
 {%- comment %}
   Section: Tabs
-  Mô tả: Tabbed content — mỗi tab là 1 block richtext.
 {% endcomment -%}
 
 <div
@@ -27,7 +26,6 @@
       <div class="section-tabs__nav" role="tablist">
         {%- assign tab_index = 0 -%}
         {%- for block in section.blocks -%}
-          {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
           <button
             type="button"
             class="section-tabs__trigger{% if tab_index == 0 %} section-tabs__trigger--active{% endif %}"
@@ -46,7 +44,6 @@
 
       {%- assign panel_index = 0 -%}
       {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
         <div
           class="section-tabs__panel{% if panel_index == 0 %} section-tabs__panel--active{% endif %}"
           role="tabpanel"
@@ -62,14 +59,6 @@
         </div>
         {%- assign panel_index = panel_index | plus: 1 -%}
       {%- endfor -%}
-    {%- endif -%}
-    {%- capture app_blocks -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
-      {%- endfor -%}
-    {%- endcapture -%}
-    {%- if app_blocks != blank -%}
-      <div class="section-apps">{{ app_blocks }}</div>
     {%- endif -%}
   </div>
 </div>
@@ -286,9 +275,6 @@
           "default": "md"
         }
       ]
-    },
-    {
-      "type": "@app"
     }
   ],
   "presets": [

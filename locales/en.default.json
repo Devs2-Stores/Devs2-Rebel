@@ -47,12 +47,6 @@
       "view_empty_cart": "View cart",
       "item_added": "Item added to your cart"
     },
-    "slider": {
-      "of": "of",
-      "next_slide": "Slide right",
-      "previous_slide": "Slide left",
-      "name": "Slider"
-    },
     "tabs": {
       "untitled": "Details"
     },
@@ -95,12 +89,9 @@
       "panel_subtitle": "Choose your preferred channel",
       "channels": {
         "hotline": "Hotline",
-        "zalo": "Zalo",
         "facebook": "Facebook",
         "messenger": "Messenger",
         "tiktok": "TikTok",
-        "shopee": "Shopee",
-        "lazada": "Lazada",
         "telegram": "Telegram",
         "email": "Email",
         "map": "Map",
@@ -117,23 +108,6 @@
       "one": "{{ count }} item",
       "other": "{{ count }} items"
     },
-    "countdown": {
-      "days": "Days",
-      "hours": "Hours",
-      "minutes": "Minutes",
-      "minutes_short": "Mins",
-      "seconds": "Seconds",
-      "seconds_short": "Secs"
-    },
-    "flash_sale": {
-      "sale_label": "SALE"
-    },
-    "map": {
-      "get_directions": "Get directions"
-    },
-    "recently_viewed": {
-      "empty": "No recently viewed products"
-    },
     "view_product": "View product",
     "contact": {
       "success": "Thanks for contacting us. We'll get back to you soon.",
@@ -142,12 +116,6 @@
       "phone": "Phone",
       "message": "Message",
       "send": "Send message"
-    },
-    "bundle": {
-      "total": "Bundle price",
-      "adding": "Adding...",
-      "added": "Added! ✓",
-      "error": "Error — try again"
     },
     "products": {
       "one": "{{ count }} product",
@@ -202,7 +170,6 @@
     "slideshow": "Slideshow",
     "pause_slideshow": "Pause slideshow",
     "play_slideshow": "Play slideshow",
-    "cert_alt": "{{ name }} certification",
     "video_hero_title": "Video hero",
     "video": "Video",
     "brand_logo": "Brand logo"
@@ -234,37 +201,14 @@
       "error_heading": "Please fix the following errors:",
       "navigation": "Article navigation",
       "previous_post": "Previous article",
-      "next_post": "Next article",
-      "months": {
-        "january": "January",
-        "february": "February",
-        "march": "March",
-        "april": "April",
-        "may": "May",
-        "june": "June",
-        "july": "July",
-        "august": "August",
-        "september": "September",
-        "october": "October",
-        "november": "November",
-        "december": "December"
-      }
+      "next_post": "Next article"
     },
     "sidebar": {
       "categories": "Categories",
       "recent_posts": "Recent posts",
       "tags": "Tags",
-      "related_posts": "Related posts",
-      "banner": {
-        "heading": "Texture, utility, attitude",
-        "text": "Explore sculptural layers and future-ready footwear.",
-        "button_label": "Shop the edit"
-      }
+      "related_posts": "Related posts"
     }
-  },
-  "onboarding": {
-    "product_title": "Example product title",
-    "collection_title": "Your collection's name"
   },
   "products": {
     "product_card": {
@@ -291,9 +235,6 @@
       "selling_plan_save_amount": "Save {{ amount }}",
       "selling_plan_fixed_price": "Plan price {{ price }}",
       "read_less": "Read less",
-      "back_in_stock_title": "Notify when available",
-      "back_in_stock_desc": "Leave your email and we will notify you when this product is back in stock.",
-      "back_in_stock_success": "Subscribed! We will notify you when available.",
       "availability": "Availability",
       "choose_options": "Choose options",
       "choose_product_options": "Choose options for {{ product_name }}",
@@ -361,9 +302,6 @@
         "unavailable": "Couldn't load pickup availability",
         "refresh": "Refresh"
       }
-    },
-    "modal": {
-      "label": "Media gallery"
     },
     "facets": {
       "apply": "Apply",
@@ -467,10 +405,9 @@
       "featured_categories": "Featured categories",
       "no_results_for": "No results found for ‘{{ terms }}’",
       "recommended_products": "Recommended products",
-      "view_all_results": "View all {{ count }} results for ‘{{ terms }}’"
-    },
-    "cart": {
-      "cart": "Cart"
+      "view_all_results": "View all {{ count }} results for ‘{{ terms }}’",
+      "suggestions_unavailable": "Search suggestions are unavailable.",
+      "view_search_results": "View search results"
     },
     "contact": {
       "form": {
@@ -533,26 +470,15 @@
       "remove": "Remove",
       "taxes_included": "Taxes included.",
       "shipping_policy_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">Shipping</a> calculated at checkout.",
-      "taxes_included_shipping_at_checkout_without_policy": "Taxes included. Discounts and shipping calculated at checkout.",
       "headings": {
         "product": "Product",
-        "price": "Price",
-        "total": "Total",
-        "quantity": "Quantity",
         "image": "Product image"
       },
-      "update": "Update",
       "order_summary": "Order summary",
       "item_count": "Items",
       "subtotal": "Subtotal",
-      "discount": "Discount",
       "shipping": "Shipping",
-      "shipping_calculated": "Calculated at next step",
-      "continue_shopping": "Continue shopping",
-      "login": {
-        "title": "Have an account?",
-        "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">Log in</a> to check out faster."
-      }
+      "shipping_calculated": "Calculated at next step"
     },
     "footer": {
       "payment": "Payment methods"
@@ -568,7 +494,8 @@
       "view_all_label": "View all products in the {{ collection_name }} collection"
     },
     "featured_product": {
-      "empty": "Select a product to display"
+      "empty": "Select a product to display",
+      "placeholder_title": "Example product title"
     },
     "promotion_banner": {
       "onboarding": "Add a promotion block to get started"

@@ -204,9 +204,7 @@ class SearchModal extends HTMLElement {
       .catch(function(error) {
         if (error.name === 'AbortError') return;
         if (requestId !== self.searchRequestId || self.searchController !== controller) return;
-        var errorMsg = (typeof themeConfig !== 'undefined' && themeConfig.strings && themeConfig.strings.cart)
-          ? (themeConfig.strings.cart.error || 'An error occurred. Please try again.')
-          : 'An error occurred. Please try again.';
+        var errorMsg = themeConfig.strings.cart.error;
         self.displayError(errorMsg);
       })
       .finally(function() {
@@ -257,7 +255,7 @@ class SearchModal extends HTMLElement {
   displayFallbackSearchLink(query) {
     if (!this.resultsContainer) return;
     var searchUrl = this.getRootUrl() + 'search?type=product&q=' + encodeURIComponent(query);
-    this.resultsContainer.innerHTML = '<div class="search-modal-empty"><p>' + ThemeUtils.escapeHtml(this.dataset.fallback || 'Search suggestions are unavailable.') + '</p><a href="' + ThemeUtils.escapeHtml(searchUrl) + '">' + ThemeUtils.escapeHtml(this.dataset.fallbackLink || 'View search results') + '</a></div>';
+    this.resultsContainer.innerHTML = '<div class="search-modal-empty"><p>' + ThemeUtils.escapeHtml(themeConfig.strings.search.unavailable) + '</p><a href="' + ThemeUtils.escapeHtml(searchUrl) + '">' + ThemeUtils.escapeHtml(themeConfig.strings.search.viewResults) + '</a></div>';
     if (this.input) this.input.setAttribute('aria-expanded', 'true');
   }
 
@@ -273,9 +271,9 @@ class SearchModal extends HTMLElement {
     var groups = Array.from(root.querySelectorAll('[data-search-group]'));
     if (!groups.length) return;
     var tabs = [
-      { key: 'products', label: this.dataset.tabProducts || 'Products' },
-      { key: 'articles', label: this.dataset.tabArticles || 'Articles' },
-      { key: 'pages', label: this.dataset.tabPages || 'Pages' }
+      { key: 'products', label: this.dataset.tabProducts },
+      { key: 'articles', label: this.dataset.tabArticles },
+      { key: 'pages', label: this.dataset.tabPages }
     ];
     var hasCategoryResults = tabs.some(function(tab) {
       return groups.some(function(group) { return group.dataset.searchGroup === tab.key; });
@@ -286,7 +284,7 @@ class SearchModal extends HTMLElement {
     var tablist = document.createElement('div');
     tablist.className = 'predictive-search__tabs';
     tablist.setAttribute('role', 'tablist');
-    tablist.setAttribute('aria-label', this.dataset.tabsLabel || 'Search result categories');
+    tablist.setAttribute('aria-label', this.dataset.tabsLabel);
     var panels = document.createElement('div');
     panels.className = 'predictive-search__tab-panels';
     var selectedKey = null;

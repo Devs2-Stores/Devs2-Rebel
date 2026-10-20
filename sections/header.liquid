@@ -25,10 +25,7 @@
       <div class="header__menu">
         {%- render 'megamenu', menu: section.settings.menu -%}
       </div>
-      <div class="header__actions">
-        <button type="button" class="header__action-btn" data-action="open-search-modal" aria-label="{{ 'accessibility.search' | t }}">
-          {%- render 'icon', name: 'search' -%}
-        </button>
+      {%- capture account_control -%}
         {%- if shop.customer_accounts_enabled -%}
           <shopify-account menu="{{ section.settings.customer_account_menu }}">
             <span slot="signed-out-avatar" class="header__action-btn">
@@ -40,6 +37,12 @@
             {%- render 'icon', name: 'user' -%}
           </a>
         {%- endif -%}
+      {%- endcapture -%}
+      <div class="header__actions">
+        <button type="button" class="header__action-btn" data-action="open-search-modal" aria-label="{{ 'accessibility.search' | t }}">
+          {%- render 'icon', name: 'search' -%}
+        </button>
+        {{ account_control }}
         {%- capture cart_trigger_inner -%}
           <span class="visually-hidden">{{ 'accessibility.open_cart' | t }}</span>
           {%- render 'icon', name: 'cart' -%}
@@ -55,6 +58,7 @@
         <button type="button" class="header__action-btn" data-action="open-search-modal" aria-label="{{ 'accessibility.search' | t }}">
           {%- render 'icon', name: 'search' -%}
         </button>
+        {{ account_control }}
         {%- if settings.cart_type == 'page' -%}
           <a href="{{ routes.cart_url }}" class="header__action-btn header__cart-btn">{{ cart_trigger_inner }}</a>
         {%- else -%}
