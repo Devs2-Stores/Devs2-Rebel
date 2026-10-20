@@ -1,0 +1,61 @@
+.section-icon-boxes {
+  padding-block: var(--ib-mt) var(--ib-mb);
+  background: rgb(var(--color-background));
+  color: rgba(var(--color-foreground), 0.85);
+}
+@media (min-width: 750px) {
+  .section-icon-boxes { padding-block: var(--ib-dt) var(--ib-db); }
+}
+.section-icon-boxes__head { text-align: center; margin-bottom: var(--section-head-gap); }
+.section-icon-boxes__subheading {
+  margin: 0 0 0.5rem;
+  font-weight: var(--eyebrow-weight);
+  letter-spacing: var(--eyebrow-tracking);
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+.section-icon-boxes__heading { margin: 0; color: var(--color-ink); letter-spacing: var(--heading-tracking); }
+
+.section-icon-boxes__grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+}
+@media (min-width: 750px) {
+  .section-icon-boxes__grid { grid-template-columns: repeat(var(--ib-cols, 4), 1fr); gap: 2rem; }
+}
+.section-icon-boxes__grid--centered .section-icon-boxes__item { align-items: center; text-align: center; }
+.section-icon-boxes__grid--left .section-icon-boxes__item { align-items: flex-start; text-align: left; }
+
+.section-icon-boxes__item {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  padding: 0; border-radius: 0;
+}
+
+.section-icon-boxes__icon-wrap { display: flex; align-items: center; justify-content: center; margin-bottom: 0.25rem; }
+.section-icon-boxes__icon-wrap--circle {
+  width: 2.75rem; height: 2.75rem; border-radius: 50%;
+  border: 1px solid var(--color-hairline); color: var(--color-ink);
+}
+.section-icon-boxes__icon-wrap--square {
+  width: 2.75rem; height: 2.75rem; border-radius: var(--media-radius);
+  border: 1px solid var(--color-hairline); color: var(--color-ink);
+}
+.section-icon-boxes__icon-wrap--none { color: var(--color-ink); }
+
+.section-icon-boxes__icon-img { width: 1.75rem; height: 1.75rem; object-fit: contain; }
+.section-icon-boxes__emoji { font-size: 1.5rem; }
+
+.section-icon-boxes__title {
+  margin: 0; font-size: 0.9375rem; font-weight: 600;
+  color: var(--color-ink); line-height: 1.3;
+}
+.section-icon-boxes__text {
+  margin: 0; font-size: 0.875rem;
+  color: var(--color-muted); line-height: 1.6;
+}
+.section-icon-boxes__link {
+  display: inline-flex; align-items: center; gap: 0.25rem;
+  font-size: var(--meta-size); font-weight: 500; color: var(--color-ink);
+  text-decoration: underline; text-underline-offset: 0.25em;
+  margin-top: auto;
+}
+.section-icon-boxes__link:hover { color: var(--color-ink); }

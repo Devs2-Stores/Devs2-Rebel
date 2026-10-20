@@ -1,5 +1,4 @@
 {%- if section.settings.enable -%}
-{{ 'announcement-bar.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'announcement-bar.js' | asset_url }}" defer="defer"></script>
 <announcement-bar class="announcement-bar color-{{ section.settings.color_scheme }}" role="region" aria-label="{{ 'sections.announcement_bar.label' | t }}">
   <div class="announcement-bar__container">
@@ -26,6 +25,54 @@
   </div>
 </announcement-bar>
 {%- endif -%}
+
+{% stylesheet %}
+.announcement-bar {
+  display: block;
+  position: relative;
+  padding: 0.5rem 0;
+  background-color: rgb(var(--color-background, 245 242 237));
+  color: rgb(var(--color-foreground, 10 10 10));
+  font-size: var(--eyebrow-size, 0.75rem);
+  letter-spacing: 0.06em;
+  line-height: var(--line-height-snug, 1.375);
+  border-bottom: 1px solid var(--color-hairline);
+}
+.announcement-bar__text,
+.announcement-bar__nav:after {
+  color: rgb(var(--color-foreground, 10 10 10));
+}
+.announcement-bar__container { width: 100%; max-width: 100%; overflow: hidden; }
+.announcement-bar__swiper { width: 100%; }
+.announcement-bar__slide { display: flex; align-items: center; justify-content: center; height: 100%; }
+.announcement-bar__content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: 0 2.5rem;
+  text-align: center;
+}
+.announcement-bar__text {
+  color: inherit;
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  transition: color var(--transition-fast);
+}
+.announcement-bar__text.announcement-bar__link:hover {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.announcement-bar__nav {
+  background: transparent;
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+}
+.announcement-bar__nav:hover:after { color: var(--color-ink); }
+.announcement-bar__nav:after { color: inherit; font-size: var(--font-xs); opacity: 1; }
+{% endstylesheet %}
 
 {% schema %}
 {

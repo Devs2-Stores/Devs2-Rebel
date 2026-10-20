@@ -1044,7 +1044,7 @@ class ProductTemplateRelate extends HTMLElement {
 				}
 			}
 		});
-		});
+		}, swiperEl);
 	}
 }
 if (!customElements.get('product-template-relate')) customElements.define('product-template-relate', ProductTemplateRelate);
@@ -1187,7 +1187,7 @@ class ProductViewed extends HTMLElement {
 				992: { slidesPerView: 4, spaceBetween: 24 }
 			}
 		});
-		});
+		}, swiperEl);
 	}
 
 	showEmpty() {

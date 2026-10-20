@@ -1,3 +1,4 @@
+{{ 'section-marquee-products.css' | asset_url | stylesheet_tag }}
 {%- comment %}
   Section: Marquee Products
 {% endcomment -%}
@@ -7,7 +8,6 @@
   assign products_to_show = section.settings.products_to_show
 -%}
 
-{{ 'product-card.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'product-card.js' | asset_url }}" defer="defer"></script>
 <div
   id="section-{{ section.id }}"
@@ -88,128 +88,6 @@
 })();
 </script>
 
-{% stylesheet %}
-  .section-marquee-products {
-    --mp-edge: max(15px, calc((100% - var(--page-width, 1200px)) / 2 + 15px));
-    padding-block: var(--mp-mt) var(--mp-mb);
-    background: rgb(var(--color-background));
-    overflow: hidden;
-  }
-  @media (min-width: 750px) {
-    .section-marquee-products {
-      --mp-edge: max(30px, calc((100% - var(--page-width, 1200px)) / 2 + 30px));
-      padding-block: var(--mp-dt) var(--mp-db);
-    }
-  }
-  @media (min-width: 1024px) {
-    .section-marquee-products {
-      --mp-edge: max(75px, calc((100% - var(--page-width, 1200px)) / 2 + 75px));
-    }
-  }
-  .section-marquee-products__head {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-bottom: var(--section-head-gap);
-  }
-  .section-marquee-products__heading {
-    margin: 0;
-    color: var(--color-ink);
-    letter-spacing: var(--heading-tracking);
-  }
-  .section-marquee-products__actions {
-    display: inline-flex;
-    align-items: center;
-    gap: 1.25rem;
-  }
-  .section-marquee-products__view-all {
-    display: inline-flex;
-    align-items: center;
-    min-height: 1.5rem;
-    color: var(--color-ink);
-    font-size: 0.875rem;
-    font-weight: 500;
-    white-space: nowrap;
-    text-decoration: underline;
-    text-decoration-color: transparent;
-    text-underline-offset: 0.25em;
-    transition: text-decoration-color var(--transition-fast);
-  }
-  .section-marquee-products__view-all:hover {
-    color: var(--color-ink);
-    text-decoration-color: currentColor;
-  }
-  .section-marquee-products__controls {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .section-marquee-products__nav {
-    width: 2.5rem;
-    height: 2.5rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    border: 1px solid var(--color-hairline);
-    border-radius: var(--buttons-radius, 0);
-    background: transparent;
-    color: var(--color-ink);
-    cursor: pointer;
-    transition: background-color var(--duration-default) ease, color var(--duration-default) ease, border-color var(--duration-default) ease;
-  }
-  .section-marquee-products__nav:hover {
-    background: var(--color-ink);
-    border-color: var(--color-ink);
-    color: rgb(var(--color-background));
-  }
-  .section-marquee-products__nav:focus-visible {
-    outline: 2px solid var(--color-focus);
-    outline-offset: 2px;
-  }
-
-  .section-marquee-products__track {
-    display: flex;
-    width: 100%;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-    padding-inline-start: var(--mp-edge);
-    padding-inline-end: var(--mp-edge);
-    scroll-padding-inline-start: var(--mp-edge);
-  }
-  .section-marquee-products__track::-webkit-scrollbar { display: none; }
-
-  .section-marquee-products__list {
-    display: flex;
-    flex: 0 0 auto;
-    gap: 16px;
-  }
-  .section-marquee-products__item {
-    width: 220px;
-    flex-shrink: 0;
-    scroll-snap-align: start;
-  }
-  .section-marquee-products__placeholder-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
-  }
-  .section-marquee-products__placeholder-card {
-    aspect-ratio: 3 / 4;
-    overflow: hidden;
-    background: rgba(var(--color-foreground), 0.04);
-  }
-  .section-marquee-products__placeholder-svg { width: 100%; height: 100%; }
-  @media (min-width: 750px) {
-    .section-marquee-products__item { width: 260px; }
-    .section-marquee-products__list { gap: 20px; }
-    .section-marquee-products__placeholder-list { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
-  }
-{% endstylesheet %}
 
 {% schema %}
 {

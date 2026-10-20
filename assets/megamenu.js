@@ -19,10 +19,19 @@
       if (!this.container || !this.list) return;
 
       this.bindEvents();
-      this.checkOverflow();
+      if ('IntersectionObserver' in window) {
+        this._firstLayoutObserver = new IntersectionObserver(function(entries, observer) {
+          observer.disconnect();
+          this.checkOverflow();
+        }.bind(this));
+        this._firstLayoutObserver.observe(this.container);
+      } else {
+        this.checkOverflow();
+      }
     }
 
     disconnectedCallback() {
+      if (this._firstLayoutObserver) this._firstLayoutObserver.disconnect();
       if (this._boundResizeHandler) window.removeEventListener('resize', this._boundResizeHandler);
       if (this._boundDocClick) document.removeEventListener('click', this._boundDocClick, true);
       if (this._boundDocKeydown) document.removeEventListener('keydown', this._boundDocKeydown);
@@ -67,6 +76,9 @@
       }, true);
 
       this.addEventListener('focusin', function(e) {
+        var menuItem = e.target.closest('.megamenu__item');
+        if (menuItem) self.checkDropdownOverflow(menuItem);
+
         var parent = e.target.closest('.megamenu__simple-parent');
         if (parent && e.target.parentElement === parent) self.checkSubmenuOverflow(parent);
       });
@@ -92,6 +104,7 @@
           self.syncExpanded(item, false);
         });
         trigger.addEventListener('click', function() {
+          self.checkDropdownOverflow(item);
           item.classList.remove('is-dismissed');
           self.syncExpanded(item);
         });
@@ -102,9 +115,6 @@
           self.syncExpanded(item);
         });
       });
-
-      // Initial check for all dropdowns
-      this.checkAllDropdowns();
     }
 
     syncExpanded(item, focusInside) {

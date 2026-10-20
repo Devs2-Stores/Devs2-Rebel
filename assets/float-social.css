@@ -14,10 +14,12 @@
 }
 .float-social[data-position="right"] { right: calc(16px + env(safe-area-inset-right)); }
 .float-social[data-position="left"] { left: calc(16px + env(safe-area-inset-left)); }
+.float-social[data-position="left"] ~ .back-to-top { left: auto; right: calc(16px + env(safe-area-inset-right)); }
 @media (min-width: 750px) {
   .float-social { bottom: calc(24px + env(safe-area-inset-bottom)); }
   .float-social[data-position="right"] { right: calc(24px + env(safe-area-inset-right)); }
   .float-social[data-position="left"] { left: calc(24px + env(safe-area-inset-left)); }
+  .float-social[data-position="left"] ~ .back-to-top { right: calc(24px + env(safe-area-inset-right)); }
 }
 .float-social__toggle {
   position: relative;

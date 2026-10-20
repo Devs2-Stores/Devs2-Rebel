@@ -1,3 +1,4 @@
+{{ 'section-logo-list.css' | asset_url | stylesheet_tag }}
 {%- comment %}
   Section: Logo List / Brand Bar
 {% endcomment -%}
@@ -95,75 +96,6 @@
 </div>
 {%- endif -%}
 
-{% stylesheet %}
-  .section-logo-list {
-    padding-block: var(--ll-mt) var(--ll-mb);
-    background: rgb(var(--color-background));
-    border-top: 1px solid var(--color-hairline);
-    overflow: hidden;
-  }
-  @media (min-width: 750px) {
-    .section-logo-list { padding-block: var(--ll-dt) var(--ll-db); }
-  }
-  .section-logo-list__head { text-align: center; margin-bottom: 1.75rem; }
-  .section-logo-list__heading {
-    margin: 0;
-    font-weight: var(--eyebrow-weight);
-    letter-spacing: var(--eyebrow-tracking);
-    text-transform: uppercase;
-    color: var(--color-muted);
-  }
-  .section-logo-list__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    align-items: center;
-    justify-items: center;
-  }
-  @media (min-width: 750px) {
-    .section-logo-list__grid {
-      grid-template-columns: repeat(var(--ll-cols, 5), 1fr);
-      gap: 2rem;
-    }
-  }
-
-  .section-logo-list__item { display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .section-logo-list__link { display: flex; transition: opacity var(--duration-medium); }
-  .section-logo-list__link:hover { opacity: 0.6; }
-
-  .section-logo-list__logo {
-    height: var(--ll-logo-h, 40px);
-    width: auto;
-    object-fit: contain;
-    opacity: 0.55;
-    filter: grayscale(100%);
-    transition: opacity var(--duration-medium), filter var(--duration-medium);
-  }
-  .section-logo-list__item:hover .section-logo-list__logo {
-    opacity: 1;
-    filter: grayscale(0%);
-  }
-
-  .section-logo-list__ph { height: var(--ll-logo-h, 40px); width: 80px; opacity: 0.12; }
-  .section-logo-list__ph svg { height: 100%; width: auto; }
-
-  @keyframes logo-marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-  .section-logo-list__marquee { overflow: hidden; width: 100%; }
-  .section-logo-list__marquee:hover .section-logo-list__track { animation-play-state: paused; }
-  .section-logo-list__track {
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-    width: fit-content;
-    animation: logo-marquee var(--ll-marquee-speed, 30s) linear infinite;
-  }
-  @media (min-width: 750px) {
-    .section-logo-list__track { gap: 4rem; }
-  }
-{% endstylesheet %}
 
 {% schema %}
 {

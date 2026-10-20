@@ -1,3 +1,4 @@
+{{ 'section-banner-hotspots.css' | asset_url | stylesheet_tag }}
 {%- comment %}
   Section: Banner with Hotspots
 {% endcomment -%}
@@ -152,6 +153,34 @@
       });
   }
 
+  function fitTooltip(tip) {
+    var frame = tip.closest('.section-hotspot__wrapper');
+    tip.style.removeProperty('--hs-shift-x');
+    tip.style.removeProperty('--hs-shift-y');
+    if (!frame) return;
+    var inset = 8;
+    var box = frame.getBoundingClientRect();
+    var rect = tip.getBoundingClientRect();
+    var dx = 0;
+    var dy = 0;
+    if (rect.left < box.left + inset) dx = box.left + inset - rect.left;
+    else if (rect.right > box.right - inset) dx = Math.max(box.right - inset - rect.right, box.left + inset - rect.left);
+    if (rect.top < box.top + inset) dy = box.top + inset - rect.top;
+    else if (rect.bottom > box.bottom - inset) dy = Math.max(box.bottom - inset - rect.bottom, box.top + inset - rect.top);
+    if (dx) tip.style.setProperty('--hs-shift-x', Math.round(dx) + 'px');
+    if (dy) tip.style.setProperty('--hs-shift-y', Math.round(dy) + 'px');
+  }
+
+  function openTooltip(tip) {
+    tip.style.transition = 'none';
+    tip.classList.add('is-open');
+    fitTooltip(tip);
+    tip.classList.remove('is-open');
+    void tip.offsetWidth;
+    tip.style.transition = '';
+    tip.classList.add('is-open');
+  }
+
   dots.forEach(function(dot) {
     var btn = dot.querySelector('[data-hotspot-btn]');
     var tip = dot.querySelector('[data-hotspot-tooltip]');
@@ -161,7 +190,7 @@
       document.querySelectorAll('[data-hotspot-tooltip].is-open').forEach(function(t) { t.classList.remove('is-open'); });
       if (!isOpen) {
         hydrateTooltip(tip).finally(function() {
-          tip.classList.add('is-open');
+          openTooltip(tip);
         });
       }
     });
@@ -172,83 +201,6 @@
 })();
 </script>
 
-{% stylesheet %}
-  .section-hotspot {
-    padding-block: var(--hs-mt) var(--hs-mb);
-    background: rgb(var(--color-background));
-  }
-  @media (min-width: 750px) {
-    .section-hotspot { padding-block: var(--hs-dt) var(--hs-db); }
-  }
-  .section-hotspot__head { text-align: center; margin-bottom: var(--section-head-gap); }
-  .section-hotspot__heading { margin: 0; color: var(--color-ink); letter-spacing: var(--heading-tracking); }
-  .section-hotspot__wrapper { position: relative; border-radius: var(--media-radius); border: var(--media-border); box-shadow: var(--media-shadow); overflow: hidden; }
-  .section-hotspot__img { width: 100%; height: auto; display: block; }
-  .section-hotspot__ph { aspect-ratio: 16/9; background: rgba(var(--color-foreground), 0.04); display: flex; align-items: center; justify-content: center; }
-  .section-hotspot__ph svg { width: 30%; opacity: 0.1; }
-
-  .section-hotspot__dot {
-    position: absolute;
-    left: var(--hs-x); top: var(--hs-y);
-    transform: translate(-50%, -50%);
-    z-index: 3;
-  }
-
-  @keyframes hotspot-ping {
-    0% { transform: scale(1); opacity: 0.6; }
-    100% { transform: scale(2.2); opacity: 0; }
-  }
-
-  .section-hotspot__pulse {
-    width: 2rem; height: 2rem; border-radius: 50%;
-    background: var(--color-white); border: 1px solid var(--color-black);
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer; position: relative; box-shadow: none;
-    transition: transform var(--duration-default) ease, background-color var(--duration-default) ease, color var(--duration-default) ease;
-  }
-  @media (hover: hover) {
-    .section-hotspot__pulse:hover { transform: scale(1.1); }
-  }
-  .section-hotspot__pulse::before {
-    content: ''; position: absolute; inset: -4px;
-    border-radius: 50%; border: 1px solid rgba(255,255,255,0.6);
-    animation: hotspot-ping 2s ease-out infinite;
-  }
-  .section-hotspot__plus { font-size: 1rem; font-weight: 600; color: var(--color-black); line-height: 1; }
-
-  .section-hotspot__tooltip {
-    position: absolute; z-index: 10;
-    background: rgb(var(--color-background));
-    border: var(--popup-border); border-radius: var(--popup-corner-radius);
-    box-shadow: var(--popup-shadow);
-    min-width: 200px; opacity: 0; pointer-events: none;
-    transform: translateY(8px); transition: opacity var(--duration-default) ease, transform var(--duration-default) ease;
-  }
-  .section-hotspot__tooltip.is-open {
-    opacity: 1; pointer-events: auto; transform: translateY(0);
-  }
-  .section-hotspot__tooltip--bottom { top: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(8px); }
-  .section-hotspot__tooltip--bottom.is-open { transform: translateX(-50%) translateY(0); }
-  .section-hotspot__tooltip--top { bottom: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(-8px); }
-  .section-hotspot__tooltip--top.is-open { transform: translateX(-50%) translateY(0); }
-  .section-hotspot__tooltip--left { right: calc(100% + 12px); top: 50%; transform: translateY(-50%) translateX(-8px); }
-  .section-hotspot__tooltip--left.is-open { transform: translateY(-50%) translateX(0); }
-  .section-hotspot__tooltip--right { left: calc(100% + 12px); top: 50%; transform: translateY(-50%) translateX(8px); }
-  .section-hotspot__tooltip--right.is-open { transform: translateY(-50%) translateX(0); }
-
-  .section-hotspot__tooltip-product {
-    display: flex; gap: 0.75rem; padding: 0.75rem;
-    text-decoration: none; color: inherit;
-  }
-  .section-hotspot__tooltip-img { width: 60px; height: 60px; border-radius: var(--media-radius); object-fit: cover; flex-shrink: 0; }
-  .section-hotspot__tooltip-info { display: flex; flex-direction: column; gap: 0.25rem; justify-content: center; }
-  .section-hotspot__tooltip-title { font-size: 0.8125rem; font-weight: 600; color: var(--color-ink); line-height: 1.3; }
-  .section-hotspot__tooltip-price { font-size: 0.75rem; font-weight: 500; color: var(--color-ink); }
-
-  .section-hotspot__tooltip-custom { padding: 0.875rem 1rem; display: flex; flex-direction: column; gap: 0.25rem; }
-  .section-hotspot__tooltip-custom strong { font-size: 0.8125rem; font-weight: 600; color: var(--color-ink); }
-  .section-hotspot__tooltip-custom span { font-size: 0.75rem; color: var(--color-muted); }
-{% endstylesheet %}
 
 {% schema %}
 {

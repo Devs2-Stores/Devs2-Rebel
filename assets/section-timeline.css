@@ -1,0 +1,68 @@
+.section-timeline {
+  padding-block: var(--tl-mt) var(--tl-mb);
+  background: rgb(var(--color-background));
+  color: rgba(var(--color-foreground), 0.85);
+}
+@media (min-width: 750px) {
+  .section-timeline { padding-block: var(--tl-dt) var(--tl-db); }
+}
+.section-timeline__head { text-align: center; margin-bottom: var(--section-head-gap); }
+.section-timeline__subheading {
+  margin: 0 0 0.5rem;
+  font-weight: var(--eyebrow-weight);
+  letter-spacing: var(--eyebrow-tracking);
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+.section-timeline__heading {
+  margin: 0;
+  color: var(--color-ink);
+  letter-spacing: var(--heading-tracking);
+}
+
+.section-timeline__list {
+  max-width: 40rem; margin: 0 auto;
+  position: relative; padding-left: 2rem;
+}
+.section-timeline__list::before {
+  content: ''; position: absolute; left: 4px; top: 0.375rem; bottom: 0;
+  width: 1px; background: var(--color-hairline);
+}
+
+.section-timeline__item {
+  position: relative; padding-bottom: 2.5rem;
+}
+.section-timeline__item:last-child { padding-bottom: 0; }
+
+.section-timeline__marker {
+  position: absolute; left: -2rem; top: 0.375rem;
+}
+.section-timeline__dot {
+  width: 9px; height: 9px; border-radius: 0;
+  background: var(--color-ink);
+  border: none;
+  box-shadow: none;
+}
+
+.section-timeline__content { display: flex; flex-direction: column; gap: 0.5rem; }
+.section-timeline__year {
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  letter-spacing: var(--eyebrow-tracking);
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+.section-timeline__item-heading {
+  margin: 0;
+  color: var(--color-ink);
+  line-height: 1.25;
+  letter-spacing: var(--heading-tracking);
+}
+
+.section-timeline__image {
+  border-radius: var(--media-radius); border: var(--media-border); box-shadow: var(--media-shadow); overflow: hidden; margin: 0.5rem 0;
+}
+.section-timeline__img { width: 100%; height: auto; display: block; }
+
+.section-timeline__text { color: var(--color-muted); line-height: 1.65; max-width: 65ch; }
+.section-timeline__text p:last-child { margin-bottom: 0; }

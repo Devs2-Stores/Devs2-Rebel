@@ -1,0 +1,61 @@
+.section-collapsible {
+  padding-block: var(--faq-mt) var(--faq-mb);
+  background: rgb(var(--color-background));
+  color: rgba(var(--color-foreground), 0.85);
+}
+@media (min-width: 750px) {
+  .section-collapsible { padding-block: var(--faq-dt) var(--faq-db); }
+}
+.section-collapsible__head { text-align: center; margin-bottom: var(--section-head-gap); }
+.section-collapsible__subheading {
+  margin: 0 0 0.5rem;
+  font-weight: var(--eyebrow-weight);
+  letter-spacing: var(--eyebrow-tracking);
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+.section-collapsible__heading {
+  margin: 0;
+  color: var(--color-ink);
+  letter-spacing: var(--heading-tracking);
+}
+
+.section-collapsible__list {
+  max-width: 48rem; margin: 0 auto;
+  border-top: 1px solid var(--color-hairline);
+}
+
+.section-collapsible__item {
+  border-bottom: 1px solid var(--color-hairline);
+}
+
+.section-collapsible__trigger {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; padding: 1.25rem 0;
+  cursor: pointer; list-style: none;
+  color: var(--color-ink); font-weight: 600;
+}
+.section-collapsible__trigger::-webkit-details-marker { display: none; }
+.section-collapsible__trigger::marker { display: none; content: ''; }
+.section-collapsible__trigger:hover { color: var(--color-ink); }
+
+.section-collapsible__trigger-text { flex: 1; }
+
+.section-collapsible__icon {
+  flex-shrink: 0; display: flex;
+  transition: transform 0.25s ease;
+}
+.section-collapsible__icon line:first-child {
+  transition: transform 0.25s ease; transform-origin: center;
+}
+details[open] .section-collapsible__icon {
+  transform: rotate(45deg);
+}
+
+.section-collapsible__body {
+  padding: 0 0 1.25rem;
+  color: var(--color-muted);
+  line-height: 1.65;
+  max-width: 65ch;
+}
+.section-collapsible__body p:last-child { margin-bottom: 0; }

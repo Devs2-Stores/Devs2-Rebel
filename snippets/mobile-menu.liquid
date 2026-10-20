@@ -1,5 +1,4 @@
 {%- assign resolved_menu_handle = menu_handle | default: 'main-menu' -%}
-{{ 'mobile-menu.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'mobile-menu.js' | asset_url }}" defer="defer"></script>
 <mobile-menu class="mobile-menu" role="dialog" aria-modal="true" aria-label="{{ 'accessibility.navigation' | t }}">
   <button type="button" class="mobile-menu__overlay" data-action="close-mobile-menu" aria-label="{{ 'accessibility.close' | t }}" tabindex="-1"></button>
@@ -93,3 +92,233 @@
     </div>
   </div>
 </mobile-menu>
+
+{% stylesheet %}
+mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal, 9000);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--duration-medium), visibility 0s linear var(--duration-medium);
+}
+mobile-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity var(--duration-medium), visibility 0s;
+}
+mobile-menu.show .mobile-menu__overlay {
+  opacity: 1;
+}
+mobile-menu.show .mobile-menu__drawer {
+  transform: none;
+}
+mobile-menu .mobile-menu__overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-overlay);
+  border: none;
+  padding: 0;
+  transition: opacity var(--duration-medium);
+  opacity: 0;
+}
+mobile-menu .mobile-menu__drawer {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: min(88vw, 24rem);
+  background: var(--color-surface);
+  border-right: var(--drawer-border);
+  box-shadow: var(--drawer-shadow);
+  border-radius: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--duration-medium) ease-in-out;
+  transform: translateX(-100%);
+}
+mobile-menu .mobile-menu__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--color-hairline);
+  flex-shrink: 0;
+  background: var(--color-surface);
+}
+mobile-menu .mobile-menu__title {
+  font-size: var(--eyebrow-size, 0.75rem);
+  font-weight: var(--eyebrow-weight, 600);
+  text-transform: uppercase;
+  letter-spacing: var(--eyebrow-tracking, 0.14em);
+  color: var(--color-ink);
+  margin: 0;
+}
+mobile-menu .mobile-menu__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border-radius: var(--buttons-radius);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+  color: var(--color-ink);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+mobile-menu .mobile-menu__close:hover {
+  background: var(--color-gray-light);
+}
+mobile-menu .mobile-menu__close:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+mobile-menu .mobile-menu__close svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+mobile-menu .mobile-menu__body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+}
+mobile-menu .mobile-menu__nav {
+  position: relative;
+  height: 100%;
+}
+mobile-menu .mobile-menu__list,
+mobile-menu .mobile-menu__submenu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+mobile-menu .mobile-menu__item {
+  border-bottom: 1px solid var(--color-hairline);
+}
+mobile-menu .mobile-menu__link,
+mobile-menu .mobile-menu__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: transparent;
+  border: none;
+  text-decoration: none;
+  color: var(--color-ink);
+  font-size: 0.9375rem;
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+mobile-menu .mobile-menu__link svg,
+mobile-menu .mobile-menu__trigger svg {
+  width: 0.875rem;
+  height: 0.875rem;
+  flex-shrink: 0;
+  color: var(--color-muted);
+}
+mobile-menu .mobile-menu__link:hover,
+mobile-menu .mobile-menu__trigger:hover {
+  background: var(--color-gray-light);
+  color: var(--color-ink);
+}
+mobile-menu .mobile-menu__link:focus-visible,
+mobile-menu .mobile-menu__trigger:focus-visible,
+mobile-menu .mobile-menu__back-btn:focus-visible,
+mobile-menu .mobile-menu__action-link:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: -2px;
+}
+mobile-menu .mobile-menu__submenu {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 100%;
+  height: 100%;
+  background: var(--color-surface);
+  visibility: hidden;
+  transition: transform var(--duration-medium) ease-in-out, visibility 0s linear var(--duration-medium);
+  transform: translateX(0);
+}
+mobile-menu .mobile-menu__submenu.is-open {
+  transform: translateX(-100%);
+  visibility: visible;
+  transition-delay: 0s;
+}
+mobile-menu .mobile-menu__submenu-back {
+  border-bottom: 1px solid var(--color-hairline);
+}
+mobile-menu .mobile-menu__back-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  background: var(--color-gray-lighter);
+  border: none;
+  font-size: var(--meta-size, 0.8125rem);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-muted);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+mobile-menu .mobile-menu__back-btn:hover {
+  background: var(--color-gray-light);
+  color: var(--color-ink);
+}
+mobile-menu .mobile-menu__back-btn svg {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+mobile-menu .mobile-menu__submenu-title {
+  border-bottom: 1px solid var(--color-hairline);
+}
+mobile-menu .mobile-menu__submenu-title a {
+  display: block;
+  padding: 1rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-ink);
+  text-decoration: none;
+}
+mobile-menu .mobile-menu__footer {
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid var(--color-hairline);
+  flex-shrink: 0;
+  background: var(--color-surface);
+}
+mobile-menu .mobile-menu__actions {
+  display: flex;
+  gap: 0.75rem;
+}
+mobile-menu .mobile-menu__action-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.625rem 1rem;
+  background: transparent;
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--buttons-radius);
+  text-decoration: none;
+  color: var(--color-ink);
+  font-family: var(--font-body-family);
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-medium);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+mobile-menu .mobile-menu__action-link svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+mobile-menu .mobile-menu__action-link:hover {
+  background: var(--color-gray-light);
+  border-color: var(--color-ink);
+}
+{% endstylesheet %}

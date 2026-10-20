@@ -1,3 +1,4 @@
+{{ 'section-tabs.css' | asset_url | stylesheet_tag }}
 {%- comment %}
   Section: Tabs
 {% endcomment -%}
@@ -95,45 +96,6 @@
 })();
 </script>
 
-{% stylesheet %}
-  .section-tabs {
-    padding-block: var(--tabs-mt) var(--tabs-mb);
-    background: rgb(var(--color-background));
-    color: rgba(var(--color-foreground), 0.85);
-  }
-  @media (min-width: 750px) {
-    .section-tabs { padding-block: var(--tabs-dt) var(--tabs-db); }
-  }
-  .section-tabs__head { text-align: center; margin-bottom: var(--section-head-gap); }
-  .section-tabs__heading { margin: 0; color: var(--color-ink); letter-spacing: var(--heading-tracking); }
-
-  .section-tabs__nav {
-    display: flex; gap: 0; border-bottom: 1px solid var(--color-hairline);
-    overflow-x: auto; -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  .section-tabs__nav::-webkit-scrollbar { display: none; }
-
-  .section-tabs__trigger {
-    flex-shrink: 0; padding: 0.75rem 1.25rem;
-    background: none; border: none; border-bottom: 2px solid transparent;
-    margin-bottom: -1px; cursor: pointer;
-    font-size: 0.875rem; font-weight: 600;
-    color: var(--color-muted);
-    transition: color var(--duration-default) ease, border-color var(--duration-default) ease;
-    white-space: nowrap;
-  }
-  .section-tabs__trigger:hover { color: var(--color-ink); }
-  .section-tabs__trigger--active {
-    color: var(--color-ink);
-    border-bottom-color: var(--color-ink);
-  }
-
-  .section-tabs__panel { padding: 1.5rem 0; }
-  .section-tabs__panel[hidden] { display: none; }
-  .section-tabs__content { color: var(--color-muted); line-height: 1.65; max-width: 65ch; }
-  .section-tabs__content p:last-child { margin-bottom: 0; }
-{% endstylesheet %}
 
 {% schema %}
 {

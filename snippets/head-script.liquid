@@ -100,26 +100,70 @@
 </script>
 
 <script>
-  /* Swiper dynamic loader — loads swiper.js + swiper.css on first request */
+  /*
+    Swiper loader. swiperReady(cb) loads swiper.css + swiper.js now (user-triggered or critical sliders).
+    swiperReady(cb, el) waits until el is near the viewport, then loads after window load + idle,
+    or on the first user input, so off-screen and hero sliders never compete with first paint.
+    Pre-init layout of every slider is covered by .swiper:not(.swiper-initialized) rules in theme.css.
+  */
   (function(){
     var SWIPER_CSS = '{{ "swiper.css" | asset_url }}';
     var SWIPER_JS  = '{{ "swiper.js" | asset_url }}';
-    var loading = false;
+    var queue = [];
+    var state = 0;
+    var armed = false;
+    var INPUTS = ['pointerdown', 'keydown', 'touchstart', 'wheel', 'scroll'];
+
+    function flush(){
+      state = 2;
+      queue.splice(0).forEach(function(cb){
+        try { cb(); } catch (e) { console.error(e); }
+      });
+    }
+
     function load(){
-      if (loading || typeof Swiper !== 'undefined') return;
-      loading = true;
+      if (state) return;
+      state = 1;
+      var pending = 2;
+      var done = function(){ if (--pending === 0) flush(); };
       var l = document.createElement('link');
       l.rel = 'stylesheet'; l.href = SWIPER_CSS;
+      l.onload = l.onerror = done;
       document.head.appendChild(l);
       var s = document.createElement('script');
       s.src = SWIPER_JS;
-      s.onload = function(){ document.dispatchEvent(new Event('swiper:loaded')); };
+      s.onload = s.onerror = done;
       document.head.appendChild(s);
     }
-    window.swiperReady = function(cb){
-      if (typeof Swiper !== 'undefined') return cb();
-      document.addEventListener('swiper:loaded', cb, { once: true });
-      load();
+
+    function loadSoon(){
+      if (state || armed) return;
+      armed = true;
+      var go = function(){
+        INPUTS.forEach(function(type){ window.removeEventListener(type, go); });
+        load();
+      };
+      INPUTS.forEach(function(type){ window.addEventListener(type, go, { passive: true, once: true }); });
+      var idle = function(){
+        if ('requestIdleCallback' in window) requestIdleCallback(go, { timeout: 1200 });
+        else setTimeout(go, 200);
+      };
+      if (document.readyState === 'complete') idle();
+      else window.addEventListener('load', idle, { once: true });
+    }
+
+    window.swiperReady = function(cb, el){
+      if (state === 2) return cb();
+      queue.push(cb);
+      if (state === 1) return;
+      if (!el) return load();
+      if (!('IntersectionObserver' in window)) return loadSoon();
+      var io = new IntersectionObserver(function(entries){
+        if (!entries[0].isIntersecting) return;
+        io.disconnect();
+        loadSoon();
+      }, { rootMargin: '200px 0px' });
+      io.observe(el);
     };
   })();
 </script>

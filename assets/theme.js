@@ -250,7 +250,7 @@
     },
 
     updateCartCount: (number) => {
-      var cartCountEl = document.querySelectorAll(".cart-count");
+      var cartCountEl = document.querySelectorAll("[data-cart-count]");
       if (cartCountEl.length) cartCountEl.forEach(function(el) {
         el.innerText = number;
       });

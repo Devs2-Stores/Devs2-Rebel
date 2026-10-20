@@ -1,0 +1,6 @@
+.section-page-content {
+  padding-block: var(--page-content-pt) var(--page-content-pb);
+  background: rgb(var(--color-background));
+  color: var(--color-paragraph);
+}
+.section-page-content__inner { max-width: 68ch; margin-inline: auto; }

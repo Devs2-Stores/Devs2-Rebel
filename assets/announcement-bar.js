@@ -14,7 +14,7 @@
       var self = this;
       (window.swiperReady || function(cb){ cb(); })(function(){
         self.initSwiper(swiperEl, slideCount);
-      });
+      }, swiperEl);
     }
     initSwiper(swiperEl, slideCount) {
       new Swiper(swiperEl, {

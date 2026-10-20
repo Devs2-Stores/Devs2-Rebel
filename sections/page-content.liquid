@@ -1,3 +1,4 @@
+{{ 'section-page-content.css' | asset_url | stylesheet_tag }}
 {%- assign container_width = section.settings.container_width | default: 'fixed' -%}
 
 {%- if page.content != blank -%}
@@ -13,14 +14,6 @@
   </div>
 {%- endif -%}
 
-{% stylesheet %}
-  .section-page-content {
-    padding-block: var(--page-content-pt) var(--page-content-pb);
-    background: rgb(var(--color-background));
-    color: var(--color-paragraph);
-  }
-  .section-page-content__inner { max-width: 68ch; margin-inline: auto; }
-{% endstylesheet %}
 
 {% schema %}
 {

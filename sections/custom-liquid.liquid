@@ -1,3 +1,4 @@
+{{ 'section-custom-liquid.css' | asset_url | stylesheet_tag }}
 {%- comment %}
   Section: Custom Liquid
 {% endcomment -%}
@@ -35,49 +36,6 @@
 
 
 
-{% stylesheet %}
-  /* ── Custom Liquid ── */
-  .section-custom-liquid {
-    padding-block-start: var(--cl-mt);
-    padding-block-end: var(--cl-mb);
-    background-color: rgb(var(--color-background));
-    color: rgba(var(--color-foreground), 0.85);
-  }
-
-  @media (min-width: 750px) {
-    .section-custom-liquid {
-      padding-block-start: var(--cl-dt);
-      padding-block-end: var(--cl-db);
-    }
-  }
-
-  .section-custom-liquid__full {
-    padding-inline: 15px;
-  }
-
-  @media (min-width: 750px) {
-    .section-custom-liquid__full {
-      padding-inline: 30px;
-    }
-  }
-
-  /* ── Border & Radius ── */
-  .section-custom-liquid__inner {
-    border-radius: var(--cl-radius, 0);
-    overflow: hidden;
-  }
-
-  .section-custom-liquid__bordered {
-    border: var(--cl-border-width, 1px) var(--cl-border-style, solid) rgba(var(--color-border-rgb), var(--cl-border-opacity, 1));
-    padding: 20px;
-  }
-
-  @media (min-width: 750px) {
-    .section-custom-liquid__bordered {
-      padding: 32px;
-    }
-  }
-{% endstylesheet %}
 
 {% schema %}
 {

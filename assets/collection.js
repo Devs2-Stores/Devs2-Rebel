@@ -839,7 +839,7 @@ class CollectionBest extends HTMLElement {
   }
 
   waitForSwiper(callback) {
-    (window.swiperReady || function(cb){ cb(); })(callback);
+    (window.swiperReady || function(cb){ cb(); })(callback, this.querySelector('.collection-best__content'));
   }
 
   initSwiper() {

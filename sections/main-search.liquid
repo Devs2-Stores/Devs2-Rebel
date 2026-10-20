@@ -5,7 +5,6 @@
 
 {%- assign search_query = search.terms | default: '' -%}
 
-{{ 'product-card.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'product-card.js' | asset_url }}" defer="defer"></script>
 <search-template class="search-template color-{{ section.settings.color_scheme }}">
   <div class="page-width">

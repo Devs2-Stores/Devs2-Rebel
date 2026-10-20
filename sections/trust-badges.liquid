@@ -1,3 +1,4 @@
+{{ 'section-trust-badges.css' | asset_url | stylesheet_tag }}
 {%- comment %}
   Section: Trust Badges Bar
 {% endcomment -%}
@@ -37,38 +38,6 @@
   </div>
 </div>
 
-{% stylesheet %}
-  .section-trust {
-    padding-block: var(--tr-mt) var(--tr-mb);
-    background: rgb(var(--color-background));
-    color: rgba(var(--color-foreground), 0.85);
-  }
-  @media (min-width: 750px) {
-    .section-trust { padding-block: var(--tr-dt) var(--tr-db); }
-  }
-
-  .section-trust__grid {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
-  }
-  @media (min-width: 750px) {
-    .section-trust__grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.5rem; }
-  }
-  .section-trust__grid--centered { justify-items: center; text-align: center; }
-  .section-trust__grid--centered .section-trust__item { flex-direction: column; align-items: center; }
-
-  .section-trust__item {
-    display: flex; align-items: center; gap: 0.625rem;
-    padding: 0.75rem;
-  }
-
-  .section-trust__icon { width: 2rem; height: 2rem; flex-shrink: 0; }
-  .section-trust__icon img { width: 100%; height: 100%; object-fit: contain; }
-  .section-trust__emoji { font-size: 1.5rem; flex-shrink: 0; line-height: 1; }
-
-  .section-trust__text-wrap { display: flex; flex-direction: column; gap: 0.125rem; }
-  .section-trust__title { font-size: 0.875rem; font-weight: 600; color: var(--color-ink); line-height: 1.3; }
-  .section-trust__desc { font-size: var(--meta-size); color: var(--color-muted); line-height: 1.4; }
-{% endstylesheet %}
 
 {% schema %}
 {

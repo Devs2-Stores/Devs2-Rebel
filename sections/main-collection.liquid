@@ -1,4 +1,3 @@
-{{ 'product-card.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'product-card.js' | asset_url }}" defer="defer"></script>
 {%- liquid
   assign columns_desktop = section.settings.columns_desktop | default: 4 | plus: 0

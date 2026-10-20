@@ -6,7 +6,7 @@
   <div class="cart-modal-panel{% if settings.cart_color_scheme != blank %} color-{{ settings.cart_color_scheme }}{% endif %}">
     <div class="cart-modal-header">
       <h2 class="cart-modal-title" id="cart-modal-title">
-        {{ 'sections.cart.title' | t }} (<span class="cart-modal-count cart-count">{{ cart.item_count }}</span>)
+        {{ 'sections.cart.title' | t }} (<span class="cart-modal-count" data-cart-count>{{ cart.item_count }}</span>)
       </h2>
       <button type="button" class="cart-modal-close" data-action="close-cart-modal" aria-label="{{ 'accessibility.close' | t }}">
         {%- render 'icon', name: 'close' -%}

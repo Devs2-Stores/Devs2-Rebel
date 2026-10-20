@@ -1,3 +1,4 @@
+{{ 'section-animated-counter.css' | asset_url | stylesheet_tag }}
 {%- comment %}
   Section: Animated Counter / Stats
 {% endcomment -%}
@@ -86,55 +87,6 @@
 })();
 </script>
 
-{% stylesheet %}
-  .section-stats {
-    padding-block: var(--st-mt) var(--st-mb);
-    background: rgb(var(--color-background));
-    color: rgba(var(--color-foreground), 0.85);
-  }
-  @media (min-width: 750px) {
-    .section-stats { padding-block: var(--st-dt) var(--st-db); }
-  }
-  .section-stats__head { text-align: center; margin-bottom: var(--section-head-gap); }
-  .section-stats__subheading {
-    margin: 0 0 0.5rem;
-    font-weight: var(--eyebrow-weight);
-    letter-spacing: var(--eyebrow-tracking);
-    text-transform: uppercase;
-    color: var(--color-muted);
-  }
-  .section-stats__heading {
-    margin: 0;
-    color: var(--color-ink);
-    letter-spacing: var(--heading-tracking);
-  }
-
-  .section-stats__grid {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;
-    text-align: center;
-  }
-  @media (min-width: 750px) {
-    .section-stats__grid { grid-template-columns: repeat(var(--st-cols, 4), 1fr); gap: 2.5rem; }
-  }
-
-  .section-stats__item { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
-  .section-stats__icon { width: 2.5rem; height: 2.5rem; margin-bottom: 0.25rem; }
-  .section-stats__icon img { width: 100%; height: 100%; object-fit: contain; }
-
-  .section-stats__number {
-    font-weight: 700; color: var(--color-ink);
-    font-variant-numeric: tabular-nums; line-height: 1;
-    letter-spacing: var(--heading-tracking);
-  }
-  .section-stats__prefix, .section-stats__suffix { color: var(--color-ink); }
-  .section-stats__label {
-    font-size: var(--eyebrow-size);
-    font-weight: var(--eyebrow-weight);
-    letter-spacing: var(--eyebrow-tracking);
-    text-transform: uppercase;
-    color: var(--color-muted);
-  }
-{% endstylesheet %}
 
 {% schema %}
 {

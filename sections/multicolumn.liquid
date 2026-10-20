@@ -1,3 +1,4 @@
+{{ 'section-multicolumn.css' | asset_url | stylesheet_tag }}
 {%- comment %}
   Section: Multicolumn
 {% endcomment -%}
@@ -73,66 +74,6 @@
   </div>
 </div>
 
-{% stylesheet %}
-  .section-multicolumn {
-    padding-block: var(--mc-mt) var(--mc-mb);
-    background: rgb(var(--color-background));
-    color: rgba(var(--color-foreground), 0.85);
-  }
-  @media (min-width: 750px) {
-    .section-multicolumn { padding-block: var(--mc-dt) var(--mc-db); }
-  }
-  .section-multicolumn__head { text-align: center; margin-bottom: var(--section-head-gap); }
-  .section-multicolumn__subheading {
-    margin: 0 0 0.5rem;
-    font-weight: var(--eyebrow-weight);
-    letter-spacing: var(--eyebrow-tracking);
-    text-transform: uppercase;
-    color: var(--color-muted);
-  }
-  .section-multicolumn__heading {
-    margin: 0;
-    color: var(--color-ink);
-    line-height: 1.15;
-    letter-spacing: var(--heading-tracking);
-  }
-  .section-multicolumn__grid {
-    display: grid;
-    grid-template-columns: repeat(var(--mc-cols-m, 1), 1fr);
-    gap: 1.5rem;
-  }
-  @media (min-width: 750px) {
-    .section-multicolumn__grid {
-      grid-template-columns: repeat(var(--mc-cols-d, 3), 1fr);
-      gap: 2rem;
-    }
-  }
-  .section-multicolumn__grid--left { text-align: left; }
-  .section-multicolumn__grid--center { text-align: center; }
-  .section-multicolumn__grid--center .section-multicolumn__item { align-items: center; }
-
-  .section-multicolumn__item {
-    display: flex; flex-direction: column; gap: 0.5rem;
-  }
-  .section-multicolumn__icon { width: var(--mc-icon-size, 48px); height: var(--mc-icon-size, 48px); flex-shrink: 0; }
-  .section-multicolumn__grid--center .section-multicolumn__icon { margin: 0 auto; }
-  .section-multicolumn__icon-img { width: 100%; height: 100%; object-fit: contain; }
-
-  .section-multicolumn__item-heading { margin: 0; color: var(--color-ink); letter-spacing: var(--heading-tracking); }
-  .section-multicolumn__item-text { margin: 0; color: var(--color-muted); line-height: 1.65; }
-  .section-multicolumn__item-text p { margin: 0; }
-
-  .section-multicolumn__item-link {
-    display: inline-flex; align-items: center; gap: 0.25rem;
-    font-size: 0.875rem; font-weight: 500; color: var(--color-ink);
-    text-decoration: underline; text-underline-offset: 0.25em;
-  }
-  .section-multicolumn__item-link:hover { color: var(--color-ink); }
-  .section-multicolumn__item-link svg { transition: transform var(--duration-default) ease; }
-  @media (hover: hover) {
-    .section-multicolumn__item-link:hover svg { transform: translateX(3px); }
-  }
-{% endstylesheet %}
 
 {% schema %}
 {

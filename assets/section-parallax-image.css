@@ -1,0 +1,69 @@
+.section-parallax {
+  position: relative; height: var(--px-height, 70vh);
+  min-height: 350px; overflow: hidden;
+  display: flex; color: var(--color-white);
+}
+
+.section-parallax__bg {
+  position: absolute; inset: -20% 0; z-index: 0;
+  will-change: transform;
+}
+.section-parallax__img { width: 100%; height: 100%; object-fit: cover; }
+.section-parallax__ph {
+  width: 100%; height: 100%;
+  background: var(--color-black);
+}
+.section-parallax__ph .placeholder-svg { width: 100%; height: 100%; object-fit: cover; fill: rgba(255, 255, 255, 0.35); }
+.section-parallax__overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: rgba(0, 0, 0, var(--px-overlay, 0.35));
+}
+
+.section-parallax__content {
+  position: relative; z-index: 2; width: 100%;
+  display: flex; padding: 2rem 1.5rem;
+}
+.section-parallax__content--top { align-items: flex-start; padding-top: 3rem; }
+.section-parallax__content--center { align-items: center; }
+.section-parallax__content--bottom { align-items: flex-end; padding-bottom: 3rem; }
+
+.section-parallax__inner { display: flex; flex-direction: column; gap: 0.875rem; max-width: var(--parallax-content-max-width); }
+.section-parallax__inner--left { text-align: left; }
+.section-parallax__inner--center { text-align: center; margin: 0 auto; align-items: center; }
+
+.section-parallax__subheading {
+  margin: 0;
+  font-weight: var(--eyebrow-weight);
+  letter-spacing: var(--eyebrow-tracking);
+  text-transform: uppercase;
+  color: var(--color-white);
+}
+.section-parallax__heading {
+  margin: 0;
+  color: var(--color-white);
+  line-height: 1.08;
+  letter-spacing: var(--heading-tracking);
+}
+.section-parallax__text {
+  margin: 0;
+  color: var(--color-white);
+  line-height: 1.6;
+  max-width: 60ch;
+}
+
+.section-parallax__btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: var(--btn-height);
+  padding: 0 var(--btn-padding-x);
+  font-size: var(--btn-font-size);
+  font-weight: var(--btn-font-weight);
+  letter-spacing: var(--btn-letter-spacing);
+  text-decoration: none; border-radius: var(--buttons-radius, 0);
+  cursor: pointer; transition: background-color var(--duration-default) ease, color var(--duration-default) ease, border-color var(--duration-default) ease;
+  margin-top: 0.5rem;
+}
+.section-parallax__btn:focus-visible { outline: 2px solid var(--color-white); outline-offset: 2px; }
+.section-parallax__btn--primary { background: var(--color-white); color: var(--color-black); border: 1px solid var(--color-white); }
+.section-parallax__btn--primary:hover { background: rgba(255, 255, 255, 0.88); border-color: rgba(255, 255, 255, 0.88); }
+.section-parallax__btn--secondary { background: transparent; color: var(--color-white); border: 1px solid var(--color-white); }
+.section-parallax__btn--secondary:hover { background: var(--color-white); color: var(--color-black); border-color: var(--color-white); }
