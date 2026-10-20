@@ -53,8 +53,12 @@
   {{ settings.type_body_font | font_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
 {%- endunless -%}
 {%- unless settings.type_body_font.system? -%}
-  {{ body_font_medium | font_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
-  {{ body_font_semibold | font_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+  {%- if body_font_medium -%}
+    {{ body_font_medium | font_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+  {%- endif -%}
+  {%- if body_font_semibold -%}
+    {{ body_font_semibold | font_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+  {%- endif -%}
 {%- endunless -%}
 {%- unless settings.type_header_font.system? -%}
   {{ settings.type_header_font | font_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
