@@ -1,0 +1,22 @@
+(node:27784) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[PASS] 375 /pages/does-not-exist-404 :: fonts: every text element uses a theme family
+[PASS] 375 /pages/does-not-exist-404 :: fonts: form controls inherit theme family
+[PASS] 375 /pages/does-not-exist-404 :: fonts: used families are loaded
+[PASS] 375 /pages/does-not-exist-404 :: fonts: every used weight/style has its own face
+[PASS] 375 /pages/does-not-exist-404 :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 375 /pages/does-not-exist-404 :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 375 /pages/does-not-exist-404 :: fonts: multi-line text keeps line-height >= 1
+[INFO] 375 /pages/does-not-exist-404 :: fonts: inputs >= 16px on mobile (iOS zoom, advisory) :: [".footer-newsletter__field > input#FooterNewsletterEmail-sections--27439318761581__footer.footer-newsletter__in 14px",".footer-localization__select-wrap > select#FooterCountrySelect.footer-localization__select 13px"]
+[PASS] 375 /pages/does-not-exist-404 :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 375 /pages/does-not-exist-404 :: spacing: text keeps >= 12px viewport gutter
+[PASS] 375 /pages/does-not-exist-404 :: spacing: overlapping targets keep >= 24px each
+[INFO] 375 /pages/does-not-exist-404 :: spacing: layered targets by design (advisory) :: [".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",".product-card__media > a.product-card__media
+[PASS] 375 /pages/does-not-exist-404 :: icons: every <use> resolves to a drawn symbol
+[PASS] 375 /pages/does-not-exist-404 :: icons: no empty or collapsed icon
+[PASS] 375 /pages/does-not-exist-404 :: icons: icon-only controls have a name
+[PASS] 375 /pages/does-not-exist-404 :: icons: icon-only targets >= 24px or spaced
+[PASS] 375 /pages/does-not-exist-404 :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 375 /pages/does-not-exist-404 :: icons: icon centred with its label (<= 3px)
+[INFO] 375 /pages/does-not-exist-404 :: icons: decorative svg exposed to AT (advisory) :: 1
+SUMMARY {"PASS":16,"FAIL":0,"INFO":3}

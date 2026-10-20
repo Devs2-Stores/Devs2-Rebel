@@ -18,6 +18,7 @@ class ProductTemplate extends HTMLElement {
 		this.initMedia();
 		this.initVideoSlides();
 		this.initBackInStock();
+		this.initSellingPlans();
 	}
 
 	cacheElements() {
@@ -79,29 +80,23 @@ class ProductTemplate extends HTMLElement {
 	 */
 	initVariantFromURL() {
 		var self = this;
-		try {
-			var url = new URL(window.location.href);
-			var variantId = url.searchParams.get('variant');
+		var variantId = new URLSearchParams(window.location.search).get('variant');
+		if (!variantId) return;
 
-			if (!variantId) return;
+		var product = (typeof themeConfig !== 'undefined' && themeConfig.product) ? themeConfig.product.data : null;
+		if (!product || !product.variants) return;
 
-			var product = (typeof themeConfig !== 'undefined' && themeConfig.product) ? themeConfig.product.data : null;
-			if (!product || !product.variants) return;
+		var variant = product.variants.find(function(v) {
+			return String(v.id) === String(variantId);
+		});
+		if (!variant) return;
 
-			var variant = product.variants.find(function(v) {
-				return String(v.id) === String(variantId);
-			});
-
-			if (variant) {
-				this.currentVariant = variant;
-				// Wait for variant picker to be ready (custom elements may not be connected yet)
-				setTimeout(function() {
-					self.selectVariantOptions(variant);
-					self.refreshUI(variant);
-				}, 100);
-			}
-		} catch (e) {
-		}
+		this.currentVariant = variant;
+		// Wait for variant picker to be ready (custom elements may not be connected yet)
+		setTimeout(function() {
+			self.selectVariantOptions(variant);
+			self.refreshUI(variant);
+		}, 100);
 	}
 
 	/**
@@ -145,11 +140,12 @@ class ProductTemplate extends HTMLElement {
 	}
 
 	initTabs() {
-		// Move server-rendered nav button templates into the tablist container.
+		// Re-rendered tabs (theme editor) arrive with their nav buttons still in templates.
 		this.querySelectorAll('template[data-tab-nav]').forEach(function(tpl) {
 			var tabsRoot = tpl.closest('.product-template__tabs');
 			var nav = tabsRoot ? tabsRoot.querySelector('[data-tabs-nav]') : null;
 			if (nav) nav.appendChild(tpl.content.cloneNode(true));
+			tpl.remove();
 		});
 
 		const tabButtons = this.querySelectorAll('.product-template__tab-btn');
@@ -181,87 +177,47 @@ class ProductTemplate extends HTMLElement {
 				if (targetPanel) targetPanel.classList.add('active');
 			});
 		});
+		if (window.ThemeUtils) ThemeUtils.bindTablistKeys(tabButtons);
 
 		this.initDescriptionToggle();
 	}
 
 	initDescriptionToggle() {
-		var self = this;
-
-		var initToggle = function(wrapper) {
-			if (!wrapper) return;
-
+		this.querySelectorAll('[data-description-wrapper]').forEach(function(wrapper) {
 			var toggleBtn = wrapper.querySelector('[data-description-toggle]');
 			var descContent = wrapper.querySelector('[data-description-content]');
-
 			if (!toggleBtn || !descContent) return;
 
-			var readmoreEnabled = toggleBtn.getAttribute('data-readmore-enabled') !== 'false';
-			var maxHeight = parseInt(toggleBtn.getAttribute('data-max-height')) || 300;
+			var maxHeight = parseInt(toggleBtn.getAttribute('data-max-height'), 10) || 300;
 			var moreText = toggleBtn.querySelector('[data-toggle-text-more]');
 			var lessText = toggleBtn.querySelector('[data-toggle-text-less]');
+			var expanded = false;
+			var toggleFootprint = 0;
 
-			if (!readmoreEnabled) {
-				descContent.classList.remove('is-collapsed');
-				wrapper.classList.remove('is-collapsed');
-				toggleBtn.classList.add('hidden');
-				return;
-			}
-
-			var checkHeight = function() {
-				if (descContent.scrollHeight > maxHeight) {
-					descContent.classList.add('is-collapsed');
-					wrapper.classList.add('is-collapsed');
-					toggleBtn.classList.remove('hidden');
-				} else {
-					descContent.classList.remove('is-collapsed');
-					wrapper.classList.remove('is-collapsed');
-					toggleBtn.classList.add('hidden');
+			var render = function() {
+				if (!descContent.getClientRects().length) return;
+				if (!toggleBtn.classList.contains('hidden')) {
+					toggleFootprint = toggleBtn.offsetHeight + (parseFloat(getComputedStyle(toggleBtn).marginTop) || 0);
 				}
+				var overflows = descContent.scrollHeight > maxHeight + toggleFootprint;
+				var collapsed = overflows && !expanded;
+				descContent.classList.toggle('is-collapsed', collapsed);
+				wrapper.classList.toggle('is-collapsed', collapsed);
+				toggleBtn.classList.toggle('hidden', !overflows);
+				toggleBtn.classList.toggle('is-expanded', expanded);
+				toggleBtn.setAttribute('aria-expanded', String(expanded));
+				if (moreText) moreText.classList.toggle('hidden', expanded);
+				if (lessText) lessText.classList.toggle('hidden', !expanded);
 			};
 
-			checkHeight();
-
-			toggleBtn.onclick = function() {
-				var isCollapsed = descContent.classList.contains('is-collapsed');
-
-				if (isCollapsed) {
-					descContent.classList.remove('is-collapsed');
-					wrapper.classList.remove('is-collapsed');
-					toggleBtn.classList.add('is-expanded');
-					if (moreText) moreText.classList.add('hidden');
-					if (lessText) lessText.classList.remove('hidden');
-				} else {
-					descContent.classList.add('is-collapsed');
-					wrapper.classList.add('is-collapsed');
-					toggleBtn.classList.remove('is-expanded');
-					if (moreText) moreText.classList.remove('hidden');
-					if (lessText) lessText.classList.add('hidden');
-				}
-			};
-		};
-
-		// Initialize all description wrappers
-		var wrappers = this.querySelectorAll('[data-description-wrapper]');
-		for (var i = 0; i < wrappers.length; i++) {
-			initToggle(wrappers[i]);
-		}
-
-		// Re-initialize when tab changes
-		var tabBtns = this.querySelectorAll('[data-tab]');
-		for (var j = 0; j < tabBtns.length; j++) {
-			tabBtns[j].addEventListener('click', function() {
-				setTimeout(function() {
-					var activePanel = self.querySelector('.product-template__tab-panel.active');
-					if (activePanel) {
-						var wrapper = activePanel.querySelector('[data-description-wrapper]');
-						if (wrapper) {
-							initToggle(wrapper);
-						}
-					}
-				}, 100);
+			toggleBtn.addEventListener('click', function() {
+				expanded = !expanded;
+				render();
 			});
-		}
+
+			render();
+			if ('ResizeObserver' in window) new ResizeObserver(render).observe(descContent);
+		});
 	}
 
 	initMedia() {
@@ -315,6 +271,7 @@ class ProductTemplate extends HTMLElement {
 			this.updateStockCounter(variant);
 			this.updateBackInStock(variant);
 			this.updatePickupAvailability(variant);
+			this.updateQuantityRules(variant);
 		} else {
 			this.updateFeaturedImage(null);
 			this.updateSku(null);
@@ -323,6 +280,7 @@ class ProductTemplate extends HTMLElement {
 			this.updatePrice(null);
 			this.updatePurchaseButtons(null);
 			this.updatePickupAvailability(null);
+			this.updateQuantityRules(null);
 		}
 	}
 
@@ -332,12 +290,23 @@ class ProductTemplate extends HTMLElement {
 			input.dispatchEvent(new Event('change', { bubbles: true }));
 		});
 		this.sellingPlanInputs.forEach(function(input) {
-			var allocation = variant && variant.selling_plan_allocations && variant.selling_plan_allocations.length > 0
-				? variant.selling_plan_allocations[0]
-				: null;
-			var planId = allocation && allocation.selling_plan ? allocation.selling_plan.id : (allocation ? allocation.selling_plan_id : null);
-			input.value = planId || '';
-			input.disabled = !planId;
+			var form = input.closest('form');
+			var subRadio = form ? form.querySelector('[data-purchase-option-toggle="subscription"]') : null;
+			var isSub = subRadio && subRadio.checked;
+			var allocations = variant && variant.selling_plan_allocations ? variant.selling_plan_allocations : [];
+			var allocatedIds = allocations.map(function(allocation) {
+				return String(allocation.selling_plan ? allocation.selling_plan.id : allocation.selling_plan_id);
+			});
+			if (input.options) {
+				Array.prototype.forEach.call(input.options, function(option) {
+					var allocated = allocatedIds.indexOf(option.value) !== -1;
+					option.disabled = !allocated;
+					option.hidden = !allocated;
+				});
+			}
+			var planId = allocatedIds.indexOf(String(input.value)) !== -1 ? String(input.value) : (allocatedIds[0] || '');
+			input.value = planId;
+			input.disabled = !isSub || !planId;
 		});
 	}
 
@@ -351,30 +320,39 @@ class ProductTemplate extends HTMLElement {
 	updateFeaturedImage(image) {
 		if (!image || !this.mainSwiper) return;
 
-		const imageSrc = typeof image === 'string' ? image : (image.src || image.url);
-		if (!imageSrc) return;
+		const mediaId = image.id ? String(image.id) : null;
+		const imageSrc = typeof image === 'string' ? image : (image.src || image.url || (image.preview_image && image.preview_image.src));
+		if (!imageSrc && !mediaId) return;
 
-		const slides = this.mediaSliderEl.querySelectorAll('.swiper-slide img');
-		const getFilename = (url) => url.split('/').pop().split('?')[0].replace(/(_\d+x\d+)/, '');
+		const slides = this.mediaSliderEl.querySelectorAll('.swiper-slide');
+		const getFilename = (url) => (url || '').split('/').pop().split('?')[0].replace(/(_\d+x\d+)/, '');
 
 		for (let i = 0; i < slides.length; i++) {
-			if (getFilename(slides[i].src) === getFilename(imageSrc)) {
+			if (mediaId && slides[i].dataset.mediaId === mediaId) {
+				this.mainSwiper.slideTo(i);
+				break;
+			}
+			const slideImg = slides[i].querySelector('img');
+			if (imageSrc && slideImg && getFilename(slideImg.src) === getFilename(imageSrc)) {
 				this.mainSwiper.slideTo(i);
 				break;
 			}
 		}
 	}
 
+	metaUnavailableText() {
+		var strings = typeof themeConfig !== 'undefined' && themeConfig.strings && themeConfig.strings.variant;
+		return strings && strings.metaUnavailable ? strings.metaUnavailable : '';
+	}
+
 	updateSku(sku) {
 		if (!this.skuEl) return;
-		var fallback = (typeof themeConfig !== 'undefined' && themeConfig.strings && themeConfig.strings.variant) ? themeConfig.strings.variant.updating : 'N/A';
-		this.skuEl.textContent = sku ? sku.trim() : fallback;
+		this.skuEl.textContent = sku && sku.trim() ? sku.trim() : this.metaUnavailableText();
 	}
 
 	updateBarcode(barcode) {
 		if (!this.barcodeEl) return;
-		var fallback = (typeof themeConfig !== 'undefined' && themeConfig.strings && themeConfig.strings.variant) ? themeConfig.strings.variant.updating : 'N/A';
-		this.barcodeEl.textContent = barcode ? barcode.trim() : fallback;
+		this.barcodeEl.textContent = barcode && barcode.trim() ? barcode.trim() : this.metaUnavailableText();
 	}
 
 	updateAvailable(available) {
@@ -413,6 +391,10 @@ class ProductTemplate extends HTMLElement {
 				if (addBtnContent) addBtnContent.textContent = strings.unavailable || 'Unavailable';
 			}
 		}
+		var dynamicCheckout = this.querySelector('[data-dynamic-checkout]');
+		if (dynamicCheckout) {
+			dynamicCheckout.hidden = !isAvailable;
+		}
 
 		if (this.buyButtons) {
 			var buyBtnContent = this.buyButtons.querySelector('.button-content');
@@ -429,7 +411,8 @@ class ProductTemplate extends HTMLElement {
 				if (buyBtnContent) buyBtnContent.textContent = strings.contact || 'Contact';
 
 				// Get contact link from data attribute (set by Liquid)
-				var contactLink = this.buyButtons.getAttribute('data-contact-link') || ((themeConfig.routes && themeConfig.routes.root_url) || '/') + 'pages/contact';
+				var storeRoot = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) ? window.Shopify.routes.root : '/';
+				var contactLink = this.buyButtons.getAttribute('data-contact-link') || storeRoot + 'pages/contact';
 
 				this.buyButtons.onclick = function() {
 					window.location.href = contactLink;
@@ -444,24 +427,27 @@ class ProductTemplate extends HTMLElement {
 
 		if (price == 0 || price == null) {
 			this.priceEl.textContent = strings.contact || 'Contact';
-			if (this.compareEl) this.compareEl.style.display = 'none';
-			if (this.saleEl) this.saleEl.style.display = 'none';
+			this.priceEl.classList.remove('product-template__price-current--sale');
+			if (this.compareEl) this.compareEl.hidden = true;
+			if (this.saleEl) this.saleEl.hidden = true;
 		} else {
-			this.priceEl.textContent = ThemeUtils.formatMoney(price);
+			this.priceEl.textContent = ThemeUtils.formatMoney(price, themeConfig.priceFormat);
 
 			if (compare && compare > price) {
+				this.priceEl.classList.add('product-template__price-current--sale');
 				if (this.compareEl) {
-					this.compareEl.style.display = 'block';
+					this.compareEl.hidden = false;
 					this.compareEl.textContent = ThemeUtils.formatMoney(compare);
 				}
 				if (this.saleEl) {
 					const percent = Math.round(((compare - price) / compare) * 100);
 					this.saleEl.textContent = '-' + percent + '%';
-					this.saleEl.style.display = 'block';
+					this.saleEl.hidden = false;
 				}
 			} else {
-				if (this.compareEl) this.compareEl.style.display = 'none';
-				if (this.saleEl) this.saleEl.style.display = 'none';
+				this.priceEl.classList.remove('product-template__price-current--sale');
+				if (this.compareEl) this.compareEl.hidden = true;
+				if (this.saleEl) this.saleEl.hidden = true;
 			}
 		}
 	}
@@ -483,31 +469,18 @@ class ProductTemplate extends HTMLElement {
 			var formData = new FormData(form);
 			formData.append('sections', 'main-cart-items,cart-modal');
 
-			var response = await fetch(themeConfig.routes.cart_add_url, {
-				method: 'POST',
-				headers: { 'X-Requested-With': 'XMLHttpRequest' },
-				body: formData
-			});
-
-			var data = await response.json();
-			if (!response.ok) {
-				throw new Error(data.description || data.message || 'HTTP ' + response.status);
-			}
-
-			if (data) {
-				await ThemeUtils.updateCartData(data);
-				document.dispatchEvent(new CustomEvent('cart:item_added', { detail: data }));
-				if (typeof openCartModal === 'function') openCartModal();
-			}
+			var data = await this.postCartAdd(formData);
+			await ThemeUtils.updateCartData(data);
+			document.dispatchEvent(new CustomEvent('cart:item_added', { detail: data }));
 		} catch (error) {
-			if (typeof showToast === 'function') showToast(error.message || themeConfig.strings.cart.error || 'An error occurred', 'error');
+			if (typeof showToast === 'function') showToast(error.message, 'error');
 		} finally {
 			this.setButtonLoading(this.addButtons, false);
 		}
 	}
 
 	async handleBuyNow(e) {
-		e.preventDefault();
+		if (e) e.preventDefault();
 
 		// If button is contact link, let onclick handler take over
 		if (this.buyButtons && this.buyButtons.classList.contains('contact-link')) {
@@ -527,26 +500,35 @@ class ProductTemplate extends HTMLElement {
 		try {
 			var formData = new FormData(form);
 
-			var response = await fetch(themeConfig.routes.cart_add_url, {
-				method: 'POST',
-				headers: { 'X-Requested-With': 'XMLHttpRequest' },
-				body: formData
-			});
-
-			var data = await response.json();
-			if (!response.ok) {
-				throw new Error(data.description || data.message || 'HTTP ' + response.status);
-			}
-
-			if (data) {
-				await ThemeUtils.updateCartData(data);
-				this.setButtonLoading(this.buyButtons, false);
-				window.location.href = themeConfig.routes.checkout_url || '/checkout';
-			}
+			var data = await this.postCartAdd(formData);
+			await ThemeUtils.updateCartData(data);
+			this.setButtonLoading(this.buyButtons, false);
+			window.location.href = themeConfig.routes.checkout_url || '/checkout';
 		} catch (error) {
-			if (typeof showToast === 'function') showToast(error.message || themeConfig.strings.cart.error || 'An error occurred', 'error');
+			if (typeof showToast === 'function') showToast(error.message, 'error');
 			this.setButtonLoading(this.buyButtons, false);
 		}
+	}
+
+	async postCartAdd(formData) {
+		var strings = themeConfig.strings.cart || {};
+		var fallback = strings.itemError || strings.error;
+		var response;
+		var data = null;
+		try {
+			response = await fetch(themeConfig.routes.cart_add_url, {
+				method: 'POST',
+				headers: { Accept: 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+				body: formData
+			});
+			data = await response.json();
+		} catch (requestError) {
+			throw new Error(fallback);
+		}
+		if (!response.ok || !data) {
+			throw new Error((data && typeof data.description === 'string' && data.description) || fallback);
+		}
+		return data;
 	}
 
 	validateVariant() {
@@ -579,25 +561,38 @@ class ProductTemplate extends HTMLElement {
 		var counter = this.querySelector('[data-stock-counter]');
 		if (!counter) return;
 
-		var threshold = parseInt(counter.getAttribute('data-threshold')) || 10;
-		var qty = variant ? (variant.inventory_quantity || 0) : 0;
-		var qtyEl = counter.querySelector('[data-stock-qty]');
+		if (!this._stockLevels) {
+			var levelsEl = counter.querySelector('[data-stock-levels]');
+			try {
+				this._stockLevels = levelsEl ? JSON.parse(levelsEl.textContent) : {};
+			} catch (e) {
+				this._stockLevels = {};
+			}
+		}
 
-		// Hide stock counter if inventory not tracked or overselling allowed
-		var mgmt = variant ? variant.inventory_management : null;
-		var policy = variant ? (variant.inventory_policy || 'deny') : 'deny';
-		if (!mgmt || policy === 'continue') {
+		var qty = variant ? this._stockLevels[String(variant.id)] : null;
+		var textEl = counter.querySelector('[data-stock-text]');
+		if (!qty || !textEl || !textEl.getAttribute('data-template')) {
 			counter.classList.remove('is-visible');
 			return;
 		}
+		textEl.textContent = textEl.getAttribute('data-template').replace('[qty]', qty);
+		counter.classList.add('is-visible');
+	}
+	updateQuantityRules(variant) {
+		if (!this.quantityInput) return;
+		var rule = variant && variant.quantity_rule ? variant.quantity_rule : {};
 
-		if (qty > 0 && qty <= threshold) {
-			counter.classList.add('is-visible');
-			if (qtyEl) qtyEl.textContent = qty;
-		} else {
-			counter.classList.remove('is-visible');
+		this.quantityInput.min = rule.min || 1;
+		this.quantityInput.step = rule.increment || 1;
+		if (rule.max) this.quantityInput.max = rule.max;
+		else this.quantityInput.removeAttribute('max');
+
+		if (this.quantitySelector && typeof this.quantitySelector.syncRules === 'function') {
+			this.quantitySelector.syncRules();
 		}
 	}
+
 
 	// ── Back-in-stock Alert ──────────────────────────────────────
 	initBackInStock() {}
@@ -613,11 +608,7 @@ class ProductTemplate extends HTMLElement {
 			bisBody.value = '[Back-in-stock] ' + (product.title || '') + ' - ' + (variant.title || '') + ' | ' + window.location.href;
 		}
 
-		if (variant && !variant.available) {
-			bisContainer.style.display = '';
-		} else {
-			bisContainer.style.display = 'none';
-		}
+		bisContainer.hidden = !variant || !!variant.available;
 	}
 
 	// ── Product Video Slides ─────────────────────────────────────
@@ -693,6 +684,22 @@ class ProductTemplate extends HTMLElement {
 			} catch (e) {}
 		});
 	}
+	initSellingPlans() {
+		const sellingPlansWrapper = this.querySelector('[data-selling-plans-wrapper]');
+		if (!sellingPlansWrapper) return;
+
+		const radios = sellingPlansWrapper.querySelectorAll('[data-purchase-option-toggle]');
+		const plansSelectWrapper = sellingPlansWrapper.querySelector('[data-subscription-plans]');
+		const selectEl = sellingPlansWrapper.querySelector('[data-product-selling-plan]');
+
+		radios.forEach((radio) => {
+			radio.addEventListener('change', () => {
+				const isSub = radio.value === 'subscription' && radio.checked;
+				if (plansSelectWrapper) plansSelectWrapper.hidden = !isSub;
+				if (selectEl) selectEl.disabled = !isSub || !selectEl.value;
+			});
+		});
+	}
 }
 
 if (!customElements.get('product-template')) customElements.define('product-template', ProductTemplate);
@@ -709,12 +716,24 @@ class ProductStickyAdd extends HTMLElement {
 
 	connectedCallback() {
 		this.init();
+		if (!this.triggerElement) return;
 		this.bindScrollEvents();
 		this.listenToVariantChanges();
+		this.observeHeight();
+	}
+
+	observeHeight() {
+		if (!('ResizeObserver' in window)) return;
+		var self = this;
+		this._heightObserver = new ResizeObserver(function() {
+			document.documentElement.style.setProperty('--product-sticky-add-height', self.offsetHeight + 'px');
+		});
+		this._heightObserver.observe(this);
 	}
 
 	init() {
-		this.triggerElement = document.querySelector('[data-product-buy]');
+		this.productTemplate = document.querySelector('product-template');
+		this.triggerElement = document.querySelector('[data-product-buy]') || document.querySelector('[data-product-add]');
 		if (!this.triggerElement) return;
 		this.calculateThreshold();
 		this.bindEvents();
@@ -732,6 +751,10 @@ class ProductStickyAdd extends HTMLElement {
 	disconnectedCallback() {
 		if (this._scrollHandler) window.removeEventListener('scroll', this._scrollHandler);
 		if (this._resizeHandler) window.removeEventListener('resize', this._resizeHandler);
+		if (this._heightObserver) {
+			this._heightObserver.disconnect();
+			document.documentElement.style.removeProperty('--product-sticky-add-height');
+		}
 	}
 
 	listenToVariantChanges() {
@@ -770,10 +793,10 @@ class ProductStickyAdd extends HTMLElement {
 	}
 
 	bindEvents() {
+		const self = this;
 		const addBtn = this.querySelector('[data-action="sticky-add-to-cart"]');
 		const buyBtn = this.querySelector('[data-action="sticky-buy-now"]');
 		const productInfo = this.querySelector('[data-sticky-product-info]');
-
 		if (addBtn) {
 			addBtn.addEventListener('click', function() {
 				const mainAddBtn = document.querySelector('[data-product-add]');
@@ -784,7 +807,11 @@ class ProductStickyAdd extends HTMLElement {
 		if (buyBtn) {
 			buyBtn.addEventListener('click', function() {
 				const mainBuyBtn = document.querySelector('[data-product-buy]');
-				if (mainBuyBtn) mainBuyBtn.click();
+				if (mainBuyBtn) {
+					mainBuyBtn.click();
+				} else if (self.productTemplate && typeof self.productTemplate.handleBuyNow === 'function') {
+					self.productTemplate.handleBuyNow();
+				}
 			});
 		}
 
@@ -832,16 +859,14 @@ class ProductStickyAdd extends HTMLElement {
 			var strings = (typeof themeConfig !== 'undefined' && themeConfig.strings && themeConfig.strings.variant) ? themeConfig.strings.variant : {};
 			priceEl.textContent = (variant.price == 0 || variant.price == null) 
 				? (strings.contact || 'Contact')
-			: ThemeUtils.formatMoney(variant.price);
+			: ThemeUtils.formatMoney(variant.price, themeConfig.priceFormat);
 		}
 
 		if (compareEl) {
-			if (variant.compare_at_price && variant.compare_at_price > variant.price) {
-				compareEl.style.display = 'inline';
-				compareEl.textContent = ThemeUtils.formatMoney(variant.compare_at_price);
-			} else {
-				compareEl.style.display = 'none';
-			}
+			var onSale = variant.compare_at_price && variant.compare_at_price > variant.price;
+			compareEl.textContent = onSale ? ThemeUtils.formatMoney(variant.compare_at_price) : '';
+			compareEl.hidden = !onSale;
+			if (priceEl) priceEl.classList.toggle('price-current--sale', !!onSale);
 		}
 
 		if (addBtn) addBtn.disabled = !variant.available;
@@ -859,23 +884,8 @@ class ProductLightbox extends HTMLElement {
 	}
 
 	connectedCallback() {
-		this.render();
 		this.bindEvents();
 		this.bindKeyboardEvents();
-	}
-
-	render() {
-		this.innerHTML = '<div class="lightbox-overlay"></div>' +
-			'<div class="lightbox-content">' +
-			'<button class="lightbox-close" aria-label="Close">' +
-			'<svg class="icon" aria-hidden="true"><use href="#icon-close"></use></svg>' +
-			'</button>' +
-			'<div class="lightbox-image-wrapper">' +
-			'<button class="lightbox-prev swiper-button-prev" aria-label="Previous"></button>' +
-			'<img class="lightbox-image" src="" alt="">' +
-			'<button class="lightbox-next swiper-button-next" aria-label="Next"></button>' +
-			'</div>' +
-			'</div>';
 	}
 
 	bindEvents() {
@@ -914,17 +924,23 @@ class ProductLightbox extends HTMLElement {
 		}
 	}
 
-	open(images, index = 0) {
+	open(images, index = 0, trigger) {
 		this.images = images;
-		this.currentIndex = index;
-		this.showImage(this.currentIndex);
+		this.showImage(index);
 		this.classList.add('is-active');
-		document.body.style.overflow = 'hidden';
+		if (window.ThemeUtils) {
+			ThemeUtils.lockScroll();
+			ThemeUtils.trapFocus(this, trigger);
+		}
 	}
 
 	close() {
+		if (!this.classList.contains('is-active')) return;
 		this.classList.remove('is-active');
-		document.body.style.overflow = '';
+		if (window.ThemeUtils) {
+			ThemeUtils.unlockScroll();
+			ThemeUtils.releaseFocus(this);
+		}
 	}
 
 	showImage(index) {
@@ -932,35 +948,45 @@ class ProductLightbox extends HTMLElement {
 		if (index >= this.images.length) index = 0;
 		this.currentIndex = index;
 
-		const img = this.querySelector('.lightbox-image');
-		if (img && this.images[index]) {
-			let src = this.images[index];
-			if (/_compact|_small|_medium/.test(src)) {
-				src = src.replace(/_compact|_small|_medium|_large|_grande/g, '_1024x1024');
-			}
-			img.src = src;
+		const entry = this.images[index];
+		if (!entry) return;
+		let img = this.querySelector('.lightbox-image');
+		if (!img) {
+			img = document.createElement('img');
+			img.className = 'lightbox-image';
+			this.querySelector('.lightbox-next').before(img);
 		}
+		let src = entry.src;
+		if (/_compact|_small|_medium/.test(src)) {
+			src = src.replace(/_compact|_small|_medium|_large|_grande/g, '_1024x1024');
+		}
+		img.src = src;
+		img.alt = entry.alt;
 	}
 }
 if (!customElements.get('product-lightbox')) customElements.define('product-lightbox', ProductLightbox);
 
-// Initialize lightbox for product images
-(() => {
-	document.addEventListener('DOMContentLoaded', () => {
-		const productTemplate = document.querySelector('product-template');
-		const lightbox = document.querySelector('product-lightbox');
+function initProductLightbox() {
+	const productTemplate = document.querySelector('product-template');
+	const lightbox = document.querySelector('product-lightbox');
 
-		if (!productTemplate || !lightbox) return;
+	if (!productTemplate || !lightbox) return;
 
-		const images = productTemplate.querySelectorAll('.product-template__media-image');
-		const imageUrls = Array.from(images).map(img => img.dataset.zoomSrc || img.currentSrc || img.src);
+	const images = Array.from(productTemplate.querySelectorAll('img.product-template__media-image'));
+	const entries = images.map(img => ({ src: img.dataset.zoomSrc || img.currentSrc || img.src, alt: img.alt || '' }));
 
-		images.forEach((img, index) => {
-			img.style.cursor = 'pointer';
-			img.addEventListener('click', () => lightbox.open(imageUrls, index));
-		});
+	images.forEach((img, index) => {
+		if (img.dataset.lightboxBound) return;
+		img.dataset.lightboxBound = '1';
+		img.style.cursor = 'pointer';
+		img.addEventListener('click', () => lightbox.open(entries, index));
+		const button = img.closest('.product-template__media-slide')?.querySelector('[data-lightbox-open]');
+		if (button) button.addEventListener('click', () => lightbox.open(entries, index, button));
 	});
-})();
+}
+
+document.addEventListener('DOMContentLoaded', initProductLightbox);
+document.addEventListener('shopify:section:load', initProductLightbox);
 
 // SizeGuideModal Component
 class SizeGuideModal extends HTMLElement {
@@ -1007,19 +1033,14 @@ class SizeGuideModal extends HTMLElement {
 	}
 
 	open() {
-		const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
 		this.classList.remove('hidden');
-		document.body.style.overflow = 'hidden';
-		if (scrollbarWidth > 0) {
-			document.body.style.paddingRight = scrollbarWidth + 'px';
-		}
+		if (window.ThemeUtils) ThemeUtils.lockScroll();
 		if (window.ThemeUtils && ThemeUtils.trapFocus) ThemeUtils.trapFocus(this);
 	}
 
 	close() {
 		this.classList.add('hidden');
-		document.body.style.overflow = '';
-		document.body.style.paddingRight = '';
+		if (window.ThemeUtils) ThemeUtils.unlockScroll();
 		if (window.ThemeUtils && ThemeUtils.releaseFocus) ThemeUtils.releaseFocus(this);
 	}
 }
@@ -1044,6 +1065,7 @@ class ProductTemplateRelate extends HTMLElement {
 			slidesPerView: 1.2,
 			spaceBetween: 16,
 			loop: slideCount > 4,
+			a11y: { slideRole: 'listitem' },
 			pagination: {
 				el: '.swiper-pagination',
 				clickable: true
@@ -1097,7 +1119,7 @@ class ProductViewed extends HTMLElement {
 		if (!this.listEl) return;
 
 		try {
-			var viewedProducts = JSON.parse(localStorage.getItem(this.storageKey)) || [];
+			var viewedProducts = ThemeUtils.storage.getJSON(this.storageKey) || [];
 			var currentHandle = (typeof themeConfig !== 'undefined' && themeConfig.product && themeConfig.product.data)
 				? themeConfig.product.data.handle
 				: null;
@@ -1129,7 +1151,7 @@ class ProductViewed extends HTMLElement {
 					self.listEl.innerHTML = validHTMLs.map(function (html) {
 						return '<li class="product-cards__item swiper-slide">' + html + '</li>';
 					}).join('');
-					self.style.display = 'block';
+					self.hidden = false;
 					self.initSwiper();
 				})
 				.catch(function () {
@@ -1148,8 +1170,9 @@ class ProductViewed extends HTMLElement {
 				return response.text();
 			})
 			.then(function (html) {
-				if (html && html.includes('product-card')) return html.trim();
-				return null;
+				if (!html) return null;
+				var card = new DOMParser().parseFromString(html, 'text/html').querySelector('product-card');
+				return card ? card.outerHTML : null;
 			})
 			.catch(function () {
 				return null;
@@ -1162,34 +1185,28 @@ class ProductViewed extends HTMLElement {
 		var product = themeConfig.product.data;
 		if (!product || !product.handle) return;
 
-		try {
-			var viewedProducts = JSON.parse(localStorage.getItem(this.storageKey)) || [];
+		var stored = ThemeUtils.storage.getJSON(this.storageKey);
+		var viewedProducts = Array.isArray(stored) ? stored : [];
 
-			viewedProducts = viewedProducts.filter(function (p) {
-				return p.handle !== product.handle;
-			});
+		viewedProducts = viewedProducts.filter(function (p) {
+			return p.handle !== product.handle;
+		});
 
-			var productImage = product.featured_image;
-			if (!productImage && product.images && product.images[0]) {
-				productImage = product.images[0].src;
-			}
-
-			viewedProducts.unshift({
-				handle: product.handle,
-				title: product.title,
-				image: productImage || null,
-				price: product.price,
-				compare_at_price: product.compare_at_price,
-				url: product.url || ((themeConfig.routes && themeConfig.routes.all_products_url) ? themeConfig.routes.all_products_url.replace('/collections/all', '/products/') : '/products/') + product.handle
-			});
-
-			if (viewedProducts.length > this.limit) {
-				viewedProducts = viewedProducts.slice(0, this.limit);
-			}
-
-			localStorage.setItem(this.storageKey, JSON.stringify(viewedProducts));
-		} catch (error) {
+		var productImage = product.featured_image;
+		if (!productImage && product.images && product.images[0]) {
+			productImage = product.images[0].src;
 		}
+
+		viewedProducts.unshift({
+			handle: product.handle,
+			title: product.title,
+			image: productImage || null,
+			price: product.price,
+			compare_at_price: product.compare_at_price,
+			url: product.url || ((themeConfig.routes && themeConfig.routes.all_products_url) ? themeConfig.routes.all_products_url.replace('/collections/all', '/products/') : '/products/') + product.handle
+		});
+
+		ThemeUtils.storage.set(this.storageKey, JSON.stringify(viewedProducts.slice(0, this.limit)));
 	}
 
 	initSwiper() {
@@ -1204,6 +1221,7 @@ class ProductViewed extends HTMLElement {
 			slidesPerView: 1.2,
 			spaceBetween: 16,
 			loop: slideCount > 4,
+			a11y: { slideRole: 'listitem' },
 			navigation: {
 				nextEl: swiperEl.querySelector('.swiper-button-next'),
 				prevEl: swiperEl.querySelector('.swiper-button-prev')
@@ -1218,7 +1236,7 @@ class ProductViewed extends HTMLElement {
 	}
 
 	showEmpty() {
-		this.style.display = 'none';
+		this.hidden = true;
 	}
 }
 if (!customElements.get('product-viewed')) customElements.define('product-viewed', ProductViewed);
@@ -1248,10 +1266,15 @@ class GiftCardRecipient {
 	}
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+function initGiftCardRecipients() {
 	document.querySelectorAll('.product-template__gift-card-recipient').forEach(function(el) {
+		if (el.dataset.recipientBound) return;
+		el.dataset.recipientBound = '1';
 		new GiftCardRecipient(el);
 	});
-});
+}
+
+document.addEventListener('DOMContentLoaded', initGiftCardRecipients);
+document.addEventListener('shopify:section:load', initGiftCardRecipients);
 
 })();

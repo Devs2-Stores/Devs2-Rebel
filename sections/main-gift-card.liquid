@@ -13,7 +13,7 @@
         <p class="gift-card__expiration">{{ 'gift_cards.issued.expiration_date' | t: expires_on: gift_card_expiration_date }}</p>
       {%- endif -%}
     </header>
-    <section class="gift-card__body" aria-label="Gift card details">
+    <section class="gift-card__body" aria-label="{{ 'gift_cards.issued.details' | t }}">
       {%- if gift_card.qr_identifier != blank -%}
         <div class="gift-card__qr" id="qr-code" data-identifier="{{ gift_card.qr_identifier | escape }}" aria-label="{{ 'gift_cards.issued.qr_image_alt' | t }}"></div>
       {%- endif -%}
@@ -48,6 +48,6 @@
 </script>
 {% schema %}
 {
-  "name": "Gift card"
+  "name": "t:sections.main_gift_card.name"
 }
 {% endschema %}

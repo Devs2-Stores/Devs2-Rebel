@@ -1,0 +1,89 @@
+{
+ "at": "2026-10-10T00:08:36.842Z",
+ "results": [
+  {
+   "journey": "pdpVariantCart",
+   "name": "journey crashed",
+   "ok": false,
+   "detail": "PASSWORD_GATE: dev server redirects to /password and SHOPIFY_STOREFRONT_PASSWORD is not set"
+  },
+  {
+   "journey": "buyNow",
+   "name": "journey crashed",
+   "ok": false,
+   "detail": "PASSWORD_GATE: dev server redirects to /password and SHOPIFY_STOREFRONT_PASSWORD is not set"
+  }
+ ],
+ "logs": {
+  "buyNow": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Access to font at 'http://cdn.shopify.com/shopify-marketing_assets/static/ShopifySans--regular.woff' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+     "url": "http://127.0.0.1:9292/password"
+    },
+    {
+     "text": "Failed to load resource: net::ERR_FAILED",
+     "url": "http://cdn.shopify.com/shopify-marketing_assets/static/ShopifySans--regular.woff"
+    },
+    {
+     "text": "Access to font at 'http://cdn.shopify.com/shopify-marketing_assets/static/ShopifySans--light.woff2' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+     "url": "http://127.0.0.1:9292/password"
+    },
+    {
+     "text": "Failed to load resource: net::ERR_FAILED",
+     "url": "http://cdn.shopify.com/shopify-marketing_assets/static/ShopifySans--light.woff2"
+    },
+    {
+     "text": "Access to font at 'http://cdn.shopify.com/shopify-marketing_assets/static/ShopifySans--bold.woff2' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+     "url": "http://127.0.0.1:9292/password"
+    },
+    {
+     "text": "Failed to load resource: net::ERR_FAILED",
+     "url": "http://cdn.shopify.com/shopify-marketing_assets/static/ShopifySans--bold.woff2"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+     "url": "http://127.0.0.1:9292/favicon.ico"
+    }
+   ],
+   "badResponses": [],
+   "dialogs": []
+  },
+  "pdpVariantCart": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Access to font at 'http://cdn.shopify.com/shopify-marketing_assets/static/ShopifySans--regular.woff' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+     "url": "http://127.0.0.1:9292/password"
+    },
+    {
+     "text": "Failed to load resource: net::ERR_FAILED",
+     "url": "http://cdn.shopify.com/shopify-marketing_assets/static/ShopifySans--regular.woff"
+    },
+    {
+     "text": "Access to font at 'http://cdn.shopify.com/shopify-marketing_assets/static/ShopifySans--bold.woff2' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+     "url": "http://127.0.0.1:9292/password"
+    },
+    {
+     "text": "Failed to load resource: net::ERR_FAILED",
+     "url": "http://cdn.shopify.com/shopify-marketing_assets/static/ShopifySans--bold.woff2"
+    },
+    {
+     "text": "Access to font at 'http://cdn.shopify.com/shopify-marketing_assets/static/ShopifySans--light.woff2' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+     "url": "http://127.0.0.1:9292/password"
+    },
+    {
+     "text": "Failed to load resource: net::ERR_FAILED",
+     "url": "http://cdn.shopify.com/shopify-marketing_assets/static/ShopifySans--light.woff2"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+     "url": "http://127.0.0.1:9292/favicon.ico"
+    }
+   ],
+   "badResponses": [],
+   "dialogs": []
+  }
+ }
+}

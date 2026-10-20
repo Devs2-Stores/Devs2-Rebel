@@ -1,0 +1,28 @@
+(node:27236) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[PASS] overlay:lightbox-375 :: trigger is keyboard focusable with a name
+[PASS] overlay:lightbox-375 :: closed at rest: hidden and nothing focusable
+[PASS] overlay:lightbox-375 :: opens from keyboard (Enter on trigger)
+[PASS] overlay:lightbox-375 :: dialog semantics: role=dialog + aria-modal + name
+[PASS] overlay:lightbox-375 :: focus moves inside
+[PASS] overlay:lightbox-375 :: panel is topmost layer
+[PASS] overlay:lightbox-375 :: panel fits viewport horizontally
+[PASS] overlay:lightbox-375 :: panel top inside viewport
+[PASS] overlay:lightbox-375 :: page scroll locked
+[PASS] overlay:lightbox-375 :: no layout shift of page behind
+[PASS] overlay:lightbox-375 :: scroll position kept while open
+[PASS] overlay:lightbox-375 :: nothing focusable under aria-hidden
+[PASS] overlay:lightbox-375 :: text keeps >= 12px from panel edges
+[PASS] overlay:lightbox-375 :: panel text uses the theme body family (slotted content included)
+[PASS] overlay:lightbox-375 :: Tab x20 + Shift+Tab x6 stay inside
+[PASS] overlay:lightbox-375 :: close button named and >= 24x24
+[PASS] overlay:lightbox-375 :: Escape closes
+[PASS] overlay:lightbox-375 :: Escape: focus returns to trigger
+[PASS] overlay:lightbox-375 :: closed: scroll unlocked and position restored
+[PASS] overlay:lightbox-375 :: closed: nothing focusable inside
+[PASS] overlay:lightbox-375 :: close button closes
+[PASS] overlay:lightbox-375 :: close button: focus returns to trigger
+[INFO] overlay:lightbox-375 :: click outside panel closes :: "panel covers viewport"
+[PASS] overlay:lightbox-375 :: third open/close cycle still works
+[PASS] overlay:lightbox-375 :: no page errors during cycles
+SUMMARY {"PASS":24,"FAIL":0,"INFO":1}

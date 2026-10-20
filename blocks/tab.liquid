@@ -48,21 +48,23 @@
         type="button"
       >
         {%- if block.settings.icon != blank -%}
-          <img
-            src="{{ block.settings.icon | image_url: width: 40 }}"
-            alt=""
-            width="20"
-            height="20"
-            loading="lazy"
-            decoding="async"
-            class="product-template__tab-icon"
-          >
+          {{
+            block.settings.icon
+            | image_url: width: 40
+            | image_tag: widths: '20, 40', sizes: '20px', width: 20, height: 20, alt: '', loading: 'lazy', decoding: 'async', class: 'product-template__tab-icon'
+          }}
         {%- endif -%}
-        <span>{{ block.settings.title | default: 'Tab' }}</span>
+        {%- assign untitled_tab = 'general.tabs.untitled' | t -%}
+        <span>{{ block.settings.title | default: untitled_tab }}</span>
       </button>
     </template>
     <div class="product-template__description-wrapper" data-description-wrapper>
-      <div class="product-template__description-content is-collapsed" data-description-content>
+      <div
+        id="DescriptionContent-{{ block.id }}"
+        class="product-template__description-content{% if block.settings.description_readmore %} is-collapsed{% endif %}"
+        style="--read-more-height: {{ block.settings.description_max_height }}px;"
+        data-description-content
+      >
         {%- case block.settings.content_type -%}
           {%- when 'description' -%}
             {{ product.description }}
@@ -74,17 +76,20 @@
             {{ block.settings.custom_liquid }}
         {%- endcase -%}
       </div>
-      <button
-        class="product-template__description-toggle"
-        data-description-toggle
-        data-readmore-enabled="{{ block.settings.description_readmore }}"
-        data-max-height="{{ block.settings.description_max_height }}"
-        type="button"
-      >
-        <span data-toggle-text-more>{{ 'products.product.read_more' | t }}</span>
-        <span data-toggle-text-less class="hidden">{{ 'products.product.read_less' | t }}</span>
-        {%- render 'icon', name: 'chevron-right' -%}
-      </button>
+      {%- if block.settings.description_readmore -%}
+        <button
+          class="product-template__description-toggle"
+          data-description-toggle
+          aria-expanded="false"
+          aria-controls="DescriptionContent-{{ block.id }}"
+          data-max-height="{{ block.settings.description_max_height }}"
+          type="button"
+        >
+          <span data-toggle-text-more>{{ 'products.product.read_more' | t }}</span>
+          <span data-toggle-text-less class="hidden">{{ 'products.product.read_less' | t }}</span>
+          {%- render 'icon', name: 'chevron-right' -%}
+        </button>
+      {%- endif -%}
     </div>
   </div>
 {%- endif -%}
@@ -98,7 +103,7 @@
       "type": "text",
       "id": "title",
       "label": "t:sections.main_product.blocks.tab.settings.title.label",
-      "default": "Tab"
+      "default": "t:sections.main_product.blocks.tab.settings.title.default"
     },
     {
       "type": "select",

@@ -1,0 +1,2446 @@
+[
+ {
+  "journey": "overlay:cart-1440",
+  "name": "trigger is keyboard focusable with a name",
+  "ok": true,
+  "detail": {
+   "tag": "BUTTON",
+   "focusable": true,
+   "name": "Open cart\n\n  \n\n0",
+   "haspopup": null,
+   "expanded": null,
+   "controls": null
+  }
+ },
+ {
+  "journey": "overlay:cart-1440",
+  "name": "closed at rest: hidden and nothing focusable",
+  "ok": true,
+  "detail": {
+   "open": false,
+   "leaks": 0
+  }
+ },
+ {
+  "journey": "overlay:cart-1440",
+  "name": "opens from keyboard (Enter on trigger)",
+  "ok": true,
+  "detail": {
+   "open": true,
+   "active": "cart-modal-close"
+  }
+ },
+ {
+  "journey": "overlay:cart-1440",
+  "name": "dialog semantics: role=dialog + aria-modal + name",
+  "ok": true,
+  "detail": {
+   "role": "dialog",
+   "ariaModal": "true",
+   "name": "Your cart (0)"
+  }
+ },
+ {
+  "journey": "overlay:cart-1440",
+  "name": "focus moves inside",
+  "ok": true,
+  "detail": "cart-modal-close"
+ },
+ {
+  "journey": "overlay:cart-1440",
+  "name": "panel is topmost layer",
+  "ok": true,
+  "detail": "[object SVGAnimatedString]"
+ },
+ {
+  "journey": "overlay:cart-1440",
+  "name": "panel fits viewport horizontally",
+  "ok": true,
+  "detail": {
+   "l": 1000,
+   "r": 1440,
+   "t": 0,
+   "b": 900,
+   "vw": 1440,
+   "vh": 900
+  }
+ },
+ {
+  "journey": "overlay:cart-1440",
+  "name": "panel top inside viewport",
+  "ok": true,
+  "detail": {
+   "l": 1000,
+   "r": 1440,
+   "t": 0,
+   "b": 900,
+   "vw": 1440,
+   "vh": 900
+  }
+ },
+ {
+  "journey": "overlay:cart-1440",
+  "name": "page scroll locked",
+  "ok": true,
+  "detail": {
+   "scrollY": 400
+  }
+ },
+ {
+  "journey": "overlay:cart-1440",
+  "name": "no layout shift of page behind",
+  "ok": true,
+  "detail": {
+   "before": [
+    0,
+    1440
+   ],
+   "after": [
+    0,
+    1440
+   ]
+  }
+ },
+ {
+  "journey": "overlay:cart-1440",
+  "name": "scroll position kept while open",
+  "ok": true,
+  "detail": {
+   "before": 400,
+   "open": 400
+  }
+ },
+ {
+  "journey": "overlay:cart-1440",
+  "name": "nothing focusable under aria-hidden",
+  "ok": true,
+  "detail": 0
+ },
+ {
+  "journey": "overlay:cart-1440",
+  "name": "text keeps >= 12px from panel edges",
+  "ok": true,
+  "detail": 21
+ },
+ {
+  "journey": "overlay:cart-1440",
+  "name": "panel text uses a theme font family: body, heading or subheading token (slotted content included)",
+  "ok": true,
+  "detail": []
+ },
+ {
+  "journey": "overlay:cart-1440",
+  "name": "wheel outside panel does not scroll page",
+  "ok": true,
+  "detail": {
+   "before": 400,
+   "after": 400
+  }
+ },
+ {
+  "journey": "overlay:cart-1440",
+  "name": "Tab x20 + Shift+Tab x6 stay inside",
+  "ok": true,
+  "detail": "11111111111111111111111111"
+ },
+ {
+  "journey": "overlay:cart-1440",
+  "name": "close button named and >= 24x24",
+  "ok": true,
+  "detail": {
+   "w": 36,
+   "h": 36,
+   "name": "Close",
+   "x": 1402,
+   "y": 34
+  }
+ },
+ {
+  "journey": "overlay:cart-1440",
+  "name": "Escape closes",
+  "ok": true,
+  "detail": {
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:cart-1440",
+  "name": "Escape: focus returns to trigger",
+  "ok": true,
+  "detail": "header__action-btn header__cart-btn"
+ },
+ {
+  "journey": "overlay:cart-1440",
+  "name": "closed: scroll unlocked and position restored",
+  "ok": true,
+  "detail": {
+   "locked": false,
+   "scrollY": 400,
+   "was": 400
+  }
+ },
+ {
+  "journey": "overlay:cart-1440",
+  "name": "closed: nothing focusable inside",
+  "ok": true,
+  "detail": 0
+ },
+ {
+  "journey": "overlay:cart-1440",
+  "name": "close button closes",
+  "ok": true,
+  "detail": {
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:cart-1440",
+  "name": "close button: focus returns to trigger",
+  "ok": true,
+  "detail": "header__action-btn header__cart-btn"
+ },
+ {
+  "journey": "overlay:cart-1440",
+  "name": "click outside panel closes",
+  "ok": true,
+  "detail": {
+   "at": {
+    "x": 8,
+    "y": 450
+   },
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:cart-1440",
+  "name": "third open/close cycle still works",
+  "ok": true,
+  "detail": {
+   "open": true,
+   "closed": true,
+   "locked": false
+  }
+ },
+ {
+  "journey": "overlay:cart-1440",
+  "name": "no page errors during cycles",
+  "ok": true,
+  "detail": []
+ },
+ {
+  "journey": "overlay:cart-375",
+  "name": "trigger is keyboard focusable with a name",
+  "ok": true,
+  "detail": {
+   "tag": "BUTTON",
+   "focusable": true,
+   "name": "Open cart\n\n  \n\n0",
+   "haspopup": null,
+   "expanded": null,
+   "controls": null
+  }
+ },
+ {
+  "journey": "overlay:cart-375",
+  "name": "closed at rest: hidden and nothing focusable",
+  "ok": true,
+  "detail": {
+   "open": false,
+   "leaks": 0
+  }
+ },
+ {
+  "journey": "overlay:cart-375",
+  "name": "opens from keyboard (Enter on trigger)",
+  "ok": true,
+  "detail": {
+   "open": true,
+   "active": "cart-modal-close"
+  }
+ },
+ {
+  "journey": "overlay:cart-375",
+  "name": "dialog semantics: role=dialog + aria-modal + name",
+  "ok": true,
+  "detail": {
+   "role": "dialog",
+   "ariaModal": "true",
+   "name": "Your cart (0)"
+  }
+ },
+ {
+  "journey": "overlay:cart-375",
+  "name": "focus moves inside",
+  "ok": true,
+  "detail": "cart-modal-close"
+ },
+ {
+  "journey": "overlay:cart-375",
+  "name": "panel is topmost layer",
+  "ok": true,
+  "detail": "[object SVGAnimatedString]"
+ },
+ {
+  "journey": "overlay:cart-375",
+  "name": "panel fits viewport horizontally",
+  "ok": true,
+  "detail": {
+   "l": 0,
+   "r": 375,
+   "t": 0,
+   "b": 812,
+   "vw": 375,
+   "vh": 812
+  }
+ },
+ {
+  "journey": "overlay:cart-375",
+  "name": "panel top inside viewport",
+  "ok": true,
+  "detail": {
+   "l": 0,
+   "r": 375,
+   "t": 0,
+   "b": 812,
+   "vw": 375,
+   "vh": 812
+  }
+ },
+ {
+  "journey": "overlay:cart-375",
+  "name": "page scroll locked",
+  "ok": true,
+  "detail": {
+   "scrollY": 400
+  }
+ },
+ {
+  "journey": "overlay:cart-375",
+  "name": "no layout shift of page behind",
+  "ok": true,
+  "detail": {
+   "before": [
+    0,
+    375
+   ],
+   "after": [
+    0,
+    375
+   ]
+  }
+ },
+ {
+  "journey": "overlay:cart-375",
+  "name": "scroll position kept while open",
+  "ok": true,
+  "detail": {
+   "before": 400,
+   "open": 400
+  }
+ },
+ {
+  "journey": "overlay:cart-375",
+  "name": "nothing focusable under aria-hidden",
+  "ok": true,
+  "detail": 0
+ },
+ {
+  "journey": "overlay:cart-375",
+  "name": "text keeps >= 12px from panel edges",
+  "ok": true,
+  "detail": 21
+ },
+ {
+  "journey": "overlay:cart-375",
+  "name": "panel text uses a theme font family: body, heading or subheading token (slotted content included)",
+  "ok": true,
+  "detail": []
+ },
+ {
+  "journey": "overlay:cart-375",
+  "name": "Tab x20 + Shift+Tab x6 stay inside",
+  "ok": true,
+  "detail": "11111111111111111111111111"
+ },
+ {
+  "journey": "overlay:cart-375",
+  "name": "close button named and >= 24x24",
+  "ok": true,
+  "detail": {
+   "w": 36,
+   "h": 36,
+   "name": "Close",
+   "x": 337,
+   "y": 34
+  }
+ },
+ {
+  "journey": "overlay:cart-375",
+  "name": "Escape closes",
+  "ok": true,
+  "detail": {
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:cart-375",
+  "name": "Escape: focus returns to trigger",
+  "ok": true,
+  "detail": "header__action-btn header__cart-btn"
+ },
+ {
+  "journey": "overlay:cart-375",
+  "name": "closed: scroll unlocked and position restored",
+  "ok": true,
+  "detail": {
+   "locked": false,
+   "scrollY": 400,
+   "was": 400
+  }
+ },
+ {
+  "journey": "overlay:cart-375",
+  "name": "closed: nothing focusable inside",
+  "ok": true,
+  "detail": 0
+ },
+ {
+  "journey": "overlay:cart-375",
+  "name": "close button closes",
+  "ok": true,
+  "detail": {
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:cart-375",
+  "name": "close button: focus returns to trigger",
+  "ok": true,
+  "detail": "header__action-btn header__cart-btn"
+ },
+ {
+  "journey": "overlay:cart-375",
+  "name": "click outside panel closes",
+  "ok": null,
+  "detail": "panel covers viewport"
+ },
+ {
+  "journey": "overlay:cart-375",
+  "name": "third open/close cycle still works",
+  "ok": true,
+  "detail": {
+   "open": true,
+   "closed": true,
+   "locked": false
+  }
+ },
+ {
+  "journey": "overlay:cart-375",
+  "name": "no page errors during cycles",
+  "ok": true,
+  "detail": []
+ },
+ {
+  "journey": "overlay:search-1440",
+  "name": "trigger is keyboard focusable with a name",
+  "ok": true,
+  "detail": {
+   "tag": "BUTTON",
+   "focusable": true,
+   "name": "Search",
+   "haspopup": null,
+   "expanded": null,
+   "controls": null
+  }
+ },
+ {
+  "journey": "overlay:search-1440",
+  "name": "closed at rest: hidden and nothing focusable",
+  "ok": true,
+  "detail": {
+   "open": false,
+   "leaks": 0
+  }
+ },
+ {
+  "journey": "overlay:search-1440",
+  "name": "opens from keyboard (Enter on trigger)",
+  "ok": true,
+  "detail": {
+   "open": true,
+   "active": "search-modal-input"
+  }
+ },
+ {
+  "journey": "overlay:search-1440",
+  "name": "dialog semantics: role=dialog + aria-modal + name",
+  "ok": true,
+  "detail": {
+   "role": "dialog",
+   "ariaModal": "true",
+   "name": "Search"
+  }
+ },
+ {
+  "journey": "overlay:search-1440",
+  "name": "focus moves inside",
+  "ok": true,
+  "detail": "search-modal-input"
+ },
+ {
+  "journey": "overlay:search-1440",
+  "name": "panel is topmost layer",
+  "ok": true,
+  "detail": "search-modal-results"
+ },
+ {
+  "journey": "overlay:search-1440",
+  "name": "panel fits viewport horizontally",
+  "ok": true,
+  "detail": {
+   "l": 864,
+   "r": 1440,
+   "t": 0,
+   "b": 900,
+   "vw": 1440,
+   "vh": 900
+  }
+ },
+ {
+  "journey": "overlay:search-1440",
+  "name": "panel top inside viewport",
+  "ok": true,
+  "detail": {
+   "l": 864,
+   "r": 1440,
+   "t": 0,
+   "b": 900,
+   "vw": 1440,
+   "vh": 900
+  }
+ },
+ {
+  "journey": "overlay:search-1440",
+  "name": "page scroll locked",
+  "ok": true,
+  "detail": {
+   "scrollY": 400
+  }
+ },
+ {
+  "journey": "overlay:search-1440",
+  "name": "no layout shift of page behind",
+  "ok": true,
+  "detail": {
+   "before": [
+    0,
+    1440
+   ],
+   "after": [
+    0,
+    1440
+   ]
+  }
+ },
+ {
+  "journey": "overlay:search-1440",
+  "name": "scroll position kept while open",
+  "ok": true,
+  "detail": {
+   "before": 400,
+   "open": 400
+  }
+ },
+ {
+  "journey": "overlay:search-1440",
+  "name": "nothing focusable under aria-hidden",
+  "ok": true,
+  "detail": 0
+ },
+ {
+  "journey": "overlay:search-1440",
+  "name": "text keeps >= 12px from panel edges",
+  "ok": true,
+  "detail": 25
+ },
+ {
+  "journey": "overlay:search-1440",
+  "name": "panel text uses a theme font family: body, heading or subheading token (slotted content included)",
+  "ok": true,
+  "detail": []
+ },
+ {
+  "journey": "overlay:search-1440",
+  "name": "wheel outside panel does not scroll page",
+  "ok": true,
+  "detail": {
+   "before": 400,
+   "after": 400
+  }
+ },
+ {
+  "journey": "overlay:search-1440",
+  "name": "Tab x20 + Shift+Tab x6 stay inside",
+  "ok": true,
+  "detail": "11111111111111111111111111"
+ },
+ {
+  "journey": "overlay:search-1440",
+  "name": "close button named and >= 24x24",
+  "ok": true,
+  "detail": {
+   "w": 40,
+   "h": 40,
+   "name": "Close",
+   "x": 1396,
+   "y": 36
+  }
+ },
+ {
+  "journey": "overlay:search-1440",
+  "name": "Escape closes",
+  "ok": true,
+  "detail": {
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:search-1440",
+  "name": "Escape: focus returns to trigger",
+  "ok": true,
+  "detail": "header__action-btn"
+ },
+ {
+  "journey": "overlay:search-1440",
+  "name": "closed: scroll unlocked and position restored",
+  "ok": true,
+  "detail": {
+   "locked": false,
+   "scrollY": 400,
+   "was": 400
+  }
+ },
+ {
+  "journey": "overlay:search-1440",
+  "name": "closed: nothing focusable inside",
+  "ok": true,
+  "detail": 0
+ },
+ {
+  "journey": "overlay:search-1440",
+  "name": "close button closes",
+  "ok": true,
+  "detail": {
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:search-1440",
+  "name": "close button: focus returns to trigger",
+  "ok": true,
+  "detail": "header__action-btn"
+ },
+ {
+  "journey": "overlay:search-1440",
+  "name": "click outside panel closes",
+  "ok": true,
+  "detail": {
+   "at": {
+    "x": 8,
+    "y": 450
+   },
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:search-1440",
+  "name": "third open/close cycle still works",
+  "ok": true,
+  "detail": {
+   "open": true,
+   "closed": true,
+   "locked": false
+  }
+ },
+ {
+  "journey": "overlay:search-1440",
+  "name": "no page errors during cycles",
+  "ok": true,
+  "detail": []
+ },
+ {
+  "journey": "overlay:search-375",
+  "name": "trigger is keyboard focusable with a name",
+  "ok": true,
+  "detail": {
+   "tag": "BUTTON",
+   "focusable": true,
+   "name": "Search",
+   "haspopup": null,
+   "expanded": null,
+   "controls": null
+  }
+ },
+ {
+  "journey": "overlay:search-375",
+  "name": "closed at rest: hidden and nothing focusable",
+  "ok": true,
+  "detail": {
+   "open": false,
+   "leaks": 0
+  }
+ },
+ {
+  "journey": "overlay:search-375",
+  "name": "opens from keyboard (Enter on trigger)",
+  "ok": true,
+  "detail": {
+   "open": true,
+   "active": "search-modal-input"
+  }
+ },
+ {
+  "journey": "overlay:search-375",
+  "name": "dialog semantics: role=dialog + aria-modal + name",
+  "ok": true,
+  "detail": {
+   "role": "dialog",
+   "ariaModal": "true",
+   "name": "Search"
+  }
+ },
+ {
+  "journey": "overlay:search-375",
+  "name": "focus moves inside",
+  "ok": true,
+  "detail": "search-modal-input"
+ },
+ {
+  "journey": "overlay:search-375",
+  "name": "panel is topmost layer",
+  "ok": true,
+  "detail": "search-modal-results"
+ },
+ {
+  "journey": "overlay:search-375",
+  "name": "panel fits viewport horizontally",
+  "ok": true,
+  "detail": {
+   "l": 0,
+   "r": 375,
+   "t": 0,
+   "b": 812,
+   "vw": 375,
+   "vh": 812
+  }
+ },
+ {
+  "journey": "overlay:search-375",
+  "name": "panel top inside viewport",
+  "ok": true,
+  "detail": {
+   "l": 0,
+   "r": 375,
+   "t": 0,
+   "b": 812,
+   "vw": 375,
+   "vh": 812
+  }
+ },
+ {
+  "journey": "overlay:search-375",
+  "name": "page scroll locked",
+  "ok": true,
+  "detail": {
+   "scrollY": 400
+  }
+ },
+ {
+  "journey": "overlay:search-375",
+  "name": "no layout shift of page behind",
+  "ok": true,
+  "detail": {
+   "before": [
+    0,
+    375
+   ],
+   "after": [
+    0,
+    375
+   ]
+  }
+ },
+ {
+  "journey": "overlay:search-375",
+  "name": "scroll position kept while open",
+  "ok": true,
+  "detail": {
+   "before": 400,
+   "open": 400
+  }
+ },
+ {
+  "journey": "overlay:search-375",
+  "name": "nothing focusable under aria-hidden",
+  "ok": true,
+  "detail": 0
+ },
+ {
+  "journey": "overlay:search-375",
+  "name": "text keeps >= 12px from panel edges",
+  "ok": true,
+  "detail": 24
+ },
+ {
+  "journey": "overlay:search-375",
+  "name": "panel text uses a theme font family: body, heading or subheading token (slotted content included)",
+  "ok": true,
+  "detail": []
+ },
+ {
+  "journey": "overlay:search-375",
+  "name": "Tab x20 + Shift+Tab x6 stay inside",
+  "ok": true,
+  "detail": "11111111111111111111111111"
+ },
+ {
+  "journey": "overlay:search-375",
+  "name": "close button named and >= 24x24",
+  "ok": true,
+  "detail": {
+   "w": 40,
+   "h": 40,
+   "name": "Close",
+   "x": 331,
+   "y": 36
+  }
+ },
+ {
+  "journey": "overlay:search-375",
+  "name": "Escape closes",
+  "ok": true,
+  "detail": {
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:search-375",
+  "name": "Escape: focus returns to trigger",
+  "ok": true,
+  "detail": "header__action-btn"
+ },
+ {
+  "journey": "overlay:search-375",
+  "name": "closed: scroll unlocked and position restored",
+  "ok": true,
+  "detail": {
+   "locked": false,
+   "scrollY": 400,
+   "was": 400
+  }
+ },
+ {
+  "journey": "overlay:search-375",
+  "name": "closed: nothing focusable inside",
+  "ok": true,
+  "detail": 0
+ },
+ {
+  "journey": "overlay:search-375",
+  "name": "close button closes",
+  "ok": true,
+  "detail": {
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:search-375",
+  "name": "close button: focus returns to trigger",
+  "ok": true,
+  "detail": "header__action-btn"
+ },
+ {
+  "journey": "overlay:search-375",
+  "name": "click outside panel closes",
+  "ok": null,
+  "detail": "panel covers viewport"
+ },
+ {
+  "journey": "overlay:search-375",
+  "name": "third open/close cycle still works",
+  "ok": true,
+  "detail": {
+   "open": true,
+   "closed": true,
+   "locked": false
+  }
+ },
+ {
+  "journey": "overlay:search-375",
+  "name": "no page errors during cycles",
+  "ok": true,
+  "detail": []
+ },
+ {
+  "journey": "overlay:mobile-menu-375",
+  "name": "trigger is keyboard focusable with a name",
+  "ok": true,
+  "detail": {
+   "tag": "BUTTON",
+   "focusable": true,
+   "name": "Open menu",
+   "haspopup": null,
+   "expanded": null,
+   "controls": null
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-375",
+  "name": "closed at rest: hidden and nothing focusable",
+  "ok": true,
+  "detail": {
+   "open": false,
+   "leaks": 0
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-375",
+  "name": "opens from keyboard (Enter on trigger)",
+  "ok": true,
+  "detail": {
+   "open": true,
+   "active": "mobile-menu__close"
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-375",
+  "name": "dialog semantics: role=dialog + aria-modal + name",
+  "ok": true,
+  "detail": {
+   "role": "dialog",
+   "ariaModal": "true",
+   "name": "Main navigation"
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-375",
+  "name": "focus moves inside",
+  "ok": true,
+  "detail": "mobile-menu__close"
+ },
+ {
+  "journey": "overlay:mobile-menu-375",
+  "name": "panel is topmost layer",
+  "ok": true,
+  "detail": "mobile-menu__nav"
+ },
+ {
+  "journey": "overlay:mobile-menu-375",
+  "name": "panel fits viewport horizontally",
+  "ok": true,
+  "detail": {
+   "l": 0,
+   "r": 330,
+   "t": 0,
+   "b": 812,
+   "vw": 375,
+   "vh": 812
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-375",
+  "name": "panel top inside viewport",
+  "ok": true,
+  "detail": {
+   "l": 0,
+   "r": 330,
+   "t": 0,
+   "b": 812,
+   "vw": 375,
+   "vh": 812
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-375",
+  "name": "page scroll locked",
+  "ok": true,
+  "detail": {
+   "scrollY": 400
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-375",
+  "name": "no layout shift of page behind",
+  "ok": true,
+  "detail": {
+   "before": [
+    0,
+    375
+   ],
+   "after": [
+    0,
+    375
+   ]
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-375",
+  "name": "scroll position kept while open",
+  "ok": true,
+  "detail": {
+   "before": 400,
+   "open": 400
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-375",
+  "name": "nothing focusable under aria-hidden",
+  "ok": true,
+  "detail": 0
+ },
+ {
+  "journey": "overlay:mobile-menu-375",
+  "name": "text keeps >= 12px from panel edges",
+  "ok": true,
+  "detail": 24
+ },
+ {
+  "journey": "overlay:mobile-menu-375",
+  "name": "panel text uses a theme font family: body, heading or subheading token (slotted content included)",
+  "ok": true,
+  "detail": []
+ },
+ {
+  "journey": "overlay:mobile-menu-375",
+  "name": "wheel outside panel does not scroll page",
+  "ok": true,
+  "detail": {
+   "before": 400,
+   "after": 400
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-375",
+  "name": "Tab x20 + Shift+Tab x6 stay inside",
+  "ok": true,
+  "detail": "11111111111111111111111111"
+ },
+ {
+  "journey": "overlay:mobile-menu-375",
+  "name": "close button named and >= 24x24",
+  "ok": true,
+  "detail": {
+   "w": 40,
+   "h": 40,
+   "name": "Close",
+   "x": 285,
+   "y": 36
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-375",
+  "name": "Escape closes",
+  "ok": true,
+  "detail": {
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-375",
+  "name": "Escape: focus returns to trigger",
+  "ok": true,
+  "detail": "header__hamburger"
+ },
+ {
+  "journey": "overlay:mobile-menu-375",
+  "name": "closed: scroll unlocked and position restored",
+  "ok": true,
+  "detail": {
+   "locked": false,
+   "scrollY": 400,
+   "was": 400
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-375",
+  "name": "closed: nothing focusable inside",
+  "ok": true,
+  "detail": 0
+ },
+ {
+  "journey": "overlay:mobile-menu-375",
+  "name": "close button closes",
+  "ok": true,
+  "detail": {
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-375",
+  "name": "close button: focus returns to trigger",
+  "ok": true,
+  "detail": "header__hamburger"
+ },
+ {
+  "journey": "overlay:mobile-menu-375",
+  "name": "click outside panel closes",
+  "ok": true,
+  "detail": {
+   "at": {
+    "x": 367,
+    "y": 406
+   },
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-375",
+  "name": "third open/close cycle still works",
+  "ok": true,
+  "detail": {
+   "open": true,
+   "closed": true,
+   "locked": false
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-375",
+  "name": "no page errors during cycles",
+  "ok": true,
+  "detail": []
+ },
+ {
+  "journey": "overlay:mobile-menu-768",
+  "name": "trigger is keyboard focusable with a name",
+  "ok": true,
+  "detail": {
+   "tag": "BUTTON",
+   "focusable": true,
+   "name": "Open menu",
+   "haspopup": null,
+   "expanded": null,
+   "controls": null
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-768",
+  "name": "closed at rest: hidden and nothing focusable",
+  "ok": true,
+  "detail": {
+   "open": false,
+   "leaks": 0
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-768",
+  "name": "opens from keyboard (Enter on trigger)",
+  "ok": true,
+  "detail": {
+   "open": true,
+   "active": "mobile-menu__close"
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-768",
+  "name": "dialog semantics: role=dialog + aria-modal + name",
+  "ok": true,
+  "detail": {
+   "role": "dialog",
+   "ariaModal": "true",
+   "name": "Main navigation"
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-768",
+  "name": "focus moves inside",
+  "ok": true,
+  "detail": "mobile-menu__close"
+ },
+ {
+  "journey": "overlay:mobile-menu-768",
+  "name": "panel is topmost layer",
+  "ok": true,
+  "detail": "mobile-menu__nav"
+ },
+ {
+  "journey": "overlay:mobile-menu-768",
+  "name": "panel fits viewport horizontally",
+  "ok": true,
+  "detail": {
+   "l": 0,
+   "r": 384,
+   "t": 0,
+   "b": 1024,
+   "vw": 768,
+   "vh": 1024
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-768",
+  "name": "panel top inside viewport",
+  "ok": true,
+  "detail": {
+   "l": 0,
+   "r": 384,
+   "t": 0,
+   "b": 1024,
+   "vw": 768,
+   "vh": 1024
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-768",
+  "name": "page scroll locked",
+  "ok": true,
+  "detail": {
+   "scrollY": 400
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-768",
+  "name": "no layout shift of page behind",
+  "ok": true,
+  "detail": {
+   "before": [
+    0,
+    768
+   ],
+   "after": [
+    0,
+    768
+   ]
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-768",
+  "name": "scroll position kept while open",
+  "ok": true,
+  "detail": {
+   "before": 400,
+   "open": 400
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-768",
+  "name": "nothing focusable under aria-hidden",
+  "ok": true,
+  "detail": 0
+ },
+ {
+  "journey": "overlay:mobile-menu-768",
+  "name": "text keeps >= 12px from panel edges",
+  "ok": true,
+  "detail": 24
+ },
+ {
+  "journey": "overlay:mobile-menu-768",
+  "name": "panel text uses a theme font family: body, heading or subheading token (slotted content included)",
+  "ok": true,
+  "detail": []
+ },
+ {
+  "journey": "overlay:mobile-menu-768",
+  "name": "wheel outside panel does not scroll page",
+  "ok": true,
+  "detail": {
+   "before": 400,
+   "after": 400
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-768",
+  "name": "Tab x20 + Shift+Tab x6 stay inside",
+  "ok": true,
+  "detail": "11111111111111111111111111"
+ },
+ {
+  "journey": "overlay:mobile-menu-768",
+  "name": "close button named and >= 24x24",
+  "ok": true,
+  "detail": {
+   "w": 40,
+   "h": 40,
+   "name": "Close",
+   "x": 339,
+   "y": 36
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-768",
+  "name": "Escape closes",
+  "ok": true,
+  "detail": {
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-768",
+  "name": "Escape: focus returns to trigger",
+  "ok": true,
+  "detail": "header__hamburger"
+ },
+ {
+  "journey": "overlay:mobile-menu-768",
+  "name": "closed: scroll unlocked and position restored",
+  "ok": true,
+  "detail": {
+   "locked": false,
+   "scrollY": 400,
+   "was": 400
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-768",
+  "name": "closed: nothing focusable inside",
+  "ok": true,
+  "detail": 0
+ },
+ {
+  "journey": "overlay:mobile-menu-768",
+  "name": "close button closes",
+  "ok": true,
+  "detail": {
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-768",
+  "name": "close button: focus returns to trigger",
+  "ok": true,
+  "detail": "header__hamburger"
+ },
+ {
+  "journey": "overlay:mobile-menu-768",
+  "name": "click outside panel closes",
+  "ok": true,
+  "detail": {
+   "at": {
+    "x": 760,
+    "y": 512
+   },
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-768",
+  "name": "third open/close cycle still works",
+  "ok": true,
+  "detail": {
+   "open": true,
+   "closed": true,
+   "locked": false
+  }
+ },
+ {
+  "journey": "overlay:mobile-menu-768",
+  "name": "no page errors during cycles",
+  "ok": true,
+  "detail": []
+ },
+ {
+  "journey": "overlay:quickview-1440",
+  "name": "trigger is keyboard focusable with a name",
+  "ok": true,
+  "detail": {
+   "tag": "BUTTON",
+   "focusable": true,
+   "name": "Quick view Bespoke Charcoal Pinstripe Bl",
+   "haspopup": null,
+   "expanded": null,
+   "controls": null
+  }
+ },
+ {
+  "journey": "overlay:quickview-1440",
+  "name": "closed at rest: hidden and nothing focusable",
+  "ok": true,
+  "detail": {
+   "open": false,
+   "leaks": 0
+  }
+ },
+ {
+  "journey": "overlay:quickview-1440",
+  "name": "opens from keyboard (Enter on trigger)",
+  "ok": true,
+  "detail": {
+   "open": true,
+   "active": "quickview-modal-close"
+  }
+ },
+ {
+  "journey": "overlay:quickview-1440",
+  "name": "dialog semantics: role=dialog + aria-modal + name",
+  "ok": true,
+  "detail": {
+   "role": "dialog",
+   "ariaModal": "true",
+   "name": "Quick view"
+  }
+ },
+ {
+  "journey": "overlay:quickview-1440",
+  "name": "focus moves inside",
+  "ok": true,
+  "detail": "quickview-modal-close"
+ },
+ {
+  "journey": "overlay:quickview-1440",
+  "name": "panel is topmost layer",
+  "ok": true,
+  "detail": "quickview-product__full-link"
+ },
+ {
+  "journey": "overlay:quickview-1440",
+  "name": "panel fits viewport horizontally",
+  "ok": true,
+  "detail": {
+   "l": 560,
+   "r": 1424,
+   "t": 16,
+   "b": 684,
+   "vw": 1440,
+   "vh": 900
+  }
+ },
+ {
+  "journey": "overlay:quickview-1440",
+  "name": "panel top inside viewport",
+  "ok": true,
+  "detail": {
+   "l": 560,
+   "r": 1424,
+   "t": 16,
+   "b": 684,
+   "vw": 1440,
+   "vh": 900
+  }
+ },
+ {
+  "journey": "overlay:quickview-1440",
+  "name": "page scroll locked",
+  "ok": true,
+  "detail": {
+   "scrollY": 371
+  }
+ },
+ {
+  "journey": "overlay:quickview-1440",
+  "name": "no layout shift of page behind",
+  "ok": true,
+  "detail": {
+   "before": [
+    0,
+    1440
+   ],
+   "after": [
+    0,
+    1440
+   ]
+  }
+ },
+ {
+  "journey": "overlay:quickview-1440",
+  "name": "scroll position kept while open",
+  "ok": true,
+  "detail": {
+   "before": 371,
+   "open": 371
+  }
+ },
+ {
+  "journey": "overlay:quickview-1440",
+  "name": "nothing focusable under aria-hidden",
+  "ok": true,
+  "detail": 0
+ },
+ {
+  "journey": "overlay:quickview-1440",
+  "name": "text keeps >= 12px from panel edges",
+  "ok": true,
+  "detail": 21
+ },
+ {
+  "journey": "overlay:quickview-1440",
+  "name": "panel text uses a theme font family: body, heading or subheading token (slotted content included)",
+  "ok": true,
+  "detail": []
+ },
+ {
+  "journey": "overlay:quickview-1440",
+  "name": "wheel outside panel does not scroll page",
+  "ok": true,
+  "detail": {
+   "before": 371,
+   "after": 371
+  }
+ },
+ {
+  "journey": "overlay:quickview-1440",
+  "name": "Tab x20 + Shift+Tab x6 stay inside",
+  "ok": true,
+  "detail": "11111111111111111111111111"
+ },
+ {
+  "journey": "overlay:quickview-1440",
+  "name": "close button named and >= 24x24",
+  "ok": true,
+  "detail": {
+   "w": 36,
+   "h": 36,
+   "name": "Close",
+   "x": 1385,
+   "y": 51
+  }
+ },
+ {
+  "journey": "overlay:quickview-1440",
+  "name": "Escape closes",
+  "ok": true,
+  "detail": {
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:quickview-1440",
+  "name": "Escape: focus returns to trigger",
+  "ok": true,
+  "detail": "product-card__quickview"
+ },
+ {
+  "journey": "overlay:quickview-1440",
+  "name": "closed: scroll unlocked and position restored",
+  "ok": true,
+  "detail": {
+   "locked": false,
+   "scrollY": 371,
+   "was": 371
+  }
+ },
+ {
+  "journey": "overlay:quickview-1440",
+  "name": "closed: nothing focusable inside",
+  "ok": true,
+  "detail": 0
+ },
+ {
+  "journey": "overlay:quickview-1440",
+  "name": "close button closes",
+  "ok": true,
+  "detail": {
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:quickview-1440",
+  "name": "close button: focus returns to trigger",
+  "ok": true,
+  "detail": "product-card__quickview"
+ },
+ {
+  "journey": "overlay:quickview-1440",
+  "name": "click outside panel closes",
+  "ok": true,
+  "detail": {
+   "at": {
+    "x": 8,
+    "y": 450
+   },
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:quickview-1440",
+  "name": "third open/close cycle still works",
+  "ok": true,
+  "detail": {
+   "open": true,
+   "closed": true,
+   "locked": false
+  }
+ },
+ {
+  "journey": "overlay:quickview-1440",
+  "name": "no page errors during cycles",
+  "ok": true,
+  "detail": []
+ },
+ {
+  "journey": "overlay:filter-375",
+  "name": "trigger is keyboard focusable with a name",
+  "ok": true,
+  "detail": {
+   "tag": "BUTTON",
+   "focusable": true,
+   "name": "Filter",
+   "haspopup": null,
+   "expanded": null,
+   "controls": null
+  }
+ },
+ {
+  "journey": "overlay:filter-375",
+  "name": "closed at rest: hidden and nothing focusable",
+  "ok": true,
+  "detail": {
+   "open": false,
+   "leaks": 0
+  }
+ },
+ {
+  "journey": "overlay:filter-375",
+  "name": "opens from keyboard (Enter on trigger)",
+  "ok": true,
+  "detail": {
+   "open": true,
+   "active": "collection-template__close-filter"
+  }
+ },
+ {
+  "journey": "overlay:filter-375",
+  "name": "dialog semantics: role=dialog + aria-modal + name",
+  "ok": true,
+  "detail": {
+   "role": "dialog",
+   "ariaModal": "true",
+   "name": "Filter"
+  }
+ },
+ {
+  "journey": "overlay:filter-375",
+  "name": "focus moves inside",
+  "ok": true,
+  "detail": "collection-template__close-filter"
+ },
+ {
+  "journey": "overlay:filter-375",
+  "name": "panel is topmost layer",
+  "ok": true,
+  "detail": "facet-filters__form"
+ },
+ {
+  "journey": "overlay:filter-375",
+  "name": "panel fits viewport horizontally",
+  "ok": true,
+  "detail": {
+   "l": 0,
+   "r": 320,
+   "t": 0,
+   "b": 812,
+   "vw": 375,
+   "vh": 812
+  }
+ },
+ {
+  "journey": "overlay:filter-375",
+  "name": "panel top inside viewport",
+  "ok": true,
+  "detail": {
+   "l": 0,
+   "r": 320,
+   "t": 0,
+   "b": 812,
+   "vw": 375,
+   "vh": 812
+  }
+ },
+ {
+  "journey": "overlay:filter-375",
+  "name": "page scroll locked",
+  "ok": true,
+  "detail": {
+   "scrollY": 400
+  }
+ },
+ {
+  "journey": "overlay:filter-375",
+  "name": "no layout shift of page behind",
+  "ok": true,
+  "detail": {
+   "before": [
+    0,
+    375
+   ],
+   "after": [
+    0,
+    375
+   ]
+  }
+ },
+ {
+  "journey": "overlay:filter-375",
+  "name": "scroll position kept while open",
+  "ok": true,
+  "detail": {
+   "before": 400,
+   "open": 400
+  }
+ },
+ {
+  "journey": "overlay:filter-375",
+  "name": "nothing focusable under aria-hidden",
+  "ok": true,
+  "detail": 0
+ },
+ {
+  "journey": "overlay:filter-375",
+  "name": "text keeps >= 12px from panel edges",
+  "ok": true,
+  "detail": 20
+ },
+ {
+  "journey": "overlay:filter-375",
+  "name": "panel text uses a theme font family: body, heading or subheading token (slotted content included)",
+  "ok": true,
+  "detail": []
+ },
+ {
+  "journey": "overlay:filter-375",
+  "name": "wheel outside panel does not scroll page",
+  "ok": true,
+  "detail": {
+   "before": 400,
+   "after": 400
+  }
+ },
+ {
+  "journey": "overlay:filter-375",
+  "name": "Tab x20 + Shift+Tab x6 stay inside",
+  "ok": true,
+  "detail": "11111111111111111111111111"
+ },
+ {
+  "journey": "overlay:filter-375",
+  "name": "close button named and >= 24x24",
+  "ok": true,
+  "detail": {
+   "w": 40,
+   "h": 40,
+   "name": "Close",
+   "x": 280,
+   "y": -203
+  }
+ },
+ {
+  "journey": "overlay:filter-375",
+  "name": "Escape closes",
+  "ok": true,
+  "detail": {
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:filter-375",
+  "name": "Escape: focus returns to trigger",
+  "ok": true,
+  "detail": "collection-template__filter-btn"
+ },
+ {
+  "journey": "overlay:filter-375",
+  "name": "closed: scroll unlocked and position restored",
+  "ok": true,
+  "detail": {
+   "locked": false,
+   "scrollY": 400,
+   "was": 400
+  }
+ },
+ {
+  "journey": "overlay:filter-375",
+  "name": "closed: nothing focusable inside",
+  "ok": true,
+  "detail": 0
+ },
+ {
+  "journey": "overlay:filter-375",
+  "name": "close button closes",
+  "ok": true,
+  "detail": {
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:filter-375",
+  "name": "close button: focus returns to trigger",
+  "ok": true,
+  "detail": "collection-template__filter-btn"
+ },
+ {
+  "journey": "overlay:filter-375",
+  "name": "click outside panel closes",
+  "ok": true,
+  "detail": {
+   "at": {
+    "x": 367,
+    "y": 406
+   },
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:filter-375",
+  "name": "third open/close cycle still works",
+  "ok": true,
+  "detail": {
+   "open": true,
+   "closed": true,
+   "locked": false
+  }
+ },
+ {
+  "journey": "overlay:filter-375",
+  "name": "no page errors during cycles",
+  "ok": true,
+  "detail": []
+ },
+ {
+  "journey": "overlay:pickup-1440",
+  "name": "trigger rendered",
+  "ok": null,
+  "detail": "#ShowPickupAvailabilityDrawer not visible at 1440 (needs store data: a location with local pickup enabled)"
+ },
+ {
+  "journey": "overlay:pickup-375",
+  "name": "trigger rendered",
+  "ok": null,
+  "detail": "#ShowPickupAvailabilityDrawer not visible at 375 (needs store data: a location with local pickup enabled)"
+ },
+ {
+  "journey": "overlay:size-guide-1440",
+  "name": "opened through element API (no trigger rendered with current settings)",
+  "ok": null,
+  "detail": "size-guide-modal"
+ },
+ {
+  "journey": "overlay:size-guide-1440",
+  "name": "closed at rest: hidden and nothing focusable",
+  "ok": true,
+  "detail": {
+   "open": false,
+   "leaks": 0
+  }
+ },
+ {
+  "journey": "overlay:size-guide-1440",
+  "name": "dialog semantics: role=dialog + aria-modal + name",
+  "ok": true,
+  "detail": {
+   "role": "dialog",
+   "ariaModal": "true",
+   "name": "Size guide"
+  }
+ },
+ {
+  "journey": "overlay:size-guide-1440",
+  "name": "focus moves inside",
+  "ok": true,
+  "detail": "size-guide-modal-overlay"
+ },
+ {
+  "journey": "overlay:size-guide-1440",
+  "name": "panel is topmost layer",
+  "ok": true,
+  "detail": "size-guide-modal-content"
+ },
+ {
+  "journey": "overlay:size-guide-1440",
+  "name": "panel fits viewport horizontally",
+  "ok": true,
+  "detail": {
+   "l": 752,
+   "r": 1424,
+   "t": 16,
+   "b": 884,
+   "vw": 1440,
+   "vh": 900
+  }
+ },
+ {
+  "journey": "overlay:size-guide-1440",
+  "name": "panel top inside viewport",
+  "ok": true,
+  "detail": {
+   "l": 752,
+   "r": 1424,
+   "t": 16,
+   "b": 884,
+   "vw": 1440,
+   "vh": 900
+  }
+ },
+ {
+  "journey": "overlay:size-guide-1440",
+  "name": "page scroll locked",
+  "ok": true,
+  "detail": {
+   "scrollY": 400
+  }
+ },
+ {
+  "journey": "overlay:size-guide-1440",
+  "name": "no layout shift of page behind",
+  "ok": true,
+  "detail": {
+   "before": [
+    0,
+    1440
+   ],
+   "after": [
+    0,
+    1440
+   ]
+  }
+ },
+ {
+  "journey": "overlay:size-guide-1440",
+  "name": "scroll position kept while open",
+  "ok": true,
+  "detail": {
+   "before": 400,
+   "open": 400
+  }
+ },
+ {
+  "journey": "overlay:size-guide-1440",
+  "name": "nothing focusable under aria-hidden",
+  "ok": true,
+  "detail": 0
+ },
+ {
+  "journey": "overlay:size-guide-1440",
+  "name": "text keeps >= 12px from panel edges",
+  "ok": true,
+  "detail": 21
+ },
+ {
+  "journey": "overlay:size-guide-1440",
+  "name": "panel text uses a theme font family: body, heading or subheading token (slotted content included)",
+  "ok": true,
+  "detail": []
+ },
+ {
+  "journey": "overlay:size-guide-1440",
+  "name": "wheel outside panel does not scroll page",
+  "ok": true,
+  "detail": {
+   "before": 400,
+   "after": 400
+  }
+ },
+ {
+  "journey": "overlay:size-guide-1440",
+  "name": "Tab x20 + Shift+Tab x6 stay inside",
+  "ok": true,
+  "detail": "11111111111111111111111111"
+ },
+ {
+  "journey": "overlay:size-guide-1440",
+  "name": "close button named and >= 24x24",
+  "ok": true,
+  "detail": {
+   "w": 36,
+   "h": 36,
+   "name": "Close",
+   "x": 1385,
+   "y": 51
+  }
+ },
+ {
+  "journey": "overlay:size-guide-1440",
+  "name": "Escape closes",
+  "ok": true,
+  "detail": {
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:size-guide-1440",
+  "name": "Escape: focus returns to trigger",
+  "ok": true,
+  "detail": "gradient animate--enabled animate--hover-default"
+ },
+ {
+  "journey": "overlay:size-guide-1440",
+  "name": "closed: scroll unlocked and position restored",
+  "ok": true,
+  "detail": {
+   "locked": false,
+   "scrollY": 400,
+   "was": 400
+  }
+ },
+ {
+  "journey": "overlay:size-guide-1440",
+  "name": "closed: nothing focusable inside",
+  "ok": true,
+  "detail": 0
+ },
+ {
+  "journey": "overlay:size-guide-1440",
+  "name": "close button closes",
+  "ok": true,
+  "detail": {
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:size-guide-1440",
+  "name": "close button: focus returns to trigger",
+  "ok": true,
+  "detail": "gradient animate--enabled animate--hover-default"
+ },
+ {
+  "journey": "overlay:size-guide-1440",
+  "name": "click outside panel closes",
+  "ok": true,
+  "detail": {
+   "at": {
+    "x": 8,
+    "y": 450
+   },
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:size-guide-1440",
+  "name": "third open/close cycle still works",
+  "ok": true,
+  "detail": {
+   "open": true,
+   "closed": true,
+   "locked": false
+  }
+ },
+ {
+  "journey": "overlay:size-guide-1440",
+  "name": "no page errors during cycles",
+  "ok": true,
+  "detail": []
+ },
+ {
+  "journey": "overlay:lightbox-1440",
+  "name": "trigger is keyboard focusable with a name",
+  "ok": true,
+  "detail": {
+   "tag": "BUTTON",
+   "focusable": true,
+   "name": "Open media 1 in modal",
+   "haspopup": "dialog",
+   "expanded": null,
+   "controls": null
+  }
+ },
+ {
+  "journey": "overlay:lightbox-1440",
+  "name": "closed at rest: hidden and nothing focusable",
+  "ok": true,
+  "detail": {
+   "open": false,
+   "leaks": 0
+  }
+ },
+ {
+  "journey": "overlay:lightbox-1440",
+  "name": "opens from keyboard (Enter on trigger)",
+  "ok": true,
+  "detail": {
+   "open": true,
+   "active": "lightbox-close"
+  }
+ },
+ {
+  "journey": "overlay:lightbox-1440",
+  "name": "dialog semantics: role=dialog + aria-modal + name",
+  "ok": true,
+  "detail": {
+   "role": "dialog",
+   "ariaModal": "true",
+   "name": "Image lightbox"
+  }
+ },
+ {
+  "journey": "overlay:lightbox-1440",
+  "name": "focus moves inside",
+  "ok": true,
+  "detail": "lightbox-close"
+ },
+ {
+  "journey": "overlay:lightbox-1440",
+  "name": "panel is topmost layer",
+  "ok": true,
+  "detail": "lightbox-image"
+ },
+ {
+  "journey": "overlay:lightbox-1440",
+  "name": "panel fits viewport horizontally",
+  "ok": true,
+  "detail": {
+   "l": 0,
+   "r": 1440,
+   "t": 0,
+   "b": 900,
+   "vw": 1440,
+   "vh": 900
+  }
+ },
+ {
+  "journey": "overlay:lightbox-1440",
+  "name": "panel top inside viewport",
+  "ok": true,
+  "detail": {
+   "l": 0,
+   "r": 1440,
+   "t": 0,
+   "b": 900,
+   "vw": 1440,
+   "vh": 900
+  }
+ },
+ {
+  "journey": "overlay:lightbox-1440",
+  "name": "page scroll locked",
+  "ok": true,
+  "detail": {
+   "scrollY": 0
+  }
+ },
+ {
+  "journey": "overlay:lightbox-1440",
+  "name": "no layout shift of page behind",
+  "ok": true,
+  "detail": {
+   "before": [
+    0,
+    1440
+   ],
+   "after": [
+    0,
+    1440
+   ]
+  }
+ },
+ {
+  "journey": "overlay:lightbox-1440",
+  "name": "scroll position kept while open",
+  "ok": true,
+  "detail": {
+   "before": 0,
+   "open": 0
+  }
+ },
+ {
+  "journey": "overlay:lightbox-1440",
+  "name": "nothing focusable under aria-hidden",
+  "ok": true,
+  "detail": 0
+ },
+ {
+  "journey": "overlay:lightbox-1440",
+  "name": "text keeps >= 12px from panel edges",
+  "ok": true,
+  "detail": null
+ },
+ {
+  "journey": "overlay:lightbox-1440",
+  "name": "panel text uses a theme font family: body, heading or subheading token (slotted content included)",
+  "ok": true,
+  "detail": []
+ },
+ {
+  "journey": "overlay:lightbox-1440",
+  "name": "Tab x20 + Shift+Tab x6 stay inside",
+  "ok": true,
+  "detail": "11111111111111111111111111"
+ },
+ {
+  "journey": "overlay:lightbox-1440",
+  "name": "close button named and >= 24x24",
+  "ok": true,
+  "detail": {
+   "w": 40,
+   "h": 40,
+   "name": "Close",
+   "x": 1400,
+   "y": 40
+  }
+ },
+ {
+  "journey": "overlay:lightbox-1440",
+  "name": "Escape closes",
+  "ok": true,
+  "detail": {
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:lightbox-1440",
+  "name": "Escape: focus returns to trigger",
+  "ok": true,
+  "detail": "product-template__zoom-btn"
+ },
+ {
+  "journey": "overlay:lightbox-1440",
+  "name": "closed: scroll unlocked and position restored",
+  "ok": true,
+  "detail": {
+   "locked": false,
+   "scrollY": 0,
+   "was": 0
+  }
+ },
+ {
+  "journey": "overlay:lightbox-1440",
+  "name": "closed: nothing focusable inside",
+  "ok": true,
+  "detail": 0
+ },
+ {
+  "journey": "overlay:lightbox-1440",
+  "name": "close button closes",
+  "ok": true,
+  "detail": {
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:lightbox-1440",
+  "name": "close button: focus returns to trigger",
+  "ok": true,
+  "detail": "product-template__zoom-btn"
+ },
+ {
+  "journey": "overlay:lightbox-1440",
+  "name": "click outside panel closes",
+  "ok": null,
+  "detail": "panel covers viewport"
+ },
+ {
+  "journey": "overlay:lightbox-1440",
+  "name": "third open/close cycle still works",
+  "ok": true,
+  "detail": {
+   "open": true,
+   "closed": true,
+   "locked": false
+  }
+ },
+ {
+  "journey": "overlay:lightbox-1440",
+  "name": "no page errors during cycles",
+  "ok": true,
+  "detail": []
+ },
+ {
+  "journey": "overlay:lightbox-375",
+  "name": "trigger is keyboard focusable with a name",
+  "ok": true,
+  "detail": {
+   "tag": "BUTTON",
+   "focusable": true,
+   "name": "Open media 1 in modal",
+   "haspopup": "dialog",
+   "expanded": null,
+   "controls": null
+  }
+ },
+ {
+  "journey": "overlay:lightbox-375",
+  "name": "closed at rest: hidden and nothing focusable",
+  "ok": true,
+  "detail": {
+   "open": false,
+   "leaks": 0
+  }
+ },
+ {
+  "journey": "overlay:lightbox-375",
+  "name": "opens from keyboard (Enter on trigger)",
+  "ok": true,
+  "detail": {
+   "open": true,
+   "active": "lightbox-close"
+  }
+ },
+ {
+  "journey": "overlay:lightbox-375",
+  "name": "dialog semantics: role=dialog + aria-modal + name",
+  "ok": true,
+  "detail": {
+   "role": "dialog",
+   "ariaModal": "true",
+   "name": "Image lightbox"
+  }
+ },
+ {
+  "journey": "overlay:lightbox-375",
+  "name": "focus moves inside",
+  "ok": true,
+  "detail": "lightbox-close"
+ },
+ {
+  "journey": "overlay:lightbox-375",
+  "name": "panel is topmost layer",
+  "ok": true,
+  "detail": "lightbox-image"
+ },
+ {
+  "journey": "overlay:lightbox-375",
+  "name": "panel fits viewport horizontally",
+  "ok": true,
+  "detail": {
+   "l": 0,
+   "r": 375,
+   "t": 0,
+   "b": 812,
+   "vw": 375,
+   "vh": 812
+  }
+ },
+ {
+  "journey": "overlay:lightbox-375",
+  "name": "panel top inside viewport",
+  "ok": true,
+  "detail": {
+   "l": 0,
+   "r": 375,
+   "t": 0,
+   "b": 812,
+   "vw": 375,
+   "vh": 812
+  }
+ },
+ {
+  "journey": "overlay:lightbox-375",
+  "name": "page scroll locked",
+  "ok": true,
+  "detail": {
+   "scrollY": 0
+  }
+ },
+ {
+  "journey": "overlay:lightbox-375",
+  "name": "no layout shift of page behind",
+  "ok": true,
+  "detail": {
+   "before": [
+    0,
+    375
+   ],
+   "after": [
+    0,
+    375
+   ]
+  }
+ },
+ {
+  "journey": "overlay:lightbox-375",
+  "name": "scroll position kept while open",
+  "ok": true,
+  "detail": {
+   "before": 0,
+   "open": 0
+  }
+ },
+ {
+  "journey": "overlay:lightbox-375",
+  "name": "nothing focusable under aria-hidden",
+  "ok": true,
+  "detail": 0
+ },
+ {
+  "journey": "overlay:lightbox-375",
+  "name": "text keeps >= 12px from panel edges",
+  "ok": true,
+  "detail": null
+ },
+ {
+  "journey": "overlay:lightbox-375",
+  "name": "panel text uses a theme font family: body, heading or subheading token (slotted content included)",
+  "ok": true,
+  "detail": []
+ },
+ {
+  "journey": "overlay:lightbox-375",
+  "name": "Tab x20 + Shift+Tab x6 stay inside",
+  "ok": true,
+  "detail": "11111111111111111111111111"
+ },
+ {
+  "journey": "overlay:lightbox-375",
+  "name": "close button named and >= 24x24",
+  "ok": true,
+  "detail": {
+   "w": 40,
+   "h": 40,
+   "name": "Close",
+   "x": 335,
+   "y": 40
+  }
+ },
+ {
+  "journey": "overlay:lightbox-375",
+  "name": "Escape closes",
+  "ok": true,
+  "detail": {
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:lightbox-375",
+  "name": "Escape: focus returns to trigger",
+  "ok": true,
+  "detail": "product-template__zoom-btn"
+ },
+ {
+  "journey": "overlay:lightbox-375",
+  "name": "closed: scroll unlocked and position restored",
+  "ok": true,
+  "detail": {
+   "locked": false,
+   "scrollY": 0,
+   "was": 0
+  }
+ },
+ {
+  "journey": "overlay:lightbox-375",
+  "name": "closed: nothing focusable inside",
+  "ok": true,
+  "detail": 0
+ },
+ {
+  "journey": "overlay:lightbox-375",
+  "name": "close button closes",
+  "ok": true,
+  "detail": {
+   "open": false
+  }
+ },
+ {
+  "journey": "overlay:lightbox-375",
+  "name": "close button: focus returns to trigger",
+  "ok": true,
+  "detail": "product-template__zoom-btn"
+ },
+ {
+  "journey": "overlay:lightbox-375",
+  "name": "click outside panel closes",
+  "ok": null,
+  "detail": "panel covers viewport"
+ },
+ {
+  "journey": "overlay:lightbox-375",
+  "name": "third open/close cycle still works",
+  "ok": true,
+  "detail": {
+   "open": true,
+   "closed": true,
+   "locked": false
+  }
+ },
+ {
+  "journey": "overlay:lightbox-375",
+  "name": "no page errors during cycles",
+  "ok": true,
+  "detail": []
+ }
+]

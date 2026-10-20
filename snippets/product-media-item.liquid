@@ -1,0 +1,82 @@
+{% doc %}
+  @description Renders a single product media item (image, external_video, video, or 3D model).
+  @param {object} media - Shopify product media object
+  @param {object} product - Shopify product object
+  @param {string} [sizes] - Responsive sizes attribute for image_tag
+  @param {string} [loading] - Image loading strategy ('eager' or 'lazy'). Default: 'lazy'
+  @param {string} [fetchpriority] - Image fetchpriority ('high', 'low', 'auto'). Default: 'auto'
+  @param {boolean} [preload] - Preload first image. Default: false
+  @param {boolean} [enable_zoom] - Emit data-zoom-src and data-product-featured-image on images. Default: false
+  @param {string} [image_class] - CSS class for the rendered image. Default: 'product-template__media-image'
+  @example {%- render 'product-media-item', media: media, product: product, sizes: '(min-width: 750px) 50vw, 100vw' -%}
+{% enddoc %}
+
+{%- liquid
+  assign media_sizes = sizes | default: '(max-width: 749px) 100vw, 50vw'
+  assign media_loading = loading | default: 'lazy'
+  assign media_fetchpriority = fetchpriority | default: 'auto'
+  assign media_preload = preload | default: false, allow_false: true
+  assign media_enable_zoom = enable_zoom | default: false, allow_false: true
+  assign media_image_class = image_class | default: 'product-template__media-image'
+-%}
+
+{%- case media.media_type -%}
+  {%- when 'image' -%}
+    {%- assign media_alt = media.alt | default: product.title | escape -%}
+    {%- if media_enable_zoom -%}
+      {%- assign media_zoom_src = media | image_url: width: 2048 -%}
+      {{
+        media
+        | image_url: width: 1512
+        | image_tag:
+          widths: '360, 540, 720, 900, 1080, 1296, 1512',
+          sizes: media_sizes,
+          alt: media_alt,
+          loading: media_loading,
+          fetchpriority: media_fetchpriority,
+          preload: media_preload,
+          decoding: 'async',
+          class: media_image_class,
+          data-zoom-src: media_zoom_src,
+          data-product-featured-image: 'true'
+      }}
+    {%- else -%}
+      {{
+        media
+        | image_url: width: 1200
+        | image_tag:
+          widths: '360, 540, 720, 900, 1080, 1200',
+          sizes: media_sizes,
+          alt: media_alt,
+          loading: media_loading,
+          fetchpriority: media_fetchpriority,
+          preload: media_preload,
+          decoding: 'async',
+          class: media_image_class
+      }}
+    {%- endif -%}
+  {%- when 'external_video' -%}
+    <div class="product-template__video-wrapper">
+      {{ media | external_video_tag: loading: 'lazy', class: 'product-template__video-iframe' }}
+    </div>
+  {%- when 'video' -%}
+    <div class="product-template__video-wrapper">
+      {{ media | video_tag: controls: true, preload: 'none', image_size: '1200x', class: 'product-template__video' }}
+    </div>
+  {%- when 'model' -%}
+    <div class="product-template__model-wrapper">
+      {{ media | model_viewer_tag: reveal: 'interaction', toggleable: true, image_size: '1200x', class: 'product-template__model' }}
+      <button
+        class="button button--full-width product-template__xr-button"
+        type="button"
+        aria-label="{{ 'products.product.xr_button_label' | t }}"
+        data-shopify-xr
+        data-shopify-model3d-id="{{ media.id }}"
+        data-shopify-title="{{ product.title | escape }}"
+        data-shopify-xr-hidden
+      >
+        {%- render 'icon', name: '3d-model' -%}
+        {{ 'products.product.xr_button' | t }}
+      </button>
+    </div>
+{%- endcase -%}

@@ -2,7 +2,7 @@
 {{ 'mobile-menu.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'mobile-menu.js' | asset_url }}" defer="defer"></script>
 <mobile-menu class="mobile-menu" role="dialog" aria-modal="true" aria-label="{{ 'accessibility.navigation' | t }}">
-  <button type="button" class="mobile-menu__overlay" data-action="close-mobile-menu" aria-label="{{ 'accessibility.close' | t }}"></button>
+  <button type="button" class="mobile-menu__overlay" data-action="close-mobile-menu" aria-label="{{ 'accessibility.close' | t }}" tabindex="-1"></button>
   <div class="mobile-menu__drawer">
     <div class="mobile-menu__header">
       <span class="mobile-menu__title">{{ 'accessibility.navigation' | t }}</span>
@@ -15,13 +15,14 @@
         <ul class="mobile-menu__list">
           {%- if resolved_menu_handle != blank -%}
             {%- for link in linklists[resolved_menu_handle].links -%}
-              {%- if linklists[link.handle].links -%}
+              {%- if link.links.size > 0 -%}
+                {%- assign submenu_index = forloop.index -%}
                 <li class="mobile-menu__item mobile-menu__item--has-children">
-                  <button type="button" class="mobile-menu__trigger" aria-expanded="false" aria-controls="mobile-submenu-{{ link.handle | handleize }}">
+                  <button type="button" class="mobile-menu__trigger" aria-expanded="false" aria-controls="mobile-submenu-{{ submenu_index }}">
                     <span>{{ link.title }}</span>
                     {%- render 'icon', name: 'chevron-right' -%}
                   </button>
-                  <ul id="mobile-submenu-{{ link.handle | handleize }}" class="mobile-menu__submenu">
+                  <ul id="mobile-submenu-{{ submenu_index }}" class="mobile-menu__submenu">
                     <li class="mobile-menu__submenu-back">
                       <button type="button" class="mobile-menu__back-btn" aria-label="{{ 'general.breadcrumbs.back' | t }}">
                         {%- render 'icon', name: 'chevron-left' -%}
@@ -31,14 +32,14 @@
                     <li class="mobile-menu__submenu-title">
                       <a href="{{ link.url }}">{{ link.title }}</a>
                     </li>
-                    {%- for link_1 in linklists[link.handle].links -%}
-                      {%- if linklists[link_1.handle].links -%}
+                    {%- for link_1 in link.links -%}
+                      {%- if link_1.links.size > 0 -%}
                         <li class="mobile-menu__item mobile-menu__item--has-children">
-                          <button type="button" class="mobile-menu__trigger" aria-expanded="false" aria-controls="mobile-submenu-{{ link_1.handle | handleize }}">
+                          <button type="button" class="mobile-menu__trigger" aria-expanded="false" aria-controls="mobile-submenu-{{ submenu_index }}-{{ forloop.index }}">
                             <span>{{ link_1.title }}</span>
                             {%- render 'icon', name: 'chevron-right' -%}
                           </button>
-                          <ul id="mobile-submenu-{{ link_1.handle | handleize }}" class="mobile-menu__submenu">
+                          <ul id="mobile-submenu-{{ submenu_index }}-{{ forloop.index }}" class="mobile-menu__submenu">
                             <li class="mobile-menu__submenu-back">
                               <button type="button" class="mobile-menu__back-btn" aria-label="{{ 'general.breadcrumbs.back' | t }}">
                                 {%- render 'icon', name: 'chevron-left' -%}
@@ -48,7 +49,7 @@
                             <li class="mobile-menu__submenu-title">
                               <a href="{{ link_1.url }}">{{ link_1.title }}</a>
                             </li>
-                            {%- for link_2 in linklists[link_1.handle].links -%}
+                            {%- for link_2 in link_1.links -%}
                               <li class="mobile-menu__item">
                                 <a href="{{ link_2.url }}" class="mobile-menu__link">{{ link_2.title }}</a>
                               </li>

@@ -6,6 +6,8 @@
         "slide_1": {
           "type": "slide",
           "settings": {
+            "image_mobile": "shopify://shop_images/noir-index-hero-slideshow-slide-1-mobile.jpg",
+            "image_desktop": "shopify://shop_images/noir-index-hero-slideshow-slide-1-image-desktop-v2.jpg",
             "color_scheme": "scheme-1",
             "overlay_opacity": 25,
             "text_position": "bottom_left",
@@ -25,6 +27,8 @@
         "slide_2": {
           "type": "slide",
           "settings": {
+            "image_mobile": "shopify://shop_images/noir-index-hero-slideshow-slide-2-mobile.jpg",
+            "image_desktop": "shopify://shop_images/noir-index-hero-slideshow-slide-2-image-desktop.jpg",
             "color_scheme": "scheme-1",
             "overlay_opacity": 30,
             "text_position": "bottom_center",
@@ -44,6 +48,8 @@
         "slide_3": {
           "type": "slide",
           "settings": {
+            "image_mobile": "shopify://shop_images/noir-index-hero-slideshow-slide-3-mobile.jpg",
+            "image_desktop": "shopify://shop_images/noir-index-hero-slideshow-slide-3-image-desktop.jpg",
             "color_scheme": "scheme-1",
             "overlay_opacity": 35,
             "text_position": "middle_left",
@@ -169,6 +175,7 @@
         "hot_3"
       ],
       "settings": {
+        "image": "shopify://shop_images/noir-index-lookbook-hotspots-image.jpg",
         "color_scheme": "scheme-1",
         "heading": "Shop the lookbook",
         "heading_size": "lg",
@@ -221,9 +228,11 @@
         "ito_btn"
       ],
       "settings": {
+        "image_mobile": "shopify://shop_images/noir-index-image-text-overlay-hero-mobile.jpg",
+        "image": "shopify://shop_images/noir-index-image-text-overlay-hero-image.jpg",
         "color_scheme": "scheme-3",
         "section_height": 90,
-        "overlay_opacity": 40,
+        "overlay_opacity": 55,
         "content_position": "center-left",
         "text_align": "left",
         "heading_alt": "Editorial fashion campaign image"
@@ -235,18 +244,23 @@
         "c_1": {
           "type": "collection_card",
           "settings": {
-            "custom_title": "Womenswear"
+            "collection": "outerwear",
+            "image": "shopify://shop_images/noir-index-collection-list-c-1-image-v2.jpg",
+            "custom_title": "Outerwear"
           }
         },
         "c_2": {
           "type": "collection_card",
           "settings": {
-            "custom_title": "Menswear"
+            "collection": "casual-shirts",
+            "image": "shopify://shop_images/noir-index-collection-list-c-2-image-v2.jpg",
+            "custom_title": "Casual Shirts"
           }
         },
         "c_3": {
           "type": "collection_card",
           "settings": {
+            "image": "shopify://shop_images/noir-index-collection-list-c-3-image-v2.jpg",
             "collection": "accessories",
             "custom_title": "Accessories"
           }
@@ -254,7 +268,9 @@
         "c_4": {
           "type": "collection_card",
           "settings": {
-            "custom_title": "Footwear"
+            "collection": "limited-edition",
+            "image": "shopify://shop_images/noir-index-collection-list-c-4-image-v2.jpg",
+            "custom_title": "Limited Edition"
           }
         }
       },
@@ -312,6 +328,9 @@
         "f_3"
       ],
       "settings": {
+        "image_3": "shopify://shop_images/noir-index-layered-atelier-image-3.jpg",
+        "image_2": "shopify://shop_images/noir-index-layered-atelier-image-2.jpg",
+        "image_1": "shopify://shop_images/noir-index-layered-atelier-image-1.jpg",
         "color_scheme": "scheme-1",
         "subheading": "THE HOUSE",
         "subheading_size": "xs",
@@ -337,15 +356,16 @@
         "padding_bottom_desktop": 100,
         "padding_top_mobile": 60,
         "padding_bottom_mobile": 60,
-        "product": "the-complete-snowboard"
+        "product": "rebel-tactical-bomber-jacket"
       }
     },
     "parallax_atelier": {
       "type": "parallax-image",
       "settings": {
+        "image": "shopify://shop_images/noir-index-parallax-atelier-image.jpg",
         "color_scheme": "scheme-3",
         "section_height": 80,
-        "overlay_opacity": 45,
+        "overlay_opacity": 60,
         "parallax_speed": 5,
         "subheading": "EST. 2015",
         "subheading_size": "xs",
@@ -371,8 +391,6 @@
         "heading_size": "md",
         "heading_tag": "h2",
         "products_to_show": 12,
-        "speed": 40,
-        "direction": "normal",
         "padding_top_desktop": 60,
         "padding_bottom_desktop": 60,
         "padding_top_mobile": 40,
@@ -401,7 +419,7 @@
         "iwt_text": {
           "type": "text",
           "settings": {
-            "text": "<p>Founded on the belief that luxury is not loud — it whispers, lasts, and improves with wear. Every Devs2 Rebel piece is cut by hand from rare European fabrics and finished in ateliers that have stood for generations.</p>",
+            "text": "<p>Founded on the belief that luxury is not loud — it whispers, lasts, and improves with wear. Every Rebel piece is cut by hand from rare European fabrics and finished in ateliers that have stood for generations.</p>",
             "content_size": "md"
           }
         },
@@ -422,6 +440,7 @@
         "iwt_btn"
       ],
       "settings": {
+        "image": "shopify://shop_images/noir-index-brand-story-image.jpg",
         "color_scheme": "scheme-2",
         "image_position": "left",
         "section_width": "full",
@@ -435,6 +454,8 @@
     "before_after_craft": {
       "type": "before-after",
       "settings": {
+        "image_after": "shopify://shop_images/noir-index-before-after-craft-image-after.jpg",
+        "image_before": "shopify://shop_images/noir-index-before-after-craft-image-before.jpg",
         "color_scheme": "scheme-1",
         "subheading": "CRAFTSMANSHIP",
         "subheading_size": "xs",
@@ -455,6 +476,7 @@
         "r_1": {
           "type": "testimonial",
           "settings": {
+            "avatar": "shopify://shop_images/demo-testimonial_1_ca2d3feb-f79f-4abc-b2bc-74fd6c7af61c.jpg",
             "rating": 5,
             "quote": "<p>The cut is absolute. Nothing else in my wardrobe fits like this.</p>",
             "author": "Camille R.",
@@ -464,6 +486,7 @@
         "r_2": {
           "type": "testimonial",
           "settings": {
+            "avatar": "shopify://shop_images/demo-testimonial_2_cddac5cd-1944-4bb9-bd0c-e3c1024a001c.jpg",
             "rating": 5,
             "quote": "<p>I bought one coat in 2022. Three winters later, it looks better than the day it arrived.</p>",
             "author": "Jonas K.",
@@ -473,6 +496,7 @@
         "r_3": {
           "type": "testimonial",
           "settings": {
+            "avatar": "shopify://shop_images/demo-testimonial_3_b95942d2-f757-4dc2-8631-3f68785e78b4.jpg",
             "rating": 5,
             "quote": "<p>You can feel the hands that made it. That's rare now.</p>",
             "author": "Mei L.",
@@ -526,27 +550,27 @@
       "blocks": {
         "l_1": {
           "type": "logo",
-          "settings": {}
+          "settings": { "image": "shopify://shop_images/press-logo-meridian-dark.png" }
         },
         "l_2": {
           "type": "logo",
-          "settings": {}
+          "settings": { "image": "shopify://shop_images/press-logo-northbound-dark.png" }
         },
         "l_3": {
           "type": "logo",
-          "settings": {}
+          "settings": { "image": "shopify://shop_images/press-logo-form-field-dark.png" }
         },
         "l_4": {
           "type": "logo",
-          "settings": {}
+          "settings": { "image": "shopify://shop_images/press-logo-loom-quarterly-dark.png" }
         },
         "l_5": {
           "type": "logo",
-          "settings": {}
+          "settings": { "image": "shopify://shop_images/press-logo-studio-signal-dark.png" }
         },
         "l_6": {
           "type": "logo",
-          "settings": {}
+          "settings": { "image": "shopify://shop_images/press-logo-le-cahier-dark.png" }
         }
       },
       "block_order": [

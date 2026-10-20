@@ -1,13 +1,13 @@
 {% doc %}
   @description Card hiển thị collection với ảnh, tên và số sản phẩm
   @param {collection} collection - Đối tượng collection (bắt buộc)
-  @param {string} [image_shape='square'] - Hình dạng ảnh: adapt, square, portrait, portrait-tall, landscape, landscape-wide
-  @param {string} [image_position='middle-center'] - Vị trí ảnh: top-left, top-center, ..., bottom-right
-  @param {string} [card_heading_size='md'] - Kích thước heading: sm, md, lg
-  @param {boolean} [show_product_count=true] - Hiển thị số sản phẩm
-  @param {string} [columns_mobile='2'] - Số cột mobile (dùng cho sizes attribute)
-  @param {number} [columns_desktop=3] - Số cột desktop (dùng cho sizes attribute)
-  @param {string} [lazyload='lazy'] - Loading strategy: lazy hoặc eager
+  @param {string} [image_shape] - Image shape: adapt, square, portrait, portrait-tall, landscape, landscape-wide. Default: 'square'
+  @param {string} [image_position] - Image position: top-left, top-center, ..., bottom-right. Default: 'middle-center'
+  @param {string} [card_heading_size] - Heading size: sm, md, lg. Default: 'md'
+  @param {boolean} [show_product_count] - Show product count. Default: true
+  @param {string} [columns_mobile] - Mobile column count (used for the sizes attribute). Default: '2'
+  @param {number} [columns_desktop] - Desktop column count (used for the sizes attribute). Default: 3
+  @param {string} [lazyload] - Loading strategy: lazy or eager. Default: 'lazy'
   @example {% render 'collection-card', collection: collection, image_shape: 'square' %}
 {% enddoc %}
 
@@ -42,7 +42,7 @@
     }}
     {%- else -%}
     <div class="collection-card__placeholder image-shape image-shape--{{ image_shape }}">
-      {{ collection.title | placeholder_svg_tag: 'placeholder-svg' }}
+      {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
     </div>
     {%- endif -%}
   </div>

@@ -1,0 +1,2022 @@
+{
+  "runs": [
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "browserZone": "America/New_York",
+      "offset": "-0400",
+      "liveRegions": 0,
+      "cards": 32,
+      "open": 32,
+      "closed": 0,
+      "blank": 0,
+      "mismatches": 17,
+      "sample": [
+        "Devs2 Rebel SoHo [America/New_York] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Shoreditch [Europe/London] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Ginza [Asia/Tokyo] 11:00 - 20:00 -> Open now",
+        "Devs2 Rebel District 1 [Asia/Ho_Chi_Minh] 09:00 - 21:00 -> Open now",
+        "Devs2 Rebel Surry Hills [Australia/Sydney] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Silver Lake [America/Los_Angeles] 10:00 - 19:00 -> Open now"
+      ]
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "browserZone": "Asia/Tokyo",
+      "offset": "-0400",
+      "liveRegions": 0,
+      "cards": 32,
+      "open": 0,
+      "closed": 32,
+      "blank": 0,
+      "mismatches": 15,
+      "sample": [
+        "Devs2 Rebel SoHo [America/New_York] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Shoreditch [Europe/London] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Ginza [Asia/Tokyo] 11:00 - 20:00 -> Closed now",
+        "Devs2 Rebel District 1 [Asia/Ho_Chi_Minh] 09:00 - 21:00 -> Closed now",
+        "Devs2 Rebel Surry Hills [Australia/Sydney] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Silver Lake [America/Los_Angeles] 10:00 - 19:00 -> Closed now"
+      ]
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "browserZone": "America/New_York",
+      "offset": "-0400",
+      "liveRegions": 0,
+      "cards": 32,
+      "open": 0,
+      "closed": 32,
+      "blank": 0,
+      "mismatches": 15,
+      "sample": [
+        "Devs2 Rebel SoHo [America/New_York] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Shoreditch [Europe/London] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Ginza [Asia/Tokyo] 11:00 - 20:00 -> Closed now",
+        "Devs2 Rebel District 1 [Asia/Ho_Chi_Minh] 09:00 - 21:00 -> Closed now",
+        "Devs2 Rebel Surry Hills [Australia/Sydney] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Silver Lake [America/Los_Angeles] 10:00 - 19:00 -> Closed now"
+      ]
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "browserZone": "Asia/Tokyo",
+      "offset": "-0400",
+      "liveRegions": 0,
+      "cards": 32,
+      "open": 32,
+      "closed": 0,
+      "blank": 0,
+      "mismatches": 17,
+      "sample": [
+        "Devs2 Rebel SoHo [America/New_York] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Shoreditch [Europe/London] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Ginza [Asia/Tokyo] 11:00 - 20:00 -> Open now",
+        "Devs2 Rebel District 1 [Asia/Ho_Chi_Minh] 09:00 - 21:00 -> Open now",
+        "Devs2 Rebel Surry Hills [Australia/Sydney] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Silver Lake [America/Los_Angeles] 10:00 - 19:00 -> Open now"
+      ]
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "browserZone": "America/New_York",
+      "offset": "-0400",
+      "liveRegions": 0,
+      "cards": 32,
+      "open": 32,
+      "closed": 0,
+      "blank": 0,
+      "mismatches": 17,
+      "sample": [
+        "Devs2 Rebel SoHo [] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Shoreditch [Not/AZone] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Ginza [Asia/Tokyo] 11:00 - 20:00 -> Open now",
+        "Devs2 Rebel District 1 [Asia/Ho_Chi_Minh] 09:00 - 21:00 -> Open now",
+        "Devs2 Rebel Surry Hills [Australia/Sydney] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Silver Lake [America/Los_Angeles] 10:00 - 19:00 -> Open now"
+      ]
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "browserZone": "Asia/Tokyo",
+      "offset": "-0400",
+      "liveRegions": 0,
+      "cards": 32,
+      "open": 0,
+      "closed": 32,
+      "blank": 0,
+      "mismatches": 15,
+      "sample": [
+        "Devs2 Rebel SoHo [] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Shoreditch [Not/AZone] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Ginza [Asia/Tokyo] 11:00 - 20:00 -> Closed now",
+        "Devs2 Rebel District 1 [Asia/Ho_Chi_Minh] 09:00 - 21:00 -> Closed now",
+        "Devs2 Rebel Surry Hills [Australia/Sydney] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Silver Lake [America/Los_Angeles] 10:00 - 19:00 -> Closed now"
+      ]
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "browserZone": "America/New_York",
+      "offset": "-0400",
+      "liveRegions": 0,
+      "cards": 32,
+      "open": 0,
+      "closed": 32,
+      "blank": 0,
+      "mismatches": 15,
+      "sample": [
+        "Devs2 Rebel SoHo [] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Shoreditch [Not/AZone] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Ginza [Asia/Tokyo] 11:00 - 20:00 -> Closed now",
+        "Devs2 Rebel District 1 [Asia/Ho_Chi_Minh] 09:00 - 21:00 -> Closed now",
+        "Devs2 Rebel Surry Hills [Australia/Sydney] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Silver Lake [America/Los_Angeles] 10:00 - 19:00 -> Closed now"
+      ]
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "browserZone": "Asia/Tokyo",
+      "offset": "-0400",
+      "liveRegions": 0,
+      "cards": 32,
+      "open": 32,
+      "closed": 0,
+      "blank": 0,
+      "mismatches": 17,
+      "sample": [
+        "Devs2 Rebel SoHo [] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Shoreditch [Not/AZone] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Ginza [Asia/Tokyo] 11:00 - 20:00 -> Open now",
+        "Devs2 Rebel District 1 [Asia/Ho_Chi_Minh] 09:00 - 21:00 -> Open now",
+        "Devs2 Rebel Surry Hills [Australia/Sydney] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Silver Lake [America/Los_Angeles] 10:00 - 19:00 -> Open now"
+      ]
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "browserZone": "America/New_York",
+      "offset": null,
+      "liveRegions": 0,
+      "cards": 32,
+      "open": 32,
+      "closed": 0,
+      "blank": 0,
+      "mismatches": 18,
+      "sample": [
+        "Devs2 Rebel SoHo [] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Shoreditch [Europe/London] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Ginza [Asia/Tokyo] 11:00 - 20:00 -> Open now",
+        "Devs2 Rebel District 1 [Asia/Ho_Chi_Minh] 09:00 - 21:00 -> Open now",
+        "Devs2 Rebel Surry Hills [Australia/Sydney] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Silver Lake [America/Los_Angeles] 10:00 - 19:00 -> Open now"
+      ]
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "browserZone": "Asia/Tokyo",
+      "offset": null,
+      "liveRegions": 0,
+      "cards": 32,
+      "open": 0,
+      "closed": 32,
+      "blank": 0,
+      "mismatches": 15,
+      "sample": [
+        "Devs2 Rebel SoHo [] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Shoreditch [Europe/London] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Ginza [Asia/Tokyo] 11:00 - 20:00 -> Closed now",
+        "Devs2 Rebel District 1 [Asia/Ho_Chi_Minh] 09:00 - 21:00 -> Closed now",
+        "Devs2 Rebel Surry Hills [Australia/Sydney] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Silver Lake [America/Los_Angeles] 10:00 - 19:00 -> Closed now"
+      ]
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "browserZone": "America/New_York",
+      "offset": null,
+      "liveRegions": 0,
+      "cards": 32,
+      "open": 0,
+      "closed": 32,
+      "blank": 0,
+      "mismatches": 16,
+      "sample": [
+        "Devs2 Rebel SoHo [] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Shoreditch [Europe/London] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Ginza [Asia/Tokyo] 11:00 - 20:00 -> Closed now",
+        "Devs2 Rebel District 1 [Asia/Ho_Chi_Minh] 09:00 - 21:00 -> Closed now",
+        "Devs2 Rebel Surry Hills [Australia/Sydney] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Silver Lake [America/Los_Angeles] 10:00 - 19:00 -> Closed now"
+      ]
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "browserZone": "Asia/Tokyo",
+      "offset": null,
+      "liveRegions": 0,
+      "cards": 32,
+      "open": 32,
+      "closed": 0,
+      "blank": 0,
+      "mismatches": 17,
+      "sample": [
+        "Devs2 Rebel SoHo [] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Shoreditch [Europe/London] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Ginza [Asia/Tokyo] 11:00 - 20:00 -> Open now",
+        "Devs2 Rebel District 1 [Asia/Ho_Chi_Minh] 09:00 - 21:00 -> Open now",
+        "Devs2 Rebel Surry Hills [Australia/Sydney] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Silver Lake [America/Los_Angeles] 10:00 - 19:00 -> Open now"
+      ]
+    }
+  ],
+  "failures": [
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Daikanyama",
+      "cardZone": "Asia/Tokyo",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Shibuya",
+      "cardZone": "Asia/Tokyo",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Ginza",
+      "cardZone": "Asia/Tokyo",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Daikanyama Annex",
+      "cardZone": "Asia/Tokyo",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel District 1",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel District 3",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Thao Dien",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Phu Nhuan",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Old Quarter",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Tay Ho",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Hannam",
+      "cardZone": "Asia/Seoul",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Gangnam",
+      "cardZone": "Asia/Seoul",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Surry Hills",
+      "cardZone": "Australia/Sydney",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Fitzroy",
+      "cardZone": "Australia/Melbourne",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Silver Lake",
+      "cardZone": "America/Los_Angeles",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Hayes Valley",
+      "cardZone": "America/Los_Angeles",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Tiong Bahru",
+      "cardZone": "Asia/Singapore",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel SoHo",
+      "cardZone": "America/New_York",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Shoreditch",
+      "cardZone": "Europe/London",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Brooklyn",
+      "cardZone": "America/New_York",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Chelsea",
+      "cardZone": "America/New_York",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Williamsburg",
+      "cardZone": "America/New_York",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Marylebone",
+      "cardZone": "Europe/London",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Notting Hill",
+      "cardZone": "Europe/London",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Covent Garden",
+      "cardZone": "Europe/London",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Camden",
+      "cardZone": "Europe/London",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Le Marais",
+      "cardZone": "Europe/Paris",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Saint-Germain",
+      "cardZone": "Europe/Paris",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Brera",
+      "cardZone": "Europe/Rome",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Queen West",
+      "cardZone": "America/Toronto",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Mitte",
+      "cardZone": "Europe/Berlin",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Vesterbro",
+      "cardZone": "Europe/Copenhagen",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "error": "status differs by browser time zone"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Daikanyama",
+      "cardZone": "Asia/Tokyo",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Shibuya",
+      "cardZone": "Asia/Tokyo",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Ginza",
+      "cardZone": "Asia/Tokyo",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Daikanyama Annex",
+      "cardZone": "Asia/Tokyo",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel District 1",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel District 3",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Thao Dien",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Phu Nhuan",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Old Quarter",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Tay Ho",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Hannam",
+      "cardZone": "Asia/Seoul",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Gangnam",
+      "cardZone": "Asia/Seoul",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Surry Hills",
+      "cardZone": "Australia/Sydney",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Fitzroy",
+      "cardZone": "Australia/Melbourne",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Tiong Bahru",
+      "cardZone": "Asia/Singapore",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel SoHo",
+      "cardZone": "America/New_York",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Shoreditch",
+      "cardZone": "Europe/London",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Brooklyn",
+      "cardZone": "America/New_York",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Chelsea",
+      "cardZone": "America/New_York",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Williamsburg",
+      "cardZone": "America/New_York",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Marylebone",
+      "cardZone": "Europe/London",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Notting Hill",
+      "cardZone": "Europe/London",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Covent Garden",
+      "cardZone": "Europe/London",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Camden",
+      "cardZone": "Europe/London",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Le Marais",
+      "cardZone": "Europe/Paris",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Saint-Germain",
+      "cardZone": "Europe/Paris",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Brera",
+      "cardZone": "Europe/Rome",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Silver Lake",
+      "cardZone": "America/Los_Angeles",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Hayes Valley",
+      "cardZone": "America/Los_Angeles",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Queen West",
+      "cardZone": "America/Toronto",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Mitte",
+      "cardZone": "Europe/Berlin",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Vesterbro",
+      "cardZone": "Europe/Copenhagen",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "error": "status differs by browser time zone"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Daikanyama",
+      "cardZone": "Asia/Tokyo",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Shibuya",
+      "cardZone": "Asia/Tokyo",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Ginza",
+      "cardZone": "Asia/Tokyo",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Daikanyama Annex",
+      "cardZone": "Asia/Tokyo",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel District 1",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel District 3",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Thao Dien",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Phu Nhuan",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Old Quarter",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Tay Ho",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Hannam",
+      "cardZone": "Asia/Seoul",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Gangnam",
+      "cardZone": "Asia/Seoul",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Surry Hills",
+      "cardZone": "Australia/Sydney",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Fitzroy",
+      "cardZone": "Australia/Melbourne",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Silver Lake",
+      "cardZone": "America/Los_Angeles",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Hayes Valley",
+      "cardZone": "America/Los_Angeles",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Tiong Bahru",
+      "cardZone": "Asia/Singapore",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel SoHo",
+      "cardZone": "",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Shoreditch",
+      "cardZone": "Not/AZone",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Brooklyn",
+      "cardZone": "America/New_York",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Chelsea",
+      "cardZone": "America/New_York",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Williamsburg",
+      "cardZone": "America/New_York",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Marylebone",
+      "cardZone": "Europe/London",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Notting Hill",
+      "cardZone": "Europe/London",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Covent Garden",
+      "cardZone": "Europe/London",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Camden",
+      "cardZone": "Europe/London",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Le Marais",
+      "cardZone": "Europe/Paris",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Saint-Germain",
+      "cardZone": "Europe/Paris",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Brera",
+      "cardZone": "Europe/Rome",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Queen West",
+      "cardZone": "America/Toronto",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Mitte",
+      "cardZone": "Europe/Berlin",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Vesterbro",
+      "cardZone": "Europe/Copenhagen",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "error": "status differs by browser time zone"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Daikanyama",
+      "cardZone": "Asia/Tokyo",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Shibuya",
+      "cardZone": "Asia/Tokyo",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Ginza",
+      "cardZone": "Asia/Tokyo",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Daikanyama Annex",
+      "cardZone": "Asia/Tokyo",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel District 1",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel District 3",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Thao Dien",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Phu Nhuan",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Old Quarter",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Tay Ho",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Hannam",
+      "cardZone": "Asia/Seoul",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Gangnam",
+      "cardZone": "Asia/Seoul",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Surry Hills",
+      "cardZone": "Australia/Sydney",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Fitzroy",
+      "cardZone": "Australia/Melbourne",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Tiong Bahru",
+      "cardZone": "Asia/Singapore",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel SoHo",
+      "cardZone": "",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Shoreditch",
+      "cardZone": "Not/AZone",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Brooklyn",
+      "cardZone": "America/New_York",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Chelsea",
+      "cardZone": "America/New_York",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Williamsburg",
+      "cardZone": "America/New_York",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Marylebone",
+      "cardZone": "Europe/London",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Notting Hill",
+      "cardZone": "Europe/London",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Covent Garden",
+      "cardZone": "Europe/London",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Camden",
+      "cardZone": "Europe/London",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Le Marais",
+      "cardZone": "Europe/Paris",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Saint-Germain",
+      "cardZone": "Europe/Paris",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Brera",
+      "cardZone": "Europe/Rome",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Silver Lake",
+      "cardZone": "America/Los_Angeles",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Hayes Valley",
+      "cardZone": "America/Los_Angeles",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Queen West",
+      "cardZone": "America/Toronto",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Mitte",
+      "cardZone": "Europe/Berlin",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Vesterbro",
+      "cardZone": "Europe/Copenhagen",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "error": "status differs by browser time zone"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel SoHo",
+      "cardZone": "",
+      "got": "Open now",
+      "want": ""
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Daikanyama",
+      "cardZone": "Asia/Tokyo",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Shibuya",
+      "cardZone": "Asia/Tokyo",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Ginza",
+      "cardZone": "Asia/Tokyo",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Daikanyama Annex",
+      "cardZone": "Asia/Tokyo",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel District 1",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel District 3",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Thao Dien",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Phu Nhuan",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Old Quarter",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Tay Ho",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Hannam",
+      "cardZone": "Asia/Seoul",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Gangnam",
+      "cardZone": "Asia/Seoul",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Surry Hills",
+      "cardZone": "Australia/Sydney",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Fitzroy",
+      "cardZone": "Australia/Melbourne",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Silver Lake",
+      "cardZone": "America/Los_Angeles",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Hayes Valley",
+      "cardZone": "America/Los_Angeles",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Tiong Bahru",
+      "cardZone": "Asia/Singapore",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel SoHo",
+      "cardZone": "",
+      "got": "Closed now",
+      "want": ""
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Shoreditch",
+      "cardZone": "Europe/London",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Brooklyn",
+      "cardZone": "America/New_York",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Chelsea",
+      "cardZone": "America/New_York",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Williamsburg",
+      "cardZone": "America/New_York",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Marylebone",
+      "cardZone": "Europe/London",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Notting Hill",
+      "cardZone": "Europe/London",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Covent Garden",
+      "cardZone": "Europe/London",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Camden",
+      "cardZone": "Europe/London",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Le Marais",
+      "cardZone": "Europe/Paris",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Saint-Germain",
+      "cardZone": "Europe/Paris",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Brera",
+      "cardZone": "Europe/Rome",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Queen West",
+      "cardZone": "America/Toronto",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Mitte",
+      "cardZone": "Europe/Berlin",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Vesterbro",
+      "cardZone": "Europe/Copenhagen",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "error": "status differs by browser time zone"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel SoHo",
+      "cardZone": "",
+      "got": "Closed now",
+      "want": ""
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Daikanyama",
+      "cardZone": "Asia/Tokyo",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Shibuya",
+      "cardZone": "Asia/Tokyo",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Ginza",
+      "cardZone": "Asia/Tokyo",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Daikanyama Annex",
+      "cardZone": "Asia/Tokyo",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel District 1",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel District 3",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Thao Dien",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Phu Nhuan",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Old Quarter",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Tay Ho",
+      "cardZone": "Asia/Ho_Chi_Minh",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Hannam",
+      "cardZone": "Asia/Seoul",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Gangnam",
+      "cardZone": "Asia/Seoul",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Surry Hills",
+      "cardZone": "Australia/Sydney",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Fitzroy",
+      "cardZone": "Australia/Melbourne",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "America/New_York",
+      "card": "Devs2 Rebel Tiong Bahru",
+      "cardZone": "Asia/Singapore",
+      "got": "Closed now",
+      "want": "Open now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel SoHo",
+      "cardZone": "",
+      "got": "Open now",
+      "want": ""
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Shoreditch",
+      "cardZone": "Europe/London",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Brooklyn",
+      "cardZone": "America/New_York",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Chelsea",
+      "cardZone": "America/New_York",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Williamsburg",
+      "cardZone": "America/New_York",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Marylebone",
+      "cardZone": "Europe/London",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Notting Hill",
+      "cardZone": "Europe/London",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Covent Garden",
+      "cardZone": "Europe/London",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Camden",
+      "cardZone": "Europe/London",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Le Marais",
+      "cardZone": "Europe/Paris",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Saint-Germain",
+      "cardZone": "Europe/Paris",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Brera",
+      "cardZone": "Europe/Rome",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Silver Lake",
+      "cardZone": "America/Los_Angeles",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Hayes Valley",
+      "cardZone": "America/Los_Angeles",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Queen West",
+      "cardZone": "America/Toronto",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Mitte",
+      "cardZone": "Europe/Berlin",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "zone": "Asia/Tokyo",
+      "card": "Devs2 Rebel Vesterbro",
+      "cardZone": "Europe/Copenhagen",
+      "got": "Open now",
+      "want": "Closed now"
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "error": "status differs by browser time zone"
+    }
+  ]
+}

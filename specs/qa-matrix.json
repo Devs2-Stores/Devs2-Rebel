@@ -1,0 +1,67 @@
+{
+  "timestamp": "2026-10-17T04:50:40.570Z",
+  "overallScore": 98,
+  "passed": false,
+  "verdict": "FAIL",
+  "coverage": {
+    "measuredDimensions": 3,
+    "totalDimensions": 8,
+    "measuredViewports": 0,
+    "totalViewports": 3
+  },
+  "dimensions": {
+    "visualFidelity": {
+      "score": null,
+      "details": "Visual diff unmeasured (no baseline comparison supplied)"
+    },
+    "domSemantics": {
+      "score": 95,
+      "details": "Score 95/100: H1: 1, Alt gaps: 0, Name gaps: 0, Unlabeled: 0, Dup IDs: 0, JSON-LD: 2 block(s) [@type: WebSite, Organization]"
+    },
+    "cssModularity": {
+      "score": null,
+      "details": "CSS modularity unmeasured (this workflow runs no stylesheet-modularity scanner)"
+    },
+    "interactiveOperability": {
+      "score": null,
+      "details": "Interactive operability unmeasured (no interaction probe executed in this run)"
+    },
+    "haravanCompliance": {
+      "score": 100,
+      "details": "Liquid syntax clean per scanner static/browser checks (does not certify full Haravan OS 2.0 or runtime platform compliance)"
+    },
+    "assetIntegrity": {
+      "score": 100,
+      "details": "All assets and local font subsets resolved without broken links"
+    },
+    "responsiveParity": {
+      "score": null,
+      "details": "Responsive viewports unmeasured (no baseline comparison supplied)"
+    },
+    "performanceCWV": {
+      "score": null,
+      "details": "Core Web Vitals and performance unmeasured (no CWV telemetry measured in this run)"
+    }
+  },
+  "viewports": {
+    "desktop": {
+      "mismatchPercent": null,
+      "passed": false,
+      "measured": false,
+      "verdict": "INCONCLUSIVE"
+    },
+    "tablet": {
+      "mismatchPercent": null,
+      "passed": false,
+      "measured": false,
+      "verdict": "INCONCLUSIVE"
+    },
+    "mobile": {
+      "mismatchPercent": null,
+      "passed": false,
+      "measured": false,
+      "verdict": "INCONCLUSIVE"
+    }
+  },
+  "domUnstable": true
+}

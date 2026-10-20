@@ -1,7 +1,7 @@
 ---
 title: "Shopify Theme Store Modernization (2025-2026 Standards)"
 description: "Bring Devs2 Rebel theme to 100% compliance with Shopify Theme Store requirements via Clean Cutover, Native PDP FormData, Theme Blocks, Speculation Rules, 5 Presets, and Locale Purge."
-status: in-progress
+status: completed
 priority: P1
 effort: "3d"
 branch: "main"

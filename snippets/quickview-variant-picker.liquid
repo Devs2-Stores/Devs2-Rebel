@@ -39,6 +39,20 @@
                 assign swatch_style = 'background-color: ' | append: value.swatch.color | append: ';'
               endif
             endif
+            assign value_image = blank
+            if is_swatch_option and has_native_swatch == false
+              assign value_variants = product.variants | where: option_position, value.name
+              for value_variant in value_variants
+                if value_variant.featured_image
+                  assign value_image = value_variant.featured_image
+                  break
+                endif
+              endfor
+            endif
+            assign show_visual = false
+            if has_native_swatch or value_image != blank
+              assign show_visual = true
+            endif
           -%}
           <div class="variant-picker__item">
             <input
@@ -51,18 +65,17 @@
               {% if value.selected %}checked{% endif %}
             >
             <label
-              class="variant-picker__item-label{% if is_swatch_option %} variant-picker__item-label--image{% endif %}"
+              class="variant-picker__item-label{% if show_visual %} variant-picker__item-label--image{% endif %}"
               for="{{ id }}"
               title="{{ value | escape }}"
+              data-sold-out-label="{{ 'products.product.sold_out' | t | escape }}"
               {% if swatch_style != '' %}style="{{ swatch_style }}"{% endif %}
             >
-              {%- if is_swatch_option -%}
-                {%- if has_native_swatch -%}
-                  {%- render 'swatch', swatch: value.swatch -%}
-                  <span class="visually-hidden">{{ value | escape }}</span>
-                {%- else -%}
-                  <quickview-variant-picker-image class="variant-picker__item-image" data-option="{{ option_position }}" data-value="{{ value | escape }}"></quickview-variant-picker-image>
-                {%- endif -%}
+              {%- if has_native_swatch -%}
+                {%- render 'swatch', swatch: value.swatch -%}
+                <span class="visually-hidden">{{ value | escape }}</span>
+              {%- elsif value_image != blank -%}
+                {{ value_image | image_url: width: 80 | image_tag: width: 40, height: 40, loading: 'lazy', alt: value.name }}
               {%- else -%}
                 <span>{{ value }}</span>
               {%- endif -%}

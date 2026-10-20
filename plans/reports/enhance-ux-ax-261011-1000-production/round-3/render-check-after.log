@@ -1,0 +1,1455 @@
+=== home /
+(node:46184) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+render-check: http://127.0.0.1:9292/
+
+[375x812] page height 10225px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\home\375x812.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 375x58
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 375x58
+        div.announcement-bar__container "New season: the tailored an @ x0 y8 375x42
+          div.swiper.announcement-bar__swiper "New season: the tailore @ x0 y8 375x42
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y58 375x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y58 375x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y58 375x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x15 y58 345x64
+    main#MainContent.content-for-layout.focus-none "Devs2 Rebel  @ x0 y122 375x9310
+      section#shopify-section-template--27321871499373__hero_slide @ x0 y122 375x731
+        div#section-template--27321871499373__hero_slideshow.section @ x0 y122 375x731
+          div.section-slideshow__swiper.swiper "AW26 — REFINED DEFIANC @ x0 y122 375x731
+      section#shopify-section-template--27321871499373__scrolling_ @ x0 y853 375x76
+        div#section-template--27321871499373__scrolling_tagline.sect @ x0 y853 375x76
+          div.section-marquee__track "REFINED DEFIANCE — AW26 COLLECTI @ x-242 y873 4304x36
+      section#shopify-section-template--27321871499373__collection @ x0 y929 375x673
+        div#section-template--27321871499373__collection_list.sectio @ x0 y929 375x673
+          div.page-width "BY CATEGORY Pick your wardrobe Outerwear" @ x0 y989 375x553
+      section#shopify-section-template--27321871499373__featured_p @ x0 y1601 375x873
+        div#section-template--27321871499373__featured_piece.section @ x0 y1601 375x873
+          div.page-width "PIECE OF THE WEEK Rebel Tactical Bomber " @ x0 y1661 375x753
+      section#shopify-section-template--27321871499373__marquee_pr @ x0 y2474 375x529
+        div#section-template--27321871499373__marquee_products.secti @ x0 y2474 375x529
+          div.section-marquee-products__track "Bespoke Charcoal Pinstr @ x0 y2563 375x400
+      section#shopify-section-template--27321871499373__lookbook_h @ x0 y3003 375x333
+        div#section-template--27321871499373__lookbook_hotspots.sect @ x0 y3003 375x333
+          div "Shop the lookbook + The Crimson Coat Woo" @ x0 y3033 375x273
+      section#shopify-section-template--27321871499373__before_aft @ x0 y3336 375x691
+        div#section-template--27321871499373__before_after_craft.sec @ x0 y3336 375x691
+          div.page-width "CRAFTSMANSHIP From bolt of fabric to fin" @ x0 y3396 375x571
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  ERROR runtime-error: Framing 'https://shop.app/' violates the following Content Security Policy directive: "frame-ancestors 'self' https://shop.app https://admin.shopify.com". The request has been blocked.
+
+  ERROR runtime-error: Failed to load resource: net::ERR_FAILED (http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js)
+  ERROR runtime-error: Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. (http://127.0.0.1:9292/)
+  ERROR low-contrast: h3.section-collection-list__title "Outerwear" - text contrast 1.12:1
+  ERROR low-contrast: h3.section-collection-list__title "Casual Shirts" - text contrast 1.12:1
+  ERROR low-contrast: h3.section-collection-list__title "Accessories" - text contrast 1.12:1
+  ERROR low-contrast: h3.section-collection-list__title "Limited Edition" - text contrast 1.12:1
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  small-touch-target: 24 controls smaller than 44px; e.g. a.header__logo-link "Devs2 Rebel"; button.section-slideshow__rotation; button.swiper-pagination-bullet.swiper-pagination-bullet-active; button.swiper-pagination-bullet
+
+[768x1024] page height 11109px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\home\768x1024.png
+  outline:
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 768x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y37 768x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y37 768x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x30 y37 708x64
+    main#MainContent.content-for-layout.focus-none "Devs2 Rebel  @ x0 y101 768x9976
+      section#shopify-section-template--27321871499373__hero_slide @ x0 y101 768x973
+        div#section-template--27321871499373__hero_slideshow.section @ x0 y101 768x973
+          div.section-slideshow__swiper.swiper "AW26 — REFINED DEFIANC @ x0 y101 768x973
+      section#shopify-section-template--27321871499373__scrolling_ @ x0 y1074 768x108
+        div#section-template--27321871499373__scrolling_tagline.sect @ x0 y1074 768x108
+          div.section-marquee__track "REFINED DEFIANCE — AW26 COLLECTI @ x-277 y1104 5850x48
+      section#shopify-section-template--27321871499373__collection @ x0 y1182 768x523
+        div#section-template--27321871499373__collection_list.sectio @ x0 y1182 768x523
+          div.page-width "BY CATEGORY Pick your wardrobe Outerwear" @ x0 y1282 768x323
+      section#shopify-section-template--27321871499373__featured_p @ x0 y1705 768x610
+        div#section-template--27321871499373__featured_piece.section @ x0 y1705 768x610
+          div.page-width "PIECE OF THE WEEK Rebel Tactical Bomber " @ x0 y1805 768x410
+      section#shopify-section-template--27321871499373__marquee_pr @ x0 y2315 768x639
+        div#section-template--27321871499373__marquee_products.secti @ x0 y2315 768x639
+          div.section-marquee-products__track "Bespoke Charcoal Pinstr @ x-358 y2429 6720x465
+      section#shopify-section-template--27321871499373__lookbook_h @ x0 y2954 768x662
+        div#section-template--27321871499373__lookbook_hotspots.sect @ x0 y2954 768x662
+          div "Shop the lookbook + The Crimson Coat Woo" @ x0 y3034 768x502
+      section#shopify-section-template--27321871499373__before_aft @ x0 y3616 768x1236
+        div#section-template--27321871499373__before_after_craft.sec @ x0 y3616 768x1236
+          div.page-width "CRAFTSMANSHIP From bolt of fabric to fin" @ x0 y3716 768x1036
+      section#shopify-section-template--27321871499373__brand_stor @ x0 y4851 768x654
+        div#section-template--27321871499373__brand_story.section-iw @ x0 y4851 768x654
+          div "INSIDE THE ATELIER Twelve years. One phi" @ x0 y4951 768x454
+      section#shopify-section-template--27321871499373__layered_at @ x0 y5506 768x955
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  ERROR low-contrast: h3.section-collection-list__title "Outerwear" - text contrast 1.12:1
+  ERROR low-contrast: h3.section-collection-list__title "Casual Shirts" - text contrast 1.12:1
+  ERROR low-contrast: h3.section-collection-list__title "Accessories" - text contrast 1.12:1
+  ERROR low-contrast: h3.section-collection-list__title "Limited Edition" - text contrast 1.12:1
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+
+[1440x900] page height 11329px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\home\1440x900.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 1440x37
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 1440x37
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 1440x72
+      global-header.header.color-scheme-1 "Devs2 Rebel Home Shop C @ x0 y37 1440x72
+        div.page-width "Devs2 Rebel Home Shop Collections Journa" @ x0 y37 1440x72
+          div.header__wrapper "Devs2 Rebel Home Shop Collections Journ @ x75 y37 1290x72
+    main#MainContent.content-for-layout.focus-none "Devs2 Rebel  @ x0 y109 1440x10327
+      section#shopify-section-template--27321871499373__hero_slide @ x0 y109 1440x855
+        div#section-template--27321871499373__hero_slideshow.section @ x0 y109 1440x855
+          div.section-slideshow__swiper.swiper "AW26 — REFINED DEFIANC @ x0 y109 1440x855
+      section#shopify-section-template--27321871499373__scrolling_ @ x0 y964 1440x108
+        div#section-template--27321871499373__scrolling_tagline.sect @ x0 y964 1440x108
+          div.section-marquee__track "REFINED DEFIANCE — AW26 COLLECTI @ x-329 y994 5850x48
+      section#shopify-section-template--27321871499373__collection @ x0 y1072 1440x717
+        div#section-template--27321871499373__collection_list.sectio @ x0 y1072 1440x717
+          div.page-width "BY CATEGORY Pick your wardrobe Outerwear" @ x0 y1172 1440x517
+      section#shopify-section-template--27321871499373__featured_p @ x0 y1789 1440x821
+        div#section-template--27321871499373__featured_piece.section @ x0 y1789 1440x821
+          div.page-width "PIECE OF THE WEEK Rebel Tactical Bomber " @ x0 y1889 1440x621
+      section#shopify-section-template--27321871499373__marquee_pr @ x0 y2610 1440x640
+        div#section-template--27321871499373__marquee_products.secti @ x0 y2610 1440x640
+          div.section-marquee-products__track "Bespoke Charcoal Pinstr @ x-426 y2724 6720x466
+      section#shopify-section-template--27321871499373__lookbook_h @ x0 y3250 1440x1040
+        div#section-template--27321871499373__lookbook_hotspots.sect @ x0 y3250 1440x1040
+          div "Shop the lookbook + The Crimson Coat Woo" @ x0 y3330 1440x880
+      section#shopify-section-template--27321871499373__before_aft @ x0 y4289 1440x1315
+        div#section-template--27321871499373__before_after_craft.sec @ x0 y4289 1440x1315
+          div.page-width "CRAFTSMANSHIP From bolt of fabric to fin" @ x0 y4389 1440x1115
+      section#shopify-section-template--27321871499373__brand_stor @ x0 y5605 1440x740
+        div#section-template--27321871499373__brand_story.section-iw @ x0 y5605 1440x740
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  ERROR low-contrast: h3.section-collection-list__title "Outerwear" - text contrast 1.12:1
+  ERROR low-contrast: h3.section-collection-list__title "Casual Shirts" - text contrast 1.12:1
+  ERROR low-contrast: h3.section-collection-list__title "Accessories" - text contrast 1.12:1
+  ERROR low-contrast: h3.section-collection-list__title "Limited Edition" - text contrast 1.12:1
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+
+Summary: 21 errors, 4 warnings. Fix errors first, re-run, then review the screenshots.
+=== exit home 1
+=== collection /collections/all
+(node:32320) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+render-check: http://127.0.0.1:9292/collections/all
+
+[375x812] page height 5286px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\collection\375x812.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 375x58
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 375x58
+        div.announcement-bar__container "New season: the tailored an @ x0 y8 375x42
+          div.swiper.announcement-bar__swiper "New season: the tailore @ x0 y8 375x42
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y58 375x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y58 375x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y58 375x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x15 y58 345x64
+    main#MainContent.content-for-layout.focus-none "Home / All P @ x0 y122 375x4370
+      section#shopify-section-template--27321871433837__breadcrumb @ x0 y122 375x57
+        div.section-breadcrumbs.color-scheme-1 "Home / All Products" @ x0 y122 375x57
+      section#shopify-section-template--27321871433837__main.shopi @ x0 y179 375x4313
+        div#CollectionMain.collection-template "All Products BEST SE @ x0 y179 375x4313
+          div.page-width "All Products BEST SELLERS Bespoke Charco" @ x0 y179 375x4313
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y4540 375x746
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y4540 375x746
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y4540 375x746
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x15 y4540 345x442
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x15 y4982 345x192
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x15 y5174 345x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  ERROR runtime-error: Framing 'https://shop.app/' violates the following Content Security Policy directive: "frame-ancestors 'self' https://shop.app https://admin.shopify.com". The request has been blocked.
+
+  ERROR runtime-error: Failed to load resource: net::ERR_FAILED (http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js)
+  ERROR runtime-error: Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. (http://127.0.0.1:9292/collections/all)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  small-touch-target: 53 controls smaller than 44px; e.g. a.header__logo-link "Devs2 Rebel"; a.breadcrumb__link "Home"; a "Bespoke Charcoal Pinstripe Blazer"; a "Black Full-Grain Leather Belt"
+
+[768x1024] page height 5137px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\collection\768x1024.png
+  outline:
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 768x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y37 768x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y37 768x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x30 y37 708x64
+    main#MainContent.content-for-layout.focus-none "Home / All P @ x0 y101 768x4004
+      section#shopify-section-template--27321871433837__breadcrumb @ x0 y101 768x57
+        div.section-breadcrumbs.color-scheme-1 "Home / All Products" @ x0 y101 768x57
+      section#shopify-section-template--27321871433837__main.shopi @ x0 y158 768x3947
+        div#CollectionMain.collection-template "All Products BEST SE @ x0 y158 768x3947
+          div.page-width "All Products BEST SELLERS Bespoke Charco" @ x0 y158 768x3947
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y4153 768x984
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y4153 768x984
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y4153 768x984
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x30 y4153 708x706
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x30 y4859 708x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x30 y5025 708x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+
+[1440x900] page height 4331px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\collection\1440x900.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 1440x37
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 1440x37
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 1440x72
+      global-header.header.color-scheme-1 "Devs2 Rebel Home Shop C @ x0 y37 1440x72
+        div.page-width "Devs2 Rebel Home Shop Collections Journa" @ x0 y37 1440x72
+          div.header__wrapper "Devs2 Rebel Home Shop Collections Journ @ x75 y37 1290x72
+    main#MainContent.content-for-layout.focus-none "Home / All P @ x0 y109 1440x3329
+      section#shopify-section-template--27321871433837__breadcrumb @ x0 y109 1440x57
+        div.section-breadcrumbs.color-scheme-1 "Home / All Products" @ x0 y109 1440x57
+      section#shopify-section-template--27321871433837__main.shopi @ x0 y166 1440x3272
+        div#CollectionMain.collection-template "All Products BEST SE @ x0 y166 1440x3272
+          div.page-width "All Products BEST SELLERS Bespoke Charco" @ x0 y166 1440x3272
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y3486 1440x845
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y3486 1440x845
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y3486 1440x845
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x75 y3486 1290x567
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x75 y4053 1290x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x75 y4219 1290x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+
+Summary: 9 errors, 4 warnings. Fix errors first, re-run, then review the screenshots.
+=== exit collection 1
+=== product /products/rebel-tactical-bomber-jacket
+(node:22432) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+render-check: http://127.0.0.1:9292/products/rebel-tactical-bomber-jacket
+
+[375x812] page height 3503px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\product\375x812.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 375x58
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 375x58
+        div.announcement-bar__container "New season: the tailored an @ x0 y8 375x42
+          div.swiper.announcement-bar__swiper "New season: the tailore @ x0 y8 375x42
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y58 375x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y58 375x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y58 375x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x15 y58 345x64
+    main#MainContent.content-for-layout.focus-none "Home / Best  @ x0 y122 375x2587
+      section#shopify-section-template--27321871728749__breadcrumb @ x0 y122 375x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Best Sellers  @ x0 y122 375x57
+      section#shopify-section-template--27321871728749__main.shopi @ x0 y179 375x1439
+        product-template.product-template.color-scheme-1 "Rebel Tact @ x0 y179 375x1439
+          div.page-width "Rebel Tactical Bomber Jacket SKU: REBEL-" @ x0 y179 375x1439
+      section#shopify-section-template--27321871728749__recommenda @ x0 y1642 375x1067
+        product-recommendations "You may also like DEVS2 REBEL Black @ x0 y1642 375x1067
+          section.product-recommendations.color-scheme-1 "You may also @ x0 y1642 375x1067
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y2757 375x746
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y2757 375x746
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y2757 375x746
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x15 y2757 345x442
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x15 y3199 345x192
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x15 y3391 345x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  ERROR runtime-error: Framing 'https://shop.app/' violates the following Content Security Policy directive: "frame-ancestors 'self' https://shop.app https://admin.shopify.com". The request has been blocked.
+
+  ERROR runtime-error: Failed to load resource: net::ERR_FAILED (http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js)
+  ERROR runtime-error: Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. (http://127.0.0.1:9292/products/rebel-tactical-bomber-jacket)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: span.sr-only "Decrease quantity for Rebel Tactical Bom" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: span.sr-only "Increase quantity for Rebel Tactical Bom" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  small-touch-target: 25 controls smaller than 44px; e.g. a.header__logo-link "Devs2 Rebel"; a.breadcrumb__link "Home"; a.breadcrumb__link "Best Sellers"; button.swiper-button-next
+
+[768x1024] page height 4196px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\product\768x1024.png
+  outline:
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 768x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y37 768x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y37 768x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x30 y37 708x64
+    main#MainContent.content-for-layout.focus-none "Home / Best  @ x0 y101 768x3063
+      section#shopify-section-template--27321871728749__breadcrumb @ x0 y101 768x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Best Sellers  @ x0 y101 768x57
+      section#shopify-section-template--27321871728749__main.shopi @ x0 y158 768x2084
+        product-template.product-template.color-scheme-1 "Rebel Tact @ x0 y158 768x2084
+          div.page-width "Rebel Tactical Bomber Jacket SKU: REBEL-" @ x0 y158 768x2084
+      section#shopify-section-template--27321871728749__recommenda @ x0 y2266 768x898
+        product-recommendations "You may also like DEVS2 REBEL Black @ x0 y2266 768x898
+          section.product-recommendations.color-scheme-1 "You may also @ x0 y2266 768x898
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y3212 768x984
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y3212 768x984
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y3212 768x984
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x30 y3212 708x706
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x30 y3918 708x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x30 y4084 708x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: span.sr-only "Decrease quantity for Rebel Tactical Bom" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: span.sr-only "Increase quantity for Rebel Tactical Bom" - text is cut off by overflow without an ellipsis or line clamp
+
+[1440x900] page height 2609px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\product\1440x900.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 1440x37
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 1440x37
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 1440x72
+      global-header.header.color-scheme-1 "Devs2 Rebel Home Shop C @ x0 y37 1440x72
+        div.page-width "Devs2 Rebel Home Shop Collections Journa" @ x0 y37 1440x72
+          div.header__wrapper "Devs2 Rebel Home Shop Collections Journ @ x75 y37 1290x72
+    main#MainContent.content-for-layout.focus-none "Home / Best  @ x0 y109 1440x1607
+      section#shopify-section-template--27321871728749__breadcrumb @ x0 y109 1440x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Best Sellers  @ x0 y109 1440x57
+      section#shopify-section-template--27321871728749__main.shopi @ x0 y166 1440x923
+        product-template.product-template.color-scheme-1 "Rebel Tact @ x0 y166 1440x923
+          div.page-width "Rebel Tactical Bomber Jacket SKU: REBEL-" @ x0 y166 1440x923
+      section#shopify-section-template--27321871728749__recommenda @ x0 y1113 1440x603
+        product-recommendations "You may also like DEVS2 REBEL Black @ x0 y1113 1440x603
+          section.product-recommendations.color-scheme-1 "You may also @ x0 y1113 1440x603
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y1764 1440x845
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y1764 1440x845
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y1764 1440x845
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x75 y1764 1290x567
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x75 y2331 1290x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x75 y2497 1290x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: span.sr-only "Decrease quantity for Rebel Tactical Bom" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: span.sr-only "Increase quantity for Rebel Tactical Bom" - text is cut off by overflow without an ellipsis or line clamp
+
+Summary: 9 errors, 10 warnings. Fix errors first, re-run, then review the screenshots.
+=== exit product 1
+=== product-balm /products/leather-care-balm
+(node:23840) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+render-check: http://127.0.0.1:9292/products/leather-care-balm
+
+[375x812] page height 3704px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\product-balm\375x812.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 375x58
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 375x58
+        div.announcement-bar__container "New season: the tailored an @ x0 y8 375x42
+          div.swiper.announcement-bar__swiper "New season: the tailore @ x0 y8 375x42
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y58 375x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y58 375x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y58 375x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x15 y58 345x64
+    main#MainContent.content-for-layout.focus-none "Home / Acces @ x0 y122 375x2789
+      section#shopify-section-template--27321871728749__breadcrumb @ x0 y122 375x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Accessories / @ x0 y122 375x57
+      section#shopify-section-template--27321871728749__main.shopi @ x0 y179 375x1639
+        product-template.product-template.color-scheme-1 "Leather Ca @ x0 y179 375x1639
+          div.page-width "Leather Care Balm SKU: RBL-ACC-BALM-100 " @ x0 y179 375x1639
+      section#shopify-section-template--27321871728749__recommenda @ x0 y1842 375x1069
+        product-recommendations "You may also like DEVS2 REBEL Crims @ x0 y1842 375x1069
+          section.product-recommendations.color-scheme-1 "You may also @ x0 y1842 375x1069
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y2959 375x746
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y2959 375x746
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y2959 375x746
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x15 y2959 345x442
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x15 y3400 345x192
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x15 y3592 345x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  ERROR runtime-error: Framing 'https://shop.app/' violates the following Content Security Policy directive: "frame-ancestors 'self' https://shop.app https://admin.shopify.com". The request has been blocked.
+
+  ERROR runtime-error: Failed to load resource: net::ERR_FAILED (http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js)
+  ERROR runtime-error: Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. (http://127.0.0.1:9292/products/leather-care-balm)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: span.sr-only "Decrease quantity for Leather Care Balm" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: span.sr-only "Increase quantity for Leather Care Balm" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: legend.visually-hidden "Purchase options" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  small-touch-target: 27 controls smaller than 44px; e.g. a.header__logo-link "Devs2 Rebel"; a.breadcrumb__link "Home"; a.breadcrumb__link "Accessories"; button.swiper-button-next
+
+[768x1024] page height 4501px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\product-balm\768x1024.png
+  outline:
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 768x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y37 768x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y37 768x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x30 y37 708x64
+    main#MainContent.content-for-layout.focus-none "Home / Acces @ x0 y101 768x3369
+      section#shopify-section-template--27321871728749__breadcrumb @ x0 y101 768x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Accessories / @ x0 y101 768x57
+      section#shopify-section-template--27321871728749__main.shopi @ x0 y158 768x2390
+        product-template.product-template.color-scheme-1 "Leather Ca @ x0 y158 768x2390
+          div.page-width "Leather Care Balm SKU: RBL-ACC-BALM-100 " @ x0 y158 768x2390
+      section#shopify-section-template--27321871728749__recommenda @ x0 y2572 768x898
+        product-recommendations "You may also like DEVS2 REBEL Crims @ x0 y2572 768x898
+          section.product-recommendations.color-scheme-1 "You may also @ x0 y2572 768x898
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y3518 768x984
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y3518 768x984
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y3518 768x984
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x30 y3518 708x706
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x30 y4223 708x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x30 y4389 708x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: span.sr-only "Decrease quantity for Leather Care Balm" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: span.sr-only "Increase quantity for Leather Care Balm" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: legend.visually-hidden "Purchase options" - text is cut off by overflow without an ellipsis or line clamp
+
+[1440x900] page height 2789px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\product-balm\1440x900.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 1440x37
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 1440x37
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 1440x72
+      global-header.header.color-scheme-1 "Devs2 Rebel Home Shop C @ x0 y37 1440x72
+        div.page-width "Devs2 Rebel Home Shop Collections Journa" @ x0 y37 1440x72
+          div.header__wrapper "Devs2 Rebel Home Shop Collections Journ @ x75 y37 1290x72
+    main#MainContent.content-for-layout.focus-none "Home / Acces @ x0 y109 1440x1787
+      section#shopify-section-template--27321871728749__breadcrumb @ x0 y109 1440x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Accessories / @ x0 y109 1440x57
+      section#shopify-section-template--27321871728749__main.shopi @ x0 y166 1440x1102
+        product-template.product-template.color-scheme-1 "Leather Ca @ x0 y166 1440x1102
+          div.page-width "Leather Care Balm SKU: RBL-ACC-BALM-100 " @ x0 y166 1440x1102
+      section#shopify-section-template--27321871728749__recommenda @ x0 y1292 1440x603
+        product-recommendations "You may also like DEVS2 REBEL Crims @ x0 y1292 1440x603
+          section.product-recommendations.color-scheme-1 "You may also @ x0 y1292 1440x603
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y1944 1440x845
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y1944 1440x845
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y1944 1440x845
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x75 y1944 1290x567
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x75 y2511 1290x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x75 y2677 1290x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: span.sr-only "Decrease quantity for Leather Care Balm" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: span.sr-only "Increase quantity for Leather Care Balm" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: legend.visually-hidden "Purchase options" - text is cut off by overflow without an ellipsis or line clamp
+
+Summary: 9 errors, 13 warnings. Fix errors first, re-run, then review the screenshots.
+=== exit product-balm 1
+=== cart /cart
+(node:20908) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+render-check: http://127.0.0.1:9292/cart
+
+[375x812] page height 1392px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\cart\375x812.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 375x58
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 375x58
+        div.announcement-bar__container "New season: the tailored an @ x0 y8 375x42
+          div.swiper.announcement-bar__swiper "New season: the tailore @ x0 y8 375x42
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y58 375x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y58 375x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y58 375x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x15 y58 345x64
+    main#MainContent.content-for-layout.focus-none "Home / Cart  @ x0 y122 375x476
+      section#shopify-section-template--27321871335533__breadcrumb @ x0 y122 375x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Cart" @ x0 y122 375x57
+      section#shopify-section-template--27321871335533__main.shopi @ x0 y179 375x419
+        cart-template "Your cart (0 items) Your cart is current" @ x0 y179 375x419
+          div.color-scheme-1 "Your cart (0 items) Your cart is current @ x0 y203 375x363
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y646 375x746
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y646 375x746
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y646 375x746
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x15 y646 345x442
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x15 y1088 345x192
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x15 y1280 345x112
+  ERROR runtime-error: Framing 'https://shop.app/' violates the following Content Security Policy directive: "frame-ancestors 'self' https://shop.app https://admin.shopify.com". The request has been blocked.
+
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  ERROR runtime-error: Failed to load resource: net::ERR_FAILED (http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js)
+  ERROR runtime-error: Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. (http://127.0.0.1:9292/cart)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  small-touch-target: 11 controls smaller than 44px; e.g. a.header__logo-link "Devs2 Rebel"; a.breadcrumb__link "Home"; a.button-primary.active "Continue shopping"; a.footer-logo "Devs2 Rebel"
+
+[768x1024] page height 1676px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\cart\768x1024.png
+  outline:
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 768x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y37 768x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y37 768x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x30 y37 708x64
+    main#MainContent.content-for-layout.focus-none "Home / Cart  @ x0 y101 768x544
+      section#shopify-section-template--27321871335533__breadcrumb @ x0 y101 768x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Cart" @ x0 y101 768x57
+      section#shopify-section-template--27321871335533__main.shopi @ x0 y158 768x487
+        cart-template "Your cart (0 items) Your cart is current" @ x0 y158 768x487
+          div.color-scheme-1 "Your cart (0 items) Your cart is current @ x0 y182 768x431
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y693 768x984
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y693 768x984
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y693 768x984
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x30 y693 708x706
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x30 y1398 708x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x30 y1564 708x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+
+[1440x900] page height 1570px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\cart\1440x900.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 1440x37
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 1440x37
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 1440x72
+      global-header.header.color-scheme-1 "Devs2 Rebel Home Shop C @ x0 y37 1440x72
+        div.page-width "Devs2 Rebel Home Shop Collections Journa" @ x0 y37 1440x72
+          div.header__wrapper "Devs2 Rebel Home Shop Collections Journ @ x75 y37 1290x72
+    main#MainContent.content-for-layout.focus-none "Home / Cart  @ x0 y109 1440x568
+      section#shopify-section-template--27321871335533__breadcrumb @ x0 y109 1440x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Cart" @ x0 y109 1440x57
+      section#shopify-section-template--27321871335533__main.shopi @ x0 y166 1440x511
+        cart-template "Your cart (0 items) Your cart is current" @ x0 y166 1440x511
+          div.color-scheme-1 "Your cart (0 items) Your cart is current @ x0 y198 1440x447
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y725 1440x845
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y725 1440x845
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y725 1440x845
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x75 y725 1290x567
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x75 y1292 1290x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x75 y1458 1290x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+
+Summary: 9 errors, 4 warnings. Fix errors first, re-run, then review the screenshots.
+=== exit cart 1
+=== search /search?q=jacket
+(node:6644) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+render-check: http://127.0.0.1:9292/search?q=jacket
+
+[375x812] page height 2076px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\search\375x812.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 375x58
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 375x58
+        div.announcement-bar__container "New season: the tailored an @ x0 y8 375x42
+          div.swiper.announcement-bar__swiper "New season: the tailore @ x0 y8 375x42
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y58 375x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y58 375x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y58 375x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x15 y58 345x64
+    main#MainContent.content-for-layout.focus-none "Home / Searc @ x0 y122 375x1161
+      section#shopify-section-template--27321871761517__breadcrumb @ x0 y122 375x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Search" @ x0 y122 375x57
+      section#shopify-section-template--27321871761517__main.shopi @ x0 y179 375x1104
+        search-template.search-template.color-scheme-1 "Search for “ @ x0 y179 375x1104
+          div.page-width "Search for “jacket” 6 results found Sear" @ x0 y179 375x1104
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y1331 375x746
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y1331 375x746
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y1331 375x746
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x15 y1331 345x442
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x15 y1772 345x192
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x15 y1964 345x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  ERROR runtime-error: Framing 'https://shop.app/' violates the following Content Security Policy directive: "frame-ancestors 'self' https://shop.app https://admin.shopify.com". The request has been blocked.
+
+  ERROR runtime-error: Failed to load resource: net::ERR_FAILED (http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js)
+  ERROR runtime-error: Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. (http://127.0.0.1:9292/search?q=jacket)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  small-touch-target: 19 controls smaller than 44px; e.g. a.header__logo-link "Devs2 Rebel"; a.breadcrumb__link "Home"; a "Rebel Tactical Bomber Jacket"; a.product-card__swatch
+
+[768x1024] page height 2423px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\search\768x1024.png
+  outline:
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 768x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y37 768x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y37 768x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x30 y37 708x64
+    main#MainContent.content-for-layout.focus-none "Home / Searc @ x0 y101 768x1291
+      section#shopify-section-template--27321871761517__breadcrumb @ x0 y101 768x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Search" @ x0 y101 768x57
+      section#shopify-section-template--27321871761517__main.shopi @ x0 y158 768x1234
+        search-template.search-template.color-scheme-1 "Search for “ @ x0 y158 768x1234
+          div.page-width "Search for “jacket” 6 results found Sear" @ x0 y158 768x1234
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y1440 768x984
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y1440 768x984
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y1440 768x984
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x30 y1440 708x706
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x30 y2145 708x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x30 y2311 708x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+
+[1440x900] page height 1950px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\search\1440x900.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 1440x37
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 1440x37
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 1440x72
+      global-header.header.color-scheme-1 "Devs2 Rebel Home Shop C @ x0 y37 1440x72
+        div.page-width "Devs2 Rebel Home Shop Collections Journa" @ x0 y37 1440x72
+          div.header__wrapper "Devs2 Rebel Home Shop Collections Journ @ x75 y37 1290x72
+    main#MainContent.content-for-layout.focus-none "Home / Searc @ x0 y109 1440x948
+      section#shopify-section-template--27321871761517__breadcrumb @ x0 y109 1440x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Search" @ x0 y109 1440x57
+      section#shopify-section-template--27321871761517__main.shopi @ x0 y166 1440x891
+        search-template.search-template.color-scheme-1 "Search for “ @ x0 y166 1440x891
+          div.page-width "Search for “jacket” 6 results found Sear" @ x0 y166 1440x891
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y1105 1440x845
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y1105 1440x845
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y1105 1440x845
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x75 y1105 1290x567
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x75 y1672 1290x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x75 y1838 1290x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+
+Summary: 9 errors, 4 warnings. Fix errors first, re-run, then review the screenshots.
+=== exit search 1
+=== about /pages/about
+(node:32780) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+render-check: http://127.0.0.1:9292/pages/about
+
+[375x812] page height 5525px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\about\375x812.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 375x58
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 375x58
+        div.announcement-bar__container "New season: the tailored an @ x0 y8 375x42
+          div.swiper.announcement-bar__swiper "New season: the tailore @ x0 y8 375x42
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y58 375x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y58 375x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y58 375x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x15 y58 345x64
+    main#MainContent.content-for-layout.focus-none "Home / Insid @ x0 y122 375x4609
+      section#shopify-section-template--27321871597677__breadcrumb @ x0 y122 375x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Inside Devs2  @ x0 y122 375x57
+      section#shopify-section-template--27321871597677__hero.shopi @ x0 y179 375x650
+        div#section-template--27321871597677__hero.section-hero.colo @ x0 y179 375x650
+          div.section-hero__media.section-hero__media--mobile @ x0 y179 375x650
+          div.section-hero__overlay @ x0 y179 375x650
+          div.section-hero__content.section-hero__content--middle-cent @ x0 y179 375x650
+      section#shopify-section-template--27321871597677__mission.sh @ x0 y829 375x293
+        div#section-template--27321871597677__mission.section-rich-t @ x0 y829 375x293
+          div.page-width "OUR PURPOSE A sharper kind of luxury Dev" @ x0 y879 375x177
+      section#shopify-section-template--27321871597677__material.s @ x0 y1122 375x510
+        div#section-template--27321871597677__material.section-iwt.c @ x0 y1122 375x510
+          div.page-width "MATERIAL STUDIES Material first We start" @ x0 y1162 375x430
+      section#shopify-section-template--27321871597677__reworn.sho @ x0 y1631 375x510
+        div#section-template--27321871597677__reworn.section-iwt.col @ x0 y1631 375x510
+          div.page-width "WARDROBE PERMANENCE Designed to be rewor" @ x0 y1671 375x430
+      section#shopify-section-template--27321871597677__team.shopi @ x0 y2141 375x697
+        div#section-template--27321871597677__team.section-team.colo @ x0 y2141 375x697
+          div.page-width "PEOPLE The studio team Linh Tran CREATIV" @ x0 y2181 375x617
+      section#shopify-section-template--27321871597677__stats.shop @ x0 y2837 375x342
+        div#section-template--27321871597677__stats.section-stats.co @ x0 y2837 375x342
+  ERROR runtime-error: Framing 'https://shop.app/' violates the following Content Security Policy directive: "frame-ancestors 'self' https://shop.app https://admin.shopify.com". The request has been blocked.
+
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  ERROR runtime-error: Failed to load resource: net::ERR_FAILED (http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js)
+  ERROR runtime-error: Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. (http://127.0.0.1:9292/pages/about)
+  ERROR low-contrast: p.section-hero__subheading.subheading-size-sm "INSIDE THE ATELIER" - text contrast 1.12:1
+  ERROR low-contrast: h1.section-hero__heading.heading-size-2xl "Inside Devs2 Rebel" - text contrast 1.12:1
+  ERROR low-contrast: p "A study in structure, proportion, and qu" - text contrast 1.12:1
+  ERROR low-contrast: a.section-hero__btn.section-hero__btn--secondary "Contact the atelier" - text contrast 1.12:1
+  WARN  touching-text: span "179" - runs into the next element span.section-stats__suffix "K" with a 0.0px gap
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  small-touch-target: 10 controls smaller than 44px; e.g. a.header__logo-link "Devs2 Rebel"; a.breadcrumb__link "Home"; a.footer-logo "Devs2 Rebel"; button.footer-actions-menu__toggle "Shop"
+
+[768x1024] page height 6051px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\about\768x1024.png
+  outline:
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 768x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y37 768x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y37 768x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x30 y37 708x64
+    main#MainContent.content-for-layout.focus-none "Home / Insid @ x0 y101 768x4919
+      section#shopify-section-template--27321871597677__breadcrumb @ x0 y101 768x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Inside Devs2  @ x0 y101 768x57
+      section#shopify-section-template--27321871597677__hero.shopi @ x0 y158 768x819
+        div#section-template--27321871597677__hero.section-hero.colo @ x0 y158 768x819
+          div.section-hero__media @ x0 y158 768x819
+          div.section-hero__overlay @ x0 y158 768x819
+          div.section-hero__content.section-hero__content--middle-cent @ x0 y158 768x819
+      section#shopify-section-template--27321871597677__mission.sh @ x0 y977 768x326
+        div#section-template--27321871597677__mission.section-rich-t @ x0 y977 768x326
+          div.page-width "OUR PURPOSE A sharper kind of luxury Dev" @ x0 y1057 768x150
+      section#shopify-section-template--27321871597677__material.s @ x0 y1303 768x361
+        div#section-template--27321871597677__material.section-iwt.c @ x0 y1303 768x361
+          div.page-width "MATERIAL STUDIES Material first We start" @ x0 y1373 768x221
+      section#shopify-section-template--27321871597677__reworn.sho @ x0 y1665 768x361
+        div#section-template--27321871597677__reworn.section-iwt.col @ x0 y1665 768x361
+          div.page-width "WARDROBE PERMANENCE Designed to be rewor" @ x0 y1735 768x221
+      section#shopify-section-template--27321871597677__team.shopi @ x0 y2026 768x513
+        div#section-template--27321871597677__team.section-team.colo @ x0 y2026 768x513
+          div.page-width "PEOPLE The studio team Linh Tran CREATIV" @ x0 y2096 768x373
+      section#shopify-section-template--27321871597677__stats.shop @ x0 y2539 768x308
+        div#section-template--27321871597677__stats.section-stats.co @ x0 y2539 768x308
+          div.page-width "MEASURED GROWTH Built with patience 11+ " @ x0 y2599 768x188
+      section#shopify-section-template--27321871597677__timeline.s @ x0 y2847 768x1900
+        div#section-template--27321871597677__timeline.section-timel @ x0 y2847 768x1900
+          div.page-width "MILESTONES A timeline of refinement 2015" @ x0 y2917 768x1760
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  ERROR low-contrast: p.section-hero__subheading.subheading-size-sm "INSIDE THE ATELIER" - text contrast 1.12:1
+  ERROR low-contrast: h1.section-hero__heading.heading-size-2xl "Inside Devs2 Rebel" - text contrast 1.12:1
+  ERROR low-contrast: p "A study in structure, proportion, and qu" - text contrast 1.12:1
+  ERROR low-contrast: a.section-hero__btn.section-hero__btn--secondary "Contact the atelier" - text contrast 1.12:1
+  WARN  touching-text: span "179" - runs into the next element span.section-stats__suffix "K" with a 0.0px gap
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+
+[1440x900] page height 6173px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\about\1440x900.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 1440x37
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 1440x37
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 1440x72
+      global-header.header.color-scheme-1 "Devs2 Rebel Home Shop C @ x0 y37 1440x72
+        div.page-width "Devs2 Rebel Home Shop Collections Journa" @ x0 y37 1440x72
+          div.header__wrapper "Devs2 Rebel Home Shop Collections Journ @ x75 y37 1290x72
+    main#MainContent.content-for-layout.focus-none "Home / Insid @ x0 y109 1440x5171
+      section#shopify-section-template--27321871597677__breadcrumb @ x0 y109 1440x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Inside Devs2  @ x0 y109 1440x57
+      section#shopify-section-template--27321871597677__hero.shopi @ x0 y166 1440x720
+        div#section-template--27321871597677__hero.section-hero.colo @ x0 y166 1440x720
+          div.section-hero__media @ x0 y166 1440x720
+          div.section-hero__overlay @ x0 y166 1440x720
+          div.section-hero__content.section-hero__content--middle-cent @ x0 y166 1440x720
+      section#shopify-section-template--27321871597677__mission.sh @ x0 y886 1440x326
+        div#section-template--27321871597677__mission.section-rich-t @ x0 y886 1440x326
+          div.page-width "OUR PURPOSE A sharper kind of luxury Dev" @ x0 y966 1440x150
+      section#shopify-section-template--27321871597677__material.s @ x0 y1212 1440x556
+        div#section-template--27321871597677__material.section-iwt.c @ x0 y1212 1440x556
+          div.page-width "MATERIAL STUDIES Material first We start" @ x0 y1282 1440x416
+      section#shopify-section-template--27321871597677__reworn.sho @ x0 y1769 1440x556
+        div#section-template--27321871597677__reworn.section-iwt.col @ x0 y1769 1440x556
+          div.page-width "WARDROBE PERMANENCE Designed to be rewor" @ x0 y1839 1440x416
+      section#shopify-section-template--27321871597677__team.shopi @ x0 y2325 1440x494
+        div#section-template--27321871597677__team.section-team.colo @ x0 y2325 1440x494
+          div.page-width "PEOPLE The studio team Linh Tran CREATIV" @ x0 y2395 1440x354
+      section#shopify-section-template--27321871597677__stats.shop @ x0 y2819 1440x289
+        div#section-template--27321871597677__stats.section-stats.co @ x0 y2819 1440x289
+          div.page-width "MEASURED GROWTH Built with patience 11+ " @ x0 y2879 1440x169
+      section#shopify-section-template--27321871597677__timeline.s @ x0 y3107 1440x1900
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  ERROR low-contrast: p.section-hero__subheading.subheading-size-sm "INSIDE THE ATELIER" - text contrast 1.12:1
+  ERROR low-contrast: h1.section-hero__heading.heading-size-2xl "Inside Devs2 Rebel" - text contrast 1.12:1
+  ERROR low-contrast: p "A study in structure, proportion, and qu" - text contrast 1.12:1
+  ERROR low-contrast: a.section-hero__btn.section-hero__btn--secondary "Contact the atelier" - text contrast 1.12:1
+  WARN  touching-text: span "179" - runs into the next element span.section-stats__suffix "K" with a 0.0px gap
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+
+Summary: 21 errors, 7 warnings. Fix errors first, re-run, then review the screenshots.
+=== exit about 1
+=== contact /pages/contact
+(node:41144) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+render-check: http://127.0.0.1:9292/pages/contact
+
+[375x812] page height 2884px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\contact\375x812.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 375x58
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 375x58
+        div.announcement-bar__container "New season: the tailored an @ x0 y8 375x42
+          div.swiper.announcement-bar__swiper "New season: the tailore @ x0 y8 375x42
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y58 375x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y58 375x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y58 375x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x15 y58 345x64
+    main#MainContent.content-for-layout.focus-none "Home / Conta @ x0 y122 375x2016
+      section#shopify-section-template--27321871630445__breadcrumb @ x0 y122 375x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Contact" @ x0 y122 375x57
+      section#shopify-section-template--27321871630445__main.shopi @ x0 y179 375x1959
+        contact-page.page-contact "Contact form Visit the studio, re @ x0 y179 375x1959
+          section.contact-hero "Contact form Visit the studio, request @ x0 y179 375x197
+          section.contact-main.section-padding "ATELIER SUPPORT Contac @ x0 y392 375x1746
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y2138 375x746
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y2138 375x746
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y2138 375x746
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x15 y2138 345x442
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x15 y2580 345x192
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x15 y2772 345x112
+  ERROR runtime-error: Framing 'https://shop.app/' violates the following Content Security Policy directive: "frame-ancestors 'self' https://shop.app https://admin.shopify.com". The request has been blocked.
+
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  ERROR runtime-error: Failed to load resource: net::ERR_FAILED (http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js)
+  ERROR runtime-error: Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. (http://127.0.0.1:9292/pages/contact)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  small-touch-target: 13 controls smaller than 44px; e.g. a.header__logo-link "Devs2 Rebel"; a.breadcrumb__link "Home"; a.contact-main__info-item-text "+33 1 23 45 67 89"; input#ContactForm-template--27321871630445__main-company-website
+
+[768x1024] page height 2972px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\contact\768x1024.png
+  outline:
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 768x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y37 768x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y37 768x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x30 y37 708x64
+    main#MainContent.content-for-layout.focus-none "Home / Conta @ x0 y101 768x1887
+      section#shopify-section-template--27321871630445__breadcrumb @ x0 y101 768x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Contact" @ x0 y101 768x57
+      section#shopify-section-template--27321871630445__main.shopi @ x0 y158 768x1830
+        contact-page.page-contact "Contact form Visit the studio, re @ x0 y158 768x1830
+          section.contact-hero "Contact form Visit the studio, request @ x0 y158 768x168
+          section.contact-main.section-padding "ATELIER SUPPORT Contac @ x0 y342 768x1646
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y1988 768x984
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y1988 768x984
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y1988 768x984
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x30 y1988 708x706
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x30 y2694 708x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x30 y2860 708x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+
+[1440x900] page height 2159px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\contact\1440x900.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 1440x37
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 1440x37
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 1440x72
+      global-header.header.color-scheme-1 "Devs2 Rebel Home Shop C @ x0 y37 1440x72
+        div.page-width "Devs2 Rebel Home Shop Collections Journa" @ x0 y37 1440x72
+          div.header__wrapper "Devs2 Rebel Home Shop Collections Journ @ x75 y37 1290x72
+    main#MainContent.content-for-layout.focus-none "Home / Conta @ x0 y109 1440x1205
+      section#shopify-section-template--27321871630445__breadcrumb @ x0 y109 1440x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Contact" @ x0 y109 1440x57
+      section#shopify-section-template--27321871630445__main.shopi @ x0 y166 1440x1148
+        contact-page.page-contact "Contact form Visit the studio, re @ x0 y166 1440x1148
+          section.contact-hero "Contact form Visit the studio, request @ x0 y166 1440x176
+          section.contact-main.section-padding "ATELIER SUPPORT Contac @ x0 y385 1440x929
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y1314 1440x845
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y1314 1440x845
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y1314 1440x845
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x75 y1314 1290x567
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x75 y1881 1290x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x75 y2047 1290x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+
+Summary: 9 errors, 4 warnings. Fix errors first, re-run, then review the screenshots.
+=== exit contact 1
+=== faq /pages/faq
+(node:31600) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+render-check: http://127.0.0.1:9292/pages/faq
+
+[375x812] page height 2799px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\faq\375x812.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 375x58
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 375x58
+        div.announcement-bar__container "New season: the tailored an @ x0 y8 375x42
+          div.swiper.announcement-bar__swiper "New season: the tailore @ x0 y8 375x42
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y58 375x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y58 375x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y58 375x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x15 y58 345x64
+    main#MainContent.content-for-layout.focus-none "Home / FAQ H @ x0 y122 375x1884
+      section#shopify-section-template--27321871466605__breadcrumb @ x0 y122 375x57
+        div.section-breadcrumbs.color-scheme-1 "Home / FAQ" @ x0 y122 375x57
+      section#shopify-section-template--27321871466605__main.shopi @ x0 y179 375x1128
+        faq-page.page-faq "HELP CENTER FAQ Quick answers about orde" @ x0 y179 375x1128
+          section.faq-hero "HELP CENTER FAQ Quick answers about orde" @ x0 y179 375x243
+          section.faq-main.section-padding "Orders & payment How can I @ x0 y422 375x725
+          section.faq-contact.section-padding-bg "CUSTOMER CARE Still  @ x0 y1147 375x160
+      section#shopify-section-template--27321871466605__contact_fo @ x0 y1307 375x699
+        div#section-template--27321871466605__contact_form.section-c @ x0 y1307 375x699
+          div.page-width "GET IN TOUCH We'd love to hear from you " @ x0 y1337 375x639
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y2054 375x746
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y2054 375x746
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y2054 375x746
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x15 y2054 345x442
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x15 y2495 345x192
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x15 y2687 345x112
+  ERROR runtime-error: Framing 'https://shop.app/' violates the following Content Security Policy directive: "frame-ancestors 'self' https://shop.app https://admin.shopify.com". The request has been blocked.
+
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  ERROR runtime-error: Failed to load resource: net::ERR_FAILED (http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js)
+  ERROR runtime-error: Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. (http://127.0.0.1:9292/pages/faq)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: label.sr-only "Search questions" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  small-touch-target: 11 controls smaller than 44px; e.g. a.header__logo-link "Devs2 Rebel"; a.breadcrumb__link "Home"; input#faq-search-template--27321871466605__main.faq-hero__search-input; a.footer-logo "Devs2 Rebel"
+
+[768x1024] page height 2761px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\faq\768x1024.png
+  outline:
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 768x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y37 768x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y37 768x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x30 y37 708x64
+    main#MainContent.content-for-layout.focus-none "Home / FAQ H @ x0 y101 768x1629
+      section#shopify-section-template--27321871466605__breadcrumb @ x0 y101 768x57
+        div.section-breadcrumbs.color-scheme-1 "Home / FAQ" @ x0 y101 768x57
+      section#shopify-section-template--27321871466605__main.shopi @ x0 y158 768x1113
+        faq-page.page-faq "HELP CENTER FAQ Quick answers about orde" @ x0 y158 768x1113
+          section.faq-hero "HELP CENTER FAQ Quick answers about orde" @ x0 y158 768x225
+          section.faq-main.section-padding "Orders & payment How can I @ x0 y383 768x725
+          section.faq-contact.section-padding-bg "CUSTOMER CARE Still  @ x0 y1108 768x163
+      section#shopify-section-template--27321871466605__contact_fo @ x0 y1271 768x459
+        div#section-template--27321871466605__contact_form.section-c @ x0 y1271 768x459
+          div.page-width "GET IN TOUCH We'd love to hear from you " @ x0 y1321 768x359
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y1778 768x984
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y1778 768x984
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y1778 768x984
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x30 y1778 708x706
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x30 y2483 708x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x30 y2649 708x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: label.sr-only "Search questions" - text is cut off by overflow without an ellipsis or line clamp
+
+[1440x900] page height 2664px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\faq\1440x900.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 1440x37
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 1440x37
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 1440x72
+      global-header.header.color-scheme-1 "Devs2 Rebel Home Shop C @ x0 y37 1440x72
+        div.page-width "Devs2 Rebel Home Shop Collections Journa" @ x0 y37 1440x72
+          div.header__wrapper "Devs2 Rebel Home Shop Collections Journ @ x75 y37 1290x72
+    main#MainContent.content-for-layout.focus-none "Home / FAQ H @ x0 y109 1440x1662
+      section#shopify-section-template--27321871466605__breadcrumb @ x0 y109 1440x57
+        div.section-breadcrumbs.color-scheme-1 "Home / FAQ" @ x0 y109 1440x57
+      section#shopify-section-template--27321871466605__main.shopi @ x0 y166 1440x1146
+        faq-page.page-faq "HELP CENTER FAQ Quick answers about orde" @ x0 y166 1440x1146
+          section.faq-hero "HELP CENTER FAQ Quick answers about orde" @ x0 y166 1440x242
+          section.faq-main.section-padding "Orders & payment How can I @ x0 y408 1440x733
+          section.faq-contact.section-padding-bg "CUSTOMER CARE Still  @ x0 y1141 1440x171
+      section#shopify-section-template--27321871466605__contact_fo @ x0 y1312 1440x459
+        div#section-template--27321871466605__contact_form.section-c @ x0 y1312 1440x459
+          div.page-width "GET IN TOUCH We'd love to hear from you " @ x0 y1362 1440x359
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y1819 1440x845
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y1819 1440x845
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y1819 1440x845
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x75 y1819 1290x567
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x75 y2386 1290x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x75 y2552 1290x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: label.sr-only "Search questions" - text is cut off by overflow without an ellipsis or line clamp
+
+Summary: 9 errors, 7 warnings. Fix errors first, re-run, then review the screenshots.
+=== exit faq 1
+=== stores /pages/stores
+(node:38944) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+render-check: http://127.0.0.1:9292/pages/stores
+
+[375x812] page height 17526px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\stores\375x812.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 375x58
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 375x58
+        div.announcement-bar__container "New season: the tailored an @ x0 y8 375x42
+          div.swiper.announcement-bar__swiper "New season: the tailore @ x0 y8 375x42
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y58 375x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y58 375x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y58 375x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x15 y58 345x64
+    main#MainContent.content-for-layout.focus-none "Home / Store @ x0 y122 375x16658
+      section#shopify-section-template--27321871695981__breadcrumb @ x0 y122 375x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Stores" @ x0 y122 375x57
+      section#shopify-section-template--27321871695981__main.shopi @ x0 y179 375x16601
+        stores-page.page-stores "Visit our stores Find a Devs2 Rebel @ x0 y179 375x16601
+          section.stores-hero "Visit our stores Find a Devs2 Rebel sto @ x0 y179 375x197
+          section.stores-main.section-padding "Search stores Province  @ x0 y376 375x16404
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y16780 375x746
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y16780 375x746
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y16780 375x746
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x15 y16780 345x442
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x15 y17222 345x192
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x15 y17414 345x112
+  ERROR runtime-error: Framing 'https://shop.app/' violates the following Content Security Policy directive: "frame-ancestors 'self' https://shop.app https://admin.shopify.com". The request has been blocked.
+
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  ERROR runtime-error: Failed to load resource: net::ERR_FAILED (http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js)
+  ERROR runtime-error: Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. (http://127.0.0.1:9292/pages/stores)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: label.sr-only "Search stores" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  small-touch-target: 108 controls smaller than 44px; e.g. a.header__logo-link "Devs2 Rebel"; a.breadcrumb__link "Home"; input#stores-search.stores-sidebar__search-input; button#stores-clear.stores-sidebar__clear "Clear filter"
+
+[768x1024] page height 23792px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\stores\768x1024.png
+  outline:
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 768x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y37 768x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y37 768x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x30 y37 708x64
+    main#MainContent.content-for-layout.focus-none "Home / Store @ x0 y101 768x22707
+      section#shopify-section-template--27321871695981__breadcrumb @ x0 y101 768x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Stores" @ x0 y101 768x57
+      section#shopify-section-template--27321871695981__main.shopi @ x0 y158 768x22650
+        stores-page.page-stores "Visit our stores Find a Devs2 Rebel @ x0 y158 768x22650
+          section.stores-hero "Visit our stores Find a Devs2 Rebel sto @ x0 y158 768x168
+          section.stores-main.section-padding "Search stores Province  @ x0 y326 768x22482
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y22808 768x984
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y22808 768x984
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y22808 768x984
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x30 y22808 708x706
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x30 y23514 708x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x30 y23680 708x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: label.sr-only "Search stores" - text is cut off by overflow without an ellipsis or line clamp
+
+[1440x900] page height 10114px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\stores\1440x900.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 1440x37
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 1440x37
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 1440x72
+      global-header.header.color-scheme-1 "Devs2 Rebel Home Shop C @ x0 y37 1440x72
+        div.page-width "Devs2 Rebel Home Shop Collections Journa" @ x0 y37 1440x72
+          div.header__wrapper "Devs2 Rebel Home Shop Collections Journ @ x75 y37 1290x72
+    main#MainContent.content-for-layout.focus-none "Home / Store @ x0 y109 1440x9160
+      section#shopify-section-template--27321871695981__breadcrumb @ x0 y109 1440x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Stores" @ x0 y109 1440x57
+      section#shopify-section-template--27321871695981__main.shopi @ x0 y166 1440x9103
+        stores-page.page-stores "Visit our stores Find a Devs2 Rebel @ x0 y166 1440x9103
+          section.stores-hero "Visit our stores Find a Devs2 Rebel sto @ x0 y166 1440x146
+          section.stores-main.section-padding "Search stores Province  @ x0 y312 1440x8957
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y9269 1440x845
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y9269 1440x845
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y9269 1440x845
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x75 y9269 1290x567
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x75 y9836 1290x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x75 y10002 1290x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: label.sr-only "Search stores" - text is cut off by overflow without an ellipsis or line clamp
+
+Summary: 9 errors, 7 warnings. Fix errors first, re-run, then review the screenshots.
+=== exit stores 1
+=== list-collections /collections
+(node:36188) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+render-check: http://127.0.0.1:9292/collections
+
+[375x812] page height 5149px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\list-collections\375x812.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 375x58
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 375x58
+        div.announcement-bar__container "New season: the tailored an @ x0 y8 375x42
+          div.swiper.announcement-bar__swiper "New season: the tailore @ x0 y8 375x42
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y58 375x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y58 375x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y58 375x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x15 y58 345x64
+    main#MainContent.content-for-layout.focus-none "Home / Colle @ x0 y122 375x4233
+      section#shopify-section-template--27321871532141__breadcrumb @ x0 y122 375x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Collections" @ x0 y122 375x57
+      section#shopify-section-template--27321871532141__main.shopi @ x0 y179 375x3871
+        div.list-collections-template.section-padding "Shop the coll @ x0 y179 375x3871
+          div.page-width "Shop the collections EXPLORE CURATED EDI" @ x0 y199 375x3795
+      section#shopify-section-template--27321871532141__newsletter @ x0 y4050 375x305
+        div#section-template--27321871532141__newsletter.section-new @ x0 y4050 375x305
+          div.page-width "STAY CONNECTED Subscribe to our newslett" @ x0 y4090 375x225
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y4403 375x746
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y4403 375x746
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y4403 375x746
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x15 y4403 345x442
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x15 y4845 345x192
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x15 y5037 345x112
+  ERROR runtime-error: Framing 'https://shop.app/' violates the following Content Security Policy directive: "frame-ancestors 'self' https://shop.app https://admin.shopify.com". The request has been blocked.
+
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  ERROR runtime-error: Failed to load resource: net::ERR_FAILED (http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js)
+  ERROR runtime-error: Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. (http://127.0.0.1:9292/collections)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  small-touch-target: 10 controls smaller than 44px; e.g. a.header__logo-link "Devs2 Rebel"; a.breadcrumb__link "Home"; a.footer-logo "Devs2 Rebel"; button.footer-actions-menu__toggle "Shop"
+
+[768x1024] page height 2632px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\list-collections\768x1024.png
+  outline:
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 768x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y37 768x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y37 768x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x30 y37 708x64
+    main#MainContent.content-for-layout.focus-none "Home / Colle @ x0 y101 768x1499
+      section#shopify-section-template--27321871532141__breadcrumb @ x0 y101 768x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Collections" @ x0 y101 768x57
+      section#shopify-section-template--27321871532141__main.shopi @ x0 y158 768x1150
+        div.list-collections-template.section-padding "Shop the coll @ x0 y158 768x1150
+          div.page-width "Shop the collections EXPLORE CURATED EDI" @ x0 y178 768x1074
+      section#shopify-section-template--27321871532141__newsletter @ x0 y1308 768x292
+        div#section-template--27321871532141__newsletter.section-new @ x0 y1308 768x292
+          div.page-width "STAY CONNECTED Subscribe to our newslett" @ x0 y1368 768x172
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y1648 768x984
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y1648 768x984
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y1648 768x984
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x30 y1648 708x706
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x30 y2354 708x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x30 y2520 708x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+
+[1440x900] page height 3399px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\list-collections\1440x900.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 1440x37
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 1440x37
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 1440x72
+      global-header.header.color-scheme-1 "Devs2 Rebel Home Shop C @ x0 y37 1440x72
+        div.page-width "Devs2 Rebel Home Shop Collections Journa" @ x0 y37 1440x72
+          div.header__wrapper "Devs2 Rebel Home Shop Collections Journ @ x75 y37 1290x72
+    main#MainContent.content-for-layout.focus-none "Home / Colle @ x0 y109 1440x2397
+      section#shopify-section-template--27321871532141__breadcrumb @ x0 y109 1440x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Collections" @ x0 y109 1440x57
+      section#shopify-section-template--27321871532141__main.shopi @ x0 y166 1440x2048
+        div.list-collections-template.section-padding "Shop the coll @ x0 y166 1440x2048
+          div.page-width "Shop the collections EXPLORE CURATED EDI" @ x0 y186 1440x1956
+      section#shopify-section-template--27321871532141__newsletter @ x0 y2214 1440x292
+        div#section-template--27321871532141__newsletter.section-new @ x0 y2214 1440x292
+          div.page-width "STAY CONNECTED Subscribe to our newslett" @ x0 y2274 1440x172
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y2554 1440x845
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y2554 1440x845
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y2554 1440x845
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x75 y2554 1290x567
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x75 y3121 1290x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x75 y3287 1290x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+
+Summary: 9 errors, 4 warnings. Fix errors first, re-run, then review the screenshots.
+=== exit list-collections 1
+=== blog /blogs/sustainable-fashion-eco-tech
+(node:11344) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+render-check: http://127.0.0.1:9292/blogs/sustainable-fashion-eco-tech
+
+[375x812] page height 5880px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\blog\375x812.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 375x58
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 375x58
+        div.announcement-bar__container "New season: the tailored an @ x0 y8 375x42
+          div.swiper.announcement-bar__swiper "New season: the tailore @ x0 y8 375x42
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y58 375x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y58 375x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y58 375x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x15 y58 345x64
+    main#MainContent.content-for-layout.focus-none "Home / Susta @ x0 y122 375x4965
+      section#shopify-section-template--27321871401069__breadcrumb @ x0 y122 375x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Sustainable F @ x0 y122 375x57
+      section#shopify-section-template--27321871401069__main.shopi @ x0 y179 375x4608
+        div.blog-template "Sustainable Fashion & Eco-Tech Blog SUST" @ x0 y179 375x4608
+          div.page-width "Sustainable Fashion & Eco-Tech Blog SUST" @ x0 y179 375x4568
+      section#shopify-section-template--27321871401069__newsletter @ x0 y4787 375x300
+        div#section-template--27321871401069__newsletter.section-new @ x0 y4787 375x300
+          div.page-width "STAY CONNECTED Get stories in your inbox" @ x0 y4827 375x220
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y5135 375x746
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y5135 375x746
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y5135 375x746
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x15 y5135 345x442
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x15 y5576 345x192
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x15 y5768 345x112
+  ERROR runtime-error: Framing 'https://shop.app/' violates the following Content Security Policy directive: "frame-ancestors 'self' https://shop.app https://admin.shopify.com". The request has been blocked.
+
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  ERROR runtime-error: Failed to load resource: net::ERR_FAILED (http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js)
+  ERROR runtime-error: Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. (http://127.0.0.1:9292/blogs/sustainable-fashion-eco-tech)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: h2.sr-only "Blog" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  small-touch-target: 24 controls smaller than 44px; e.g. a.header__logo-link "Devs2 Rebel"; a.breadcrumb__link "Home"; a.article-card__category-link "SUSTAINABLE FASHION & ECO-TECH"; a.article-card__category-link "SUSTAINABLE FASHION & ECO-TECH"
+
+[768x1024] page height 4982px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\blog\768x1024.png
+  outline:
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 768x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y37 768x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y37 768x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x30 y37 708x64
+    main#MainContent.content-for-layout.focus-none "Home / Susta @ x0 y101 768x3849
+      section#shopify-section-template--27321871401069__breadcrumb @ x0 y101 768x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Sustainable F @ x0 y101 768x57
+      section#shopify-section-template--27321871401069__main.shopi @ x0 y158 768x3508
+        div.blog-template "Sustainable Fashion & Eco-Tech Blog SUST" @ x0 y158 768x3508
+          div.page-width "Sustainable Fashion & Eco-Tech Blog SUST" @ x0 y158 768x3468
+      section#shopify-section-template--27321871401069__newsletter @ x0 y3666 768x285
+        div#section-template--27321871401069__newsletter.section-new @ x0 y3666 768x285
+          div.page-width "STAY CONNECTED Get stories in your inbox" @ x0 y3726 768x165
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y3998 768x984
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y3998 768x984
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y3998 768x984
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x30 y3998 708x706
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x30 y4704 708x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x30 y4870 708x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: h2.sr-only "Blog" - text is cut off by overflow without an ellipsis or line clamp
+
+[1440x900] page height 3831px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\blog\1440x900.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 1440x37
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 1440x37
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 1440x72
+      global-header.header.color-scheme-1 "Devs2 Rebel Home Shop C @ x0 y37 1440x72
+        div.page-width "Devs2 Rebel Home Shop Collections Journa" @ x0 y37 1440x72
+          div.header__wrapper "Devs2 Rebel Home Shop Collections Journ @ x75 y37 1290x72
+    main#MainContent.content-for-layout.focus-none "Home / Susta @ x0 y109 1440x2829
+      section#shopify-section-template--27321871401069__breadcrumb @ x0 y109 1440x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Sustainable F @ x0 y109 1440x57
+      section#shopify-section-template--27321871401069__main.shopi @ x0 y166 1440x2487
+        div.blog-template "Sustainable Fashion & Eco-Tech Blog SUST" @ x0 y166 1440x2487
+          div.page-width "Sustainable Fashion & Eco-Tech Blog SUST" @ x0 y166 1440x2447
+      section#shopify-section-template--27321871401069__newsletter @ x0 y2653 1440x285
+        div#section-template--27321871401069__newsletter.section-new @ x0 y2653 1440x285
+          div.page-width "STAY CONNECTED Get stories in your inbox" @ x0 y2713 1440x165
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y2986 1440x845
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y2986 1440x845
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y2986 1440x845
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x75 y2986 1290x567
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x75 y3553 1290x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x75 y3719 1290x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: h2.sr-only "Blog" - text is cut off by overflow without an ellipsis or line clamp
+
+Summary: 9 errors, 7 warnings. Fix errors first, re-run, then review the screenshots.
+=== exit blog 1
+=== article /blogs/sustainable-fashion-eco-tech/bio-textiles-mycelium-algae-and-the-lab-grown-revolution
+(node:46236) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+render-check: http://127.0.0.1:9292/blogs/sustainable-fashion-eco-tech/bio-textiles-mycelium-algae-and-the-lab-grown-revolution
+
+[375x812] page height 6914px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\article\375x812.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 375x58
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 375x58
+        div.announcement-bar__container "New season: the tailored an @ x0 y8 375x42
+          div.swiper.announcement-bar__swiper "New season: the tailore @ x0 y8 375x42
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y58 375x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y58 375x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y58 375x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x15 y58 345x64
+    main#MainContent.content-for-layout.focus-none "Home / Susta @ x0 y122 375x5999
+      section#shopify-section-template--27321871368301__breadcrumb @ x0 y122 375x99
+        div.section-breadcrumbs.color-scheme-1 "Home / Sustainable F @ x0 y122 375x99
+          div.page-width "Home / Sustainable Fashion & Eco-Tech / " @ x0 y138 375x63
+      section#shopify-section-template--27321871368301__main.shopi @ x0 y221 375x5900
+        article.article-template "Bio-Textiles: Mycelium, Algae, and @ x0 y221 375x5900
+          div.page-width "Bio-Textiles: Mycelium, Algae, and the L" @ x0 y221 375x5900
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y6169 375x746
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y6169 375x746
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y6169 375x746
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x15 y6169 345x442
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x15 y6610 345x192
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x15 y6802 345x112
+  ERROR runtime-error: Framing 'https://shop.app/' violates the following Content Security Policy directive: "frame-ancestors 'self' https://shop.app https://admin.shopify.com". The request has been blocked.
+
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  ERROR runtime-error: Failed to load resource: net::ERR_FAILED (http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js)
+  ERROR runtime-error: Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. (http://127.0.0.1:9292/blogs/sustainable-fashion-eco-tech/bio-textiles-mycelium-algae-and-the-lab-grown-revolution)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  small-touch-target: 20 controls smaller than 44px; e.g. a.header__logo-link "Devs2 Rebel"; a.breadcrumb__link "Home"; a.breadcrumb__link "Sustainable Fashion & Eco-Tech"; a "SUSTAINABLE FASHION & ECO-TECH"
+
+[768x1024] page height 5634px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\article\768x1024.png
+  outline:
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 768x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y37 768x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y37 768x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x30 y37 708x64
+    main#MainContent.content-for-layout.focus-none "Home / Susta @ x0 y101 768x4501
+      section#shopify-section-template--27321871368301__breadcrumb @ x0 y101 768x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Sustainable F @ x0 y101 768x57
+      section#shopify-section-template--27321871368301__main.shopi @ x0 y158 768x4444
+        article.article-template "Bio-Textiles: Mycelium, Algae, and @ x0 y158 768x4444
+          div.page-width "Bio-Textiles: Mycelium, Algae, and the L" @ x0 y158 768x4444
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y4650 768x984
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y4650 768x984
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y4650 768x984
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x30 y4650 708x706
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x30 y5356 708x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x30 y5522 708x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+
+[1440x900] page height 5243px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\article\1440x900.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 1440x37
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 1440x37
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 1440x72
+      global-header.header.color-scheme-1 "Devs2 Rebel Home Shop C @ x0 y37 1440x72
+        div.page-width "Devs2 Rebel Home Shop Collections Journa" @ x0 y37 1440x72
+          div.header__wrapper "Devs2 Rebel Home Shop Collections Journ @ x75 y37 1290x72
+    main#MainContent.content-for-layout.focus-none "Home / Susta @ x0 y109 1440x4241
+      section#shopify-section-template--27321871368301__breadcrumb @ x0 y109 1440x57
+        div.section-breadcrumbs.color-scheme-1 "Home / Sustainable F @ x0 y109 1440x57
+      section#shopify-section-template--27321871368301__main.shopi @ x0 y166 1440x4184
+        article.article-template "Bio-Textiles: Mycelium, Algae, and @ x0 y166 1440x4184
+          div.page-width "Bio-Textiles: Mycelium, Algae, and the L" @ x0 y166 1440x4184
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y4398 1440x845
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y4398 1440x845
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y4398 1440x845
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x75 y4398 1290x567
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x75 y4965 1290x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x75 y5131 1290x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+
+Summary: 9 errors, 4 warnings. Fix errors first, re-run, then review the screenshots.
+=== exit article 1
+=== login /account/login
+(node:28368) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+render-check: http://127.0.0.1:9292/account/login
+
+[375x812] page height 2554px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\login\375x812.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 375x58
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 375x58
+        div.announcement-bar__container "New season: the tailored an @ x0 y8 375x42
+          div.swiper.announcement-bar__swiper "New season: the tailore @ x0 y8 375x42
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y58 375x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y58 375x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y58 375x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x15 y58 345x64
+    main#MainContent.content-for-layout.focus-none "404 LOST IN  @ x0 y122 375x1639
+      section#shopify-section-template--27321871302765__main-404_m @ x0 y122 375x774
+        div.error-404.color-scheme-1 "404 LOST IN THE SHOP? Page not @ x0 y122 375x774
+          div.page-width "404 LOST IN THE SHOP? Page not found The" @ x0 y122 375x774
+      section#shopify-section-template--27321871302765__404-featur @ x0 y896 375x864
+        div#section-template--27321871302765__404-featured-products. @ x0 y896 375x864
+          div.page-width "View all Bespoke Charcoal Pinstripe Blaz" @ x0 y921 375x799
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y1809 375x746
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y1809 375x746
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y1809 375x746
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x15 y1809 345x442
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x15 y2250 345x192
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x15 y2442 345x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  ERROR runtime-error: Failed to load resource: net::ERR_FAILED (http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js)
+  ERROR runtime-error: Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. (http://127.0.0.1:9292/69775753325/account?locale=en&region_country=US&buyer_flags=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkZXZzMi1yZWJlbC5teXNob3BpZnkuY29tIiwiZmxhZ3MiOltdLCJleHAiOjE3OTIzMDMyMzMsIm5iZiI6MTc5MTY5ODQzM30._YZABmbzv2Mdnm6OgH5asHJ_r5w5y0m3uzBkbMgQWPE)
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 404 (Not Found) (http://127.0.0.1:9292/69775753325/account?locale=en&region_country=US&buyer_flags=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkZXZzMi1yZWJlbC5teXNob3BpZnkuY29tIiwiZmxhZ3MiOltdLCJleHAiOjE3OTIzMDMyMzMsIm5iZiI6MTc5MTY5ODQzM30._YZABmbzv2Mdnm6OgH5asHJ_r5w5y0m3uzBkbMgQWPE)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: label.visually-hidden "Search the store" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  small-touch-target: 14 controls smaller than 44px; e.g. a.header__logo-link "Devs2 Rebel"; a.section-featured-collection__view-all "View all"; a "Bespoke Charcoal Pinstripe Blazer"; a "Black Full-Grain Leather Belt"
+
+[768x1024] page height 2529px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\login\768x1024.png
+  outline:
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 768x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y37 768x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y37 768x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x30 y37 708x64
+    main#MainContent.content-for-layout.focus-none "404 LOST IN  @ x0 y101 768x1397
+      section#shopify-section-template--27321871302765__main-404_m @ x0 y101 768x837
+        div.error-404.color-scheme-1 "404 LOST IN THE SHOP? Page not @ x0 y101 768x837
+          div.page-width "404 LOST IN THE SHOP? Page not found The" @ x0 y101 768x837
+      section#shopify-section-template--27321871302765__404-featur @ x0 y938 768x560
+        div#section-template--27321871302765__404-featured-products. @ x0 y938 768x560
+          div.page-width "View all Bespoke Charcoal Pinstripe Blaz" @ x0 y968 768x470
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y1546 768x984
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y1546 768x984
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y1546 768x984
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x30 y1546 708x706
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x30 y2251 708x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x30 y2417 708x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 404 (Not Found) (http://127.0.0.1:9292/69775753325/account?locale=en&region_country=US&buyer_flags=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkZXZzMi1yZWJlbC5teXNob3BpZnkuY29tIiwiZmxhZ3MiOltdLCJleHAiOjE3OTIzMDMyMzksIm5iZiI6MTc5MTY5ODQzOX0.yB8lryfhgS1vSGxPeQLbtMyGvwDBA_jcyLuRidyLkiA)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: label.visually-hidden "Search the store" - text is cut off by overflow without an ellipsis or line clamp
+
+[1440x900] page height 2410px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\login\1440x900.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 1440x37
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 1440x37
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 1440x72
+      global-header.header.color-scheme-1 "Devs2 Rebel Home Shop C @ x0 y37 1440x72
+        div.page-width "Devs2 Rebel Home Shop Collections Journa" @ x0 y37 1440x72
+          div.header__wrapper "Devs2 Rebel Home Shop Collections Journ @ x75 y37 1290x72
+    main#MainContent.content-for-layout.focus-none "404 LOST IN  @ x0 y109 1440x1408
+      section#shopify-section-template--27321871302765__main-404_m @ x0 y109 1440x648
+        div.error-404.color-scheme-1 "404 LOST IN THE SHOP? Page not @ x0 y109 1440x648
+          div.page-width "404 LOST IN THE SHOP? Page not found The" @ x0 y109 1440x648
+      section#shopify-section-template--27321871302765__404-featur @ x0 y757 1440x760
+        div#section-template--27321871302765__404-featured-products. @ x0 y757 1440x760
+          div.page-width "View all Bespoke Charcoal Pinstripe Blaz" @ x0 y787 1440x670
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y1565 1440x845
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y1565 1440x845
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y1565 1440x845
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x75 y1565 1290x567
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x75 y2132 1290x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x75 y2298 1290x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 404 (Not Found) (http://127.0.0.1:9292/69775753325/account?locale=en&region_country=US&buyer_flags=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkZXZzMi1yZWJlbC5teXNob3BpZnkuY29tIiwiZmxhZ3MiOltdLCJleHAiOjE3OTIzMDMyNDMsIm5iZiI6MTc5MTY5ODQ0M30.scLbOCpQ9F9VMfT1sbYjdQLW7tK2RFb3ZCZlPISaSi8)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: label.visually-hidden "Search the store" - text is cut off by overflow without an ellipsis or line clamp
+
+Summary: 11 errors, 7 warnings. Fix errors first, re-run, then review the screenshots.
+=== exit login 1
+=== 404 /pages/does-not-exist-404
+(node:22000) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+render-check: http://127.0.0.1:9292/pages/does-not-exist-404
+
+[375x812] page height 2554px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\404\375x812.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 375x58
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 375x58
+        div.announcement-bar__container "New season: the tailored an @ x0 y8 375x42
+          div.swiper.announcement-bar__swiper "New season: the tailore @ x0 y8 375x42
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y58 375x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y58 375x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y58 375x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x15 y58 345x64
+    main#MainContent.content-for-layout.focus-none "404 LOST IN  @ x0 y122 375x1639
+      section#shopify-section-template--27321871302765__main-404_m @ x0 y122 375x774
+        div.error-404.color-scheme-1 "404 LOST IN THE SHOP? Page not @ x0 y122 375x774
+          div.page-width "404 LOST IN THE SHOP? Page not found The" @ x0 y122 375x774
+      section#shopify-section-template--27321871302765__404-featur @ x0 y896 375x864
+        div#section-template--27321871302765__404-featured-products. @ x0 y896 375x864
+          div.page-width "View all Bespoke Charcoal Pinstripe Blaz" @ x0 y921 375x799
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y1809 375x746
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y1809 375x746
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y1809 375x746
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x15 y1809 345x442
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x15 y2250 345x192
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x15 y2442 345x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  ERROR runtime-error: Failed to load resource: net::ERR_FAILED (http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js)
+  ERROR runtime-error: Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. (http://127.0.0.1:9292/pages/does-not-exist-404)
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 404 (Not Found) (http://127.0.0.1:9292/pages/does-not-exist-404)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: label.visually-hidden "Search the store" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  small-touch-target: 14 controls smaller than 44px; e.g. a.header__logo-link "Devs2 Rebel"; a.section-featured-collection__view-all "View all"; a "Bespoke Charcoal Pinstripe Blazer"; a "Black Full-Grain Leather Belt"
+
+[768x1024] page height 2529px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\404\768x1024.png
+  outline:
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 768x64
+      global-header.header.color-scheme-1 "Devs2 Rebel Open cart 0 @ x0 y37 768x64
+        div.page-width "Devs2 Rebel Open cart 0" @ x0 y37 768x64
+          div.header__wrapper "Devs2 Rebel Open cart 0" @ x30 y37 708x64
+    main#MainContent.content-for-layout.focus-none "404 LOST IN  @ x0 y101 768x1397
+      section#shopify-section-template--27321871302765__main-404_m @ x0 y101 768x837
+        div.error-404.color-scheme-1 "404 LOST IN THE SHOP? Page not @ x0 y101 768x837
+          div.page-width "404 LOST IN THE SHOP? Page not found The" @ x0 y101 768x837
+      section#shopify-section-template--27321871302765__404-featur @ x0 y938 768x560
+        div#section-template--27321871302765__404-featured-products. @ x0 y938 768x560
+          div.page-width "View all Bespoke Charcoal Pinstripe Blaz" @ x0 y968 768x470
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y1546 768x984
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y1546 768x984
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y1546 768x984
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x30 y1546 708x706
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x30 y2251 708x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x30 y2417 708x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 404 (Not Found) (http://127.0.0.1:9292/pages/does-not-exist-404)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: label.visually-hidden "Search the store" - text is cut off by overflow without an ellipsis or line clamp
+
+[1440x900] page height 2410px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261011-1000-production\round-3\after\404\1440x900.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 1440x37
+      announcement-bar.announcement-bar.color-scheme-3 "New season @ x0 y0 1440x37
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 1440x72
+      global-header.header.color-scheme-1 "Devs2 Rebel Home Shop C @ x0 y37 1440x72
+        div.page-width "Devs2 Rebel Home Shop Collections Journa" @ x0 y37 1440x72
+          div.header__wrapper "Devs2 Rebel Home Shop Collections Journ @ x75 y37 1290x72
+    main#MainContent.content-for-layout.focus-none "404 LOST IN  @ x0 y109 1440x1408
+      section#shopify-section-template--27321871302765__main-404_m @ x0 y109 1440x648
+        div.error-404.color-scheme-1 "404 LOST IN THE SHOP? Page not @ x0 y109 1440x648
+          div.page-width "404 LOST IN THE SHOP? Page not found The" @ x0 y109 1440x648
+      section#shopify-section-template--27321871302765__404-featur @ x0 y757 1440x760
+        div#section-template--27321871302765__404-featured-products. @ x0 y757 1440x760
+          div.page-width "View all Bespoke Charcoal Pinstripe Blaz" @ x0 y787 1440x670
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y1565 1440x845
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y1565 1440x845
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y1565 1440x845
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x75 y1565 1290x567
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x75 y2132 1290x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x75 y2298 1290x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 404 (Not Found) (http://127.0.0.1:9292/pages/does-not-exist-404)
+  WARN  clipped-text: span.visually-hidden "Open cart" - text is cut off by overflow without an ellipsis or line clamp
+  WARN  clipped-text: label.visually-hidden "Search the store" - text is cut off by overflow without an ellipsis or line clamp
+
+Summary: 11 errors, 7 warnings. Fix errors first, re-run, then review the screenshots.
+=== exit 404 1

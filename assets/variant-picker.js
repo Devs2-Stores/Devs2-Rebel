@@ -15,15 +15,8 @@
     }
 
     init() {
-      var product = null;
       var scriptTag = this.querySelector('script[type="application/json"]');
-
-      if (scriptTag && scriptTag.textContent) {
-        try {
-          product = JSON.parse(scriptTag.textContent.trim());
-        } catch (e) {
-        }
-      }
+      var product = scriptTag ? ThemeUtils.parseJSON(scriptTag.textContent.trim()) : null;
 
       if (!product) {
         return;
@@ -274,15 +267,8 @@
     }
 
     init() {
-      var product = null;
       var scriptTag = this.querySelector('script[type="application/json"]');
-
-      if (scriptTag && scriptTag.textContent) {
-        try {
-          product = JSON.parse(scriptTag.textContent.trim());
-        } catch (e) {
-        }
-      }
+      var product = scriptTag ? ThemeUtils.parseJSON(scriptTag.textContent.trim()) : null;
 
       if (!product) {
         // Fallback to themeConfig
@@ -401,84 +387,4 @@
     }
   }
   if (!customElements.get('product-variant-select')) customElements.define('product-variant-select', ProductVariantSelect);
-
-  /* -------------------------------------------------------------------------- */
-  /*                      PRODUCT VARIANT PICKER IMAGE                          */
-  /* -------------------------------------------------------------------------- */
-
-  class ProductVariantPickerImage extends HTMLElement {
-    constructor() {
-      super();
-    }
-
-    connectedCallback() {
-      this.option = this.dataset.option;
-      this.value = this.dataset.value;
-
-      if (typeof themeConfig === 'undefined' || !themeConfig.product || !themeConfig.product.data) {
-        var self = this;
-        setTimeout(function() {
-          self.buildImage();
-        }, 100);
-        return;
-      }
-
-      this.buildImage();
-    }
-
-    buildImage() {
-      var isInQuickview = this.closest('[data-quickview-product]') !== null;
-      var product = null;
-
-      if (isInQuickview) {
-        if (typeof themeConfig !== 'undefined' && themeConfig.quickview && themeConfig.quickview.data) {
-          product = themeConfig.quickview.data;
-        }
-      } else {
-        if (typeof themeConfig !== 'undefined' && themeConfig.product && themeConfig.product.data) {
-          product = themeConfig.product.data;
-        }
-      }
-
-      if (!product || !product.variants) return;
-
-      var self = this;
-      var variant = product.variants.find(function(v) {
-        return v[self.option] == self.value && v.image;
-      });
-
-      var imageSrc = null;
-      if (variant && variant.image) {
-        if (typeof variant.image === 'string') {
-          imageSrc = variant.image;
-        } else if (variant.image.src) {
-          imageSrc = variant.image.src;
-        } else if (variant.image.url) {
-          imageSrc = variant.image.url;
-        }
-      }
-
-      if (!imageSrc) {
-        if (typeof themeConfig !== 'undefined' && themeConfig.no_image_product) {
-          imageSrc = themeConfig.no_image_product;
-        } else {
-          return;
-        }
-      }
-
-      var finalSrc = ThemeUtils.resizeImage(imageSrc);
-
-      var safeAlt = (this.value || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
-      var img = document.createElement('img');
-      img.width = 40;
-      img.height = 40;
-      img.src = finalSrc;
-      img.alt = this.value || '';
-      img.loading = 'lazy';
-      img.decoding = 'async';
-      this.textContent = '';
-      this.appendChild(img);
-    }
-  }
-  if (!customElements.get('product-variant-picker-image')) customElements.define('product-variant-picker-image', ProductVariantPickerImage);
 })();

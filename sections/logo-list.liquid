@@ -5,9 +5,24 @@
 
 {%- liquid
   assign layout = section.settings.layout
-  assign logo_count = section.blocks.size
+  assign logo_count = 0
+  for block in section.blocks
+    if block.type == '@app'
+      continue
+    endif
+    if block.settings.image != blank or request.design_mode
+      assign logo_count = logo_count | plus: 1
+    endif
+  endfor
 -%}
 
+{%- capture app_blocks -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- if logo_count > 0 or app_blocks != blank or request.design_mode -%}
 <div
   id="section-{{ section.id }}"
   class="section-logo-list color-{{ section.settings.color_scheme }}"
@@ -38,18 +53,22 @@
         <div class="section-logo-list__track">
           {%- for i in (1..2) -%}
             {%- for block in section.blocks -%}
-              <div class="section-logo-list__item" {{ block.shopify_attributes }}>
+              {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
+              {%- unless block.settings.image != blank or request.design_mode -%}{%- continue -%}{%- endunless -%}
+              <div class="section-logo-list__item"{% if i == 1 %} {{ block.shopify_attributes }}{% else %} aria-hidden="true" inert{% endif %}>
                 {%- if block.settings.image != blank -%}
                   {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" class="section-logo-list__link">{%- endif -%}
+                    {%- assign logo_alt = 'accessibility.brand_logo' | t -%}
+                    {%- assign logo_alt = block.settings.image.alt | default: logo_alt -%}
                     {{ block.settings.image | image_url: height: 120 | image_tag:
                       loading: 'lazy', decoding: 'async',
-                      alt: block.settings.image.alt | default: 'Brand logo',
+                      alt: logo_alt,
                       class: 'section-logo-list__logo'
                     }}
                   {%- if block.settings.link != blank -%}</a>{%- endif -%}
                 {%- else -%}
                   <div class="section-logo-list__ph">
-                    {{ 'image' | placeholder_svg_tag }}
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                   </div>
                 {%- endif -%}
               </div>
@@ -61,18 +80,22 @@
       <div class="page-width">
         <div class="section-logo-list__grid" style="--ll-cols: {{ section.settings.columns_desktop }};">
           {%- for block in section.blocks -%}
+            {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
+            {%- unless block.settings.image != blank or request.design_mode -%}{%- continue -%}{%- endunless -%}
             <div class="section-logo-list__item" {{ block.shopify_attributes }}>
               {%- if block.settings.image != blank -%}
                 {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" class="section-logo-list__link">{%- endif -%}
+                  {%- assign logo_alt = 'accessibility.brand_logo' | t -%}
+                  {%- assign logo_alt = block.settings.image.alt | default: logo_alt -%}
                   {{ block.settings.image | image_url: height: 120 | image_tag:
                     loading: 'lazy', decoding: 'async',
-                    alt: block.settings.image.alt | default: 'Brand logo',
+                    alt: logo_alt,
                     class: 'section-logo-list__logo'
                   }}
                 {%- if block.settings.link != blank -%}</a>{%- endif -%}
               {%- else -%}
                 <div class="section-logo-list__ph">
-                  {{ 'image' | placeholder_svg_tag }}
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                 </div>
               {%- endif -%}
             </div>
@@ -81,20 +104,32 @@
       </div>
     {%- endif -%}
   {%- endif -%}
+  {%- if app_blocks != blank -%}
+    <div class="page-width">
+      <div class="section-apps">{{ app_blocks }}</div>
+    </div>
+  {%- endif -%}
 </div>
+{%- endif -%}
 
 {% stylesheet %}
   .section-logo-list {
     padding-block: var(--ll-mt) var(--ll-mb);
     background: rgb(var(--color-background));
+    border-top: 1px solid var(--color-hairline);
     overflow: hidden;
   }
   @media (min-width: 750px) {
     .section-logo-list { padding-block: var(--ll-dt) var(--ll-db); }
   }
-  .section-logo-list__head { text-align: center; margin-bottom: 2rem; }
-  .section-logo-list__heading { margin: 0; color: rgb(var(--color-foreground)); }
-
+  .section-logo-list__head { text-align: center; margin-bottom: 1.75rem; }
+  .section-logo-list__heading {
+    margin: 0;
+    font-weight: var(--eyebrow-weight);
+    letter-spacing: var(--eyebrow-tracking);
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
   .section-logo-list__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -110,7 +145,7 @@
   }
 
   .section-logo-list__item { display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .section-logo-list__link { display: flex; transition: opacity 0.3s; }
+  .section-logo-list__link { display: flex; transition: opacity var(--duration-medium); }
   .section-logo-list__link:hover { opacity: 0.6; }
 
   .section-logo-list__logo {
@@ -119,7 +154,7 @@
     object-fit: contain;
     opacity: 0.55;
     filter: grayscale(100%);
-    transition: opacity 0.3s, filter 0.3s;
+    transition: opacity var(--duration-medium), filter var(--duration-medium);
   }
   .section-logo-list__item:hover .section-logo-list__logo {
     opacity: 1;
@@ -149,45 +184,45 @@
 
 {% schema %}
 {
-  "name": "Logo list",
+  "name": "t:sections.logo_list.name",
   "tag": "section",
   "class": "section-logo-list-wrapper",
   "settings": [
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Color scheme",
+      "label": "t:sections.logo_list.settings.color_scheme.label",
       "default": "scheme-1"
     },
     {
       "type": "header",
-      "content": "Heading"
+      "content": "t:sections.logo_list.settings.header__heading.content"
     },
     {
       "type": "inline_richtext",
       "id": "heading",
-      "label": "Heading"
+      "label": "t:sections.logo_list.settings.heading.label"
     },
     {
       "type": "select",
       "id": "heading_size",
-      "label": "Heading size",
+      "label": "t:sections.logo_list.settings.heading_size.label",
       "options": [
         {
           "value": "xs",
-          "label": "Extra small"
+          "label": "t:sections.logo_list.settings.heading_size.options.xs"
         },
         {
           "value": "sm",
-          "label": "Small"
+          "label": "t:sections.logo_list.settings.heading_size.options.sm"
         },
         {
           "value": "md",
-          "label": "Medium"
+          "label": "t:sections.logo_list.settings.heading_size.options.md"
         },
         {
           "value": "lg",
-          "label": "Large"
+          "label": "t:sections.logo_list.settings.heading_size.options.lg"
         }
       ],
       "default": "sm"
@@ -195,39 +230,39 @@
     {
       "type": "select",
       "id": "heading_tag",
-      "label": "Heading tag",
+      "label": "t:sections.logo_list.settings.heading_tag.label",
       "options": [
         {
           "value": "h2",
-          "label": "H2"
+          "label": "t:sections.logo_list.settings.heading_tag.options.h2"
         },
         {
           "value": "h3",
-          "label": "H3"
+          "label": "t:sections.logo_list.settings.heading_tag.options.h3"
         },
         {
           "value": "p",
-          "label": "P"
+          "label": "t:sections.logo_list.settings.heading_tag.options.p"
         }
       ],
       "default": "h3"
     },
     {
       "type": "header",
-      "content": "Layout"
+      "content": "t:sections.logo_list.settings.header__layout.content"
     },
     {
       "type": "select",
       "id": "layout",
-      "label": "Layout",
+      "label": "t:sections.logo_list.settings.layout.label",
       "options": [
         {
           "value": "grid",
-          "label": "Grid"
+          "label": "t:sections.logo_list.settings.layout.options.grid"
         },
         {
           "value": "marquee",
-          "label": "Marquee (auto scroll)"
+          "label": "t:sections.logo_list.settings.layout.options.marquee"
         }
       ],
       "default": "grid"
@@ -238,7 +273,7 @@
       "min": 3,
       "max": 8,
       "step": 1,
-      "label": "Desktop columns",
+      "label": "t:sections.logo_list.settings.columns_desktop.label",
       "default": 5,
       "visible_if": "{{ section.settings.layout == 'grid' }}"
     },
@@ -249,7 +284,7 @@
       "max": 80,
       "step": 5,
       "unit": "px",
-      "label": "Logo height",
+      "label": "t:sections.logo_list.settings.logo_height.label",
       "default": 40
     },
     {
@@ -259,13 +294,13 @@
       "max": 60,
       "step": 5,
       "unit": "s",
-      "label": "Marquee speed",
+      "label": "t:sections.logo_list.settings.marquee_speed.label",
       "default": 30,
       "visible_if": "{{ section.settings.layout == 'marquee' }}"
     },
     {
       "type": "header",
-      "content": "Desktop spacing"
+      "content": "t:sections.logo_list.settings.header__desktop_spacing.content"
     },
     {
       "type": "range",
@@ -274,7 +309,7 @@
       "max": 150,
       "step": 5,
       "unit": "px",
-      "label": "Top spacing",
+      "label": "t:sections.logo_list.settings.padding_top_desktop.label",
       "default": 40
     },
     {
@@ -284,12 +319,12 @@
       "max": 150,
       "step": 5,
       "unit": "px",
-      "label": "Bottom spacing",
+      "label": "t:sections.logo_list.settings.padding_bottom_desktop.label",
       "default": 40
     },
     {
       "type": "header",
-      "content": "Mobile spacing"
+      "content": "t:sections.logo_list.settings.header__mobile_spacing.content"
     },
     {
       "type": "range",
@@ -298,7 +333,7 @@
       "max": 100,
       "step": 5,
       "unit": "px",
-      "label": "Top spacing",
+      "label": "t:sections.logo_list.settings.padding_top_mobile.label",
       "default": 25
     },
     {
@@ -308,25 +343,25 @@
       "max": 100,
       "step": 5,
       "unit": "px",
-      "label": "Bottom spacing",
+      "label": "t:sections.logo_list.settings.padding_bottom_mobile.label",
       "default": 25
     }
   ],
   "blocks": [
     {
       "type": "logo",
-      "name": "Logo",
+      "name": "t:sections.logo_list.blocks.logo.name",
       "settings": [
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Logo image",
-          "info": "Recommended: transparent PNG"
+          "label": "t:sections.logo_list.blocks.logo.settings.image.label",
+          "info": "t:sections.logo_list.blocks.logo.settings.image.info"
         },
         {
           "type": "url",
           "id": "link",
-          "label": "Link"
+          "label": "t:sections.logo_list.blocks.logo.settings.link.label"
         }
       ]
     },
@@ -336,7 +371,7 @@
   ],
   "presets": [
     {
-      "name": "Logo list",
+      "name": "t:sections.logo_list.presets.logo_list.name",
       "category": "Image",
       "blocks": [
         {

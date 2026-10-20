@@ -69,43 +69,100 @@
   class AddressModal extends HTMLElement {
     constructor() {
       super();
-      this.allProvince = [];
-      this.allDistrict = [];
-      this.allWard = [];
-      this.loadedData = false;
     }
 
     connectedCallback() {
       this.bindEvents();
+      this.initAddressSelects();
     }
 
     bindEvents() {
-      // Close button events
       this.querySelectorAll('[data-action="close-address-modal"]').forEach(el => {
         el.addEventListener('click', () => this.close());
       });
+    }
 
-      // Country change event
-      const countrySelect = this.querySelector('[name="address[country]"], [name="Country"]');
-      if (countrySelect) {
-        countrySelect.addEventListener('change', () => this.handleCountryChange(countrySelect));
-      }
+    initAddressSelects() {
+      const forms = this.querySelectorAll('form');
+      const containers = forms.length ? Array.from(forms) : [this];
 
-      // Province/District/Ward change events
-      this.addEventListener('change', (e) => {
-        const select = e.target.closest('select[data-address-type]');
-        if (!select) return;
+      containers.forEach(container => {
+        const countrySelect = container.querySelector('select[name="address[country]"], select[name="Country"]');
+        const provinceSelect = container.querySelector('select[name="address[province]"], select[name="Province"]');
+        if (!countrySelect) return;
 
-        const type = select.dataset.addressType;
-        const zone = select.dataset.addressZone;
+        if (countrySelect.dataset.default) {
+          const defaultCountry = countrySelect.dataset.default;
+          const matchOption = Array.from(countrySelect.options).find(
+            opt => opt.value === defaultCountry || opt.text === defaultCountry
+          );
+          if (matchOption) {
+            countrySelect.value = matchOption.value;
+            matchOption.selected = true;
+          }
+        }
 
-        if (type === 'province') {
-          this.setDistrict(zone, select.value, undefined);
-          this.setWard(zone, '', undefined);
-        } else if (type === 'district') {
-          this.setWard(zone, select.value, undefined);
+        if (provinceSelect) {
+          this.populateProvinces(countrySelect, provinceSelect, true);
+          if (!countrySelect._hasAddressListener) {
+            countrySelect._hasAddressListener = true;
+            countrySelect.addEventListener('change', () => {
+              this.populateProvinces(countrySelect, provinceSelect, false);
+            });
+          }
         }
       });
+    }
+
+    populateProvinces(countrySelect, provinceSelect, isInitial) {
+      const selectedOption = countrySelect.options[countrySelect.selectedIndex];
+      let provinces = [];
+
+      if (selectedOption && selectedOption.hasAttribute('data-provinces')) {
+        try {
+          provinces = JSON.parse(selectedOption.getAttribute('data-provinces') || '[]');
+        } catch (e) {
+          provinces = [];
+        }
+      }
+
+      while (provinceSelect.options.length > 1) {
+        provinceSelect.remove(1);
+      }
+
+      const defaultProvince = isInitial ? (provinceSelect.dataset.default || '') : '';
+      let hasSelected = false;
+
+      if (Array.isArray(provinces) && provinces.length > 0) {
+        let matchedOption = null;
+        provinces.forEach(p => {
+          const value = Array.isArray(p) ? p[0] : (typeof p === 'object' && p !== null ? (p.value || p.name) : String(p));
+          const label = Array.isArray(p) ? (p[1] || p[0]) : (typeof p === 'object' && p !== null ? (p.label || p.name || p.value) : String(p));
+          const option = new Option(label, value);
+          if (defaultProvince && (value === defaultProvince || label === defaultProvince)) {
+            matchedOption = option;
+          }
+          provinceSelect.add(option);
+        });
+
+        if (matchedOption) {
+          matchedOption.selected = true;
+          hasSelected = true;
+        }
+      }
+
+      if (!hasSelected && provinceSelect.options.length > 0) {
+        provinceSelect.selectedIndex = 0;
+      }
+
+      const provinceGroup = provinceSelect.closest('.form-group');
+      if (!provinces || provinces.length === 0) {
+        if (provinceGroup) provinceGroup.hidden = true;
+        provinceSelect.disabled = true;
+      } else {
+        if (provinceGroup) provinceGroup.hidden = false;
+        provinceSelect.disabled = false;
+      }
     }
 
     open() {
@@ -116,25 +173,6 @@
         document.body.style.overflow = 'hidden';
       }
       if (window.ThemeUtils && ThemeUtils.trapFocus) ThemeUtils.trapFocus(this);
-
-      // Force-select country từ data-default (luôn chạy, dù value đã có)
-      // để selectedIndex đúng → data-provinces đọc được → province populate chính xác
-      const countrySelect = this.querySelector('[name="address[country]"], [name="Country"]');
-      if (countrySelect && countrySelect.dataset.default) {
-        const defVal = countrySelect.dataset.default;
-        const matchOpt = Array.from(countrySelect.options).find(
-          opt => opt.value === defVal || opt.text === defVal
-        );
-        if (matchOpt) matchOpt.selected = true;
-      }
-
-      // Populate province từ data-provinces + show/hide fields
-      if (countrySelect) this.handleCountryChange(countrySelect);
-
-      // Load district/ward data for Vietnamese address cascade
-      this.loadData().then(() => {
-        this.refreshAddressZones();
-      });
     }
 
     close() {
@@ -145,151 +183,6 @@
         document.body.style.overflow = '';
       }
       if (window.ThemeUtils && ThemeUtils.releaseFocus) ThemeUtils.releaseFocus(this);
-    }
-
-    handleCountryChange(select) {
-      // Haravan dùng data-default để set selected, nên cần fallback
-      const val = select.value || select.dataset.default || '';
-      const isVN = val === 'Việt Nam' || val === 'Vietnam' || val === 'Viet Nam' || val === '';
-      this.querySelectorAll('.not-vn').forEach(field => {
-        field.style.display = isVN ? '' : 'none';
-      });
-      // Populate province từ data-provinces của country option
-      this.querySelectorAll('select[data-address-type="province"]').forEach(ps => {
-        this.setProvinceFromCountry(select, ps.dataset.addressZone, ps.dataset.default || '');
-      });
-    }
-
-    // Đọc data-provinces từ country option (Haravan đã nhúng sẵn trong HTML)
-    setProvinceFromCountry(countrySelect, zone, defaultVal) {
-      const $province = this.querySelector(`select[data-address-type='province'][data-address-zone='${zone}']`);
-      if (!$province) return;
-
-      const selectedOpt = countrySelect.options[countrySelect.selectedIndex];
-      let provinces = [];
-      try {
-        provinces = JSON.parse(selectedOpt?.getAttribute('data-provinces') || '[]');
-      } catch (e) {}
-
-      if (!provinces.length) {
-        $province.innerHTML = '<option value="" hidden>---</option>';
-        $province.disabled = true;
-        return;
-      }
-
-      let html = '<option value="" hidden>---</option>';
-      provinces.forEach(p => {
-        const name = Array.isArray(p) ? p[0] : (p.name || p);
-        const selected = name === defaultVal ? ' selected' : '';
-        html += `<option value="${name}"${selected}>${name}</option>`;
-      });
-      $province.disabled = false;
-      $province.innerHTML = html;
-    }
-
-    async loadData() {
-      if (this.loadedData) return;
-      // Shopify does not have /checkout/addresses.json (Haravan-only).
-      // Province data comes from country option's data-provinces attribute instead.
-      this.allProvince = [];
-      this.allDistrict = [];
-      this.allWard = [];
-    }
-
-    setProvince(zone, province) {
-      const $province = this.querySelector(`select[data-address-type='province'][data-address-zone='${zone}']`);
-      if (!$province) return;
-
-      let list = '<option value="" hidden>---</option>';
-      this.allProvince.forEach(p => {
-        const selected = p.name === province ? ' selected' : '';
-        list += `<option value="${p.name}"${selected}>${p.name}</option>`;
-      });
-      $province.innerHTML = list;
-    }
-
-    setDistrict(zone, province, district) {
-      const $district = this.querySelector(`select[data-address-type='district'][data-address-zone='${zone}']`);
-      if (!$district) return;
-
-      if (!province) {
-        $district.value = '';
-        $district.disabled = true;
-        $district.innerHTML = '';
-        return;
-      }
-
-      const provinceObj = this.allProvince.find(p => p.name === province);
-      if (!provinceObj) return;
-
-      const districts = this.allDistrict.filter(d => d.province_id === provinceObj.id);
-      let list = '<option value="" hidden>---</option>';
-      districts.forEach(d => {
-        const selected = d.name === district ? ' selected' : '';
-        list += `<option value="${d.name}"${selected}>${d.name}</option>`;
-      });
-      $district.disabled = false;
-      $district.innerHTML = list;
-    }
-
-    setWard(zone, district, ward) {
-      const $ward = this.querySelector(`select[data-address-type='ward'][data-address-zone='${zone}']`);
-      if (!$ward) return;
-
-      if (!district) {
-        $ward.value = '';
-        $ward.disabled = true;
-        $ward.innerHTML = '';
-        return;
-      }
-
-      const districtObj = this.allDistrict.find(d => d.name === district);
-      if (!districtObj) return;
-
-      const wards = this.allWard.filter(w => w.district_id === districtObj.id);
-      let list = '<option value="" hidden>---</option>';
-      wards.forEach(w => {
-        const selected = w.name === ward ? ' selected' : '';
-        list += `<option value="${w.name}"${selected}>${w.name}</option>`;
-      });
-      $ward.disabled = false;
-      $ward.innerHTML = list;
-    }
-
-    async refreshAddressZones() {
-      // Province: đọc từ data-provinces trong HTML (không cần API)
-      const countrySelect = this.querySelector('[name="address[country]"], [name="Country"]');
-      if (countrySelect) {
-        this.querySelectorAll('select[data-address-type="province"]').forEach(ps => {
-          this.setProvinceFromCountry(countrySelect, ps.dataset.addressZone, ps.dataset.default || '');
-        });
-      }
-
-      // District/Ward: từ API (VN)
-      await this.loadData();
-
-      const zones = {};
-      this.querySelectorAll('select[data-address-type="province"]').forEach(ps => {
-        const z = ps.dataset.addressZone;
-        if (!zones[z]) zones[z] = {};
-        zones[z].province = ps.value || ps.dataset.default || '';
-      });
-      this.querySelectorAll('select[data-address-type="district"]').forEach(ds => {
-        const z = ds.dataset.addressZone;
-        if (!zones[z]) zones[z] = {};
-        zones[z].district = ds.value || ds.dataset.default || '';
-      });
-      this.querySelectorAll('select[data-address-type="ward"]').forEach(ws => {
-        const z = ws.dataset.addressZone;
-        if (!zones[z]) zones[z] = {};
-        zones[z].ward = ws.value || ws.dataset.default || '';
-      });
-
-      Object.keys(zones).forEach(zoneName => {
-        const zone = zones[zoneName];
-        this.setDistrict(zoneName, zone.province, zone.district);
-        this.setWard(zoneName, zone.district, zone.ward);
-      });
     }
   }
   if (!customElements.get('address-modal')) customElements.define('address-modal', AddressModal);

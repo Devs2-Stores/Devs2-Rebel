@@ -94,7 +94,12 @@
     },
     "contact_form": {
       "type": "contact-form",
-      "settings": {}
+      "settings": {
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 30,
+        "padding_bottom_mobile": 50
+      }
     }
   },
   "order": [

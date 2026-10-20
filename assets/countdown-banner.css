@@ -3,10 +3,15 @@
    ═══════════════════════════════════════════════════ */
 .countdown-banner {
   display: block;
-  background: var(--countdown-bg, #1a1a2e);
-  color: var(--countdown-text, #fff);
+  background: var(--countdown-bg, rgb(var(--color-foreground)));
+  color: var(--countdown-text, rgb(var(--color-background)));
   overflow: hidden;
-  border-radius: 0.75rem;
+  border-radius: var(--text-boxes-radius);
+  border: var(--text-boxes-border);
+  box-shadow: var(--text-boxes-shadow);
+}
+.countdown-banner[hidden] {
+  display: none;
 }
 
 /* ── Inner layout ── */
@@ -20,6 +25,7 @@
 @media (min-width: 750px) {
   .countdown-banner--horizontal .countdown-banner__inner {
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-between;
     padding-block: 2.5rem;
   }
@@ -30,7 +36,9 @@
   flex-shrink: 0;
   width: 100%;
   max-width: 220px;
-  border-radius: 0.75rem;
+  border-radius: var(--media-radius);
+  border: var(--media-border);
+  box-shadow: var(--media-shadow);
   overflow: hidden;
 }
 @media (min-width: 750px) {
@@ -44,7 +52,7 @@
   width: 100%;
   height: auto;
   object-fit: cover;
-  border-radius: 0.75rem;
+  border-radius: var(--media-radius);
 }
 
 /* ── Content ── */
@@ -54,6 +62,7 @@
 }
 @media (min-width: 750px) {
   .countdown-banner--horizontal .countdown-banner__content {
+    flex: 1 1 16rem;
     text-align: start;
   }
 }
@@ -75,22 +84,22 @@
   line-height: 1.5;
 }
 .countdown-banner__btn {
-  display: inline-block;
-  padding: 0.75rem 2rem;
-  background: var(--countdown-accent, #e94560);
-  color: #fff;
-  font-size: 0.875rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--btn-height);
+  padding: 0 var(--btn-padding-x);
+  background: var(--countdown-accent, var(--color-inverse-button));
+  color: var(--countdown-btn-text, var(--color-inverse-button-text));
+  font-size: var(--btn-font-size);
+  font-weight: var(--btn-font-weight);
+  letter-spacing: var(--btn-letter-spacing);
   text-decoration: none;
-  border-radius: 0.375rem;
-  transition: all 0.25s ease;
+  border-radius: var(--buttons-radius);
+  transition: opacity var(--duration-default) ease;
 }
 .countdown-banner__btn:hover {
-  filter: brightness(1.15);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  opacity: 0.88;
 }
 
 /* ── Timer ── */
@@ -110,10 +119,9 @@
   gap: 0.25rem;
   min-width: 3.5rem;
   padding: 0.75rem 0.5rem;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 0.5rem;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--text-boxes-radius);
 }
 @media (min-width: 750px) {
   .countdown-banner__unit {
@@ -161,9 +169,3 @@
   text-align: center;
 }
 .countdown-banner--stacked .countdown-banner__content { text-align: center; }
-
-/* ── Animation: pulse on last 60 seconds ── */
-@keyframes countdown-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}

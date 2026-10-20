@@ -3,7 +3,7 @@
   overflow: hidden;
   height: 1px;
   left: -99999px;
-  word-wrap: normal !important;
+  overflow-wrap: normal;
 }
 .skip-to-content-link:focus {
   position: fixed;
@@ -12,8 +12,9 @@
   z-index: var(--z-toast);
   height: auto;
   padding: var(--space-sm) var(--space-md);
-  background: var(--color-primary);
-  color: var(--color-white);
-  border-radius: var(--radius-sm);
-  outline: 2px solid var(--color-white);
+  background: var(--color-ink);
+  color: var(--color-bg);
+  border-radius: var(--buttons-radius);
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
 }

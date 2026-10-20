@@ -10,24 +10,21 @@
   assign available = product.selected_or_first_available_variant.available
 -%}
 
-<div class="back-in-stock" data-back-in-stock style="{% if available %}display:none{% endif %}" {{ block.shopify_attributes }}>
+<div class="back-in-stock" data-back-in-stock {% if available %}hidden{% endif %} {{ block.shopify_attributes }}>
   <div class="back-in-stock__inner">
     <div class="back-in-stock__header">
-      <span class="back-in-stock__icon">🔔</span>
       <strong class="back-in-stock__title">{{ 'products.product.back_in_stock_title' | t }}</strong>
     </div>
     <p class="back-in-stock__desc">{{ 'products.product.back_in_stock_desc' | t }}</p>
     {% form 'contact' %}
       {%- if form.posted_successfully? -%}
         <div class="back-in-stock__success" role="alert">
-          <span>✅</span> {{ 'products.product.back_in_stock_success' | t }}
+          {{ 'products.product.back_in_stock_success' | t }}
         </div>
       {%- endif -%}
       <div
         class="back-in-stock__form"
-        {% if form.posted_successfully? %}
-          style="display:none"
-        {% endif %}
+        {% if form.posted_successfully? %}hidden{% endif %}
       >
         <input
           type="email"
@@ -45,7 +42,7 @@
         >
         <button
           type="submit"
-          class="back-in-stock__submit button-primary"
+          class="back-in-stock__submit button-primary active"
           aria-label="{{ 'products.product.back_in_stock_title' | t }}"
         >
           <svg

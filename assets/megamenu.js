@@ -66,8 +66,53 @@
         }
       }, true);
 
+      this.addEventListener('focusin', function(e) {
+        var parent = e.target.closest('.megamenu__simple-parent, .megamenu__link-parent');
+        if (parent && e.target.parentElement === parent) self.checkSubmenuOverflow(parent);
+      });
+
+      this.querySelectorAll('.megamenu__item').forEach(function(item) {
+        var trigger = item.querySelector(':scope > .megamenu__trigger[aria-expanded]');
+        if (!trigger) return;
+
+        item.addEventListener('mouseenter', function() {
+          item.classList.remove('is-dismissed');
+          self.syncExpanded(item);
+        });
+        item.addEventListener('mouseleave', function() {
+          if (!item.contains(document.activeElement)) item.classList.remove('is-dismissed');
+          self.syncExpanded(item);
+        });
+        item.addEventListener('focusin', function() {
+          self.syncExpanded(item);
+        });
+        item.addEventListener('focusout', function(e) {
+          if (item.contains(e.relatedTarget)) return;
+          if (!item.matches(':hover')) item.classList.remove('is-dismissed');
+          self.syncExpanded(item, false);
+        });
+        trigger.addEventListener('click', function() {
+          item.classList.remove('is-dismissed');
+          self.syncExpanded(item);
+        });
+        item.addEventListener('keydown', function(e) {
+          if (e.key !== 'Escape' || item.classList.contains('is-dismissed')) return;
+          item.classList.add('is-dismissed');
+          trigger.focus();
+          self.syncExpanded(item);
+        });
+      });
+
       // Initial check for all dropdowns
       this.checkAllDropdowns();
+    }
+
+    syncExpanded(item, focusInside) {
+      var trigger = item.querySelector(':scope > .megamenu__trigger[aria-expanded]');
+      if (!trigger) return;
+      var inside = typeof focusInside === 'boolean' ? focusInside : item.contains(document.activeElement);
+      var open = !item.classList.contains('is-dismissed') && (inside || item.matches(':hover'));
+      trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
     }
 
     checkAllDropdowns() {

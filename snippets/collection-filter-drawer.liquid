@@ -1,0 +1,95 @@
+{% doc %}
+  Collection Filter Drawer / Modal snippet.
+  Renders either the sidebar drawer or the slide-in modal depending on filter_layout.
+{% enddoc %}
+
+{%- liquid
+  assign results = results | default: collection
+  assign sort_by = results.sort_by | default: results.default_sort_by
+  if results.url
+    assign results_url = results.url
+  else
+    assign terms_encoded = results.terms | replace: '&amp;', '&' | replace: '&#39;', "'" | replace: '&quot;', '"' | replace: '&lt;', '<' | replace: '&gt;', '>' | url_encode
+    assign results_url = routes.search_url | append: '?q=' | append: terms_encoded | append: '&type=product,article,page'
+  endif
+  if results_url contains '?'
+    assign clear_url = results_url | append: '&sort_by=' | append: sort_by
+  else
+    assign clear_url = results_url | append: '?sort_by=' | append: sort_by
+  endif
+-%}
+
+{%- if enable_filtering -%}
+  {%- if filter_layout == 'sidebar' -%}
+    <div class="collection-template__facet-filter" id="CollectionFilterDrawer">
+      <div class="collection-template__facet-filter-header">
+        <span class="collection-template__facet-filter-header-title" id="CollectionFilterDrawerTitle">
+          {{- 'products.facets.filter_button' | t -}}
+        </span>
+        <button
+          type="button"
+          class="collection-template__close-filter"
+          data-action="close-filter"
+          aria-label="{{ 'accessibility.close' | t }}"
+        >
+          {%- render 'icon', name: 'close' -%}
+        </button>
+      </div>
+      <div class="collection-template__facet-filter-title">
+        <strong>{{ 'products.facets.filter_by_label' | t }}</strong>
+      </div>
+      <div class="collection-template__facet-filter-content" id="FacetFiltersContainer">
+        {%- render 'collection-facet-filter', results: results, price_filter_style: price_filter_style -%}
+      </div>
+    </div>
+    <div class="collection-template__filter-overlay" data-action="close-filter"></div>
+
+  {%- elsif filter_layout == 'modal' -%}
+    <div
+      class="collection-filter-modal"
+      id="CollectionFilterModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="filter-modal-title"
+      aria-hidden="true"
+    >
+      <button
+        type="button"
+        class="collection-filter-modal__overlay"
+        data-action="close-filter-modal"
+        aria-label="{{ 'accessibility.close' | t }}"
+        tabindex="-1"
+      ></button>
+      <div class="collection-filter-modal__panel">
+        <div class="collection-filter-modal__header">
+          <h2 class="collection-filter-modal__title" id="filter-modal-title">
+            {{ 'products.facets.filter_by_label' | t }}
+          </h2>
+          <button
+            type="button"
+            class="collection-filter-modal__close"
+            data-action="close-filter-modal"
+            aria-label="{{ 'accessibility.close' | t }}"
+          >
+            {%- render 'icon', name: 'close' -%}
+          </button>
+        </div>
+        <div class="collection-filter-modal__body" id="FacetFiltersContainer">
+          {%- render 'collection-facet-filter', results: results, collapse_filters: false, price_filter_style: price_filter_style -%}
+        </div>
+        <div class="collection-filter-modal__footer">
+          <a
+            href="{{ clear_url }}"
+            class="collection-filter-modal__clear-btn"
+            data-filter-remove
+          >
+            {{ 'products.facets.clear_all_filters' | t }}
+          </a>
+          <button type="button" class="collection-filter-modal__apply-btn" data-action="close-filter-modal">
+            {{ 'products.facets.apply_filters' | t }}
+          </button>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+{%- endif -%}

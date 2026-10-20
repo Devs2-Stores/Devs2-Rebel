@@ -14,24 +14,24 @@
 -%}
 
 <div class="product-template__price-box" {{ block.shopify_attributes }}>
-  <div class="product-template__price-current" data-product-price>
+  <div class="product-template__price-current{% if has_compare %} product-template__price-current--sale{% endif %}" data-product-price>
     {%- if selected_variant.price == 0 -%}
       {{ 'products.product.price.contact' | t }}
     {%- else -%}
-      {{ selected_variant.price | money }}
+      {%- if settings.currency_code_enabled -%}{{ selected_variant.price | money_with_currency }}{%- else -%}{{ selected_variant.price | money }}{%- endif -%}
     {%- endif -%}
   </div>
   <div
     class="product-template__price-compare"
     data-product-compare
-    style="display: {%- if has_compare -%}block{%- else -%}none{%- endif -%};"
+    {% unless has_compare %}hidden{% endunless %}
   >
     {{- selected_variant.compare_at_price | money -}}
   </div>
   <div
     class="product-template__price-sale"
     data-product-sale
-    style="display: {%- if has_compare -%}block{%- else -%}none{%- endif -%};"
+    {% unless has_compare %}hidden{% endunless %}
   >
     {%- if has_compare -%}
       {%- assign percent = selected_variant.compare_at_price | minus: selected_variant.price | times: 100.0 | divided_by: selected_variant.compare_at_price | round -%}
@@ -46,8 +46,16 @@
       {{ selected_variant.unit_price | money }}/{{ selected_variant.unit_price_measurement.reference_value }}{{ selected_variant.unit_price_measurement.reference_unit }}
     </div>
   {%- endif -%}
-  {%- if cart.taxes_included -%}
-    <div class="product-template__tax-notice">{{ 'products.product.include_taxes' | t }}</div>
+  {%- if cart.taxes_included or shop.shipping_policy.body != blank -%}
+    <div class="product-template__tax-notice">
+      {%- if cart.taxes_included and shop.shipping_policy.body != blank -%}
+        {{ 'products.product.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
+      {%- elsif cart.taxes_included -%}
+        {{ 'products.product.include_taxes' | t }}
+      {%- elsif shop.shipping_policy.body != blank -%}
+        {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
+      {%- endif -%}
+    </div>
   {%- endif -%}
 </div>
 

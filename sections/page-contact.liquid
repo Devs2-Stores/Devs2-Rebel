@@ -1,5 +1,10 @@
 
-<contact-page class="page-contact">
+<contact-page
+  class="page-contact"
+  data-msg-required="{{ 'sections.page_contact.error_required' | t | escape }}"
+  data-msg-email="{{ 'sections.page_contact.error_email' | t | escape }}"
+  data-msg-phone="{{ 'sections.page_contact.error_phone' | t | escape }}"
+>
   <section class="contact-hero">
     <div class="page-width">
       <div class="contact-hero__wrap">
@@ -81,7 +86,7 @@
                     </div>
                     <div class="contact-main__info-item-content">
                       <h3 class="contact-main__info-item-title">{{ 'sections.page_contact.email' | t }}</h3>
-                      <a href="mailto:{{ contact_email }}" class="contact-main__info-item-text" title="Email {{ contact_email | escape }}">{{ contact_email | escape }}</a>
+                      <a href="mailto:{{ contact_email }}" class="contact-main__info-item-text" title="{{ 'sections.page_contact.email' | t }} {{ contact_email | escape }}">{{ contact_email | escape }}</a>
                     </div>
                   </div>
                 {%- endif -%}
@@ -122,7 +127,7 @@
         <div class="contact-main__form contact-main__sticky-target">
           <h2 class="contact-main__form-title">{{ 'sections.page_contact.send_message' | t }}</h2>
           {%- assign contact_form_id = 'ContactForm-' | append: section.id -%}
-          {%- form 'contact', id: contact_form_id, class: 'contact-form' -%}
+          {%- form 'contact', id: contact_form_id, class: 'contact-form', novalidate: 'novalidate' -%}
           {%- if form.posted_successfully? -%}
           <div class="contact-form__success" role="status" tabindex="-1" data-contact-success>
             <div class="contact-form__success-icon">
@@ -289,6 +294,10 @@
 (function() {
   var section = document.getElementById('shopify-section-{{ section.id }}');
   if (!section) return;
+
+  var notice = section.querySelector('[data-contact-errors], [data-contact-success]');
+  if (notice) notice.focus();
+
   var wrap = section.querySelector('[data-contact-sticky-wrap]');
   if (!wrap) return;
   var targets = wrap.querySelectorAll('.contact-main__sticky-target');
@@ -318,21 +327,6 @@
     var ro = new ResizeObserver(syncSticky);
     targets.forEach(function(node) { ro.observe(node); });
   }
-
-  var form = section.querySelector('.contact-form');
-  if (form) {
-    var submit = form.querySelector('[data-contact-submit]');
-    form.addEventListener('submit', function() {
-      if (!submit || !form.checkValidity()) return;
-      submit.disabled = true;
-      submit.setAttribute('aria-disabled', 'true');
-      submit.querySelector('.contact-form__submit-text').hidden = true;
-      submit.querySelector('.contact-form__submit-loading').hidden = false;
-    });
-  }
-
-  var notice = section.querySelector('[data-contact-errors], [data-contact-success]');
-  if (notice) notice.focus();
 })();
 </script>
 </contact-page>

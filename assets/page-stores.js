@@ -16,6 +16,24 @@
     return removeDiacritics((str || '').toLowerCase().trim());
   }
 
+  var WEEKDAYS = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+
+  function parseOffset(value) {
+    var match = /^([+-])(\d{2}):?(\d{2})$/.exec(value || '');
+    if (!match) return null;
+    var minutes = Number(match[2]) * 60 + Number(match[3]);
+    return match[1] === '-' ? -minutes : minutes;
+  }
+
+  function zoneFormatter(timeZone) {
+    if (!timeZone) return null;
+    try {
+      return new Intl.DateTimeFormat('en-US', { timeZone: timeZone, weekday: 'short', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' });
+    } catch (error) {
+      return null;
+    }
+  }
+
   /* ── Custom Element ────────────────────────────── */
   class StoresPage extends HTMLElement {
     connectedCallback() {
@@ -33,6 +51,7 @@
         open: this.dataset.openLabel || '',
         closed: this.dataset.closedLabel || ''
       };
+      this.shopOffset = parseOffset(this.dataset.shopUtcOffset);
 
       if (!this.cards.length) return;
 
@@ -81,7 +100,9 @@
         district: (card.dataset.storeDistrict || '').trim(),
         provinceNorm: normalize(card.dataset.storeProvince),
         districtNorm: normalize(card.dataset.storeDistrict),
-        hours: card.dataset.storeHours || ''
+        hours: card.dataset.storeHours || '',
+        clock: zoneFormatter((card.dataset.storeTimezone || '').trim()),
+        status: card.querySelector('[data-store-status]')
       }));
       this.updateStoreStatuses();
     }
@@ -136,18 +157,18 @@
       this.searchInput.addEventListener('input', function() {
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(function() {
-          self.applyFilters();
+          self.applyFilters(false);
         }, 200);
       });
 
       this.provinceSelect.addEventListener('change', function() {
         self.populateDistricts(this.value);
         self.districtSelect.value = '';
-        self.applyFilters();
+        self.applyFilters(true);
       });
 
       this.districtSelect.addEventListener('change', function() {
-        self.applyFilters();
+        self.applyFilters(true);
       });
 
       this.clearBtn.addEventListener('click', function() {
@@ -156,11 +177,12 @@
         self.districtSelect.value = '';
         self.districtSelect.disabled = true;
         self.populateDistricts('');
-        self.applyFilters();
+        self.applyFilters(true);
+        self.searchInput.focus({ preventScroll: true });
       });
     }
 
-    applyFilters() {
+    applyFilters(scroll) {
       var query = normalize(this.searchInput.value);
       var province = this.provinceSelect.value;
       var district = this.districtSelect.value;
@@ -198,9 +220,9 @@
       });
 
       this.updateCount(visibleCount);
-      this.clearBtn.style.display = hasFilter ? '' : 'none';
-      this.emptyEl.style.display = visibleCount === 0 ? '' : 'none';
-      this.scrollToResults();
+      this.clearBtn.hidden = !hasFilter;
+      this.emptyEl.hidden = visibleCount !== 0;
+      if (scroll) this.scrollToResults();
     }
 
     scrollToResults() {
@@ -223,25 +245,36 @@
     }
 
     updateStoreStatuses() {
+      var now = new Date();
       this.stores.forEach(store => {
-        var status = store.el.querySelector('[data-store-status]');
-        if (!status) return;
+        if (!store.status) return;
 
-        var isOpen = this.getStoreStatus(store.hours, new Date());
-        status.textContent = '';
-        status.classList.remove('is-open', 'is-closed');
-        if (isOpen === null) return;
+        var clock = this.storeClock(store, now);
+        var isOpen = clock ? this.getStoreStatus(store.hours, clock) : null;
+        if (isOpen === store.isOpen) return;
 
-        status.textContent = isOpen ? this.strings.open : this.strings.closed;
-        status.classList.toggle('is-open', isOpen);
-        status.classList.toggle('is-closed', !isOpen);
+        store.isOpen = isOpen;
+        store.status.textContent = isOpen === null ? '' : isOpen ? this.strings.open : this.strings.closed;
+        store.status.classList.toggle('is-open', isOpen === true);
+        store.status.classList.toggle('is-closed', isOpen === false);
       });
     }
 
-    getStoreStatus(hours, now) {
+    storeClock(store, now) {
+      if (store.clock) {
+        var parts = {};
+        store.clock.formatToParts(now).forEach(function(part) { parts[part.type] = part.value; });
+        return { day: WEEKDAYS[parts.weekday], minutes: Number(parts.hour) % 24 * 60 + Number(parts.minute) };
+      }
+      if (this.shopOffset === null) return null;
+      var shifted = new Date(now.getTime() + this.shopOffset * 60000);
+      return { day: shifted.getUTCDay(), minutes: shifted.getUTCHours() * 60 + shifted.getUTCMinutes() };
+    }
+
+    getStoreStatus(hours, clock) {
       var entries = String(hours || '').split(/[\n;,|/]+/).map(entry => entry.trim()).filter(Boolean);
       var fallback = null;
-      var today = now.getDay();
+      var today = clock.day;
 
       for (var i = 0; i < entries.length; i++) {
         var entry = entries[i];
@@ -250,7 +283,7 @@
 
         var normalizedEntry = normalize(entry);
         var isClosed = /\b(closed|close|dong cua|dong|nghi)\b/.test(normalizedEntry);
-        var state = isClosed ? false : this.getRangeStatus(entry, now);
+        var state = isClosed ? false : this.getRangeStatus(entry, clock.minutes);
         if (state === null) continue;
         if (days) return state;
         fallback = state;
@@ -295,7 +328,7 @@
       return Array.from(days);
     }
 
-    getRangeStatus(value, now) {
+    getRangeStatus(value, current) {
       var range = String(value).match(/(\d{1,2})(?::(\d{2}))?\s*(am|pm)?\s*[-\u2013\u2014]\s*(\d{1,2})(?::(\d{2}))?\s*(am|pm)?/i);
       if (!range) return null;
 
@@ -312,7 +345,6 @@
         end += 12 * 60;
       }
 
-      var current = now.getHours() * 60 + now.getMinutes();
       return end < start ? current >= start || current < end : current >= start && current < end;
     }
 

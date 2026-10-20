@@ -1,4 +1,7 @@
 {%- layout none -%}
+{{ 'variant-picker.css' | asset_url | stylesheet_tag }}
+{{ 'quantity-selector.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'quantity-selector.js' | asset_url }}" defer="defer"></script>
 {%- liquid
   assign available = product.selected_or_first_available_variant.available
   assign selected_variant = product.selected_or_first_available_variant | default: product.variants.first
@@ -18,19 +21,29 @@
   <div class="quickview-product__media">
     <div class="swiper quickview-product__slider">
       <div class="swiper-wrapper">
-        {%- if product.images.size > 0 -%}
-        {%- for image in product.images -%}
-        <div class="swiper-slide">
-          <img src="{{ image | image_url: width: 1024 }}" alt="{{ image.alt | default: product.title | escape }}" width="{{ image.width }}" height="{{ image.height }}" loading="lazy" class="quickview-product__image">
+        {%- if product.media.size > 0 -%}
+        {%- for media in product.media -%}
+        <div
+          class="swiper-slide product-template__media-slide product-template__media-slide--{{ media.media_type }}"
+          data-media-id="{{ media.id }}"
+          {% if media.media_type == 'external_video' %}data-video-host="{{ media.host }}"{% endif %}
+        >
+          {%- render 'product-media-item',
+            media: media,
+            product: product,
+            sizes: '(min-width: 750px) 50vw, 100vw',
+            loading: 'lazy',
+            image_class: 'quickview-product__image'
+          -%}
         </div>
         {%- endfor -%}
         {%- else -%}
         <div class="swiper-slide">
-          <img src="{{ 'no_image.png' | asset_url }}" alt="{{ product.title | escape }}" width="800" height="1200" loading="lazy" class="quickview-product__image">
+          {{ 'product-1' | placeholder_svg_tag: 'quickview-product__image quickview-product__image--placeholder' }}
         </div>
         {%- endif -%}
       </div>
-      {%- if product.images.size > 1 -%}
+      {%- if product.media.size > 1 -%}
       <button type="button" class="swiper-button-next" aria-label="{{ 'accessibility.next' | t }}"></button>
       <button type="button" class="swiper-button-prev" aria-label="{{ 'accessibility.previous' | t }}"></button>
       {%- endif -%}
@@ -43,19 +56,18 @@
     </h2>
 
     <ul class="quickview-product__meta">
-      {%- if settings.product_show_sku and selected_variant.sku != blank -%}
+      {%- if selected_variant.sku != blank -%}
       <li class="quickview-product__meta-item">
         <span class="quickview-product__meta-label">{{ 'products.product.sku' | t }}:</span>
         <strong data-product-sku>{{ selected_variant.sku }}</strong>
       </li>
       {%- endif -%}
-      {%- if settings.product_show_brand and product.vendor != blank -%}
+      {%- if product.vendor != blank -%}
       <li class="quickview-product__meta-item">
         <span class="quickview-product__meta-label">{{ 'products.product.vendor' | t }}:</span>
         <strong>{{ product.vendor }}</strong>
       </li>
       {%- endif -%}
-      {%- if settings.product_show_availability -%}
       <li class="quickview-product__meta-item">
         <span class="quickview-product__meta-label">{{ 'products.product.availability' | t }}:</span>
         {%- if available -%}
@@ -64,15 +76,14 @@
         <strong data-product-available class="quickview-product__status--unavailable">{{ 'products.product.inventory_out_of_stock' | t }}</strong>
         {%- endif -%}
       </li>
-      {%- endif -%}
     </ul>
 
     <div class="quickview-product__price" data-product-price-wrapper>
-      <span class="quickview-product__price-current" data-product-price>
+      <span class="quickview-product__price-current{% if quickview_on_sale %} quickview-product__price-current--sale{% endif %}" data-product-price>
         {%- if quickview_is_contact -%}
           {{ 'products.product.price.contact' | t }}
         {%- else -%}
-          {{ selected_variant.price | money }}
+          {%- if settings.currency_code_enabled -%}{{ selected_variant.price | money_with_currency }}{%- else -%}{{ selected_variant.price | money }}{%- endif -%}
         {%- endif -%}
       </span>
       <s class="quickview-product__price-compare{% unless quickview_on_sale %} hidden{% endunless %}" data-product-compare>{%- if quickview_on_sale -%}{{ selected_variant.compare_at_price | money }}{%- endif -%}</s>
@@ -89,7 +100,7 @@
       {%- render 'quantity-selector', product: product -%}
       <button
         type="button"
-        class="button-primary quickview-product__add-btn"
+        class="button-primary active quickview-product__add-btn"
         data-product-add
         {% unless available or quickview_is_contact %}disabled{% endunless %}
       >
@@ -110,3 +121,9 @@
     </a>
   </div>
 </div>
+{%- assign first_3d_model = product.media | where: 'media_type', 'model' | first -%}
+{%- if first_3d_model -%}
+  <script type="application/json" id="ModelJson-quickview-{{ product.id }}">
+    {{ product.media | where: 'media_type', 'model' | json }}
+  </script>
+{%- endif -%}

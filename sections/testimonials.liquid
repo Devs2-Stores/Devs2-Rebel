@@ -5,7 +5,7 @@
 
 {%- liquid
   assign layout = section.settings.layout
-  assign block_count = section.blocks.size
+  assign block_count = section.blocks | where: 'type', 'testimonial' | size
 -%}
 
 <div
@@ -40,6 +40,7 @@
           <div class="section-testimonials__swiper swiper" data-tm-slider>
             <div class="swiper-wrapper">
               {%- for block in section.blocks -%}
+                {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
                 <div class="swiper-slide" {{ block.shopify_attributes }}>
                   {%- render 'testimonial-card', block: block -%}
                 </div>
@@ -51,12 +52,21 @@
       {%- else -%}
         <div class="section-testimonials__grid" style="--tm-cols: {{ section.settings.columns_desktop }};">
           {%- for block in section.blocks -%}
+            {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
             <div {{ block.shopify_attributes }}>
               {%- render 'testimonial-card', block: block -%}
             </div>
           {%- endfor -%}
         </div>
       {%- endif -%}
+    {%- endif -%}
+    {%- capture app_blocks -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- if app_blocks != blank -%}
+      <div class="section-apps">{{ app_blocks }}</div>
     {%- endif -%}
   </div>
 </div>
@@ -114,13 +124,19 @@
   @media (min-width: 750px) {
     .section-testimonials { padding-block: var(--tm-dt) var(--tm-db); }
   }
-  .section-testimonials__head { text-align: center; margin-bottom: 2.5rem; }
+  .section-testimonials__head { text-align: center; margin-bottom: var(--section-head-gap); }
   .section-testimonials__subheading {
-    margin: 0 0 0.25rem; text-transform: uppercase;
-    letter-spacing: 0.12em; color: rgb(var(--color-accent)); font-weight: 600;
+    margin: 0 0 0.5rem;
+    font-weight: var(--eyebrow-weight);
+    letter-spacing: var(--eyebrow-tracking);
+    text-transform: uppercase;
+    color: var(--color-muted);
   }
-  .section-testimonials__heading { margin: 0; color: rgb(var(--color-foreground)); }
-
+  .section-testimonials__heading {
+    margin: 0;
+    color: var(--color-ink);
+    letter-spacing: var(--heading-tracking);
+  }
   .section-testimonials__grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -142,42 +158,44 @@
     position: relative;
     width: 44px; height: 44px; border: 0; padding: 0;
     border-radius: 50%; background: transparent; opacity: 1;
-    transition: transform 0.3s; cursor: pointer;
+    transition: transform var(--duration-medium); cursor: pointer;
   }
   .section-testimonials__pagination .swiper-pagination-bullet::before {
     content: ''; position: absolute; inset: 17px;
     border-radius: 50%; background: rgba(var(--color-foreground), 0.2);
-    transition: background 0.3s, transform 0.3s;
+    transition: background var(--duration-medium), transform var(--duration-medium);
   }
   .section-testimonials__pagination .swiper-pagination-bullet-active {
     transform: scale(1.05);
   }
   .section-testimonials__pagination .swiper-pagination-bullet-active::before {
-    background: rgb(var(--color-accent)); transform: scale(1.3);
+    background: var(--color-ink); transform: scale(1.3);
   }
   .section-testimonials__pagination .swiper-pagination-bullet:focus-visible {
-    outline: 2px solid rgb(var(--color-accent)); outline-offset: 2px;
+    outline: 2px solid var(--color-focus); outline-offset: 2px;
   }
 
   /* ── Card (inline — also used by snippet) ── */
   .testimonial-card {
-    background: rgba(var(--color-foreground), 0.03);
-    border: 1px solid rgba(var(--color-foreground), 0.08);
-    border-radius: 0.75rem;
-    padding: 1.5rem;
-    display: flex; flex-direction: column; gap: 1rem;
+    background: transparent;
+    border: none;
+    border-top: 1px solid var(--color-hairline);
+    border-radius: 0;
+    padding: 1.5rem 0 0;
+    display: flex; flex-direction: column; gap: 1.25rem;
     height: 100%;
   }
-  .testimonial-card__stars { display: flex; gap: 2px; color: #f59e0b; }
-  .testimonial-card__stars svg { width: 16px; height: 16px; }
+  .testimonial-card__stars { display: flex; gap: 3px; color: var(--color-ink); }
+  .testimonial-card__stars svg { width: 14px; height: 14px; }
   .testimonial-card__quote {
-    flex: 1; font-style: italic;
-    color: rgba(var(--color-foreground), 0.8); line-height: 1.7;
+    flex: 1; font-style: normal;
+    font-size: 1.0625rem;
+    color: var(--color-ink); line-height: 1.65;
   }
   .testimonial-card__quote p { margin: 0; }
   .testimonial-card__author {
     display: flex; align-items: center; gap: 0.75rem;
-    padding-top: 0.75rem; border-top: 1px solid rgba(var(--color-foreground), 0.06);
+    padding-top: 0.25rem;
   }
   .testimonial-card__avatar {
     width: 40px; height: 40px; border-radius: 50%; object-fit: cover;
@@ -187,49 +205,49 @@
     width: 40px; height: 40px; border-radius: 50%;
     background: rgba(var(--color-foreground), 0.08);
     display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 0.875rem; color: rgba(var(--color-foreground), 0.4);
+    font-weight: 600; font-size: 0.875rem; color: var(--color-muted);
   }
-  .testimonial-card__name { font-weight: 600; font-size: 0.875rem; color: rgb(var(--color-foreground)); }
-  .testimonial-card__title { font-size: 0.75rem; color: rgba(var(--color-foreground), 0.5); }
+  .testimonial-card__name { font-weight: 600; font-size: 0.875rem; color: var(--color-ink); }
+  .testimonial-card__title { font-size: var(--meta-size); color: var(--color-muted); }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "Testimonials",
+  "name": "t:sections.testimonials.name",
   "tag": "section",
   "class": "section-testimonials-wrapper",
   "settings": [
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Color scheme",
+      "label": "t:sections.testimonials.settings.color_scheme.label",
       "default": "scheme-1"
     },
     {
       "type": "header",
-      "content": "Heading"
+      "content": "t:sections.testimonials.settings.header__heading.content"
     },
     {
       "type": "inline_richtext",
       "id": "subheading",
-      "label": "Subheading"
+      "label": "t:sections.testimonials.settings.subheading.label"
     },
     {
       "type": "select",
       "id": "subheading_size",
-      "label": "Subheading size",
+      "label": "t:sections.testimonials.settings.subheading_size.label",
       "options": [
         {
           "value": "xs",
-          "label": "XS"
+          "label": "t:sections.testimonials.settings.subheading_size.options.xs"
         },
         {
           "value": "sm",
-          "label": "S"
+          "label": "t:sections.testimonials.settings.subheading_size.options.sm"
         },
         {
           "value": "md",
-          "label": "M"
+          "label": "t:sections.testimonials.settings.subheading_size.options.md"
         }
       ],
       "default": "sm"
@@ -237,29 +255,29 @@
     {
       "type": "inline_richtext",
       "id": "heading",
-      "label": "Heading",
-      "default": "What our customers say"
+      "label": "t:sections.testimonials.settings.heading.label",
+      "default": "t:sections.testimonials.settings.heading.default"
     },
     {
       "type": "select",
       "id": "heading_size",
-      "label": "Heading size",
+      "label": "t:sections.testimonials.settings.heading_size.label",
       "options": [
         {
           "value": "sm",
-          "label": "S"
+          "label": "t:sections.testimonials.settings.heading_size.options.sm"
         },
         {
           "value": "md",
-          "label": "M"
+          "label": "t:sections.testimonials.settings.heading_size.options.md"
         },
         {
           "value": "lg",
-          "label": "L"
+          "label": "t:sections.testimonials.settings.heading_size.options.lg"
         },
         {
           "value": "xl",
-          "label": "XL"
+          "label": "t:sections.testimonials.settings.heading_size.options.xl"
         }
       ],
       "default": "lg"
@@ -267,35 +285,35 @@
     {
       "type": "select",
       "id": "heading_tag",
-      "label": "Heading tag",
+      "label": "t:sections.testimonials.settings.heading_tag.label",
       "options": [
         {
           "value": "h2",
-          "label": "H2"
+          "label": "t:sections.testimonials.settings.heading_tag.options.h2"
         },
         {
           "value": "h3",
-          "label": "H3"
+          "label": "t:sections.testimonials.settings.heading_tag.options.h3"
         }
       ],
       "default": "h2"
     },
     {
       "type": "header",
-      "content": "Layout"
+      "content": "t:sections.testimonials.settings.header__layout.content"
     },
     {
       "type": "select",
       "id": "layout",
-      "label": "Layout",
+      "label": "t:sections.testimonials.settings.layout.label",
       "options": [
         {
           "value": "grid",
-          "label": "Grid"
+          "label": "t:sections.testimonials.settings.layout.options.grid"
         },
         {
           "value": "slider",
-          "label": "Slider"
+          "label": "t:sections.testimonials.settings.layout.options.slider"
         }
       ],
       "default": "slider"
@@ -306,12 +324,12 @@
       "min": 2,
       "max": 4,
       "step": 1,
-      "label": "Desktop columns",
+      "label": "t:sections.testimonials.settings.columns_desktop.label",
       "default": 3
     },
     {
       "type": "header",
-      "content": "Desktop spacing"
+      "content": "t:sections.testimonials.settings.header__desktop_spacing.content"
     },
     {
       "type": "range",
@@ -320,7 +338,7 @@
       "max": 150,
       "step": 5,
       "unit": "px",
-      "label": "Top",
+      "label": "t:sections.testimonials.settings.padding_top_desktop.label",
       "default": 50
     },
     {
@@ -330,12 +348,12 @@
       "max": 150,
       "step": 5,
       "unit": "px",
-      "label": "Bottom",
+      "label": "t:sections.testimonials.settings.padding_bottom_desktop.label",
       "default": 50
     },
     {
       "type": "header",
-      "content": "Mobile spacing"
+      "content": "t:sections.testimonials.settings.header__mobile_spacing.content"
     },
     {
       "type": "range",
@@ -344,7 +362,7 @@
       "max": 100,
       "step": 5,
       "unit": "px",
-      "label": "Top",
+      "label": "t:sections.testimonials.settings.padding_top_mobile.label",
       "default": 30
     },
     {
@@ -354,14 +372,14 @@
       "max": 100,
       "step": 5,
       "unit": "px",
-      "label": "Bottom",
+      "label": "t:sections.testimonials.settings.padding_bottom_mobile.label",
       "default": 30
     }
   ],
   "blocks": [
     {
       "type": "testimonial",
-      "name": "Testimonial",
+      "name": "t:sections.testimonials.blocks.testimonial.name",
       "settings": [
         {
           "type": "range",
@@ -369,31 +387,31 @@
           "min": 1,
           "max": 5,
           "step": 1,
-          "label": "Rating",
+          "label": "t:sections.testimonials.blocks.testimonial.settings.rating.label",
           "default": 5
         },
         {
           "type": "richtext",
           "id": "quote",
-          "label": "Quote",
-          "default": "<p>This product exceeded my expectations! Amazing quality and fast shipping.</p>"
+          "label": "t:sections.testimonials.blocks.testimonial.settings.quote.label",
+          "default": "t:sections.testimonials.blocks.testimonial.settings.quote.default"
         },
         {
           "type": "text",
           "id": "author",
-          "label": "Author name",
-          "default": "Jane Doe"
+          "label": "t:sections.testimonials.blocks.testimonial.settings.author.label",
+          "default": "t:sections.testimonials.blocks.testimonial.settings.author.default"
         },
         {
           "type": "text",
           "id": "author_title",
-          "label": "Author title",
-          "info": "E.g. Verified buyer"
+          "label": "t:sections.testimonials.blocks.testimonial.settings.author_title.label",
+          "info": "t:sections.testimonials.blocks.testimonial.settings.author_title.info"
         },
         {
           "type": "image_picker",
           "id": "avatar",
-          "label": "Avatar"
+          "label": "t:sections.testimonials.blocks.testimonial.settings.avatar.label"
         }
       ]
     },
@@ -403,7 +421,7 @@
   ],
   "presets": [
     {
-      "name": "Testimonials",
+      "name": "t:sections.testimonials.presets.testimonials.name",
       "category": "Custom",
       "blocks": [
         {

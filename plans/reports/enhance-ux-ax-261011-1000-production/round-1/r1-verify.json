@@ -1,0 +1,318 @@
+[
+ {
+  "journey": "home-1440",
+  "name": "P43 no index.css/index.js request",
+  "ok": true,
+  "detail": []
+ },
+ {
+  "journey": "home-1440",
+  "name": "P36 bullets inside viewport and centred within 2px",
+  "ok": true,
+  "detail": {
+   "count": 3,
+   "vw": 1440,
+   "left": 648,
+   "right": 792,
+   "centreOffset": 0,
+   "inside": true
+  }
+ },
+ {
+  "journey": "home-1440",
+  "name": "P36 bullet focus ring visible",
+  "ok": true,
+  "detail": {
+   "cls": "swiper-pagination-bullet swiper-pagination-bullet-active",
+   "fv": true,
+   "outline": "solid 2px",
+   "shadow": "none"
+  }
+ },
+ {
+  "journey": "home-1440",
+  "name": "P53 ito max-width equals content_width rem",
+  "ok": true,
+  "detail": {
+   "inline": "--ito-content-max-width: 36rem;",
+   "maxWidth": "576px",
+   "rootPx": 16,
+   "expectPx": 576
+  }
+ },
+ {
+  "journey": "home-1440",
+  "name": "P45 no combined page-width element",
+  "ok": true,
+  "detail": []
+ },
+ {
+  "journey": "home-1440",
+  "name": "P50 JSON-LD parses and sameAs lists configured URLs",
+  "ok": true,
+  "detail": {
+   "blocks": 2,
+   "parseErrors": 0,
+   "sameAs": [
+    "https://facebook.com/devs2rebel",
+    "https://instagram.com/devs2rebel",
+    "https://youtube.com/@devs2rebel",
+    "https://tiktok.com/@devs2rebel",
+    "https://x.com/devs2rebel",
+    "https://pinterest.com/devs2rebel"
+   ],
+   "expected": [
+    "https://facebook.com/devs2rebel",
+    "https://instagram.com/devs2rebel",
+    "https://youtube.com/@devs2rebel",
+    "https://tiktok.com/@devs2rebel",
+    "https://x.com/devs2rebel",
+    "https://pinterest.com/devs2rebel"
+   ]
+  }
+ },
+ {
+  "journey": "home-1440",
+  "name": "P41 themeConfig.routes.root_url ends with /",
+  "ok": true,
+  "detail": "/"
+ },
+ {
+  "journey": "home-1440",
+  "name": "P40 focused marquee cards in view, animation none",
+  "ok": true,
+  "detail": {
+   "stops": 12,
+   "bad": []
+  }
+ },
+ {
+  "journey": "home-1440",
+  "name": "P41 hotspot markup present (load path uses root_url)",
+  "ok": null,
+  "detail": "<button type=\"button\" class=\"product-card__quickview\" data-action=\"open-quickview\" data-product-handle=\"charcoal-pinstri"
+ },
+ {
+  "journey": "home-375",
+  "name": "P43 no index.css/index.js request",
+  "ok": true,
+  "detail": []
+ },
+ {
+  "journey": "home-375",
+  "name": "P36 bullets inside viewport and centred within 2px",
+  "ok": true,
+  "detail": {
+   "count": 3,
+   "vw": 375,
+   "left": 116,
+   "right": 260,
+   "centreOffset": 0,
+   "inside": true
+  }
+ },
+ {
+  "journey": "home-375",
+  "name": "P36 bullet focus ring visible",
+  "ok": true,
+  "detail": {
+   "cls": "swiper-pagination-bullet swiper-pagination-bullet-active",
+   "fv": true,
+   "outline": "solid 2px",
+   "shadow": "none"
+  }
+ },
+ {
+  "journey": "home-375",
+  "name": "P53 ito max-width equals content_width rem",
+  "ok": true,
+  "detail": {
+   "inline": "--ito-content-max-width: 36rem;",
+   "maxWidth": "576px",
+   "rootPx": 16,
+   "expectPx": 576
+  }
+ },
+ {
+  "journey": "home-375",
+  "name": "P45 no combined page-width element",
+  "ok": true,
+  "detail": []
+ },
+ {
+  "journey": "pdp-1440",
+  "name": "P35 setup: dynamic checkout state",
+  "ok": null,
+  "detail": {
+   "dynamic": true,
+   "buy": false
+  }
+ },
+ {
+  "journey": "pdp-1440",
+  "name": "P35 sticky add: +1 line, drawer opens, header count updates",
+  "ok": true,
+  "detail": {
+   "visible": true,
+   "before": 0,
+   "lines": 1,
+   "drawer": "cart-modal-wrapper show",
+   "headerCount": "1",
+   "itemCount": 1,
+   "adds": [
+    "/cart/add"
+   ]
+  }
+ },
+ {
+  "journey": "pdp-1440",
+  "name": "P51 single product tab is selected and tabbable (template ships 1 tab block)",
+  "ok": true,
+  "detail": [
+   {
+    "tabindex": 0,
+    "selected": "true"
+   }
+  ]
+ },
+ {
+  "journey": "gift-1440",
+  "name": "P49 recipient/add/buy ids suffixed and unique",
+  "ok": true,
+  "detail": {
+   "dupes": [],
+   "recipientIds": [
+    "gift-card-recipient-toggle-template--27321871728749__main-AeDVBMklVb3R3UlFJM__buy_buttons",
+    "gift-card-recipient-email-template--27321871728749__main-AeDVBMklVb3R3UlFJM__buy_buttons",
+    "gift-card-recipient-name-template--27321871728749__main-AeDVBMklVb3R3UlFJM__buy_buttons",
+    "gift-card-recipient-message-template--27321871728749__main-AeDVBMklVb3R3UlFJM__buy_buttons",
+    "gift-card-recipient-send-on-template--27321871728749__main-AeDVBMklVb3R3UlFJM__buy_buttons",
+    "product-template__add-template--27321871728749__main-AeDVBMklVb3R3UlFJM__buy_buttons"
+   ]
+  }
+ },
+ {
+  "journey": "gift-1440",
+  "name": "P49 label click toggles recipient fields",
+  "ok": true,
+  "detail": {
+   "checked": true,
+   "enabled": 4,
+   "total": 4
+  }
+ },
+ {
+  "journey": "search-1440",
+  "name": "P51 search tabs single tabindex=0",
+  "ok": true,
+  "detail": {
+   "query": "the",
+   "n": 3,
+   "enabled": 2,
+   "tabindex": [
+    0,
+    -1,
+    -1
+   ]
+  }
+ },
+ {
+  "journey": "search-1440",
+  "name": "P51 ArrowRight moves focus to next enabled tab, selects it, shows its panel, roving tabindex",
+  "ok": true,
+  "detail": {
+   "start": 0,
+   "focused": 1,
+   "disabled": [
+    false,
+    false,
+    true
+   ],
+   "selected": [
+    "false",
+    "true",
+    "false"
+   ],
+   "tabindex": [
+    -1,
+    0,
+    -1
+   ],
+   "panelShown": true
+  }
+ },
+ {
+  "journey": "search-1440",
+  "name": "P51 Home moves to first enabled tab",
+  "ok": true,
+  "detail": {
+   "focused": 0,
+   "firstEnabled": 0
+  }
+ },
+ {
+  "journey": "contact-1440",
+  "name": "P44 phone 123 shows error, submit enabled, no POST",
+  "ok": true,
+  "detail": {
+   "disabled": false,
+   "error": "Enter a phone number with at least 10 digits."
+  }
+ },
+ {
+  "journey": "contact-1440",
+  "name": "P44 captcha pending: submit stays enabled, no loading state, no POST yet",
+  "ok": true,
+  "detail": {
+   "posts": 0,
+   "at": 1791692535547,
+   "submitted": true,
+   "gated": true,
+   "disabled": false,
+   "aria": null,
+   "loading": false
+  }
+ },
+ {
+  "journey": "contact-1440",
+  "name": "P44 navigation in flight: exactly one POST, submit locked with loading state",
+  "ok": true,
+  "detail": {
+   "gated": true,
+   "posts": 1,
+   "beatsDuring": 6,
+   "last": {
+    "at": 1791692537150,
+    "submitted": true,
+    "gated": true,
+    "disabled": true,
+    "aria": "true",
+    "loading": true
+   }
+  }
+ },
+ {
+  "journey": "contact-1440",
+  "name": "P44 no English literal in page-contact.js",
+  "ok": true,
+  "detail": null
+ },
+ {
+  "journey": "stores-1440",
+  "name": "P48 typing leaves scrollY unchanged",
+  "ok": true,
+  "detail": {
+   "y0": 0,
+   "y1": 0
+  }
+ },
+ {
+  "journey": "stores-1440",
+  "name": "P48 province change scrolls to grid",
+  "ok": true,
+  "detail": {
+   "scrollY": 252,
+   "gridTop": 88
+  }
+ }
+]

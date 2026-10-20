@@ -110,11 +110,12 @@
                 <tbody>
                   {%- for line_item in order.line_items -%}
                   <tr>
-                    <td>
+                    <td data-label="{{ 'customer.order.product' | t }}" class="order-template__cell-product">
                       <div class="order-template__product-cell">
                         {%- if line_item.image -%}
                         <a href="{{ line_item.product.url }}" title="{{ line_item.title | escape }}" class="order-template__product-image">
-                          <img src="{{ line_item.image | image_url: width: 160 }}" alt="{{ line_item.title | escape }}" width="80" height="80" loading="lazy" decoding="async">
+                          {%- assign line_alt = line_item.title | escape -%}
+                          {{ line_item.image | image_url: width: 160 | image_tag: widths: '80, 160', sizes: '80px', width: 80, height: 80, alt: line_alt, loading: 'lazy', decoding: 'async' }}
                         </a>
                         {%- endif -%}
                         <div class="order-template__product-info">
@@ -128,11 +129,25 @@
                           {%- if line_item.selling_plan_allocation -%}
                             <p class="order-template__selling-plan">{{ line_item.selling_plan_allocation.selling_plan.name }}</p>
                           {%- endif -%}
+                          {%- if line_item.line_level_discount_allocations != blank -%}
+                            <ul class="order-template__line-discounts" role="list">
+                              {%- for discount_allocation in line_item.line_level_discount_allocations -%}
+                                <li class="order-template__line-discount">
+                                  {{- discount_allocation.discount_application.title | escape }} (-{{ discount_allocation.amount | money -}})
+                                </li>
+                              {%- endfor -%}
+                            </ul>
+                          {%- endif -%}
                         </div>
                       </div>
                     </td>
-                    <td class="text-right">
-                      {{ line_item.final_price | money }}
+                    <td data-label="{{ 'customer.order.price' | t }}" class="text-right">
+                      {%- if line_item.original_price != line_item.final_price -%}
+                        <del class="order-template__price-original">{{ line_item.original_price | money }}</del>
+                        <span class="order-template__price-final">{{ line_item.final_price | money }}</span>
+                      {%- else -%}
+                        {{ line_item.final_price | money }}
+                      {%- endif -%}
                       {%- if line_item.unit_price -%}
                         <div class="order-template__unit-price">
                           <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
@@ -140,8 +155,15 @@
                         </div>
                       {%- endif -%}
                     </td>
-                    <td class="text-center">{{ line_item.quantity }}</td>
-                    <td class="text-right order-template__product-total">{{ line_item.final_line_price | money }}</td>
+                    <td data-label="{{ 'customer.order.quantity' | t }}" class="text-center">{{ line_item.quantity }}</td>
+                    <td data-label="{{ 'customer.order.total' | t }}" class="text-right order-template__product-total">
+                      {%- if line_item.original_line_price != line_item.final_line_price -%}
+                        <del class="order-template__price-original">{{ line_item.original_line_price | money }}</del>
+                        <span class="order-template__price-final">{{ line_item.final_line_price | money }}</span>
+                      {%- else -%}
+                        {{ line_item.final_line_price | money }}
+                      {%- endif -%}
+                    </td>
                   </tr>
                   {%- endfor -%}
                 </tbody>
@@ -150,6 +172,10 @@
           </div>
           <div class="order-template__summary">
             <div class="order-template__summary-content">
+              <div class="order-template__summary-row">
+                <span class="order-template__label">{{ 'customer.order.subtotal' | t }}:</span>
+                <span class="order-template__value">{{ order.line_items_subtotal_price | money }}</span>
+              </div>
               {%- for discount_application in order.discount_applications -%}
               <div class="order-template__summary-row">
                 <span class="order-template__label">{{ 'customer.order.discount' | t }} {{ discount_application.title }}:</span>
@@ -165,6 +191,18 @@
                 </span>
               </div>
               {%- endfor -%}
+              {%- for tax_line in order.tax_lines -%}
+              <div class="order-template__summary-row">
+                <span class="order-template__label">{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%):</span>
+                <span class="order-template__value">{{ tax_line.price | money }}</span>
+              </div>
+              {%- endfor -%}
+              {%- if order.total_duties -%}
+              <div class="order-template__summary-row">
+                <span class="order-template__label">{{ 'customer.order.total_duties' | t }}:</span>
+                <span class="order-template__value">{{ order.total_duties | money }}</span>
+              </div>
+              {%- endif -%}
               <div class="order-template__summary-row order-template__summary-row--total">
                 <span>{{ 'customer.order.total' | t }}:</span>
                 <span>{{ order.total_price | money }}</span>
@@ -172,7 +210,7 @@
             </div>
           </div>
           <div class="order-template__actions">
-            <a href="{{ routes.account_url }}" class="button-primary active" title="{{ 'customer.order.back_to_orders' | t }}">
+            <a href="{{ routes.account_url }}" class="button-primary" title="{{ 'customer.order.back_to_orders' | t }}">
               {%- render 'icon', name: 'chevron-left', size: '16' -%}
               {{ 'customer.order.back_to_orders' | t }}
             </a>

@@ -10,14 +10,24 @@
 >
   {%- if block.settings.icon != blank -%}
     <div class="product-template__icon-text-icon">
-      <img
-        src="{{ block.settings.icon | image_url: width: 96 }}"
-        alt="{{ block.settings.heading | escape }}"
-        width="{{ block.settings.icon_size }}"
-        height="{{ block.settings.icon_size }}"
-        loading="lazy"
-        decoding="async"
-      >
+      {%- liquid
+        assign icon_alt = block.settings.heading | escape
+        assign icon_size_2x = block.settings.icon_size | times: 2
+        assign icon_widths = block.settings.icon_size | append: ', ' | append: icon_size_2x
+        assign icon_sizes = block.settings.icon_size | append: 'px'
+      -%}
+      {{
+        block.settings.icon
+        | image_url: width: icon_size_2x
+        | image_tag:
+          widths: icon_widths,
+          sizes: icon_sizes,
+          width: block.settings.icon_size,
+          height: block.settings.icon_size,
+          alt: icon_alt,
+          loading: 'lazy',
+          decoding: 'async'
+      }}
     </div>
   {%- endif -%}
   <div class="product-template__icon-text-content">
@@ -70,13 +80,13 @@
       "type": "text",
       "id": "heading",
       "label": "t:sections.main_product.blocks.icon_with_text.settings.heading.label",
-      "default": "Free shipping"
+      "default": "t:sections.main_product.blocks.icon_with_text.settings.heading.default"
     },
     {
       "type": "text",
       "id": "text",
       "label": "t:sections.main_product.blocks.icon_with_text.settings.text.label",
-      "default": "Orders over $50 ship free"
+      "default": "t:sections.main_product.blocks.icon_with_text.settings.text.default"
     }
   ],
   "presets": [

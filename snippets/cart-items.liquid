@@ -1,3 +1,5 @@
+{{ 'quantity-selector.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'quantity-selector.js' | asset_url }}" defer="defer"></script>
 <cart-items role="list">
   <form action="{{ routes.cart_url }}" method="post" id="cart" novalidate>
     <div class="cart-template__data-head" aria-hidden="true">
@@ -25,6 +27,9 @@
         </a>
         <div class="cart-item__info">
           <div>
+            {%- if settings.show_vendor and item.product.vendor != blank -%}
+              <p class="cart-item__vendor">{{ item.product.vendor | escape }}</p>
+            {%- endif -%}
             <a href="{{ item.url }}" class="cart-item__title">{{ item.product.title | escape }}</a>
             {%- render 'cart-line-details', item: item -%}
             <div class="cart-item__price-mobile">

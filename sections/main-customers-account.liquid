@@ -6,28 +6,6 @@
   <div class="page-width">
     <h1 class="account-template__title">{{ 'customer.account.title' | t }}</h1>
     <div class="account-template__grid">
-      <main class="account-template__orders-column">
-        <section class="account-template__order" aria-labelledby="account-orders-title">
-          <h2 id="account-orders-title" class="account-template__section-title"><i>{%- render 'icon', name: 'order' -%}</i>{{ 'customer.orders.title' | t }}</h2>
-          {%- paginate customer.orders by 20 -%}
-            {%- if customer.orders.size > 0 -%}
-              <div class="account-template__order-table-wrapper">
-                <table class="account-template__order-table">
-                  <thead><tr><th scope="col">{{ 'customer.orders.order_number' | t }}</th><th scope="col">{{ 'customer.orders.date' | t }}</th><th scope="col">{{ 'customer.orders.payment_status' | t }}</th><th scope="col">{{ 'customer.orders.fulfillment_status' | t }}</th><th scope="col">{{ 'customer.orders.total' | t }}</th></tr></thead>
-                  <tbody>{%- for order in customer.orders -%}<tr>
-                    <td data-label="{{ 'customer.orders.order_number' | t }}"><a href="{{ order.customer_url }}" class="account-template__order-name" title="{{ 'customer.orders.view_order' | t }}: {{ order.name }}">{{ order.name }}</a></td>
-                    <td data-label="{{ 'customer.orders.date' | t }}">{{ order.created_at | date: '%B %d, %Y' }}</td>
-                    <td data-label="{{ 'customer.orders.payment_status' | t }}"><span class="account-template__status account-template__status--{{ order.financial_status }}">{{ order.financial_status_label }}</span></td>
-                    <td data-label="{{ 'customer.orders.fulfillment_status' | t }}"><span class="account-template__status account-template__status--{{ order.fulfillment_status }}">{{ order.fulfillment_status_label }}</span></td>
-                    <td data-label="{{ 'customer.orders.total' | t }}"><strong>{{ order.total_price | money }}</strong></td>
-                  </tr>{%- endfor -%}</tbody>
-                </table>
-              </div>
-              {%- if paginate.pages > 1 -%}<nav class="account-template__pagination" aria-label="{{ 'general.pagination.label' | t }}">{{ paginate | default_pagination }}</nav>{%- endif -%}
-            {%- else -%}<div class="account-template__order-empty"><i>{%- render 'icon', name: 'sad' -%}</i><p>{{ 'customer.orders.none' | t }}</p><a href="{{ routes.all_products_collection_url }}" class="button-primary active" title="{{ 'general.continue_shopping' | t }}">{{ 'general.continue_shopping' | t }}</a></div>{%- endif -%}
-          {%- endpaginate -%}
-        </section>
-      </main>
       <aside class="account-template__details-column">
         {%- render 'customer-sidebar' -%}
         <section class="account-template__wrapper" aria-labelledby="account-details-title">
@@ -38,10 +16,32 @@
               <li><strong>{{ 'customer.login_page.email' | t }}:</strong> {{ customer.email }}</li>
               {%- if customer.default_address -%}<li><strong>{{ 'customer.addresses.title' | t }}:</strong> {{ customer.default_address | format_address }}</li>{%- endif -%}
             </ul>
-            <a href="{{ routes.account_addresses_url }}" class="button-primary active" title="{{ 'customer.addresses.manage' | t }}">{{ 'customer.addresses.manage' | t }}</a>
+            <a href="{{ routes.account_addresses_url }}" class="button-primary" title="{{ 'customer.addresses.manage' | t }}">{{ 'customer.addresses.manage' | t }}</a>
           </div>
         </section>
       </aside>
+      <main class="account-template__orders-column">
+        <section class="account-template__order" aria-labelledby="account-orders-title">
+          <h2 id="account-orders-title" class="account-template__section-title"><i>{%- render 'icon', name: 'order' -%}</i>{{ 'customer.orders.title' | t }}</h2>
+          {%- paginate customer.orders by 20 -%}
+            {%- if customer.orders.size > 0 -%}
+              <div class="account-template__order-table-wrapper">
+                <table class="account-template__order-table">
+                  <thead><tr><th scope="col">{{ 'customer.orders.order_number' | t }}</th><th scope="col">{{ 'customer.orders.date' | t }}</th><th scope="col">{{ 'customer.orders.payment_status' | t }}</th><th scope="col">{{ 'customer.orders.fulfillment_status' | t }}</th><th scope="col">{{ 'customer.orders.total' | t }}</th></tr></thead>
+                  <tbody>{%- for order in customer.orders -%}<tr>
+                    <td data-label="{{ 'customer.orders.order_number' | t }}"><a href="{{ order.customer_url }}" class="account-template__order-name" title="{{ 'customer.orders.view_order' | t }}: {{ order.name }}">{{ order.name }}</a></td>
+                    <td data-label="{{ 'customer.orders.date' | t }}" class="account-template__order-date">{{ order.created_at | date: '%B %d, %Y' }}</td>
+                    <td data-label="{{ 'customer.orders.payment_status' | t }}"><span class="account-template__status account-template__status--{{ order.financial_status }}">{{ order.financial_status_label }}</span></td>
+                    <td data-label="{{ 'customer.orders.fulfillment_status' | t }}"><span class="account-template__status account-template__status--{{ order.fulfillment_status }}">{{ order.fulfillment_status_label }}</span></td>
+                    <td data-label="{{ 'customer.orders.total' | t }}" class="account-template__order-total-cell"><strong>{{ order.total_price | money }}</strong></td>
+                  </tr>{%- endfor -%}</tbody>
+                </table>
+              </div>
+              {%- if paginate.pages > 1 -%}<nav class="account-template__pagination" aria-label="{{ 'general.pagination.label' | t }}">{{ paginate | default_pagination }}</nav>{%- endif -%}
+            {%- else -%}<div class="account-template__order-empty"><i>{%- render 'icon', name: 'sad' -%}</i><p>{{ 'customer.orders.none' | t }}</p><a href="{{ routes.all_products_collection_url }}" class="button-primary active" title="{{ 'general.continue_shopping' | t }}">{{ 'general.continue_shopping' | t }}</a></div>{%- endif -%}
+          {%- endpaginate -%}
+        </section>
+      </main>
     </div>
   </div>
 </div>

@@ -10,6 +10,7 @@ ignore:
   - "node_modules/**"
   - "plans/**"
   - "runs/**"
+  - "scratch/**"
   - "scripts/**"
   - ".research-repos-*/**"
   - ".playwright-mcp/**"
@@ -27,9 +28,8 @@ AssetSizeJavaScript:
   enabled: true
   threshold_in_bytes: 150000
 
-# Tạm tắt trong quá trình migrate — bật lại sau
 DeprecatedTag:
-  enabled: false
+  enabled: true
 
 # UnknownFilter: giữ bật — filter ảo pickup_availability đã được thay bằng
 # sections/pickup-availability.liquid + <pickup-availability> custom element.
@@ -54,6 +54,9 @@ UndefinedObject:
     - "layout/password.liquid"
     - "snippets/product-variant-picker.liquid"
     - "snippets/swatch.liquid"
+    - "snippets/collection-hero.liquid"
+    - "snippets/collection-filter-drawer.liquid"
+    - "snippets/collection-active-filters.liquid"
 
 # OrphanedSnippet: skip-to-content-link.liquid đang được render trong theme.liquid line 14
 # nhưng theme-check không phát hiện vì call site phức tạp.

@@ -53,14 +53,34 @@
             <meta itemprop="url" content="{{ article.image | image_url: width: 2048 }}">
             <meta itemprop="width" content="{{ article.image.width }}">
             <meta itemprop="height" content="{{ article.image.height }}">
-            {%- assign hero_alt = article.image.alt | default: article.title | escape -%}
+            {%- liquid
+              assign hero_alt = article.image.alt | default: article.title | escape
+              if container_width == 'fixed'
+                assign hero_sizes = '(min-width: 1024px) calc(100vw - 150px), (min-width: 750px) calc(100vw - 60px), calc(100vw - 30px)'
+                assign hero_cap = settings.page_width | minus: 150
+                if has_sidebar
+                  assign hero_cap_sidebar = settings.page_width | minus: 462
+                  if settings.page_width >= 1280
+                    assign hero_sizes = '(min-width: ' | append: settings.page_width | append: 'px) ' | append: hero_cap_sidebar | append: 'px, (min-width: 1280px) calc(100vw - 462px), ' | append: hero_sizes
+                  else
+                    assign hero_sizes = '(min-width: 1280px) ' | append: hero_cap_sidebar | append: 'px, (min-width: ' | append: settings.page_width | append: 'px) ' | append: hero_cap | append: 'px, ' | append: hero_sizes
+                  endif
+                else
+                  assign hero_sizes = '(min-width: ' | append: settings.page_width | append: 'px) ' | append: hero_cap | append: 'px, ' | append: hero_sizes
+                endif
+              elsif has_sidebar
+                assign hero_sizes = '(min-width: 1280px) calc(100vw - 342px), calc(100vw - 30px)'
+              else
+                assign hero_sizes = 'calc(100vw - 30px)'
+              endif
+            -%}
             {{-
               article.image
               | image_url: width: 2048
               | image_tag:
                 class: 'article-template__media-image',
                 widths: '480,768,1200,1600,2048',
-                sizes: '(max-width: 480px) 480px, (max-width: 768px) 768px, (max-width: 1200px) 1200px, 2048px',
+                sizes: hero_sizes,
                 alt: hero_alt,
                 loading: 'eager',
                 fetchpriority: 'high'
@@ -108,11 +128,15 @@
         </div>
 
         {%- if show_toc -%}
-          {%- render 'content-toc' -%}
+          {%- render 'content-toc', content: article.content -%}
         {%- endif -%}
 
+        {%- liquid
+          assign table_label = 'blogs.article.table_label' | t | escape
+          assign table_open = '<div class="article-template__table" role="region" tabindex="0" aria-label="' | append: table_label | append: '"><table'
+        -%}
         <div class="article-template__content rte" itemprop="articleBody">
-          {{ article.content }}
+          {{ article.content | replace: '<table', table_open | replace: '</table>', '</table></div>' }}
         </div>
 
         {%- for block in section.blocks -%}
@@ -168,10 +192,12 @@
                           <span class="article-template__nav-thumb">
                             {{
                               prev_article.image
-                              | image_url: width: 120
+                              | image_url: width: 270
                               | image_tag:
                                 class: 'article-template__nav-thumb-img',
-                                widths: '60,120',
+                                widths: '90, 180, 270',
+                                sizes: '90px',
+                                loading: 'lazy',
                                 alt: prev_alt
                             }}
                           </span>
@@ -232,10 +258,12 @@
                           <span class="article-template__nav-thumb">
                             {{
                               next_article.image
-                              | image_url: width: 120
+                              | image_url: width: 270
                               | image_tag:
                                 class: 'article-template__nav-thumb-img',
-                                widths: '60,120',
+                                widths: '90, 180, 270',
+                                sizes: '90px',
+                                loading: 'lazy',
                                 alt: next_alt
                             }}
                           </span>
@@ -482,22 +510,16 @@
                                     -%}
                                     {{-
                                       related_article.image
-                                      | image_url: width: 160
+                                      | image_url: width: 288
                                       | image_tag:
                                         class: 'blog-sidebar__recent-post-img',
-                                        widths: '80,160',
+                                        widths: '96, 192, 288',
+                                        sizes: '96px',
                                         alt: rp_alt,
                                         loading: 'lazy'
                                     -}}
                                   {%- else -%}
-                                    <img
-                                      class="blog-sidebar__recent-post-img"
-                                      src="{{ 'no_image.png' | asset_url }}"
-                                      alt="{{ related_article.title | escape }}"
-                                      loading="lazy"
-                                      width="64"
-                                      height="64"
-                                    >
+                                    {{ 'image' | placeholder_svg_tag: 'blog-sidebar__recent-post-img blog-sidebar__recent-post-img--placeholder' }}
                                   {%- endif -%}
                                 </div>
                                 <div class="blog-sidebar__recent-post-content">
@@ -553,6 +575,14 @@
         </aside>
       {%- endif -%}
     </div>
+    {%- capture app_blocks -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- if app_blocks != blank -%}
+      <div class="section-apps">{{ app_blocks }}</div>
+    {%- endif -%}
   </div>
 </article>
 
@@ -694,7 +724,7 @@
           "type": "text",
           "id": "title",
           "label": "t:sections.main_article.blocks.share_buttons.settings.title.label",
-          "default": "Share"
+          "default": "t:sections.main_article.blocks.share_buttons.settings.title.default"
         }
       ]
     },
@@ -719,7 +749,7 @@
           "type": "text",
           "id": "back_text",
           "label": "t:sections.main_article.blocks.navigation.settings.back_text.label",
-          "default": "Back to blog"
+          "default": "t:sections.main_article.blocks.navigation.settings.back_text.default"
         },
         {
           "type": "checkbox",
@@ -739,7 +769,7 @@
           "type": "text",
           "id": "title",
           "label": "t:sections.main_article.blocks.sidebar_related_posts.settings.title.label",
-          "default": "Related posts"
+          "default": "t:sections.main_article.blocks.sidebar_related_posts.settings.title.default"
         },
         {
           "type": "range",
@@ -801,7 +831,7 @@
           "type": "text",
           "id": "title",
           "label": "t:sections.main_article.blocks.sidebar_tags.settings.title.label",
-          "default": "Tags"
+          "default": "t:sections.main_article.blocks.sidebar_tags.settings.title.default"
         },
         {
           "type": "range",

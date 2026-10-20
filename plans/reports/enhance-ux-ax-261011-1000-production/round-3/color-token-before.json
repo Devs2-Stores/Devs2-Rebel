@@ -1,0 +1,33 @@
+{
+ "tokens": {
+  "rgb-wrap-primary": "rgb(1, 2, 3)",
+  "rgba-wrap-primary": "rgba(0, 0, 0, 0)",
+  "outline-wrap-primary": "none 3px rgb(1, 2, 3)",
+  "bare-price-triplet": "rgb(1, 2, 3)",
+  "bare-background-triplet": "rgba(0, 0, 0, 0)",
+  "fixed-primary": "rgb(188, 30, 44)",
+  "fixed-primary-rgba": "rgba(188, 30, 44, 0.06)",
+  "fixed-price": "rgb(10, 10, 10)",
+  "fixed-background": "rgb(245, 242, 237)",
+  "__tokens": {
+   "primary": "rgb(188, 30, 44)",
+   "price": "10, 10, 10",
+   "background": "245, 242, 237"
+  }
+ },
+ "live": {
+  "inputFocus": {
+   "boxShadow": "none",
+   "borderColor": "rgb(188, 184, 177)",
+   "outline": "solid 2px rgb(188, 30, 44)"
+  },
+  "resultFocus": {
+   "cls": "predictive-search__link predictive-search__link--query",
+   "outline": "none 3px rgb(10, 10, 10)"
+  },
+  "resultHover": {
+   "title": null,
+   "price": null
+  }
+ }
+}

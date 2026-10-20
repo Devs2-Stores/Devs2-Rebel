@@ -1,0 +1,434 @@
+{
+ "desktop": {
+  "hoverMedia": true,
+  "routes": {
+   "/": {
+    "rows": {
+     ".section-slideshow__btn": {
+      "pre": "none",
+      "post": "matrix(1, 0, 0, 1, 0, -1)",
+      "changed": true
+     },
+     ".section-collection-list__card .section-collection-list__img": {
+      "pre": "none",
+      "post": "matrix(1.05, 0, 0, 1.05, 0, 0)",
+      "changed": true
+     },
+     ".section-blog-posts__media .section-blog-posts__img": {
+      "pre": "none",
+      "post": "matrix(1.05, 0, 0, 1.05, 0, 0)",
+      "changed": true
+     },
+     ".section-blog-posts__view-all svg": {
+      "pre": "none",
+      "post": "matrix(1, 0, 0, 1, 3, 0)",
+      "changed": true
+     },
+     ".section-iwt__btn": {
+      "pre": "none",
+      "post": "matrix(1, 0, 0, 1, 0, -1)",
+      "changed": true
+     },
+     ".section-layered__layer": {
+      "pre": "none",
+      "post": "matrix(1, 0, 0, 1, 0, -4)",
+      "changed": true
+     },
+     ".section-hotspot__pulse": {
+      "pre": "none",
+      "post": "matrix(1.15, 0, 0, 1.15, 0, 0)",
+      "changed": true
+     },
+     ".product-card__add-btn": {
+      "pre": "none",
+      "post": "matrix(1, 0, 0, 1, 0, -3)",
+      "changed": true
+     }
+    },
+    "control": {
+     "pre": "none",
+     "post": "matrix(2, 0, 0, 2, 0, 0)",
+     "changed": true
+    },
+    "cardZoom": {
+     "pre": "matrix(1.01, 0, 0, 1.01, 0, 0)",
+     "post": "matrix(1.045, 0, 0, 1.045, 0, 0)",
+     "changed": true
+    }
+   },
+   "/collections/all": {
+    "rows": {
+     ".product-card__add-btn": {
+      "pre": "none",
+      "post": "matrix(1, 0, 0, 1, 0, -3)",
+      "changed": true
+     }
+    },
+    "control": {
+     "pre": "none",
+     "post": "matrix(2, 0, 0, 2, 0, 0)",
+     "changed": true
+    },
+    "cardZoom": {
+     "pre": "matrix(1.01, 0, 0, 1.01, 0, 0)",
+     "post": "matrix(1.045, 0, 0, 1.045, 0, 0)",
+     "changed": true
+    }
+   },
+   "/collections": {
+    "rows": {
+     ".collection-card": {
+      "pre": "none",
+      "post": "matrix(1, 0, 0, 1, 0, -2)",
+      "changed": true
+     }
+    },
+    "control": {
+     "pre": "none",
+     "post": "matrix(2, 0, 0, 2, 0, 0)",
+     "changed": true
+    },
+    "cardZoom": null
+   },
+   "/pages/about": {
+    "rows": {
+     ".section-hero__btn": {
+      "pre": "none",
+      "post": "matrix(1, 0, 0, 1, 0, -1)",
+      "changed": true
+     }
+    },
+    "control": {
+     "pre": "none",
+     "post": "matrix(2, 0, 0, 2, 0, 0)",
+     "changed": true
+    },
+    "cardZoom": null
+   },
+   "/pages/contact": {
+    "rows": {
+     ".button-primary": {
+      "pre": "none",
+      "post": "matrix(1, 0, 0, 1, 0, -1)",
+      "changed": true
+     }
+    },
+    "control": {
+     "pre": "none",
+     "post": "matrix(2, 0, 0, 2, 0, 0)",
+     "changed": true
+    },
+    "cardZoom": null
+   },
+   "/blogs/sustainable-fashion-eco-tech": {
+    "rows": {
+     ".article-card__media-inner .article-card__media-image": {
+      "pre": "none",
+      "post": "matrix(1.05, 0, 0, 1.05, 0, 0)",
+      "changed": true
+     },
+     ".article-card__read-more svg": {
+      "pre": "none",
+      "post": "matrix(1, 0, 0, 1, 4, 0)",
+      "changed": true
+     }
+    },
+    "control": {
+     "pre": "none",
+     "post": "matrix(2, 0, 0, 2, 0, 0)",
+     "changed": true
+    },
+    "cardZoom": null
+   },
+   "/blogs/sustainable-fashion-eco-tech/bio-textiles-mycelium-algae-and-the-lab-grown-revolution": {
+    "rows": {
+     ".button-primary": {
+      "pre": "none",
+      "post": "matrix(1, 0, 0, 1, 0, -1)",
+      "changed": true
+     },
+     ".article-template__nav-link": {
+      "pre": "none",
+      "post": "matrix(1, 0, 0, 1, 0, -1)",
+      "changed": true
+     }
+    },
+    "control": {
+     "pre": "none",
+     "post": "matrix(2, 0, 0, 2, 0, 0)",
+     "changed": true
+    },
+    "cardZoom": null
+   },
+   "/search?q=jacket": {
+    "rows": {
+     ".article-card__media-inner .article-card__media-image": {
+      "pre": "none",
+      "post": "none",
+      "changed": false
+     },
+     ".article-card__read-more svg": {
+      "pre": "none",
+      "post": "none",
+      "changed": false
+     },
+     ".product-card__add-btn": {
+      "pre": "none",
+      "post": "matrix(1, 0, 0, 1, 0, -3)",
+      "changed": true
+     }
+    },
+    "control": {
+     "pre": "none",
+     "post": "matrix(2, 0, 0, 2, 0, 0)",
+     "changed": true
+    },
+    "cardZoom": {
+     "pre": "matrix(1.01, 0, 0, 1.01, 0, 0)",
+     "post": "matrix(1.045, 0, 0, 1.045, 0, 0)",
+     "changed": true
+    }
+   },
+   "/products/rebel-tactical-bomber-jacket": {
+    "rows": {
+     ".button-primary": {
+      "pre": "none",
+      "post": "matrix(1, 0, 0, 1, 0, -2)",
+      "changed": true
+     },
+     ".product-card__add-btn": {
+      "pre": "none",
+      "post": "matrix(1, 0, 0, 1, 0, -3)",
+      "changed": true
+     }
+    },
+    "control": {
+     "pre": "none",
+     "post": "matrix(2, 0, 0, 2, 0, 0)",
+     "changed": true
+    },
+    "cardZoom": {
+     "pre": "matrix(1.01, 0, 0, 1.01, 0, 0)",
+     "post": "matrix(1.045, 0, 0, 1.045, 0, 0)",
+     "changed": true
+    }
+   }
+  }
+ },
+ "touch": {
+  "hoverMedia": false,
+  "routes": {
+   "/": {
+    "rows": {
+     ".section-slideshow__btn": {
+      "pre": "none",
+      "post": "none",
+      "changed": false
+     },
+     ".section-collection-list__card .section-collection-list__img": {
+      "pre": "none",
+      "post": "none",
+      "changed": false
+     },
+     ".section-blog-posts__media .section-blog-posts__img": {
+      "pre": "none",
+      "post": "none",
+      "changed": false
+     },
+     ".section-blog-posts__view-all svg": {
+      "pre": "none",
+      "post": "none",
+      "changed": false
+     },
+     ".section-iwt__btn": {
+      "pre": "none",
+      "post": "none",
+      "changed": false
+     },
+     ".section-layered__layer": {
+      "pre": "none",
+      "post": "none",
+      "changed": false
+     },
+     ".section-hotspot__pulse": {
+      "pre": "none",
+      "post": "none",
+      "changed": false
+     },
+     ".product-card__add-btn": {
+      "pre": "none",
+      "post": "none",
+      "changed": false
+     }
+    },
+    "control": {
+     "pre": "none",
+     "post": "matrix(2, 0, 0, 2, 0, 0)",
+     "changed": true
+    },
+    "cardZoom": {
+     "pre": "matrix(1.01, 0, 0, 1.01, 0, 0)",
+     "post": "matrix(1.01, 0, 0, 1.01, 0, 0)",
+     "changed": false
+    }
+   },
+   "/collections/all": {
+    "rows": {
+     ".product-card__add-btn": {
+      "pre": "none",
+      "post": "none",
+      "changed": false
+     }
+    },
+    "control": {
+     "pre": "none",
+     "post": "matrix(2, 0, 0, 2, 0, 0)",
+     "changed": true
+    },
+    "cardZoom": {
+     "pre": "matrix(1.01, 0, 0, 1.01, 0, 0)",
+     "post": "matrix(1.01, 0, 0, 1.01, 0, 0)",
+     "changed": false
+    }
+   },
+   "/collections": {
+    "rows": {
+     ".collection-card": {
+      "pre": "none",
+      "post": "none",
+      "changed": false
+     }
+    },
+    "control": {
+     "pre": "none",
+     "post": "matrix(2, 0, 0, 2, 0, 0)",
+     "changed": true
+    },
+    "cardZoom": null
+   },
+   "/pages/about": {
+    "rows": {
+     ".section-hero__btn": {
+      "pre": "none",
+      "post": "none",
+      "changed": false
+     }
+    },
+    "control": {
+     "pre": "none",
+     "post": "matrix(2, 0, 0, 2, 0, 0)",
+     "changed": true
+    },
+    "cardZoom": null
+   },
+   "/pages/contact": {
+    "rows": {
+     ".button-primary": {
+      "pre": "none",
+      "post": "none",
+      "changed": false
+     }
+    },
+    "control": {
+     "pre": "none",
+     "post": "matrix(2, 0, 0, 2, 0, 0)",
+     "changed": true
+    },
+    "cardZoom": null
+   },
+   "/blogs/sustainable-fashion-eco-tech": {
+    "rows": {
+     ".article-card__media-inner .article-card__media-image": {
+      "pre": "none",
+      "post": "none",
+      "changed": false
+     },
+     ".article-card__read-more svg": {
+      "pre": "none",
+      "post": "none",
+      "changed": false
+     }
+    },
+    "control": {
+     "pre": "none",
+     "post": "matrix(2, 0, 0, 2, 0, 0)",
+     "changed": true
+    },
+    "cardZoom": null
+   },
+   "/blogs/sustainable-fashion-eco-tech/bio-textiles-mycelium-algae-and-the-lab-grown-revolution": {
+    "rows": {
+     ".button-primary": {
+      "pre": "none",
+      "post": "none",
+      "changed": false
+     },
+     ".article-template__nav-link": {
+      "pre": "none",
+      "post": "none",
+      "changed": false
+     }
+    },
+    "control": {
+     "pre": "none",
+     "post": "matrix(2, 0, 0, 2, 0, 0)",
+     "changed": true
+    },
+    "cardZoom": null
+   },
+   "/search?q=jacket": {
+    "rows": {
+     ".article-card__media-inner .article-card__media-image": {
+      "pre": "none",
+      "post": "none",
+      "changed": false
+     },
+     ".article-card__read-more svg": {
+      "pre": "none",
+      "post": "none",
+      "changed": false
+     },
+     ".product-card__add-btn": {
+      "pre": "none",
+      "post": "none",
+      "changed": false
+     }
+    },
+    "control": {
+     "pre": "none",
+     "post": "matrix(2, 0, 0, 2, 0, 0)",
+     "changed": true
+    },
+    "cardZoom": {
+     "pre": "matrix(1.01, 0, 0, 1.01, 0, 0)",
+     "post": "matrix(1.01, 0, 0, 1.01, 0, 0)",
+     "changed": false
+    }
+   },
+   "/products/rebel-tactical-bomber-jacket": {
+    "rows": {
+     ".button-primary": {
+      "pre": "none",
+      "post": "none",
+      "changed": false
+     },
+     ".product-card__add-btn": {
+      "pre": "none",
+      "post": "none",
+      "changed": false
+     }
+    },
+    "control": {
+     "pre": "none",
+     "post": "matrix(2, 0, 0, 2, 0, 0)",
+     "changed": true
+    },
+    "cardZoom": {
+     "pre": "matrix(1.01, 0, 0, 1.01, 0, 0)",
+     "post": "matrix(1.01, 0, 0, 1.01, 0, 0)",
+     "changed": false
+    }
+   }
+  }
+ }
+}

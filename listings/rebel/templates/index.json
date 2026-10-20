@@ -6,8 +6,10 @@
         "slide_1": {
           "type": "slide",
           "settings": {
+            "image_mobile": "shopify://shop_images/rebel-index-hero-slideshow-slide-1-mobile-clean-2.jpg",
+            "image_desktop": "shopify://shop_images/rebel-hero-editorial-banner-clean-2.jpg",
             "color_scheme": "scheme-1",
-            "overlay_opacity": 25,
+            "overlay_opacity": 45,
             "text_position": "bottom_left",
             "subheading": "AW26 — REFINED DEFIANCE",
             "subheading_size": "xs",
@@ -25,8 +27,10 @@
         "slide_2": {
           "type": "slide",
           "settings": {
+            "image_desktop": "shopify://shop_images/rebel-slide-lifestyle.jpg",
+            "image_mobile": "shopify://shop_images/rebel-index-hero-slideshow-slide-2-mobile.jpg",
             "color_scheme": "scheme-1",
-            "overlay_opacity": 30,
+            "overlay_opacity": 45,
             "text_position": "bottom_center",
             "subheading": "MENSWEAR",
             "subheading_size": "xs",
@@ -44,8 +48,10 @@
         "slide_3": {
           "type": "slide",
           "settings": {
+            "image_desktop": "shopify://shop_images/rebel-slide-streetwear.jpg",
+            "image_mobile": "shopify://shop_images/rebel-index-hero-slideshow-slide-3-mobile.jpg",
             "color_scheme": "scheme-1",
-            "overlay_opacity": 35,
+            "overlay_opacity": 45,
             "text_position": "middle_left",
             "subheading": "ATELIER",
             "subheading_size": "xs",
@@ -117,8 +123,8 @@
         "text_size": "2xl",
         "separator": "—",
         "speed": 30,
-        "padding_top_desktop": 30,
-        "padding_bottom_desktop": 30,
+        "padding_top_desktop": 25,
+        "padding_bottom_desktop": 25,
         "padding_top_mobile": 20,
         "padding_bottom_mobile": 20
       }
@@ -169,13 +175,16 @@
         "hot_3"
       ],
       "settings": {
+        "image": "shopify://shop_images/demo-banner_hotspots.jpg",
         "color_scheme": "scheme-1",
         "heading": "Shop the lookbook",
-        "heading_size": "lg",
+        "heading_size": "xl",
         "heading_tag": "h2",
         "section_width": "full",
         "padding_top_desktop": 80,
-        "padding_bottom_desktop": 80
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 50,
+        "padding_bottom_mobile": 50
       }
     },
     "image_text_overlay_hero": {
@@ -221,9 +230,11 @@
         "ito_btn"
       ],
       "settings": {
+        "image": "shopify://shop_images/rebel-index-image-text-overlay-hero-image.jpg",
+        "image_mobile": "shopify://shop_images/rebel-index-image-text-overlay-hero-mobile.jpg",
         "color_scheme": "scheme-3",
         "section_height": 90,
-        "overlay_opacity": 40,
+        "overlay_opacity": 55,
         "content_position": "center-left",
         "text_align": "left",
         "heading_alt": "Editorial fashion campaign image"
@@ -235,18 +246,23 @@
         "c_1": {
           "type": "collection_card",
           "settings": {
-            "custom_title": "Womenswear"
+            "collection": "outerwear",
+            "image": "shopify://shop_images/rebel-index-collection-list-c-1-image.jpg",
+            "custom_title": "Outerwear"
           }
         },
         "c_2": {
           "type": "collection_card",
           "settings": {
-            "custom_title": "Menswear"
+            "collection": "casual-shirts",
+            "image": "shopify://shop_images/rebel-index-collection-list-c-2-image.jpg",
+            "custom_title": "Casual Shirts"
           }
         },
         "c_3": {
           "type": "collection_card",
           "settings": {
+            "image": "shopify://shop_images/rebel-index-collection-list-c-3-image.jpg",
             "collection": "accessories",
             "custom_title": "Accessories"
           }
@@ -254,7 +270,9 @@
         "c_4": {
           "type": "collection_card",
           "settings": {
-            "custom_title": "Footwear"
+            "collection": "limited-edition",
+            "image": "shopify://shop_images/rebel-index-collection-list-c-4-image.jpg",
+            "custom_title": "Limited Edition"
           }
         }
       },
@@ -275,10 +293,10 @@
         "columns_mobile": "2",
         "image_ratio": "portrait",
         "show_count": false,
-        "padding_top_desktop": 100,
-        "padding_bottom_desktop": 100,
-        "padding_top_mobile": 60,
-        "padding_bottom_mobile": 60
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 50,
+        "padding_bottom_mobile": 50
       }
     },
     "layered_atelier": {
@@ -312,18 +330,25 @@
         "f_3"
       ],
       "settings": {
+        "image_3": "shopify://shop_images/demo-layered_3.jpg",
+        "image_2": "shopify://shop_images/demo-layered_2.jpg",
+        "image_1": "shopify://shop_images/demo-layered_1.jpg",
         "color_scheme": "scheme-1",
         "subheading": "THE HOUSE",
         "subheading_size": "xs",
         "heading": "Made by hand, made to last",
         "heading_size": "xl",
-        "heading_tag": "h2"
+        "heading_tag": "h2",
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 50,
+        "padding_bottom_mobile": 50
       }
     },
     "featured_piece": {
       "type": "featured-product",
       "settings": {
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
         "subheading": "PIECE OF THE WEEK",
         "subheading_size": "xs",
         "heading_size": "xl",
@@ -333,19 +358,20 @@
         "show_view_link": true,
         "image_position": "left",
         "button_size": "lg",
-        "padding_top_desktop": 100,
-        "padding_bottom_desktop": 100,
-        "padding_top_mobile": 60,
-        "padding_bottom_mobile": 60,
-        "product": "the-complete-snowboard"
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 50,
+        "padding_bottom_mobile": 50,
+        "product": "rebel-tactical-bomber-jacket"
       }
     },
     "parallax_atelier": {
       "type": "parallax-image",
       "settings": {
+        "image": "shopify://shop_images/demo-parallax.jpg",
         "color_scheme": "scheme-3",
         "section_height": 80,
-        "overlay_opacity": 45,
+        "overlay_opacity": 60,
         "parallax_speed": 5,
         "subheading": "EST. 2015",
         "subheading_size": "xs",
@@ -368,15 +394,13 @@
       "settings": {
         "color_scheme": "scheme-1",
         "heading": "Trending now",
-        "heading_size": "md",
+        "heading_size": "lg",
         "heading_tag": "h2",
         "products_to_show": 12,
-        "speed": 40,
-        "direction": "normal",
-        "padding_top_desktop": 60,
-        "padding_bottom_desktop": 60,
-        "padding_top_mobile": 40,
-        "padding_bottom_mobile": 40,
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 50,
+        "padding_bottom_mobile": 50,
         "collection": "all"
       }
     },
@@ -401,7 +425,7 @@
         "iwt_text": {
           "type": "text",
           "settings": {
-            "text": "<p>Founded on the belief that luxury is not loud — it whispers, lasts, and improves with wear. Every Devs2 Rebel piece is cut by hand from rare European fabrics and finished in ateliers that have stood for generations.</p>",
+            "text": "<p>Founded on the belief that luxury is not loud — it whispers, lasts, and improves with wear. Every Rebel piece is cut by hand from rare European fabrics and finished in ateliers that have stood for generations.</p>",
             "content_size": "md"
           }
         },
@@ -422,19 +446,22 @@
         "iwt_btn"
       ],
       "settings": {
-        "color_scheme": "scheme-2",
+        "image": "shopify://shop_images/demo-image_with_text_73596a7c-b250-4b91-9f7c-f9a1867231d8.jpg",
+        "color_scheme": "scheme-1",
         "image_position": "left",
-        "section_width": "full",
+        "section_width": "fixed",
         "text_align": "left",
-        "padding_top_desktop": 100,
-        "padding_bottom_desktop": 100,
-        "padding_top_mobile": 60,
-        "padding_bottom_mobile": 60
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 50,
+        "padding_bottom_mobile": 50
       }
     },
     "before_after_craft": {
       "type": "before-after",
       "settings": {
+        "image_after": "shopify://shop_images/demo-before_after_after.jpg",
+        "image_before": "shopify://shop_images/demo-before_after_before.jpg",
         "color_scheme": "scheme-1",
         "subheading": "CRAFTSMANSHIP",
         "subheading_size": "xs",
@@ -443,10 +470,10 @@
         "heading_tag": "h2",
         "label_before": "Raw fabric",
         "label_after": "Finished piece",
-        "padding_top_desktop": 100,
-        "padding_bottom_desktop": 100,
-        "padding_top_mobile": 60,
-        "padding_bottom_mobile": 60
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 50,
+        "padding_bottom_mobile": 50
       }
     },
     "testimonials": {
@@ -455,6 +482,7 @@
         "r_1": {
           "type": "testimonial",
           "settings": {
+            "avatar": "shopify://shop_images/demo-testimonial_1_ca2d3feb-f79f-4abc-b2bc-74fd6c7af61c.jpg",
             "rating": 5,
             "quote": "<p>The cut is absolute. Nothing else in my wardrobe fits like this.</p>",
             "author": "Camille R.",
@@ -464,6 +492,7 @@
         "r_2": {
           "type": "testimonial",
           "settings": {
+            "avatar": "shopify://shop_images/demo-testimonial_2_cddac5cd-1944-4bb9-bd0c-e3c1024a001c.jpg",
             "rating": 5,
             "quote": "<p>I bought one coat in 2022. Three winters later, it looks better than the day it arrived.</p>",
             "author": "Jonas K.",
@@ -473,6 +502,7 @@
         "r_3": {
           "type": "testimonial",
           "settings": {
+            "avatar": "shopify://shop_images/demo-testimonial_3_b95942d2-f757-4dc2-8631-3f68785e78b4.jpg",
             "rating": 5,
             "quote": "<p>You can feel the hands that made it. That's rare now.</p>",
             "author": "Mei L.",
@@ -494,10 +524,10 @@
         "heading_tag": "h2",
         "layout": "slider",
         "columns_desktop": 3,
-        "padding_top_desktop": 100,
-        "padding_bottom_desktop": 100,
-        "padding_top_mobile": 60,
-        "padding_bottom_mobile": 60
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 50,
+        "padding_bottom_mobile": 50
       }
     },
     "blog_journal": {
@@ -515,10 +545,10 @@
         "show_date": true,
         "show_excerpt": true,
         "show_view_all": true,
-        "padding_top_desktop": 100,
-        "padding_bottom_desktop": 100,
-        "padding_top_mobile": 60,
-        "padding_bottom_mobile": 60
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 50,
+        "padding_bottom_mobile": 50
       }
     },
     "press_logos": {
@@ -526,27 +556,27 @@
       "blocks": {
         "l_1": {
           "type": "logo",
-          "settings": {}
+          "settings": { "image": "shopify://shop_images/press-logo-meridian-dark.png" }
         },
         "l_2": {
           "type": "logo",
-          "settings": {}
+          "settings": { "image": "shopify://shop_images/press-logo-northbound-dark.png" }
         },
         "l_3": {
           "type": "logo",
-          "settings": {}
+          "settings": { "image": "shopify://shop_images/press-logo-form-field-dark.png" }
         },
         "l_4": {
           "type": "logo",
-          "settings": {}
+          "settings": { "image": "shopify://shop_images/press-logo-loom-quarterly-dark.png" }
         },
         "l_5": {
           "type": "logo",
-          "settings": {}
+          "settings": { "image": "shopify://shop_images/press-logo-studio-signal-dark.png" }
         },
         "l_6": {
           "type": "logo",
-          "settings": {}
+          "settings": { "image": "shopify://shop_images/press-logo-le-cahier-dark.png" }
         }
       },
       "block_order": [
@@ -558,7 +588,7 @@
         "l_6"
       ],
       "settings": {
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
         "heading": "As featured in",
         "heading_size": "sm",
         "heading_tag": "h2",
@@ -586,10 +616,10 @@
         "button_label": "Subscribe",
         "button_size": "lg",
         "text_align": "center",
-        "padding_top_desktop": 100,
-        "padding_bottom_desktop": 100,
-        "padding_top_mobile": 60,
-        "padding_bottom_mobile": 60
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 50,
+        "padding_bottom_mobile": 50
       }
     }
   },

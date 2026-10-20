@@ -27,6 +27,7 @@
 
     <div class="section-timeline__list">
       {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
         <div class="section-timeline__item" {{ block.shopify_attributes }}>
           <div class="section-timeline__marker">
             <div class="section-timeline__dot"></div>
@@ -56,6 +57,14 @@
         </div>
       {%- endfor -%}
     </div>
+    {%- capture app_blocks -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- if app_blocks != blank -%}
+      <div class="section-apps">{{ app_blocks }}</div>
+    {%- endif -%}
   </div>
 </div>
 
@@ -68,17 +77,27 @@
   @media (min-width: 750px) {
     .section-timeline { padding-block: var(--tl-dt) var(--tl-db); }
   }
-  .section-timeline__head { text-align: center; margin-bottom: 3rem; }
-  .section-timeline__subheading { margin: 0 0 0.25rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgb(var(--color-accent)); font-weight: 600; }
-  .section-timeline__heading { margin: 0; color: rgb(var(--color-foreground)); }
+  .section-timeline__head { text-align: center; margin-bottom: var(--section-head-gap); }
+  .section-timeline__subheading {
+    margin: 0 0 0.5rem;
+    font-weight: var(--eyebrow-weight);
+    letter-spacing: var(--eyebrow-tracking);
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .section-timeline__heading {
+    margin: 0;
+    color: var(--color-ink);
+    letter-spacing: var(--heading-tracking);
+  }
 
   .section-timeline__list {
     max-width: 40rem; margin: 0 auto;
     position: relative; padding-left: 2rem;
   }
   .section-timeline__list::before {
-    content: ''; position: absolute; left: 7px; top: 0; bottom: 0;
-    width: 2px; background: rgba(var(--color-foreground), 0.1);
+    content: ''; position: absolute; left: 4px; top: 0.375rem; bottom: 0;
+    width: 1px; background: var(--color-hairline);
   }
 
   .section-timeline__item {
@@ -87,68 +106,76 @@
   .section-timeline__item:last-child { padding-bottom: 0; }
 
   .section-timeline__marker {
-    position: absolute; left: -2rem; top: 0.25rem;
+    position: absolute; left: -2rem; top: 0.375rem;
   }
   .section-timeline__dot {
-    width: 14px; height: 14px; border-radius: 50%;
-    background: rgb(var(--color-accent));
-    border: 3px solid rgb(var(--color-background));
-    box-shadow: 0 0 0 2px rgba(var(--color-accent), 0.3);
+    width: 9px; height: 9px; border-radius: 0;
+    background: var(--color-ink);
+    border: none;
+    box-shadow: none;
   }
 
   .section-timeline__content { display: flex; flex-direction: column; gap: 0.5rem; }
   .section-timeline__year {
-    font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.1em; color: rgb(var(--color-accent));
+    font-size: var(--eyebrow-size);
+    font-weight: var(--eyebrow-weight);
+    letter-spacing: var(--eyebrow-tracking);
+    text-transform: uppercase;
+    color: var(--color-muted);
   }
-  .section-timeline__item-heading { margin: 0; color: rgb(var(--color-foreground)); line-height: 1.3; }
+  .section-timeline__item-heading {
+    margin: 0;
+    color: var(--color-ink);
+    line-height: 1.25;
+    letter-spacing: var(--heading-tracking);
+  }
 
   .section-timeline__image {
-    border-radius: 0.5rem; overflow: hidden; margin: 0.25rem 0;
+    border-radius: var(--media-radius); border: var(--media-border); box-shadow: var(--media-shadow); overflow: hidden; margin: 0.5rem 0;
   }
   .section-timeline__img { width: 100%; height: auto; display: block; }
 
-  .section-timeline__text { color: rgba(var(--color-foreground), 0.7); line-height: 1.7; }
+  .section-timeline__text { color: var(--color-muted); line-height: 1.65; max-width: 65ch; }
   .section-timeline__text p:last-child { margin-bottom: 0; }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "Timeline",
+  "name": "t:sections.timeline.name",
   "tag": "section",
   "class": "section-timeline-wrapper",
   "settings": [
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Color scheme",
+      "label": "t:sections.timeline.settings.color_scheme.label",
       "default": "scheme-1"
     },
     {
       "type": "header",
-      "content": "Heading"
+      "content": "t:sections.timeline.settings.header__heading.content"
     },
     {
       "type": "inline_richtext",
       "id": "subheading",
-      "label": "Subheading"
+      "label": "t:sections.timeline.settings.subheading.label"
     },
     {
       "type": "select",
       "id": "subheading_size",
-      "label": "Subheading size",
+      "label": "t:sections.timeline.settings.subheading_size.label",
       "options": [
         {
           "value": "xs",
-          "label": "XS"
+          "label": "t:sections.timeline.settings.subheading_size.options.xs"
         },
         {
           "value": "sm",
-          "label": "S"
+          "label": "t:sections.timeline.settings.subheading_size.options.sm"
         },
         {
           "value": "md",
-          "label": "M"
+          "label": "t:sections.timeline.settings.subheading_size.options.md"
         }
       ],
       "default": "sm"
@@ -156,29 +183,29 @@
     {
       "type": "inline_richtext",
       "id": "heading",
-      "label": "Heading",
-      "default": "Our story"
+      "label": "t:sections.timeline.settings.heading.label",
+      "default": "t:sections.timeline.settings.heading.default"
     },
     {
       "type": "select",
       "id": "heading_size",
-      "label": "Heading size",
+      "label": "t:sections.timeline.settings.heading_size.label",
       "options": [
         {
           "value": "sm",
-          "label": "S"
+          "label": "t:sections.timeline.settings.heading_size.options.sm"
         },
         {
           "value": "md",
-          "label": "M"
+          "label": "t:sections.timeline.settings.heading_size.options.md"
         },
         {
           "value": "lg",
-          "label": "L"
+          "label": "t:sections.timeline.settings.heading_size.options.lg"
         },
         {
           "value": "xl",
-          "label": "XL"
+          "label": "t:sections.timeline.settings.heading_size.options.xl"
         }
       ],
       "default": "lg"
@@ -186,22 +213,22 @@
     {
       "type": "select",
       "id": "heading_tag",
-      "label": "Heading tag",
+      "label": "t:sections.timeline.settings.heading_tag.label",
       "options": [
         {
           "value": "h2",
-          "label": "H2"
+          "label": "t:sections.timeline.settings.heading_tag.options.h2"
         },
         {
           "value": "h3",
-          "label": "H3"
+          "label": "t:sections.timeline.settings.heading_tag.options.h3"
         }
       ],
       "default": "h2"
     },
     {
       "type": "header",
-      "content": "Desktop spacing"
+      "content": "t:sections.timeline.settings.header__desktop_spacing.content"
     },
     {
       "type": "range",
@@ -210,7 +237,7 @@
       "max": 150,
       "step": 5,
       "unit": "px",
-      "label": "Top",
+      "label": "t:sections.timeline.settings.padding_top_desktop.label",
       "default": 50
     },
     {
@@ -220,12 +247,12 @@
       "max": 150,
       "step": 5,
       "unit": "px",
-      "label": "Bottom",
+      "label": "t:sections.timeline.settings.padding_bottom_desktop.label",
       "default": 50
     },
     {
       "type": "header",
-      "content": "Mobile spacing"
+      "content": "t:sections.timeline.settings.header__mobile_spacing.content"
     },
     {
       "type": "range",
@@ -234,7 +261,7 @@
       "max": 100,
       "step": 5,
       "unit": "px",
-      "label": "Top",
+      "label": "t:sections.timeline.settings.padding_top_mobile.label",
       "default": 30
     },
     {
@@ -244,43 +271,43 @@
       "max": 100,
       "step": 5,
       "unit": "px",
-      "label": "Bottom",
+      "label": "t:sections.timeline.settings.padding_bottom_mobile.label",
       "default": 30
     }
   ],
   "blocks": [
     {
       "type": "event",
-      "name": "Event",
+      "name": "t:sections.timeline.blocks.event.name",
       "settings": [
         {
           "type": "text",
           "id": "year",
-          "label": "Year / Date",
+          "label": "t:sections.timeline.blocks.event.settings.year.label",
           "default": "2020"
         },
         {
           "type": "inline_richtext",
           "id": "heading",
-          "label": "Heading",
-          "default": "We started our journey"
+          "label": "t:sections.timeline.blocks.event.settings.heading.label",
+          "default": "t:sections.timeline.blocks.event.settings.heading.default"
         },
         {
           "type": "select",
           "id": "heading_size",
-          "label": "Heading size",
+          "label": "t:sections.timeline.blocks.event.settings.heading_size.label",
           "options": [
             {
               "value": "xs",
-              "label": "XS"
+              "label": "t:sections.timeline.blocks.event.settings.heading_size.options.xs"
             },
             {
               "value": "sm",
-              "label": "S"
+              "label": "t:sections.timeline.blocks.event.settings.heading_size.options.sm"
             },
             {
               "value": "md",
-              "label": "M"
+              "label": "t:sections.timeline.blocks.event.settings.heading_size.options.md"
             }
           ],
           "default": "sm"
@@ -288,26 +315,26 @@
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Image"
+          "label": "t:sections.timeline.blocks.event.settings.image.label"
         },
         {
           "type": "richtext",
           "id": "text",
-          "label": "Description",
-          "default": "<p>A brief description of this milestone.</p>"
+          "label": "t:sections.timeline.blocks.event.settings.text.label",
+          "default": "t:sections.timeline.blocks.event.settings.text.default"
         },
         {
           "type": "select",
           "id": "text_size",
-          "label": "Text size",
+          "label": "t:sections.timeline.blocks.event.settings.text_size.label",
           "options": [
             {
               "value": "sm",
-              "label": "S"
+              "label": "t:sections.timeline.blocks.event.settings.text_size.options.sm"
             },
             {
               "value": "md",
-              "label": "M"
+              "label": "t:sections.timeline.blocks.event.settings.text_size.options.md"
             }
           ],
           "default": "sm"
@@ -320,7 +347,7 @@
   ],
   "presets": [
     {
-      "name": "Timeline",
+      "name": "t:sections.timeline.presets.timeline.name",
       "category": "Custom",
       "blocks": [
         {

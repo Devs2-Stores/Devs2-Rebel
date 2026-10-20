@@ -1,0 +1,335 @@
+{
+  "375 fresh": {
+    "ok": true,
+    "blocks": [
+      {
+        "name": "main",
+        "box": {
+          "top": 179,
+          "bottom": 1864,
+          "left": 15,
+          "right": 360
+        },
+        "headTop": null,
+        "contentBottom": 1864,
+        "cards": 0,
+        "carousel": true,
+        "cardLeft": null,
+        "cardRight": null
+      },
+      {
+        "name": "related",
+        "box": {
+          "top": 1888,
+          "bottom": 2466,
+          "left": 0,
+          "right": 375
+        },
+        "headTop": 1912,
+        "contentBottom": 2466,
+        "cards": 4,
+        "carousel": true,
+        "cardLeft": 15,
+        "cardRight": 1202
+      }
+    ],
+    "gaps": [
+      {
+        "between": "main>related",
+        "gap": 48
+      }
+    ],
+    "complementaryHost": {
+      "connected": false
+    },
+    "docOverflow": 0,
+    "vw": 375
+  },
+  "375 history": {
+    "ok": true,
+    "blocks": [
+      {
+        "name": "main",
+        "box": {
+          "top": 179,
+          "bottom": 1864,
+          "left": 15,
+          "right": 360
+        },
+        "headTop": null,
+        "contentBottom": 1864,
+        "cards": 0,
+        "carousel": true,
+        "cardLeft": null,
+        "cardRight": null
+      },
+      {
+        "name": "viewed",
+        "box": {
+          "top": 1888,
+          "bottom": 2443,
+          "left": 15,
+          "right": 360
+        },
+        "headTop": 1888,
+        "contentBottom": 2443,
+        "cards": 1,
+        "carousel": true,
+        "cardLeft": 15,
+        "cardRight": 300
+      },
+      {
+        "name": "related",
+        "box": {
+          "top": 2443,
+          "bottom": 3021,
+          "left": 0,
+          "right": 375
+        },
+        "headTop": 2467,
+        "contentBottom": 3021,
+        "cards": 4,
+        "carousel": true,
+        "cardLeft": 15,
+        "cardRight": 1202
+      }
+    ],
+    "gaps": [
+      {
+        "between": "main>viewed",
+        "gap": 24
+      },
+      {
+        "between": "viewed>related",
+        "gap": 24
+      }
+    ],
+    "complementaryHost": {
+      "connected": false
+    },
+    "docOverflow": 0,
+    "vw": 375
+  },
+  "768 fresh": {
+    "ok": true,
+    "blocks": [
+      {
+        "name": "main",
+        "box": {
+          "top": 158,
+          "bottom": 1210,
+          "left": 30,
+          "right": 738
+        },
+        "headTop": null,
+        "contentBottom": 1210,
+        "cards": 0,
+        "carousel": true,
+        "cardLeft": null,
+        "cardRight": null
+      },
+      {
+        "name": "related",
+        "box": {
+          "top": 1234,
+          "bottom": 1730,
+          "left": 0,
+          "right": 768
+        },
+        "headTop": 1258,
+        "contentBottom": 1730,
+        "cards": 4,
+        "carousel": true,
+        "cardLeft": 30,
+        "cardRight": 981
+      }
+    ],
+    "gaps": [
+      {
+        "between": "main>related",
+        "gap": 48
+      }
+    ],
+    "complementaryHost": {
+      "connected": false
+    },
+    "docOverflow": 0,
+    "vw": 768
+  },
+  "768 history": {
+    "ok": true,
+    "blocks": [
+      {
+        "name": "main",
+        "box": {
+          "top": 158,
+          "bottom": 1210,
+          "left": 30,
+          "right": 738
+        },
+        "headTop": null,
+        "contentBottom": 1210,
+        "cards": 0,
+        "carousel": true,
+        "cardLeft": null,
+        "cardRight": null
+      },
+      {
+        "name": "viewed",
+        "box": {
+          "top": 1234,
+          "bottom": 1706,
+          "left": 30,
+          "right": 738
+        },
+        "headTop": 1234,
+        "contentBottom": 1706,
+        "cards": 1,
+        "carousel": true,
+        "cardLeft": 30,
+        "cardRight": 253
+      },
+      {
+        "name": "related",
+        "box": {
+          "top": 1706,
+          "bottom": 2202,
+          "left": 0,
+          "right": 768
+        },
+        "headTop": 1730,
+        "contentBottom": 2202,
+        "cards": 4,
+        "carousel": true,
+        "cardLeft": 30,
+        "cardRight": 981
+      }
+    ],
+    "gaps": [
+      {
+        "between": "main>viewed",
+        "gap": 24
+      },
+      {
+        "between": "viewed>related",
+        "gap": 24
+      }
+    ],
+    "complementaryHost": {
+      "connected": false
+    },
+    "docOverflow": 0,
+    "vw": 768
+  },
+  "1440 fresh": {
+    "ok": true,
+    "blocks": [
+      {
+        "name": "main",
+        "box": {
+          "top": 166,
+          "bottom": 1231,
+          "left": 75,
+          "right": 1365
+        },
+        "headTop": null,
+        "contentBottom": 1231,
+        "cards": 0,
+        "carousel": true,
+        "cardLeft": null,
+        "cardRight": null
+      },
+      {
+        "name": "related",
+        "box": {
+          "top": 1255,
+          "bottom": 1882,
+          "left": 0,
+          "right": 1440
+        },
+        "headTop": 1279,
+        "contentBottom": 1882,
+        "cards": 4,
+        "carousel": true,
+        "cardLeft": 75,
+        "cardRight": 1365
+      }
+    ],
+    "gaps": [
+      {
+        "between": "main>related",
+        "gap": 48
+      }
+    ],
+    "complementaryHost": {
+      "connected": false
+    },
+    "docOverflow": 0,
+    "vw": 1440
+  },
+  "1440 history": {
+    "ok": true,
+    "blocks": [
+      {
+        "name": "main",
+        "box": {
+          "top": 166,
+          "bottom": 1231,
+          "left": 75,
+          "right": 1365
+        },
+        "headTop": null,
+        "contentBottom": 1231,
+        "cards": 0,
+        "carousel": true,
+        "cardLeft": null,
+        "cardRight": null
+      },
+      {
+        "name": "viewed",
+        "box": {
+          "top": 1255,
+          "bottom": 1857,
+          "left": 75,
+          "right": 1365
+        },
+        "headTop": 1255,
+        "contentBottom": 1857,
+        "cards": 1,
+        "carousel": true,
+        "cardLeft": 75,
+        "cardRight": 380
+      },
+      {
+        "name": "related",
+        "box": {
+          "top": 1857,
+          "bottom": 2484,
+          "left": 0,
+          "right": 1440
+        },
+        "headTop": 1881,
+        "contentBottom": 2484,
+        "cards": 4,
+        "carousel": true,
+        "cardLeft": 75,
+        "cardRight": 1365
+      }
+    ],
+    "gaps": [
+      {
+        "between": "main>viewed",
+        "gap": 24
+      },
+      {
+        "between": "viewed>related",
+        "gap": 24
+      }
+    ],
+    "complementaryHost": {
+      "connected": false
+    },
+    "docOverflow": 0,
+    "vw": 1440
+  }
+}

@@ -77,7 +77,9 @@ function getAllFiles(dir, ext) {
   return results;
 }
 
-const liquidFiles = getAllFiles('.', '.liquid');
+const liquidFiles = ['layout', 'sections', 'snippets', 'blocks', 'templates']
+  .filter((dir) => fs.existsSync(dir))
+  .flatMap((dir) => getAllFiles(dir, '.liquid'));
 const jsonTemplates = getAllFiles('templates', '.json');
 
 let missingStorefront = [];
@@ -111,6 +113,29 @@ for (const file of allSchemaFiles) {
       missingSchema.push(`${file} -> ${key}`);
     }
   }
+}
+
+const referencedSchemaKeys = new Set();
+for (const file of allSchemaFiles) {
+  if (!fs.existsSync(file)) continue;
+  const content = fs.readFileSync(file, 'utf8');
+  for (const match of content.matchAll(tSchemaRegex)) referencedSchemaKeys.add(match[1]);
+}
+
+const staleSchema = [];
+function collectStale(node, keyPath) {
+  if (node !== null && typeof node === 'object') {
+    for (const [k, v] of Object.entries(node)) collectStale(v, keyPath ? `${keyPath}.${k}` : k);
+  } else if (!referencedSchemaKeys.has(keyPath)) {
+    staleSchema.push(keyPath);
+  }
+}
+collectStale(schema, '');
+
+if (staleSchema.length > 0) {
+  console.error(`FAILED: ${staleSchema.length} schema locale keys are not referenced by any t: reference:`);
+  for (const k of staleSchema.slice(0, 10)) console.error(`  - ${k}`);
+  process.exit(1);
 }
 
 if (missingStorefront.length > 0 || missingSchema.length > 0) {

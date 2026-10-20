@@ -1,0 +1,2292 @@
+{
+ "at": "2026-10-09T23:58:00.670Z",
+ "results": [
+  {
+   "journey": "megamenu-1440",
+   "name": "header has items with dropdowns",
+   "ok": true,
+   "detail": {
+    "n": 6
+   }
+  },
+  {
+   "journey": "megamenu-1440",
+   "name": "hover opens dropdown",
+   "ok": true,
+   "detail": {
+    "vis": "visible",
+    "op": "1",
+    "ariaHidden": "true",
+    "right": 341,
+    "vw": 1440,
+    "links": 7
+   }
+  },
+  {
+   "journey": "megamenu-1440",
+   "name": "open dropdown inside viewport",
+   "ok": true,
+   "detail": {
+    "vis": "visible",
+    "op": "1",
+    "ariaHidden": "true",
+    "right": 341,
+    "vw": 1440,
+    "links": 7
+   }
+  },
+  {
+   "journey": "megamenu-1440",
+   "name": "open dropdown not aria-hidden=\"true\"",
+   "ok": false,
+   "detail": {
+    "vis": "visible",
+    "op": "1",
+    "ariaHidden": "true",
+    "right": 341,
+    "vw": 1440,
+    "links": 7
+   }
+  },
+  {
+   "journey": "keyboard-1440",
+   "name": "first Tab lands on skip link",
+   "ok": true,
+   "detail": {
+    "tag": "a",
+    "cls": "skip-to-content-link button-secondary",
+    "href": "#MainContent",
+    "id": ""
+   }
+  },
+  {
+   "journey": "keyboard-1440",
+   "name": "skip link visible when focused (>=24x24 in viewport)",
+   "ok": true,
+   "detail": {
+    "w": 139,
+    "h": 44,
+    "top": 8
+   }
+  },
+  {
+   "journey": "keyboard-1440",
+   "name": "Enter on skip link targets #MainContent",
+   "ok": true,
+   "detail": "#MainContent"
+  },
+  {
+   "journey": "megamenu-1440",
+   "name": "keyboard focus opens dropdown (focus-within)",
+   "ok": true,
+   "detail": {
+    "vis": "visible",
+    "expanded": "false",
+    "trigTag": "BUTTON"
+   }
+  },
+  {
+   "journey": "megamenu-1440",
+   "name": "trigger exposes aria-expanded",
+   "ok": true,
+   "detail": {
+    "vis": "visible",
+    "expanded": "false",
+    "trigTag": "BUTTON"
+   }
+  },
+  {
+   "journey": "megamenu-1440",
+   "name": "Escape closes dropdown",
+   "ok": false,
+   "detail": {
+    "vis": "visible"
+   }
+  },
+  {
+   "journey": "keyboard-1440",
+   "name": "first 25 Tab stops show a focus indicator and are visible",
+   "ok": true,
+   "detail": {
+    "stops": 25,
+    "missing": []
+   }
+  },
+  {
+   "journey": "mobile-menu-375",
+   "name": "hamburger visible",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "journey": "mobile-menu-375",
+   "name": "menu opens with aria-hidden=false",
+   "ok": true,
+   "detail": {
+    "show": true,
+    "ariaHidden": "false",
+    "focusInside": false,
+    "bodyLocked": true
+   }
+  },
+  {
+   "journey": "mobile-menu-375",
+   "name": "focus moved into menu",
+   "ok": false,
+   "detail": {
+    "show": true,
+    "ariaHidden": "false",
+    "focusInside": false,
+    "bodyLocked": true
+   }
+  },
+  {
+   "journey": "mobile-menu-375",
+   "name": "submenu trigger toggles aria-expanded + panel",
+   "ok": true,
+   "detail": {
+    "expanded": "true",
+    "subOpen": true,
+    "subExists": true
+   }
+  },
+  {
+   "journey": "mobile-menu-375",
+   "name": "Escape closes menu",
+   "ok": true,
+   "detail": {
+    "show": false,
+    "ariaHidden": "true",
+    "focus": "header__hamburger"
+   }
+  },
+  {
+   "journey": "mobile-menu-375",
+   "name": "focus returns to hamburger",
+   "ok": true,
+   "detail": {
+    "show": false,
+    "ariaHidden": "true",
+    "focus": "header__hamburger"
+   }
+  },
+  {
+   "journey": "search-1440",
+   "name": "modal opens",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "journey": "search-1440",
+   "name": "input focused",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "journey": "search-1440",
+   "name": "predictive results render links",
+   "ok": true,
+   "detail": {
+    "links": 5,
+    "expanded": "true",
+    "tabs": 1
+   }
+  },
+  {
+   "journey": "search-1440",
+   "name": "combobox aria-expanded=true with results",
+   "ok": true,
+   "detail": {
+    "links": 5,
+    "expanded": "true",
+    "tabs": 1
+   }
+  },
+  {
+   "journey": "search-1440",
+   "name": "Escape closes modal",
+   "ok": true,
+   "detail": {
+    "show": false,
+    "focus": "open-search-modal"
+   }
+  },
+  {
+   "journey": "search-1440",
+   "name": "focus returns to search trigger",
+   "ok": true,
+   "detail": {
+    "show": false,
+    "focus": "open-search-modal"
+   }
+  },
+  {
+   "journey": "search-375",
+   "name": "modal opens",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "journey": "search-375",
+   "name": "input focused",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "journey": "search-375",
+   "name": "predictive results render links",
+   "ok": true,
+   "detail": {
+    "links": 5,
+    "expanded": "true",
+    "tabs": 1
+   }
+  },
+  {
+   "journey": "search-375",
+   "name": "combobox aria-expanded=true with results",
+   "ok": true,
+   "detail": {
+    "links": 5,
+    "expanded": "true",
+    "tabs": 1
+   }
+  },
+  {
+   "journey": "search-375",
+   "name": "Escape closes modal",
+   "ok": true,
+   "detail": {
+    "show": false,
+    "focus": "open-search-modal"
+   }
+  },
+  {
+   "journey": "search-375",
+   "name": "focus returns to search trigger",
+   "ok": true,
+   "detail": {
+    "show": false,
+    "focus": "open-search-modal"
+   }
+  },
+  {
+   "journey": "search-1440",
+   "name": "Enter submits to /search with product results",
+   "ok": true,
+   "detail": {
+    "url": "/search?type=product%2Carticle%2Cpage&q=jacket",
+    "cards": 3,
+    "tabs": [
+     {
+      "sel": "true",
+      "dis": false,
+      "id": "search-products-tab"
+     },
+     {
+      "sel": "false",
+      "dis": false,
+      "id": "search-articles-tab"
+     },
+     {
+      "sel": "false",
+      "dis": true,
+      "id": "search-pages-tab"
+     }
+    ]
+   }
+  },
+  {
+   "journey": "search-1440",
+   "name": "exactly one search tab aria-selected=true",
+   "ok": true,
+   "detail": [
+    {
+     "sel": "true",
+     "dis": false,
+     "id": "search-products-tab"
+    },
+    {
+     "sel": "false",
+     "dis": false,
+     "id": "search-articles-tab"
+    },
+    {
+     "sel": "false",
+     "dis": true,
+     "id": "search-pages-tab"
+    }
+   ]
+  },
+  {
+   "journey": "search-1440",
+   "name": "tabpanel aria-labelledby resolves to a tab id",
+   "ok": true,
+   "detail": [
+    {
+     "panel": "search-products-panel",
+     "labelledby": "search-products-tab",
+     "resolves": true
+    },
+    {
+     "panel": "search-articles-panel",
+     "labelledby": "search-articles-tab",
+     "resolves": true
+    }
+   ]
+  },
+  {
+   "journey": "search-1440",
+   "name": "clicking second tab moves aria-selected",
+   "ok": true,
+   "detail": [
+    "false",
+    "true",
+    "false"
+   ]
+  },
+  {
+   "journey": "search-375",
+   "name": "Enter submits to /search with product results",
+   "ok": true,
+   "detail": {
+    "url": "/search?type=product%2Carticle%2Cpage&q=jacket",
+    "cards": 3,
+    "tabs": [
+     {
+      "sel": "true",
+      "dis": false,
+      "id": "search-products-tab"
+     },
+     {
+      "sel": "false",
+      "dis": false,
+      "id": "search-articles-tab"
+     },
+     {
+      "sel": "false",
+      "dis": true,
+      "id": "search-pages-tab"
+     }
+    ]
+   }
+  },
+  {
+   "journey": "plp-1440",
+   "name": "collection renders product cards",
+   "ok": true,
+   "detail": {
+    "n0": 20
+   }
+  },
+  {
+   "journey": "plp-1440",
+   "name": "sort change updates URL without reload",
+   "ok": true,
+   "detail": "?sort_by=price-ascending"
+  },
+  {
+   "journey": "plp-1440",
+   "name": "sorted grid is price-ascending",
+   "ok": true,
+   "detail": [
+    9.95,
+    10,
+    189,
+    600,
+    629.95,
+    699.95,
+    729.95,
+    749.95,
+    785.95,
+    885.95,
+    885.95,
+    949.95
+   ]
+  },
+  {
+   "journey": "plp-1440",
+   "name": "sort select keeps chosen value after re-render",
+   "ok": true,
+   "detail": "price-ascending"
+  },
+  {
+   "journey": "plp-1440",
+   "name": "checking a filter updates URL",
+   "ok": true,
+   "detail": {
+    "meta": {
+     "name": "filter.v.availability",
+     "value": "1",
+     "id": "Filter-filter-v-availability-1",
+     "label": "\n                          \n                          In stock\n                          (28)\n                        "
+    },
+    "url": "?filter.v.availability=1&sort_by=price-ascending"
+   }
+  },
+  {
+   "journey": "plp-1440",
+   "name": "active filter chip / remove link shown",
+   "ok": true,
+   "detail": [
+    "In stock ×",
+    "Clear all filters",
+    "In stock ×",
+    "Clear all filters"
+   ]
+  },
+  {
+   "journey": "plp-1440",
+   "name": "sort survives filtering",
+   "ok": true,
+   "detail": "?filter.v.availability=1&sort_by=price-ascending"
+  },
+  {
+   "journey": "plp-1440",
+   "name": "removing chip clears filter",
+   "ok": true,
+   "detail": {
+    "url": "?sort_by=price-ascending",
+    "cards": 20
+   }
+  },
+  {
+   "journey": "plp-1440",
+   "name": "browser Back restores previous filter state (popstate)",
+   "ok": true,
+   "detail": "?filter.v.availability=1&sort_by=price-ascending"
+  },
+  {
+   "journey": "plp-filter-375",
+   "name": "filter button >= 24x24",
+   "ok": true,
+   "detail": {
+    "x": 15,
+    "y": 741.09375,
+    "width": 99.453125,
+    "height": 44
+   }
+  },
+  {
+   "journey": "plp-filter-375",
+   "name": "filter panel opens",
+   "ok": true,
+   "detail": [
+    {
+     "id": "CollectionFilterDrawer",
+     "open": true,
+     "vis": "visible",
+     "w": 300,
+     "left": 0,
+     "focusInside": false,
+     "ariaHidden": null,
+     "role": null,
+     "modal": null
+    }
+   ]
+  },
+  {
+   "journey": "plp-filter-375",
+   "name": "opened panel fully on-screen",
+   "ok": true,
+   "detail": {
+    "id": "CollectionFilterDrawer",
+    "open": true,
+    "vis": "visible",
+    "w": 300,
+    "left": 0,
+    "focusInside": false,
+    "ariaHidden": null,
+    "role": null,
+    "modal": null
+   }
+  },
+  {
+   "journey": "plp-filter-375",
+   "name": "focus moves into filter panel",
+   "ok": false,
+   "detail": {
+    "id": "CollectionFilterDrawer",
+    "open": true,
+    "vis": "visible",
+    "w": 300,
+    "left": 0,
+    "focusInside": false,
+    "ariaHidden": null,
+    "role": null,
+    "modal": null
+   }
+  },
+  {
+   "journey": "plp-filter-375",
+   "name": "panel exposes dialog semantics",
+   "ok": false,
+   "detail": {
+    "id": "CollectionFilterDrawer",
+    "open": true,
+    "vis": "visible",
+    "w": 300,
+    "left": 0,
+    "focusInside": false,
+    "ariaHidden": null,
+    "role": null,
+    "modal": null
+   }
+  },
+  {
+   "journey": "plp-filter-375",
+   "name": "Escape closes filter panel",
+   "ok": false,
+   "detail": [
+    true
+   ]
+  },
+  {
+   "journey": "quickview-1440",
+   "name": "quick view button reachable by keyboard when card has focus",
+   "ok": false,
+   "detail": {
+    "visibility": "hidden",
+    "opacity": "0",
+    "display": "flex",
+    "focusWithin": true
+   }
+  },
+  {
+   "journey": "quickview-1440",
+   "name": "quickview opens with product + add button",
+   "ok": true,
+   "detail": {
+    "hidden": false,
+    "title": "Quick view",
+    "add": true,
+    "focusInside": true,
+    "role": "dialog",
+    "modal": "true"
+   }
+  },
+  {
+   "journey": "quickview-1440",
+   "name": "focus inside quickview",
+   "ok": true,
+   "detail": {
+    "hidden": false,
+    "title": "Quick view",
+    "add": true,
+    "focusInside": true,
+    "role": "dialog",
+    "modal": "true"
+   }
+  },
+  {
+   "journey": "quickview-1440",
+   "name": "quickview has dialog semantics",
+   "ok": true,
+   "detail": {
+    "hidden": false,
+    "title": "Quick view",
+    "add": true,
+    "focusInside": true,
+    "role": "dialog",
+    "modal": "true"
+   }
+  },
+  {
+   "journey": "quickview-1440",
+   "name": "quickview add-to-cart increments header count",
+   "ok": true,
+   "detail": {
+    "c0": 0,
+    "c1": 1
+   }
+  },
+  {
+   "journey": "pdp-cart-1440",
+   "name": "variant radios rendered",
+   "ok": true,
+   "detail": {
+    "count": 6
+   }
+  },
+  {
+   "journey": "pdp-cart-1440",
+   "name": "variant change updates hidden id",
+   "ok": true,
+   "detail": {
+    "id0": "45897370304621",
+    "id": "45897370468461",
+    "urlVariant": "45897370468461",
+    "price": "$189",
+    "addDisabled": false,
+    "addText": "Add to cart"
+   }
+  },
+  {
+   "journey": "pdp-cart-1440",
+   "name": "URL ?variant= matches selected id",
+   "ok": true,
+   "detail": {
+    "id": "45897370468461",
+    "urlVariant": "45897370468461",
+    "price": "$189",
+    "addDisabled": false,
+    "addText": "Add to cart"
+   }
+  },
+  {
+   "journey": "pdp-cart-1440",
+   "name": "selected label shows chosen value",
+   "ok": true,
+   "detail": "Stealth Slate"
+  },
+  {
+   "journey": "pdp-cart-1440",
+   "name": "quantity + increments to 2",
+   "ok": true,
+   "detail": "2"
+  },
+  {
+   "journey": "pdp-cart-1440",
+   "name": "quantity cannot go below 1 (decrease disabled at 1)",
+   "ok": true,
+   "detail": {
+    "q1": "1",
+    "decDisabled": true
+   }
+  },
+  {
+   "journey": "footer-375",
+   "name": "footer menus present",
+   "ok": true,
+   "detail": 4
+  },
+  {
+   "journey": "footer-375",
+   "name": "toggles shown, collapsed, aria-controls resolve",
+   "ok": true,
+   "detail": [
+    {
+     "toggleShown": true,
+     "expanded": "false",
+     "controls": true,
+     "listVis": "hidden",
+     "links": 8
+    },
+    {
+     "toggleShown": true,
+     "expanded": "false",
+     "controls": true,
+     "listVis": "hidden",
+     "links": 6
+    },
+    {
+     "toggleShown": true,
+     "expanded": "false",
+     "controls": true,
+     "listVis": "hidden",
+     "links": 6
+    },
+    {
+     "toggleShown": true,
+     "expanded": "false",
+     "controls": true,
+     "listVis": "hidden",
+     "links": 5
+    }
+   ]
+  },
+  {
+   "journey": "footer-375",
+   "name": "Enter expands menu + list visible",
+   "ok": true,
+   "detail": {
+    "exp": "true",
+    "vis": "visible"
+   }
+  },
+  {
+   "journey": "footer-375",
+   "name": "Space collapses menu + list hidden",
+   "ok": true,
+   "detail": {
+    "exp": "false",
+    "vis": "hidden"
+   }
+  },
+  {
+   "journey": "footer-375",
+   "name": "toggle target >= 24px tall",
+   "ok": true,
+   "detail": {
+    "x": 15,
+    "y": 393.609375,
+    "width": 345,
+    "height": 24
+   }
+  },
+  {
+   "journey": "footer-1440",
+   "name": "footer menus present",
+   "ok": true,
+   "detail": 4
+  },
+  {
+   "journey": "footer-1440",
+   "name": "no toggles at desktop, lists visible",
+   "ok": true,
+   "detail": [
+    {
+     "toggleShown": false,
+     "expanded": "false",
+     "controls": true,
+     "listVis": "visible",
+     "links": 8
+    },
+    {
+     "toggleShown": false,
+     "expanded": "false",
+     "controls": true,
+     "listVis": "visible",
+     "links": 6
+    },
+    {
+     "toggleShown": false,
+     "expanded": "false",
+     "controls": true,
+     "listVis": "visible",
+     "links": 6
+    },
+    {
+     "toggleShown": false,
+     "expanded": "false",
+     "controls": true,
+     "listVis": "visible",
+     "links": 5
+    }
+   ]
+  },
+  {
+   "journey": "toc-1440",
+   "name": "TOC lists heading links",
+   "ok": true,
+   "detail": {
+    "links": 4,
+    "busy": "false",
+    "hrefsResolve": true,
+    "cls": "toc color-scheme-1 toc--ready",
+    "display": "block"
+   }
+  },
+  {
+   "journey": "toc-1440",
+   "name": "every TOC link target exists",
+   "ok": true,
+   "detail": {
+    "links": 4,
+    "busy": "false",
+    "hrefsResolve": true,
+    "cls": "toc color-scheme-1 toc--ready",
+    "display": "block"
+   }
+  },
+  {
+   "journey": "toc-1440",
+   "name": "aria-busy cleared after build",
+   "ok": true,
+   "detail": {
+    "links": 4,
+    "busy": "false",
+    "hrefsResolve": true,
+    "cls": "toc color-scheme-1 toc--ready",
+    "display": "block"
+   }
+  },
+  {
+   "journey": "toc-1440",
+   "name": "clicking TOC link scrolls heading into view below sticky header",
+   "ok": true,
+   "detail": {
+    "top": 88,
+    "headerBottom": -1603,
+    "vh": 900
+   }
+  },
+  {
+   "journey": "pdp-cart-1440",
+   "name": "add-to-cart opens cart drawer",
+   "ok": false,
+   "detail": {
+    "show": false,
+    "ariaHidden": "true",
+    "items": 0,
+    "focusInside": false,
+    "count": "0"
+   }
+  },
+  {
+   "journey": "pdp-cart-1440",
+   "name": "drawer lists the line item",
+   "ok": false,
+   "detail": {
+    "show": false,
+    "ariaHidden": "true",
+    "items": 0,
+    "focusInside": false,
+    "count": "0"
+   }
+  },
+  {
+   "journey": "pdp-cart-1440",
+   "name": "header cart count incremented",
+   "ok": false,
+   "detail": {
+    "c0": 0,
+    "now": "0"
+   }
+  },
+  {
+   "journey": "pdp-cart-1440",
+   "name": "focus trapped inside drawer",
+   "ok": false,
+   "detail": {
+    "show": false,
+    "ariaHidden": "true",
+    "items": 0,
+    "focusInside": false,
+    "count": "0"
+   }
+  },
+  {
+   "journey": "pdp-cart-1440",
+   "name": "Tab x12 never leaves drawer",
+   "ok": false,
+   "detail": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "journey": "pdp-cart-1440",
+   "name": "Escape closes drawer",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "journey": "pdp-cart-1440",
+   "name": "/cart shows the line",
+   "ok": true,
+   "detail": {
+    "lines": 1,
+    "total": "\n  Order summary\n  \n    \n      Items:\n      1 items\n    \n    \n      Subtotal:\n      $189.00\n    \n      Shipping:\n      Calculated at next step\n    \n    \n      Estimated total:\n      $189.00\n    \n  \n    Check outContinue shopping\n  \n"
+   }
+  },
+  {
+   "journey": "toc-375",
+   "name": "TOC lists heading links",
+   "ok": true,
+   "detail": {
+    "links": 4,
+    "busy": "false",
+    "hrefsResolve": true,
+    "cls": "toc color-scheme-1 toc--ready",
+    "display": "block"
+   }
+  },
+  {
+   "journey": "toc-375",
+   "name": "every TOC link target exists",
+   "ok": true,
+   "detail": {
+    "links": 4,
+    "busy": "false",
+    "hrefsResolve": true,
+    "cls": "toc color-scheme-1 toc--ready",
+    "display": "block"
+   }
+  },
+  {
+   "journey": "toc-375",
+   "name": "aria-busy cleared after build",
+   "ok": true,
+   "detail": {
+    "links": 4,
+    "busy": "false",
+    "hrefsResolve": true,
+    "cls": "toc color-scheme-1 toc--ready",
+    "display": "block"
+   }
+  },
+  {
+   "journey": "pdp-cart-1440",
+   "name": "cart page + updates quantity and server cart",
+   "ok": true,
+   "detail": {
+    "before": "1",
+    "q": "2",
+    "count": "2",
+    "err": [],
+    "serverCart": 2
+   }
+  },
+  {
+   "journey": "toc-375",
+   "name": "clicking TOC link scrolls heading into view below sticky header",
+   "ok": true,
+   "detail": {
+    "top": 80,
+    "headerBottom": -1506,
+    "vh": 812
+   }
+  },
+  {
+   "journey": "pdp-cart-1440",
+   "name": "removing all lines shows empty state",
+   "ok": true,
+   "detail": {
+    "emptyShown": true,
+    "count": "0",
+    "server": 0
+   }
+  },
+  {
+   "journey": "contact-1440",
+   "name": "every field has an accessible label",
+   "ok": true,
+   "detail": [
+    {
+     "name": "contact[company_website]",
+     "type": "text",
+     "required": false,
+     "label": true,
+     "autocomplete": "off"
+    },
+    {
+     "name": "contact[name]",
+     "type": "text",
+     "required": true,
+     "label": true,
+     "autocomplete": "name"
+    },
+    {
+     "name": "contact[email]",
+     "type": "email",
+     "required": true,
+     "label": true,
+     "autocomplete": "email"
+    },
+    {
+     "name": "contact[phone]",
+     "type": "tel",
+     "required": false,
+     "label": true,
+     "autocomplete": "tel"
+    },
+    {
+     "name": "contact[body]",
+     "type": "textarea",
+     "required": true,
+     "label": true,
+     "autocomplete": null
+    }
+   ]
+  },
+  {
+   "journey": "contact-1440",
+   "name": "email field is type=email + required",
+   "ok": true,
+   "detail": [
+    {
+     "name": "contact[company_website]",
+     "type": "text",
+     "required": false,
+     "label": true,
+     "autocomplete": "off"
+    },
+    {
+     "name": "contact[name]",
+     "type": "text",
+     "required": true,
+     "label": true,
+     "autocomplete": "name"
+    },
+    {
+     "name": "contact[email]",
+     "type": "email",
+     "required": true,
+     "label": true,
+     "autocomplete": "email"
+    },
+    {
+     "name": "contact[phone]",
+     "type": "tel",
+     "required": false,
+     "label": true,
+     "autocomplete": "tel"
+    },
+    {
+     "name": "contact[body]",
+     "type": "textarea",
+     "required": true,
+     "label": true,
+     "autocomplete": null
+    }
+   ]
+  },
+  {
+   "journey": "contact-1440",
+   "name": "empty submit is blocked client-side (no POST)",
+   "ok": true,
+   "detail": {
+    "posted": false,
+    "url": "http://127.0.0.1:9292/pages/contact"
+   }
+  },
+  {
+   "journey": "contact-1440",
+   "name": "first invalid field receives focus",
+   "ok": true,
+   "detail": {
+    "invalid": [
+     "contact[name]",
+     "contact[email]",
+     "contact[body]"
+    ],
+    "focus": "contact[name]"
+   }
+  },
+  {
+   "journey": "cart-drawer-1440",
+   "name": "cart seeded through AJAX API (/cart/add.js)",
+   "ok": true,
+   "detail": 200
+  },
+  {
+   "journey": "cart-drawer-1440",
+   "name": "keyboard Enter on header cart opens drawer with the line",
+   "ok": true,
+   "detail": {
+    "show": true,
+    "ariaHidden": "false",
+    "items": 1,
+    "focusInside": false
+   }
+  },
+  {
+   "journey": "cart-drawer-1440",
+   "name": "focus moves into drawer",
+   "ok": false,
+   "detail": {
+    "focusInside": false,
+    "active": "header__action-btn header__cart-btn"
+   }
+  },
+  {
+   "journey": "404-375",
+   "name": "HTTP 404",
+   "ok": true,
+   "detail": 404
+  },
+  {
+   "journey": "404-375",
+   "name": "recovery link to home/collections",
+   "ok": true,
+   "detail": {
+    "h1": "Page not found",
+    "links": [
+     "/",
+     "/collections/all",
+     "/collections/all",
+     "/products/3-option-size-mau-ch%E1%BA%A5t-li%E1%BB%87u-max",
+     "/products/3-option-size-mau-ch%E1%BA%A5t-li%E1%BB%87u-max",
+     "/products/%E1%BA%A3nh-d%E1%BB%8Dc-portrait-test-object-fit-crop"
+    ],
+    "search": true
+   }
+  },
+  {
+   "journey": "cart-drawer-1440",
+   "name": "Tab x12 never leaves drawer",
+   "ok": false,
+   "detail": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "journey": "cart-drawer-1440",
+   "name": "Escape closes drawer",
+   "ok": true,
+   "detail": {
+    "show": false,
+    "ariaHidden": "true",
+    "focusReturned": true
+   }
+  },
+  {
+   "journey": "cart-drawer-1440",
+   "name": "focus returns to the cart trigger",
+   "ok": true,
+   "detail": {
+    "show": false,
+    "ariaHidden": "true",
+    "focusReturned": true
+   }
+  },
+  {
+   "journey": "buy-now-1440",
+   "name": "theme buy-now button present",
+   "ok": null,
+   "detail": {
+    "buy": false,
+    "dynamic": true,
+    "dynamicChildren": 1,
+    "note": "show_dynamic_checkout renders payment_button; theme buy-now path not exercised"
+   }
+  }
+ ],
+ "logs": {
+  "skipLinkAndFocusRing": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+     "url": "http://127.0.0.1:9292/"
+    },
+    {
+     "text": "Failed to load resource: net::ERR_FAILED",
+     "url": "http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js"
+    },
+    {
+     "text": "Framing 'https://shop.app/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://shop.app https://admin.shopify.com\". The request has been blocked.\n",
+     "url": ""
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=63afc7f4-6e95-4367-a473-7b83b224d518&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=63afc7f4-6e95-4367-a473-7b83b224d518&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=6ddfbebb-ccee-447d-b3db-7fee7d210ba6&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "[HotReload] Connection closed by the server, attempting to reconnect...",
+     "url": "http://127.0.0.1:9292/cdn/shopifycloud/theme-hot-reload/theme-hot-reload.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    }
+   ],
+   "badResponses": [],
+   "dialogs": []
+  },
+  "megamenuDesktop": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+     "url": "http://127.0.0.1:9292/"
+    },
+    {
+     "text": "Failed to load resource: net::ERR_FAILED",
+     "url": "http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js"
+    },
+    {
+     "text": "Framing 'https://shop.app/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://shop.app https://admin.shopify.com\". The request has been blocked.\n",
+     "url": ""
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+     "url": "http://127.0.0.1:9292/favicon.ico"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=ef3b4ef2-7338-4cec-a10d-9d3aa2ca2c9e&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=ef3b4ef2-7338-4cec-a10d-9d3aa2ca2c9e&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=6973ef35-fe4e-4b14-8b32-ec3bfecdccc8&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    }
+   ],
+   "badResponses": [],
+   "dialogs": []
+  },
+  "mobileMenu": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+     "url": "http://127.0.0.1:9292/"
+    },
+    {
+     "text": "Failed to load resource: net::ERR_FAILED",
+     "url": "http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js"
+    },
+    {
+     "text": "Framing 'https://shop.app/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://shop.app https://admin.shopify.com\". The request has been blocked.\n",
+     "url": ""
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=19177be0-e66d-4116-b051-dd5a4e0f0981&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=19177be0-e66d-4116-b051-dd5a4e0f0981&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=d64cd109-ab53-4856-a749-da29167ff3a2&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    }
+   ],
+   "badResponses": [],
+   "dialogs": []
+  },
+  "search1440": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+     "url": "http://127.0.0.1:9292/"
+    },
+    {
+     "text": "Failed to load resource: net::ERR_FAILED",
+     "url": "http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Framing 'https://shop.app/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://shop.app https://admin.shopify.com\". The request has been blocked.\n",
+     "url": ""
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=c1607e4b-a9a9-4a10-ab9f-0cc9d98ae83c&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=c1607e4b-a9a9-4a10-ab9f-0cc9d98ae83c&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=6c45bfa4-e75d-4b90-a08c-7a509d50748a&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "[HotReload] Connection closed by the server, attempting to reconnect...",
+     "url": "http://127.0.0.1:9292/cdn/shopifycloud/theme-hot-reload/theme-hot-reload.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    }
+   ],
+   "badResponses": [],
+   "dialogs": []
+  },
+  "search375": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+     "url": "http://127.0.0.1:9292/"
+    },
+    {
+     "text": "Failed to load resource: net::ERR_FAILED",
+     "url": "http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js"
+    },
+    {
+     "text": "Framing 'https://shop.app/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://shop.app https://admin.shopify.com\". The request has been blocked.\n",
+     "url": ""
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=af9d4d71-f6b8-4831-905d-82aa2bd345a5&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=af9d4d71-f6b8-4831-905d-82aa2bd345a5&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=c73578cd-5b24-4cb2-9f0c-a695f89bbdc6&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "[HotReload] Connection closed by the server, attempting to reconnect...",
+     "url": "http://127.0.0.1:9292/cdn/shopifycloud/theme-hot-reload/theme-hot-reload.js"
+    }
+   ],
+   "badResponses": [],
+   "dialogs": []
+  },
+  "plpSortFilter": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+     "url": "http://127.0.0.1:9292/collections/all"
+    },
+    {
+     "text": "Failed to load resource: net::ERR_FAILED",
+     "url": "http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js"
+    },
+    {
+     "text": "Framing 'https://shop.app/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://shop.app https://admin.shopify.com\". The request has been blocked.\n",
+     "url": ""
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=b712b49a-835a-44ff-bcef-a6fc80d7cce0&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=b712b49a-835a-44ff-bcef-a6fc80d7cce0&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=86048713-6514-444e-b8a3-71a0c016b9cf&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    }
+   ],
+   "badResponses": [],
+   "dialogs": []
+  },
+  "plpMobileFilter": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+     "url": "http://127.0.0.1:9292/collections/all"
+    },
+    {
+     "text": "Failed to load resource: net::ERR_FAILED",
+     "url": "http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js"
+    },
+    {
+     "text": "Framing 'https://shop.app/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://shop.app https://admin.shopify.com\". The request has been blocked.\n",
+     "url": ""
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=dc507025-1b9f-4e17-9fa5-cb792cbcadb7&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=dc507025-1b9f-4e17-9fa5-cb792cbcadb7&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=ee65aa9d-0775-42f2-b955-a9c7e86c44b2&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    }
+   ],
+   "badResponses": [],
+   "dialogs": []
+  },
+  "quickview": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+     "url": "http://127.0.0.1:9292/collections/all"
+    },
+    {
+     "text": "Failed to load resource: net::ERR_FAILED",
+     "url": "http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js"
+    },
+    {
+     "text": "Framing 'https://shop.app/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://shop.app https://admin.shopify.com\". The request has been blocked.\n",
+     "url": ""
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=37ceccb4-0d3f-4249-8ced-f983da144999&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=37ceccb4-0d3f-4249-8ced-f983da144999&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=6f4110e9-711f-409a-b794-d477d1cc38aa&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    }
+   ],
+   "badResponses": [],
+   "dialogs": []
+  },
+  "footer1440": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+     "url": "http://127.0.0.1:9292/"
+    },
+    {
+     "text": "Failed to load resource: net::ERR_FAILED",
+     "url": "http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js"
+    },
+    {
+     "text": "Framing 'https://shop.app/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://shop.app https://admin.shopify.com\". The request has been blocked.\n",
+     "url": ""
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=ec9386de-1ea9-441f-bba5-c428e0615997&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=ec9386de-1ea9-441f-bba5-c428e0615997&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=71b1950a-e5a7-4cf6-b9c6-771a285b077b&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    }
+   ],
+   "badResponses": [],
+   "dialogs": []
+  },
+  "footer375": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+     "url": "http://127.0.0.1:9292/"
+    },
+    {
+     "text": "Failed to load resource: net::ERR_FAILED",
+     "url": "http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js"
+    },
+    {
+     "text": "Framing 'https://shop.app/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://shop.app https://admin.shopify.com\". The request has been blocked.\n",
+     "url": ""
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=e9b4453c-027f-4b49-9709-f74699e624a3&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=e9b4453c-027f-4b49-9709-f74699e624a3&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=138c1c09-cc8f-46c5-9c2c-0bf64f5c06f4&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    }
+   ],
+   "badResponses": [],
+   "dialogs": []
+  },
+  "toc1440": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+     "url": "http://127.0.0.1:9292/blogs/sustainable-fashion-eco-tech/bio-textiles-mycelium-algae-and-the-lab-grown-revolution"
+    },
+    {
+     "text": "Failed to load resource: net::ERR_FAILED",
+     "url": "http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js"
+    },
+    {
+     "text": "Framing 'https://shop.app/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://shop.app https://admin.shopify.com\". The request has been blocked.\n",
+     "url": ""
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=2eedc116-5cb5-4acc-bb65-1025af229257&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=2eedc116-5cb5-4acc-bb65-1025af229257&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=1a3502c8-d477-4f67-8b36-2657c4d58292&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    }
+   ],
+   "badResponses": [],
+   "dialogs": []
+  },
+  "toc375": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+     "url": "http://127.0.0.1:9292/blogs/sustainable-fashion-eco-tech/bio-textiles-mycelium-algae-and-the-lab-grown-revolution"
+    },
+    {
+     "text": "Failed to load resource: net::ERR_FAILED",
+     "url": "http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js"
+    },
+    {
+     "text": "Framing 'https://shop.app/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://shop.app https://admin.shopify.com\". The request has been blocked.\n",
+     "url": ""
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=eb5e379b-25e3-4f1f-aeb3-c67065a295a3&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=eb5e379b-25e3-4f1f-aeb3-c67065a295a3&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=065b2001-2885-4689-8420-f9fd8c45fa78&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    }
+   ],
+   "badResponses": [],
+   "dialogs": []
+  },
+  "pdpVariantCart": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+     "url": "http://127.0.0.1:9292/products/rebel-tactical-bomber-jacket"
+    },
+    {
+     "text": "Failed to load resource: net::ERR_FAILED",
+     "url": "http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js"
+    },
+    {
+     "text": "Framing 'https://shop.app/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://shop.app https://admin.shopify.com\". The request has been blocked.\n",
+     "url": ""
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=c1ac2948-e10e-456d-badd-c473c58e29bd&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=c1ac2948-e10e-456d-badd-c473c58e29bd&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=d7107efb-9892-44bb-92b9-8d75b958df99&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "[HotReload] Connection closed by the server, attempting to reconnect...",
+     "url": "http://127.0.0.1:9292/cdn/shopifycloud/theme-hot-reload/theme-hot-reload.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=48f3a443-d694-4172-a4c5-573d17ceca74&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=48f3a443-d694-4172-a4c5-573d17ceca74&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=739ea975-7fc0-4b3d-aefc-94c80fced18d&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    }
+   ],
+   "badResponses": [],
+   "dialogs": [
+    "confirm: Are you sure you want to remove this item?"
+   ]
+  },
+  "notFound": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+     "url": "http://127.0.0.1:9292/pages/does-not-exist-404"
+    },
+    {
+     "text": "Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+     "url": "http://127.0.0.1:9292/pages/does-not-exist-404"
+    },
+    {
+     "text": "Failed to load resource: net::ERR_FAILED",
+     "url": "http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Framing 'https://shop.app/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://shop.app https://admin.shopify.com\". The request has been blocked.\n",
+     "url": ""
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=7623abbf-6f71-48aa-a2ca-e26ab6b21536&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=7623abbf-6f71-48aa-a2ca-e26ab6b21536&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=256bbdba-62f1-45fd-b25e-37f1ae1ee240&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    }
+   ],
+   "badResponses": [
+    {
+     "status": 404,
+     "url": "http://127.0.0.1:9292/pages/does-not-exist-404",
+     "cls": "storefront"
+    }
+   ],
+   "dialogs": []
+  },
+  "cartDrawerHeader": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+     "url": "http://127.0.0.1:9292/products/rebel-tactical-bomber-jacket"
+    },
+    {
+     "text": "Failed to load resource: net::ERR_FAILED",
+     "url": "http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Framing 'https://shop.app/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://shop.app https://admin.shopify.com\". The request has been blocked.\n",
+     "url": ""
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=b1be13a7-b077-48c7-97ac-36380b86efa2&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "[HotReload] Connection closed by the server, attempting to reconnect...",
+     "url": "http://127.0.0.1:9292/cdn/shopifycloud/theme-hot-reload/theme-hot-reload.js"
+    },
+    {
+     "text": "TypeError: Failed to fetch\n    at T (http://127.0.0.1:9292/cdn/shopifycloud/storefront/assets/storefront/event_observer_reporter-ed358274.js:3:1425)\n    at w (http://127.0.0.1:9292/cdn/shopifycloud/storefront/assets/storefront/event_observer_reporter-ed358274.js:3:1373)\n    at D (http://127.0.0.1:92",
+     "url": "http://127.0.0.1:9292/cdn/shopifycloud/storefront/assets/storefront/event_observer_reporter-ed358274.js"
+    },
+    {
+     "text": "TypeError: Failed to fetch\n    at T (http://127.0.0.1:9292/cdn/shopifycloud/storefront/assets/storefront/event_observer_reporter-ed358274.js:3:1425)\n    at w (http://127.0.0.1:9292/cdn/shopifycloud/storefront/assets/storefront/event_observer_reporter-ed358274.js:3:1373)\n    at D (http://127.0.0.1:92",
+     "url": "http://127.0.0.1:9292/cdn/shopifycloud/storefront/assets/storefront/event_observer_reporter-ed358274.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=51f42a07-d39a-4e38-8ac4-64152857f8e4&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=51f42a07-d39a-4e38-8ac4-64152857f8e4&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=6002a596-323b-4028-bc7b-c6c56192c050&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    }
+   ],
+   "badResponses": [],
+   "dialogs": []
+  },
+  "buyNow": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+     "url": "http://127.0.0.1:9292/products/rebel-tactical-bomber-jacket"
+    },
+    {
+     "text": "Failed to load resource: net::ERR_FAILED",
+     "url": "http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js"
+    },
+    {
+     "text": "Framing 'https://shop.app/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://shop.app https://admin.shopify.com\". The request has been blocked.\n",
+     "url": ""
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=7c0ab2a8-6988-4987-b94c-4fdbb2532301&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=7c0ab2a8-6988-4987-b94c-4fdbb2532301&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=7593b3bc-bb7e-4081-afe2-11341a1ff38c&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    }
+   ],
+   "badResponses": [],
+   "dialogs": []
+  },
+  "contactForm": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+     "url": "http://127.0.0.1:9292/pages/contact"
+    },
+    {
+     "text": "Failed to load resource: net::ERR_FAILED",
+     "url": "http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js"
+    },
+    {
+     "text": "Framing 'https://shop.app/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://shop.app https://admin.shopify.com\". The request has been blocked.\n",
+     "url": ""
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 400 ()",
+     "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+    },
+    {
+     "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=16942c39-9d51-4a2c-ad75-798f9d1b3ede&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "chrome-error://chromewebdata/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=16942c39-9d51-4a2c-ad75-798f9d1b3ede&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 403 ()",
+     "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=2a6e9f57-7d19-49c1-826f-3317f090807f&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+    }
+   ],
+   "badResponses": [],
+   "dialogs": []
+  }
+ }
+}

@@ -12,9 +12,11 @@
       <auth-form class="login-template__form login-layout">
         <div class="form form-login" id="form-login">
           {%- form 'customer_login' -%}
+          {%- if form.errors -%}
           <div class="form-error" role="alert">
             {%- for error in form.errors -%}{{ form.errors.messages[error] }}<br />{%- endfor -%}
           </div>
+          {%- endif -%}
           <div class="form-group">
             <label for="login-email">
               <span class="required">{{ 'customer.login_page.email' | t }}</span>
@@ -49,6 +51,7 @@
           {%- if form.errors -%}
           <div class="form-error" role="alert">{{ form.errors | default_errors }}</div>
           {%- endif -%}
+          <p class="login-template__recover-subtext">{{ 'customer.recover_password.subtext' | t }}</p>
           <div class="form-group">
             <label for="recover-email">
               <span class="required">{{ 'customer.login_page.email' | t }}</span>

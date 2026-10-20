@@ -2,8 +2,8 @@
 <script src="{{ 'cart-modal.js' | asset_url }}" defer="defer"></script>
 
 <cart-modal class="cart-modal-wrapper" role="dialog" aria-modal="true" aria-labelledby="cart-modal-title" aria-hidden="true">
-  <button type="button" class="cart-modal-overlay" data-action="close-cart-modal" aria-label="{{ 'accessibility.close' | t }}"></button>
-  <div class="cart-modal-panel">
+  <button type="button" class="cart-modal-overlay" data-action="close-cart-modal" aria-label="{{ 'accessibility.close' | t }}" tabindex="-1"></button>
+  <div class="cart-modal-panel{% if settings.cart_color_scheme != blank %} color-{{ settings.cart_color_scheme }}{% endif %}">
     <div class="cart-modal-header">
       <h2 class="cart-modal-title" id="cart-modal-title">
         {{ 'sections.cart.title' | t }} (<span class="cart-modal-count cart-count">{{ cart.item_count }}</span>)
@@ -18,43 +18,79 @@
         <p class="cart-modal-items-loading-text">{{ 'accessibility.loading' | t }}</p>
       </div>
       <div class="cart-modal-items-empty hidden">
-        <img
-          class="cart-modal-items-empty-image"
-          src="{{ 'cart-empty-illustration.svg' | asset_url }}"
-          alt=""
-          width="520"
-          height="360"
-          loading="lazy"
-          decoding="async"
-          aria-hidden="true"
-        >
+        <svg class="cart-modal-items-empty-image" viewBox="0 0 160 120" width="160" height="120" fill="none" aria-hidden="true" focusable="false">
+          <path class="cart-modal-items-empty-image__wave" d="M24 82c18-24 33-34 49-31 16 2 26 18 43 19 9 1 16-2 20-5v31H24z"/>
+          <path class="cart-modal-items-empty-image__bag" stroke-width="3" d="M51 43h58l-4 43a7 7 0 0 1-7 6H62a7 7 0 0 1-7-6z"/>
+          <path class="cart-modal-items-empty-image__line" stroke-linecap="round" stroke-width="4" d="M65 45v-5a15 15 0 0 1 30 0v5"/>
+          <path class="cart-modal-items-empty-image__accent" stroke-linecap="round" stroke-width="4" d="M69 64h22"/>
+          <circle class="cart-modal-items-empty-image__dot" cx="65" cy="82" r="4"/>
+          <circle class="cart-modal-items-empty-image__dot" cx="96" cy="82" r="4"/>
+        </svg>
         <p class="cart-modal-items-empty-text">{{ 'sections.cart.empty' | t }}</p>
         <a href="{{ routes.all_products_collection_url }}" class="cart-modal-items-empty-button">{{ 'general.continue_shopping' | t }}</a>
+        {%- assign drawer_collection = settings.cart_drawer_collection -%}
+        {%- if drawer_collection != blank and drawer_collection.products_count > 0 -%}
+          <div class="cart-modal-collection">
+            <h3 class="cart-modal-collection__title">{{ drawer_collection.title | escape }}</h3>
+            <ul class="cart-modal-collection__list" role="list">
+              {%- for product in drawer_collection.products limit: 4 -%}
+                <li>
+                  <a href="{{ product.url }}" class="cart-modal-collection__link">
+                    {%- if product.featured_image != blank -%}
+                      {%- assign drawer_product_alt = product.featured_image.alt | default: product.title | escape -%}
+                      {{
+                        product.featured_image
+                        | image_url: width: 360
+                        | image_tag:
+                          widths: '180, 270, 360',
+                          sizes: '10rem',
+                          alt: drawer_product_alt,
+                          loading: 'lazy',
+                          decoding: 'async',
+                          class: 'cart-modal-collection__image'
+                      }}
+                    {%- else -%}
+                      {{ 'product-1' | placeholder_svg_tag: 'cart-modal-collection__image' }}
+                    {%- endif -%}
+                    <span class="cart-modal-collection__name">{{ product.title | escape }}</span>
+                    <span class="cart-modal-collection__price">{{ product.price | money }}</span>
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
       </div>
       <div class="cart-modal-items-list"></div>
     </div>
     <form action="{{ routes.cart_url }}" method="post" class="cart-modal-footer">
-      <div class="cart-modal-note">
-        <label for="cart-modal-note">{{ 'sections.cart.note' | t }}</label>
-        <textarea id="cart-modal-note" name="note" placeholder="{{ 'sections.cart.note' | t }}">{{ cart.note | escape }}</textarea>
-        <p class="cart-modal-note__status" data-note-status role="status" aria-live="polite"></p>
-      </div>
+      {%- if settings.show_cart_note -%}
+        <div class="cart-modal-note">
+          <label for="cart-modal-note">{{ 'sections.cart.note' | t }}</label>
+          <textarea id="cart-modal-note" name="note" placeholder="{{ 'sections.cart.note' | t }}">{{ cart.note | escape }}</textarea>
+          <p class="cart-modal-note__status" data-note-status role="status" aria-live="polite"></p>
+        </div>
+      {%- endif -%}
       <div class="cart-modal-summary">
         <ul class="cart-modal-discounts" role="list" hidden></ul>
         <div class="cart-modal-summary-row">
           <span class="cart-modal-summary-label">{{ 'sections.cart.estimated_total' | t }}:</span>
-          <span class="cart-modal-total cart-price">{{ cart.total_price | money }}</span>
+          <span class="cart-modal-total cart-price">{% if settings.currency_code_enabled %}{{ cart.total_price | money_with_currency }}{% else %}{{ cart.total_price | money }}{% endif %}</span>
         </div>
-        <p class="cart-modal-summary-note">{{ 'sections.cart.taxes_included_shipping_at_checkout_without_policy' | t }}</p>
+        {%- if cart.taxes_included or shop.shipping_policy.body != blank -%}
+          <p class="cart-modal-summary-note">
+            {%- if cart.taxes_included -%}{{ 'sections.cart.taxes_included' | t }} {% endif -%}
+            {%- if shop.shipping_policy.body != blank -%}{{ 'sections.cart.shipping_policy_html' | t: link: shop.shipping_policy.url }}{%- endif -%}
+          </p>
+        {%- endif -%}
       </div>
       <div class="cart-modal-actions">
-        <a href="{{ routes.cart_url }}" class="cart-modal-action-button cart-modal-action-view">{{ 'general.cart.view_empty_cart' | t }}</a>
-        <button type="submit" name="checkout" class="cart-modal-action-button cart-modal-action-checkout">
+        <button type="submit" name="checkout" class="cart-modal-action-button cart-modal-action-checkout active">
           <span class="cart-modal-action-checkout-inner">
-            {%- render 'icon', name: 'cart' -%}
             {{ 'sections.cart.checkout' | t }}
           </span>
         </button>
+        <a href="{{ routes.cart_url }}" class="cart-modal-action-button cart-modal-action-view">{{ 'general.cart.view_empty_cart' | t }}</a>
       </div>
     </form>
   </div>

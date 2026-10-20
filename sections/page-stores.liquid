@@ -5,6 +5,7 @@
   data-count-template="{{ 'sections.page_stores.count' | t | escape }}"
   data-open-label="{{ 'sections.page_stores.open_now' | t | escape }}"
   data-closed-label="{{ 'sections.page_stores.closed_now' | t | escape }}"
+  data-shop-utc-offset="{{ 'now' | date: '%z' }}"
 >
   <section class="stores-hero">
     <div class="page-width">
@@ -43,7 +44,7 @@
             </div>
             <div class="stores-sidebar__meta">
               <span class="stores-sidebar__count" id="stores-count" role="status" aria-live="polite"></span>
-              <button type="button" class="stores-sidebar__clear" id="stores-clear" style="display:none">
+              <button type="button" class="stores-sidebar__clear" id="stores-clear" hidden>
                 {%- render 'icon', name: 'close', size: '12' -%}
                 <span>{{ 'sections.page_stores.clear_filter' | t }}</span>
               </button>
@@ -53,6 +54,7 @@
 
         <div class="stores-grid" id="stores-grid">
           {%- for block in section.blocks -%}
+          {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
           {%- if block.type == 'store' -%}
           <div class="stores-card"
                data-store-name="{{ block.settings.name | escape }}"
@@ -60,6 +62,7 @@
                data-store-province="{{ block.settings.province | escape }}"
                data-store-district="{{ block.settings.district | escape }}"
                data-store-hours="{{ block.settings.hours | escape }}"
+               data-store-timezone="{{ block.settings.timezone | strip | escape }}"
                {{ block.shopify_attributes }}>
             {%- assign store_image_alt = 'sections.page_stores.store_image_alt' | t: store: block.settings.name -%}
             <div class="stores-card__media is-loading" data-store-image>
@@ -90,18 +93,24 @@
               {%- if block.settings.email != blank -%}
               <div class="stores-card__info">
                 {%- render 'icon', name: 'email', size: '16' -%}
-                <a href="mailto:{{ block.settings.email }}" title="Email {{ block.settings.email | escape }}">{{ block.settings.email | escape }}</a>
+                <a href="mailto:{{ block.settings.email }}" title="{{ 'sections.page_contact.email' | t }} {{ block.settings.email | escape }}">{{ block.settings.email | escape }}</a>
               </div>
               {%- endif -%}
               {%- if block.settings.hours != blank -%}
               <div class="stores-card__info">
                 {%- render 'icon', name: 'calendar', size: '16' -%}
                 <span>{{ block.settings.hours | escape }}</span>
-                <span class="stores-card__status" data-store-status aria-live="polite"></span>
+                <span class="stores-card__status" data-store-status></span>
               </div>
               {%- endif -%}
-              {%- if block.settings.address != blank -%}
-              <a href="https://maps.google.com/?daddr={{ block.settings.address | url_encode }}" target="_blank" rel="noopener noreferrer" class="stores-card__direction" title="{{ 'sections.page_stores.view_map' | t }}">
+              {%- liquid
+                assign map_href = block.settings.map_url
+                if map_href == blank and block.settings.address != blank
+                  assign map_href = block.settings.address | url_encode | prepend: 'https://maps.google.com/?daddr='
+                endif
+              -%}
+              {%- if map_href != blank -%}
+              <a href="{{ map_href }}" target="_blank" rel="noopener noreferrer" class="stores-card__direction" title="{{ 'sections.page_stores.view_map' | t }}">
                 {%- render 'icon', name: 'location', size: '16' -%}
                 <span>{{ 'sections.page_stores.view_map' | t }}</span>
               </a>
@@ -126,19 +135,28 @@
                 "@type": "GeoCoordinates",
                 "latitude": {{ block.settings.latitude | json }},
                 "longitude": {{ block.settings.longitude | json }}
-              }{%- endif -%}
+              }{%- endif -%}{%- if block.settings.map_url != blank -%},
+              "hasMap": {{ block.settings.map_url | json }}{%- endif -%}
             }
           </script>
           {%- endif -%}
           {%- endif -%}
           {%- endfor -%}
 
-          <div class="stores-empty" id="stores-empty" role="status" aria-live="polite" style="display:none">
+          <div class="stores-empty" id="stores-empty" role="status" aria-live="polite" hidden>
             {%- render 'icon', name: 'sad', size: '48' -%}
             <p>{{ 'sections.page_stores.no_results' | t }}</p>
           </div>
         </div>
       </div>
+      {%- capture app_blocks -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+      {%- if app_blocks != blank -%}
+        <div class="section-apps">{{ app_blocks }}</div>
+      {%- endif -%}
     </div>
   </section>
 
@@ -225,6 +243,12 @@
           "type": "text",
           "id": "hours",
           "label": "t:sections.page_stores.blocks.store.settings.hours.label"
+        },
+        {
+          "type": "text",
+          "id": "timezone",
+          "label": "t:sections.page_stores.blocks.store.settings.timezone.label",
+          "info": "t:sections.page_stores.blocks.store.settings.timezone.info"
         },
         {
           "type": "image_picker",

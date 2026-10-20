@@ -96,7 +96,7 @@
         await this.renderCart(cart);
         await updateCartData(cart, { source: this });
       } catch (error) {
-        this.showError(error.message);
+        this.showError(this.getString('error'));
       } finally {
         this.isLoading = false;
         this.toggleLoading(false);
@@ -119,9 +119,14 @@
     async fetchCartItemsHtml() {
       var cartUrl = (themeConfig.routes && themeConfig.routes.cart_url) || '/cart';
       var separator = cartUrl.indexOf('?') === -1 ? '?' : '&';
-      var response = await fetch(cartUrl + separator + 'section_id=main-cart-items', {
-        headers: { Accept: 'text/html' }
-      });
+      var response;
+      try {
+        response = await fetch(cartUrl + separator + 'section_id=main-cart-items', {
+          headers: { Accept: 'text/html' }
+        });
+      } catch (error) {
+        throw new Error(this.getString('error'));
+      }
       if (!response.ok) throw new Error(this.getString('error'));
       var html = (await response.text()).trim();
       if (!html || html.charAt(0) === '{' || html.charAt(0) === '[') throw new Error(this.getString('error'));
@@ -136,13 +141,7 @@
       this.classList.add('is-updating');
 
       try {
-        var response = await fetch((themeConfig.routes && themeConfig.routes.cart_change_url) || '/cart/change.js', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({ line: line, quantity: quantity }),
-          signal: controller.signal
-        });
-        var cart = await this.parseCartResponse(response);
+        var cart = await this.postCart((themeConfig.routes && themeConfig.routes.cart_change_url) || '/cart/change.js', { line: line, quantity: quantity }, 'error', controller.signal);
         var updatedItem = cart.items[line - 1];
         if (quantity > 0 && updatedItem && updatedItem.quantity !== quantity) this.showQuantityError(updatedItem.quantity);
         await this.renderCart(cart);
@@ -164,22 +163,30 @@
       if (!this.noteInput) return;
       if (this.noteStatus) this.noteStatus.textContent = '';
       try {
-        var response = await fetch((themeConfig.routes && themeConfig.routes.cart_update_url) || '/cart/update.js', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({ note: this.noteInput.value })
-        });
-        var cart = await this.parseCartResponse(response);
+        var cart = await this.postCart((themeConfig.routes && themeConfig.routes.cart_update_url) || '/cart/update.js', { note: this.noteInput.value }, 'noteError');
         if (this.noteStatus) this.noteStatus.textContent = this.getString('noteSaved');
         await updateCartData(cart, { source: this });
       } catch (error) {
-        this.showError(error.message || this.getString('noteError'));
+        this.showError(error.message);
       }
     }
 
-    async parseCartResponse(response) {
-      var data = await response.json();
-      if (!response.ok) throw new Error(data.description || data.message || this.getString('error'));
+    async postCart(url, body, fallbackKey, signal) {
+      var response;
+      var data = null;
+      try {
+        response = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(body),
+          signal: signal
+        });
+        data = await response.json();
+      } catch (error) {
+        if (error.name === 'AbortError') throw error;
+        throw new Error(this.getString(fallbackKey));
+      }
+      if (!response.ok || !data) throw new Error((data && typeof data.description === 'string' && data.description) || this.getString(fallbackKey));
       return data;
     }
 
@@ -191,7 +198,7 @@
 
     updateTotals(cart) {
       ThemeUtils.setText(this.countEl, cart.item_count || 0);
-      if (this.totalEl) this.totalEl.textContent = formatMoney(cart.total_price || 0);
+      if (this.totalEl) this.totalEl.textContent = formatMoney(cart.total_price || 0, themeConfig.priceFormat);
       if (this.discountsEl) {
         this.discountsEl.replaceChildren();
         (cart.cart_level_discount_applications || []).forEach(function(discount) {
@@ -237,15 +244,21 @@
 
   document.addEventListener('cart:item_added', function() {
     var config = themeConfig.cart || {};
+    if (config.type === 'page') {
+      window.location.href = themeConfig.routes.cart_url;
+      return;
+    }
+    if (config.type === 'notification') {
+      if (typeof window.showToast === 'function') window.showToast((themeConfig.strings.cart || {}).itemAdded, 'success');
+      return;
+    }
     if (config.auto_open_modal || config.auto_open_sidebar) window.openCartModal();
   });
 
-  document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('[data-action="open-cart-modal"], [data-action="open-cart-sidebar"]').forEach(function(button) {
-      button.addEventListener('click', function(event) {
-        event.preventDefault();
-        window.openCartModal();
-      });
-    });
+  document.addEventListener('click', function(event) {
+    var button = event.target.closest('[data-action="open-cart-modal"], [data-action="open-cart-sidebar"]');
+    if (!button) return;
+    event.preventDefault();
+    window.openCartModal();
   });
 })();

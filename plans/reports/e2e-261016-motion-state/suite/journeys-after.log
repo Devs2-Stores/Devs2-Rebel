@@ -1,0 +1,27 @@
+[FAIL] keyboard-1440 :: first Tab lands on skip link :: {"tag":"div","cls":"json-formatter-container","href":null,"id":""}
+[PASS] keyboard-1440 :: skip link visible when focused (>=24x24 in viewport)
+[FAIL] mobile-menu-375 :: hamburger visible :: null
+[FAIL] megamenu-1440 :: header has items with dropdowns :: {"n":0}
+[FAIL] keyboard-1440 :: Enter on skip link targets #MainContent :: ""
+[FAIL] keyboard-1440 :: first 25 Tab stops show a focus indicator and are visible :: {"stops":14,"missing":[{"el":"div.json-formatter-container","ring":false,"visible":true,"text":""},{"el":"div.json-formatter-container","ring":false,"visible":true,"text":""},{"el":"div.json-formatter-container","ring":false,"visible":true,"text":""},{"el":"div.json-formatter-container","ring":false,"visible":true,"text":""},{"el":"div.json-formatter-container","ring":false,"visible":true,"text":"
+[FAIL] mobileMenu :: journey crashed :: "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.header__hamburger')\u001b[22m\n"
+[FAIL] plp-1440 :: collection renders product cards :: {"n0":0}
+[FAIL] search1440 :: journey crashed :: "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-action=\"open-search-modal\"]:visible').first()\u001b[22m\n"
+[FAIL] search375 :: journey crashed :: "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-action=\"open-search-modal\"]:visible').first()\u001b[22m\n"
+[FAIL] plp-filter-375 :: filter button visible at 375 :: "none visible"
+[FAIL] plpSortFilter :: journey crashed :: "locator.evaluate: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('facet-filters select[name=\"sort_by\"]')\u001b[22m\n"
+[FAIL] footer-375 :: footer menus present :: 0
+[PASS] footer-375 :: toggles shown, collapsed, aria-controls resolve
+[FAIL] quickview :: journey crashed :: "locator.evaluate: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('facet-filters .product-card').first()\u001b[22m\n"
+[FAIL] pdpVariantCart :: journey crashed :: "page.inputValue: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('form[action*=\"/cart/add\"] input[name=\"id\"]')\u001b[22m\n"
+[FAIL] footer-1440 :: footer menus present :: 0
+[PASS] footer-1440 :: no toggles at desktop, lists visible
+[INFO] toc-1440 :: TOC rendered :: "content-toc absent (setting off or no headings)"
+[INFO] toc-375 :: TOC rendered :: "content-toc absent (setting off or no headings)"
+[FAIL] contact-1440 :: contact form present :: null
+[FAIL] 404-375 :: HTTP 404 :: 401
+[FAIL] 404-375 :: recovery link to home/collections :: {"links":[],"search":false}
+[FAIL] cartDrawerHeader :: journey crashed :: "page.evaluate: TypeError: Cannot read properties of null (reading 'value')\n    at eval (eval at evaluate (:302:30), <anonymous>:2:91)\n    at UtilityScript.evaluate (<anonymous>:304:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)"
+[INFO] buy-now-1440 :: theme buy-now button present :: {"buy":false,"dynamic":false,"dynamicChildren":0,"note":"show_dynamic_checkout renders payment_button; theme buy-now path not exercised"}
+[FAIL] footer375 :: journey crashed :: "locator.focus: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.footer-actions-menu__toggle').first()\u001b[22m\n"
+SUMMARY pass=3 fail=20 info=3 -> plans\reports\e2e-261016-motion-state\suite\journeys\journeys.json

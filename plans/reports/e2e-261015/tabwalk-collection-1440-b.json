@@ -1,0 +1,32 @@
+{
+ "selftest": {
+  "ok": true,
+  "stops": 9,
+  "cycled": true,
+  "invisible": 5,
+  "fadeIn": 1,
+  "offscreenAfterFocus": 0,
+  "labelExempt": 1,
+  "unique": {
+   "null|button|opacity 0.000": 1,
+   "null|a|opacity 0.020": 1,
+   "null|a|aria-hidden": 1,
+   "null|a|zero-size": 1,
+   "null|input#r2|clipped": 1
+  },
+  "offscreenSamples": []
+ },
+ "1440 /collections/all": {
+  "stops": 217,
+  "cycled": true,
+  "invisible": 0,
+  "fadeIn": 0,
+  "offscreenAfterFocus": 2,
+  "labelExempt": 0,
+  "unique": {},
+  "offscreenSamples": [
+   "a.privacy Privacy 1452,855,35,12",
+   "a.terms Terms 1499,855,29,12"
+  ]
+ }
+}

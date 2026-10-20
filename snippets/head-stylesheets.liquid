@@ -11,9 +11,7 @@
 {{ 'toast.css' | asset_url | stylesheet_tag }}
 {{ 'back-to-top.css' | asset_url | stylesheet_tag }}
 
-{%- if template == 'index' -%}
-  {{ 'index.css' | asset_url | stylesheet_tag }}
-{%- elsif template == 'list-collections' -%}
+{%- if template == 'list-collections' -%}
   {{ 'list-collections.css' | asset_url | stylesheet_tag }}
 {%- elsif template == 'collection' -%}
   {{ 'collection.css' | asset_url | stylesheet_tag }}
@@ -32,6 +30,7 @@
 {%- elsif template contains 'customer' -%}
   {{ 'customer.css' | asset_url | stylesheet_tag }}
 {%- elsif template contains 'search' -%}
+  {{ 'collection.css' | asset_url | stylesheet_tag }}
   {{ 'search.css' | asset_url | stylesheet_tag }}
   {{ 'article-card.css' | asset_url | stylesheet_tag }}
 {%- elsif template == 'page.about' -%}

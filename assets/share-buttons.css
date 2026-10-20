@@ -1,47 +1,61 @@
-.share-buttons { display: flex; align-items: center; gap: 0.5rem; }
-.share-buttons__label { font-size: var(--font-base); font-weight: 600; line-height: 1; }
-@media (max-width: 768px) {
-  .share-buttons__label { font-size: var(--font-sm); }
+.share-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
 }
-.share-buttons__items { display: flex; align-items: center; gap: 0.35rem; }
-@media (max-width: 768px) {
-  .share-buttons__items { gap: 0.25rem; }
+.share-buttons__label {
+  font-size: var(--eyebrow-size, 0.75rem);
+  font-weight: var(--eyebrow-weight, 600);
+  text-transform: uppercase;
+  letter-spacing: var(--eyebrow-tracking, 0.14em);
+  color: var(--color-muted);
+  line-height: 1;
+}
+.share-buttons__items {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem;
 }
 .share-buttons__item {
-  width: 2.75rem;
-  height: 2.75rem;
-  flex: 0 0 2.75rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex: 0 0 2.25rem;
 }
 .share-buttons__item a,
 .share-buttons__item button {
   width: 100%;
   height: 100%;
   padding: 0;
-  border: 0;
-  border-radius: var(--radius-sm, 4px);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--buttons-radius);
   background: transparent;
-  color: inherit;
+  color: var(--color-ink);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color 0.2s, color 0.2s, opacity 0.2s;
+  transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
 }
 .share-buttons__item a:hover,
 .share-buttons__item button:hover {
-  background: var(--color-gray-light);
-  color: var(--color-primary);
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  color: var(--color-bg);
 }
 .share-buttons__item a:focus-visible,
 .share-buttons__item button:focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--color-focus);
   outline-offset: 2px;
 }
 .share-buttons__item svg {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1rem;
+  height: 1rem;
 }
-.share-buttons__native-item { display: none; }
-.share-buttons--native .share-buttons__native-item { display: block; }
-.share-buttons__icon { display: block; }
-.share-buttons__icon svg { width: 2rem; height: 2rem; }
+.share-buttons__native-item {
+  display: none;
+}
+.share-buttons--native .share-buttons__native-item {
+  display: block;
+}

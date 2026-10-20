@@ -1,7 +1,7 @@
 ---
 title: Ổn định release-readiness theme Devs2 Shopify
 description: Kế hoạch ổn định theme Devs2 Rebel từ audit report trước khi release/deploy.
-status: pending
+status: completed
 priority: P1
 branch: main
 tags:

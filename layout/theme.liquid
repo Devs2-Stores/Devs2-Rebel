@@ -1,5 +1,5 @@
 {%- comment -%}
-  Devs2 Rebel — Shopify Theme
+  Rebel — Shopify Theme
   Copyright (c) 2026 Devs2. All rights reserved.
   Distributed via Shopify Theme Store. See LICENSE.md for terms.
 {%- endcomment -%}
@@ -12,11 +12,10 @@
     {%- render 'head-color-schemes' -%}
     {%- render 'head-design-systems' -%}
     {%- render 'head-script' -%}
-    {%- render 'head-defer' -%}
     {{ content_for_header }}
   </head>
 
-  <body class="gradient{% if settings.animations_reveal_on_scroll %} animate--enabled{% endif %}">
+  <body class="gradient{% if settings.animations_reveal_on_scroll %} animate--enabled{% endif %} animate--hover-{{ settings.animations_hover_elements | default: 'default' }}">
     {%- assign skip_to_content_text = 'accessibility.skip_to_text' | t -%}
     {%- render 'skip-to-content-link', href: '#MainContent', text: skip_to_content_text -%}
     {%- render 'icons-sprite' -%}

@@ -1,7 +1,7 @@
 ---
 title: "Shopify Theme Store readiness"
 description: "Bring Devs2 Rebel from release-candidate theme to Shopify Theme Store submission-ready state."
-status: pending
+status: in-progress
 priority: P1
 branch: "main"
 tags: [shopify, theme-store, storefront, compliance, qa]

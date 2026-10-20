@@ -1,11 +1,12 @@
+{%- if settings.newsletter_modal_enable -%}
 {{- 'newsletter-modal.css' | asset_url | stylesheet_tag -}}
 <script src="{{ 'newsletter-modal.js' | asset_url }}" defer="defer"></script>
-<newsletter-modal>
+<newsletter-modal data-delay="{{ settings.newsletter_modal_delay }}" data-msg-email="{{ 'newsletter.error_email' | t | escape }}">
   <div id="newsletter-popup" role="dialog" aria-modal="true" aria-labelledby="newsletter-popup-title">
-    <div class="newsletter-popup-wrapper">
+    <div class="newsletter-popup-wrapper color-{{ settings.newsletter_modal_color_scheme }}">
       {%- if settings.newsletter_modal_image != blank -%}
       <div class="newsletter-popup-banner">
-        {%- assign newsletter_alt = settings.newsletter_modal_heading | default: 'Newsletter' | escape -%}
+        {%- assign newsletter_alt = settings.newsletter_modal_heading | escape -%}
         {{ settings.newsletter_modal_image | image_url: width: 600 | image_tag:
           alt: newsletter_alt,
           width: 900, height: 1400,
@@ -22,19 +23,18 @@
         <p class="global-content">{{ settings.newsletter_modal_description }}</p>
         {%- form 'customer' -%}
         <input type="hidden" name="contact[tags]" value="newsletter">
-        <input type="hidden" name="contact[first_name]" value="Subscriber">
-        <input type="hidden" name="contact[last_name]" value="">
         <div class="form-group">
           <label>
             <span class="visually-hidden">{{ 'newsletter.label' | t }}</span>
-            <input class="form-control" title="{{ 'newsletter.label' | t }}" type="email" placeholder="{% if settings.newsletter_modal_placeholder != blank %}{{ settings.newsletter_modal_placeholder }}{% else %}{{ 'newsletter.label' | t }}{% endif %}" name="contact[email]" required autocomplete="email">
+            <input class="form-control newsletter-popup-input" title="{{ 'newsletter.label' | t }}" type="email" placeholder="{% if settings.newsletter_modal_placeholder != blank %}{{ settings.newsletter_modal_placeholder }}{% else %}{{ 'newsletter.label' | t }}{% endif %}" name="contact[email]" required autocomplete="email">
           </label>
         </div>
         <div class="form-group">
-          <button class="button-primary" type="submit" title="{{ 'newsletter.button_label' | t }}">{% if settings.newsletter_modal_button != blank %}{{ settings.newsletter_modal_button }}{% else %}{{ 'newsletter.button_label' | t }}{% endif %}</button>
+          <button class="button-primary active newsletter-popup-submit" type="submit" title="{{ 'newsletter.button_label' | t }}">{% if settings.newsletter_modal_button != blank %}{{ settings.newsletter_modal_button }}{% else %}{{ 'newsletter.button_label' | t }}{% endif %}</button>
         </div>
         {%- endform -%}
       </div>
     </div>
   </div>
 </newsletter-modal>
+{%- endif -%}

@@ -1,0 +1,12 @@
+(node:24664) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Discovery surfaces for http://127.0.0.1:9292: 0 URL(s) in sitemap, 1 page(s) checked
+
+ERROR (3)
+- [robots] http://127.0.0.1:9292/robots.txt: robots.txt not served as text (status 401)
+- [sitemap] http://127.0.0.1:9292/sitemap.xml: sitemap missing or not XML (status 401)
+- [page] http://127.0.0.1:9292/: page failed (status 401)
+
+WARN (2)
+- [llms-txt] http://127.0.0.1:9292/llms.txt: llms.txt missing (status 401)
+- [llms-full-txt] http://127.0.0.1:9292/llms-full.txt: llms-full.txt missing (status 401); expected when the site has docs or long-form content

@@ -1,0 +1,212 @@
+[
+  {
+    "viewport": "375x812",
+    "screenshot": "E:\\Work\\shopify\\plans\\reports\\enhance-ux-ax-261011-1000-production\\round-10\\final-shots\\404\\375x812.png",
+    "outline": [
+      "section#shopify-section-sections--27321871204461__announceme @ x0 y0 375x58",
+      "  announcement-bar.announcement-bar.color-scheme-3 \"New season @ x0 y0 375x58",
+      "    div.announcement-bar__container \"New season: the tailored an @ x0 y8 375x42",
+      "      div.swiper.announcement-bar__swiper \"New season: the tailore @ x0 y8 375x42",
+      "section#shopify-section-sections--27321871204461__header.sho @ x0 y58 375x64",
+      "  global-header.header.color-scheme-1 \"Devs2 Rebel Open cart 0 @ x0 y58 375x64",
+      "    div.page-width \"Devs2 Rebel Open cart 0\" @ x0 y58 375x64",
+      "      div.header__wrapper \"Devs2 Rebel Open cart 0\" @ x15 y58 345x64",
+      "main#MainContent.content-for-layout.focus-none \"404 LOST IN  @ x0 y122 375x1639",
+      "  section#shopify-section-template--27321871302765__main-404_m @ x0 y122 375x774",
+      "    div.error-404.color-scheme-1 \"404 LOST IN THE SHOP? Page not @ x0 y122 375x774",
+      "      div.page-width \"404 LOST IN THE SHOP? Page not found The\" @ x0 y122 375x774",
+      "  section#shopify-section-template--27321871302765__404-featur @ x0 y896 375x864",
+      "    div#section-template--27321871302765__404-featured-products. @ x0 y896 375x864",
+      "      div.page-width \"View all Bespoke Charcoal Pinstripe Blaz\" @ x0 y921 375x799",
+      "section#shopify-section-sections--27321871171693__footer.sho @ x0 y1809 375x792",
+      "  global-footer.footer.color-scheme-1 \"Devs2 Rebel Refined def @ x0 y1809 375x792",
+      "    div.page-width \"Devs2 Rebel Refined defiance — luxury fa\" @ x0 y1809 375x792",
+      "      div.footer-wrapper \"Devs2 Rebel Refined defiance — luxury fa @ x15 y1809 345x488",
+      "      div.footer-copyright \"© 2026 Devs2 Rebel, Powered by Shopify @ x15 y2296 345x192",
+      "      div.footer-localization \"COUNTRY/REGION Canada (CAD $) Unite @ x15 y2488 345x112"
+    ],
+    "findings": [
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)"
+      },
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "Framing 'https://shop.app/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://shop.app https://admin.shopify.com\". The request has been blocked.\n"
+      },
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "Failed to load resource: net::ERR_FAILED (http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js)"
+      },
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. (http://127.0.0.1:9292/pages/does-not-exist-404)"
+      },
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "Failed to load resource: the server responded with a status of 404 (Not Found) (http://127.0.0.1:9292/pages/does-not-exist-404)"
+      },
+      {
+        "severity": "warn",
+        "type": "clipped-text",
+        "target": "span.visually-hidden \"Open cart\"",
+        "message": "text is cut off by overflow without an ellipsis or line clamp"
+      },
+      {
+        "severity": "warn",
+        "type": "clipped-text",
+        "target": "label.visually-hidden \"Search the store\"",
+        "message": "text is cut off by overflow without an ellipsis or line clamp"
+      },
+      {
+        "severity": "warn",
+        "type": "clipped-text",
+        "target": "label.visually-hidden \"Email\"",
+        "message": "text is cut off by overflow without an ellipsis or line clamp"
+      },
+      {
+        "severity": "warn",
+        "type": "small-touch-target",
+        "target": "",
+        "message": "14 controls smaller than 44px; e.g. a.header__logo-link \"Devs2 Rebel\"; a.section-featured-collection__view-all \"View all\"; a \"Bespoke Charcoal Pinstripe Blazer\"; a \"Black Full-Grain Leather Belt\""
+      }
+    ],
+    "height": 2600
+  },
+  {
+    "viewport": "768x1024",
+    "screenshot": "E:\\Work\\shopify\\plans\\reports\\enhance-ux-ax-261011-1000-production\\round-10\\final-shots\\404\\768x1024.png",
+    "outline": [
+      "section#shopify-section-sections--27321871204461__header.sho @ x0 y37 768x64",
+      "  global-header.header.color-scheme-1 \"Devs2 Rebel Open cart 0 @ x0 y37 768x64",
+      "    div.page-width \"Devs2 Rebel Open cart 0\" @ x0 y37 768x64",
+      "      div.header__wrapper \"Devs2 Rebel Open cart 0\" @ x30 y37 708x64",
+      "main#MainContent.content-for-layout.focus-none \"404 LOST IN  @ x0 y101 768x1397",
+      "  section#shopify-section-template--27321871302765__main-404_m @ x0 y101 768x837",
+      "    div.error-404.color-scheme-1 \"404 LOST IN THE SHOP? Page not @ x0 y101 768x837",
+      "      div.page-width \"404 LOST IN THE SHOP? Page not found The\" @ x0 y101 768x837",
+      "  section#shopify-section-template--27321871302765__404-featur @ x0 y938 768x560",
+      "    div#section-template--27321871302765__404-featured-products. @ x0 y938 768x560",
+      "      div.page-width \"View all Bespoke Charcoal Pinstripe Blaz\" @ x0 y968 768x470",
+      "section#shopify-section-sections--27321871171693__footer.sho @ x0 y1546 768x1030",
+      "  global-footer.footer.color-scheme-1 \"Devs2 Rebel Refined def @ x0 y1546 768x1030",
+      "    div.page-width \"Devs2 Rebel Refined defiance — luxury fa\" @ x0 y1546 768x1030",
+      "      div.footer-wrapper \"Devs2 Rebel Refined defiance — luxury fa @ x30 y1546 708x752",
+      "      div.footer-copyright \"© 2026 Devs2 Rebel, Powered by Shopify @ x30 y2297 708x166",
+      "      div.footer-localization \"COUNTRY/REGION Canada (CAD $) Unite @ x30 y2463 708x112"
+    ],
+    "findings": [
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items."
+      },
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)"
+      },
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "Failed to load resource: the server responded with a status of 404 (Not Found) (http://127.0.0.1:9292/pages/does-not-exist-404)"
+      },
+      {
+        "severity": "warn",
+        "type": "clipped-text",
+        "target": "span.visually-hidden \"Open cart\"",
+        "message": "text is cut off by overflow without an ellipsis or line clamp"
+      },
+      {
+        "severity": "warn",
+        "type": "clipped-text",
+        "target": "label.visually-hidden \"Search the store\"",
+        "message": "text is cut off by overflow without an ellipsis or line clamp"
+      },
+      {
+        "severity": "warn",
+        "type": "clipped-text",
+        "target": "label.visually-hidden \"Email\"",
+        "message": "text is cut off by overflow without an ellipsis or line clamp"
+      }
+    ],
+    "height": 2575
+  },
+  {
+    "viewport": "1440x900",
+    "screenshot": "E:\\Work\\shopify\\plans\\reports\\enhance-ux-ax-261011-1000-production\\round-10\\final-shots\\404\\1440x900.png",
+    "outline": [
+      "section#shopify-section-sections--27321871204461__announceme @ x0 y0 1440x37",
+      "  announcement-bar.announcement-bar.color-scheme-3 \"New season @ x0 y0 1440x37",
+      "section#shopify-section-sections--27321871204461__header.sho @ x0 y37 1440x72",
+      "  global-header.header.color-scheme-1 \"Devs2 Rebel Home Shop C @ x0 y37 1440x72",
+      "    div.page-width \"Devs2 Rebel Home Shop Collections Journa\" @ x0 y37 1440x72",
+      "      div.header__wrapper \"Devs2 Rebel Home Shop Collections Journ @ x75 y37 1290x72",
+      "main#MainContent.content-for-layout.focus-none \"404 LOST IN  @ x0 y109 1440x1408",
+      "  section#shopify-section-template--27321871302765__main-404_m @ x0 y109 1440x648",
+      "    div.error-404.color-scheme-1 \"404 LOST IN THE SHOP? Page not @ x0 y109 1440x648",
+      "      div.page-width \"404 LOST IN THE SHOP? Page not found The\" @ x0 y109 1440x648",
+      "  section#shopify-section-template--27321871302765__404-featur @ x0 y757 1440x760",
+      "    div#section-template--27321871302765__404-featured-products. @ x0 y757 1440x760",
+      "      div.page-width \"View all Bespoke Charcoal Pinstripe Blaz\" @ x0 y787 1440x670",
+      "section#shopify-section-sections--27321871171693__footer.sho @ x0 y1565 1440x845",
+      "  global-footer.footer.color-scheme-1 \"Devs2 Rebel Refined def @ x0 y1565 1440x845",
+      "    div.page-width \"Devs2 Rebel Refined defiance — luxury fa\" @ x0 y1565 1440x845",
+      "      div.footer-wrapper \"Devs2 Rebel Refined defiance — luxury fa @ x75 y1565 1290x567",
+      "      div.footer-copyright \"© 2026 Devs2 Rebel, Powered by Shopify @ x75 y2132 1290x166",
+      "      div.footer-localization \"COUNTRY/REGION Canada (CAD $) Unite @ x75 y2298 1290x112"
+    ],
+    "findings": [
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items."
+      },
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)"
+      },
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "Failed to load resource: the server responded with a status of 404 (Not Found) (http://127.0.0.1:9292/pages/does-not-exist-404)"
+      },
+      {
+        "severity": "warn",
+        "type": "clipped-text",
+        "target": "span.visually-hidden \"Open cart\"",
+        "message": "text is cut off by overflow without an ellipsis or line clamp"
+      },
+      {
+        "severity": "warn",
+        "type": "clipped-text",
+        "target": "label.visually-hidden \"Search the store\"",
+        "message": "text is cut off by overflow without an ellipsis or line clamp"
+      },
+      {
+        "severity": "warn",
+        "type": "clipped-text",
+        "target": "label.visually-hidden \"Email\"",
+        "message": "text is cut off by overflow without an ellipsis or line clamp"
+      }
+    ],
+    "height": 2410
+  }
+]

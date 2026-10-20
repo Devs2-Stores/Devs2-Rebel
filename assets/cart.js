@@ -80,11 +80,7 @@
       this.setUpdating(true);
 
       try {
-        var config = fetchConfig();
-        config.signal = controller.signal;
-        config.body = JSON.stringify({ line: line, quantity: quantity });
-        var response = await fetch(this.getCartRoute('change'), config);
-        var cart = await this.parseCartResponse(response);
+        var cart = await this.requestCart(this.getCartRoute('change'), { line: line, quantity: quantity }, 'error', controller.signal);
         var updatedItem = cart.items[line - 1];
 
         if (quantity > 0 && updatedItem && updatedItem.quantity !== quantity) {
@@ -108,10 +104,16 @@
     async refreshSection(signal) {
       if (!this.sectionId) throw new Error(this.getString('error'));
       var separator = this.getCartRoute().indexOf('?') === -1 ? '?' : '&';
-      var response = await fetch(this.getCartRoute() + separator + 'section_id=' + encodeURIComponent(this.sectionId), {
-        headers: { Accept: 'text/html' },
-        signal: signal
-      });
+      var response;
+      try {
+        response = await fetch(this.getCartRoute() + separator + 'section_id=' + encodeURIComponent(this.sectionId), {
+          headers: { Accept: 'text/html' },
+          signal: signal
+        });
+      } catch (error) {
+        if (error.name === 'AbortError') throw error;
+        throw new Error(this.getString('error'));
+      }
       if (!response.ok) throw new Error(this.getString('error'));
       this.renderSection(await response.text());
     }
@@ -132,19 +134,27 @@
 
     async updateCartFields(body, errorKey) {
       try {
-        var config = fetchConfig();
-        config.body = JSON.stringify(body);
-        var response = await fetch(this.getCartRoute('update'), config);
-        var cart = await this.parseCartResponse(response);
+        var cart = await this.requestCart(this.getCartRoute('update'), body, errorKey);
         await updateCartData(cart, { source: this });
       } catch (error) {
-        this.showError(error.message || this.getString(errorKey));
+        this.showError(error.message);
       }
     }
 
-    async parseCartResponse(response) {
-      var data = await response.json();
-      if (!response.ok) throw new Error(data.description || data.message || this.getString('error'));
+    async requestCart(url, body, fallbackKey, signal) {
+      var config = fetchConfig();
+      config.body = JSON.stringify(body);
+      if (signal) config.signal = signal;
+      var response;
+      var data = null;
+      try {
+        response = await fetch(url, config);
+        data = await response.json();
+      } catch (error) {
+        if (error.name === 'AbortError') throw error;
+        throw new Error(this.getString(fallbackKey));
+      }
+      if (!response.ok || !data) throw new Error((data && typeof data.description === 'string' && data.description) || this.getString(fallbackKey));
       return data;
     }
 

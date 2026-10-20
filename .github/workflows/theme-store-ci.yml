@@ -25,16 +25,18 @@ jobs:
       - name: Validate Locale Integrity & Parity
         run: node scripts/validate-locales.mjs
 
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.2
-
-      - name: Install Theme Check
-        run: gem install theme-check
+      - name: Install Shopify CLI
+        run: npm install -g @shopify/cli@latest
 
       - name: Run Shopify Theme Check
-        run: theme-check --fail-level error
+        run: shopify theme check --fail-level error
 
       - name: Package Distribution Theme ZIP
         run: python scripts/package-theme.py
+
+      - name: Upload Distribution Theme ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: rebel-v1.0.0-zip
+          path: dist/rebel-v1.0.0.zip
+          if-no-files-found: error

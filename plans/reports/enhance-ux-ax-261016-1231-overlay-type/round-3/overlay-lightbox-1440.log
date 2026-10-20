@@ -1,0 +1,27 @@
+(node:36960) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[PASS] overlay:lightbox-1440 :: trigger is keyboard focusable with a name
+[PASS] overlay:lightbox-1440 :: closed at rest: hidden and nothing focusable
+[PASS] overlay:lightbox-1440 :: opens from keyboard (Enter on trigger)
+[PASS] overlay:lightbox-1440 :: dialog semantics: role=dialog + aria-modal + name
+[PASS] overlay:lightbox-1440 :: focus moves inside
+[PASS] overlay:lightbox-1440 :: panel is topmost layer
+[PASS] overlay:lightbox-1440 :: panel fits viewport horizontally
+[PASS] overlay:lightbox-1440 :: panel top inside viewport
+[PASS] overlay:lightbox-1440 :: page scroll locked
+[PASS] overlay:lightbox-1440 :: no layout shift of page behind
+[PASS] overlay:lightbox-1440 :: scroll position kept while open
+[PASS] overlay:lightbox-1440 :: nothing focusable under aria-hidden
+[PASS] overlay:lightbox-1440 :: text keeps >= 12px from panel edges
+[PASS] overlay:lightbox-1440 :: Tab x20 + Shift+Tab x6 stay inside
+[PASS] overlay:lightbox-1440 :: close button named and >= 24x24
+[PASS] overlay:lightbox-1440 :: Escape closes
+[PASS] overlay:lightbox-1440 :: Escape: focus returns to trigger
+[PASS] overlay:lightbox-1440 :: closed: scroll unlocked and position restored
+[PASS] overlay:lightbox-1440 :: closed: nothing focusable inside
+[PASS] overlay:lightbox-1440 :: close button closes
+[PASS] overlay:lightbox-1440 :: close button: focus returns to trigger
+[INFO] overlay:lightbox-1440 :: click outside panel closes :: "panel covers viewport"
+[PASS] overlay:lightbox-1440 :: third open/close cycle still works
+[PASS] overlay:lightbox-1440 :: no page errors during cycles
+SUMMARY {"PASS":23,"FAIL":0,"INFO":1}

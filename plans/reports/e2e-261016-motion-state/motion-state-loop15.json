@@ -1,0 +1,1215 @@
+{
+ "base": "http://127.0.0.1:9292",
+ "results": [
+  {
+   "journey": "overlay:cart-1440",
+   "name": "closed at rest: nothing focusable leaks",
+   "ok": true,
+   "detail": {
+    "open": false,
+    "inView": false,
+    "vis": "hidden",
+    "op": "1",
+    "focusInside": false,
+    "active": "gradient animate--enabled",
+    "leaks": 0,
+    "scrollLock": false,
+    "overflow": "visible/visible/"
+   }
+  },
+  {
+   "journey": "overlay:cart-1440",
+   "name": "opens from keyboard",
+   "ok": true,
+   "detail": {
+    "open": true,
+    "inView": true,
+    "vis": "visible",
+    "op": "1",
+    "focusInside": true,
+    "active": "cart-modal-close",
+    "leaks": 3,
+    "scrollLock": true,
+    "overflow": "visible/hidden/locked"
+   }
+  },
+  {
+   "journey": "overlay:cart-1440",
+   "name": "panel visible in viewport",
+   "ok": true,
+   "detail": {
+    "inView": true,
+    "vis": "visible",
+    "op": "1"
+   }
+  },
+  {
+   "journey": "overlay:cart-1440",
+   "name": "open is animated (>=3 distinct frames, 100-700ms)",
+   "ok": true,
+   "detail": {
+    "frames": 46,
+    "distinct": 5,
+    "ms": 315
+   }
+  },
+  {
+   "journey": "overlay:cart-1440",
+   "name": "focus moves inside",
+   "ok": true,
+   "detail": "cart-modal-close"
+  },
+  {
+   "journey": "overlay:cart-1440",
+   "name": "page scroll locked",
+   "ok": true,
+   "detail": "visible/hidden/locked"
+  },
+  {
+   "journey": "overlay:cart-1440",
+   "name": "Escape closes",
+   "ok": true,
+   "detail": {
+    "open": false,
+    "inView": false,
+    "vis": "hidden",
+    "op": "1",
+    "focusInside": false,
+    "active": "header__action-btn header__cart-btn",
+    "leaks": 0,
+    "scrollLock": false,
+    "overflow": "visible/visible/"
+   }
+  },
+  {
+   "journey": "overlay:cart-1440",
+   "name": "close is animated",
+   "ok": true,
+   "detail": {
+    "frames": 59,
+    "distinct": 16,
+    "ms": 312
+   }
+  },
+  {
+   "journey": "overlay:cart-1440",
+   "name": "closed: nothing focusable leaks",
+   "ok": true,
+   "detail": 0
+  },
+  {
+   "journey": "overlay:cart-1440",
+   "name": "closed: scroll unlocked",
+   "ok": true,
+   "detail": "visible/visible/"
+  },
+  {
+   "journey": "overlay:cart-1440",
+   "name": "focus returns to trigger",
+   "ok": true,
+   "detail": "header__action-btn header__cart-btn"
+  },
+  {
+   "journey": "overlay:search-1440",
+   "name": "closed at rest: nothing focusable leaks",
+   "ok": true,
+   "detail": {
+    "open": false,
+    "inView": false,
+    "vis": "hidden",
+    "op": "1",
+    "focusInside": false,
+    "active": "gradient animate--enabled",
+    "leaks": 0,
+    "scrollLock": false,
+    "overflow": "visible/visible/"
+   }
+  },
+  {
+   "journey": "overlay:search-1440",
+   "name": "opens from keyboard",
+   "ok": true,
+   "detail": {
+    "open": true,
+    "inView": true,
+    "vis": "visible",
+    "op": "1",
+    "focusInside": true,
+    "active": "search-modal-input",
+    "leaks": 13,
+    "scrollLock": true,
+    "overflow": "visible/hidden/locked"
+   }
+  },
+  {
+   "journey": "overlay:search-1440",
+   "name": "panel visible in viewport",
+   "ok": true,
+   "detail": {
+    "inView": true,
+    "vis": "visible",
+    "op": "1"
+   }
+  },
+  {
+   "journey": "overlay:search-1440",
+   "name": "open is animated (>=3 distinct frames, 100-700ms)",
+   "ok": true,
+   "detail": {
+    "frames": 59,
+    "distinct": 16,
+    "ms": 314
+   }
+  },
+  {
+   "journey": "overlay:search-1440",
+   "name": "focus moves inside",
+   "ok": true,
+   "detail": "search-modal-input"
+  },
+  {
+   "journey": "overlay:search-1440",
+   "name": "page scroll locked",
+   "ok": true,
+   "detail": "visible/hidden/locked"
+  },
+  {
+   "journey": "overlay:search-1440",
+   "name": "Escape closes",
+   "ok": true,
+   "detail": {
+    "open": false,
+    "inView": false,
+    "vis": "hidden",
+    "op": "1",
+    "focusInside": false,
+    "active": "header__action-btn",
+    "leaks": 0,
+    "scrollLock": false,
+    "overflow": "visible/visible/"
+   }
+  },
+  {
+   "journey": "overlay:search-1440",
+   "name": "close is animated",
+   "ok": true,
+   "detail": {
+    "frames": 59,
+    "distinct": 16,
+    "ms": 310
+   }
+  },
+  {
+   "journey": "overlay:search-1440",
+   "name": "closed: nothing focusable leaks",
+   "ok": true,
+   "detail": 0
+  },
+  {
+   "journey": "overlay:search-1440",
+   "name": "closed: scroll unlocked",
+   "ok": true,
+   "detail": "visible/visible/"
+  },
+  {
+   "journey": "overlay:search-1440",
+   "name": "focus returns to trigger",
+   "ok": true,
+   "detail": "header__action-btn"
+  },
+  {
+   "journey": "overlay:search-375",
+   "name": "closed at rest: nothing focusable leaks",
+   "ok": true,
+   "detail": {
+    "open": false,
+    "inView": false,
+    "vis": "hidden",
+    "op": "1",
+    "focusInside": false,
+    "active": "gradient animate--enabled",
+    "leaks": 0,
+    "scrollLock": false,
+    "overflow": "visible/visible/"
+   }
+  },
+  {
+   "journey": "overlay:search-375",
+   "name": "opens from keyboard",
+   "ok": true,
+   "detail": {
+    "open": true,
+    "inView": true,
+    "vis": "visible",
+    "op": "1",
+    "focusInside": true,
+    "active": "search-modal-input",
+    "leaks": 13,
+    "scrollLock": true,
+    "overflow": "visible/hidden/locked"
+   }
+  },
+  {
+   "journey": "overlay:search-375",
+   "name": "panel visible in viewport",
+   "ok": true,
+   "detail": {
+    "inView": true,
+    "vis": "visible",
+    "op": "1"
+   }
+  },
+  {
+   "journey": "overlay:search-375",
+   "name": "open is animated (>=3 distinct frames, 100-700ms)",
+   "ok": true,
+   "detail": {
+    "frames": 59,
+    "distinct": 16,
+    "ms": 313
+   }
+  },
+  {
+   "journey": "overlay:search-375",
+   "name": "focus moves inside",
+   "ok": true,
+   "detail": "search-modal-input"
+  },
+  {
+   "journey": "overlay:search-375",
+   "name": "page scroll locked",
+   "ok": true,
+   "detail": "visible/hidden/locked"
+  },
+  {
+   "journey": "overlay:search-375",
+   "name": "Escape closes",
+   "ok": true,
+   "detail": {
+    "open": false,
+    "inView": false,
+    "vis": "hidden",
+    "op": "1",
+    "focusInside": false,
+    "active": "header__action-btn",
+    "leaks": 0,
+    "scrollLock": false,
+    "overflow": "visible/visible/"
+   }
+  },
+  {
+   "journey": "overlay:search-375",
+   "name": "close is animated",
+   "ok": true,
+   "detail": {
+    "frames": 59,
+    "distinct": 16,
+    "ms": 307
+   }
+  },
+  {
+   "journey": "overlay:search-375",
+   "name": "closed: nothing focusable leaks",
+   "ok": true,
+   "detail": 0
+  },
+  {
+   "journey": "overlay:search-375",
+   "name": "closed: scroll unlocked",
+   "ok": true,
+   "detail": "visible/visible/"
+  },
+  {
+   "journey": "overlay:search-375",
+   "name": "focus returns to trigger",
+   "ok": true,
+   "detail": "header__action-btn"
+  },
+  {
+   "journey": "overlay:mobile-menu-375",
+   "name": "closed at rest: nothing focusable leaks",
+   "ok": true,
+   "detail": {
+    "open": false,
+    "inView": false,
+    "vis": "hidden",
+    "op": "1",
+    "focusInside": false,
+    "active": "gradient animate--enabled",
+    "leaks": 0,
+    "scrollLock": false,
+    "overflow": "visible/visible/"
+   }
+  },
+  {
+   "journey": "overlay:mobile-menu-375",
+   "name": "opens from keyboard",
+   "ok": true,
+   "detail": {
+    "open": true,
+    "inView": true,
+    "vis": "visible",
+    "op": "1",
+    "focusInside": true,
+    "active": "mobile-menu__close",
+    "leaks": 8,
+    "scrollLock": true,
+    "overflow": "visible/hidden/locked"
+   }
+  },
+  {
+   "journey": "overlay:mobile-menu-375",
+   "name": "panel visible in viewport",
+   "ok": true,
+   "detail": {
+    "inView": true,
+    "vis": "visible",
+    "op": "1"
+   }
+  },
+  {
+   "journey": "overlay:mobile-menu-375",
+   "name": "open is animated (>=3 distinct frames, 100-700ms)",
+   "ok": true,
+   "detail": {
+    "frames": 59,
+    "distinct": 16,
+    "ms": 313
+   }
+  },
+  {
+   "journey": "overlay:mobile-menu-375",
+   "name": "focus moves inside",
+   "ok": true,
+   "detail": "mobile-menu__close"
+  },
+  {
+   "journey": "overlay:mobile-menu-375",
+   "name": "page scroll locked",
+   "ok": true,
+   "detail": "visible/hidden/locked"
+  },
+  {
+   "journey": "overlay:mobile-menu-375",
+   "name": "Escape closes",
+   "ok": true,
+   "detail": {
+    "open": false,
+    "inView": false,
+    "vis": "hidden",
+    "op": "1",
+    "focusInside": false,
+    "active": "header__hamburger",
+    "leaks": 0,
+    "scrollLock": false,
+    "overflow": "visible/visible/"
+   }
+  },
+  {
+   "journey": "overlay:mobile-menu-375",
+   "name": "close is animated",
+   "ok": true,
+   "detail": {
+    "frames": 58,
+    "distinct": 16,
+    "ms": 316
+   }
+  },
+  {
+   "journey": "overlay:mobile-menu-375",
+   "name": "closed: nothing focusable leaks",
+   "ok": true,
+   "detail": 0
+  },
+  {
+   "journey": "overlay:mobile-menu-375",
+   "name": "closed: scroll unlocked",
+   "ok": true,
+   "detail": "visible/visible/"
+  },
+  {
+   "journey": "overlay:mobile-menu-375",
+   "name": "focus returns to trigger",
+   "ok": true,
+   "detail": "header__hamburger"
+  },
+  {
+   "journey": "overlay:quickview-1440",
+   "name": "closed at rest: nothing focusable leaks",
+   "ok": true,
+   "detail": {
+    "open": false,
+    "inView": false,
+    "vis": "hidden",
+    "op": "1",
+    "focusInside": false,
+    "active": "gradient animate--enabled",
+    "leaks": 0,
+    "scrollLock": false,
+    "overflow": "visible/visible/"
+   }
+  },
+  {
+   "journey": "overlay:quickview-1440",
+   "name": "opens from keyboard",
+   "ok": true,
+   "detail": {
+    "open": true,
+    "inView": true,
+    "vis": "visible",
+    "op": "1",
+    "focusInside": true,
+    "active": "quickview-modal-close",
+    "leaks": 8,
+    "scrollLock": true,
+    "overflow": "visible/hidden/locked"
+   }
+  },
+  {
+   "journey": "overlay:quickview-1440",
+   "name": "panel visible in viewport",
+   "ok": true,
+   "detail": {
+    "inView": true,
+    "vis": "visible",
+    "op": "1"
+   }
+  },
+  {
+   "journey": "overlay:quickview-1440",
+   "name": "open is animated (>=3 distinct frames, 100-700ms)",
+   "ok": false,
+   "detail": {
+    "frames": 58,
+    "distinct": 2,
+    "ms": 27
+   }
+  },
+  {
+   "journey": "overlay:quickview-1440",
+   "name": "focus moves inside",
+   "ok": true,
+   "detail": "quickview-modal-close"
+  },
+  {
+   "journey": "overlay:quickview-1440",
+   "name": "page scroll locked",
+   "ok": true,
+   "detail": "visible/hidden/locked"
+  },
+  {
+   "journey": "overlay:quickview-1440",
+   "name": "Escape closes",
+   "ok": true,
+   "detail": {
+    "open": false,
+    "inView": false,
+    "vis": "hidden",
+    "op": "1",
+    "focusInside": false,
+    "active": "gradient animate--enabled",
+    "leaks": 0,
+    "scrollLock": false,
+    "overflow": "visible/visible/"
+   }
+  },
+  {
+   "journey": "overlay:quickview-1440",
+   "name": "close is animated",
+   "ok": false,
+   "detail": {
+    "frames": 58,
+    "distinct": 2,
+    "ms": 27
+   }
+  },
+  {
+   "journey": "overlay:quickview-1440",
+   "name": "closed: nothing focusable leaks",
+   "ok": true,
+   "detail": 0
+  },
+  {
+   "journey": "overlay:quickview-1440",
+   "name": "closed: scroll unlocked",
+   "ok": true,
+   "detail": "visible/visible/"
+  },
+  {
+   "journey": "overlay:quickview-1440",
+   "name": "focus returns to trigger",
+   "ok": false,
+   "detail": "gradient animate--enabled"
+  },
+  {
+   "journey": "overlay:filter-375",
+   "name": "closed at rest: nothing focusable leaks",
+   "ok": true,
+   "detail": {
+    "open": false,
+    "inView": false,
+    "vis": "hidden",
+    "op": "1",
+    "focusInside": false,
+    "active": "gradient animate--enabled",
+    "leaks": 0,
+    "scrollLock": false,
+    "overflow": "visible/visible/"
+   }
+  },
+  {
+   "journey": "overlay:filter-375",
+   "name": "opens from keyboard",
+   "ok": true,
+   "detail": {
+    "open": true,
+    "inView": true,
+    "vis": "visible",
+    "op": "1",
+    "focusInside": true,
+    "active": "collection-template__close-filter",
+    "leaks": 20,
+    "scrollLock": true,
+    "overflow": "visible/hidden/locked"
+   }
+  },
+  {
+   "journey": "overlay:filter-375",
+   "name": "panel visible in viewport",
+   "ok": true,
+   "detail": {
+    "inView": true,
+    "vis": "visible",
+    "op": "1"
+   }
+  },
+  {
+   "journey": "overlay:filter-375",
+   "name": "open is animated (>=3 distinct frames, 100-700ms)",
+   "ok": true,
+   "detail": {
+    "frames": 59,
+    "distinct": 16,
+    "ms": 301
+   }
+  },
+  {
+   "journey": "overlay:filter-375",
+   "name": "focus moves inside",
+   "ok": true,
+   "detail": "collection-template__close-filter"
+  },
+  {
+   "journey": "overlay:filter-375",
+   "name": "page scroll locked",
+   "ok": true,
+   "detail": "visible/hidden/locked"
+  },
+  {
+   "journey": "overlay:filter-375",
+   "name": "Escape closes",
+   "ok": true,
+   "detail": {
+    "open": false,
+    "inView": false,
+    "vis": "hidden",
+    "op": "1",
+    "focusInside": false,
+    "active": "collection-template__filter-btn",
+    "leaks": 0,
+    "scrollLock": false,
+    "overflow": "visible/visible/"
+   }
+  },
+  {
+   "journey": "overlay:filter-375",
+   "name": "close is animated",
+   "ok": true,
+   "detail": {
+    "frames": 58,
+    "distinct": 16,
+    "ms": 317
+   }
+  },
+  {
+   "journey": "overlay:filter-375",
+   "name": "closed: nothing focusable leaks",
+   "ok": true,
+   "detail": 0
+  },
+  {
+   "journey": "overlay:filter-375",
+   "name": "closed: scroll unlocked",
+   "ok": true,
+   "detail": "visible/visible/"
+  },
+  {
+   "journey": "overlay:filter-375",
+   "name": "focus returns to trigger",
+   "ok": true,
+   "detail": "collection-template__filter-btn"
+  },
+  {
+   "journey": "overlay:float-social-1440",
+   "name": "trigger present",
+   "ok": null,
+   "detail": ".float-social__toggle not rendered"
+  },
+  {
+   "journey": "hover:button",
+   "name": "/ .button-primary.active: hover changes colour",
+   "ok": true,
+   "detail": {
+    "a": {
+     "bg": "rgb(188, 30, 44)",
+     "color": "rgb(255, 255, 255)",
+     "border": "rgb(188, 30, 44)",
+     "tf": "none",
+     "shadow": "none",
+     "deco": "none"
+    },
+    "b": {
+     "bg": "color(srgb 0.634039 0.101176 0.148392)",
+     "color": "rgb(255, 255, 255)",
+     "border": "color(srgb 0.634039 0.101176 0.148392)",
+     "tf": "none",
+     "shadow": "none",
+     "deco": "none"
+    }
+   }
+  },
+  {
+   "journey": "hover:button",
+   "name": "/ .button-primary.active: no lift / shadow",
+   "ok": true,
+   "detail": {
+    "tf": "none",
+    "shadow": "none"
+   }
+  },
+  {
+   "journey": "hover:button",
+   "name": "/ .button-primary:not(.active):not(.white)",
+   "ok": null,
+   "detail": "absent"
+  },
+  {
+   "journey": "hover:button",
+   "name": "/pages/does-not-exist-404 .error-404__button--secondary: hover changes colour",
+   "ok": true,
+   "detail": {
+    "a": {
+     "bg": "rgba(0, 0, 0, 0)",
+     "color": "rgb(10, 10, 10)",
+     "border": "rgb(10, 10, 10)",
+     "tf": "none",
+     "shadow": "none",
+     "deco": "none"
+    },
+    "b": {
+     "bg": "rgb(10, 10, 10)",
+     "color": "rgb(245, 242, 237)",
+     "border": "rgb(10, 10, 10)",
+     "tf": "none",
+     "shadow": "none",
+     "deco": "none"
+    }
+   }
+  },
+  {
+   "journey": "hover:button",
+   "name": "/pages/does-not-exist-404 .error-404__button--secondary: no lift / shadow",
+   "ok": true,
+   "detail": {
+    "tf": "none",
+    "shadow": "none"
+   }
+  },
+  {
+   "journey": "hover:button",
+   "name": "/products/rebel-tactical-bomber-jacket .product-template__add-btn: hover changes colour",
+   "ok": true,
+   "detail": {
+    "a": {
+     "bg": "rgb(188, 30, 44)",
+     "color": "rgb(255, 255, 255)",
+     "border": "rgb(188, 30, 44)",
+     "tf": "none",
+     "shadow": "none",
+     "deco": "none"
+    },
+    "b": {
+     "bg": "color(srgb 0.634039 0.101176 0.148392)",
+     "color": "rgb(255, 255, 255)",
+     "border": "color(srgb 0.634039 0.101176 0.148392)",
+     "tf": "none",
+     "shadow": "none",
+     "deco": "none"
+    }
+   }
+  },
+  {
+   "journey": "hover:button",
+   "name": "/products/rebel-tactical-bomber-jacket .product-template__add-btn: no lift / shadow",
+   "ok": true,
+   "detail": {
+    "tf": "none",
+    "shadow": "none"
+   }
+  },
+  {
+   "journey": "hover:button",
+   "name": "/products/rebel-tactical-bomber-jacket .button-primary:not(.active)",
+   "ok": null,
+   "detail": "absent"
+  },
+  {
+   "journey": "hover:button",
+   "name": "/pages/contact .button-primary.active",
+   "ok": null,
+   "detail": "absent"
+  },
+  {
+   "journey": "hover:button",
+   "name": "/cart .button-primary: hover changes colour",
+   "ok": true,
+   "detail": {
+    "a": {
+     "bg": "rgb(188, 30, 44)",
+     "color": "rgb(255, 255, 255)",
+     "border": "rgb(188, 30, 44)",
+     "tf": "none",
+     "shadow": "none",
+     "deco": "none"
+    },
+    "b": {
+     "bg": "color(srgb 0.634039 0.101176 0.148392)",
+     "color": "rgb(255, 255, 255)",
+     "border": "color(srgb 0.634039 0.101176 0.148392)",
+     "tf": "none",
+     "shadow": "none",
+     "deco": "none"
+    }
+   }
+  },
+  {
+   "journey": "hover:button",
+   "name": "/cart .button-primary: no lift / shadow",
+   "ok": true,
+   "detail": {
+    "tf": "none",
+    "shadow": "none"
+   }
+  },
+  {
+   "journey": "hover:product-card",
+   "name": "media hover changes image (swap or zoom)",
+   "ok": true,
+   "detail": {
+    "ca": {
+     "second": {
+      "op": "0",
+      "tf": "matrix(1.01, 0, 0, 1.01, 0, 0)",
+      "vis": "visible"
+     },
+     "primary": {
+      "op": "1",
+      "tf": "matrix(1.01, 0, 0, 1.01, 0, 0)",
+      "vis": "visible"
+     },
+     "qv": {
+      "op": "0",
+      "tf": "matrix(1, 0, 0, 1, -74, 0)",
+      "vis": "hidden"
+     },
+     "add": {
+      "op": "0",
+      "tf": "none",
+      "vis": "hidden"
+     }
+    },
+    "cb": {
+     "second": {
+      "op": "1",
+      "tf": "matrix(1.03, 0, 0, 1.03, 0, 0)",
+      "vis": "visible"
+     },
+     "primary": {
+      "op": "1",
+      "tf": "matrix(1.03, 0, 0, 1.03, 0, 0)",
+      "vis": "visible"
+     },
+     "qv": {
+      "op": "1",
+      "tf": "matrix(1, 0, 0, 1, -74, 0)",
+      "vis": "visible"
+     },
+     "add": {
+      "op": "1",
+      "tf": "none",
+      "vis": "visible"
+     }
+    }
+   }
+  },
+  {
+   "journey": "hover:product-card",
+   "name": "quick actions revealed on hover",
+   "ok": true,
+   "detail": {
+    "qv": {
+     "op": "1",
+     "tf": "matrix(1, 0, 0, 1, -74, 0)",
+     "vis": "visible"
+    },
+    "add": {
+     "op": "1",
+     "tf": "none",
+     "vis": "visible"
+    }
+   }
+  },
+  {
+   "journey": "hover:megamenu",
+   "name": "dropdown hidden at rest",
+   "ok": true,
+   "detail": {
+    "vis": "hidden",
+    "op": "0",
+    "pe": "none"
+   }
+  },
+  {
+   "journey": "hover:megamenu",
+   "name": "hover opens dropdown",
+   "ok": true,
+   "detail": {
+    "vis": "visible",
+    "op": "1",
+    "pe": "auto"
+   }
+  },
+  {
+   "journey": "hover:megamenu",
+   "name": "aria-expanded tracks hover-open",
+   "ok": true,
+   "detail": "true"
+  },
+  {
+   "journey": "hover:megamenu",
+   "name": "leaving closes dropdown",
+   "ok": true,
+   "detail": {
+    "vis": "hidden",
+    "op": "0",
+    "pe": "none"
+   }
+  },
+  {
+   "journey": "keyboard:megamenu",
+   "name": "Enter opens, aria-expanded=true",
+   "ok": true,
+   "detail": {
+    "k": {
+     "vis": "visible",
+     "op": "1",
+     "pe": "auto"
+    },
+    "kexp": "true"
+   }
+  },
+  {
+   "journey": "keyboard:megamenu",
+   "name": "Escape closes, aria-expanded=false",
+   "ok": true,
+   "detail": {
+    "e": {
+     "vis": "hidden",
+     "op": "0",
+     "pe": "none"
+    },
+    "eexp": "false"
+   }
+  },
+  {
+   "journey": "hover:link",
+   "name": "footer link gives hover feedback",
+   "ok": true,
+   "detail": {
+    "a": {
+     "bg": "rgba(0, 0, 0, 0)",
+     "color": "rgba(10, 10, 10, 0.7)",
+     "border": "rgba(10, 10, 10, 0.7)",
+     "tf": "none",
+     "shadow": "none",
+     "deco": "none"
+    },
+    "b": {
+     "bg": "rgba(0, 0, 0, 0)",
+     "color": "rgb(10, 10, 10)",
+     "border": "rgb(10, 10, 10)",
+     "tf": "none",
+     "shadow": "none",
+     "deco": "underline"
+    }
+   }
+  },
+  {
+   "journey": "state:variant",
+   "name": "selected pill restyles",
+   "ok": true,
+   "detail": {
+    "s0": {
+     "border": "rgb(217, 212, 204)",
+     "bg": "rgba(0, 0, 0, 0)",
+     "color": "rgb(10, 10, 10)"
+    },
+    "s1": {
+     "border": "rgb(10, 10, 10)",
+     "bg": "rgb(10, 10, 10)",
+     "color": "rgb(245, 242, 237)"
+    }
+   }
+  },
+  {
+   "journey": "state:variant",
+   "name": "previous pill returns to rest",
+   "ok": true,
+   "detail": {
+    "sPrev": {
+     "border": "rgb(217, 212, 204)",
+     "bg": "rgba(0, 0, 0, 0)",
+     "color": "rgb(10, 10, 10)"
+    }
+   }
+  },
+  {
+   "journey": "state:variant",
+   "name": "URL tracks variant",
+   "ok": true,
+   "detail": "cal-bomber-jacket?variant=45897370468461"
+  },
+  {
+   "journey": "state:tabs",
+   "name": "PDP tabs",
+   "ok": null,
+   "detail": "fewer than 2"
+  },
+  {
+   "journey": "state:add-to-cart",
+   "name": "button shows a busy state during request",
+   "ok": true,
+   "detail": [
+    {
+     "cls": "button-primary active product-template__add-btn loading",
+     "dis": true,
+     "busy": null
+    },
+    {
+     "cls": "button-primary active product-template__add-btn",
+     "dis": false,
+     "busy": null
+    }
+   ]
+  },
+  {
+   "journey": "state:add-to-cart",
+   "name": "button returns to rest",
+   "ok": true,
+   "detail": [
+    {
+     "cls": "button-primary active product-template__add-btn",
+     "dis": false,
+     "busy": null
+    }
+   ]
+  },
+  {
+   "journey": "state:add-to-cart",
+   "name": "header count updates",
+   "ok": true,
+   "detail": {
+    "count0": "0",
+    "count1": "1"
+   }
+  },
+  {
+   "journey": "state:add-to-cart",
+   "name": "cart drawer opens",
+   "ok": true,
+   "detail": true
+  },
+  {
+   "journey": "state:cart-drawer",
+   "name": "quantity + on PDP drawer updates cart",
+   "ok": true,
+   "detail": 2
+  },
+  {
+   "journey": "state:header",
+   "name": "sticky header stays in view after scroll",
+   "ok": true,
+   "detail": {
+    "y": 1800,
+    "headerTop": 0,
+    "headerBottom": 73,
+    "btt": {
+     "cls": "back-to-top is-visible",
+     "vis": "visible",
+     "op": "1"
+    }
+   }
+  },
+  {
+   "journey": "state:back-to-top",
+   "name": "appears after scroll",
+   "ok": true,
+   "detail": {
+    "cls": "back-to-top is-visible",
+    "vis": "visible",
+    "op": "1"
+   }
+  },
+  {
+   "journey": "state:back-to-top",
+   "name": "click returns to top",
+   "ok": true,
+   "detail": 0
+  },
+  {
+   "journey": "state:back-to-top",
+   "name": "hides at top",
+   "ok": true,
+   "detail": {
+    "cls": "back-to-top",
+    "vis": "hidden"
+   }
+  },
+  {
+   "journey": "motion:home",
+   "name": "infinite animations are intentional (marquee/pulse/spinner)",
+   "ok": true,
+   "detail": [
+    {
+     "name": "marquee-scroll",
+     "target": "section-marquee__track",
+     "dur": 30000,
+     "iter": null,
+     "state": "running"
+    },
+    {
+     "name": "hotspot-ping",
+     "target": "section-hotspot__pulse",
+     "dur": 2000,
+     "iter": null,
+     "state": "running"
+    },
+    {
+     "name": "hotspot-ping",
+     "target": "section-hotspot__pulse",
+     "dur": 2000,
+     "iter": null,
+     "state": "running"
+    },
+    {
+     "name": "hotspot-ping",
+     "target": "section-hotspot__pulse",
+     "dur": 2000,
+     "iter": null,
+     "state": "running"
+    },
+    {
+     "name": "logo-marquee",
+     "target": "section-logo-list__track",
+     "dur": 30000,
+     "iter": null,
+     "state": "running"
+    }
+   ]
+  },
+  {
+   "journey": "motion:home",
+   "name": "running animations inventory",
+   "ok": null,
+   "detail": [
+    {
+     "name": "slideshow-progress",
+     "target": "section-slideshow__progress",
+     "dur": 6000,
+     "iter": 1,
+     "state": "running"
+    },
+    {
+     "name": "marquee-scroll",
+     "target": "section-marquee__track",
+     "dur": 30000,
+     "iter": null,
+     "state": "running"
+    },
+    {
+     "name": "hotspot-ping",
+     "target": "section-hotspot__pulse",
+     "dur": 2000,
+     "iter": null,
+     "state": "running"
+    },
+    {
+     "name": "hotspot-ping",
+     "target": "section-hotspot__pulse",
+     "dur": 2000,
+     "iter": null,
+     "state": "running"
+    },
+    {
+     "name": "hotspot-ping",
+     "target": "section-hotspot__pulse",
+     "dur": 2000,
+     "iter": null,
+     "state": "running"
+    },
+    {
+     "name": "logo-marquee",
+     "target": "section-logo-list__track",
+     "dur": 30000,
+     "iter": null,
+     "state": "running"
+    }
+   ]
+  },
+  {
+   "journey": "motion:tokens",
+   "name": "motion tokens match DESIGN.md",
+   "ok": true,
+   "detail": [
+    [
+     "--transition-fast",
+     "150ms linear"
+    ],
+    [
+     "--transition-base",
+     "300ms linear"
+    ],
+    [
+     "--transition-slow",
+     "500ms linear"
+    ],
+    [
+     "--duration-short",
+     "100ms"
+    ],
+    [
+     "--duration-default",
+     "200ms"
+    ],
+    [
+     "--duration-long",
+     "500ms"
+    ],
+    [
+     "--marquee-duration",
+     "30s"
+    ]
+   ]
+  }
+ ]
+}

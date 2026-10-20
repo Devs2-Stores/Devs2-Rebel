@@ -1,0 +1,133 @@
+{
+ "pdpAdd": {
+  "target": [
+   {
+    "form": "ref: <Node>",
+    "inQuickview": false,
+    "disabled": false,
+    "text": "Add to cart",
+    "visible": true
+   }
+  ],
+  "ctors": {
+   "openCartModal": "function",
+   "updateCartData": "function",
+   "cartModalDefined": true,
+   "productFormHosts": [
+    "product-template",
+    "product-template-info"
+   ],
+   "cartAddRoute": "/cart/add"
+  },
+  "posts": [
+   {
+    "url": "/cart/add",
+    "status": 302,
+    "body": "Error: response.text: Response body is unavailable for redirect responses"
+   }
+  ],
+  "samples": [
+   {
+    "ms": 300,
+    "show": false,
+    "ariaHidden": "true",
+    "items": 0,
+    "count": "0",
+    "toast": []
+   },
+   {
+    "ms": 1000,
+    "show": false,
+    "ariaHidden": "true",
+    "items": 0,
+    "count": "0",
+    "toast": []
+   },
+   {
+    "ms": 2500,
+    "show": false,
+    "ariaHidden": "true",
+    "items": 0,
+    "count": "0",
+    "toast": [
+     "Unexpected token '<', \"<!doctype \"... is not valid JSON×",
+     "Unexpected token '<', \"<!doctype \"... is not valid JSON×",
+     "Unexpected token '<', \"<!doctype \"... is not valid JSON×",
+     "Unexpected token '<', \"<!doctype \"... is not valid JSON",
+     "×"
+    ]
+   },
+   {
+    "ms": 5000,
+    "show": false,
+    "ariaHidden": "true",
+    "items": 0,
+    "count": "0",
+    "toast": [
+     "Unexpected token '<', \"<!doctype \"... is not valid JSON×",
+     "Unexpected token '<', \"<!doctype \"... is not valid JSON×",
+     "Unexpected token '<', \"<!doctype \"... is not valid JSON×",
+     "Unexpected token '<', \"<!doctype \"... is not valid JSON",
+     "×"
+    ]
+   }
+  ],
+  "server": 1,
+  "errs": [
+   "error Failed to load resource: the server responded with a status of 403 ()",
+   "error Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "error Failed to load resource: the server responded with a status of 403 ()",
+   "error Failed to load resource: the server responded with a status of 403 ()",
+   "error Failed to load resource: the server responded with a status of 403 ()",
+   "error Failed to load resource: the server responded with a status of 403 ()",
+   "error Failed to load resource: the server responded with a status of 403 ()"
+  ]
+ },
+ "cartDelete": {
+  "n0": 1,
+  "dialogs": [
+   "Are you sure you want to remove this item?"
+  ],
+  "lines": 0,
+  "emptyShown": true,
+  "count": "0",
+  "server": 0
+ },
+ "accountFocus": [
+  {
+   "host": "shopify-account",
+   "inner": "button.account-button",
+   "outline": "auto 1px rgb(16, 16, 16)",
+   "boxShadow": "none",
+   "focusVisible": true,
+   "hostOutline": "none 3px",
+   "w": 44,
+   "h": 44
+  }
+ ],
+ "mobileMenuFocus": [
+  {
+   "ms": 50,
+   "inside": false,
+   "active": "BUTTON.header__hamburger",
+   "vis": "visible"
+  },
+  {
+   "ms": 400,
+   "inside": false,
+   "active": "BUTTON.header__hamburger",
+   "vis": "visible"
+  },
+  {
+   "ms": 1000,
+   "inside": false,
+   "active": "BUTTON.header__hamburger",
+   "vis": "visible"
+  },
+  {
+   "afterTab": true,
+   "inside": false,
+   "active": "A.header__logo-link"
+  }
+ ]
+}

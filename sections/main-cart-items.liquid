@@ -1,4 +1,6 @@
 {%- layout none -%}
+{{ 'quantity-selector.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'quantity-selector.js' | asset_url }}" defer="defer"></script>
 {%- if cart.item_count > 0 -%}
   {%- for item in cart.items -%}
     <article class="cart-modal-item" data-line-item="{{ forloop.index }}" data-variant-id="{{ item.variant_id }}">

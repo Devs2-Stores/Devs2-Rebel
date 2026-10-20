@@ -1,0 +1,92 @@
+(node:26192) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[
+ {
+  "route": "/collections/all",
+  "sel": ".product-card__wrapper",
+  "stored": "animate--hover-default",
+  "mode": "default",
+  "rest": "none",
+  "hovered": "none",
+  "ok": true
+ },
+ {
+  "route": "/collections/all",
+  "sel": ".product-card__wrapper",
+  "stored": "animate--hover-default",
+  "mode": "vertical-lift",
+  "rest": "none",
+  "hovered": "matrix(1, 0, 0, 1, 0, -4)",
+  "ok": true
+ },
+ {
+  "route": "/collections/all",
+  "sel": ".product-card__wrapper",
+  "stored": "animate--hover-default",
+  "mode": "3d-lift",
+  "rest": "none",
+  "hovered": "matrix3d(1, 0, 0, 0, 0, 0.999391, 0.0348995, -3.63536e-05, 0, -0.0348995, 0.999391, -0.00104103, 0, -3.99756, -0.139598, 1.00015)",
+  "ok": true
+ },
+ {
+  "route": "/collections",
+  "sel": ".collection-card",
+  "stored": "animate--hover-default",
+  "mode": "default",
+  "rest": "none",
+  "hovered": "none",
+  "ok": true
+ },
+ {
+  "route": "/collections",
+  "sel": ".collection-card",
+  "stored": "animate--hover-default",
+  "mode": "vertical-lift",
+  "rest": "none",
+  "hovered": "matrix(1, 0, 0, 1, 0, -4)",
+  "ok": true
+ },
+ {
+  "route": "/collections",
+  "sel": ".collection-card",
+  "stored": "animate--hover-default",
+  "mode": "3d-lift",
+  "rest": "none",
+  "hovered": "matrix3d(1, 0, 0, 0, 0, 0.999391, 0.0348995, -3.63536e-05, 0, -0.0348995, 0.999391, -0.00104103, 0, -3.99756, -0.139598, 1.00015)",
+  "ok": true
+ },
+ {
+  "route": "/search?q=a&type=article",
+  "sel": ".article-card",
+  "stored": "animate--hover-default",
+  "mode": "default",
+  "rest": "none",
+  "hovered": "none",
+  "ok": true
+ },
+ {
+  "route": "/search?q=a&type=article",
+  "sel": ".article-card",
+  "stored": "animate--hover-default",
+  "mode": "vertical-lift",
+  "rest": "none",
+  "hovered": "matrix(1, 0, 0, 1, 0, -4)",
+  "ok": true
+ },
+ {
+  "route": "/search?q=a&type=article",
+  "sel": ".article-card",
+  "stored": "animate--hover-default",
+  "mode": "3d-lift",
+  "rest": "none",
+  "hovered": "matrix3d(1, 0, 0, 0, 0, 0.999391, 0.0348995, -3.63536e-05, 0, -0.0348995, 0.999391, -0.00104103, 0, -3.99756, -0.139598, 1.00015)",
+  "ok": true
+ },
+ {
+  "touch": true,
+  "hoverMedia": false,
+  "afterTap": "none",
+  "ok": true
+ }
+]
+SUMMARY fail [33m0[39m

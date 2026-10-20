@@ -1,4 +1,4 @@
-# AGENTS.md - Shopify Base Theme `Devs2 Rebel`
+# AGENTS.md - Shopify Base Theme `Rebel`
 
 This contract applies to the Shopify theme under `shopify/`. Read the workspace
 contract at `../AGENTS.md` first. This file adds theme-specific rules without
@@ -7,7 +7,7 @@ repeating the full workspace contract.
 ## Identity
 
 - Platform: Shopify Online Store 2.0. Git branch: `main`. Theme identity:
-  `Devs2 Rebel`. Role: base theme, as recorded in `.workspace-context.json`.
+  `Rebel`. Role: base theme, as recorded in `.workspace-context.json`.
 - Never mix Shopify, Haravan, and Sapo syntax. If the platform is unclear, ask
   instead of guessing.
 - Default storefront language is English. Store all new customer-facing copy
@@ -113,6 +113,38 @@ The schema uses a `select` setting named `container_width`, options `fixed` and
 - Responsive images provide `srcset` and `sizes`, or `image_tag` with explicit
   responsive widths.
 - Avoid render-blocking non-critical JavaScript and unbounded collection loops.
+
+### Design Direction and UX Review
+
+- Read `DESIGN.md` before any storefront UI work. It records the brand
+  direction, preset character, tokens, motion and component rules. Token
+  values stay owned by `snippets/head-design-systems.liquid` and
+  `snippets/head-color-schemes.liquid`.
+- Status colours: filled badges and toasts use `--color-{success,warning,error}`
+  with white text. Status text uses the scheme-derived
+  `--color-{success,warning,error}-text`. Never put a status fill or a literal
+  status hex on text.
+- Text over images reaches 4.5:1 measured against the photo pixels. A checker
+  that compares against the page background behind an `<img>` is not a
+  measurement.
+- Minimum target size is 24 x 24 CSS px (WCAG 2.2 AA 2.5.8), not 44.
+- Verify UI changes at 1440x900, 768x1024 and 375x812, and follow `REVIEW.md`
+  for the rubric, accessibility checks and evidence rule.
+- When routes, templates or structured-data sections change, keep the
+  theme-owned discovery surfaces in sync. These are the metadata and JSON-LD in
+  `snippets/head-meta-tags.liquid` and the section JSON-LD listed in
+  `REVIEW.md`.
+- JavaScript components clean up their `window`/`document` listeners on
+  disconnect, keep section-owned controls working after
+  `shopify:section:load`, and show a locale string for every failed cart or
+  collection request, never a raw `fetch` or JSON error. `REVIEW.md` lists the
+  checks and the probes that prove them.
+- Decorative hover motion (`transform` lift, zoom or nudge) sits inside
+  `@media (hover: hover)`, so a tap on a touch screen never leaves a card
+  zoomed or a button lifted. Content that a script reveals starts hidden only
+  under the upgraded element (`my-element:defined`), so it stays visible when
+  the script fails. `DESIGN.md` (Motion) and `REVIEW.md` (Motion row) own the
+  detail.
 
 ## Skill Routing
 

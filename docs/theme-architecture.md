@@ -2,7 +2,7 @@
 
 ## Overview
 
-Devs2 Rebel is a Shopify Online Store 2.0 base theme on the `main` Git branch. It is configured as a verified base theme in [.workspace-context.json](../.workspace-context.json). The deployable surface is the standard Shopify theme directories; `_reference/`, `node_modules/`, plans, and documentation are excluded from upload by [.shopifyignore](../.shopifyignore).
+Rebel is a Shopify Online Store 2.0 base theme on the `main` Git branch. It is configured as a verified base theme in [.workspace-context.json](../.workspace-context.json). The deployable surface is the standard Shopify theme directories; `_reference/`, `node_modules/`, plans, and documentation are excluded from upload by [.shopifyignore](../.shopifyignore).
 
 ## Request Path
 
@@ -23,7 +23,7 @@ Keep CSS mobile-first and component-scoped. Reuse Shopify image filters (`image_
 
 ## Commerce Contracts
 
-The browser configuration exposes Shopify cart, search, checkout, and product routes. Cart, product variant selection, collection filtering, predictive search, quickview, wishlist, customer forms, and modals are coordinated through `themeConfig`, custom elements, and `localStorage`/`sessionStorage` where the feature requires client persistence. When changing one of these flows, inspect its paired section/snippet, asset, and template before editing.
+The browser configuration exposes Shopify cart, search, checkout, and product routes. Cart, product variant selection, collection filtering, predictive search, quickview, customer forms, and modals are coordinated through `themeConfig`, custom elements, and `localStorage`/`sessionStorage` where the feature requires client persistence. When changing one of these flows, inspect its paired section/snippet, asset, and template before editing.
 
 ## Verification
 

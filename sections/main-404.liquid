@@ -1,14 +1,41 @@
 {%- liquid
   assign container_width = section.settings.container_width | default: 'fixed'
-  assign eyebrow = section.settings.eyebrow | default: 'templates.404.eyebrow' | t
-  assign title = section.settings.title | default: 'templates.404.title' | t
-  assign content = section.settings.content | default: 'templates.404.content' | t
-  assign search_label = section.settings.search_label | default: 'templates.404.search_label' | t
-  assign search_placeholder = section.settings.search_placeholder | default: 'templates.404.search_placeholder' | t
-  assign search_button = section.settings.search_button | default: 'templates.404.search_button' | t
-  assign primary_label = section.settings.primary_label | default: 'templates.404.primary_label' | t
-  assign secondary_label = section.settings.secondary_label | default: 'templates.404.secondary_label' | t
-  assign suggestions_label = section.settings.suggestions_label | default: 'templates.404.suggestions_label' | t
+  assign eyebrow = section.settings.eyebrow
+  if eyebrow == blank
+    assign eyebrow = 'templates.404.eyebrow' | t
+  endif
+  assign title = section.settings.title
+  if title == blank
+    assign title = 'templates.404.title' | t
+  endif
+  assign content = section.settings.content
+  if content == blank
+    assign content = 'templates.404.content' | t
+  endif
+  assign search_label = section.settings.search_label
+  if search_label == blank
+    assign search_label = 'templates.404.search_label' | t
+  endif
+  assign search_placeholder = section.settings.search_placeholder
+  if search_placeholder == blank
+    assign search_placeholder = 'templates.404.search_placeholder' | t
+  endif
+  assign search_button = section.settings.search_button
+  if search_button == blank
+    assign search_button = 'templates.404.search_button' | t
+  endif
+  assign primary_label = section.settings.primary_label
+  if primary_label == blank
+    assign primary_label = 'templates.404.primary_label' | t
+  endif
+  assign secondary_label = section.settings.secondary_label
+  if secondary_label == blank
+    assign secondary_label = 'templates.404.secondary_label' | t
+  endif
+  assign suggestions_label = section.settings.suggestions_label
+  if suggestions_label == blank
+    assign suggestions_label = 'templates.404.suggestions_label' | t
+  endif
 -%}
 
 <div class="error-404 color-{{ section.settings.color_scheme }}">
@@ -16,10 +43,6 @@
     <div class="error-404__shell">
       <div class="error-404__visual" aria-hidden="true">
         <span class="error-404__code">404</span>
-        <span class="error-404__orbit error-404__orbit--one"></span>
-        <span class="error-404__orbit error-404__orbit--two"></span>
-        <span class="error-404__spark error-404__spark--one"></span>
-        <span class="error-404__spark error-404__spark--two"></span>
       </div>
 
       <div class="error-404__content">

@@ -26,7 +26,6 @@
           body: Object.fromEntries(formData)
         })
         .then(function() {
-          window.showToast && window.showToast((themeConfig.strings.cart || {}).itemAdded || 'Added to cart', 'success');
           document.dispatchEvent(new CustomEvent('cart:item_added', { bubbles: true }));
         })
         .catch(function(e) {

@@ -7,14 +7,12 @@
 <div class="product-template__commitment-item" {{ block.shopify_attributes }}>
   {%- if block.settings.image != blank -%}
     <div class="product-template__commitment-icon">
-      <img
-        src="{{ block.settings.image | image_url: width: 96 }}"
-        alt="{{ block.settings.text | escape }}"
-        width="48"
-        height="48"
-        loading="lazy"
-        decoding="async"
-      >
+      {%- assign commitment_alt = block.settings.text | escape -%}
+      {{
+        block.settings.image
+        | image_url: width: 96
+        | image_tag: widths: '48, 96', sizes: '48px', width: 48, height: 48, alt: commitment_alt, loading: 'lazy', decoding: 'async'
+      }}
     </div>
   {%- endif -%}
   <div class="product-template__commitment-content">
@@ -36,7 +34,7 @@
       "type": "text",
       "id": "text",
       "label": "t:sections.main_product.blocks.commitment.settings.text.label",
-      "default": "Product commitment"
+      "default": "t:sections.main_product.blocks.commitment.settings.text.default"
     }
   ],
   "presets": [

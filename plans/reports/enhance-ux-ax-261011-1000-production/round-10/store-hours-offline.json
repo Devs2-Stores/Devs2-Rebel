@@ -1,0 +1,245 @@
+{
+  "runs": [
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "browserZone": "America/New_York",
+      "offset": "-0400",
+      "liveRegions": 0,
+      "cards": 32,
+      "open": 15,
+      "closed": 17,
+      "blank": 0,
+      "mismatches": 0,
+      "sample": [
+        "Devs2 Rebel SoHo [America/New_York] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Shoreditch [Europe/London] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Ginza [Asia/Tokyo] 11:00 - 20:00 -> Closed now",
+        "Devs2 Rebel District 1 [Asia/Ho_Chi_Minh] 09:00 - 21:00 -> Closed now",
+        "Devs2 Rebel Surry Hills [Australia/Sydney] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Silver Lake [America/Los_Angeles] 10:00 - 19:00 -> Closed now"
+      ]
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-11T15:30:00Z",
+      "browserZone": "Asia/Tokyo",
+      "offset": "-0400",
+      "liveRegions": 0,
+      "cards": 32,
+      "open": 15,
+      "closed": 17,
+      "blank": 0,
+      "mismatches": 0,
+      "sample": [
+        "Devs2 Rebel SoHo [America/New_York] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Shoreditch [Europe/London] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Ginza [Asia/Tokyo] 11:00 - 20:00 -> Closed now",
+        "Devs2 Rebel District 1 [Asia/Ho_Chi_Minh] 09:00 - 21:00 -> Closed now",
+        "Devs2 Rebel Surry Hills [Australia/Sydney] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Silver Lake [America/Los_Angeles] 10:00 - 19:00 -> Closed now"
+      ]
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "browserZone": "America/New_York",
+      "offset": "-0400",
+      "liveRegions": 0,
+      "cards": 32,
+      "open": 15,
+      "closed": 17,
+      "blank": 0,
+      "mismatches": 0,
+      "sample": [
+        "Devs2 Rebel SoHo [America/New_York] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Shoreditch [Europe/London] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Ginza [Asia/Tokyo] 11:00 - 20:00 -> Open now",
+        "Devs2 Rebel District 1 [Asia/Ho_Chi_Minh] 09:00 - 21:00 -> Open now",
+        "Devs2 Rebel Surry Hills [Australia/Sydney] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Silver Lake [America/Los_Angeles] 10:00 - 19:00 -> Closed now"
+      ]
+    },
+    {
+      "variant": "live",
+      "instant": "2026-10-12T02:30:00Z",
+      "browserZone": "Asia/Tokyo",
+      "offset": "-0400",
+      "liveRegions": 0,
+      "cards": 32,
+      "open": 15,
+      "closed": 17,
+      "blank": 0,
+      "mismatches": 0,
+      "sample": [
+        "Devs2 Rebel SoHo [America/New_York] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Shoreditch [Europe/London] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Ginza [Asia/Tokyo] 11:00 - 20:00 -> Open now",
+        "Devs2 Rebel District 1 [Asia/Ho_Chi_Minh] 09:00 - 21:00 -> Open now",
+        "Devs2 Rebel Surry Hills [Australia/Sydney] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Silver Lake [America/Los_Angeles] 10:00 - 19:00 -> Closed now"
+      ]
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "browserZone": "America/New_York",
+      "offset": "-0400",
+      "liveRegions": 0,
+      "cards": 32,
+      "open": 15,
+      "closed": 17,
+      "blank": 0,
+      "mismatches": 0,
+      "sample": [
+        "Devs2 Rebel SoHo [] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Shoreditch [Not/AZone] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Ginza [Asia/Tokyo] 11:00 - 20:00 -> Closed now",
+        "Devs2 Rebel District 1 [Asia/Ho_Chi_Minh] 09:00 - 21:00 -> Closed now",
+        "Devs2 Rebel Surry Hills [Australia/Sydney] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Silver Lake [America/Los_Angeles] 10:00 - 19:00 -> Closed now"
+      ]
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "browserZone": "Asia/Tokyo",
+      "offset": "-0400",
+      "liveRegions": 0,
+      "cards": 32,
+      "open": 15,
+      "closed": 17,
+      "blank": 0,
+      "mismatches": 0,
+      "sample": [
+        "Devs2 Rebel SoHo [] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Shoreditch [Not/AZone] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Ginza [Asia/Tokyo] 11:00 - 20:00 -> Closed now",
+        "Devs2 Rebel District 1 [Asia/Ho_Chi_Minh] 09:00 - 21:00 -> Closed now",
+        "Devs2 Rebel Surry Hills [Australia/Sydney] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Silver Lake [America/Los_Angeles] 10:00 - 19:00 -> Closed now"
+      ]
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "browserZone": "America/New_York",
+      "offset": "-0400",
+      "liveRegions": 0,
+      "cards": 32,
+      "open": 15,
+      "closed": 17,
+      "blank": 0,
+      "mismatches": 0,
+      "sample": [
+        "Devs2 Rebel SoHo [] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Shoreditch [Not/AZone] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Ginza [Asia/Tokyo] 11:00 - 20:00 -> Open now",
+        "Devs2 Rebel District 1 [Asia/Ho_Chi_Minh] 09:00 - 21:00 -> Open now",
+        "Devs2 Rebel Surry Hills [Australia/Sydney] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Silver Lake [America/Los_Angeles] 10:00 - 19:00 -> Closed now"
+      ]
+    },
+    {
+      "variant": "fallback-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "browserZone": "Asia/Tokyo",
+      "offset": "-0400",
+      "liveRegions": 0,
+      "cards": 32,
+      "open": 15,
+      "closed": 17,
+      "blank": 0,
+      "mismatches": 0,
+      "sample": [
+        "Devs2 Rebel SoHo [] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Shoreditch [Not/AZone] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Ginza [Asia/Tokyo] 11:00 - 20:00 -> Open now",
+        "Devs2 Rebel District 1 [Asia/Ho_Chi_Minh] 09:00 - 21:00 -> Open now",
+        "Devs2 Rebel Surry Hills [Australia/Sydney] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Silver Lake [America/Los_Angeles] 10:00 - 19:00 -> Closed now"
+      ]
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "browserZone": "America/New_York",
+      "offset": null,
+      "liveRegions": 0,
+      "cards": 32,
+      "open": 14,
+      "closed": 17,
+      "blank": 1,
+      "mismatches": 0,
+      "sample": [
+        "Devs2 Rebel SoHo [] 10:00 - 19:00 -> ",
+        "Devs2 Rebel Shoreditch [Europe/London] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Ginza [Asia/Tokyo] 11:00 - 20:00 -> Closed now",
+        "Devs2 Rebel District 1 [Asia/Ho_Chi_Minh] 09:00 - 21:00 -> Closed now",
+        "Devs2 Rebel Surry Hills [Australia/Sydney] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Silver Lake [America/Los_Angeles] 10:00 - 19:00 -> Closed now"
+      ]
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-11T15:30:00Z",
+      "browserZone": "Asia/Tokyo",
+      "offset": null,
+      "liveRegions": 0,
+      "cards": 32,
+      "open": 14,
+      "closed": 17,
+      "blank": 1,
+      "mismatches": 0,
+      "sample": [
+        "Devs2 Rebel SoHo [] 10:00 - 19:00 -> ",
+        "Devs2 Rebel Shoreditch [Europe/London] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Ginza [Asia/Tokyo] 11:00 - 20:00 -> Closed now",
+        "Devs2 Rebel District 1 [Asia/Ho_Chi_Minh] 09:00 - 21:00 -> Closed now",
+        "Devs2 Rebel Surry Hills [Australia/Sydney] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Silver Lake [America/Los_Angeles] 10:00 - 19:00 -> Closed now"
+      ]
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "browserZone": "America/New_York",
+      "offset": null,
+      "liveRegions": 0,
+      "cards": 32,
+      "open": 15,
+      "closed": 16,
+      "blank": 1,
+      "mismatches": 0,
+      "sample": [
+        "Devs2 Rebel SoHo [] 10:00 - 19:00 -> ",
+        "Devs2 Rebel Shoreditch [Europe/London] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Ginza [Asia/Tokyo] 11:00 - 20:00 -> Open now",
+        "Devs2 Rebel District 1 [Asia/Ho_Chi_Minh] 09:00 - 21:00 -> Open now",
+        "Devs2 Rebel Surry Hills [Australia/Sydney] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Silver Lake [America/Los_Angeles] 10:00 - 19:00 -> Closed now"
+      ]
+    },
+    {
+      "variant": "no-offset",
+      "instant": "2026-10-12T02:30:00Z",
+      "browserZone": "Asia/Tokyo",
+      "offset": null,
+      "liveRegions": 0,
+      "cards": 32,
+      "open": 15,
+      "closed": 16,
+      "blank": 1,
+      "mismatches": 0,
+      "sample": [
+        "Devs2 Rebel SoHo [] 10:00 - 19:00 -> ",
+        "Devs2 Rebel Shoreditch [Europe/London] 10:00 - 19:00 -> Closed now",
+        "Devs2 Rebel Ginza [Asia/Tokyo] 11:00 - 20:00 -> Open now",
+        "Devs2 Rebel District 1 [Asia/Ho_Chi_Minh] 09:00 - 21:00 -> Open now",
+        "Devs2 Rebel Surry Hills [Australia/Sydney] 10:00 - 19:00 -> Open now",
+        "Devs2 Rebel Silver Lake [America/Los_Angeles] 10:00 - 19:00 -> Closed now"
+      ]
+    }
+  ],
+  "failures": []
+}

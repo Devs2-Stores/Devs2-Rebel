@@ -22,65 +22,87 @@
       </div>
     {%- endif -%}
 
-    {%- if section.blocks.size > 0 -%}
+    {%- assign tab_count = section.blocks | where: 'type', 'tab' | size -%}
+    {%- if tab_count > 0 -%}
       <div class="section-tabs__nav" role="tablist">
+        {%- assign tab_index = 0 -%}
         {%- for block in section.blocks -%}
+          {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
           <button
-            class="section-tabs__trigger{% if forloop.first %} section-tabs__trigger--active{% endif %}"
+            type="button"
+            class="section-tabs__trigger{% if tab_index == 0 %} section-tabs__trigger--active{% endif %}"
             role="tab"
-            id="tab-btn-{{ section.id }}-{{ forloop.index0 }}"
-            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
-            aria-controls="tab-panel-{{ section.id }}-{{ forloop.index0 }}"
-            data-tabs-btn="{{ forloop.index0 }}"
+            id="tab-btn-{{ section.id }}-{{ tab_index }}"
+            aria-selected="{% if tab_index == 0 %}true{% else %}false{% endif %}"
+            aria-controls="tab-panel-{{ section.id }}-{{ tab_index }}"
+            data-tabs-btn="{{ tab_index }}"
           >
-            {{ block.settings.tab_label | default: 'Tab' }}
+            {%- assign untitled_tab = 'general.tabs.untitled' | t -%}
+            {{ block.settings.tab_label | default: untitled_tab }}
           </button>
+          {%- assign tab_index = tab_index | plus: 1 -%}
         {%- endfor -%}
       </div>
 
+      {%- assign panel_index = 0 -%}
       {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
         <div
-          class="section-tabs__panel{% if forloop.first %} section-tabs__panel--active{% endif %}"
+          class="section-tabs__panel{% if panel_index == 0 %} section-tabs__panel--active{% endif %}"
           role="tabpanel"
-          id="tab-panel-{{ section.id }}-{{ forloop.index0 }}"
-          aria-labelledby="tab-btn-{{ section.id }}-{{ forloop.index0 }}"
-          data-tabs-panel="{{ forloop.index0 }}"
+          id="tab-panel-{{ section.id }}-{{ panel_index }}"
+          aria-labelledby="tab-btn-{{ section.id }}-{{ panel_index }}"
+          data-tabs-panel="{{ panel_index }}"
           {{ block.shopify_attributes }}
-          {% unless forloop.first %}hidden{% endunless %}
+          {% unless panel_index == 0 %}hidden{% endunless %}
         >
           <div class="section-tabs__content rte content-size-{{ block.settings.content_size }}">
             {{ block.settings.content }}
           </div>
         </div>
+        {%- assign panel_index = panel_index | plus: 1 -%}
       {%- endfor -%}
+    {%- endif -%}
+    {%- capture app_blocks -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- if app_blocks != blank -%}
+      <div class="section-apps">{{ app_blocks }}</div>
     {%- endif -%}
   </div>
 </div>
 
 <script>
 (function() {
-  var s = document.getElementById('section-{{ section.id }}');
-  if (!s) return;
-  var btns = s.querySelectorAll('[data-tabs-btn]');
-  var panels = s.querySelectorAll('[data-tabs-panel]');
+  function init() {
+    var s = document.getElementById('section-{{ section.id }}');
+    if (!s) return;
+    var btns = s.querySelectorAll('[data-tabs-btn]');
+    var panels = s.querySelectorAll('[data-tabs-panel]');
 
-  btns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      var idx = btn.getAttribute('data-tabs-btn');
-      btns.forEach(function(b) {
-        b.classList.remove('section-tabs__trigger--active');
-        b.setAttribute('aria-selected', 'false');
+    btns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var idx = btn.getAttribute('data-tabs-btn');
+        btns.forEach(function(b) {
+          b.classList.remove('section-tabs__trigger--active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        panels.forEach(function(p) {
+          p.classList.remove('section-tabs__panel--active');
+          p.hidden = true;
+        });
+        btn.classList.add('section-tabs__trigger--active');
+        btn.setAttribute('aria-selected', 'true');
+        var panel = s.querySelector('[data-tabs-panel="' + idx + '"]');
+        if (panel) { panel.classList.add('section-tabs__panel--active'); panel.hidden = false; }
       });
-      panels.forEach(function(p) {
-        p.classList.remove('section-tabs__panel--active');
-        p.hidden = true;
-      });
-      btn.classList.add('section-tabs__trigger--active');
-      btn.setAttribute('aria-selected', 'true');
-      var panel = s.querySelector('[data-tabs-panel="' + idx + '"]');
-      if (panel) { panel.classList.add('section-tabs__panel--active'); panel.hidden = false; }
     });
-  });
+    if (window.ThemeUtils) window.ThemeUtils.bindTablistKeys(btns);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();
 </script>
 
@@ -93,11 +115,11 @@
   @media (min-width: 750px) {
     .section-tabs { padding-block: var(--tabs-dt) var(--tabs-db); }
   }
-  .section-tabs__head { text-align: center; margin-bottom: 2rem; }
-  .section-tabs__heading { margin: 0; color: rgb(var(--color-foreground)); }
+  .section-tabs__head { text-align: center; margin-bottom: var(--section-head-gap); }
+  .section-tabs__heading { margin: 0; color: var(--color-ink); letter-spacing: var(--heading-tracking); }
 
   .section-tabs__nav {
-    display: flex; gap: 0; border-bottom: 2px solid rgba(var(--color-foreground), 0.08);
+    display: flex; gap: 0; border-bottom: 1px solid var(--color-hairline);
     overflow-x: auto; -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
@@ -106,57 +128,57 @@
   .section-tabs__trigger {
     flex-shrink: 0; padding: 0.75rem 1.25rem;
     background: none; border: none; border-bottom: 2px solid transparent;
-    margin-bottom: -2px; cursor: pointer;
+    margin-bottom: -1px; cursor: pointer;
     font-size: 0.875rem; font-weight: 600;
-    color: rgba(var(--color-foreground), 0.5);
-    transition: color 0.3s, border-color 0.3s;
+    color: var(--color-muted);
+    transition: color var(--duration-default) ease, border-color var(--duration-default) ease;
     white-space: nowrap;
   }
-  .section-tabs__trigger:hover { color: rgb(var(--color-foreground)); }
+  .section-tabs__trigger:hover { color: var(--color-ink); }
   .section-tabs__trigger--active {
-    color: rgb(var(--color-accent));
-    border-bottom-color: rgb(var(--color-accent));
+    color: var(--color-ink);
+    border-bottom-color: var(--color-ink);
   }
 
   .section-tabs__panel { padding: 1.5rem 0; }
   .section-tabs__panel[hidden] { display: none; }
-  .section-tabs__content { line-height: 1.7; max-width: 48rem; }
+  .section-tabs__content { color: var(--color-muted); line-height: 1.65; max-width: 65ch; }
   .section-tabs__content p:last-child { margin-bottom: 0; }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "Tabs",
+  "name": "t:sections.tabs.name",
   "tag": "section",
   "class": "section-tabs-wrapper",
   "settings": [
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Color scheme",
+      "label": "t:sections.tabs.settings.color_scheme.label",
       "default": "scheme-1"
     },
     {
       "type": "inline_richtext",
       "id": "heading",
-      "label": "Heading"
+      "label": "t:sections.tabs.settings.heading.label"
     },
     {
       "type": "select",
       "id": "heading_size",
-      "label": "Heading size",
+      "label": "t:sections.tabs.settings.heading_size.label",
       "options": [
         {
           "value": "sm",
-          "label": "S"
+          "label": "t:sections.tabs.settings.heading_size.options.sm"
         },
         {
           "value": "md",
-          "label": "M"
+          "label": "t:sections.tabs.settings.heading_size.options.md"
         },
         {
           "value": "lg",
-          "label": "L"
+          "label": "t:sections.tabs.settings.heading_size.options.lg"
         }
       ],
       "default": "lg"
@@ -164,22 +186,22 @@
     {
       "type": "select",
       "id": "heading_tag",
-      "label": "Heading tag",
+      "label": "t:sections.tabs.settings.heading_tag.label",
       "options": [
         {
           "value": "h2",
-          "label": "H2"
+          "label": "t:sections.tabs.settings.heading_tag.options.h2"
         },
         {
           "value": "h3",
-          "label": "H3"
+          "label": "t:sections.tabs.settings.heading_tag.options.h3"
         }
       ],
       "default": "h2"
     },
     {
       "type": "header",
-      "content": "Desktop spacing"
+      "content": "t:sections.tabs.settings.header__desktop_spacing.content"
     },
     {
       "type": "range",
@@ -188,7 +210,7 @@
       "max": 150,
       "step": 5,
       "unit": "px",
-      "label": "Top",
+      "label": "t:sections.tabs.settings.padding_top_desktop.label",
       "default": 50
     },
     {
@@ -198,12 +220,12 @@
       "max": 150,
       "step": 5,
       "unit": "px",
-      "label": "Bottom",
+      "label": "t:sections.tabs.settings.padding_bottom_desktop.label",
       "default": 50
     },
     {
       "type": "header",
-      "content": "Mobile spacing"
+      "content": "t:sections.tabs.settings.header__mobile_spacing.content"
     },
     {
       "type": "range",
@@ -212,7 +234,7 @@
       "max": 100,
       "step": 5,
       "unit": "px",
-      "label": "Top",
+      "label": "t:sections.tabs.settings.padding_top_mobile.label",
       "default": 30
     },
     {
@@ -222,43 +244,43 @@
       "max": 100,
       "step": 5,
       "unit": "px",
-      "label": "Bottom",
+      "label": "t:sections.tabs.settings.padding_bottom_mobile.label",
       "default": 30
     }
   ],
   "blocks": [
     {
       "type": "tab",
-      "name": "Tab",
+      "name": "t:sections.tabs.blocks.tab.name",
       "settings": [
         {
           "type": "text",
           "id": "tab_label",
-          "label": "Tab label",
-          "default": "Tab"
+          "label": "t:sections.tabs.blocks.tab.settings.tab_label.label",
+          "default": "t:sections.tabs.blocks.tab.settings.tab_label.default"
         },
         {
           "type": "richtext",
           "id": "content",
-          "label": "Content",
-          "default": "<p>Tab content goes here.</p>"
+          "label": "t:sections.tabs.blocks.tab.settings.content.label",
+          "default": "t:sections.tabs.blocks.tab.settings.content.default"
         },
         {
           "type": "select",
           "id": "content_size",
-          "label": "Content size",
+          "label": "t:sections.tabs.blocks.tab.settings.content_size.label",
           "options": [
             {
               "value": "sm",
-              "label": "S"
+              "label": "t:sections.tabs.blocks.tab.settings.content_size.options.sm"
             },
             {
               "value": "md",
-              "label": "M"
+              "label": "t:sections.tabs.blocks.tab.settings.content_size.options.md"
             },
             {
               "value": "lg",
-              "label": "L"
+              "label": "t:sections.tabs.blocks.tab.settings.content_size.options.lg"
             }
           ],
           "default": "md"
@@ -271,7 +293,7 @@
   ],
   "presets": [
     {
-      "name": "Tabs",
+      "name": "t:sections.tabs.presets.tabs.name",
       "category": "Custom",
       "blocks": [
         {

@@ -4,23 +4,49 @@
   Only loads non-system fonts.
 {% endcomment -%}
 
-{%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
+{%- unless settings.type_header_font.system? and settings.type_subheading_font.system? and settings.type_body_font.system? -%}
   <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
 {%- endunless -%}
 
 {%- liquid
+  assign header_font_bold = settings.type_header_font | font_modify: 'weight', 'bold'
+  assign header_font_italic = settings.type_header_font | font_modify: 'style', 'italic'
+  assign header_font_bold_italic = header_font_bold | font_modify: 'style', 'italic'
+  assign header_font_medium = settings.type_header_font | font_modify: 'weight', '500'
+  assign header_font_semibold = settings.type_header_font | font_modify: 'weight', '600'
+
+  assign subheading_font_bold = settings.type_subheading_font | font_modify: 'weight', 'bold'
+  assign subheading_font_italic = settings.type_subheading_font | font_modify: 'style', 'italic'
+  assign subheading_font_bold_italic = subheading_font_bold | font_modify: 'style', 'italic'
+  assign subheading_font_medium = settings.type_subheading_font | font_modify: 'weight', '500'
+  assign subheading_font_semibold = settings.type_subheading_font | font_modify: 'weight', '600'
+
   assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
   assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
   assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
+  assign body_font_medium = settings.type_body_font | font_modify: 'weight', '500'
+  assign body_font_semibold = settings.type_body_font | font_modify: 'weight', '600'
 -%}
 
 {% style %}
   {{ settings.type_header_font | font_face: font_display: 'swap' }}
+  {{ header_font_bold | font_face: font_display: 'swap' }}
+  {{ header_font_italic | font_face: font_display: 'swap' }}
+  {{ header_font_bold_italic | font_face: font_display: 'swap' }}
+  {{ header_font_medium | font_face: font_display: 'swap' }}
+  {{ header_font_semibold | font_face: font_display: 'swap' }}
   {{ settings.type_subheading_font | font_face: font_display: 'swap' }}
+  {{ subheading_font_bold | font_face: font_display: 'swap' }}
+  {{ subheading_font_italic | font_face: font_display: 'swap' }}
+  {{ subheading_font_bold_italic | font_face: font_display: 'swap' }}
+  {{ subheading_font_medium | font_face: font_display: 'swap' }}
+  {{ subheading_font_semibold | font_face: font_display: 'swap' }}
   {{ settings.type_body_font | font_face: font_display: 'swap' }}
   {{ body_font_bold | font_face: font_display: 'swap' }}
   {{ body_font_italic | font_face: font_display: 'swap' }}
   {{ body_font_bold_italic | font_face: font_display: 'swap' }}
+  {{ body_font_medium | font_face: font_display: 'swap' }}
+  {{ body_font_semibold | font_face: font_display: 'swap' }}
 {% endstyle %}
 
 {%- unless settings.type_body_font.system? -%}

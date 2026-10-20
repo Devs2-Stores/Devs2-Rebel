@@ -37,14 +37,7 @@
             fetchpriority: fetchpriority
         -}}
       {%- else -%}
-        <img
-          class="article-card__media-image"
-          src="{{ 'no_image.png' | asset_url }}"
-          alt="{{ article.title | escape }}"
-          loading="{{ lazyload }}"
-          width="720"
-          height="480"
-        >
+        {{ 'lifestyle-2' | placeholder_svg_tag: 'article-card__media-image article-card__media-image--placeholder' }}
       {%- endif -%}
     </div>
   </div>
@@ -106,7 +99,7 @@
     {%- if show_read_more -%}
       <div class="article-card__button" aria-hidden="true">
         <span class="article-card__read-more">
-          {{ 'blogs.article.read_more_title' | t: title: '' | strip }}
+          {{ 'blogs.article.read_more' | t }}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="14"

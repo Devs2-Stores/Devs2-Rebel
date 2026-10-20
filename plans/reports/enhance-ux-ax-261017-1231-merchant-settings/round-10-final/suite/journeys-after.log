@@ -1,0 +1,98 @@
+[PASS] keyboard-1440 :: first Tab lands on skip link
+[PASS] keyboard-1440 :: skip link visible when focused (>=24x24 in viewport)
+[PASS] keyboard-1440 :: Enter on skip link targets #MainContent
+[PASS] mobile-menu-375 :: hamburger visible
+[PASS] megamenu-1440 :: header has items with dropdowns
+[PASS] mobile-menu-375 :: menu opens with aria-hidden=false
+[PASS] mobile-menu-375 :: focus moved into menu
+[PASS] mobile-menu-375 :: submenu trigger toggles aria-expanded + panel
+[PASS] megamenu-1440 :: hover opens dropdown
+[PASS] megamenu-1440 :: open dropdown inside viewport
+[PASS] megamenu-1440 :: open dropdown not aria-hidden="true"
+[PASS] mobile-menu-375 :: Escape closes menu
+[PASS] mobile-menu-375 :: focus returns to hamburger
+[PASS] megamenu-1440 :: keyboard focus opens dropdown (focus-within)
+[PASS] megamenu-1440 :: trigger exposes aria-expanded
+[PASS] keyboard-1440 :: first 25 Tab stops show a focus indicator and are visible
+[PASS] megamenu-1440 :: Escape closes dropdown
+[PASS] search-1440 :: modal opens
+[PASS] search-1440 :: input focused
+[PASS] plp-1440 :: collection renders product cards
+[PASS] search-1440 :: predictive results render links
+[PASS] search-1440 :: combobox aria-expanded=true with results
+[PASS] search-375 :: modal opens
+[PASS] search-375 :: input focused
+[PASS] search-1440 :: Escape closes modal
+[PASS] search-1440 :: focus returns to search trigger
+[PASS] plp-1440 :: sort change updates URL without reload
+[PASS] plp-1440 :: sorted grid is price-ascending
+[PASS] plp-1440 :: sort select keeps chosen value after re-render
+[PASS] search-375 :: predictive results render links
+[PASS] search-375 :: combobox aria-expanded=true with results
+[PASS] search-375 :: Escape closes modal
+[PASS] search-375 :: focus returns to search trigger
+[PASS] plp-1440 :: checking a filter updates URL
+[PASS] plp-1440 :: active filter chip / remove link shown
+[PASS] plp-1440 :: sort survives filtering
+[PASS] search-1440 :: Enter submits to /search with product results
+[PASS] search-1440 :: exactly one search tab aria-selected=true
+[PASS] search-1440 :: tabpanel aria-labelledby resolves to a tab id
+[PASS] plp-1440 :: removing chip clears filter
+[PASS] search-1440 :: clicking second tab moves aria-selected
+[PASS] search-375 :: Enter submits to /search with product results
+[PASS] plp-1440 :: browser Back restores previous filter state (popstate)
+[PASS] plp-filter-375 :: filter button >= 24x24
+[PASS] plp-filter-375 :: filter panel opens
+[PASS] plp-filter-375 :: opened panel fully on-screen
+[PASS] plp-filter-375 :: focus moves into filter panel
+[PASS] plp-filter-375 :: panel exposes dialog semantics
+[PASS] plp-filter-375 :: Escape closes filter panel
+[PASS] pdp-cart-1440 :: variant radios rendered
+[PASS] quickview-1440 :: quick view button reachable by keyboard when card has focus
+[PASS] pdp-cart-1440 :: variant change updates hidden id
+[PASS] pdp-cart-1440 :: URL ?variant= matches selected id
+[PASS] pdp-cart-1440 :: selected label shows chosen value
+[PASS] pdp-cart-1440 :: quantity + increments to 2
+[PASS] pdp-cart-1440 :: quantity cannot go below 1 (decrease disabled at 1)
+[PASS] quickview-1440 :: quickview opens with product + add button
+[PASS] quickview-1440 :: focus inside quickview
+[PASS] quickview-1440 :: quickview has dialog semantics
+[PASS] pdp-cart-1440 :: add-to-cart opens cart drawer
+[PASS] pdp-cart-1440 :: drawer lists the line item
+[PASS] pdp-cart-1440 :: header cart count incremented
+[PASS] pdp-cart-1440 :: focus trapped inside drawer
+[PASS] pdp-cart-1440 :: Tab x12 never leaves drawer
+[PASS] quickview-1440 :: quickview add-to-cart increments header count
+[PASS] pdp-cart-1440 :: Escape closes drawer
+[PASS] footer-375 :: footer menus present
+[PASS] footer-375 :: toggles shown, collapsed, aria-controls resolve
+[PASS] pdp-cart-1440 :: /cart shows the line
+[PASS] footer-375 :: Enter expands menu + list visible
+[PASS] footer-375 :: Space collapses menu + list hidden
+[PASS] footer-375 :: toggle target >= 24px tall
+[PASS] pdp-cart-1440 :: cart page + updates quantity and server cart
+[PASS] footer-1440 :: footer menus present
+[PASS] footer-1440 :: no toggles at desktop, lists visible
+[PASS] pdp-cart-1440 :: removing all lines shows empty state
+[PASS] toc-1440 :: TOC lists heading links
+[PASS] toc-1440 :: every TOC link target exists
+[PASS] toc-1440 :: aria-busy cleared after build
+[PASS] toc-1440 :: clicking TOC link scrolls heading into view below sticky header
+[PASS] toc-375 :: TOC lists heading links
+[PASS] toc-375 :: every TOC link target exists
+[PASS] toc-375 :: aria-busy cleared after build
+[PASS] toc-375 :: clicking TOC link scrolls heading into view below sticky header
+[PASS] contact-1440 :: every field has an accessible label
+[PASS] contact-1440 :: email field is type=email + required
+[PASS] contact-1440 :: empty submit is blocked client-side (no POST)
+[PASS] contact-1440 :: first invalid field receives focus
+[PASS] 404-375 :: HTTP 404
+[PASS] 404-375 :: recovery link to home/collections
+[INFO] buy-now-1440 :: theme buy-now button present :: {"buy":false,"dynamic":true,"dynamicChildren":1,"note":"show_dynamic_checkout renders payment_button; theme buy-now path not exercised"}
+[PASS] cart-drawer-1440 :: cart seeded through AJAX API (/cart/add.js)
+[PASS] cart-drawer-1440 :: keyboard Enter on header cart opens drawer with the line
+[PASS] cart-drawer-1440 :: focus moves into drawer
+[PASS] cart-drawer-1440 :: Tab x12 never leaves drawer
+[PASS] cart-drawer-1440 :: Escape closes drawer
+[PASS] cart-drawer-1440 :: focus returns to the cart trigger
+SUMMARY pass=96 fail=0 info=1 -> plans\reports\enhance-ux-ax-261017-1231-merchant-settings\round-10-final\suite\journeys\journeys.json

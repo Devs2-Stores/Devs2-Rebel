@@ -58,6 +58,22 @@
       return res.json();
     },
 
+    storage: {
+      get: (key) => {
+        try { return localStorage.getItem(key); } catch (e) { return null; }
+      },
+      set: (key, value) => {
+        try { localStorage.setItem(key, value); return true; } catch (e) { return false; }
+      },
+      getJSON: (key) => {
+        try { return JSON.parse(localStorage.getItem(key)); } catch (e) { return null; }
+      }
+    },
+
+    parseJSON: (text) => {
+      try { return JSON.parse(text); } catch (e) { return null; }
+    },
+
     remToPx: (rem) => {
       return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
     },
@@ -83,37 +99,45 @@
 
     formatMoney: (cents, format) => {
       if (cents == null) return '0';
-      cents = cents / 100;
-      if (typeof cents === 'string') cents = cents.replace(/\./g, '');
-      var formatString = format || (typeof themeConfig !== 'undefined' && themeConfig.formatMoney) || '{{amount_no_decimals}}';
+      if (typeof cents === 'string') cents = cents.replace('.', '');
+      var formatString = format || (typeof themeConfig !== 'undefined' && themeConfig.formatMoney) || '{{amount}}';
       var patt = /\{\{\s*(\w+)\s*\}\}/;
       var match = formatString.match(patt);
       if (!match) return String(cents);
 
-      function floatToStr(num, dec) {
-        var fixed = parseFloat(num).toFixed(dec);
-        return fixed;
-      }
-      function addCommas(str) {
-        return str.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+      function withDelimiters(amount, precision, thousands, decimal) {
+        var number = parseFloat(amount);
+        if (isNaN(number)) return '0';
+        var parts = (number / 100).toFixed(precision).split('.');
+        var whole = parts[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1' + thousands);
+        return parts[1] ? whole + decimal + parts[1] : whole;
       }
 
-      var value = '';
+      var value;
       switch (match[1]) {
-        case 'amount':
-          value = addCommas(floatToStr(cents, 0));
-          break;
         case 'amount_no_decimals':
-          value = addCommas(floatToStr(cents, 0));
+          value = withDelimiters(cents, 0, ',', '.');
           break;
         case 'amount_with_comma_separator':
-          value = floatToStr(cents, 2).replace(/\./, ',');
+          value = withDelimiters(cents, 2, '.', ',');
           break;
         case 'amount_no_decimals_with_comma_separator':
-          value = addCommas(floatToStr(cents, 0)).replace(/\./, ',');
+          value = withDelimiters(cents, 0, '.', ',');
+          break;
+        case 'amount_with_apostrophe_separator':
+          value = withDelimiters(cents, 2, "'", '.');
+          break;
+        case 'amount_no_decimals_with_space_separator':
+          value = withDelimiters(cents, 0, ' ', '.');
+          break;
+        case 'amount_with_space_separator':
+          value = withDelimiters(cents, 2, ' ', ',');
+          break;
+        case 'amount_with_period_and_space_separator':
+          value = withDelimiters(cents, 2, ' ', '.');
           break;
         default:
-          value = addCommas(floatToStr(cents, 0));
+          value = withDelimiters(cents, 2, ',', '.');
       }
       return formatString.replace(patt, value);
     },
@@ -129,12 +153,12 @@
       var scrollbarWidth = ThemeUtils.getScrollbarWidth();
       document.body.dataset.prevPaddingRight = document.body.style.paddingRight;
       document.body.style.paddingRight = scrollbarWidth + 'px';
-      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
       document.body.classList.add('scroll-locked');
     },
 
     unlockScroll: () => {
-      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
       document.body.style.paddingRight = document.body.dataset.prevPaddingRight || '';
       delete document.body.dataset.prevPaddingRight;
       document.body.classList.remove('scroll-locked');
@@ -142,21 +166,38 @@
 
     trapFocus: (container, triggerEl) => {
       var focusableSelector = 'a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+      var isUsable = function(el) {
+        return el.tabIndex >= 0 && el.getClientRects().length > 0 && getComputedStyle(el).visibility !== 'hidden';
+      };
+      var collect = function(root, list) {
+        Array.prototype.forEach.call(root.querySelectorAll('*'), function(el) {
+          if (el.closest('[inert]')) return;
+          if (el.matches(focusableSelector) && isUsable(el)) list.push(el);
+          if (el.shadowRoot) collect(el.shadowRoot, list);
+        });
+        return list;
+      };
+      var getFocusables = function() {
+        return collect(container, []);
+      };
+      var deepActive = function() {
+        var active = document.activeElement;
+        while (active && active.shadowRoot && active.shadowRoot.activeElement) active = active.shadowRoot.activeElement;
+        return active;
+      };
       var handler = function(e) {
         if (e.key !== 'Tab') return;
-        var focusables = Array.from(container.querySelectorAll(focusableSelector)).filter(function(el) {
-          return el.offsetParent !== null;
-        });
+        var focusables = getFocusables();
         if (focusables.length === 0) return;
         var first = focusables[0];
         var last = focusables[focusables.length - 1];
         if (e.shiftKey) {
-          if (document.activeElement === first) {
+          if (deepActive() === first) {
             e.preventDefault();
             last.focus();
           }
         } else {
-          if (document.activeElement === last) {
+          if (deepActive() === last) {
             e.preventDefault();
             first.focus();
           }
@@ -165,7 +206,7 @@
       container.addEventListener('keydown', handler);
       container._focusTrapHandler = handler;
       container._focusTrapTrigger = triggerEl || document.activeElement;
-      var firstFocusable = container.querySelector(focusableSelector);
+      var firstFocusable = getFocusables()[0];
       if (firstFocusable) firstFocusable.focus();
     },
 
@@ -180,6 +221,34 @@
       }
     },
 
+    bindTablistKeys: (tabList) => {
+      var tabs = Array.from(tabList);
+      if (tabs.length === 0) return;
+      var sync = function() {
+        var enabled = tabs.filter(function(t) { return !t.disabled; });
+        var selected = enabled.find(function(t) { return t.getAttribute('aria-selected') === 'true'; }) || enabled[0];
+        tabs.forEach(function(t) { t.tabIndex = t === selected ? 0 : -1; });
+      };
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', sync);
+        tab.addEventListener('keydown', function(e) {
+          var enabled = tabs.filter(function(t) { return !t.disabled; });
+          var i = enabled.indexOf(tab);
+          if (i < 0) return;
+          var next = e.key === 'ArrowRight' ? (i + 1) % enabled.length
+            : e.key === 'ArrowLeft' ? (i - 1 + enabled.length) % enabled.length
+            : e.key === 'Home' ? 0
+            : e.key === 'End' ? enabled.length - 1
+            : -1;
+          if (next < 0) return;
+          e.preventDefault();
+          enabled[next].focus();
+          enabled[next].click();
+        });
+      });
+      sync();
+    },
+
     updateCartCount: (number) => {
       var cartCountEl = document.querySelectorAll(".cart-count");
       if (cartCountEl.length) cartCountEl.forEach(function(el) {
@@ -190,7 +259,7 @@
     updateCartMoney: (price) => {
       var cartPriceEl = document.querySelectorAll(".cart-price");
       if (cartPriceEl.length) cartPriceEl.forEach(function(el) {
-        el.innerText = ThemeUtils.formatMoney(price);
+        el.innerText = ThemeUtils.formatMoney(price, themeConfig.priceFormat);
       });
     },
 

@@ -8,7 +8,12 @@
 {%- assign share_url_encoded = share_url | url_encode -%}
 {%- assign share_title_text = page_title -%}
 {%- assign share_title = page_title | url_encode -%}
-{%- assign share_label = title | default: settings.share_label | default: 'Share:' -%}
+{%- liquid
+  assign share_label = title | default: settings.share_label
+  if share_label == blank
+    assign share_label = 'general.share.label' | t
+  endif
+-%}
 
 {{ 'share-buttons.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'share-buttons.js' | asset_url }}" defer="defer"></script>
@@ -34,7 +39,7 @@
         title="{{ 'general.share.native_share' | t }}"
         aria-label="{{ 'general.share.native_share' | t }}"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98"/><path d="m15.41 6.51-6.82 3.98"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98"/><path d="m15.41 6.51-6.82 3.98"/></svg>
       </button>
     </div>
 
@@ -73,7 +78,7 @@
     {%- if settings.share_email -%}
       <div class="share-buttons__item" role="listitem">
         <a href="mailto:?subject={{ share_title }}&body={{ share_url_encoded }}" title="{{ 'accessibility.share_via_email' | t }}" aria-label="{{ 'accessibility.share_via_email' | t }}">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
         </a>
       </div>
     {%- endif -%}
@@ -81,7 +86,7 @@
     {%- if settings.share_copy -%}
       <div class="share-buttons__item" role="listitem">
         <button type="button" class="share-buttons__copy" data-url="{{ share_url }}" title="{{ 'general.share.copy_to_clipboard' | t }}" aria-label="{{ 'general.share.copy_to_clipboard' | t }}">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
         </button>
       </div>
     {%- endif -%}

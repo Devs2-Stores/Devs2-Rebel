@@ -1,16 +1,27 @@
 {% doc %}
   @description Collection sort toolbar — filter button, product count, sort dropdown
+  @param {object} [results] - Collection or Search object. Default: collection
   @param {number} limit - Products per page (for count calculation)
   @param {object} paginate - Paginate object from {% paginate %} block
   @param {string} allowed_sort_options - Comma-separated list of allowed sort option values
-  @param {boolean} [show_product_count=true] - Show product count
-  @param {boolean} [enable_sorting=true] - Show sort dropdown
-  @param {boolean} [enable_filtering=true] - Enable filtering
-  @param {string} [filter_layout='sidebar'] - Filter layout type (sidebar or modal)
+  @param {boolean} [show_product_count] - Show product count. Default: true
+  @param {boolean} [enable_sorting] - Show sort dropdown. Default: true
+  @param {boolean} [enable_filtering] - Enable filtering. Default: true
+  @param {string} [filter_layout] - Filter layout type (sidebar or modal). Default: 'sidebar'
   @example {%- render 'collection-sort', limit: 20, paginate: paginate, allowed_sort_options: 'best-selling,price-ascending' -%}
 {% enddoc %}
 
 {%- liquid
+  assign results = results | default: collection
+  assign total_count = results.products_count | default: results.results_count | default: 0
+  if results.products_count == nil and results.results != blank and paginate.pages == 1
+    assign total_count = 0
+    for item in results.results
+      if item.object_type == 'product'
+        assign total_count = total_count | plus: 1
+      endif
+    endfor
+  endif
   assign t_showing = 'products.facets.showing' | t
   assign t_products_label = 'products.facets.products_label' | t
   assign t_sort_by = 'products.facets.sort_by_label' | t
@@ -50,13 +61,13 @@
   {%- comment %} Center: Product count {% endcomment -%}
   {%- if show_product_count -%}
     <div class="collection-sort__count">
-      {%- if collection.products_count > 0 -%}
+      {%- if total_count > 0 -%}
         {%- assign current_count = paginate.current_page | times: limit -%}
-        {%- if current_count > collection.products_count -%}
-          {%- assign current_count = collection.products_count -%}
+        {%- if current_count > total_count -%}
+          {%- assign current_count = total_count -%}
         {%- endif -%}
         <span class="collection-sort__count-text">
-          {{ t_showing }} <b>{{ current_count }}</b> / {{ collection.products_count }} {{ t_products_label }}
+          {{ t_showing }} <b>{{ current_count }}</b> / {{ total_count }} {{ t_products_label }}
         </span>
       {%- endif -%}
     </div>
@@ -67,9 +78,9 @@
     <div class="collection-sort__by">
       <label for="SortBy" class="collection-sort__label">{{ t_sort_by }}:</label>
       <div class="collection-sort__select-wrapper">
-        {%- assign current_sort = collection.sort_by | default: collection.default_sort_by -%}
+        {%- assign current_sort = results.sort_by | default: results.default_sort_by -%}
         <select name="sort_by" id="SortBy" class="collection-sort__select" aria-label="{{ t_sort_by }}">
-          {%- for option in collection.sort_options -%}
+          {%- for option in results.sort_options -%}
             {%- liquid
               assign show_option = false
               if allowed_sort_options == blank

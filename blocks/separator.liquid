@@ -6,7 +6,7 @@
 
 <hr
   class="product-template__separator"
-  style="border-color: {{ block.settings.color | default: '#e5e5e5' }}; opacity: {{ block.settings.opacity | divided_by: 100.0 }};"
+  style="{% if block.settings.color != blank %}border-color: {{ block.settings.color }}; {% endif %}opacity: {{ block.settings.opacity | divided_by: 100.0 }};"
   {{ block.shopify_attributes }}
 >
 

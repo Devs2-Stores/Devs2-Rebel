@@ -45,11 +45,11 @@
       {%- assign heading_title = 'sections.main_list_collections.default_title' | t -%}
     {%- endif -%}
     <div class="list-collections-template__heading global-heading text-align-desktop-{{ section.settings.heading_alignment_desktop }} text-align-mobile-{{ section.settings.heading_alignment_mobile }}">
+      <div class="list-collections-template__meta"><span>{{ 'sections.collection_list.collections_count' | t: count: source_total }}</span></div>
       <h1 class="section-heading heading-size-{{ section.settings.heading_size }}">{{ heading_title }}</h1>
       {%- if section.settings.subtitle != blank -%}
         <p class="section-subheading">{{ section.settings.subtitle }}</p>
       {%- endif -%}
-      <div class="list-collections-template__meta"><span>{{ 'sections.collection_list.collections_count' | t: count: source_total }}</span></div>
     </div>
 
     {%- if collection_source == 'all' -%}
@@ -137,8 +137,14 @@
       "id": "collection_source",
       "label": "t:sections.main_list_collections.settings.collection_source.label",
       "options": [
-        { "value": "all", "label": "t:sections.main_list_collections.settings.collection_source.options__all.label" },
-        { "value": "menu", "label": "t:sections.main_list_collections.settings.collection_source.options__menu.label" }
+        {
+          "value": "all",
+          "label": "t:sections.main_list_collections.settings.collection_source.options__all.label"
+        },
+        {
+          "value": "menu",
+          "label": "t:sections.main_list_collections.settings.collection_source.options__menu.label"
+        }
       ],
       "default": "all"
     },
@@ -159,7 +165,7 @@
       "type": "inline_richtext",
       "id": "title",
       "label": "t:sections.main_list_collections.settings.title.label",
-      "default": "Collections"
+      "default": "t:sections.main_list_collections.settings.title.default"
     },
     {
       "type": "inline_richtext",
@@ -171,10 +177,22 @@
       "id": "heading_size",
       "label": "t:sections.all.heading_size.label",
       "options": [
-        { "value": "sm", "label": "t:sections.all.heading_size.options__sm.label" },
-        { "value": "md", "label": "t:sections.all.heading_size.options__md.label" },
-        { "value": "lg", "label": "t:sections.all.heading_size.options__lg.label" },
-        { "value": "xl", "label": "t:sections.all.heading_size.options__xl.label" }
+        {
+          "value": "sm",
+          "label": "t:sections.all.heading_size.options__sm.label"
+        },
+        {
+          "value": "md",
+          "label": "t:sections.all.heading_size.options__md.label"
+        },
+        {
+          "value": "lg",
+          "label": "t:sections.all.heading_size.options__lg.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.heading_size.options__xl.label"
+        }
       ],
       "default": "lg"
     },
@@ -227,7 +245,10 @@
       "id": "image_shape",
       "label": "t:sections.all.image_shape.label",
       "options": [
-        { "value": "adapt", "label": "t:sections.all.image_shape.options__adapt.label" },
+        {
+          "value": "adapt",
+          "label": "t:sections.all.image_shape.options__adapt.label"
+        },
         {
           "value": "landscape",
           "label": "t:sections.all.image_shape.options__landscape.label"
@@ -236,7 +257,10 @@
           "value": "landscape-wide",
           "label": "t:sections.all.image_shape.options__landscape_wide.label"
         },
-        { "value": "square", "label": "t:sections.all.image_shape.options__square.label" },
+        {
+          "value": "square",
+          "label": "t:sections.all.image_shape.options__square.label"
+        },
         {
           "value": "portrait",
           "label": "t:sections.all.image_shape.options__portrait.label"
@@ -298,9 +322,18 @@
       "id": "card_heading_size",
       "label": "t:sections.main_list_collections.settings.card_heading_size.label",
       "options": [
-        { "value": "sm", "label": "t:sections.all.heading_size.options__sm.label" },
-        { "value": "md", "label": "t:sections.all.heading_size.options__md.label" },
-        { "value": "lg", "label": "t:sections.all.heading_size.options__lg.label" }
+        {
+          "value": "sm",
+          "label": "t:sections.all.heading_size.options__sm.label"
+        },
+        {
+          "value": "md",
+          "label": "t:sections.all.heading_size.options__md.label"
+        },
+        {
+          "value": "lg",
+          "label": "t:sections.all.heading_size.options__lg.label"
+        }
       ],
       "default": "md"
     },
@@ -319,8 +352,14 @@
       "id": "container_width",
       "label": "t:sections.all.container_width.label",
       "options": [
-        { "value": "fixed", "label": "t:sections.all.container_width.options__fixed.label" },
-        { "value": "full", "label": "t:sections.all.container_width.options__full.label" }
+        {
+          "value": "fixed",
+          "label": "t:sections.all.container_width.options__fixed.label"
+        },
+        {
+          "value": "full",
+          "label": "t:sections.all.container_width.options__full.label"
+        }
       ],
       "default": "fixed"
     },
@@ -329,11 +368,26 @@
       "id": "columns_desktop",
       "label": "t:sections.all.columns_desktop.label",
       "options": [
-        { "value": "1", "label": "1" },
-        { "value": "2", "label": "2" },
-        { "value": "3", "label": "3" },
-        { "value": "4", "label": "4" },
-        { "value": "5", "label": "5" }
+        {
+          "value": "1",
+          "label": "t:sections.main_list_collections.settings.columns_desktop.options._1"
+        },
+        {
+          "value": "2",
+          "label": "t:sections.main_list_collections.settings.columns_desktop.options._2"
+        },
+        {
+          "value": "3",
+          "label": "t:sections.main_list_collections.settings.columns_desktop.options._3"
+        },
+        {
+          "value": "4",
+          "label": "t:sections.main_list_collections.settings.columns_desktop.options._4"
+        },
+        {
+          "value": "5",
+          "label": "t:sections.main_list_collections.settings.columns_desktop.options._5"
+        }
       ],
       "default": "3"
     },
@@ -344,11 +398,11 @@
       "options": [
         {
           "value": "1",
-          "label": "1"
+          "label": "t:sections.main_list_collections.settings.columns_mobile.options._1"
         },
         {
           "value": "2",
-          "label": "2"
+          "label": "t:sections.main_list_collections.settings.columns_mobile.options._2"
         }
       ],
       "default": "2"
@@ -358,12 +412,30 @@
       "id": "column_gap",
       "label": "t:sections.all.column_gap.label",
       "options": [
-        { "value": "none", "label": "t:sections.all.column_gap.options__none.label" },
-        { "value": "xs", "label": "t:sections.all.column_gap.options__xs.label" },
-        { "value": "sm", "label": "t:sections.all.column_gap.options__sm.label" },
-        { "value": "md", "label": "t:sections.all.column_gap.options__md.label" },
-        { "value": "lg", "label": "t:sections.all.column_gap.options__lg.label" },
-        { "value": "xl", "label": "t:sections.all.column_gap.options__xl.label" }
+        {
+          "value": "none",
+          "label": "t:sections.all.column_gap.options__none.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.column_gap.options__xs.label"
+        },
+        {
+          "value": "sm",
+          "label": "t:sections.all.column_gap.options__sm.label"
+        },
+        {
+          "value": "md",
+          "label": "t:sections.all.column_gap.options__md.label"
+        },
+        {
+          "value": "lg",
+          "label": "t:sections.all.column_gap.options__lg.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.column_gap.options__xl.label"
+        }
       ],
       "default": "md"
     },
@@ -388,7 +460,10 @@
           "value": "date_reversed",
           "label": "t:sections.main_list_collections.settings.sort.options__date_reversed.label"
         },
-        { "value": "date", "label": "t:sections.main_list_collections.settings.sort.options__date.label" },
+        {
+          "value": "date",
+          "label": "t:sections.main_list_collections.settings.sort.options__date.label"
+        },
         {
           "value": "products_high",
           "label": "t:sections.main_list_collections.settings.sort.options__products_high.label"

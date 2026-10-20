@@ -9,7 +9,7 @@
     constructor() {
       super();
       this.storageKey = 'newsletter_popup_closed';
-      this.timeToShow = 3000;
+      this.timeToShow = (parseInt(this.dataset.delay, 10) || 5) * 1000;
     }
 
     connectedCallback() {
@@ -37,11 +37,14 @@
           self.handleFormSubmit(e);
         });
       }
+      this.popup.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && self.popup.classList.contains('active')) self.closePopup();
+      });
     }
 
     checkPopupStatus() {
       var self = this;
-      var isClosed = localStorage.getItem(this.storageKey);
+      var isClosed = ThemeUtils.storage.get(this.storageKey);
       if (!isClosed) {
         setTimeout(function() {
           self.showPopup();
@@ -63,7 +66,7 @@
         ThemeUtils.unlockScroll();
         ThemeUtils.releaseFocus(this.popup);
       }
-      localStorage.setItem(this.storageKey, 'true');
+      ThemeUtils.storage.set(this.storageKey, 'true');
     }
 
     handleFormSubmit(event) {
@@ -73,7 +76,7 @@
         // Allow form submission normally
       } else {
         event.preventDefault();
-        if (typeof showToast === 'function') showToast('Please enter a valid email address.', 'error', 3000);
+        if (typeof showToast === 'function' && this.dataset.msgEmail) showToast(this.dataset.msgEmail, 'error', 3000);
       }
     }
 

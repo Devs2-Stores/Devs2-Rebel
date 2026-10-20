@@ -29,13 +29,12 @@ Accepts:
       endif
     endif
   else
-    assign min = min | default: 1
-    assign step = step | default: 1
-    assign quantity_max = max | default: 999
+    assign min = min | default: variant.quantity_rule.min | default: 1
+    assign step = step | default: variant.quantity_rule.increment | default: 1
+    assign quantity_max = max | default: variant.quantity_rule.max
   endif
 
-  assign quantity_max = quantity_max | default: 999
-  if quantity_max < min
+  if quantity_max != blank and quantity_max < min
     assign quantity_max = min
   endif
   assign input_id = 'quantity-' | append: variant.id
@@ -45,8 +44,6 @@ Accepts:
     assign input_id = input_id | append: '-' | append: id_suffix
   endif
 -%}
-{{ 'quantity-selector.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'quantity-selector.js' | asset_url }}" defer="defer"></script>
 <quantity-selector class="quantity-selector">
 		<button class="quantity-selector__button quantity-selector__decrease" type="button" data-action="decrease" aria-label="{{ 'products.product.quantity.decrease' | t: product: product.title }}" aria-controls="{{ input_id }}">
 			<span class="sr-only">{{ 'products.product.quantity.decrease' | t: product: product.title }}</span>
@@ -63,7 +60,7 @@ Accepts:
 			   value="{{ value }}"
 			   data-confirmed-value="{{ value }}"
 			   min="{{ min }}"
-			   max="{{ quantity_max }}"
+			   {%- if quantity_max != blank %} max="{{ quantity_max }}"{% endif %}
 			   step="{{ step }}"
 			   autocomplete="off"
 			   inputmode="numeric"

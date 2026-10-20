@@ -1,6 +1,6 @@
-import os, zipfile, fnmatch
+import os, zipfile, fnmatch, json
 
-THEME_DIRS = ['assets', 'blocks', 'config', 'layout', 'listings', 'locales', 'sections', 'snippets', 'templates']
+THEME_DIRS = ['assets', 'blocks', 'config', 'layout', 'locales', 'sections', 'snippets', 'templates']
 
 ignore_patterns = []
 if os.path.exists('.shopifyignore'):
@@ -20,7 +20,9 @@ def should_ignore(path):
     return False
 
 os.makedirs('dist', exist_ok=True)
-zip_path = 'dist/devs2-rebel-v1.0.0.zip'
+with open('config/settings_schema.json', encoding='utf-8') as schema_file:
+    theme_info = next(item for item in json.load(schema_file) if item.get('name') == 'theme_info')
+zip_path = f"dist/rebel-v{theme_info['theme_version']}.zip"
 
 file_count = 0
 with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zf:

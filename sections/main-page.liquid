@@ -19,7 +19,8 @@
         <div class="page-default__placeholder-icon">
           {%- render 'icon', name: 'clipboard' -%}
         </div>
-        <p class="page-default__placeholder-text">{{ section.settings.empty_text }}</p>
+        {%- assign default_empty_text = 'sections.main_page.empty_text' | t -%}
+        <p class="page-default__placeholder-text">{{ section.settings.empty_text | default: default_empty_text }}</p>
       </div>
       {%- endif -%}
     </div>
@@ -36,7 +37,7 @@
       "type": "text",
       "id": "empty_text",
       "label": "t:sections.main_page.settings.empty_text.label",
-      "default": "Page content is being updated."
+      "default": "t:sections.main_page.settings.empty_text.default"
     }
   ]
 }

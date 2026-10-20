@@ -1,0 +1,54 @@
+{
+ "1440x900": {
+  "axe": {
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".section-slideshow__pagination",
+      ".section-marquee-products__list[aria-hidden=\"true\"]"
+     ]
+    }
+   ]
+  },
+  "tabStops": 259,
+  "hiddenStops": 62,
+  "hiddenBySection": {
+   "header|megamenu__dropdown": 8,
+   "hero_slideshow|section-slideshow__pagination swiper-pagination-cl": 6,
+   "marquee_products|section-marquee-products__list": 48
+  },
+  "offscreenStops": 20,
+  "offscreenBySection": {
+   "hero_slideshow|section-slideshow__pagination swiper-pagination-cl": 6,
+   "marquee_products|": 12,
+   "null|": 2
+  }
+ },
+ "375x812": {
+  "axe": {
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 1,
+     "targets": [
+      ".section-slideshow__pagination"
+     ]
+    }
+   ]
+  },
+  "tabStops": 258,
+  "hiddenStops": 9,
+  "hiddenBySection": {
+   "hero_slideshow|section-slideshow__pagination swiper-pagination-cl": 9
+  },
+  "offscreenStops": 13,
+  "offscreenBySection": {
+   "hero_slideshow|section-slideshow__pagination swiper-pagination-cl": 9,
+   "null|": 4
+  }
+ }
+}

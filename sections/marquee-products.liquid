@@ -1,6 +1,6 @@
 {%- comment %}
   Section: Marquee Products
-  Mô tả: Auto-scrolling horizontal product cards — infinite.
+  Mô tả: Horizontal product card carousel with prev/next controls.
 {% endcomment -%}
 
 {%- liquid
@@ -8,6 +8,8 @@
   assign products_to_show = section.settings.products_to_show
 -%}
 
+{{ 'product-card.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-card.js' | asset_url }}" defer="defer"></script>
 <div
   id="section-{{ section.id }}"
   class="section-marquee-products color-{{ section.settings.color_scheme }}"
@@ -16,20 +18,30 @@
     --mp-db: {{ section.settings.padding_bottom_desktop }}px;
     --mp-mt: {{ section.settings.padding_top_mobile }}px;
     --mp-mb: {{ section.settings.padding_bottom_mobile }}px;
-    --mp-speed: {{ section.settings.speed }}s;
-    --mp-direction: {{ section.settings.direction }};
   "
 >
   {%- if section.settings.heading != blank -%}
-    <div class="page-width section-marquee-products__head">
-      <{{ section.settings.heading_tag }} class="section-marquee-products__heading heading-size-{{ section.settings.heading_size }}">
-        {{- section.settings.heading -}}
-      </{{ section.settings.heading_tag }}>
-      {%- if collection != blank -%}
-        <a href="{{ collection.url }}" class="section-marquee-products__view-all">
-          {{- 'general.view_all' | t -}}
-        </a>
-      {%- endif -%}
+    <div class="page-width">
+      <div class="section-marquee-products__head">
+        <{{ section.settings.heading_tag }} class="section-marquee-products__heading heading-size-{{ section.settings.heading_size }}">
+          {{- section.settings.heading -}}
+        </{{ section.settings.heading_tag }}>
+        <div class="section-marquee-products__actions">
+          {%- if collection != blank -%}
+            <a href="{{ collection.url }}" class="section-marquee-products__view-all">
+              {{- 'general.view_all' | t -}}
+            </a>
+          {%- endif -%}
+          <div class="section-marquee-products__controls">
+            <button type="button" class="section-marquee-products__nav" data-mp-prev aria-label="{{ 'accessibility.previous_slide' | t }}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button type="button" class="section-marquee-products__nav" data-mp-next aria-label="{{ 'accessibility.next_slide' | t }}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   {%- endif -%}
 
@@ -42,63 +54,143 @@
           </div>
         {%- endfor -%}
       </div>
-      {%- comment %} Duplicate for infinite loop {% endcomment -%}
-      <div class="section-marquee-products__list" aria-hidden="true">
-        {%- for product in collection.products limit: products_to_show -%}
-          <div class="section-marquee-products__item">
-            {%- render 'product-card', product: product, lazyload: 'lazy', fetchpriority: 'auto' -%}
+    </div>
+  {%- else -%}
+    <div class="page-width">
+      <div class="section-marquee-products__placeholder-list" aria-hidden="true">
+        {%- for i in (1..4) -%}
+          <div class="section-marquee-products__placeholder-card">
+            {{- 'product-' | append: i | placeholder_svg_tag: 'section-marquee-products__placeholder-svg' -}}
           </div>
         {%- endfor -%}
       </div>
-    </div>
-  {%- else -%}
-    <div class="section-marquee-products__placeholder-list page-width" aria-hidden="true">
-      {%- for i in (1..4) -%}
-        <div class="section-marquee-products__placeholder-card">
-          {{- 'product-' | append: i | placeholder_svg_tag: 'section-marquee-products__placeholder-svg' -}}
-        </div>
-      {%- endfor -%}
     </div>
   {%- endif -%}
 </div>
 
 <script>
 (function() {
-  var track = document.querySelector('#section-{{ section.id }} [data-mp-track]');
+  var root = document.getElementById('section-{{ section.id }}');
+  if (!root) return;
+  var track = root.querySelector('[data-mp-track]');
   if (!track) return;
-  track.addEventListener('mouseenter', function() { track.style.animationPlayState = 'paused'; });
-  track.addEventListener('mouseleave', function() { track.style.animationPlayState = 'running'; });
+  track.addEventListener('focusin', function(e) {
+    if (!e.target.matches(':focus-visible')) return;
+    requestAnimationFrame(function() { e.target.scrollIntoView({ block: 'nearest', inline: 'nearest' }); });
+  });
+  var prev = root.querySelector('[data-mp-prev]');
+  var next = root.querySelector('[data-mp-next]');
+  var step = function() {
+    var item = track.querySelector('.section-marquee-products__item');
+    return item ? item.getBoundingClientRect().width + 20 : 280;
+  };
+  if (prev) prev.addEventListener('click', function() { track.scrollBy({ left: -step() * 2, behavior: 'smooth' }); });
+  if (next) next.addEventListener('click', function() { track.scrollBy({ left: step() * 2, behavior: 'smooth' }); });
 })();
 </script>
 
 {% stylesheet %}
   .section-marquee-products {
+    --mp-edge: max(15px, calc((100% - var(--page-width, 1200px)) / 2 + 15px));
     padding-block: var(--mp-mt) var(--mp-mb);
     background: rgb(var(--color-background));
     overflow: hidden;
   }
   @media (min-width: 750px) {
-    .section-marquee-products { padding-block: var(--mp-dt) var(--mp-db); }
+    .section-marquee-products {
+      --mp-edge: max(30px, calc((100% - var(--page-width, 1200px)) / 2 + 30px));
+      padding-block: var(--mp-dt) var(--mp-db);
+    }
+  }
+  @media (min-width: 1024px) {
+    .section-marquee-products {
+      --mp-edge: max(75px, calc((100% - var(--page-width, 1200px)) / 2 + 75px));
+    }
   }
   .section-marquee-products__head {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
+    flex-wrap: wrap;
     gap: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--section-head-gap);
   }
-  .section-marquee-products__heading { margin: 0; color: rgb(var(--color-foreground)); }
-  .section-marquee-products__view-all { color: rgb(var(--color-foreground)); white-space: nowrap; }
+  .section-marquee-products__heading {
+    margin: 0;
+    color: var(--color-ink);
+    letter-spacing: var(--heading-tracking);
+  }
+  .section-marquee-products__actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  .section-marquee-products__view-all {
+    color: var(--color-ink);
+    font-size: 0.875rem;
+    font-weight: 500;
+    white-space: nowrap;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.25em;
+    transition: text-decoration-color var(--transition-fast);
+  }
+  .section-marquee-products__view-all:hover {
+    color: var(--color-ink);
+    text-decoration-color: currentColor;
+  }
+  .section-marquee-products__controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .section-marquee-products__nav {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--buttons-radius, 0);
+    background: transparent;
+    color: var(--color-ink);
+    cursor: pointer;
+    transition: background-color var(--duration-default) ease, color var(--duration-default) ease, border-color var(--duration-default) ease;
+  }
+  .section-marquee-products__nav:hover {
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+    color: rgb(var(--color-background));
+  }
+  .section-marquee-products__nav:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
 
   .section-marquee-products__track {
-    display: flex; width: max-content;
-    animation: mpScroll var(--mp-speed, 30s) linear infinite;
-    animation-direction: var(--mp-direction, normal);
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding-inline-start: var(--mp-edge);
+    padding-inline-end: var(--mp-edge);
+    scroll-padding-inline-start: var(--mp-edge);
   }
-  @keyframes mpScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .section-marquee-products__track::-webkit-scrollbar { display: none; }
 
-  .section-marquee-products__list { display: flex; gap: 16px; padding-right: 16px; }
-  .section-marquee-products__item { width: 220px; flex-shrink: 0; }
+  .section-marquee-products__list {
+    display: flex;
+    flex: 0 0 auto;
+    gap: 16px;
+  }
+  .section-marquee-products__item {
+    width: 220px;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+  }
   .section-marquee-products__placeholder-list {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -110,50 +202,135 @@
     background: rgba(var(--color-foreground), 0.04);
   }
   .section-marquee-products__placeholder-svg { width: 100%; height: 100%; }
-  @media (max-width: 749px) {
-    .section-marquee-products { overflow: visible; }
-    .section-marquee-products__track {
-      width: 100%;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-      animation: none;
-      padding-inline: 1.5rem;
-    }
-    .section-marquee-products__track::-webkit-scrollbar { display: none; }
-    .section-marquee-products__list { flex: 0 0 auto; }
-    .section-marquee-products__list[aria-hidden="true"] { display: none; }
-    .section-marquee-products__item { scroll-snap-align: start; }
-  }
   @media (min-width: 750px) {
     .section-marquee-products__item { width: 260px; }
-    .section-marquee-products__list { gap: 20px; padding-right: 20px; }
+    .section-marquee-products__list { gap: 20px; }
     .section-marquee-products__placeholder-list { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
   }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "Marquee products",
+  "name": "t:sections.marquee_products.name",
   "tag": "section",
   "class": "section-marquee-products-wrapper",
   "settings": [
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
-    { "type": "collection", "id": "collection", "label": "Collection" },
-    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Trending now" },
-    { "type": "select", "id": "heading_size", "label": "Heading size", "options": [{ "value": "md", "label": "M" },{ "value": "lg", "label": "L" }], "default": "md" },
-    { "type": "select", "id": "heading_tag", "label": "Tag", "options": [{ "value": "h2", "label": "H2" },{ "value": "h3", "label": "H3" }], "default": "h2" },
-    { "type": "header", "content": "Behavior" },
-    { "type": "range", "id": "products_to_show", "min": 4, "max": 12, "step": 1, "label": "Products", "default": 10 },
-    { "type": "range", "id": "speed", "min": 15, "max": 60, "step": 5, "unit": "s", "label": "Speed", "default": 30, "info": "Lower = faster" },
-    { "type": "select", "id": "direction", "label": "Direction", "options": [{ "value": "normal", "label": "Left" },{ "value": "reverse", "label": "Right" }], "default": "normal" },
-    { "type": "header", "content": "Desktop spacing" },
-    { "type": "range", "id": "padding_top_desktop", "min": 0, "max": 150, "step": 5, "unit": "px", "label": "Top", "default": 50 },
-    { "type": "range", "id": "padding_bottom_desktop", "min": 0, "max": 150, "step": 5, "unit": "px", "label": "Bottom", "default": 50 },
-    { "type": "header", "content": "Mobile spacing" },
-    { "type": "range", "id": "padding_top_mobile", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Top", "default": 30 },
-    { "type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Bottom", "default": 30 }
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.marquee_products.settings.color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:sections.marquee_products.settings.collection.label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:sections.marquee_products.settings.heading.label",
+      "default": "t:sections.marquee_products.settings.heading.default"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "t:sections.marquee_products.settings.heading_size.label",
+      "options": [
+        {
+          "value": "md",
+          "label": "t:sections.marquee_products.settings.heading_size.options.md"
+        },
+        {
+          "value": "lg",
+          "label": "t:sections.marquee_products.settings.heading_size.options.lg"
+        }
+      ],
+      "default": "md"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "t:sections.marquee_products.settings.heading_tag.label",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.marquee_products.settings.heading_tag.options.h2"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.marquee_products.settings.heading_tag.options.h3"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.marquee_products.settings.header__behavior.content"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "label": "t:sections.marquee_products.settings.products_to_show.label",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "t:sections.marquee_products.settings.header__desktop_spacing.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.marquee_products.settings.padding_top_desktop.label",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.marquee_products.settings.padding_bottom_desktop.label",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "t:sections.marquee_products.settings.header__mobile_spacing.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.marquee_products.settings.padding_top_mobile.label",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.marquee_products.settings.padding_bottom_mobile.label",
+      "default": 30
+    }
   ],
-  "presets": [{ "name": "Marquee products", "category": "Collection" }]
+  "presets": [
+    {
+      "name": "t:sections.marquee_products.presets.marquee_products.name",
+      "category": "Collection"
+    }
+  ]
 }
 {% endschema %}

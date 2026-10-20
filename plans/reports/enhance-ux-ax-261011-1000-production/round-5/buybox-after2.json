@@ -1,0 +1,1394 @@
+{
+ "375 /products/rebel-tactical-bomber-jacket": {
+  "buttons": {
+   "display": "grid",
+   "flex-direction": "row",
+   "grid-template-columns": "345px",
+   "gap": "8px"
+  },
+  "buttonsKids": [
+   {
+    "tag": "button",
+    "cls": "button-primary product-template__add-btn",
+    "box": {
+     "x": 15,
+     "y": 1210,
+     "w": 345,
+     "h": 48
+    },
+    "display": "flex"
+   }
+  ],
+  "atc": {
+   "box": {
+    "x": 15,
+    "y": 1210,
+    "w": 345,
+    "h": 48
+   },
+   "style": {
+    "flex": "1 1 0%",
+    "width": "345px",
+    "max-width": "none"
+   }
+  },
+  "buyNow": {
+   "x": 15,
+   "y": 1266,
+   "w": 345,
+   "h": 48
+  },
+  "quantityGroup": {
+   "box": {
+    "x": 15,
+    "y": 1141,
+    "w": 345,
+    "h": 53
+   },
+   "style": {
+    "margin-top": "0px",
+    "padding-top": "0px"
+   }
+  },
+  "variantPicker": {
+   "box": {
+    "x": 15,
+    "y": 985,
+    "w": 345,
+    "h": 140
+   },
+   "style": {
+    "margin-bottom": "16px",
+    "padding-bottom": "0px"
+   }
+  },
+  "labels": [
+   {
+    "text": "Color:Matte Obsidian",
+    "cls": "variant-picker__label",
+    "box": {
+     "x": 15,
+     "y": 985,
+     "w": 345,
+     "h": 18
+    },
+    "style": {
+     "font-size": "12px",
+     "font-weight": "500",
+     "color": "rgba(10, 10, 10, 0.7)",
+     "margin-top": "0px",
+     "margin-bottom": "8px"
+    }
+   },
+   {
+    "text": "Matte Obsidian",
+    "cls": "variant-picker__item-label",
+    "box": {
+     "x": 15,
+     "y": 1011,
+     "w": 108,
+     "h": 36
+    },
+    "style": {
+     "font-size": "12px",
+     "font-weight": "400",
+     "color": "rgb(188, 30, 44)",
+     "margin-top": "0px",
+     "margin-bottom": "0px"
+    }
+   },
+   {
+    "text": "Stealth Slate",
+    "cls": "variant-picker__item-label",
+    "box": {
+     "x": 131,
+     "y": 1011,
+     "w": 93,
+     "h": 36
+    },
+    "style": {
+     "font-size": "12px",
+     "font-weight": "400",
+     "color": "rgba(10, 10, 10, 0.8)",
+     "margin-top": "0px",
+     "margin-bottom": "0px"
+    }
+   },
+   {
+    "text": "Size:",
+    "cls": "variant-picker__label",
+    "box": {
+     "x": 15,
+     "y": 1063,
+     "w": 345,
+     "h": 18
+    },
+    "style": {
+     "font-size": "12px",
+     "font-weight": "500",
+     "color": "rgba(10, 10, 10, 0.7)",
+     "margin-top": "0px",
+     "margin-bottom": "8px"
+    }
+   },
+   {
+    "text": "S",
+    "cls": "variant-picker__item-label",
+    "box": {
+     "x": 15,
+     "y": 1089,
+     "w": 36,
+     "h": 36
+    },
+    "style": {
+     "font-size": "12px",
+     "font-weight": "400",
+     "color": "rgb(188, 30, 44)",
+     "margin-top": "0px",
+     "margin-bottom": "0px"
+    }
+   },
+   {
+    "text": "M",
+    "cls": "variant-picker__item-label",
+    "box": {
+     "x": 59,
+     "y": 1089,
+     "w": 36,
+     "h": 36
+    },
+    "style": {
+     "font-size": "12px",
+     "font-weight": "400",
+     "color": "rgba(10, 10, 10, 0.8)",
+     "margin-top": "0px",
+     "margin-bottom": "0px"
+    }
+   }
+  ],
+  "arrows": [
+   {
+    "box": {
+     "x": 323,
+     "y": 416,
+     "w": 27,
+     "h": 40
+    },
+    "btn": {
+     "background-color": "rgba(245, 242, 237, 0.85)",
+     "opacity": "1",
+     "color": "rgb(0, 122, 255)"
+    },
+    "after": {
+     "color": "rgb(10, 10, 10)",
+     "opacity": "1",
+     "font-size": "16px"
+    }
+   },
+   {
+    "box": {
+     "x": 25,
+     "y": 416,
+     "w": 27,
+     "h": 40
+    },
+    "btn": {
+     "background-color": "rgba(245, 242, 237, 0.85)",
+     "opacity": "0.35",
+     "color": "rgb(0, 122, 255)"
+    },
+    "after": {
+     "color": "rgb(10, 10, 10)",
+     "opacity": "1",
+     "font-size": "16px"
+    }
+   }
+  ],
+  "radio": null,
+  "viewportH": 812,
+  "title": {
+   "x": 15,
+   "y": 831,
+   "w": 345,
+   "h": 25
+  },
+  "media": {
+   "box": {
+    "x": 15,
+    "y": 179,
+    "w": 345,
+    "h": 632
+   },
+   "position": "relative"
+  },
+  "hero": {
+   "rendered": 345,
+   "src": "360",
+   "sizes": "(max-width: 749px) calc(100vw - 30px), (max-width: 991px) calc(50vw - 40px), (min-width: 1600px) 580px, 34vw"
+  },
+  "ann": [],
+  "overflow": 0
+ },
+ "375 /products/leather-care-balm": {
+  "buttons": {
+   "display": "grid",
+   "flex-direction": "row",
+   "grid-template-columns": "345px",
+   "gap": "8px"
+  },
+  "buttonsKids": [
+   {
+    "tag": "button",
+    "cls": "button-primary product-template__add-btn",
+    "box": {
+     "x": 15,
+     "y": 1301,
+     "w": 345,
+     "h": 48
+    },
+    "display": "flex"
+   }
+  ],
+  "atc": {
+   "box": {
+    "x": 15,
+    "y": 1301,
+    "w": 345,
+    "h": 48
+   },
+   "style": {
+    "flex": "1 1 0%",
+    "width": "345px",
+    "max-width": "none"
+   }
+  },
+  "buyNow": {
+   "x": 15,
+   "y": 1357,
+   "w": 345,
+   "h": 48
+  },
+  "quantityGroup": {
+   "box": {
+    "x": 15,
+    "y": 1107,
+    "w": 345,
+    "h": 53
+   },
+   "style": {
+    "margin-top": "0px",
+    "padding-top": "0px"
+   }
+  },
+  "variantPicker": {
+   "box": {
+    "x": 15,
+    "y": 985,
+    "w": 345,
+    "h": 106
+   },
+   "style": {
+    "margin-bottom": "16px",
+    "padding-bottom": "0px"
+   }
+  },
+  "labels": [
+   {
+    "text": "Size:",
+    "cls": "variant-picker__label",
+    "box": {
+     "x": 15,
+     "y": 985,
+     "w": 345,
+     "h": 18
+    },
+    "style": {
+     "font-size": "12px",
+     "font-weight": "500",
+     "color": "rgba(10, 10, 10, 0.7)",
+     "margin-top": "0px",
+     "margin-bottom": "8px"
+    }
+   },
+   {
+    "text": "Classic tin 100 ml",
+    "cls": "variant-picker__item-label",
+    "box": {
+     "x": 15,
+     "y": 1011,
+     "w": 120,
+     "h": 36
+    },
+    "style": {
+     "font-size": "12px",
+     "font-weight": "400",
+     "color": "rgb(188, 30, 44)",
+     "margin-top": "0px",
+     "margin-bottom": "0px"
+    }
+   },
+   {
+    "text": "Atelier jar 250 ml",
+    "cls": "variant-picker__item-label",
+    "box": {
+     "x": 143,
+     "y": 1011,
+     "w": 118,
+     "h": 36
+    },
+    "style": {
+     "font-size": "12px",
+     "font-weight": "400",
+     "color": "rgba(10, 10, 10, 0.8)",
+     "margin-top": "0px",
+     "margin-bottom": "0px"
+    }
+   },
+   {
+    "text": "Travel tin 30 ml",
+    "cls": "variant-picker__item-label",
+    "box": {
+     "x": 15,
+     "y": 1055,
+     "w": 109,
+     "h": 36
+    },
+    "style": {
+     "font-size": "12px",
+     "font-weight": "400",
+     "color": "rgba(10, 10, 10, 0.8)",
+     "margin-top": "0px",
+     "margin-bottom": "0px"
+    }
+   },
+   {
+    "text": "Quantity",
+    "cls": "product-template__quantity-label",
+    "box": {
+     "x": 15,
+     "y": 1107,
+     "w": 345,
+     "h": 18
+    },
+    "style": {
+     "font-size": "12px",
+     "font-weight": "500",
+     "color": "rgba(10, 10, 10, 0.7)",
+     "margin-top": "0px",
+     "margin-bottom": "8px"
+    }
+   },
+   {
+    "text": "Purchase options",
+    "cls": "visually-hidden",
+    "box": {
+     "x": 27,
+     "y": 1225,
+     "w": 1,
+     "h": 1
+    },
+    "style": {
+     "font-size": "16px",
+     "font-weight": "400",
+     "color": "rgba(10, 10, 10, 0.75)",
+     "margin-top": "-1px",
+     "margin-bottom": "-1px"
+    }
+   }
+  ],
+  "arrows": [
+   {
+    "box": {
+     "x": 323,
+     "y": 416,
+     "w": 27,
+     "h": 40
+    },
+    "btn": {
+     "background-color": "rgba(245, 242, 237, 0.85)",
+     "opacity": "1",
+     "color": "rgb(0, 122, 255)"
+    },
+    "after": {
+     "color": "rgb(10, 10, 10)",
+     "opacity": "1",
+     "font-size": "16px"
+    }
+   },
+   {
+    "box": {
+     "x": 25,
+     "y": 416,
+     "w": 27,
+     "h": 40
+    },
+    "btn": {
+     "background-color": "rgba(245, 242, 237, 0.85)",
+     "opacity": "0.35",
+     "color": "rgb(0, 122, 255)"
+    },
+    "after": {
+     "color": "rgb(10, 10, 10)",
+     "opacity": "1",
+     "font-size": "16px"
+    }
+   }
+  ],
+  "radio": {
+   "accent-color": "rgb(188, 30, 44)",
+   "width": "16px",
+   "height": "16px"
+  },
+  "viewportH": 812,
+  "title": {
+   "x": 15,
+   "y": 831,
+   "w": 345,
+   "h": 25
+  },
+  "media": {
+   "box": {
+    "x": 15,
+    "y": 179,
+    "w": 345,
+    "h": 632
+   },
+   "position": "relative"
+  },
+  "hero": {
+   "rendered": 345,
+   "src": "360",
+   "sizes": "(max-width: 749px) calc(100vw - 30px), (max-width: 991px) calc(50vw - 40px), (min-width: 1600px) 580px, 34vw"
+  },
+  "ann": [],
+  "overflow": 0
+ },
+ "768 /products/rebel-tactical-bomber-jacket": {
+  "buttons": {
+   "display": "grid",
+   "flex-direction": "row",
+   "grid-template-columns": "344px",
+   "gap": "12px"
+  },
+  "buttonsKids": [
+   {
+    "tag": "button",
+    "cls": "button-primary product-template__add-btn",
+    "box": {
+     "x": 394,
+     "y": 556,
+     "w": 344,
+     "h": 48
+    },
+    "display": "flex"
+   }
+  ],
+  "atc": {
+   "box": {
+    "x": 394,
+    "y": 556,
+    "w": 344,
+    "h": 48
+   },
+   "style": {
+    "flex": "1 1 0%",
+    "width": "344px",
+    "max-width": "none"
+   }
+  },
+  "buyNow": {
+   "x": 394,
+   "y": 612,
+   "w": 344,
+   "h": 48
+  },
+  "quantityGroup": {
+   "box": {
+    "x": 394,
+    "y": 476,
+    "w": 344,
+    "h": 60
+   },
+   "style": {
+    "margin-top": "0px",
+    "padding-top": "0px"
+   }
+  },
+  "variantPicker": {
+   "box": {
+    "x": 394,
+    "y": 312,
+    "w": 344,
+    "h": 148
+   },
+   "style": {
+    "margin-bottom": "16px",
+    "padding-bottom": "0px"
+   }
+  },
+  "labels": [
+   {
+    "text": "Color:Matte Obsidian",
+    "cls": "variant-picker__label",
+    "box": {
+     "x": 394,
+     "y": 312,
+     "w": 344,
+     "h": 18
+    },
+    "style": {
+     "font-size": "12px",
+     "font-weight": "500",
+     "color": "rgba(10, 10, 10, 0.7)",
+     "margin-top": "0px",
+     "margin-bottom": "8px"
+    }
+   },
+   {
+    "text": "Matte Obsidian",
+    "cls": "variant-picker__item-label",
+    "box": {
+     "x": 394,
+     "y": 338,
+     "w": 119,
+     "h": 40
+    },
+    "style": {
+     "font-size": "13px",
+     "font-weight": "400",
+     "color": "rgb(188, 30, 44)",
+     "margin-top": "0px",
+     "margin-bottom": "0px"
+    }
+   },
+   {
+    "text": "Stealth Slate",
+    "cls": "variant-picker__item-label",
+    "box": {
+     "x": 521,
+     "y": 338,
+     "w": 103,
+     "h": 40
+    },
+    "style": {
+     "font-size": "13px",
+     "font-weight": "400",
+     "color": "rgba(10, 10, 10, 0.8)",
+     "margin-top": "0px",
+     "margin-bottom": "0px"
+    }
+   },
+   {
+    "text": "Size:",
+    "cls": "variant-picker__label",
+    "box": {
+     "x": 394,
+     "y": 394,
+     "w": 344,
+     "h": 18
+    },
+    "style": {
+     "font-size": "12px",
+     "font-weight": "500",
+     "color": "rgba(10, 10, 10, 0.7)",
+     "margin-top": "0px",
+     "margin-bottom": "8px"
+    }
+   },
+   {
+    "text": "S",
+    "cls": "variant-picker__item-label",
+    "box": {
+     "x": 394,
+     "y": 420,
+     "w": 40,
+     "h": 40
+    },
+    "style": {
+     "font-size": "13px",
+     "font-weight": "400",
+     "color": "rgb(188, 30, 44)",
+     "margin-top": "0px",
+     "margin-bottom": "0px"
+    }
+   },
+   {
+    "text": "M",
+    "cls": "variant-picker__item-label",
+    "box": {
+     "x": 442,
+     "y": 420,
+     "w": 40,
+     "h": 40
+    },
+    "style": {
+     "font-size": "13px",
+     "font-weight": "400",
+     "color": "rgba(10, 10, 10, 0.8)",
+     "margin-top": "0px",
+     "margin-bottom": "0px"
+    }
+   }
+  ],
+  "arrows": [
+   {
+    "box": {
+     "x": 337,
+     "y": 394,
+     "w": 27,
+     "h": 40
+    },
+    "btn": {
+     "background-color": "rgba(245, 242, 237, 0.85)",
+     "opacity": "1",
+     "color": "rgb(0, 122, 255)"
+    },
+    "after": {
+     "color": "rgb(10, 10, 10)",
+     "opacity": "1",
+     "font-size": "16px"
+    }
+   },
+   {
+    "box": {
+     "x": 40,
+     "y": 394,
+     "w": 27,
+     "h": 40
+    },
+    "btn": {
+     "background-color": "rgba(245, 242, 237, 0.85)",
+     "opacity": "0.35",
+     "color": "rgb(0, 122, 255)"
+    },
+    "after": {
+     "color": "rgb(10, 10, 10)",
+     "opacity": "1",
+     "font-size": "16px"
+    }
+   }
+  ],
+  "radio": null,
+  "viewportH": 1024,
+  "title": {
+   "x": 394,
+   "y": 158,
+   "w": 344,
+   "h": 25
+  },
+  "media": {
+   "box": {
+    "x": 30,
+    "y": 158,
+    "w": 344,
+    "h": 1052
+   },
+   "position": "sticky"
+  },
+  "hero": {
+   "rendered": 344,
+   "src": "360",
+   "sizes": "(max-width: 749px) calc(100vw - 30px), (max-width: 991px) calc(50vw - 40px), (min-width: 1600px) 580px, 34vw"
+  },
+  "ann": [],
+  "overflow": 0
+ },
+ "768 /products/leather-care-balm": {
+  "buttons": {
+   "display": "grid",
+   "flex-direction": "row",
+   "grid-template-columns": "344px",
+   "gap": "12px"
+  },
+  "buttonsKids": [
+   {
+    "tag": "button",
+    "cls": "button-primary product-template__add-btn",
+    "box": {
+     "x": 394,
+     "y": 647,
+     "w": 344,
+     "h": 48
+    },
+    "display": "flex"
+   }
+  ],
+  "atc": {
+   "box": {
+    "x": 394,
+    "y": 647,
+    "w": 344,
+    "h": 48
+   },
+   "style": {
+    "flex": "1 1 0%",
+    "width": "344px",
+    "max-width": "none"
+   }
+  },
+  "buyNow": {
+   "x": 394,
+   "y": 703,
+   "w": 344,
+   "h": 48
+  },
+  "quantityGroup": {
+   "box": {
+    "x": 394,
+    "y": 442,
+    "w": 344,
+    "h": 60
+   },
+   "style": {
+    "margin-top": "0px",
+    "padding-top": "0px"
+   }
+  },
+  "variantPicker": {
+   "box": {
+    "x": 394,
+    "y": 312,
+    "w": 344,
+    "h": 114
+   },
+   "style": {
+    "margin-bottom": "16px",
+    "padding-bottom": "0px"
+   }
+  },
+  "labels": [
+   {
+    "text": "Size:",
+    "cls": "variant-picker__label",
+    "box": {
+     "x": 394,
+     "y": 312,
+     "w": 344,
+     "h": 18
+    },
+    "style": {
+     "font-size": "12px",
+     "font-weight": "500",
+     "color": "rgba(10, 10, 10, 0.7)",
+     "margin-top": "0px",
+     "margin-bottom": "8px"
+    }
+   },
+   {
+    "text": "Classic tin 100 ml",
+    "cls": "variant-picker__item-label",
+    "box": {
+     "x": 394,
+     "y": 338,
+     "w": 133,
+     "h": 40
+    },
+    "style": {
+     "font-size": "13px",
+     "font-weight": "400",
+     "color": "rgb(188, 30, 44)",
+     "margin-top": "0px",
+     "margin-bottom": "0px"
+    }
+   },
+   {
+    "text": "Atelier jar 250 ml",
+    "cls": "variant-picker__item-label",
+    "box": {
+     "x": 535,
+     "y": 338,
+     "w": 130,
+     "h": 40
+    },
+    "style": {
+     "font-size": "13px",
+     "font-weight": "400",
+     "color": "rgba(10, 10, 10, 0.8)",
+     "margin-top": "0px",
+     "margin-bottom": "0px"
+    }
+   },
+   {
+    "text": "Travel tin 30 ml",
+    "cls": "variant-picker__item-label",
+    "box": {
+     "x": 394,
+     "y": 386,
+     "w": 120,
+     "h": 40
+    },
+    "style": {
+     "font-size": "13px",
+     "font-weight": "400",
+     "color": "rgba(10, 10, 10, 0.8)",
+     "margin-top": "0px",
+     "margin-bottom": "0px"
+    }
+   },
+   {
+    "text": "Quantity",
+    "cls": "product-template__quantity-label",
+    "box": {
+     "x": 394,
+     "y": 442,
+     "w": 344,
+     "h": 18
+    },
+    "style": {
+     "font-size": "12px",
+     "font-weight": "500",
+     "color": "rgba(10, 10, 10, 0.7)",
+     "margin-top": "0px",
+     "margin-bottom": "8px"
+    }
+   },
+   {
+    "text": "Purchase options",
+    "cls": "visually-hidden",
+    "box": {
+     "x": 406,
+     "y": 571,
+     "w": 1,
+     "h": 1
+    },
+    "style": {
+     "font-size": "16px",
+     "font-weight": "400",
+     "color": "rgba(10, 10, 10, 0.75)",
+     "margin-top": "-1px",
+     "margin-bottom": "-1px"
+    }
+   }
+  ],
+  "arrows": [
+   {
+    "box": {
+     "x": 337,
+     "y": 394,
+     "w": 27,
+     "h": 40
+    },
+    "btn": {
+     "background-color": "rgba(245, 242, 237, 0.85)",
+     "opacity": "1",
+     "color": "rgb(0, 122, 255)"
+    },
+    "after": {
+     "color": "rgb(10, 10, 10)",
+     "opacity": "1",
+     "font-size": "16px"
+    }
+   },
+   {
+    "box": {
+     "x": 40,
+     "y": 394,
+     "w": 27,
+     "h": 40
+    },
+    "btn": {
+     "background-color": "rgba(245, 242, 237, 0.85)",
+     "opacity": "0.35",
+     "color": "rgb(0, 122, 255)"
+    },
+    "after": {
+     "color": "rgb(10, 10, 10)",
+     "opacity": "1",
+     "font-size": "16px"
+    }
+   }
+  ],
+  "radio": {
+   "accent-color": "rgb(188, 30, 44)",
+   "width": "16px",
+   "height": "16px"
+  },
+  "viewportH": 1024,
+  "title": {
+   "x": 394,
+   "y": 158,
+   "w": 344,
+   "h": 25
+  },
+  "media": {
+   "box": {
+    "x": 30,
+    "y": 158,
+    "w": 344,
+    "h": 1229
+   },
+   "position": "sticky"
+  },
+  "hero": {
+   "rendered": 344,
+   "src": "360",
+   "sizes": "(max-width: 749px) calc(100vw - 30px), (max-width: 991px) calc(50vw - 40px), (min-width: 1600px) 580px, 34vw"
+  },
+  "ann": [],
+  "overflow": 0
+ },
+ "1440 /products/rebel-tactical-bomber-jacket": {
+  "buttons": {
+   "display": "grid",
+   "flex-direction": "row",
+   "grid-template-columns": "759.609px",
+   "gap": "12px"
+  },
+  "buttonsKids": [
+   {
+    "tag": "button",
+    "cls": "button-primary product-template__add-btn",
+    "box": {
+     "x": 605,
+     "y": 568,
+     "w": 760,
+     "h": 54
+    },
+    "display": "flex"
+   }
+  ],
+  "atc": {
+   "box": {
+    "x": 605,
+    "y": 568,
+    "w": 760,
+    "h": 54
+   },
+   "style": {
+    "flex": "1 1 0%",
+    "width": "759.609px",
+    "max-width": "none"
+   }
+  },
+  "buyNow": {
+   "x": 605,
+   "y": 630,
+   "w": 760,
+   "h": 54
+  },
+  "quantityGroup": {
+   "box": {
+    "x": 605,
+    "y": 485,
+    "w": 760,
+    "h": 63
+   },
+   "style": {
+    "margin-top": "0px",
+    "padding-top": "0px"
+   }
+  },
+  "variantPicker": {
+   "box": {
+    "x": 605,
+    "y": 315,
+    "w": 760,
+    "h": 154
+   },
+   "style": {
+    "margin-bottom": "16px",
+    "padding-bottom": "0px"
+   }
+  },
+  "labels": [
+   {
+    "text": "Color:Matte Obsidian",
+    "cls": "variant-picker__label",
+    "box": {
+     "x": 605,
+     "y": 315,
+     "w": 760,
+     "h": 21
+    },
+    "style": {
+     "font-size": "14px",
+     "font-weight": "500",
+     "color": "rgba(10, 10, 10, 0.7)",
+     "margin-top": "0px",
+     "margin-bottom": "8px"
+    }
+   },
+   {
+    "text": "Matte Obsidian",
+    "cls": "variant-picker__item-label",
+    "box": {
+     "x": 605,
+     "y": 344,
+     "w": 134,
+     "h": 40
+    },
+    "style": {
+     "font-size": "14px",
+     "font-weight": "400",
+     "color": "rgb(188, 30, 44)",
+     "margin-top": "0px",
+     "margin-bottom": "0px"
+    }
+   },
+   {
+    "text": "Stealth Slate",
+    "cls": "variant-picker__item-label",
+    "box": {
+     "x": 747,
+     "y": 344,
+     "w": 117,
+     "h": 40
+    },
+    "style": {
+     "font-size": "14px",
+     "font-weight": "400",
+     "color": "rgba(10, 10, 10, 0.8)",
+     "margin-top": "0px",
+     "margin-bottom": "0px"
+    }
+   },
+   {
+    "text": "Size:",
+    "cls": "variant-picker__label",
+    "box": {
+     "x": 605,
+     "y": 400,
+     "w": 760,
+     "h": 21
+    },
+    "style": {
+     "font-size": "14px",
+     "font-weight": "500",
+     "color": "rgba(10, 10, 10, 0.7)",
+     "margin-top": "0px",
+     "margin-bottom": "8px"
+    }
+   },
+   {
+    "text": "S",
+    "cls": "variant-picker__item-label",
+    "box": {
+     "x": 605,
+     "y": 429,
+     "w": 43,
+     "h": 40
+    },
+    "style": {
+     "font-size": "14px",
+     "font-weight": "400",
+     "color": "rgb(188, 30, 44)",
+     "margin-top": "0px",
+     "margin-bottom": "0px"
+    }
+   },
+   {
+    "text": "M",
+    "cls": "variant-picker__item-label",
+    "box": {
+     "x": 656,
+     "y": 429,
+     "w": 47,
+     "h": 40
+    },
+    "style": {
+     "font-size": "14px",
+     "font-weight": "400",
+     "color": "rgba(10, 10, 10, 0.8)",
+     "margin-top": "0px",
+     "margin-bottom": "0px"
+    }
+   }
+  ],
+  "arrows": [
+   {
+    "box": {
+     "x": 544,
+     "y": 524,
+     "w": 27,
+     "h": 40
+    },
+    "btn": {
+     "background-color": "rgba(245, 242, 237, 0.85)",
+     "opacity": "1",
+     "color": "rgb(0, 122, 255)"
+    },
+    "after": {
+     "color": "rgb(10, 10, 10)",
+     "opacity": "1",
+     "font-size": "16px"
+    }
+   },
+   {
+    "box": {
+     "x": 85,
+     "y": 524,
+     "w": 27,
+     "h": 40
+    },
+    "btn": {
+     "background-color": "rgba(245, 242, 237, 0.85)",
+     "opacity": "0.35",
+     "color": "rgb(0, 122, 255)"
+    },
+    "after": {
+     "color": "rgb(10, 10, 10)",
+     "opacity": "1",
+     "font-size": "16px"
+    }
+   }
+  ],
+  "radio": null,
+  "viewportH": 900,
+  "title": {
+   "x": 605,
+   "y": 166,
+   "w": 760,
+   "h": 30
+  },
+  "media": {
+   "box": {
+    "x": 75,
+    "y": 166,
+    "w": 506,
+    "h": 1065
+   },
+   "position": "sticky"
+  },
+  "hero": {
+   "rendered": 506,
+   "src": "540",
+   "sizes": "(max-width: 749px) calc(100vw - 30px), (max-width: 991px) calc(50vw - 40px), (min-width: 1600px) 580px, 34vw"
+  },
+  "ann": [],
+  "overflow": 0
+ },
+ "1440 /products/leather-care-balm": {
+  "buttons": {
+   "display": "grid",
+   "flex-direction": "row",
+   "grid-template-columns": "759.609px",
+   "gap": "12px"
+  },
+  "buttonsKids": [
+   {
+    "tag": "button",
+    "cls": "button-primary product-template__add-btn",
+    "box": {
+     "x": 605,
+     "y": 608,
+     "w": 760,
+     "h": 54
+    },
+    "display": "flex"
+   }
+  ],
+  "atc": {
+   "box": {
+    "x": 605,
+    "y": 608,
+    "w": 760,
+    "h": 54
+   },
+   "style": {
+    "flex": "1 1 0%",
+    "width": "759.609px",
+    "max-width": "none"
+   }
+  },
+  "buyNow": {
+   "x": 605,
+   "y": 670,
+   "w": 760,
+   "h": 54
+  },
+  "quantityGroup": {
+   "box": {
+    "x": 605,
+    "y": 400,
+    "w": 760,
+    "h": 63
+   },
+   "style": {
+    "margin-top": "0px",
+    "padding-top": "0px"
+   }
+  },
+  "variantPicker": {
+   "box": {
+    "x": 605,
+    "y": 315,
+    "w": 760,
+    "h": 69
+   },
+   "style": {
+    "margin-bottom": "16px",
+    "padding-bottom": "0px"
+   }
+  },
+  "labels": [
+   {
+    "text": "Size:",
+    "cls": "variant-picker__label",
+    "box": {
+     "x": 605,
+     "y": 315,
+     "w": 760,
+     "h": 21
+    },
+    "style": {
+     "font-size": "14px",
+     "font-weight": "500",
+     "color": "rgba(10, 10, 10, 0.7)",
+     "margin-top": "0px",
+     "margin-bottom": "8px"
+    }
+   },
+   {
+    "text": "Classic tin 100 ml",
+    "cls": "variant-picker__item-label",
+    "box": {
+     "x": 605,
+     "y": 344,
+     "w": 149,
+     "h": 40
+    },
+    "style": {
+     "font-size": "14px",
+     "font-weight": "400",
+     "color": "rgb(188, 30, 44)",
+     "margin-top": "0px",
+     "margin-bottom": "0px"
+    }
+   },
+   {
+    "text": "Atelier jar 250 ml",
+    "cls": "variant-picker__item-label",
+    "box": {
+     "x": 762,
+     "y": 344,
+     "w": 146,
+     "h": 40
+    },
+    "style": {
+     "font-size": "14px",
+     "font-weight": "400",
+     "color": "rgba(10, 10, 10, 0.8)",
+     "margin-top": "0px",
+     "margin-bottom": "0px"
+    }
+   },
+   {
+    "text": "Travel tin 30 ml",
+    "cls": "variant-picker__item-label",
+    "box": {
+     "x": 916,
+     "y": 344,
+     "w": 136,
+     "h": 40
+    },
+    "style": {
+     "font-size": "14px",
+     "font-weight": "400",
+     "color": "rgba(10, 10, 10, 0.8)",
+     "margin-top": "0px",
+     "margin-bottom": "0px"
+    }
+   },
+   {
+    "text": "Quantity",
+    "cls": "product-template__quantity-label",
+    "box": {
+     "x": 605,
+     "y": 400,
+     "w": 760,
+     "h": 21
+    },
+    "style": {
+     "font-size": "14px",
+     "font-weight": "500",
+     "color": "rgba(10, 10, 10, 0.7)",
+     "margin-top": "0px",
+     "margin-bottom": "8px"
+    }
+   },
+   {
+    "text": "Purchase options",
+    "cls": "visually-hidden",
+    "box": {
+     "x": 617,
+     "y": 532,
+     "w": 1,
+     "h": 1
+    },
+    "style": {
+     "font-size": "16px",
+     "font-weight": "400",
+     "color": "rgba(10, 10, 10, 0.75)",
+     "margin-top": "-1px",
+     "margin-bottom": "-1px"
+    }
+   }
+  ],
+  "arrows": [
+   {
+    "box": {
+     "x": 544,
+     "y": 524,
+     "w": 27,
+     "h": 40
+    },
+    "btn": {
+     "background-color": "rgba(245, 242, 237, 0.85)",
+     "opacity": "1",
+     "color": "rgb(0, 122, 255)"
+    },
+    "after": {
+     "color": "rgb(10, 10, 10)",
+     "opacity": "1",
+     "font-size": "16px"
+    }
+   },
+   {
+    "box": {
+     "x": 85,
+     "y": 524,
+     "w": 27,
+     "h": 40
+    },
+    "btn": {
+     "background-color": "rgba(245, 242, 237, 0.85)",
+     "opacity": "0.35",
+     "color": "rgb(0, 122, 255)"
+    },
+    "after": {
+     "color": "rgb(10, 10, 10)",
+     "opacity": "1",
+     "font-size": "16px"
+    }
+   }
+  ],
+  "radio": {
+   "accent-color": "rgb(188, 30, 44)",
+   "width": "16px",
+   "height": "16px"
+  },
+  "viewportH": 900,
+  "title": {
+   "x": 605,
+   "y": 166,
+   "w": 760,
+   "h": 30
+  },
+  "media": {
+   "box": {
+    "x": 75,
+    "y": 166,
+    "w": 506,
+    "h": 1051
+   },
+   "position": "sticky"
+  },
+  "hero": {
+   "rendered": 506,
+   "src": "540",
+   "sizes": "(max-width: 749px) calc(100vw - 30px), (max-width: 991px) calc(50vw - 40px), (min-width: 1600px) 580px, 34vw"
+  },
+  "ann": [],
+  "overflow": 0
+ }
+}

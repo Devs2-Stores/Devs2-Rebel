@@ -40,19 +40,26 @@
             {%- render 'icon', name: 'user' -%}
           </a>
         {%- endif -%}
-        <button type="button" class="header__action-btn header__cart-btn" data-action="open-cart-sidebar" aria-label="{{ 'accessibility.open_cart' | t }}">
+        {%- capture cart_trigger_inner -%}
+          <span class="visually-hidden">{{ 'accessibility.open_cart' | t }}</span>
           {%- render 'icon', name: 'cart' -%}
           <span class="cart-count" aria-live="polite" aria-atomic="true">{{ cart.item_count }}</span>
-        </button>
+        {%- endcapture -%}
+        {%- if settings.cart_type == 'page' -%}
+          <a href="{{ routes.cart_url }}" class="header__action-btn header__cart-btn">{{ cart_trigger_inner }}</a>
+        {%- else -%}
+          <button type="button" class="header__action-btn header__cart-btn" data-action="open-cart-sidebar">{{ cart_trigger_inner }}</button>
+        {%- endif -%}
       </div>
       <div class="header__mobile-actions">
         <button type="button" class="header__action-btn" data-action="open-search-modal" aria-label="{{ 'accessibility.search' | t }}">
           {%- render 'icon', name: 'search' -%}
         </button>
-        <button type="button" class="header__action-btn header__cart-btn" data-action="open-cart-sidebar" aria-label="{{ 'accessibility.open_cart' | t }}">
-          {%- render 'icon', name: 'cart' -%}
-          <span class="cart-count" aria-live="polite" aria-atomic="true">{{ cart.item_count }}</span>
-        </button>
+        {%- if settings.cart_type == 'page' -%}
+          <a href="{{ routes.cart_url }}" class="header__action-btn header__cart-btn">{{ cart_trigger_inner }}</a>
+        {%- else -%}
+          <button type="button" class="header__action-btn header__cart-btn" data-action="open-cart-sidebar">{{ cart_trigger_inner }}</button>
+        {%- endif -%}
       </div>
     </div>
   </div>

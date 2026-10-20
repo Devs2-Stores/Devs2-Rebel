@@ -1,0 +1,179 @@
+{
+ "results": [
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "fonts: inputs >= 16px on mobile (iOS zoom, advisory)",
+   "ok": null,
+   "detail": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-sections--27439318761581__footer.footer-newsletter__in 14px",
+    ".footer-localization__select-wrap > select#FooterCountrySelect.footer-localization__select 13px"
+   ]
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 3,
+    "touching": []
+   }
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "spacing: text keeps >= 12px viewport gutter",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "spacing: layered targets by design (advisory)",
+   "ok": null,
+   "detail": [
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)"
+   ]
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 7,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 1
+  }
+ ],
+ "raw": {
+  "375 /pages/does-not-exist-404": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-sections--27439318761581__footer.footer-newsletter__in 14px",
+    ".footer-localization__select-wrap > select#FooterCountrySelect.footer-localization__select 13px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 3,
+   "gutter": [],
+   "overlap": [],
+   "layered": [
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)"
+   ],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 1,
+   "iconOnly": 7,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  }
+ }
+}

@@ -3,11 +3,17 @@
   @param {line_item} item Cart line item.
 {% enddoc %}
 
+{%- liquid
+  assign is_line_sale = false
+  if item.original_line_price > item.final_line_price
+    assign is_line_sale = true
+  endif
+-%}
 <div class="cart-line-price">
-  {%- if item.original_line_price > item.final_line_price -%}
+  {%- if is_line_sale -%}
     <del class="cart-line-price__original">{{ item.original_line_price | money }}</del>
   {%- endif -%}
-  <strong class="cart-line-price__final">{{ item.final_line_price | money }}</strong>
+  <strong class="cart-line-price__final{% if is_line_sale %} cart-line-price__final--sale{% endif %}">{{ item.final_line_price | money }}</strong>
   {%- if item.unit_price != blank -%}
     <span class="cart-line-price__unit">
       <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>

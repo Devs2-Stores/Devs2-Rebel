@@ -2,11 +2,11 @@
 <script src="{{ 'megamenu.js' | asset_url }}" defer="defer"></script>
 <mega-menu class="megamenu" role="navigation" aria-label="{{ 'accessibility.navigation' | t }}">
   <button type="button" class="megamenu__arrow megamenu__arrow--left" aria-label="{{ 'accessibility.scroll_left' | t }}" hidden>
-    {%- render 'icon', name: 'chevron-left' -%}
+    {%- render 'icon', name: 'chevron-left', size: '16' -%}
   </button>
   <div class="megamenu__container">
     <nav class="megamenu__nav">
-      <ul class="megamenu__list" role="menubar">
+      <ul class="megamenu__list">
         {%- assign nav_menu = menu | default: linklists[settings.header_menu] | default: linklists['main-menu'] -%}
         {%- if nav_menu != blank and nav_menu.links != blank -%}
         {%- for link in nav_menu.links -%}
@@ -20,13 +20,13 @@
         {%- if link.links.size > 0 -%}{%- assign has_children = true -%}{%- endif -%}
 
         {%- if has_children -%}
-        <li class="megamenu__item {% if settings[mega_check] -%}has__mega{%- endif %}" role="none">
-          <button type="button" class="megamenu__trigger" aria-expanded="false" aria-haspopup="true" aria-controls="megamenu-{{ menu_index }}" role="menuitem">
+        <li class="megamenu__item {% if settings[mega_check] -%}has__mega{%- endif %}">
+          <button type="button" class="megamenu__trigger" aria-expanded="false" aria-controls="megamenu-{{ menu_index }}">
             <span>{{ link.title | escape }}</span>
-            {%- render 'icon', name: 'chevron-down' -%}
+            {%- render 'icon', name: 'chevron-down', size: '13', class: 'megamenu__icon' -%}
           </button>
 
-          <div id="megamenu-{{ menu_index }}" class="megamenu__dropdown" role="menu" aria-hidden="true">
+          <div id="megamenu-{{ menu_index }}" class="megamenu__dropdown">
             <div class="megamenu__dropdown-inner">
               {%- if settings[mega_check] -%}
               <div class="megamenu__grid" style="--mega-columns: {{ settings[mega_columns] | default: 4 }};">
@@ -34,13 +34,13 @@
                   {%- for link_2 in link.links -%}
                   <div class="megamenu__column">
                     <h3 class="megamenu__column-title{% if link_2.links.size == 0 %} megamenu__column-title--no-children{% endif %}">
-                      <a href="{{ link_2.url }}" title="{{ link_2.title | escape }}" class="megamenu__column-title-link" role="menuitem">{{ link_2.title | escape }}</a>
+                      <a href="{{ link_2.url }}" title="{{ link_2.title | escape }}" class="megamenu__column-title-link">{{ link_2.title | escape }}</a>
                     </h3>
                     {%- if link_2.links.size > 0 -%}
-                    <ul class="megamenu__links" role="none">
+                    <ul class="megamenu__links">
                       {%- for link_3 in link_2.links -%}
-                      <li role="none">
-                        <a href="{{ link_3.url }}" title="{{ link_3.title | escape }}" class="megamenu__link" role="menuitem">{{ link_3.title | escape }}</a>
+                      <li>
+                        <a href="{{ link_3.url }}" title="{{ link_3.title | escape }}" class="megamenu__link">{{ link_3.title | escape }}</a>
                       </li>
                       {%- endfor -%}
                     </ul>
@@ -50,7 +50,7 @@
                 </div>
                 {%- if settings[mega_image_link] != blank -%}
                 <div class="megamenu__featured">
-                  <a href="{{ settings[mega_image_link] }}" title="{{ settings[mega_image_title] | escape }}" class="megamenu__featured-link" role="menuitem">
+                  <a href="{{ settings[mega_image_link] }}" title="{{ settings[mega_image_title] | escape }}" class="megamenu__featured-link">
                     <div class="megamenu__featured-image">
                       <img src="{{ mega_image | asset_url }}" alt="{{ settings[mega_image_title] | escape }}" width="300" height="200" loading="lazy" decoding="async">
                     </div>
@@ -66,20 +66,20 @@
               </div>
               {%- else -%}
               <div class="megamenu__simple">
-                <ul class="megamenu__simple-list" role="none">
+                <ul class="megamenu__simple-list">
                   {%- for link_2 in link.links -%}
                   {%- assign has_level3 = false -%}
                   {%- if link_2.links.size > 0 -%}{%- assign has_level3 = true -%}{%- endif -%}
-                  <li class="{% if has_level3 %}megamenu__simple-parent{% endif %}" role="none">
-                    <a href="{{ link_2.url }}" title="{{ link_2.title | escape }}" class="megamenu__simple-link" role="menuitem">
-                      {{ link_2.title | escape }}
-                      {%- if has_level3 -%}{%- render 'icon', name: 'chevron-right' -%}{%- endif -%}
+                  <li{% if has_level3 %} class="megamenu__simple-parent"{% endif %}>
+                    <a href="{{ link_2.url }}" title="{{ link_2.title | escape }}" class="megamenu__simple-link">
+                      <span>{{ link_2.title | escape }}</span>
+                      {%- if has_level3 -%}{%- render 'icon', name: 'chevron-right', size: '13' -%}{%- endif -%}
                     </a>
                     {%- if has_level3 -%}
-                    <ul class="megamenu__simple-sub" role="none">
+                    <ul class="megamenu__simple-sub">
                       {%- for link_3 in link_2.links -%}
-                      <li role="none">
-                        <a href="{{ link_3.url }}" title="{{ link_3.title | escape }}" class="megamenu__simple-sublink" role="menuitem">{{ link_3.title | escape }}</a>
+                      <li>
+                        <a href="{{ link_3.url }}" title="{{ link_3.title | escape }}" class="megamenu__simple-sublink">{{ link_3.title | escape }}</a>
                       </li>
                       {%- endfor -%}
                     </ul>
@@ -93,15 +93,15 @@
           </div>
         </li>
         {%- else -%}
-        <li class="megamenu__item" role="none">
-          <a href="{{ link.url }}" title="{{ link.title | escape }}" class="megamenu__trigger megamenu__trigger--link" role="menuitem">
+        <li class="megamenu__item">
+          <a href="{{ link.url }}" title="{{ link.title | escape }}" class="megamenu__trigger megamenu__trigger--link">
             <span>{{ link.title | escape }}</span>
           </a>
         </li>
         {%- endif -%}
         {%- endfor -%}
         {%- else -%}
-        <li class="megamenu__item" role="none">
+        <li class="megamenu__item">
           <span class="megamenu__trigger megamenu__trigger--text">{{ 'general.updating' | t }}</span>
         </li>
         {%- endif -%}
@@ -109,7 +109,7 @@
     </nav>
   </div>
   <button type="button" class="megamenu__arrow megamenu__arrow--right" aria-label="{{ 'accessibility.scroll_right' | t }}" hidden>
-    {%- render 'icon', name: 'chevron-right' -%}
+    {%- render 'icon', name: 'chevron-right', size: '16' -%}
   </button>
   <div class="megamenu__overlay" aria-hidden="true"></div>
 </mega-menu>

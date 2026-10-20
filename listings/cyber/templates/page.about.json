@@ -17,7 +17,7 @@
         "title": {
           "type": "heading",
           "settings": {
-            "heading": "Inside Devs2 Rebel",
+            "heading": "Inside Rebel",
             "heading_size": "2xl",
             "heading_tag": "h1"
           }
@@ -44,13 +44,13 @@
       },
       "block_order": ["eyebrow", "title", "description", "actions"],
       "settings": {
-        "image_alt": "Inside the Devs2 Rebel atelier",
-        "focal_point_desktop": "center center",
-        "focal_point_mobile": "center top",
+        "image_mobile": "shopify://shop_images/cyber-page-about-hero-mobile.jpg",
+        "image_desktop": "shopify://shop_images/cyber-page-about-hero-image-desktop-v2.jpg",
+        "image_alt": "Inside the Rebel atelier",
         "height_desktop": "80",
         "height_mobile": "80",
-        "overlay_opacity": 45,
-        "overlay_gradient": true,
+        "overlay_opacity": 55,
+        "overlay_gradient": false,
         "content_position": "middle-center",
         "text_align": "center",
         "content_max_width": 800,
@@ -78,7 +78,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Devs2 Rebel designs clothing for a considered wardrobe: fewer pieces, stronger silhouettes, and materials chosen for texture, memory, and longevity.</p>",
+            "text": "<p>Rebel designs clothing for a considered wardrobe: fewer pieces, stronger silhouettes, and materials chosen for texture, memory, and longevity.</p>",
             "content_size": "lg"
           }
         }
@@ -123,6 +123,7 @@
       },
       "block_order": ["eyebrow", "heading", "text"],
       "settings": {
+        "image": "shopify://shop_images/cyber-page-about-material-image.jpg",
         "color_scheme": "scheme-2",
         "image_position": "left",
         "section_width": "fixed",
@@ -161,6 +162,7 @@
       },
       "block_order": ["eyebrow", "heading", "text"],
       "settings": {
+        "image": "shopify://shop_images/cyber-page-about-reworn-image.jpg",
         "color_scheme": "scheme-1",
         "image_position": "right",
         "section_width": "fixed",
@@ -177,6 +179,7 @@
         "member_1": {
           "type": "member",
           "settings": {
+            "image": "shopify://shop_images/cyber-page-about-team-member-1-image.jpg",
             "name": "Linh Tran",
             "role": "Creative director",
             "bio": "Shapes the silhouette language and seasonal point of view."
@@ -185,6 +188,7 @@
         "member_2": {
           "type": "member",
           "settings": {
+            "image": "shopify://shop_images/cyber-page-about-team-member-2-image.jpg",
             "name": "Mina Vo",
             "role": "Head of atelier",
             "bio": "Leads fittings, construction, and finishing standards across the line."
@@ -193,6 +197,7 @@
         "member_3": {
           "type": "member",
           "settings": {
+            "image": "shopify://shop_images/cyber-page-about-team-member-3-image.jpg",
             "name": "Julien Moreau",
             "role": "Brand partnerships",
             "bio": "Works with editors, buyers, and collaborators to extend the studio story."
@@ -270,15 +275,17 @@
         "event_1": {
           "type": "event",
           "settings": {
+            "image": "shopify://shop_images/cyber-timeline-2015-first-capsule.jpg",
             "year": "2015",
             "heading": "The first capsule",
             "heading_size": "sm",
-            "text": "<p>Devs2 Rebel began as a tightly edited capsule built around tailoring, drape, and wardrobe permanence.</p>"
+            "text": "<p>Rebel began as a tightly edited capsule built around tailoring, drape, and wardrobe permanence.</p>"
           }
         },
         "event_2": {
           "type": "event",
           "settings": {
+            "image": "shopify://shop_images/cyber-timeline-2020-atelier-expansion.jpg",
             "year": "2020",
             "heading": "Atelier expansion",
             "heading_size": "sm",
@@ -288,6 +295,7 @@
         "event_3": {
           "type": "event",
           "settings": {
+            "image": "shopify://shop_images/cyber-timeline-2026-global-wardrobe.jpg",
             "year": "2026",
             "heading": "A global wardrobe language",
             "heading_size": "sm",

@@ -2,10 +2,29 @@
   Color schemes CSS variables.
   Generates .color-{scheme.id} classes from color_scheme_group settings.
   First scheme also applies to :root as default.
-  Status colors from settings_schema (color_price, color_success, etc.)
+  Status colors: fixed fills carry white text; --color-{status}-text is mixed
+  toward each scheme's text color until it reaches 4.6:1 on its own 14% tint.
+  Accent, button and subtext colors used as text: --color-accent-text,
+  --color-primary-text and --color-subtext-text are mixed toward the scheme's
+  text color until they reach 4.6:1 on both background and background_2.
+  Muted text alpha: --text-alpha-floor is the smallest foreground alpha (in 5%
+  steps from 45%) whose blend reaches 4.6:1 on both background and background_2.
+  Inverted surfaces (background = scheme text): --color-inverse-button keeps the
+  scheme button when it reaches 3:1 against the text colour, otherwise it uses
+  the scheme background with the text colour as its label.
 {% endcomment %}
 
+{%- assign status_colors = 'success:#15803d,warning:#a16207,error:#dc2626' | split: ',' -%}
+{%- assign text_sources = 'accent:accent,primary:button,subtext:subtext' | split: ',' -%}
+
 {% style %}
+  :root {
+    {%- for status in status_colors -%}
+      {%- assign status_pair = status | split: ':' %}
+    --color-{{ status_pair[0] }}: {{ status_pair[1] }};
+    {%- endfor %}
+  }
+
   {% for scheme in settings.color_schemes -%}
     {% if forloop.index == 1 -%}
       :root,
@@ -20,28 +39,83 @@
       --color-secondary-button-text: {{ scheme.settings.secondary_button_label.red }}, {{ scheme.settings.secondary_button_label.green }}, {{ scheme.settings.secondary_button_label.blue }};
       --color-secondary-button-border: {{ scheme.settings.secondary_button_border.red }}, {{ scheme.settings.secondary_button_border.green }}, {{ scheme.settings.secondary_button_border.blue }};
       --color-accent: {{ scheme.settings.accent.red }}, {{ scheme.settings.accent.green }}, {{ scheme.settings.accent.blue }};
-      --color-border: {{ scheme.settings.border.red }}, {{ scheme.settings.border.green }}, {{ scheme.settings.border.blue }};
-      --color-subtext: {{ scheme.settings.subtext.red }}, {{ scheme.settings.subtext.green }}, {{ scheme.settings.subtext.blue }};
+      --color-border-rgb: {{ scheme.settings.border.red }}, {{ scheme.settings.border.green }}, {{ scheme.settings.border.blue }};
       --color-background-2: {{ scheme.settings.background_2.red }}, {{ scheme.settings.background_2.green }}, {{ scheme.settings.background_2.blue }};
       --color-form-bg: {{ scheme.settings.form_bg.red }}, {{ scheme.settings.form_bg.green }}, {{ scheme.settings.form_bg.blue }};
       --color-form-text: {{ scheme.settings.form_text.red }}, {{ scheme.settings.form_text.green }}, {{ scheme.settings.form_text.blue }};
+      {%- liquid
+        assign surface = '#FFFFFF'
+        assign surface_ratio = scheme.settings.text | color_contrast: surface
+        if surface_ratio < 4.5
+          assign surface = scheme.settings.background_2
+        endif
+      -%}
+      --color-surface: {{ surface }};
       --color-price: {{ scheme.settings.color_price.red }}, {{ scheme.settings.color_price.green }}, {{ scheme.settings.color_price.blue }};
       --color-sale-price: {{ scheme.settings.sale_price.red }}, {{ scheme.settings.sale_price.green }}, {{ scheme.settings.sale_price.blue }};
-      --color-progress-bar: {{ scheme.settings.progress_bar.red }}, {{ scheme.settings.progress_bar.green }}, {{ scheme.settings.progress_bar.blue }};
-      --color-link: {{ scheme.settings.accent.red }}, {{ scheme.settings.accent.green }}, {{ scheme.settings.accent.blue }};
-      --color-badge-foreground: {{ scheme.settings.text.red }}, {{ scheme.settings.text.green }}, {{ scheme.settings.text.blue }};
-      --color-badge-background: {{ scheme.settings.background.red }}, {{ scheme.settings.background.green }}, {{ scheme.settings.background.blue }};
-      --color-badge-border: {{ scheme.settings.text.red }}, {{ scheme.settings.text.green }}, {{ scheme.settings.text.blue }};
-      --payment-terms-background-color: rgb({{ scheme.settings.background.rgb }});
+      {%- for status in status_colors -%}
+        {%- liquid
+          assign status_pair = status | split: ':'
+          assign status_text = scheme.settings.text
+          for step in (0..10)
+            assign text_weight = step | times: 10
+            assign candidate = scheme.settings.text | color_mix: status_pair[1], text_weight
+            assign candidate_tint = candidate | color_mix: scheme.settings.background, 14
+            assign candidate_ratio = candidate | color_contrast: candidate_tint
+            if candidate_ratio >= 4.6
+              assign status_text = candidate
+              break
+            endif
+          endfor
+        %}
+      --color-{{ status_pair[0] }}-text: {{ status_text }};
+      {%- endfor %}
+      {%- for source in text_sources -%}
+        {%- liquid
+          assign source_pair = source | split: ':'
+          assign source_color = scheme.settings[source_pair[1]]
+          assign source_text = scheme.settings.text
+          for step in (0..10)
+            assign text_weight = step | times: 10
+            assign candidate = scheme.settings.text | color_mix: source_color, text_weight
+            assign candidate_ratio = candidate | color_contrast: scheme.settings.background
+            assign candidate_ratio_2 = candidate | color_contrast: scheme.settings.background_2
+            if candidate_ratio >= 4.6 and candidate_ratio_2 >= 4.6
+              assign source_text = candidate
+              break
+            endif
+          endfor
+        %}
+      --color-{{ source_pair[0] }}-text: {{ source_text }};
+      {%- endfor %}
+      {%- liquid
+        assign text_alpha_floor = 1
+        for step in (9..20)
+          assign alpha_weight = step | times: 5
+          assign muted_on_background = scheme.settings.text | color_mix: scheme.settings.background, alpha_weight
+          assign muted_on_background_2 = scheme.settings.text | color_mix: scheme.settings.background_2, alpha_weight
+          assign muted_ratio = muted_on_background | color_contrast: scheme.settings.background
+          assign muted_ratio_2 = muted_on_background_2 | color_contrast: scheme.settings.background_2
+          if muted_ratio >= 4.6 and muted_ratio_2 >= 4.6
+            assign text_alpha_floor = alpha_weight | divided_by: 100.0
+            break
+          endif
+        endfor
+      %}
+      --text-alpha-floor: {{ text_alpha_floor }};
+      {%- liquid
+        assign inverse_button = scheme.settings.button
+        assign inverse_button_text = scheme.settings.button_label
+        assign inverse_ratio = scheme.settings.button | color_contrast: scheme.settings.text
+        if inverse_ratio < 3
+          assign inverse_button = scheme.settings.background
+          assign inverse_button_text = scheme.settings.text
+        endif
+      -%}
+      --color-inverse-button: {{ inverse_button }};
+      --color-inverse-button-text: {{ inverse_button_text }};
     }
   {% endfor %}
-
-  :root {
-    --color-success: {{ settings.color_success }};
-    --color-error: {{ settings.color_error }};
-    --color-warning: {{ settings.color_warning }};
-    --color-info: {{ settings.color_info }};
-  }
 
   {%- for scheme in settings.color_schemes -%}
     {%- assign scheme_classes = scheme_classes | append: ',.color-' | append: scheme.id -%}
@@ -50,4 +124,12 @@
     color: rgba(var(--color-foreground), 0.75);
     background-color: rgb(var(--color-background));
   }
+
+  {%- for scheme in settings.color_schemes -%}
+    {%- if scheme.settings.background_gradient != blank %}
+  {% if forloop.index == 1 %}body, {% endif %}.color-{{ scheme.id }} {
+    background-image: {{ scheme.settings.background_gradient }};
+  }
+    {%- endif -%}
+  {%- endfor %}
 {% endstyle %}

@@ -1,0 +1,25 @@
+{% doc %}
+  @description Custom Liquid theme block for product and featured-product sections.
+{% enddoc %}
+<div class="product-template__custom-liquid" {{ block.shopify_attributes }}>
+  {{ block.settings.liquid_code }}
+</div>
+{% schema %}
+{
+  "name": "t:sections.custom_liquid.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "liquid",
+      "id": "liquid_code",
+      "label": "t:sections.custom_liquid.settings.liquid_code.label",
+      "info": "t:sections.custom_liquid.settings.liquid_code.info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.custom_liquid.name"
+    }
+  ]
+}
+{% endschema %}

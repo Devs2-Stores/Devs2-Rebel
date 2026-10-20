@@ -1,11 +1,11 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Devs2 Rebel",
+    "theme_name": "Rebel",
     "theme_version": "1.0.0",
     "theme_author": "Devs2",
-    "theme_documentation_url": "https://docs.devs2.com/rebel",
-    "theme_support_url": "https://devs2.com/support"
+    "theme_documentation_url": "https://devs2.org/themes/rebel/",
+    "theme_support_url": "https://devs2.org/themes/rebel/support/"
   },
   {
     "name": "t:settings_schema.logo.name",
@@ -182,12 +182,6 @@
           {
             "type": "header",
             "content": "t:settings_schema.colors.settings.header__other.content"
-          },
-          {
-            "type": "color",
-            "id": "progress_bar",
-            "label": "t:settings_schema.colors.settings.progress_bar.label",
-            "default": "#0DB756"
           },
           {
             "type": "color",
@@ -1154,38 +1148,32 @@
       {
         "type": "text",
         "id": "social_facebook_link",
-        "label": "t:settings_schema.social-media.settings.social_facebook_link.label",
-        "placeholder": "t:settings_schema.social-media.settings.social_facebook_link.info"
+        "label": "t:settings_schema.social-media.settings.social_facebook_link.label"
       },
       {
         "type": "text",
         "id": "social_instagram_link",
-        "label": "t:settings_schema.social-media.settings.social_instagram_link.label",
-        "placeholder": "t:settings_schema.social-media.settings.social_instagram_link.info"
+        "label": "t:settings_schema.social-media.settings.social_instagram_link.label"
       },
       {
         "type": "text",
         "id": "social_youtube_link",
-        "label": "t:settings_schema.social-media.settings.social_youtube_link.label",
-        "placeholder": "t:settings_schema.social-media.settings.social_youtube_link.info"
+        "label": "t:settings_schema.social-media.settings.social_youtube_link.label"
       },
       {
         "type": "text",
         "id": "social_tiktok_link",
-        "label": "t:settings_schema.social-media.settings.social_tiktok_link.label",
-        "placeholder": "t:settings_schema.social-media.settings.social_tiktok_link.info"
+        "label": "t:settings_schema.social-media.settings.social_tiktok_link.label"
       },
       {
         "type": "text",
         "id": "social_twitter_link",
-        "label": "t:settings_schema.social-media.settings.social_twitter_link.label",
-        "placeholder": "t:settings_schema.social-media.settings.social_twitter_link.info"
+        "label": "t:settings_schema.social-media.settings.social_twitter_link.label"
       },
       {
         "type": "text",
         "id": "social_pinterest_link",
-        "label": "t:settings_schema.social-media.settings.social_pinterest_link.label",
-        "placeholder": "t:settings_schema.social-media.settings.social_pinterest_link.info"
+        "label": "t:settings_schema.social-media.settings.social_pinterest_link.label"
       }
     ]
   },
@@ -1215,7 +1203,7 @@
       {
         "type": "text",
         "id": "predictive_search_trending_terms",
-        "default": "New arrivals, Best sellers, Sale",
+        "default": "t:settings_schema.search_input.settings.predictive_search_trending_terms.default",
         "label": "t:settings_schema.search_input.settings.predictive_search_trending_terms.label",
         "info": "t:settings_schema.search_input.settings.predictive_search_trending_terms.info"
       },
@@ -1313,7 +1301,7 @@
         "type": "text",
         "id": "toc_title",
         "label": "t:settings_schema.toc.settings.title.label",
-        "default": "Table of Contents"
+        "default": "t:settings_schema.toc.settings.title.default"
       },
       {
         "type": "color_scheme",
@@ -1406,7 +1394,7 @@
         "type": "text",
         "id": "share_label",
         "label": "t:settings_schema.share.settings.label.label",
-        "default": "Share:"
+        "default": "t:settings_schema.share.settings.label.default"
       }
     ]
   },
@@ -1428,25 +1416,25 @@
         "type": "text",
         "id": "newsletter_modal_heading",
         "label": "t:settings_schema.newsletter_popup.settings.heading.label",
-        "default": "Subscribe to our newsletter"
+        "default": "t:settings_schema.newsletter_popup.settings.heading.default"
       },
       {
         "type": "textarea",
         "id": "newsletter_modal_description",
         "label": "t:settings_schema.newsletter_popup.settings.description.label",
-        "default": "Get the latest updates and offers from us."
+        "default": "t:settings_schema.newsletter_popup.settings.description.default"
       },
       {
         "type": "text",
         "id": "newsletter_modal_placeholder",
         "label": "t:settings_schema.newsletter_popup.settings.placeholder.label",
-        "default": "Enter your email"
+        "default": "t:settings_schema.newsletter_popup.settings.placeholder.default"
       },
       {
         "type": "text",
         "id": "newsletter_modal_button",
         "label": "t:settings_schema.newsletter_popup.settings.button.label",
-        "default": "Subscribe"
+        "default": "t:settings_schema.newsletter_popup.settings.button.default"
       },
       {
         "type": "range",
@@ -1473,13 +1461,13 @@
         "type": "text",
         "id": "product_soldout_text",
         "label": "t:settings_schema.product_card.settings.soldout_text.label",
-        "default": "Sold out"
+        "default": "t:settings_schema.product_card.settings.soldout_text.default"
       },
       {
         "type": "text",
         "id": "product_contact_text",
         "label": "t:settings_schema.product_card.settings.contact_text.label",
-        "default": "Contact us"
+        "default": "t:settings_schema.product_card.settings.contact_text.default"
       }
     ]
   },
@@ -1515,7 +1503,7 @@
         "type": "text",
         "id": "product_size_guide_button",
         "label": "t:settings_schema.product.settings.size_guide_button.label",
-        "default": "Size guide"
+        "default": "t:settings_schema.product.settings.size_guide_button.default"
       }
     ]
   },
@@ -1548,13 +1536,13 @@
         "type": "text",
         "id": "float_social_title",
         "label": "t:settings_schema.float_social.settings.title.label",
-        "default": "Contact us"
+        "default": "t:settings_schema.float_social.settings.title.default"
       },
       {
         "type": "text",
         "id": "float_social_subtitle",
         "label": "t:settings_schema.float_social.settings.subtitle.label",
-        "default": "Choose your preferred channel"
+        "default": "t:settings_schema.float_social.settings.subtitle.default"
       },
       {
         "type": "header",
@@ -1580,7 +1568,7 @@
         "type": "text",
         "id": "float_hotline_text",
         "label": "t:settings_schema.float_social.settings.channel_text.label",
-        "default": "Hotline"
+        "default": "t:settings_schema.float_social.settings.channel_text.default__hotline"
       },
       {
         "type": "header",
@@ -1606,7 +1594,7 @@
         "type": "text",
         "id": "float_zalo_text",
         "label": "t:settings_schema.float_social.settings.channel_text.label",
-        "default": "Zalo"
+        "default": "t:settings_schema.float_social.settings.channel_text.default__zalo"
       },
       {
         "type": "header",
@@ -1632,7 +1620,7 @@
         "type": "text",
         "id": "float_facebook_text",
         "label": "t:settings_schema.float_social.settings.channel_text.label",
-        "default": "Facebook"
+        "default": "t:settings_schema.float_social.settings.channel_text.default__facebook"
       },
       {
         "type": "header",
@@ -1658,7 +1646,7 @@
         "type": "text",
         "id": "float_messenger_text",
         "label": "t:settings_schema.float_social.settings.channel_text.label",
-        "default": "Messenger"
+        "default": "t:settings_schema.float_social.settings.channel_text.default__messenger"
       },
       {
         "type": "header",
@@ -1684,7 +1672,7 @@
         "type": "text",
         "id": "float_tiktok_text",
         "label": "t:settings_schema.float_social.settings.channel_text.label",
-        "default": "TikTok"
+        "default": "t:settings_schema.float_social.settings.channel_text.default__tiktok"
       },
       {
         "type": "header",
@@ -1710,7 +1698,7 @@
         "type": "text",
         "id": "float_shopee_text",
         "label": "t:settings_schema.float_social.settings.channel_text.label",
-        "default": "Shopee"
+        "default": "t:settings_schema.float_social.settings.channel_text.default__shopee"
       },
       {
         "type": "header",
@@ -1736,7 +1724,7 @@
         "type": "text",
         "id": "float_lazada_text",
         "label": "t:settings_schema.float_social.settings.channel_text.label",
-        "default": "Lazada"
+        "default": "t:settings_schema.float_social.settings.channel_text.default__lazada"
       },
       {
         "type": "header",
@@ -1762,7 +1750,7 @@
         "type": "text",
         "id": "float_telegram_text",
         "label": "t:settings_schema.float_social.settings.channel_text.label",
-        "default": "Telegram"
+        "default": "t:settings_schema.float_social.settings.channel_text.default__telegram"
       },
       {
         "type": "header",
@@ -1788,7 +1776,7 @@
         "type": "text",
         "id": "float_email_text",
         "label": "t:settings_schema.float_social.settings.channel_text.label",
-        "default": "Email"
+        "default": "t:settings_schema.float_social.settings.channel_text.default__email"
       },
       {
         "type": "header",
@@ -1814,7 +1802,7 @@
         "type": "text",
         "id": "float_map_text",
         "label": "t:settings_schema.float_social.settings.channel_text.label",
-        "default": "Map"
+        "default": "t:settings_schema.float_social.settings.channel_text.default__map"
       },
       {
         "type": "header",
@@ -1840,7 +1828,7 @@
         "type": "text",
         "id": "float_instagram_text",
         "label": "t:settings_schema.float_social.settings.channel_text.label",
-        "default": "Instagram"
+        "default": "t:settings_schema.float_social.settings.channel_text.default__instagram"
       },
       {
         "type": "header",
@@ -1866,7 +1854,7 @@
         "type": "text",
         "id": "float_youtube_text",
         "label": "t:settings_schema.float_social.settings.channel_text.label",
-        "default": "YouTube"
+        "default": "t:settings_schema.float_social.settings.channel_text.default__youtube"
       }
     ]
   }

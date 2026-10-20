@@ -1,0 +1,638 @@
+{
+ "at": "2026-10-15T18:44:48.051Z",
+ "results": [
+  {
+   "journey": "keyboard-1440",
+   "name": "first Tab lands on skip link",
+   "ok": false,
+   "detail": {
+    "tag": "div",
+    "cls": "json-formatter-container",
+    "href": null,
+    "id": ""
+   }
+  },
+  {
+   "journey": "keyboard-1440",
+   "name": "skip link visible when focused (>=24x24 in viewport)",
+   "ok": true,
+   "detail": {
+    "w": 1440,
+    "h": 20,
+    "top": 0
+   }
+  },
+  {
+   "journey": "mobile-menu-375",
+   "name": "hamburger visible",
+   "ok": false,
+   "detail": null
+  },
+  {
+   "journey": "megamenu-1440",
+   "name": "header has items with dropdowns",
+   "ok": false,
+   "detail": {
+    "n": 0
+   }
+  },
+  {
+   "journey": "keyboard-1440",
+   "name": "Enter on skip link targets #MainContent",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "journey": "keyboard-1440",
+   "name": "first 25 Tab stops show a focus indicator and are visible",
+   "ok": false,
+   "detail": {
+    "stops": 14,
+    "missing": [
+     {
+      "el": "div.json-formatter-container",
+      "ring": false,
+      "visible": true,
+      "text": ""
+     },
+     {
+      "el": "div.json-formatter-container",
+      "ring": false,
+      "visible": true,
+      "text": ""
+     },
+     {
+      "el": "div.json-formatter-container",
+      "ring": false,
+      "visible": true,
+      "text": ""
+     },
+     {
+      "el": "div.json-formatter-container",
+      "ring": false,
+      "visible": true,
+      "text": ""
+     },
+     {
+      "el": "div.json-formatter-container",
+      "ring": false,
+      "visible": true,
+      "text": ""
+     },
+     {
+      "el": "div.json-formatter-container",
+      "ring": false,
+      "visible": true,
+      "text": ""
+     },
+     {
+      "el": "div.json-formatter-container",
+      "ring": false,
+      "visible": true,
+      "text": ""
+     },
+     {
+      "el": "div.json-formatter-container",
+      "ring": false,
+      "visible": true,
+      "text": ""
+     },
+     {
+      "el": "div.json-formatter-container",
+      "ring": false,
+      "visible": true,
+      "text": ""
+     },
+     {
+      "el": "div.json-formatter-container",
+      "ring": false,
+      "visible": true,
+      "text": ""
+     },
+     {
+      "el": "div.json-formatter-container",
+      "ring": false,
+      "visible": true,
+      "text": ""
+     },
+     {
+      "el": "div.json-formatter-container",
+      "ring": false,
+      "visible": true,
+      "text": ""
+     },
+     {
+      "el": "div.json-formatter-container",
+      "ring": false,
+      "visible": true,
+      "text": ""
+     },
+     {
+      "el": "div.json-formatter-container",
+      "ring": false,
+      "visible": true,
+      "text": ""
+     }
+    ]
+   }
+  },
+  {
+   "journey": "mobileMenu",
+   "name": "journey crashed",
+   "ok": false,
+   "detail": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.header__hamburger')\u001b[22m\n"
+  },
+  {
+   "journey": "plp-1440",
+   "name": "collection renders product cards",
+   "ok": false,
+   "detail": {
+    "n0": 0
+   }
+  },
+  {
+   "journey": "search1440",
+   "name": "journey crashed",
+   "ok": false,
+   "detail": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-action=\"open-search-modal\"]:visible').first()\u001b[22m\n"
+  },
+  {
+   "journey": "search375",
+   "name": "journey crashed",
+   "ok": false,
+   "detail": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-action=\"open-search-modal\"]:visible').first()\u001b[22m\n"
+  },
+  {
+   "journey": "plp-filter-375",
+   "name": "filter button visible at 375",
+   "ok": false,
+   "detail": "none visible"
+  },
+  {
+   "journey": "plpSortFilter",
+   "name": "journey crashed",
+   "ok": false,
+   "detail": "locator.evaluate: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('facet-filters select[name=\"sort_by\"]')\u001b[22m\n"
+  },
+  {
+   "journey": "footer-375",
+   "name": "footer menus present",
+   "ok": false,
+   "detail": 0
+  },
+  {
+   "journey": "footer-375",
+   "name": "toggles shown, collapsed, aria-controls resolve",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "quickview",
+   "name": "journey crashed",
+   "ok": false,
+   "detail": "locator.evaluate: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('facet-filters .product-card').first()\u001b[22m\n"
+  },
+  {
+   "journey": "pdpVariantCart",
+   "name": "journey crashed",
+   "ok": false,
+   "detail": "page.inputValue: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('form[action*=\"/cart/add\"] input[name=\"id\"]')\u001b[22m\n"
+  },
+  {
+   "journey": "footer-1440",
+   "name": "footer menus present",
+   "ok": false,
+   "detail": 0
+  },
+  {
+   "journey": "footer-1440",
+   "name": "no toggles at desktop, lists visible",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "toc-1440",
+   "name": "TOC rendered",
+   "ok": null,
+   "detail": "content-toc absent (setting off or no headings)"
+  },
+  {
+   "journey": "toc-375",
+   "name": "TOC rendered",
+   "ok": null,
+   "detail": "content-toc absent (setting off or no headings)"
+  },
+  {
+   "journey": "contact-1440",
+   "name": "contact form present",
+   "ok": false,
+   "detail": null
+  },
+  {
+   "journey": "404-375",
+   "name": "HTTP 404",
+   "ok": false,
+   "detail": 401
+  },
+  {
+   "journey": "404-375",
+   "name": "recovery link to home/collections",
+   "ok": false,
+   "detail": {
+    "links": [],
+    "search": false
+   }
+  },
+  {
+   "journey": "cartDrawerHeader",
+   "name": "journey crashed",
+   "ok": false,
+   "detail": "page.evaluate: TypeError: Cannot read properties of null (reading 'value')\n    at eval (eval at evaluate (:302:30), <anonymous>:2:91)\n    at UtilityScript.evaluate (<anonymous>:304:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)"
+  },
+  {
+   "journey": "buy-now-1440",
+   "name": "theme buy-now button present",
+   "ok": null,
+   "detail": {
+    "buy": false,
+    "dynamic": false,
+    "dynamicChildren": 0,
+    "note": "show_dynamic_checkout renders payment_button; theme buy-now path not exercised"
+   }
+  },
+  {
+   "journey": "footer375",
+   "name": "journey crashed",
+   "ok": false,
+   "detail": "locator.focus: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.footer-actions-menu__toggle').first()\u001b[22m\n"
+  }
+ ],
+ "logs": {
+  "megamenuDesktop": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/favicon.ico"
+    }
+   ],
+   "badResponses": [
+    {
+     "status": 401,
+     "url": "http://127.0.0.1:9292/",
+     "cls": "storefront"
+    }
+   ],
+   "dialogs": []
+  },
+  "skipLinkAndFocusRing": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/favicon.ico"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/favicon.ico"
+    }
+   ],
+   "badResponses": [
+    {
+     "status": 401,
+     "url": "http://127.0.0.1:9292/",
+     "cls": "storefront"
+    },
+    {
+     "status": 401,
+     "url": "http://127.0.0.1:9292/",
+     "cls": "storefront"
+    }
+   ],
+   "dialogs": []
+  },
+  "mobileMenu": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/favicon.ico"
+    }
+   ],
+   "badResponses": [
+    {
+     "status": 401,
+     "url": "http://127.0.0.1:9292/",
+     "cls": "storefront"
+    }
+   ],
+   "dialogs": []
+  },
+  "search1440": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/favicon.ico"
+    }
+   ],
+   "badResponses": [
+    {
+     "status": 401,
+     "url": "http://127.0.0.1:9292/",
+     "cls": "storefront"
+    }
+   ],
+   "dialogs": []
+  },
+  "search375": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/favicon.ico"
+    }
+   ],
+   "badResponses": [
+    {
+     "status": 401,
+     "url": "http://127.0.0.1:9292/",
+     "cls": "storefront"
+    }
+   ],
+   "dialogs": []
+  },
+  "plpMobileFilter": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/collections/all"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/favicon.ico"
+    }
+   ],
+   "badResponses": [
+    {
+     "status": 401,
+     "url": "http://127.0.0.1:9292/collections/all",
+     "cls": "storefront"
+    }
+   ],
+   "dialogs": []
+  },
+  "plpSortFilter": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/collections/all"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/favicon.ico"
+    }
+   ],
+   "badResponses": [
+    {
+     "status": 401,
+     "url": "http://127.0.0.1:9292/collections/all",
+     "cls": "storefront"
+    }
+   ],
+   "dialogs": []
+  },
+  "quickview": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/collections/all"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/favicon.ico"
+    }
+   ],
+   "badResponses": [
+    {
+     "status": 401,
+     "url": "http://127.0.0.1:9292/collections/all",
+     "cls": "storefront"
+    }
+   ],
+   "dialogs": []
+  },
+  "pdpVariantCart": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/products/rebel-tactical-bomber-jacket"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/favicon.ico"
+    }
+   ],
+   "badResponses": [
+    {
+     "status": 401,
+     "url": "http://127.0.0.1:9292/products/rebel-tactical-bomber-jacket",
+     "cls": "storefront"
+    }
+   ],
+   "dialogs": []
+  },
+  "footer1440": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/favicon.ico"
+    }
+   ],
+   "badResponses": [
+    {
+     "status": 401,
+     "url": "http://127.0.0.1:9292/",
+     "cls": "storefront"
+    }
+   ],
+   "dialogs": []
+  },
+  "toc1440": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/blogs/sustainable-fashion-eco-tech/bio-textiles-mycelium-algae-and-the-lab-grown-revolution"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/favicon.ico"
+    }
+   ],
+   "badResponses": [
+    {
+     "status": 401,
+     "url": "http://127.0.0.1:9292/blogs/sustainable-fashion-eco-tech/bio-textiles-mycelium-algae-and-the-lab-grown-revolution",
+     "cls": "storefront"
+    }
+   ],
+   "dialogs": []
+  },
+  "toc375": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/blogs/sustainable-fashion-eco-tech/bio-textiles-mycelium-algae-and-the-lab-grown-revolution"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/favicon.ico"
+    }
+   ],
+   "badResponses": [
+    {
+     "status": 401,
+     "url": "http://127.0.0.1:9292/blogs/sustainable-fashion-eco-tech/bio-textiles-mycelium-algae-and-the-lab-grown-revolution",
+     "cls": "storefront"
+    }
+   ],
+   "dialogs": []
+  },
+  "contactForm": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/pages/contact"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/favicon.ico"
+    }
+   ],
+   "badResponses": [
+    {
+     "status": 401,
+     "url": "http://127.0.0.1:9292/pages/contact",
+     "cls": "storefront"
+    }
+   ],
+   "dialogs": []
+  },
+  "notFound": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/pages/does-not-exist-404"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/favicon.ico"
+    }
+   ],
+   "badResponses": [
+    {
+     "status": 401,
+     "url": "http://127.0.0.1:9292/pages/does-not-exist-404",
+     "cls": "storefront"
+    }
+   ],
+   "dialogs": []
+  },
+  "cartDrawerHeader": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/products/rebel-tactical-bomber-jacket"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/favicon.ico"
+    }
+   ],
+   "badResponses": [
+    {
+     "status": 401,
+     "url": "http://127.0.0.1:9292/products/rebel-tactical-bomber-jacket",
+     "cls": "storefront"
+    }
+   ],
+   "dialogs": []
+  },
+  "buyNow": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/products/rebel-tactical-bomber-jacket"
+    }
+   ],
+   "badResponses": [
+    {
+     "status": 401,
+     "url": "http://127.0.0.1:9292/products/rebel-tactical-bomber-jacket",
+     "cls": "storefront"
+    }
+   ],
+   "dialogs": []
+  },
+  "footer375": {
+   "pageErrors": [],
+   "console": [
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/"
+    },
+    {
+     "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+     "url": "http://127.0.0.1:9292/favicon.ico"
+    }
+   ],
+   "badResponses": [
+    {
+     "status": 401,
+     "url": "http://127.0.0.1:9292/",
+     "cls": "storefront"
+    }
+   ],
+   "dialogs": []
+  }
+ }
+}

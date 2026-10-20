@@ -1,0 +1,65 @@
+{% doc %}
+  Collection Active Filters snippet.
+  Renders active filter badges/chips above the product grid with clear buttons.
+{% enddoc %}
+
+{%- liquid
+  assign results = results | default: collection
+  assign sort_by = results.sort_by | default: results.default_sort_by
+  if results.url
+    assign results_url = results.url
+  else
+    assign terms_encoded = results.terms | replace: '&amp;', '&' | replace: '&#39;', "'" | replace: '&quot;', '"' | replace: '&lt;', '<' | replace: '&gt;', '>' | url_encode
+    assign results_url = routes.search_url | append: '?q=' | append: terms_encoded | append: '&type=product,article,page'
+  endif
+  if results_url contains '?'
+    assign clear_url = results_url | append: '&sort_by=' | append: sort_by
+  else
+    assign clear_url = results_url | append: '?sort_by=' | append: sort_by
+  endif
+  assign active_count = 0
+  for filter in results.filters
+    if filter.type == 'price_range'
+      if filter.min_value.value != nil or filter.max_value.value != nil
+        assign active_count = active_count | plus: 1
+      endif
+    else
+      assign active_count = active_count | plus: filter.active_values.size
+    endif
+  endfor
+  assign t_clear_all = 'products.facets.clear_all_filters' | t
+-%}
+
+{%- if active_count > 0 -%}
+  <div class="collection-active-filters" id="CollectionActiveFilters" aria-label="{{ 'products.facets.filter_by_label' | t }}">
+    <div class="collection-active-filters__list">
+      {%- for filter in results.filters -%}
+        {%- if filter.type == 'price_range' -%}
+          {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
+            {%- capture chip_label -%}
+              {{ filter.label }}:
+              {%- if filter.min_value.value -%}{{ filter.min_value.value | money_without_trailing_zeros }}{%- else -%}{{ 0 | money_without_trailing_zeros }}{%- endif -%}
+              –
+              {%- if filter.max_value.value -%}{{ filter.max_value.value | money_without_trailing_zeros }}{%- else -%}{{ filter.range_max | money_without_trailing_zeros }}{%- endif -%}
+            {%- endcapture -%}
+            {%- assign chip_text = chip_label | strip_html | strip -%}
+            <a href="{{ filter.url_to_remove }}" class="collection-active-filters__tag" data-filter-remove aria-label="{{ 'products.facets.remove_filter_label' | t: label: chip_text }}">
+              <span>{{ chip_label }}</span>
+              <span class="collection-active-filters__remove" aria-hidden="true">&times;</span>
+            </a>
+          {%- endif -%}
+        {%- else -%}
+          {%- for value in filter.active_values -%}
+            <a href="{{ value.url_to_remove }}" class="collection-active-filters__tag" data-filter-remove aria-label="{{ 'products.facets.remove_filter_label' | t: label: value.label }}">
+              <span>{{ value.label | escape }}</span>
+              <span class="collection-active-filters__remove" aria-hidden="true">&times;</span>
+            </a>
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endfor -%}
+      <a href="{{ clear_url }}" class="collection-active-filters__clear-all" data-filter-remove>
+        {{ t_clear_all }}
+      </a>
+    </div>
+  </div>
+{%- endif -%}

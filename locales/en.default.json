@@ -25,7 +25,8 @@
       "success_message": "Link copied to clipboard",
       "copy_failed": "Copy failed",
       "copied": "Copied!",
-      "copy_article_link": "Copy article link"
+      "copy_article_link": "Copy article link",
+      "label": "Share"
     },
     "continue_shopping": "Continue shopping",
     "view_all": "View all",
@@ -51,6 +52,9 @@
       "next_slide": "Slide right",
       "previous_slide": "Slide left",
       "name": "Slider"
+    },
+    "tabs": {
+      "untitled": "Details"
     },
     "password_page": {
       "opening_soon": "Opening soon",
@@ -86,8 +90,23 @@
       },
       "follow_on": "Follow on {{ platform }}",
       "contact": "Contact",
-      "map": "Map",
-      "copy": "Copy"
+      "copy": "Copy",
+      "panel_title": "Contact us",
+      "panel_subtitle": "Choose your preferred channel",
+      "channels": {
+        "hotline": "Hotline",
+        "zalo": "Zalo",
+        "facebook": "Facebook",
+        "messenger": "Messenger",
+        "tiktok": "TikTok",
+        "shopee": "Shopee",
+        "lazada": "Lazada",
+        "telegram": "Telegram",
+        "email": "Email",
+        "map": "Map",
+        "instagram": "Instagram",
+        "youtube": "YouTube"
+      }
     },
     "newsletter": {
       "email_placeholder": "Enter your email",
@@ -138,7 +157,8 @@
   "newsletter": {
     "label": "Email",
     "success": "Thanks for subscribing",
-    "button_label": "Subscribe"
+    "button_label": "Subscribe",
+    "error_email": "Enter a valid email address, like name@example.com."
   },
   "accessibility": {
     "navigation": "Main navigation",
@@ -179,14 +199,20 @@
     "share_on": "Share on {{ platform }}",
     "share_via_email": "Share via email",
     "slide_number": "Slide {{ number }}",
+    "slideshow": "Slideshow",
+    "pause_slideshow": "Pause slideshow",
+    "play_slideshow": "Play slideshow",
     "cert_alt": "{{ name }} certification",
-    "video_hero_title": "Video hero"
+    "video_hero_title": "Video hero",
+    "video": "Video",
+    "brand_logo": "Brand logo"
   },
   "blogs": {
     "article": {
       "blog": "Blog",
       "read_more": "Read more",
-      "read_more_title": "Read more: {{ title }}",
+      "table_label": "Scrollable table",
+      "table_of_contents": "Table of contents",
       "comments": {
         "one": "{{ count }} comment",
         "other": "{{ count }} comments"
@@ -258,6 +284,12 @@
       "contact": "Contact",
       "buy_now": "Buy now",
       "read_more": "Read more",
+      "purchase_options": "Purchase options",
+      "one_time_purchase": "One-time purchase",
+      "subscribe_and_save": "Subscribe & save",
+      "selling_plan_save_percent": "Save {{ value }}%",
+      "selling_plan_save_amount": "Save {{ amount }}",
+      "selling_plan_fixed_price": "Plan price {{ price }}",
       "read_less": "Read less",
       "back_in_stock_title": "Notify when available",
       "back_in_stock_desc": "Leave your email and we will notify you when this product is back in stock.",
@@ -297,10 +329,12 @@
         "contact": "Contact for price"
       },
       "include_taxes": "Tax included.",
+      "taxes_included_and_shipping_policy_html": "Tax included. <a href=\"{{ link }}\">Shipping</a> calculated at checkout.",
       "share": "Share this product",
       "sold_out": "Sold out",
       "unavailable": "Unavailable",
       "vendor": "Vendor",
+      "meta_unavailable": "N/A",
       "value_unavailable": "{{ option_value }} - Unavailable",
       "variant_sold_out_or_unavailable": "Variant sold out or unavailable",
       "view_full_details": "View full details",
@@ -358,6 +392,9 @@
       "sort_by_label": "Sort by",
       "to": "To",
       "clear_filter": "Remove filter",
+      "remove_filter_label": "Remove filter: {{ label }}",
+      "more_products_loaded": "More products loaded",
+      "load_error": "Could not load products. Please try again.",
       "showing": "Showing",
       "of": "of",
       "products_label": "products",
@@ -419,6 +456,8 @@
       "tab_all": "All",
       "tab_content": "Articles & pages",
       "tabs_label": "Search result categories",
+      "tabs_types": "Search result types",
+      "articles_tab": "Articles",
       "collections": "Collections",
       "enter_keyword": "Enter a keyword to search...",
       "pages": "Pages",
@@ -447,6 +486,18 @@
     }
   },
   "sections": {
+    "hero": {
+      "onboarding": "Add blocks to build your hero content."
+    },
+    "video": {
+      "empty": "Select a video source"
+    },
+    "main_page": {
+      "empty_text": "Page content is being updated."
+    },
+    "main_blog": {
+      "sidebar_banner_alt": "Blog sidebar banner"
+    },
     "countdown": {
       "days": "Days",
       "hours": "Hours",
@@ -509,11 +560,18 @@
     "featured_blog": {
       "view_all": "View all",
       "onboarding_title": "Blog post",
-      "onboarding_content": "Give your customers a summary of your blog post"
+      "onboarding_content": "Give your customers a summary of your blog post",
+      "empty": "Select a blog to display posts"
     },
     "featured_collection": {
       "view_all": "View all",
       "view_all_label": "View all products in the {{ collection_name }} collection"
+    },
+    "featured_product": {
+      "empty": "Select a product to display"
+    },
+    "promotion_banner": {
+      "onboarding": "Add a promotion block to get started"
     },
     "collection_list": {
       "view_all": "View all",
@@ -526,12 +584,16 @@
       "product_count": {
         "one": "{{ count }} product",
         "other": "{{ count }} products"
-      }
+      },
+      "placeholder_title": "Collection"
     },
     "collection_template": {
       "title": "Collection",
       "empty": "No products found in this collection.",
       "products_count": "products"
+    },
+    "team": {
+      "follow_member": "Follow {{ name }} on {{ platform }}"
     },
     "page_contact": {
       "contact_info": "Contact information",
@@ -550,7 +612,10 @@
       "sending": "Sending...",
       "select_placeholder": "Select an option",
       "checkbox_value": "Yes",
-      "map_title": "Store location"
+      "map_title": "Store location",
+      "error_required": "This field is required.",
+      "error_email": "Enter a valid email address, like name@example.com.",
+      "error_phone": "Enter a phone number with at least 10 digits."
     },
     "page_faq": {
       "eyebrow": "Help center",
@@ -930,7 +995,8 @@
       "disabled": "This gift card has been disabled",
       "expired": "Expired",
       "print": "Print gift card",
-      "start_shopping": "Start shopping"
+      "start_shopping": "Start shopping",
+      "details": "Gift card details"
     }
   },
   "recipient": {

@@ -1,4 +1,4 @@
-# Devs2 Rebel Theme Documentation
+# Rebel Theme Documentation
 
 This directory is the evergreen navigation surface for the Shopify OS 2.0 base theme.
 
@@ -6,6 +6,8 @@ This directory is the evergreen navigation surface for the Shopify OS 2.0 base t
 
 - [Theme architecture](theme-architecture.md) - entry points, boundaries, and contracts that are not owned by one executable file.
 - [Shopify development rules](shopify-development-rules.md) - authority, full code standards, universal completion gates, and skill routing for implementation and Theme Store evidence.
+- [Design direction](../DESIGN.md) - brand direction, preset character, tokens, motion, and component rules for storefront UI work.
+- [UX/AX review checklist](../REVIEW.md) - rubric, accessibility and discovery-surface checks, and the screenshot evidence rule.
 - [Shopify repository essentials audit](../plans/reports/260809-shopify-repository-essentials-audit.md) - findings from `awesome-shopify` and the official Shopify AI Toolkit, plus adopted and rejected guidance.
 - [Workspace tools](workspace-tools.md) - applicability and environment-variable routing for utilities under `E:\Work\tools`.
 - [Release-readiness audit](../plans/reports/260628-devs2-shopify-theme-audit.md) - stateful findings and verification evidence.

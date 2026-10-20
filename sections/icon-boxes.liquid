@@ -28,6 +28,7 @@
 
     <div class="section-icon-boxes__grid section-icon-boxes__grid--{{ section.settings.style }}">
       {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
         <div class="section-icon-boxes__item" {{ block.shopify_attributes }}>
           <div class="section-icon-boxes__icon-wrap section-icon-boxes__icon-wrap--{{ section.settings.icon_style }}">
             {%- if block.settings.icon_image != blank -%}
@@ -53,6 +54,14 @@
         </div>
       {%- endfor -%}
     </div>
+    {%- capture app_blocks -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- if app_blocks != blank -%}
+      <div class="section-apps">{{ app_blocks }}</div>
+    {%- endif -%}
   </div>
 </div>
 
@@ -65,9 +74,15 @@
   @media (min-width: 750px) {
     .section-icon-boxes { padding-block: var(--ib-dt) var(--ib-db); }
   }
-  .section-icon-boxes__head { text-align: center; margin-bottom: 2.5rem; }
-  .section-icon-boxes__subheading { margin: 0 0 0.25rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgb(var(--color-accent)); font-weight: 600; }
-  .section-icon-boxes__heading { margin: 0; color: rgb(var(--color-foreground)); }
+  .section-icon-boxes__head { text-align: center; margin-bottom: var(--section-head-gap); }
+  .section-icon-boxes__subheading {
+    margin: 0 0 0.5rem;
+    font-weight: var(--eyebrow-weight);
+    letter-spacing: var(--eyebrow-tracking);
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .section-icon-boxes__heading { margin: 0; color: var(--color-ink); letter-spacing: var(--heading-tracking); }
 
   .section-icon-boxes__grid {
     display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
@@ -80,74 +95,73 @@
 
   .section-icon-boxes__item {
     display: flex; flex-direction: column; gap: 0.5rem;
-    padding: 1.25rem; border-radius: 0.75rem;
-    transition: transform 0.3s, box-shadow 0.3s;
+    padding: 0; border-radius: 0;
   }
-  .section-icon-boxes__item:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
 
   .section-icon-boxes__icon-wrap { display: flex; align-items: center; justify-content: center; margin-bottom: 0.25rem; }
   .section-icon-boxes__icon-wrap--circle {
-    width: 3rem; height: 3rem; border-radius: 50%;
-    background: rgba(var(--color-accent), 0.1); color: rgb(var(--color-accent));
+    width: 2.75rem; height: 2.75rem; border-radius: 50%;
+    border: 1px solid var(--color-hairline); color: var(--color-ink);
   }
   .section-icon-boxes__icon-wrap--square {
-    width: 3rem; height: 3rem; border-radius: 0.5rem;
-    background: rgba(var(--color-accent), 0.1); color: rgb(var(--color-accent));
+    width: 2.75rem; height: 2.75rem; border-radius: var(--media-radius);
+    border: 1px solid var(--color-hairline); color: var(--color-ink);
   }
-  .section-icon-boxes__icon-wrap--none { color: rgb(var(--color-accent)); }
+  .section-icon-boxes__icon-wrap--none { color: var(--color-ink); }
 
-  .section-icon-boxes__icon-img { width: 2rem; height: 2rem; object-fit: contain; }
+  .section-icon-boxes__icon-img { width: 1.75rem; height: 1.75rem; object-fit: contain; }
   .section-icon-boxes__emoji { font-size: 1.5rem; }
 
   .section-icon-boxes__title {
-    margin: 0; font-size: 0.9375rem; font-weight: 700;
-    color: rgb(var(--color-foreground)); line-height: 1.3;
+    margin: 0; font-size: 0.9375rem; font-weight: 600;
+    color: var(--color-ink); line-height: 1.3;
   }
   .section-icon-boxes__text {
-    margin: 0; font-size: 0.8125rem;
-    color: rgba(var(--color-foreground), 0.6); line-height: 1.5;
+    margin: 0; font-size: 0.875rem;
+    color: var(--color-muted); line-height: 1.6;
   }
   .section-icon-boxes__link {
     display: inline-flex; align-items: center; gap: 0.25rem;
-    font-size: 0.8125rem; font-weight: 600; color: rgb(var(--color-accent));
-    text-decoration: none; transition: opacity 0.3s; margin-top: auto;
+    font-size: var(--meta-size); font-weight: 500; color: var(--color-ink);
+    text-decoration: underline; text-underline-offset: 0.25em;
+    margin-top: auto;
   }
-  .section-icon-boxes__link:hover { opacity: 0.7; }
+  .section-icon-boxes__link:hover { color: var(--color-ink); }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "Icon boxes",
+  "name": "t:sections.icon_boxes.name",
   "tag": "section",
   "class": "section-icon-boxes-wrapper",
   "settings": [
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Color scheme",
+      "label": "t:sections.icon_boxes.settings.color_scheme.label",
       "default": "scheme-1"
     },
     {
       "type": "header",
-      "content": "Heading"
+      "content": "t:sections.icon_boxes.settings.header__heading.content"
     },
     {
       "type": "inline_richtext",
       "id": "subheading",
-      "label": "Subheading"
+      "label": "t:sections.icon_boxes.settings.subheading.label"
     },
     {
       "type": "select",
       "id": "subheading_size",
-      "label": "Subheading size",
+      "label": "t:sections.icon_boxes.settings.subheading_size.label",
       "options": [
         {
           "value": "xs",
-          "label": "XS"
+          "label": "t:sections.icon_boxes.settings.subheading_size.options.xs"
         },
         {
           "value": "sm",
-          "label": "S"
+          "label": "t:sections.icon_boxes.settings.subheading_size.options.sm"
         }
       ],
       "default": "sm"
@@ -155,20 +169,20 @@
     {
       "type": "inline_richtext",
       "id": "heading",
-      "label": "Heading"
+      "label": "t:sections.icon_boxes.settings.heading.label"
     },
     {
       "type": "select",
       "id": "heading_size",
-      "label": "Heading size",
+      "label": "t:sections.icon_boxes.settings.heading_size.label",
       "options": [
         {
           "value": "md",
-          "label": "M"
+          "label": "t:sections.icon_boxes.settings.heading_size.options.md"
         },
         {
           "value": "lg",
-          "label": "L"
+          "label": "t:sections.icon_boxes.settings.heading_size.options.lg"
         }
       ],
       "default": "lg"
@@ -176,22 +190,22 @@
     {
       "type": "select",
       "id": "heading_tag",
-      "label": "Tag",
+      "label": "t:sections.icon_boxes.settings.heading_tag.label",
       "options": [
         {
           "value": "h2",
-          "label": "H2"
+          "label": "t:sections.icon_boxes.settings.heading_tag.options.h2"
         },
         {
           "value": "h3",
-          "label": "H3"
+          "label": "t:sections.icon_boxes.settings.heading_tag.options.h3"
         }
       ],
       "default": "h2"
     },
     {
       "type": "header",
-      "content": "Layout"
+      "content": "t:sections.icon_boxes.settings.header__layout.content"
     },
     {
       "type": "range",
@@ -199,21 +213,21 @@
       "min": 2,
       "max": 6,
       "step": 1,
-      "label": "Desktop columns",
+      "label": "t:sections.icon_boxes.settings.columns_desktop.label",
       "default": 4
     },
     {
       "type": "select",
       "id": "style",
-      "label": "Alignment",
+      "label": "t:sections.icon_boxes.settings.style.label",
       "options": [
         {
           "value": "centered",
-          "label": "Centered"
+          "label": "t:sections.icon_boxes.settings.style.options.centered"
         },
         {
           "value": "left",
-          "label": "Left"
+          "label": "t:sections.icon_boxes.settings.style.options.left"
         }
       ],
       "default": "centered"
@@ -221,26 +235,26 @@
     {
       "type": "select",
       "id": "icon_style",
-      "label": "Icon style",
+      "label": "t:sections.icon_boxes.settings.icon_style.label",
       "options": [
         {
           "value": "circle",
-          "label": "Circle"
+          "label": "t:sections.icon_boxes.settings.icon_style.options.circle"
         },
         {
           "value": "square",
-          "label": "Square"
+          "label": "t:sections.icon_boxes.settings.icon_style.options.square"
         },
         {
           "value": "none",
-          "label": "None"
+          "label": "t:sections.icon_boxes.settings.icon_style.options.none"
         }
       ],
       "default": "circle"
     },
     {
       "type": "header",
-      "content": "Desktop spacing"
+      "content": "t:sections.icon_boxes.settings.header__desktop_spacing.content"
     },
     {
       "type": "range",
@@ -249,7 +263,7 @@
       "max": 150,
       "step": 5,
       "unit": "px",
-      "label": "Top",
+      "label": "t:sections.icon_boxes.settings.padding_top_desktop.label",
       "default": 50
     },
     {
@@ -259,12 +273,12 @@
       "max": 150,
       "step": 5,
       "unit": "px",
-      "label": "Bottom",
+      "label": "t:sections.icon_boxes.settings.padding_bottom_desktop.label",
       "default": 50
     },
     {
       "type": "header",
-      "content": "Mobile spacing"
+      "content": "t:sections.icon_boxes.settings.header__mobile_spacing.content"
     },
     {
       "type": "range",
@@ -273,7 +287,7 @@
       "max": 100,
       "step": 5,
       "unit": "px",
-      "label": "Top",
+      "label": "t:sections.icon_boxes.settings.padding_top_mobile.label",
       "default": 30
     },
     {
@@ -283,48 +297,48 @@
       "max": 100,
       "step": 5,
       "unit": "px",
-      "label": "Bottom",
+      "label": "t:sections.icon_boxes.settings.padding_bottom_mobile.label",
       "default": 30
     }
   ],
   "blocks": [
     {
       "type": "box",
-      "name": "Box",
+      "name": "t:sections.icon_boxes.blocks.box.name",
       "settings": [
         {
           "type": "image_picker",
           "id": "icon_image",
-          "label": "Icon image"
+          "label": "t:sections.icon_boxes.blocks.box.settings.icon_image.label"
         },
         {
           "type": "text",
           "id": "emoji",
-          "label": "Emoji fallback",
-          "default": "🚚",
-          "info": "If no icon image"
+          "label": "t:sections.icon_boxes.blocks.box.settings.emoji.label",
+          "default": "\ud83d\ude9a",
+          "info": "t:sections.icon_boxes.blocks.box.settings.emoji.info"
         },
         {
           "type": "text",
           "id": "heading",
-          "label": "Heading",
-          "default": "Free Shipping"
+          "label": "t:sections.icon_boxes.blocks.box.settings.heading.label",
+          "default": "t:sections.icon_boxes.blocks.box.settings.heading.default"
         },
         {
           "type": "text",
           "id": "text",
-          "label": "Description",
-          "default": "Free shipping on all orders over $50."
+          "label": "t:sections.icon_boxes.blocks.box.settings.text.label",
+          "default": "t:sections.icon_boxes.blocks.box.settings.text.default"
         },
         {
           "type": "text",
           "id": "link_text",
-          "label": "Link text"
+          "label": "t:sections.icon_boxes.blocks.box.settings.link_text.label"
         },
         {
           "type": "url",
           "id": "link",
-          "label": "Link"
+          "label": "t:sections.icon_boxes.blocks.box.settings.link.label"
         }
       ]
     },
@@ -334,13 +348,13 @@
   ],
   "presets": [
     {
-      "name": "Icon boxes",
+      "name": "t:sections.icon_boxes.presets.icon_boxes.name",
       "category": "Custom",
       "blocks": [
         {
           "type": "box",
           "settings": {
-            "emoji": "🚚",
+            "emoji": "\ud83d\ude9a",
             "heading": "Free Shipping",
             "text": "On all orders over $50"
           }
@@ -348,7 +362,7 @@
         {
           "type": "box",
           "settings": {
-            "emoji": "🔒",
+            "emoji": "\ud83d\udd12",
             "heading": "Secure Checkout",
             "text": "256-bit SSL encryption"
           }
@@ -356,7 +370,7 @@
         {
           "type": "box",
           "settings": {
-            "emoji": "↩️",
+            "emoji": "\u21a9\ufe0f",
             "heading": "Easy Returns",
             "text": "30-day hassle-free returns"
           }
@@ -364,7 +378,7 @@
         {
           "type": "box",
           "settings": {
-            "emoji": "⭐",
+            "emoji": "\u2b50",
             "heading": "5-Star Reviews",
             "text": "Trusted by 10,000+ customers"
           }

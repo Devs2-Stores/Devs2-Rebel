@@ -1,4 +1,4 @@
-{%- assign product_media_sizes = '(max-width: 749px) calc(100vw - 30px), (max-width: 991px) calc(100vw - 60px), (min-width: 1600px) 580px, 34vw' -%}
+{%- assign product_media_sizes = '(max-width: 749px) calc(100vw - 30px), (max-width: 991px) calc(50vw - 40px), (min-width: 1600px) 580px, 34vw' -%}
 
 <product-template class="product-template color-{{ section.settings.color_scheme }}">
   <div class="page-width">
@@ -14,74 +14,42 @@
                   data-media-id="{{ media.id }}"
                   {% if media.media_type == 'external_video' %}data-video-host="{{ media.host }}"{% endif %}
                 >
-                  {%- case media.media_type -%}
-                    {%- when 'image' -%}
-                      {%- liquid
-                        assign media_alt = media.alt | default: product.title | escape
-                        assign media_loading = 'lazy'
-                        assign media_fetchpriority = 'low'
-                        assign media_preload = false
-                        assign media_zoom_src = media | image_url: width: 2048
-                        if forloop.first
-                          assign media_loading = 'eager'
-                          assign media_fetchpriority = 'high'
-                          assign media_preload = true
-                        endif
-                      -%}
-                      {{
-                        media
-                        | image_url: width: 1512
-                        | image_tag:
-                          widths: '360, 540, 720, 900, 1080, 1296, 1512',
-                          sizes: product_media_sizes,
-                          alt: media_alt,
-                          loading: media_loading,
-                          fetchpriority: media_fetchpriority,
-                          preload: media_preload,
-                          decoding: 'async',
-                          class: 'product-template__media-image',
-                          data-zoom-src: media_zoom_src,
-                          data-product-featured-image: 'true'
-                      }}
-                    {%- when 'external_video' -%}
-                      <div class="product-template__video-wrapper">
-                        {{ media | external_video_tag: loading: 'lazy', class: 'product-template__video-iframe' }}
-                      </div>
-                    {%- when 'video' -%}
-                      <div class="product-template__video-wrapper">
-                        {{ media | video_tag: controls: true, preload: 'none', image_size: '1200x', class: 'product-template__video' }}
-                      </div>
-                    {%- when 'model' -%}
-                      <div class="product-template__model-wrapper">
-                        {{ media | model_viewer_tag: reveal: 'interaction', toggleable: true, image_size: '1200x', class: 'product-template__model' }}
-                        <button
-                          class="button button--full-width product-template__xr-button"
-                          type="button"
-                          aria-label="{{ 'products.product.xr_button_label' | t }}"
-                          data-shopify-xr
-                          data-shopify-model3d-id="{{ media.id }}"
-                          data-shopify-title="{{ product.title | escape }}"
-                          data-shopify-xr-hidden
-                        >
-                          {%- render 'icon', name: '3d-model' -%}
-                          {{ 'products.product.xr_button' | t }}
-                        </button>
-                      </div>
-                  {%- endcase -%}
+                  {%- liquid
+                    assign media_loading = 'lazy'
+                    assign media_fetchpriority = 'low'
+                    assign media_preload = false
+                    if forloop.first
+                      assign media_loading = 'eager'
+                      assign media_fetchpriority = 'high'
+                      assign media_preload = true
+                    endif
+                  -%}
+                  {%- render 'product-media-item',
+                    media: media,
+                    product: product,
+                    sizes: product_media_sizes,
+                    loading: media_loading,
+                    fetchpriority: media_fetchpriority,
+                    preload: media_preload,
+                    enable_zoom: true,
+                    image_class: 'product-template__media-image'
+                  -%}
+                  {%- if section.settings.enable_lightbox and media.media_type == 'image' -%}
+                    <button
+                      type="button"
+                      class="product-template__zoom-btn"
+                      data-lightbox-open
+                      aria-haspopup="dialog"
+                      aria-label="{{ 'products.product.media.open_media' | t: index: forloop.index }}"
+                    >
+                      {%- render 'icon', name: 'search', size: '20' -%}
+                    </button>
+                  {%- endif -%}
                 </div>
               {%- endfor -%}
             {%- else -%}
               <div class="swiper-slide product-template__media-slide">
-                <img
-                  src="{{ 'no_image.png' | asset_url }}"
-                  alt="{{ product.title | escape }}"
-                  width="800"
-                  height="1200"
-                  loading="eager"
-                  fetchpriority="high"
-                  decoding="async"
-                  class="product-template__media-image"
-                >
+                {{ 'product-1' | placeholder_svg_tag: 'product-template__media-image product-template__media-image--placeholder' }}
               </div>
             {%- endif -%}
           </div>
@@ -137,7 +105,18 @@
 
 {%- render 'product-sticky-add' -%}
 {%- if section.settings.enable_lightbox -%}
-  <product-lightbox class="product-lightbox"></product-lightbox>
+  <product-lightbox class="product-lightbox" role="dialog" aria-modal="true" aria-label="{{ 'accessibility.image_lightbox' | t }}">
+    <div class="lightbox-overlay"></div>
+    <div class="lightbox-content">
+      <button type="button" class="lightbox-close" aria-label="{{ 'accessibility.close' | t }}">
+        {%- render 'icon', name: 'close', size: '20' -%}
+      </button>
+      <div class="lightbox-image-wrapper">
+        <button type="button" class="lightbox-prev swiper-button-prev" aria-label="{{ 'accessibility.previous' | t }}"></button>
+        <button type="button" class="lightbox-next swiper-button-next" aria-label="{{ 'accessibility.next' | t }}"></button>
+      </div>
+    </div>
+  </product-lightbox>
 {%- endif -%}
 {%- render 'size-guide-modal' -%}
 {%- assign first_3d_model = product.media | where: 'media_type', 'model' | first -%}

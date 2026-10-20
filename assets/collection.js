@@ -37,6 +37,7 @@ class FacetFilters extends HTMLElement {
 
     this.paginationType = this.dataset.paginationType || 'pagination';
     this.filterLayout = this.dataset.filterLayout || 'sidebar';
+    this.lifecycle = new AbortController();
 
     this.bindFilterEvents();
     this.bindSortEvents();
@@ -51,12 +52,15 @@ class FacetFilters extends HTMLElement {
     this.initCollapsibleLists();
     this.bindDescToggle();
     var self = this;
-    this.handlePopState = function() { self.fetchAndRender(window.location.href, false); };
-    window.addEventListener('popstate', this.handlePopState);
+    window.addEventListener('popstate', function() {
+      self.fetchAndRender(window.location.href, false);
+    }, { signal: this.lifecycle.signal });
   }
 
   disconnectedCallback() {
-    if (this.handlePopState) window.removeEventListener('popstate', this.handlePopState);
+    if (this.lifecycle) this.lifecycle.abort();
+    if (this.abortController) this.abortController.abort();
+    if (this.infiniteObserver) this.infiniteObserver.disconnect();
   }
 
   /* ── Filter form ────────────────────────────────── */
@@ -161,15 +165,26 @@ class FacetFilters extends HTMLElement {
     });
   }
 
+  buildTargetUrl(searchParams) {
+    var targetUrl = new URL(this.collectionUrl, window.location.origin);
+    targetUrl.search = searchParams.toString();
+    return targetUrl.pathname + (targetUrl.search ? targetUrl.search : '');
+  }
+
   submitFilters() {
     var searchParams = this.buildSearchParams();
-    var url = this.collectionUrl + '?' + searchParams.toString();
+    var url = this.buildTargetUrl(searchParams);
     this.fetchAndRender(url);
   }
 
   buildSearchParams() {
     var params = new URLSearchParams();
-
+    var baseUrl = new URL(this.collectionUrl, window.location.origin);
+    ['q', 'type', 'options[prefix]'].forEach(function(key) {
+      if (baseUrl.searchParams.has(key)) {
+        params.set(key, baseUrl.searchParams.get(key));
+      }
+    });
     if (!this.filterForm) return params;
 
     // Collect checkbox filters
@@ -207,7 +222,7 @@ class FacetFilters extends HTMLElement {
     this.sortSelect.addEventListener('change', function() {
       var searchParams = self.buildSearchParams();
       searchParams.set('sort_by', this.value);
-      var url = self.collectionUrl + '?' + searchParams.toString();
+      var url = self.buildTargetUrl(searchParams);
       self.fetchAndRender(url);
     });
   }
@@ -231,10 +246,10 @@ class FacetFilters extends HTMLElement {
       var searchParams = self.buildSearchParams();
       if (page) searchParams.set('page', page);
 
-      var url = self.collectionUrl + '?' + searchParams.toString();
+      var url = self.buildTargetUrl(searchParams);
       self.fetchAndRender(url);
       self.scrollToProducts();
-    });
+    }, { signal: this.lifecycle.signal });
   }
 
   /* ── Active filter remove ───────────────────────── */
@@ -293,12 +308,19 @@ class FacetFilters extends HTMLElement {
     .catch(function(err) {
       if (err.name === 'AbortError') return;
       self.classList.remove('is-loading');
+      self.showLoadError();
     });
+  }
+
+  showLoadError() {
+    var message = ((themeConfig.strings || {}).collection || {}).loadError;
+    if (message && typeof showToast === 'function') showToast(message, 'error', 4000);
   }
 
   renderSectionResponse(html) {
     var parser = new DOMParser();
     var doc = parser.parseFromString(html, 'text/html');
+    var focusState = this.captureFocusState();
 
     // Replace product grid
     var newProducts = doc.querySelector('#CollectionProducts');
@@ -323,6 +345,20 @@ class FacetFilters extends HTMLElement {
       this.reinitFilters();
     }
 
+    // Replace active filter tags above grid
+    var newActive = doc.querySelector('#CollectionActiveFilters');
+    var currentActive = document.querySelector('#CollectionActiveFilters');
+    if (newActive && currentActive) {
+      currentActive.innerHTML = newActive.innerHTML;
+    } else if (newActive && !currentActive) {
+      var productsContainer = document.querySelector('#CollectionProducts');
+      if (productsContainer) {
+        productsContainer.insertAdjacentElement('beforebegin', newActive);
+      }
+    } else if (!newActive && currentActive) {
+      currentActive.remove();
+    }
+
     // Replace sort toolbar (product count)
     var newSort = doc.querySelector('.collection-sort');
     var currentSort = document.querySelector('.collection-sort');
@@ -333,6 +369,17 @@ class FacetFilters extends HTMLElement {
       if (newCount && currentCount) {
         currentCount.innerHTML = newCount.innerHTML;
       }
+    }
+
+    var newTabs = doc.querySelector('.search-template__tabs');
+    var currentTabs = document.querySelector('.search-template__tabs');
+    if (newTabs && currentTabs) {
+      currentTabs.innerHTML = newTabs.innerHTML;
+    }
+    var newSearchCount = doc.querySelector('.search-template__count');
+    var currentSearchCount = document.querySelector('.search-template__count');
+    if (newSearchCount && currentSearchCount) {
+      currentSearchCount.innerHTML = newSearchCount.innerHTML;
     }
 
     // Update mobile filter badge
@@ -352,9 +399,51 @@ class FacetFilters extends HTMLElement {
       }
     }
 
+    var liveRegion = document.getElementById('CollectionLiveRegion');
+    var countText = newSort ? newSort.querySelector('.collection-sort__count-text') : null;
+    if (liveRegion && countText) {
+      liveRegion.textContent = countText.textContent.trim().replace(/\s+/g, ' ');
+    }
+
     // Re-apply view mode
-    var savedView = localStorage.getItem('collection_view') || 'grid';
+    var savedView = this.readViewMode() || 'grid';
     this.setViewMode(savedView);
+
+    this.restoreFocusState(focusState);
+  }
+
+  captureFocusState() {
+    var el = document.activeElement;
+    if (!el || el === document.body) return null;
+    var facets = document.getElementById('FacetFiltersContainer');
+    if (facets && facets.contains(el)) {
+      return { scope: 'facets', id: el.id, index: this.focusablesIn(facets).indexOf(el) };
+    }
+    var chips = document.getElementById('CollectionActiveFilters');
+    if (chips && chips.contains(el)) {
+      return { scope: 'chips', index: this.focusablesIn(chips).indexOf(el) };
+    }
+    return null;
+  }
+
+  restoreFocusState(state) {
+    if (!state) return;
+    var target = null;
+    if (state.scope === 'facets') {
+      var facets = document.getElementById('FacetFiltersContainer');
+      var byId = state.id ? document.getElementById(state.id) : null;
+      target = byId && !byId.disabled ? byId : (facets ? this.focusablesIn(facets)[state.index] : null);
+    } else {
+      var chips = document.getElementById('CollectionActiveFilters');
+      var remaining = chips ? this.focusablesIn(chips) : [];
+      target = remaining[Math.min(Math.max(state.index, 0), remaining.length - 1)];
+    }
+    if (!target) target = document.getElementById('CollectionProducts');
+    if (target) target.focus({ preventScroll: true });
+  }
+
+  focusablesIn(container) {
+    return Array.from(container.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), select:not([disabled])'));
   }
 
   reinitFilters() {
@@ -382,30 +471,45 @@ class FacetFilters extends HTMLElement {
   /* ── Filter drawer (mobile) ─────────────────────── */
 
   bindDrawerEvents() {
-    var openBtn = document.querySelector('[data-action="open-filter"]');
-    var closeBtns = document.querySelectorAll('[data-action="close-filter"]');
     var drawer = document.getElementById('CollectionFilterDrawer');
-    var body = document.body;
+    if (!drawer) return;
+    var overlay = document.querySelector('.collection-template__filter-overlay');
 
-    if (openBtn && drawer) {
-      openBtn.addEventListener('click', function() {
+    var close = function() {
+      if (!drawer.classList.contains('is-open')) return;
+      drawer.classList.remove('is-open');
+      drawer.removeAttribute('role');
+      drawer.removeAttribute('aria-modal');
+      drawer.removeAttribute('aria-labelledby');
+      if (overlay) overlay.classList.remove('is-visible');
+      ThemeUtils.unlockScroll();
+      ThemeUtils.releaseFocus(drawer);
+    };
+
+    document.querySelectorAll('[data-action="open-filter"]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        if (drawer.classList.contains('is-open')) return;
         drawer.classList.add('is-open');
-        var overlay = document.querySelector('.collection-template__filter-overlay');
+        drawer.setAttribute('role', 'dialog');
+        drawer.setAttribute('aria-modal', 'true');
+        drawer.setAttribute('aria-labelledby', 'CollectionFilterDrawerTitle');
         if (overlay) overlay.classList.add('is-visible');
-        body.style.overflow = 'hidden';
+        ThemeUtils.lockScroll();
+        ThemeUtils.trapFocus(drawer, btn);
       });
-    }
+    });
 
-    if (closeBtns.length > 0 && drawer) {
-      closeBtns.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          drawer.classList.remove('is-open');
-          var overlay = document.querySelector('.collection-template__filter-overlay');
-          if (overlay) overlay.classList.remove('is-visible');
-          body.style.overflow = '';
-        });
-      });
-    }
+    document.querySelectorAll('[data-action="close-filter"]').forEach(function(btn) {
+      btn.addEventListener('click', close);
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') close();
+    }, { signal: this.lifecycle.signal });
+
+    window.matchMedia('(min-width: 1024px)').addEventListener('change', function(e) {
+      if (e.matches) close();
+    }, { signal: this.lifecycle.signal });
   }
 
   /* ── Desktop filter column toggle ───────────────── */
@@ -442,7 +546,7 @@ class FacetFilters extends HTMLElement {
       btn.classList.add('is-loading');
 
       self.fetchAppendProducts(nextUrl, btn);
-    });
+    }, { signal: this.lifecycle.signal });
   }
 
   fetchAppendProducts(url, triggerEl) {
@@ -450,11 +554,17 @@ class FacetFilters extends HTMLElement {
     var sectionUrl = url + (url.indexOf('?') > -1 ? '&' : '?') + 'sections=' + this.sectionId;
 
     fetch(sectionUrl)
-      .then(function(r) { return r.json(); })
+      .then(function(r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
       .then(function(data) {
-        var html = data[self.sectionId];
+        var html = data && data[self.sectionId];
+        if (typeof html !== 'string') throw new Error('Missing section');
         var parser = new DOMParser();
         var doc = parser.parseFromString(html, 'text/html');
+        var active = document.activeElement;
+        var focusNewItem = !!triggerEl && (!active || active === document.body || active === triggerEl);
 
         // Append new product cards
         var newItems = doc.querySelectorAll('.product-cards__item');
@@ -472,6 +582,24 @@ class FacetFilters extends HTMLElement {
           currentPagination.innerHTML = newPagination.innerHTML;
         }
 
+        var newCount = doc.querySelector('.collection-sort__count-text');
+        var currentCount = document.querySelector('.collection-sort__count-text');
+        if (newCount && currentCount) {
+          currentCount.innerHTML = newCount.innerHTML;
+        }
+
+        var liveRegion = document.getElementById('CollectionLiveRegion');
+        if (liveRegion && newItems.length > 0) {
+          liveRegion.textContent = newCount
+            ? newCount.textContent.trim().replace(/\s+/g, ' ')
+            : themeConfig.strings.collection.moreLoaded;
+        }
+
+        if (focusNewItem && newItems.length > 0) {
+          var firstLink = newItems[0].querySelector('a[href]');
+          if (firstLink) firstLink.focus();
+        }
+
         // Re-bind events for new content
         if (self.paginationType === 'load_more') {
           // New load-more button is already wired via event delegation
@@ -480,11 +608,12 @@ class FacetFilters extends HTMLElement {
           self.observeInfiniteSentinel();
         }
       })
-      .catch(function(err) {
+      .catch(function() {
         if (triggerEl) {
           triggerEl.disabled = false;
           triggerEl.classList.remove('is-loading');
         }
+        self.showLoadError();
       });
   }
 
@@ -528,36 +657,31 @@ class FacetFilters extends HTMLElement {
     var modal = document.getElementById('CollectionFilterModal');
     if (!modal) return;
 
-    var body = document.body;
+    var close = function() {
+      if (!modal.classList.contains('is-open')) return;
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      ThemeUtils.unlockScroll();
+      ThemeUtils.releaseFocus(modal);
+    };
 
-    // Open modal — from mobile filter button or sort toolbar filter button
-    var openBtns = document.querySelectorAll('[data-action="open-filter"], [data-action="open-filter-modal"]');
-    openBtns.forEach(function(btn) {
+    document.querySelectorAll('[data-action="open-filter"], [data-action="open-filter-modal"]').forEach(function(btn) {
       btn.addEventListener('click', function() {
+        if (modal.classList.contains('is-open')) return;
         modal.classList.add('is-open');
         modal.setAttribute('aria-hidden', 'false');
-        body.style.overflow = 'hidden';
+        ThemeUtils.lockScroll();
+        ThemeUtils.trapFocus(modal, btn);
       });
     });
 
-    // Close modal
-    var closeBtns = modal.querySelectorAll('[data-action="close-filter-modal"]');
-    closeBtns.forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        modal.classList.remove('is-open');
-        modal.setAttribute('aria-hidden', 'true');
-        body.style.overflow = '';
-      });
+    modal.querySelectorAll('[data-action="close-filter-modal"]').forEach(function(btn) {
+      btn.addEventListener('click', close);
     });
 
-    // Close on Escape key
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && modal.classList.contains('is-open')) {
-        modal.classList.remove('is-open');
-        modal.setAttribute('aria-hidden', 'true');
-        body.style.overflow = '';
-      }
-    });
+      if (e.key === 'Escape') close();
+    }, { signal: this.lifecycle.signal });
   }
 
   /* ── View toggle (grid/list) ────────────────────── */
@@ -569,16 +693,20 @@ class FacetFilters extends HTMLElement {
 
     var mainContainer = document.getElementById('CollectionMain');
     var defaultView = (mainContainer && mainContainer.dataset.defaultView) || 'grid';
-    var savedView = localStorage.getItem('collection_view') || defaultView;
+    var savedView = this.readViewMode() || defaultView;
     this.setViewMode(savedView);
 
     viewBtns.forEach(function(btn) {
       btn.addEventListener('click', function() {
         var mode = this.getAttribute('data-view');
         self.setViewMode(mode);
-        localStorage.setItem('collection_view', mode);
+        ThemeUtils.storage.set('collection_view', mode);
       });
     });
+  }
+
+  readViewMode() {
+    return ThemeUtils.storage.get('collection_view');
   }
 
   setViewMode(mode) {
@@ -615,12 +743,20 @@ class FacetFilters extends HTMLElement {
         if (i >= limit) item.classList.add('facet-filter-item--hidden');
       });
 
+      var moreLabel = (list.getAttribute('data-show-more') || '') + ' (' + (items.length - limit) + ')';
+      var lessLabel = list.getAttribute('data-show-less') || '';
       var toggleBtn = document.createElement('button');
       toggleBtn.type = 'button';
       toggleBtn.className = 'facet-filter__toggle';
       toggleBtn.setAttribute('aria-expanded', 'false');
-      var extraCount = items.length - limit;
-      toggleBtn.innerHTML = '<span class="facet-filter__toggle-text">Show more (' + extraCount + ')</span><span class="facet-filter__toggle-icon">+</span>';
+      var toggleText = document.createElement('span');
+      toggleText.className = 'facet-filter__toggle-text';
+      toggleText.textContent = moreLabel;
+      var toggleIcon = document.createElement('span');
+      toggleIcon.className = 'facet-filter__toggle-icon';
+      toggleIcon.setAttribute('aria-hidden', 'true');
+      toggleIcon.textContent = '+';
+      toggleBtn.append(toggleText, toggleIcon);
 
       toggleBtn.addEventListener('click', function() {
         var expanded = this.getAttribute('aria-expanded') === 'true';
@@ -629,13 +765,9 @@ class FacetFilters extends HTMLElement {
             item.classList.toggle('facet-filter-item--hidden', expanded);
           }
         });
-        if (expanded) {
-          this.setAttribute('aria-expanded', 'false');
-          this.innerHTML = '<span class="facet-filter__toggle-text">Show more (' + extraCount + ')</span><span class="facet-filter__toggle-icon">+</span>';
-        } else {
-          this.setAttribute('aria-expanded', 'true');
-          this.innerHTML = '<span class="facet-filter__toggle-text">Show less</span><span class="facet-filter__toggle-icon">âˆ’</span>';
-        }
+        this.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        toggleText.textContent = expanded ? moreLabel : lessLabel;
+        toggleIcon.textContent = expanded ? '+' : '\u2212';
       });
 
       list.appendChild(toggleBtn);
@@ -682,7 +814,7 @@ class FacetFilters extends HTMLElement {
       if (summary) summary.hidden = !isExpanded;
       if (moreSpan) moreSpan.hidden = !isExpanded;
       if (lessSpan) lessSpan.hidden = isExpanded;
-    });
+    }, { signal: this.lifecycle.signal });
   }
 }
 
@@ -721,15 +853,15 @@ class CollectionBest extends HTMLElement {
 
     this.swiper = new Swiper(container, {
       slidesPerView: Math.min(columnsMobile, 4),
-      spaceBetween: 10,
+      spaceBetween: 16,
       pagination: {
         el: '.collection-best__content .swiper-pagination',
         clickable: true
       },
       breakpoints: {
-        640: { slidesPerView: Math.min(columnsTablet, 4), spaceBetween: 15 },
-        1024: { slidesPerView: Math.min(columnsLaptop, 4), spaceBetween: 20 },
-        1280: { slidesPerView: Math.min(columnsDesktop, 4), spaceBetween: 20 }
+        640: { slidesPerView: Math.min(columnsTablet, 4), spaceBetween: 20 },
+        1024: { slidesPerView: Math.min(columnsLaptop, 4), spaceBetween: 24 },
+        1280: { slidesPerView: Math.min(columnsDesktop, 4), spaceBetween: 24 }
       }
     });
   }

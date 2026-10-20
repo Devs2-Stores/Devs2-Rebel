@@ -1,6 +1,6 @@
 {%- doc -%}
   @description Product variant selector using dropdown/select elements
-  @param {boolean} [cross_out_unavailable=false] - Strike-through unavailable variants
+  @param {boolean} [cross_out_unavailable] - Strike-through unavailable variants. Default: false
 {%- enddoc -%}
 {%- if product.variants.size > 1 -%}
 {{ 'variant-picker.css' | asset_url | stylesheet_tag }}

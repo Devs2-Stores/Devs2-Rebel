@@ -5,6 +5,8 @@
 
 {%- assign search_query = search.terms | default: '' -%}
 
+{{ 'product-card.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-card.js' | asset_url }}" defer="defer"></script>
 <search-template class="search-template color-{{ section.settings.color_scheme }}">
   <div class="page-width">
 
@@ -43,9 +45,40 @@
     </div>
 
     {%- if search.performed -%}
-      {%- if search.results_count > 0 -%}
+      {%- liquid
+        assign active_filter_count = 0
+        for filter in search.filters
+          if filter.type == 'price_range'
+            if filter.min_value.value != nil or filter.max_value.value != nil
+              assign active_filter_count = active_filter_count | plus: 1
+            endif
+          else
+            assign active_filter_count = active_filter_count | plus: filter.active_values.size
+          endif
+        endfor
+        assign search_terms_encoded = search.terms | replace: '&amp;', '&' | replace: '&#39;', "'" | replace: '&quot;', '"' | replace: '&lt;', '<' | replace: '&gt;', '>' | url_encode
+        assign search_base_url = routes.search_url | append: '?q=' | append: search_terms_encoded | append: '&type=product,article,page'
+        if section.settings.enable_filtering == nil
+          assign enable_filtering = true
+        else
+          assign enable_filtering = section.settings.enable_filtering
+        endif
+        if section.settings.enable_sorting == nil
+          assign enable_sorting = true
+        else
+          assign enable_sorting = section.settings.enable_sorting
+        endif
+      -%}
+      {%- if search.results_count > 0 or active_filter_count > 0 -%}
         {%- paginate search.results by section.settings.products_per_page -%}
-        <div class="search-template__results" data-search-results data-section-id="{{ section.id }}">
+        <facet-filters
+          class="collection-template__facets search-template__results"
+          data-search-results
+          data-section-id="{{ section.id }}"
+          data-collection-url="{{ search_base_url | escape }}"
+          data-pagination-type="pagination"
+          data-filter-layout="sidebar"
+        >
           {%- assign has_products = false -%}
           {%- assign product_count = 0 -%}
           {%- assign article_count = 0 -%}
@@ -55,94 +88,147 @@
             {%- if item.object_type == 'article' -%}{%- assign article_count = article_count | plus: 1 -%}{%- endif -%}
             {%- if item.object_type == 'page' -%}{%- assign page_count = page_count | plus: 1 -%}{%- endif -%}
           {%- endfor -%}
-          <div class="search-template__tabs" role="tablist" aria-label="Search result types">
-            <button type="button" class="search-template__tab" role="tab" aria-controls="search-products-panel" data-search-tab="products" aria-selected="false"{% if product_count == 0 %} disabled{% endif %}>Products <span>{{ product_count }}</span></button>
-            <button type="button" class="search-template__tab" role="tab" aria-controls="search-articles-panel" data-search-tab="articles" aria-selected="false"{% if article_count == 0 %} disabled{% endif %}>Articles <span>{{ article_count }}</span></button>
-            <button type="button" class="search-template__tab" role="tab" aria-controls="search-pages-panel" data-search-tab="pages" aria-selected="false"{% if page_count == 0 %} disabled{% endif %}>Pages <span>{{ page_count }}</span></button>
+          <div class="search-template__tabs" role="tablist" aria-label="{{ 'templates.search.tabs_types' | t }}">
+            <button type="button" class="search-template__tab" role="tab" aria-controls="search-products-panel" data-search-tab="products" aria-selected="false"{% if product_count == 0 and active_filter_count == 0 %} disabled{% endif %}>{{ 'templates.search.products' | t }} <span>{{ product_count }}</span></button>
+            <button type="button" class="search-template__tab" role="tab" aria-controls="search-articles-panel" data-search-tab="articles" aria-selected="false"{% if article_count == 0 %} disabled{% endif %}>{{ 'templates.search.articles_tab' | t }} <span>{{ article_count }}</span></button>
+            <button type="button" class="search-template__tab" role="tab" aria-controls="search-pages-panel" data-search-tab="pages" aria-selected="false"{% if page_count == 0 %} disabled{% endif %}>{{ 'templates.search.pages' | t }} <span>{{ page_count }}</span></button>
           </div>
           <div class="search-template__results-header" aria-live="polite">
             <span class="search-template__results-info" data-search-tab-count="products" hidden>{{ 'templates.search.results_count' | t: count: product_count }}</span>
             <span class="search-template__results-info" data-search-tab-count="articles" hidden>{{ 'templates.search.results_count' | t: count: article_count }}</span>
             <span class="search-template__results-info" data-search-tab-count="pages" hidden>{{ 'templates.search.results_count' | t: count: page_count }}</span>
           </div>
-          {%- if has_products -%}
-          <section id="search-products-panel" class="search-template__product-group" role="tabpanel" aria-labelledby="search-products-tab" data-search-panel="products">
-          <ul class="product-cards search-template__products" role="list">
-            {%- for item in search.results -%}
-              {%- liquid
-                assign lazyload = 'lazy'
-                assign fetchpriority = 'auto'
-                if forloop.index <= 3
-                  assign lazyload = 'eager'
-                endif
-                if forloop.first
-                  assign fetchpriority = 'high'
-                endif
+
+          <div class="collection-template__body{% unless enable_filtering and search.filters.size > 0 %} collection-template__body--no-sidebar{% endunless %}">
+            {%- if search.filters.size > 0 -%}
+              {%- render 'collection-filter-drawer',
+                enable_filtering: enable_filtering,
+                filter_layout: 'sidebar',
+                results: search,
+                price_filter_style: 'input'
               -%}
-              {%- case item.object_type -%}
-                {%- when 'product' -%}
-                  <li class="product-cards__item" role="listitem">
-                    {%- render 'product-card', product: item, lazyload: lazyload, fetchpriority: fetchpriority, show_vendor: true -%}
-                  </li>
-              {%- endcase -%}
-            {%- endfor -%}
-          </ul>
-          </section>
-          {%- endif -%}
+            {%- endif -%}
 
-          {%- assign has_articles = false -%}
-          {%- for item in search.results -%}{%- if item.object_type == 'article' -%}{%- assign has_articles = true -%}{%- break -%}{%- endif -%}{%- endfor -%}
-          {%- if has_articles -%}
-            <section id="search-articles-panel" class="search-template__content-group" role="tabpanel" aria-labelledby="search-articles-tab" data-search-panel="articles">
-              <ul class="search-template__content-list" role="list">
-                {%- for item in search.results -%}{%- if item.object_type == 'article' -%}
-                  {%- assign content_loading = 'lazy' -%}
-                  {%- if forloop.index <= 3 -%}{%- assign content_loading = 'eager' -%}{%- endif -%}
-                  <li class="search-template__content-item" role="listitem">
-                    {%- render 'article-card', article: item, layout: 'grid', lazyload: content_loading, show_category: true -%}
-                  </li>
-                {%- endif -%}{%- endfor -%}
-              </ul>
-            </section>
-          {%- endif -%}
+            <div class="collection-template__products-container" id="CollectionProductGrid">
+              {%- if enable_filtering and search.filters.size > 0 -%}
+                <div class="collection-template__mobile-filter-ctrl">
+                  <button
+                    type="button"
+                    class="collection-template__filter-btn"
+                    data-action="open-filter"
+                    aria-label="{{ 'products.facets.filter_button' | t }}"
+                    aria-expanded="false"
+                    aria-controls="CollectionFilterDrawer"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+                    <span>{{ 'products.facets.filter_button' | t }}</span>
+                    {%- if active_filter_count > 0 -%}
+                      <span class="collection-template__filter-badge">{{ active_filter_count }}</span>
+                    {%- endif -%}
+                  </button>
+                </div>
+              {%- endif -%}
+              {%- render 'collection-sort',
+                results: search,
+                limit: section.settings.products_per_page,
+                paginate: paginate,
+                show_product_count: true,
+                enable_sorting: enable_sorting,
+                enable_filtering: enable_filtering,
+                filter_layout: 'sidebar'
+              -%}
+              {%- render 'collection-active-filters', results: search -%}
+              <div id="CollectionLiveRegion" class="visually-hidden" role="status" aria-live="polite"></div>
 
-          {%- assign has_pages = false -%}
-          {%- for item in search.results -%}{%- if item.object_type == 'page' -%}{%- assign has_pages = true -%}{%- break -%}{%- endif -%}{%- endfor -%}
-          {%- if has_pages -%}
-            <section id="search-pages-panel" class="search-template__content-group" role="tabpanel" aria-labelledby="search-pages-tab" data-search-panel="pages">
-              <ul class="search-template__content-list" role="list">
-                {%- for item in search.results -%}{%- if item.object_type == 'page' -%}
-                  <li class="search-template__content-item" role="listitem">
-                    <a class="search-page-result" href="{{ item.url }}">
-                      <span class="search-page-result__content">
-                        <strong class="search-page-result__title">{{ item.title | escape }}</strong>
-                        {%- if item.content != blank -%}
-                          <span class="search-page-result__excerpt">{{ item.content | strip_html | truncatewords: 24 | escape }}</span>
-                        {%- endif -%}
-                      </span>
-                      <span class="search-page-result__arrow" aria-hidden="true">&rarr;</span>
-                    </a>
-                  </li>
-                {%- endif -%}{%- endfor -%}
-              </ul>
-            </section>
-          {%- endif -%}
+              {%- if has_products or active_filter_count > 0 -%}
+              <section id="search-products-panel" class="search-template__product-group" role="tabpanel" aria-labelledby="search-products-tab" data-search-panel="products">
+                <div class="collection-template__products" id="CollectionProducts" tabindex="-1">
+                  {%- if has_products -%}
+                  <ul class="product-cards search-template__products" role="list">
+                    {%- for item in search.results -%}
+                      {%- liquid
+                        assign lazyload = 'lazy'
+                        assign fetchpriority = 'auto'
+                        if forloop.index <= 4
+                          assign lazyload = 'eager'
+                        endif
+                        if forloop.first
+                          assign fetchpriority = 'high'
+                        endif
+                      -%}
+                      {%- case item.object_type -%}
+                        {%- when 'product' -%}
+                          <li class="product-cards__item" role="listitem">
+                            {%- render 'product-card', product: item, lazyload: lazyload, fetchpriority: fetchpriority, show_vendor: true -%}
+                          </li>
+                      {%- endcase -%}
+                    {%- endfor -%}
+                  </ul>
+                  {%- else -%}
+                    <div class="collection-template__empty">
+                      <p>{{ 'sections.collection_template.empty' | t }}</p>
+                      <a href="{{ search_base_url }}" class="button-primary theme-btn" data-filter-remove>{{ 'products.facets.clear_all_filters' | t }}</a>
+                    </div>
+                  {%- endif -%}
+                </div>
+              </section>
+              {%- endif -%}
 
-          {%- if paginate.pages > 1 -%}
-            <div class="search-template__pagination">
-              {%- render 'section-pagination', paginate: paginate -%}
+              {%- assign has_articles = false -%}
+              {%- for item in search.results -%}{%- if item.object_type == 'article' -%}{%- assign has_articles = true -%}{%- break -%}{%- endif -%}{%- endfor -%}
+              {%- if has_articles -%}
+                <section id="search-articles-panel" class="search-template__content-group" role="tabpanel" aria-labelledby="search-articles-tab" data-search-panel="articles">
+                  <ul class="search-template__content-list" role="list">
+                    {%- for item in search.results -%}{%- if item.object_type == 'article' -%}
+                      {%- assign content_loading = 'lazy' -%}
+                      {%- if forloop.index <= 3 -%}{%- assign content_loading = 'eager' -%}{%- endif -%}
+                      <li class="search-template__content-item" role="listitem">
+                        {%- render 'article-card', article: item, layout: 'grid', lazyload: content_loading, show_category: true -%}
+                      </li>
+                    {%- endif -%}{%- endfor -%}
+                  </ul>
+                </section>
+              {%- endif -%}
+
+              {%- assign has_pages = false -%}
+              {%- for item in search.results -%}{%- if item.object_type == 'page' -%}{%- assign has_pages = true -%}{%- break -%}{%- endif -%}{%- endfor -%}
+              {%- if has_pages -%}
+                <section id="search-pages-panel" class="search-template__content-group" role="tabpanel" aria-labelledby="search-pages-tab" data-search-panel="pages">
+                  <ul class="search-template__content-list" role="list">
+                    {%- for item in search.results -%}{%- if item.object_type == 'page' -%}
+                      <li class="search-template__content-item" role="listitem">
+                        <a class="search-page-result" href="{{ item.url }}">
+                          <span class="search-page-result__content">
+                            <strong class="search-page-result__title">{{ item.title | escape }}</strong>
+                            {%- if item.content != blank -%}
+                              <span class="search-page-result__excerpt">{{ item.content | strip_html | truncatewords: 24 | escape }}</span>
+                            {%- endif -%}
+                          </span>
+                          <span class="search-page-result__arrow" aria-hidden="true">&rarr;</span>
+                        </a>
+                      </li>
+                    {%- endif -%}{%- endfor -%}
+                  </ul>
+                </section>
+              {%- endif -%}
+
+              <div class="search-template__pagination" id="CollectionPagination">
+                {%- if paginate.pages > 1 -%}
+                  {%- render 'section-pagination', paginate: paginate -%}
+                {%- endif -%}
+              </div>
             </div>
-          {%- endif -%}
-        </div>
+          </div>
+        </facet-filters>
         {%- endpaginate -%}
       {%- else -%}
         <div class="search-template__empty">
           <div class="search-template__empty-icon">
             {%- render 'icon', name: 'search' -%}
           </div>
-          <h2 class="search-template__empty-title">{{ 'templates.search.no_results_title' | t }}: {{ search_query | escape }}</h2>
+          <h2 class="search-template__empty-title">{{ 'templates.search.no_results_title' | t }}</h2>
           <p class="search-template__empty-text">
-            {{ 'templates.search.no_results' | t }}: <strong>{{ search_query | escape }}</strong>
+            {{ 'templates.search.no_results' | t: terms: search_query }}
           </p>
           <div class="search-template__empty-suggestions">
             <p><strong>{{ 'templates.search.suggestions' | t }}:</strong></p>
@@ -162,7 +248,7 @@
                   </li>
                 {%- endfor -%}
               </ul>
-              <a class="search-template__featured-link" href="{{ section.settings.featured_collection.url }}">{{ 'general.continue_shopping' | t }}</a>
+              <a class="search-template__featured-link button-primary" href="{{ section.settings.featured_collection.url }}">{{ 'general.continue_shopping' | t }}</a>
             </div>
           {%- endif -%}
         </div>
@@ -202,9 +288,21 @@
       "default": 24
     },
     {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "label": "t:sections.main_collection.settings.enable_filtering.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "label": "t:sections.main_collection.settings.enable_sorting.label",
+      "default": true
+    },
+    {
       "type": "collection",
       "id": "featured_collection",
-      "label": "Featured collection for empty search"
+      "label": "t:sections.main_search.settings.featured_collection.label"
     }
   ]
 }

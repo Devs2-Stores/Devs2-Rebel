@@ -33,7 +33,14 @@ class SearchTemplate extends HTMLElement {
     }
     this.tabs.forEach((tab) => tab.addEventListener('click', () => this.activateTab(tab.dataset.searchTab)));
     this.activateInitialTab();
+    if (window.ThemeUtils) ThemeUtils.bindTablistKeys(this.tabs);
     this.addEventListener('click', (e) => this.handlePagination(e));
+    document.addEventListener('collection:filtered', () => {
+      this.tabs = [...this.querySelectorAll('[data-search-tab]')];
+      this.tabs.forEach((tab) => tab.addEventListener('click', () => this.activateTab(tab.dataset.searchTab)));
+      if (window.ThemeUtils) ThemeUtils.bindTablistKeys(this.tabs);
+      this.activateInitialTab();
+    });
   }
 
   activateInitialTab() {
@@ -83,6 +90,7 @@ class SearchTemplate extends HTMLElement {
   }
 
   async handlePagination(e) {
+    if (this.querySelector('facet-filters')) return;
     const link = e.target.closest('.search-template__pagination a');
     if (!link || !this.results) return;
     e.preventDefault();

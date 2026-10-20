@@ -26,13 +26,16 @@
       </div>
     {%- endif -%}
 
-    <div class="section-team__grid{% if section.blocks.size == 5 and section.settings.columns_desktop == 4 %} section-team__grid--five{% endif %}">
+    {%- assign member_count = section.blocks | where: 'type', 'member' | size -%}
+    <div class="section-team__grid{% if member_count == 5 and section.settings.columns_desktop == 4 %} section-team__grid--five{% endif %}">
       {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
         <div class="section-team__member" {{ block.shopify_attributes }}>
           <div class="section-team__avatar-wrap">
             {%- if block.settings.image != blank -%}
+              {%- assign avatar_alt = block.settings.image.alt | default: block.settings.name -%}
               {{ block.settings.image | image_url: width: 400 | image_tag:
-                loading: 'lazy', class: 'section-team__avatar'
+                loading: 'lazy', class: 'section-team__avatar', alt: avatar_alt
               }}
             {%- else -%}
               <div class="section-team__avatar-ph">
@@ -51,27 +54,61 @@
           {%- endif -%}
           {%- if block.settings.social_1 != blank or block.settings.social_2 != blank -%}
             <div class="section-team__socials">
-              {%- if block.settings.social_1 != blank -%}
-                {%- assign social_1_url = block.settings.social_1 | downcase -%}
-                {%- assign social_1_label = 'Instagram' -%}
-                {%- if social_1_url contains 'facebook.com' -%}{%- assign social_1_label = 'Facebook' -%}{%- elsif social_1_url contains 'x.com' or social_1_url contains 'twitter.com' -%}{%- assign social_1_label = 'X' -%}{%- elsif social_1_url contains 'tiktok.com' -%}{%- assign social_1_label = 'TikTok' -%}{%- elsif social_1_url contains 'youtube.com' or social_1_url contains 'youtu.be' -%}{%- assign social_1_label = 'YouTube' -%}{%- elsif social_1_url contains 'linkedin.com' -%}{%- assign social_1_label = 'LinkedIn' -%}{%- endif -%}
-                <a href="{{ block.settings.social_1 }}" target="_blank" rel="noopener" class="section-team__social-link" aria-label="Follow {{ block.settings.name | default: 'team member' | escape }} on {{ social_1_label }}">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              {%- for i in (1..2) -%}
+                {%- liquid
+                  assign social_key = 'social_' | append: i
+                  assign social_url = block.settings[social_key]
+                  if social_url == blank
+                    continue
+                  endif
+                  assign social_host = social_url | downcase | split: '//' | last | split: '/' | first | remove_first: 'www.'
+                  assign social_icon = 'arrow'
+                  assign social_platform = social_host
+                  if social_host contains 'facebook.com'
+                    assign social_icon = 'facebook'
+                    assign social_platform = 'general.social.links.facebook' | t
+                  elsif social_host contains 'instagram.com'
+                    assign social_icon = 'instagram'
+                    assign social_platform = 'general.social.links.instagram' | t
+                  elsif social_host == 'x.com' or social_host contains 'twitter.com'
+                    assign social_icon = 'twitter'
+                    assign social_platform = 'general.social.links.twitter' | t
+                  elsif social_host contains 'tiktok.com'
+                    assign social_icon = 'tiktok'
+                    assign social_platform = 'general.social.links.tiktok' | t
+                  elsif social_host contains 'youtube.com' or social_host == 'youtu.be'
+                    assign social_icon = 'youtube'
+                    assign social_platform = 'general.social.links.youtube' | t
+                  elsif social_host contains 'linkedin.com'
+                    assign social_icon = 'linkedin'
+                    assign social_platform = 'general.social.links.linkedin' | t
+                  elsif social_host contains 'pinterest.'
+                    assign social_icon = 'pinterest'
+                    assign social_platform = 'general.social.links.pinterest' | t
+                  endif
+                  if block.settings.name != blank
+                    assign social_label = 'sections.team.follow_member' | t: name: block.settings.name, platform: social_platform
+                  else
+                    assign social_label = 'general.social.follow_on' | t: platform: social_platform
+                  endif
+                -%}
+                <a href="{{ social_url }}" target="_blank" rel="noopener" class="section-team__social-link" aria-label="{{ social_label | escape }}">
+                  {%- render 'icon', name: social_icon -%}
                 </a>
-              {%- endif -%}
-              {%- if block.settings.social_2 != blank -%}
-                {%- assign social_2_url = block.settings.social_2 | downcase -%}
-                {%- assign social_2_label = 'Instagram' -%}
-                {%- if social_2_url contains 'facebook.com' -%}{%- assign social_2_label = 'Facebook' -%}{%- elsif social_2_url contains 'x.com' or social_2_url contains 'twitter.com' -%}{%- assign social_2_label = 'X' -%}{%- elsif social_2_url contains 'tiktok.com' -%}{%- assign social_2_label = 'TikTok' -%}{%- elsif social_2_url contains 'youtube.com' or social_2_url contains 'youtu.be' -%}{%- assign social_2_label = 'YouTube' -%}{%- elsif social_2_url contains 'linkedin.com' -%}{%- assign social_2_label = 'LinkedIn' -%}{%- endif -%}
-                <a href="{{ block.settings.social_2 }}" target="_blank" rel="noopener" class="section-team__social-link" aria-label="Follow {{ block.settings.name | default: 'team member' | escape }} on {{ social_2_label }}">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                </a>
-              {%- endif -%}
+              {%- endfor -%}
             </div>
           {%- endif -%}
         </div>
       {%- endfor -%}
     </div>
+    {%- capture app_blocks -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- if app_blocks != blank -%}
+      <div class="section-apps">{{ app_blocks }}</div>
+    {%- endif -%}
   </div>
 </div>
 
@@ -84,9 +121,19 @@
   @media (min-width: 750px) {
     .section-team { padding-block: var(--team-dt) var(--team-db); }
   }
-  .section-team__head { text-align: center; margin-bottom: 2.5rem; }
-  .section-team__subheading { margin: 0 0 0.25rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgb(var(--color-accent)); font-weight: 600; }
-  .section-team__heading { margin: 0; color: rgb(var(--color-foreground)); }
+  .section-team__head { text-align: center; margin-bottom: var(--section-head-gap); }
+  .section-team__subheading {
+    margin: 0 0 0.5rem;
+    font-weight: var(--eyebrow-weight);
+    letter-spacing: var(--eyebrow-tracking);
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .section-team__heading {
+    margin: 0;
+    color: var(--color-ink);
+    letter-spacing: var(--heading-tracking);
+  }
 
   .section-team__grid {
     display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
@@ -100,7 +147,7 @@
   }
 
   .section-team__member { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
-  .section-team__avatar-wrap { width: 120px; height: 120px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+  .section-team__avatar-wrap { width: 120px; height: 120px; border-radius: 50%; overflow: hidden; flex-shrink: 0; margin-bottom: 0.25rem; }
   @media (min-width: 750px) {
     .section-team__avatar-wrap { width: 150px; height: 150px; }
   }
@@ -112,62 +159,73 @@
     font-size: 2rem; font-weight: 700; color: rgba(var(--color-foreground), 0.2);
   }
 
-  .section-team__name { margin: 0; font-size: 1rem; font-weight: 700; color: rgb(var(--color-foreground)); }
-  .section-team__role { margin: 0; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgb(var(--color-accent)); font-weight: 600; }
-  .section-team__bio { margin: 0; font-size: 0.8125rem; color: rgba(var(--color-foreground), 0.6); line-height: 1.5; max-width: 18rem; }
+  .section-team__name { margin: 0; font-size: 1rem; font-weight: 600; color: var(--color-ink); }
+  .section-team__role {
+    margin: 0;
+    font-size: var(--eyebrow-size);
+    font-weight: var(--eyebrow-weight);
+    letter-spacing: var(--eyebrow-tracking);
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .section-team__bio { margin: 0; font-size: 0.875rem; color: var(--color-muted); line-height: 1.6; max-width: 20rem; }
 
-  .section-team__socials { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
+  .section-team__socials { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
   .section-team__social-link {
     display: inline-flex; align-items: center; justify-content: center;
-    width: 2.75rem; height: 2.75rem;
-    border-radius: 999px;
-    border: 1px solid rgba(var(--color-foreground), 0.12);
-    background: rgba(var(--color-foreground), 0.03);
-    color: rgba(var(--color-foreground), 0.56);
-    transition: color 0.3s, background-color 0.3s, border-color 0.3s, transform 0.2s;
+    width: 2.5rem; height: 2.5rem;
+    border-radius: var(--buttons-radius, 0);
+    border: 1px solid var(--color-hairline);
+    background: transparent;
+    color: var(--color-ink);
+    transition: color var(--duration-default) ease, background-color var(--duration-default) ease, border-color var(--duration-default) ease;
   }
   .section-team__social-link svg { width: 16px; height: 16px; }
-  .section-team__social-link:hover { color: rgb(var(--color-accent)); border-color: rgba(var(--color-accent), 0.35); background: rgba(var(--color-accent), 0.08); transform: translateY(-1px); }
-  .section-team__social-link:focus-visible { outline: 2px solid rgba(var(--color-accent), 0.35); outline-offset: 3px; }
+  .section-team__social-link:hover {
+    color: rgb(var(--color-background));
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+  }
+  .section-team__social-link:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "Team",
+  "name": "t:sections.team.name",
   "tag": "section",
   "class": "section-team-wrapper",
   "settings": [
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Color scheme",
+      "label": "t:sections.team.settings.color_scheme.label",
       "default": "scheme-1"
     },
     {
       "type": "header",
-      "content": "Heading"
+      "content": "t:sections.team.settings.header__heading.content"
     },
     {
       "type": "inline_richtext",
       "id": "subheading",
-      "label": "Subheading"
+      "label": "t:sections.team.settings.subheading.label"
     },
     {
       "type": "select",
       "id": "subheading_size",
-      "label": "Subheading size",
+      "label": "t:sections.team.settings.subheading_size.label",
       "options": [
         {
           "value": "xs",
-          "label": "XS"
+          "label": "t:sections.team.settings.subheading_size.options.xs"
         },
         {
           "value": "sm",
-          "label": "S"
+          "label": "t:sections.team.settings.subheading_size.options.sm"
         },
         {
           "value": "md",
-          "label": "M"
+          "label": "t:sections.team.settings.subheading_size.options.md"
         }
       ],
       "default": "sm"
@@ -175,29 +233,29 @@
     {
       "type": "inline_richtext",
       "id": "heading",
-      "label": "Heading",
-      "default": "Meet our team"
+      "label": "t:sections.team.settings.heading.label",
+      "default": "t:sections.team.settings.heading.default"
     },
     {
       "type": "select",
       "id": "heading_size",
-      "label": "Heading size",
+      "label": "t:sections.team.settings.heading_size.label",
       "options": [
         {
           "value": "sm",
-          "label": "S"
+          "label": "t:sections.team.settings.heading_size.options.sm"
         },
         {
           "value": "md",
-          "label": "M"
+          "label": "t:sections.team.settings.heading_size.options.md"
         },
         {
           "value": "lg",
-          "label": "L"
+          "label": "t:sections.team.settings.heading_size.options.lg"
         },
         {
           "value": "xl",
-          "label": "XL"
+          "label": "t:sections.team.settings.heading_size.options.xl"
         }
       ],
       "default": "lg"
@@ -205,22 +263,22 @@
     {
       "type": "select",
       "id": "heading_tag",
-      "label": "Heading tag",
+      "label": "t:sections.team.settings.heading_tag.label",
       "options": [
         {
           "value": "h2",
-          "label": "H2"
+          "label": "t:sections.team.settings.heading_tag.options.h2"
         },
         {
           "value": "h3",
-          "label": "H3"
+          "label": "t:sections.team.settings.heading_tag.options.h3"
         }
       ],
       "default": "h2"
     },
     {
       "type": "header",
-      "content": "Layout"
+      "content": "t:sections.team.settings.header__layout.content"
     },
     {
       "type": "range",
@@ -228,12 +286,12 @@
       "min": 2,
       "max": 6,
       "step": 1,
-      "label": "Desktop columns",
+      "label": "t:sections.team.settings.columns_desktop.label",
       "default": 4
     },
     {
       "type": "header",
-      "content": "Desktop spacing"
+      "content": "t:sections.team.settings.header__desktop_spacing.content"
     },
     {
       "type": "range",
@@ -242,7 +300,7 @@
       "max": 150,
       "step": 5,
       "unit": "px",
-      "label": "Top",
+      "label": "t:sections.team.settings.padding_top_desktop.label",
       "default": 50
     },
     {
@@ -252,12 +310,12 @@
       "max": 150,
       "step": 5,
       "unit": "px",
-      "label": "Bottom",
+      "label": "t:sections.team.settings.padding_bottom_desktop.label",
       "default": 50
     },
     {
       "type": "header",
-      "content": "Mobile spacing"
+      "content": "t:sections.team.settings.header__mobile_spacing.content"
     },
     {
       "type": "range",
@@ -266,7 +324,7 @@
       "max": 100,
       "step": 5,
       "unit": "px",
-      "label": "Top",
+      "label": "t:sections.team.settings.padding_top_mobile.label",
       "default": 30
     },
     {
@@ -276,46 +334,46 @@
       "max": 100,
       "step": 5,
       "unit": "px",
-      "label": "Bottom",
+      "label": "t:sections.team.settings.padding_bottom_mobile.label",
       "default": 30
     }
   ],
   "blocks": [
     {
       "type": "member",
-      "name": "Member",
+      "name": "t:sections.team.blocks.member.name",
       "settings": [
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Photo"
+          "label": "t:sections.team.blocks.member.settings.image.label"
         },
         {
           "type": "text",
           "id": "name",
-          "label": "Name",
-          "default": "Jane Doe"
+          "label": "t:sections.team.blocks.member.settings.name.label",
+          "default": "t:sections.team.blocks.member.settings.name.default"
         },
         {
           "type": "text",
           "id": "role",
-          "label": "Role",
-          "default": "Founder & CEO"
+          "label": "t:sections.team.blocks.member.settings.role.label",
+          "default": "t:sections.team.blocks.member.settings.role.default"
         },
         {
           "type": "text",
           "id": "bio",
-          "label": "Bio"
+          "label": "t:sections.team.blocks.member.settings.bio.label"
         },
         {
           "type": "url",
           "id": "social_1",
-          "label": "Social link 1"
+          "label": "t:sections.team.blocks.member.settings.social_1.label"
         },
         {
           "type": "url",
           "id": "social_2",
-          "label": "Social link 2"
+          "label": "t:sections.team.blocks.member.settings.social_2.label"
         }
       ]
     },
@@ -325,7 +383,7 @@
   ],
   "presets": [
     {
-      "name": "Team",
+      "name": "t:sections.team.presets.team.name",
       "category": "Custom",
       "blocks": [
         {

@@ -1,0 +1,19 @@
+{
+ "route": "/cart/add",
+ "themeHeaders": {
+  "type": "opaqueredirect",
+  "status": 0
+ },
+ "themeHeadersFollowed": {
+  "status": 200,
+  "url": "/cart",
+  "ct": "text/html; charset=utf-8",
+  "body": "<!doctype html>\n<html class=\"n"
+ },
+ "withAcceptJson": {
+  "status": 200,
+  "ct": "application/json; charset=utf-8",
+  "body": "{\"id\":45897370304621,\"properties\":{},\"quantity\":3,\"variant_i"
+ },
+ "cartItemCountBeforeClear": 3
+}

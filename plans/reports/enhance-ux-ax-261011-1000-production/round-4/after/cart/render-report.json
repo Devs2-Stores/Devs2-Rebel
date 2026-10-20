@@ -1,0 +1,161 @@
+[
+  {
+    "viewport": "375x812",
+    "screenshot": "E:\\Work\\shopify\\plans\\reports\\enhance-ux-ax-261011-1000-production\\round-4\\after\\cart\\375x812.png",
+    "outline": [
+      "section#shopify-section-sections--27321871204461__announceme @ x0 y0 375x58",
+      "  announcement-bar.announcement-bar.color-scheme-3 \"New season @ x0 y0 375x58",
+      "    div.announcement-bar__container \"New season: the tailored an @ x0 y8 375x42",
+      "      div.swiper.announcement-bar__swiper \"New season: the tailore @ x0 y8 375x42",
+      "section#shopify-section-sections--27321871204461__header.sho @ x0 y58 375x64",
+      "  global-header.header.color-scheme-1 \"Devs2 Rebel Open cart 0 @ x0 y58 375x64",
+      "    div.page-width \"Devs2 Rebel Open cart 0\" @ x0 y58 375x64",
+      "      div.header__wrapper \"Devs2 Rebel Open cart 0\" @ x15 y58 345x64",
+      "main#MainContent.content-for-layout.focus-none \"Home / Cart  @ x0 y122 375x476",
+      "  section#shopify-section-template--27321871335533__breadcrumb @ x0 y122 375x57",
+      "    div.section-breadcrumbs.color-scheme-1 \"Home / Cart\" @ x0 y122 375x57",
+      "  section#shopify-section-template--27321871335533__main.shopi @ x0 y179 375x419",
+      "    cart-template \"Your cart (0 items) Your cart is current\" @ x0 y179 375x419",
+      "      div.color-scheme-1 \"Your cart (0 items) Your cart is current @ x0 y203 375x363",
+      "section#shopify-section-sections--27321871171693__footer.sho @ x0 y646 375x746",
+      "  global-footer.footer.color-scheme-1 \"Devs2 Rebel Refined def @ x0 y646 375x746",
+      "    div.page-width \"Devs2 Rebel Refined defiance — luxury fa\" @ x0 y646 375x746",
+      "      div.footer-wrapper \"Devs2 Rebel Refined defiance — luxury fa @ x15 y646 345x442",
+      "      div.footer-copyright \"© 2026 Devs2 Rebel, Powered by Shopify @ x15 y1088 345x192",
+      "      div.footer-localization \"COUNTRY/REGION Canada (CAD $) Unite @ x15 y1280 345x112"
+    ],
+    "findings": [
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items."
+      },
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)"
+      },
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "Framing 'https://shop.app/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://shop.app https://admin.shopify.com\". The request has been blocked.\n"
+      },
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "Failed to load resource: net::ERR_FAILED (http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js)"
+      },
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. (http://127.0.0.1:9292/cart)"
+      },
+      {
+        "severity": "warn",
+        "type": "clipped-text",
+        "target": "span.visually-hidden \"Open cart\"",
+        "message": "text is cut off by overflow without an ellipsis or line clamp"
+      },
+      {
+        "severity": "warn",
+        "type": "small-touch-target",
+        "target": "",
+        "message": "11 controls smaller than 44px; e.g. a.header__logo-link \"Devs2 Rebel\"; a.breadcrumb__link \"Home\"; a.button-primary.active \"Continue shopping\"; a.footer-logo \"Devs2 Rebel\""
+      }
+    ],
+    "height": 1392
+  },
+  {
+    "viewport": "768x1024",
+    "screenshot": "E:\\Work\\shopify\\plans\\reports\\enhance-ux-ax-261011-1000-production\\round-4\\after\\cart\\768x1024.png",
+    "outline": [
+      "section#shopify-section-sections--27321871204461__header.sho @ x0 y37 768x64",
+      "  global-header.header.color-scheme-1 \"Devs2 Rebel Open cart 0 @ x0 y37 768x64",
+      "    div.page-width \"Devs2 Rebel Open cart 0\" @ x0 y37 768x64",
+      "      div.header__wrapper \"Devs2 Rebel Open cart 0\" @ x30 y37 708x64",
+      "main#MainContent.content-for-layout.focus-none \"Home / Cart  @ x0 y101 768x544",
+      "  section#shopify-section-template--27321871335533__breadcrumb @ x0 y101 768x57",
+      "    div.section-breadcrumbs.color-scheme-1 \"Home / Cart\" @ x0 y101 768x57",
+      "  section#shopify-section-template--27321871335533__main.shopi @ x0 y158 768x487",
+      "    cart-template \"Your cart (0 items) Your cart is current\" @ x0 y158 768x487",
+      "      div.color-scheme-1 \"Your cart (0 items) Your cart is current @ x0 y182 768x431",
+      "section#shopify-section-sections--27321871171693__footer.sho @ x0 y693 768x984",
+      "  global-footer.footer.color-scheme-1 \"Devs2 Rebel Refined def @ x0 y693 768x984",
+      "    div.page-width \"Devs2 Rebel Refined defiance — luxury fa\" @ x0 y693 768x984",
+      "      div.footer-wrapper \"Devs2 Rebel Refined defiance — luxury fa @ x30 y693 708x706",
+      "      div.footer-copyright \"© 2026 Devs2 Rebel, Powered by Shopify @ x30 y1398 708x166",
+      "      div.footer-localization \"COUNTRY/REGION Canada (CAD $) Unite @ x30 y1564 708x112"
+    ],
+    "findings": [
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items."
+      },
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)"
+      },
+      {
+        "severity": "warn",
+        "type": "clipped-text",
+        "target": "span.visually-hidden \"Open cart\"",
+        "message": "text is cut off by overflow without an ellipsis or line clamp"
+      }
+    ],
+    "height": 1676
+  },
+  {
+    "viewport": "1440x900",
+    "screenshot": "E:\\Work\\shopify\\plans\\reports\\enhance-ux-ax-261011-1000-production\\round-4\\after\\cart\\1440x900.png",
+    "outline": [
+      "section#shopify-section-sections--27321871204461__announceme @ x0 y0 1440x37",
+      "  announcement-bar.announcement-bar.color-scheme-3 \"New season @ x0 y0 1440x37",
+      "section#shopify-section-sections--27321871204461__header.sho @ x0 y37 1440x72",
+      "  global-header.header.color-scheme-1 \"Devs2 Rebel Home Shop C @ x0 y37 1440x72",
+      "    div.page-width \"Devs2 Rebel Home Shop Collections Journa\" @ x0 y37 1440x72",
+      "      div.header__wrapper \"Devs2 Rebel Home Shop Collections Journ @ x75 y37 1290x72",
+      "main#MainContent.content-for-layout.focus-none \"Home / Cart  @ x0 y109 1440x568",
+      "  section#shopify-section-template--27321871335533__breadcrumb @ x0 y109 1440x57",
+      "    div.section-breadcrumbs.color-scheme-1 \"Home / Cart\" @ x0 y109 1440x57",
+      "  section#shopify-section-template--27321871335533__main.shopi @ x0 y166 1440x511",
+      "    cart-template \"Your cart (0 items) Your cart is current\" @ x0 y166 1440x511",
+      "      div.color-scheme-1 \"Your cart (0 items) Your cart is current @ x0 y198 1440x447",
+      "section#shopify-section-sections--27321871171693__footer.sho @ x0 y725 1440x845",
+      "  global-footer.footer.color-scheme-1 \"Devs2 Rebel Refined def @ x0 y725 1440x845",
+      "    div.page-width \"Devs2 Rebel Refined defiance — luxury fa\" @ x0 y725 1440x845",
+      "      div.footer-wrapper \"Devs2 Rebel Refined defiance — luxury fa @ x75 y725 1290x567",
+      "      div.footer-copyright \"© 2026 Devs2 Rebel, Powered by Shopify @ x75 y1292 1290x166",
+      "      div.footer-localization \"COUNTRY/REGION Canada (CAD $) Unite @ x75 y1458 1290x112"
+    ],
+    "findings": [
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items."
+      },
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)"
+      },
+      {
+        "severity": "warn",
+        "type": "clipped-text",
+        "target": "span.visually-hidden \"Open cart\"",
+        "message": "text is cut off by overflow without an ellipsis or line clamp"
+      }
+    ],
+    "height": 1570
+  }
+]

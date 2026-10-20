@@ -1,0 +1,9 @@
+idle-rotates                 idx 0,1,2 | run [33mtrue[39m -> [33mtrue[39m | is-rotation-paused | slideshow-progress/paused | Pause slideshow | live off | btn [24,914,32,32] | focus gradient animate--enabled
+hover-holds                  idx 2 | run [33mfalse[39m -> [33mfalse[39m | is-rotation-paused is-rotation-stopped | none/running | Pause slideshow | live polite | btn [24,850,32,32] | focus gradient animate--enabled
+hover-leave-rotates          idx 2,0 | run [33mtrue[39m -> [33mtrue[39m |  | slideshow-progress/running | Pause slideshow | live off | btn [24,850,32,32] | focus gradient animate--enabled
+focus-cta-holds              idx 0 | run [33mfalse[39m -> [33mfalse[39m | is-rotation-stopped | none/running | Pause slideshow | live polite | btn [24,850,32,32] | focus section-slideshow__btn section-slideshow__btn--primary butto
+focus-rotation-btn-rotates   idx 0,1 | run [33mtrue[39m -> [33mtrue[39m |  | slideshow-progress/running | Pause slideshow | live off | btn [24,850,32,32] | focus section-slideshow__rotation
+user-stop-holds-on-btn       idx 1 | run [33mfalse[39m -> [33mfalse[39m | is-rotation-user-stopped is-rotation-stopped | none/running | Play slideshow | live polite | btn [24,850,32,32] | focus section-slideshow__rotation
+user-stop-holds-after-blur   idx 1 | run [33mfalse[39m -> [33mfalse[39m | is-rotation-user-stopped is-rotation-stopped | none/running | Play slideshow | live polite | btn [24,850,32,32] | focus header__logo-link
+user-play-rotates            idx 1,2 | run [33mtrue[39m -> [33mtrue[39m |  | slideshow-progress/running | Pause slideshow | live off | btn [24,850,32,32] | focus section-slideshow__rotation
+focus-bullet-holds           idx 2 | run [33mfalse[39m -> [33mfalse[39m | is-rotation-stopped | none/running | Pause slideshow | live polite | btn [24,850,32,32] | focus swiper-pagination-bullet

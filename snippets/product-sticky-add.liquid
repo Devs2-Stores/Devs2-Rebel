@@ -1,38 +1,50 @@
 {%- if settings.product_sticky_addtocart -%}
-{%- assign available = product.selected_or_first_available_variant.available -%}
+{%- assign sticky_variant = product.selected_or_first_available_variant -%}
+{%- assign available = sticky_variant.available -%}
 <product-sticky-add class="product-sticky-add">
 	<div class="page-width">
 		<div class="product-sticky-add__container">
 			<div class="product-sticky-add__product" data-sticky-product-info>
 				{%- if product.featured_image -%}
-				<img src="{{ product.featured_image | image_url: width: 160 }}"
-					 srcset="{{ product.featured_image | image_url: width: 160 }} 1x, {{ product.featured_image | image_url: width: 240 }} 2x"
-					 alt="{{ product.title | escape }}" width="60" height="60"
-					 loading="lazy" decoding="async"
-					 class="product-sticky-add__image"
-					 data-sticky-image>
+				{%- assign sticky_alt = product.featured_image.alt | default: product.title | escape -%}
+				{{
+					product.featured_image
+					| image_url: width: 240
+					| image_tag:
+						widths: '120, 240',
+						sizes: '60px',
+						width: 60,
+						height: 60,
+						alt: sticky_alt,
+						loading: 'lazy',
+						decoding: 'async',
+						class: 'product-sticky-add__image',
+						data-sticky-image: ''
+				}}
 				{%- endif -%}
 				<div class="product-sticky-add__info">
 					<h3 class="product-sticky-add__title">{{ product.title | escape }}</h3>
 					<div class="product-sticky-add__variant" data-sticky-variant>
-						{{ product.selected_or_first_available_variant.title | escape }}
+						{{ sticky_variant.title | escape }}
 					</div>
 					<div class="product-sticky-add__price" data-sticky-price>
-						{%- if product.price == 0 -%}
-						<span class="price-contact">{{ 'products.product.price.contact' | t }}</span>
-						{%- else -%}
-						<span class="price-current">{{ product.price | money }}</span>
-						{%- if product.compare_at_price > product.price -%}
-						<span class="price-compare">{{ product.compare_at_price | money }}</span>
-						{%- endif -%}
-						{%- endif -%}
+						<span class="price-current">
+							{%- if sticky_variant.price == 0 -%}
+								{{ 'products.product.price.contact' | t }}
+							{%- else -%}
+								{%- if settings.currency_code_enabled -%}{{ sticky_variant.price | money_with_currency }}{%- else -%}{{ sticky_variant.price | money }}{%- endif -%}
+							{%- endif -%}
+						</span>
+						<span class="price-compare"{% unless sticky_variant.compare_at_price > sticky_variant.price %} hidden{% endunless %}>
+							{%- if sticky_variant.compare_at_price > sticky_variant.price -%}{{ sticky_variant.compare_at_price | money }}{%- endif -%}
+						</span>
 					</div>
 				</div>
 			</div>
 			<div class="product-sticky-add__actions">
 				<button {% unless available %}disabled{% endunless %}
 						type="button"
-						class="button-primary product-sticky-add__btn product-sticky-add__btn--add"
+						class="button-primary active product-sticky-add__btn product-sticky-add__btn--add"
 						data-action="sticky-add-to-cart"
 						aria-label="{{ 'products.product.add_to_cart' | t }}">
 					{%- render 'icon', name: 'cart' -%}

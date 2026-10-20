@@ -15,7 +15,8 @@
 -%}
 
 <cart-template>
-  <div class="page-width color-{{ section.settings.color_scheme }}">
+  <div class="color-{{ section.settings.color_scheme }}">
+  <div class="page-width">
     <h1 class="cart-template__title">
       {{ 'sections.cart.title' | t }}
       <span class="cart-template__count">({{ cart.item_count }} {{ 'sections.cart.caption' | t }})</span>
@@ -47,7 +48,7 @@
       </div>
 
       <div class="cart-template__empty"{% if cart.item_count > 0 %} hidden{% endif %}>
-        <span class="empty-icon">{%- render 'icon', name: 'sad' -%}</span>
+        <span class="empty-icon">{%- render 'icon', name: 'cart' -%}</span>
         <p class="empty-text">{{ 'sections.cart.empty' | t }}</p>
         <a href="{{ routes.all_products_collection_url }}" class="button-primary active">
           {{- 'general.continue_shopping' | t -}}
@@ -79,6 +80,7 @@
         </div>
       {%- endif -%}
     </div>
+  </div>
   </div>
 </cart-template>
 

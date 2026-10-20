@@ -7,10 +7,10 @@
   window.themeConfig = {
     shopUrl: '{{ request.origin }}',
     formatMoney: {{ shop.money_format | json }},
-    no_image_product: String(`{{ 'no_image.png' | asset_url }}`),
+    priceFormat: {% if settings.currency_code_enabled %}{{ shop.money_with_currency_format | json }}{% else %}{{ shop.money_format | json }}{% endif %},
 
     routes: {
-      root_url: '{{ routes.root_url }}',
+      root_url: {{ routes.root_url | append: '/' | replace: '//', '/' | json }},
       cart_url: '{{ routes.cart_url }}',
       cart_add_url: '{{ routes.cart_add_url }}',
       cart_change_url: '{{ routes.cart_change_url }}',
@@ -18,7 +18,7 @@
       get_cart_url: '{{ routes.cart_url }}.js',
       checkout_url: '/checkout',
       all_products_url: '{{ routes.all_products_collection_url }}',
-      predictive_search_url: '{{ routes.predictive_search_url }}',
+      predictive_search_url: '{% if settings.predictive_search_enabled %}{{ routes.predictive_search_url }}{% endif %}',
       search_url: '{{ routes.search_url }}'
     },
 
@@ -31,7 +31,8 @@
         item_remove: "cart-item-removed",
         updated: "cart:updated"
       },
-      auto_open_sidebar: true
+      type: {{ settings.cart_type | default: 'drawer' | json }},
+      auto_open_sidebar: {% if settings.cart_type == 'page' or settings.cart_type == 'notification' %}false{% else %}true{% endif %}
     },
 
     strings: {
@@ -55,6 +56,7 @@
         contact: `{{ 'products.product.price.contact' | t }}`,
         inStock: `{{ 'products.product.inventory_in_stock' | t }}`,
         updating: `{{ 'products.product.updating' | t }}`,
+        metaUnavailable: `{{ 'products.product.meta_unavailable' | t }}`,
         adding: `{{ 'products.product.adding' | t }}`,
         selectAllOptions: `{{ 'products.product.select_all_options' | t }}`,
         loadError: `{{ 'products.product.load_error' | t }}`
@@ -64,6 +66,10 @@
         copyFailed: `{{ 'general.share.copy_failed' | t }}`,
         copied: `{{ 'general.share.copied' | t }}`,
         copyArticleLink: `{{ 'general.share.copy_article_link' | t }}`
+      },
+      collection: {
+        moreLoaded: `{{ 'products.facets.more_products_loaded' | t }}`,
+        loadError: `{{ 'products.facets.load_error' | t }}`
       },
       accessibility: {
         close: `{{ 'accessibility.close' | t }}`,
@@ -118,9 +124,7 @@
 <script defer src="{{ 'toast.js' | asset_url }}"></script>
 <script defer src="{{ 'back-to-top.js' | asset_url }}"></script>
 
-{%- if template == 'index' -%}
-  <script defer src="{{ 'index.js' | asset_url }}"></script>
-{%- elsif template == 'collection' -%}
+{%- if template == 'collection' -%}
   <script defer src="{{ 'collection.js' | asset_url }}"></script>
 {%- elsif template == 'product' -%}
   <script defer src="{{ 'product.js' | asset_url }}"></script>
@@ -137,6 +141,7 @@
 {%- elsif template == 'page.faq' -%}
   <script defer src="{{ 'page-faq.js' | asset_url }}"></script>
 {%- elsif template contains 'search' -%}
+  <script defer src="{{ 'collection.js' | asset_url }}"></script>
   <script defer src="{{ 'search.js' | asset_url }}"></script>
 {%- endif -%}
 

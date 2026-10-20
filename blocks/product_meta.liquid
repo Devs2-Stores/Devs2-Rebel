@@ -8,56 +8,35 @@
 {%- liquid
   assign selected_variant = product.selected_or_first_available_variant | default: product.variants.first
   assign available = product.selected_or_first_available_variant.available
+  assign meta_unavailable = 'products.product.meta_unavailable' | t
 -%}
 
 <ul class="product-template__meta" {{ block.shopify_attributes }}>
-  {%- liquid
-    assign meta_count = 0
-  -%}
   {%- if block.settings.show_sku -%}
-    {%- if meta_count > 0 -%}
-      <li class="product-template__meta-separator">|</li>
-    {%- endif -%}
     <li class="product-template__meta-item">
       <span class="product-template__meta-label">{{ 'products.product.sku' | t }}:</span>
-      <strong data-product-sku>{{- selected_variant.sku | default: 'N/A' -}}</strong>
+      <strong data-product-sku>{{- selected_variant.sku | default: meta_unavailable -}}</strong>
     </li>
-    {%- assign meta_count = meta_count | plus: 1 -%}
   {%- endif -%}
   {%- if block.settings.show_barcode -%}
-    {%- if meta_count > 0 -%}
-      <li class="product-template__meta-separator">|</li>
-    {%- endif -%}
     <li class="product-template__meta-item">
       <span class="product-template__meta-label">{{ 'products.product.barcode' | t }}:</span>
-      <strong data-product-barcode>{{- selected_variant.barcode | default: 'N/A' -}}</strong>
+      <strong data-product-barcode>{{- selected_variant.barcode | default: meta_unavailable -}}</strong>
     </li>
-    {%- assign meta_count = meta_count | plus: 1 -%}
   {%- endif -%}
   {%- if block.settings.show_vendor and product.vendor != blank -%}
-    {%- if meta_count > 0 -%}
-      <li class="product-template__meta-separator">|</li>
-    {%- endif -%}
     <li class="product-template__meta-item">
       <span class="product-template__meta-label">{{ 'products.product.vendor' | t }}:</span>
       <strong>{{ product.vendor | link_to_vendor }}</strong>
     </li>
-    {%- assign meta_count = meta_count | plus: 1 -%}
   {%- endif -%}
   {%- if block.settings.show_type and product.type != blank -%}
-    {%- if meta_count > 0 -%}
-      <li class="product-template__meta-separator">|</li>
-    {%- endif -%}
     <li class="product-template__meta-item">
       <span class="product-template__meta-label">{{ 'products.product.type' | t }}:</span>
       <strong>{{ product.type | link_to_type }}</strong>
     </li>
-    {%- assign meta_count = meta_count | plus: 1 -%}
   {%- endif -%}
   {%- if block.settings.show_availability -%}
-    {%- if meta_count > 0 -%}
-      <li class="product-template__meta-separator">|</li>
-    {%- endif -%}
     <li class="product-template__meta-item">
       <span class="product-template__meta-label">{{ 'products.product.availability' | t }}:</span>
       {%- if available -%}

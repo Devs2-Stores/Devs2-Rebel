@@ -8,13 +8,12 @@
   function initFooterMenu() {
     var footerMenus = document.querySelectorAll('.footer-actions-menu');
     footerMenus.forEach(function(menu) {
-      var title = menu.querySelector('.footer-actions-menu__title');
-      if (!title || title.dataset.bound) return;
-      title.dataset.bound = '1';
-      title.addEventListener('click', function() {
-        if (window.innerWidth < 768) {
-          menu.classList.toggle('active');
-        }
+      var toggle = menu.querySelector('.footer-actions-menu__toggle');
+      if (!toggle || toggle.dataset.bound) return;
+      toggle.dataset.bound = '1';
+      toggle.addEventListener('click', function() {
+        var open = menu.classList.toggle('active');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
     });
   }
@@ -41,4 +40,5 @@
   } else {
     initAll();
   }
+  document.addEventListener('shopify:section:load', initAll);
 })();

@@ -1,0 +1,299 @@
+(node:24316) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[NAV] cart-1440 http://127.0.0.1:9292/
+[PASS] overlay:cart-1440 :: trigger is keyboard focusable with a name
+[PASS] overlay:cart-1440 :: closed at rest: hidden and nothing focusable
+[PASS] overlay:cart-1440 :: opens from keyboard (Enter on trigger)
+[PASS] overlay:cart-1440 :: dialog semantics: role=dialog + aria-modal + name
+[PASS] overlay:cart-1440 :: focus moves inside
+[PASS] overlay:cart-1440 :: panel is topmost layer
+[PASS] overlay:cart-1440 :: panel fits viewport horizontally
+[PASS] overlay:cart-1440 :: panel top inside viewport
+[PASS] overlay:cart-1440 :: page scroll locked
+[PASS] overlay:cart-1440 :: no layout shift of page behind
+[PASS] overlay:cart-1440 :: scroll position kept while open
+[PASS] overlay:cart-1440 :: nothing focusable under aria-hidden
+[PASS] overlay:cart-1440 :: text keeps >= 12px from panel edges
+[PASS] overlay:cart-1440 :: panel text uses a theme font family: body, heading or subheading token (slotted content included)
+[PASS] overlay:cart-1440 :: wheel outside panel does not scroll page
+[PASS] overlay:cart-1440 :: Tab x20 + Shift+Tab x6 stay inside
+[PASS] overlay:cart-1440 :: close button named and >= 24x24
+[PASS] overlay:cart-1440 :: Escape closes
+[PASS] overlay:cart-1440 :: Escape: focus returns to trigger
+[PASS] overlay:cart-1440 :: closed: scroll unlocked and position restored
+[PASS] overlay:cart-1440 :: closed: nothing focusable inside
+[PASS] overlay:cart-1440 :: close button closes
+[PASS] overlay:cart-1440 :: close button: focus returns to trigger
+[PASS] overlay:cart-1440 :: click outside panel closes
+[PASS] overlay:cart-1440 :: third open/close cycle still works
+[PASS] overlay:cart-1440 :: no page errors during cycles
+[NAV] cart-375 http://127.0.0.1:9292/
+[PASS] overlay:cart-375 :: trigger is keyboard focusable with a name
+[PASS] overlay:cart-375 :: closed at rest: hidden and nothing focusable
+[PASS] overlay:cart-375 :: opens from keyboard (Enter on trigger)
+[PASS] overlay:cart-375 :: dialog semantics: role=dialog + aria-modal + name
+[PASS] overlay:cart-375 :: focus moves inside
+[PASS] overlay:cart-375 :: panel is topmost layer
+[PASS] overlay:cart-375 :: panel fits viewport horizontally
+[PASS] overlay:cart-375 :: panel top inside viewport
+[PASS] overlay:cart-375 :: page scroll locked
+[PASS] overlay:cart-375 :: no layout shift of page behind
+[PASS] overlay:cart-375 :: scroll position kept while open
+[PASS] overlay:cart-375 :: nothing focusable under aria-hidden
+[PASS] overlay:cart-375 :: text keeps >= 12px from panel edges
+[PASS] overlay:cart-375 :: panel text uses a theme font family: body, heading or subheading token (slotted content included)
+[PASS] overlay:cart-375 :: Tab x20 + Shift+Tab x6 stay inside
+[PASS] overlay:cart-375 :: close button named and >= 24x24
+[PASS] overlay:cart-375 :: Escape closes
+[PASS] overlay:cart-375 :: Escape: focus returns to trigger
+[PASS] overlay:cart-375 :: closed: scroll unlocked and position restored
+[PASS] overlay:cart-375 :: closed: nothing focusable inside
+[PASS] overlay:cart-375 :: close button closes
+[PASS] overlay:cart-375 :: close button: focus returns to trigger
+[INFO] overlay:cart-375 :: click outside panel closes :: "panel covers viewport"
+[PASS] overlay:cart-375 :: third open/close cycle still works
+[PASS] overlay:cart-375 :: no page errors during cycles
+[NAV] search-1440 http://127.0.0.1:9292/
+[PASS] overlay:search-1440 :: trigger is keyboard focusable with a name
+[PASS] overlay:search-1440 :: closed at rest: hidden and nothing focusable
+[PASS] overlay:search-1440 :: opens from keyboard (Enter on trigger)
+[PASS] overlay:search-1440 :: dialog semantics: role=dialog + aria-modal + name
+[PASS] overlay:search-1440 :: focus moves inside
+[PASS] overlay:search-1440 :: panel is topmost layer
+[PASS] overlay:search-1440 :: panel fits viewport horizontally
+[PASS] overlay:search-1440 :: panel top inside viewport
+[PASS] overlay:search-1440 :: page scroll locked
+[PASS] overlay:search-1440 :: no layout shift of page behind
+[PASS] overlay:search-1440 :: scroll position kept while open
+[PASS] overlay:search-1440 :: nothing focusable under aria-hidden
+[PASS] overlay:search-1440 :: text keeps >= 12px from panel edges
+[PASS] overlay:search-1440 :: panel text uses a theme font family: body, heading or subheading token (slotted content included)
+[PASS] overlay:search-1440 :: wheel outside panel does not scroll page
+[PASS] overlay:search-1440 :: Tab x20 + Shift+Tab x6 stay inside
+[PASS] overlay:search-1440 :: close button named and >= 24x24
+[PASS] overlay:search-1440 :: Escape closes
+[PASS] overlay:search-1440 :: Escape: focus returns to trigger
+[PASS] overlay:search-1440 :: closed: scroll unlocked and position restored
+[PASS] overlay:search-1440 :: closed: nothing focusable inside
+[PASS] overlay:search-1440 :: close button closes
+[PASS] overlay:search-1440 :: close button: focus returns to trigger
+[PASS] overlay:search-1440 :: click outside panel closes
+[PASS] overlay:search-1440 :: third open/close cycle still works
+[PASS] overlay:search-1440 :: no page errors during cycles
+[NAV] search-375 http://127.0.0.1:9292/
+[PASS] overlay:search-375 :: trigger is keyboard focusable with a name
+[PASS] overlay:search-375 :: closed at rest: hidden and nothing focusable
+[PASS] overlay:search-375 :: opens from keyboard (Enter on trigger)
+[PASS] overlay:search-375 :: dialog semantics: role=dialog + aria-modal + name
+[PASS] overlay:search-375 :: focus moves inside
+[PASS] overlay:search-375 :: panel is topmost layer
+[PASS] overlay:search-375 :: panel fits viewport horizontally
+[PASS] overlay:search-375 :: panel top inside viewport
+[PASS] overlay:search-375 :: page scroll locked
+[PASS] overlay:search-375 :: no layout shift of page behind
+[PASS] overlay:search-375 :: scroll position kept while open
+[PASS] overlay:search-375 :: nothing focusable under aria-hidden
+[PASS] overlay:search-375 :: text keeps >= 12px from panel edges
+[PASS] overlay:search-375 :: panel text uses a theme font family: body, heading or subheading token (slotted content included)
+[PASS] overlay:search-375 :: Tab x20 + Shift+Tab x6 stay inside
+[PASS] overlay:search-375 :: close button named and >= 24x24
+[PASS] overlay:search-375 :: Escape closes
+[PASS] overlay:search-375 :: Escape: focus returns to trigger
+[PASS] overlay:search-375 :: closed: scroll unlocked and position restored
+[PASS] overlay:search-375 :: closed: nothing focusable inside
+[PASS] overlay:search-375 :: close button closes
+[PASS] overlay:search-375 :: close button: focus returns to trigger
+[INFO] overlay:search-375 :: click outside panel closes :: "panel covers viewport"
+[PASS] overlay:search-375 :: third open/close cycle still works
+[PASS] overlay:search-375 :: no page errors during cycles
+[NAV] mobile-menu-375 http://127.0.0.1:9292/
+[PASS] overlay:mobile-menu-375 :: trigger is keyboard focusable with a name
+[PASS] overlay:mobile-menu-375 :: closed at rest: hidden and nothing focusable
+[PASS] overlay:mobile-menu-375 :: opens from keyboard (Enter on trigger)
+[PASS] overlay:mobile-menu-375 :: dialog semantics: role=dialog + aria-modal + name
+[PASS] overlay:mobile-menu-375 :: focus moves inside
+[PASS] overlay:mobile-menu-375 :: panel is topmost layer
+[PASS] overlay:mobile-menu-375 :: panel fits viewport horizontally
+[PASS] overlay:mobile-menu-375 :: panel top inside viewport
+[PASS] overlay:mobile-menu-375 :: page scroll locked
+[PASS] overlay:mobile-menu-375 :: no layout shift of page behind
+[PASS] overlay:mobile-menu-375 :: scroll position kept while open
+[PASS] overlay:mobile-menu-375 :: nothing focusable under aria-hidden
+[PASS] overlay:mobile-menu-375 :: text keeps >= 12px from panel edges
+[PASS] overlay:mobile-menu-375 :: panel text uses a theme font family: body, heading or subheading token (slotted content included)
+[PASS] overlay:mobile-menu-375 :: wheel outside panel does not scroll page
+[PASS] overlay:mobile-menu-375 :: Tab x20 + Shift+Tab x6 stay inside
+[PASS] overlay:mobile-menu-375 :: close button named and >= 24x24
+[PASS] overlay:mobile-menu-375 :: Escape closes
+[PASS] overlay:mobile-menu-375 :: Escape: focus returns to trigger
+[PASS] overlay:mobile-menu-375 :: closed: scroll unlocked and position restored
+[PASS] overlay:mobile-menu-375 :: closed: nothing focusable inside
+[PASS] overlay:mobile-menu-375 :: close button closes
+[PASS] overlay:mobile-menu-375 :: close button: focus returns to trigger
+[PASS] overlay:mobile-menu-375 :: click outside panel closes
+[PASS] overlay:mobile-menu-375 :: third open/close cycle still works
+[PASS] overlay:mobile-menu-375 :: no page errors during cycles
+[NAV] mobile-menu-768 http://127.0.0.1:9292/
+[PASS] overlay:mobile-menu-768 :: trigger is keyboard focusable with a name
+[PASS] overlay:mobile-menu-768 :: closed at rest: hidden and nothing focusable
+[PASS] overlay:mobile-menu-768 :: opens from keyboard (Enter on trigger)
+[PASS] overlay:mobile-menu-768 :: dialog semantics: role=dialog + aria-modal + name
+[PASS] overlay:mobile-menu-768 :: focus moves inside
+[PASS] overlay:mobile-menu-768 :: panel is topmost layer
+[PASS] overlay:mobile-menu-768 :: panel fits viewport horizontally
+[PASS] overlay:mobile-menu-768 :: panel top inside viewport
+[PASS] overlay:mobile-menu-768 :: page scroll locked
+[PASS] overlay:mobile-menu-768 :: no layout shift of page behind
+[PASS] overlay:mobile-menu-768 :: scroll position kept while open
+[PASS] overlay:mobile-menu-768 :: nothing focusable under aria-hidden
+[PASS] overlay:mobile-menu-768 :: text keeps >= 12px from panel edges
+[PASS] overlay:mobile-menu-768 :: panel text uses a theme font family: body, heading or subheading token (slotted content included)
+[PASS] overlay:mobile-menu-768 :: wheel outside panel does not scroll page
+[PASS] overlay:mobile-menu-768 :: Tab x20 + Shift+Tab x6 stay inside
+[PASS] overlay:mobile-menu-768 :: close button named and >= 24x24
+[PASS] overlay:mobile-menu-768 :: Escape closes
+[PASS] overlay:mobile-menu-768 :: Escape: focus returns to trigger
+[PASS] overlay:mobile-menu-768 :: closed: scroll unlocked and position restored
+[PASS] overlay:mobile-menu-768 :: closed: nothing focusable inside
+[PASS] overlay:mobile-menu-768 :: close button closes
+[PASS] overlay:mobile-menu-768 :: close button: focus returns to trigger
+[PASS] overlay:mobile-menu-768 :: click outside panel closes
+[PASS] overlay:mobile-menu-768 :: third open/close cycle still works
+[PASS] overlay:mobile-menu-768 :: no page errors during cycles
+[NAV] quickview-1440 http://127.0.0.1:9292/collections/all
+[PASS] overlay:quickview-1440 :: trigger is keyboard focusable with a name
+[PASS] overlay:quickview-1440 :: closed at rest: hidden and nothing focusable
+[PASS] overlay:quickview-1440 :: opens from keyboard (Enter on trigger)
+[PASS] overlay:quickview-1440 :: dialog semantics: role=dialog + aria-modal + name
+[PASS] overlay:quickview-1440 :: focus moves inside
+[PASS] overlay:quickview-1440 :: panel is topmost layer
+[PASS] overlay:quickview-1440 :: panel fits viewport horizontally
+[PASS] overlay:quickview-1440 :: panel top inside viewport
+[PASS] overlay:quickview-1440 :: page scroll locked
+[PASS] overlay:quickview-1440 :: no layout shift of page behind
+[PASS] overlay:quickview-1440 :: scroll position kept while open
+[PASS] overlay:quickview-1440 :: nothing focusable under aria-hidden
+[PASS] overlay:quickview-1440 :: text keeps >= 12px from panel edges
+[PASS] overlay:quickview-1440 :: panel text uses a theme font family: body, heading or subheading token (slotted content included)
+[PASS] overlay:quickview-1440 :: wheel outside panel does not scroll page
+[PASS] overlay:quickview-1440 :: Tab x20 + Shift+Tab x6 stay inside
+[PASS] overlay:quickview-1440 :: close button named and >= 24x24
+[PASS] overlay:quickview-1440 :: Escape closes
+[PASS] overlay:quickview-1440 :: Escape: focus returns to trigger
+[PASS] overlay:quickview-1440 :: closed: scroll unlocked and position restored
+[PASS] overlay:quickview-1440 :: closed: nothing focusable inside
+[PASS] overlay:quickview-1440 :: close button closes
+[PASS] overlay:quickview-1440 :: close button: focus returns to trigger
+[PASS] overlay:quickview-1440 :: click outside panel closes
+[PASS] overlay:quickview-1440 :: third open/close cycle still works
+[PASS] overlay:quickview-1440 :: no page errors during cycles
+[NAV] filter-375 http://127.0.0.1:9292/collections/all
+[PASS] overlay:filter-375 :: trigger is keyboard focusable with a name
+[PASS] overlay:filter-375 :: closed at rest: hidden and nothing focusable
+[PASS] overlay:filter-375 :: opens from keyboard (Enter on trigger)
+[PASS] overlay:filter-375 :: dialog semantics: role=dialog + aria-modal + name
+[PASS] overlay:filter-375 :: focus moves inside
+[PASS] overlay:filter-375 :: panel is topmost layer
+[PASS] overlay:filter-375 :: panel fits viewport horizontally
+[PASS] overlay:filter-375 :: panel top inside viewport
+[PASS] overlay:filter-375 :: page scroll locked
+[PASS] overlay:filter-375 :: no layout shift of page behind
+[PASS] overlay:filter-375 :: scroll position kept while open
+[PASS] overlay:filter-375 :: nothing focusable under aria-hidden
+[PASS] overlay:filter-375 :: text keeps >= 12px from panel edges
+[PASS] overlay:filter-375 :: panel text uses a theme font family: body, heading or subheading token (slotted content included)
+[PASS] overlay:filter-375 :: wheel outside panel does not scroll page
+[PASS] overlay:filter-375 :: Tab x20 + Shift+Tab x6 stay inside
+[PASS] overlay:filter-375 :: close button named and >= 24x24
+[PASS] overlay:filter-375 :: Escape closes
+[PASS] overlay:filter-375 :: Escape: focus returns to trigger
+[PASS] overlay:filter-375 :: closed: scroll unlocked and position restored
+[PASS] overlay:filter-375 :: closed: nothing focusable inside
+[PASS] overlay:filter-375 :: close button closes
+[PASS] overlay:filter-375 :: close button: focus returns to trigger
+[PASS] overlay:filter-375 :: click outside panel closes
+[PASS] overlay:filter-375 :: third open/close cycle still works
+[PASS] overlay:filter-375 :: no page errors during cycles
+[NAV] pickup-1440 http://127.0.0.1:9292/products/rebel-tactical-bomber-jacket
+[INFO] overlay:pickup-1440 :: trigger rendered :: "#ShowPickupAvailabilityDrawer not visible at 1440 (needs store data: a location with local pickup enabled)"
+[NAV] pickup-375 http://127.0.0.1:9292/products/rebel-tactical-bomber-jacket
+[INFO] overlay:pickup-375 :: trigger rendered :: "#ShowPickupAvailabilityDrawer not visible at 375 (needs store data: a location with local pickup enabled)"
+[NAV] size-guide-1440 http://127.0.0.1:9292/products/rebel-tactical-bomber-jacket
+[INFO] overlay:size-guide-1440 :: opened through element API (no trigger rendered with current settings) :: "size-guide-modal"
+[PASS] overlay:size-guide-1440 :: closed at rest: hidden and nothing focusable
+[PASS] overlay:size-guide-1440 :: dialog semantics: role=dialog + aria-modal + name
+[PASS] overlay:size-guide-1440 :: focus moves inside
+[PASS] overlay:size-guide-1440 :: panel is topmost layer
+[PASS] overlay:size-guide-1440 :: panel fits viewport horizontally
+[PASS] overlay:size-guide-1440 :: panel top inside viewport
+[PASS] overlay:size-guide-1440 :: page scroll locked
+[PASS] overlay:size-guide-1440 :: no layout shift of page behind
+[PASS] overlay:size-guide-1440 :: scroll position kept while open
+[PASS] overlay:size-guide-1440 :: nothing focusable under aria-hidden
+[PASS] overlay:size-guide-1440 :: text keeps >= 12px from panel edges
+[PASS] overlay:size-guide-1440 :: panel text uses a theme font family: body, heading or subheading token (slotted content included)
+[PASS] overlay:size-guide-1440 :: wheel outside panel does not scroll page
+[PASS] overlay:size-guide-1440 :: Tab x20 + Shift+Tab x6 stay inside
+[PASS] overlay:size-guide-1440 :: close button named and >= 24x24
+[PASS] overlay:size-guide-1440 :: Escape closes
+[PASS] overlay:size-guide-1440 :: Escape: focus returns to trigger
+[PASS] overlay:size-guide-1440 :: closed: scroll unlocked and position restored
+[PASS] overlay:size-guide-1440 :: closed: nothing focusable inside
+[PASS] overlay:size-guide-1440 :: close button closes
+[PASS] overlay:size-guide-1440 :: close button: focus returns to trigger
+[PASS] overlay:size-guide-1440 :: click outside panel closes
+[PASS] overlay:size-guide-1440 :: third open/close cycle still works
+[PASS] overlay:size-guide-1440 :: no page errors during cycles
+[NAV] lightbox-1440 http://127.0.0.1:9292/products/rebel-tactical-bomber-jacket
+[PASS] overlay:lightbox-1440 :: trigger is keyboard focusable with a name
+[PASS] overlay:lightbox-1440 :: closed at rest: hidden and nothing focusable
+[PASS] overlay:lightbox-1440 :: opens from keyboard (Enter on trigger)
+[PASS] overlay:lightbox-1440 :: dialog semantics: role=dialog + aria-modal + name
+[PASS] overlay:lightbox-1440 :: focus moves inside
+[PASS] overlay:lightbox-1440 :: panel is topmost layer
+[PASS] overlay:lightbox-1440 :: panel fits viewport horizontally
+[PASS] overlay:lightbox-1440 :: panel top inside viewport
+[PASS] overlay:lightbox-1440 :: page scroll locked
+[PASS] overlay:lightbox-1440 :: no layout shift of page behind
+[PASS] overlay:lightbox-1440 :: scroll position kept while open
+[PASS] overlay:lightbox-1440 :: nothing focusable under aria-hidden
+[PASS] overlay:lightbox-1440 :: text keeps >= 12px from panel edges
+[PASS] overlay:lightbox-1440 :: panel text uses a theme font family: body, heading or subheading token (slotted content included)
+[PASS] overlay:lightbox-1440 :: Tab x20 + Shift+Tab x6 stay inside
+[PASS] overlay:lightbox-1440 :: close button named and >= 24x24
+[PASS] overlay:lightbox-1440 :: Escape closes
+[PASS] overlay:lightbox-1440 :: Escape: focus returns to trigger
+[PASS] overlay:lightbox-1440 :: closed: scroll unlocked and position restored
+[PASS] overlay:lightbox-1440 :: closed: nothing focusable inside
+[PASS] overlay:lightbox-1440 :: close button closes
+[PASS] overlay:lightbox-1440 :: close button: focus returns to trigger
+[INFO] overlay:lightbox-1440 :: click outside panel closes :: "panel covers viewport"
+[PASS] overlay:lightbox-1440 :: third open/close cycle still works
+[PASS] overlay:lightbox-1440 :: no page errors during cycles
+[NAV] lightbox-375 http://127.0.0.1:9292/products/rebel-tactical-bomber-jacket
+[PASS] overlay:lightbox-375 :: trigger is keyboard focusable with a name
+[PASS] overlay:lightbox-375 :: closed at rest: hidden and nothing focusable
+[PASS] overlay:lightbox-375 :: opens from keyboard (Enter on trigger)
+[PASS] overlay:lightbox-375 :: dialog semantics: role=dialog + aria-modal + name
+[PASS] overlay:lightbox-375 :: focus moves inside
+[PASS] overlay:lightbox-375 :: panel is topmost layer
+[PASS] overlay:lightbox-375 :: panel fits viewport horizontally
+[PASS] overlay:lightbox-375 :: panel top inside viewport
+[PASS] overlay:lightbox-375 :: page scroll locked
+[PASS] overlay:lightbox-375 :: no layout shift of page behind
+[PASS] overlay:lightbox-375 :: scroll position kept while open
+[PASS] overlay:lightbox-375 :: nothing focusable under aria-hidden
+[PASS] overlay:lightbox-375 :: text keeps >= 12px from panel edges
+[PASS] overlay:lightbox-375 :: panel text uses a theme font family: body, heading or subheading token (slotted content included)
+[PASS] overlay:lightbox-375 :: Tab x20 + Shift+Tab x6 stay inside
+[PASS] overlay:lightbox-375 :: close button named and >= 24x24
+[PASS] overlay:lightbox-375 :: Escape closes
+[PASS] overlay:lightbox-375 :: Escape: focus returns to trigger
+[PASS] overlay:lightbox-375 :: closed: scroll unlocked and position restored
+[PASS] overlay:lightbox-375 :: closed: nothing focusable inside
+[PASS] overlay:lightbox-375 :: close button closes
+[PASS] overlay:lightbox-375 :: close button: focus returns to trigger
+[INFO] overlay:lightbox-375 :: click outside panel closes :: "panel covers viewport"
+[PASS] overlay:lightbox-375 :: third open/close cycle still works
+[PASS] overlay:lightbox-375 :: no page errors during cycles
+SUMMARY {"PASS":276,"FAIL":0,"INFO":7}

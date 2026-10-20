@@ -1,0 +1,98 @@
+{% doc %}
+  Collection Hero snippet.
+  Renders the collection banner, heading, description, and product count.
+{% enddoc %}
+
+{%- liquid
+  assign show_banner = false
+  for block in section.blocks
+    if block.type == 'collection_image' and block.settings.enabled
+      assign show_banner = true
+      assign banner_block = block
+    endif
+  endfor
+-%}
+
+{%- if show_banner and collection.image != blank -%}
+  {%- liquid
+    assign hero_ratio = banner_block.settings.image_ratio | default: 'auto'
+    assign hero_position = banner_block.settings.image_position | default: 'center center'
+    assign hero_height = banner_block.settings.banner_height | default: 'medium'
+    assign hero_show_title = banner_block.settings.show_title
+    assign hero_show_description = banner_block.settings.show_description
+    assign hero_show_count = banner_block.settings.show_count
+    assign hero_style = 'object-position: ' | append: hero_position
+    assign has_content = false
+    if hero_show_title or hero_show_description or hero_show_count
+      assign has_content = true
+    endif
+  -%}
+  <div
+    class="collection-hero collection-hero--{{ hero_height }}{% unless has_content %} collection-hero--image-only{% endunless %}"
+    {{ banner_block.shopify_attributes }}
+  >
+    <div
+      class="collection-hero__banner"
+      style="{% if hero_ratio != 'auto' %}aspect-ratio: {{ hero_ratio }};{% endif %}"
+    >
+      {%- assign img_alt = collection.title | escape -%}
+      {{
+        collection.image
+        | image_url: width: 2048
+        | image_tag:
+          widths: '480, 600, 1024, 1440, 2048',
+          sizes: '(min-width: 1024px) 50vw, 100vw',
+          alt: img_alt,
+          loading: 'eager',
+          fetchpriority: 'high',
+          class: 'collection-hero__img',
+          style: hero_style
+      }}
+    </div>
+    {%- if has_content -%}
+      <div class="collection-hero__content">
+        {%- if hero_show_title -%}
+          <h1 class="collection-hero__heading heading-size-{{ section.settings.heading_size | default: 'md' }}">
+            {%- unless is_all_collection -%}
+              {{ collection.title | escape }}
+            {%- else -%}
+              {{ 'general.breadcrumbs.all_products' | t }}
+            {%- endunless -%}
+          </h1>
+        {%- endif -%}
+        {%- if hero_show_description and collection.description != blank and show_collection_description -%}
+          <div class="collection-hero__description rte">
+            {{ collection.description }}
+          </div>
+        {%- endif -%}
+        {%- if hero_show_count and collection.products_count > 0 -%}
+          <div class="collection-hero__count">
+            {{ collection.products_count }}
+            {{ 'sections.collection_template.products_count' | t }}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+  {%- unless hero_show_title -%}
+    <div class="collection-template__title">
+      <h1 class="collection-template__heading heading-size-{{ section.settings.heading_size | default: 'md' }}">
+        {%- unless is_all_collection -%}
+          {{ collection.title | escape }}
+        {%- else -%}
+          {{ 'general.breadcrumbs.all_products' | t }}
+        {%- endunless -%}
+      </h1>
+    </div>
+  {%- endunless -%}
+{%- else -%}
+  <div class="collection-template__title">
+    <h1 class="collection-template__heading heading-size-{{ section.settings.heading_size | default: 'md' }}">
+      {%- unless is_all_collection -%}
+        {{ collection.title | escape }}
+      {%- else -%}
+        {{ 'general.breadcrumbs.all_products' | t }}
+      {%- endunless -%}
+    </h1>
+  </div>
+{%- endif -%}

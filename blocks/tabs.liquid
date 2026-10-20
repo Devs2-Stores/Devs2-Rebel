@@ -12,6 +12,21 @@
     {% content_for 'blocks' %}
   </div>
 </div>
+<script>
+  (function (root) {
+    var nav = root.querySelector('[data-tabs-nav]');
+    root.querySelectorAll('template[data-tab-nav]').forEach(function (tpl) {
+      nav.appendChild(tpl.content.cloneNode(true));
+      tpl.remove();
+    });
+    var first = nav.querySelector('.product-template__tab-btn');
+    if (!first || nav.querySelector('.product-template__tab-btn.active')) return;
+    first.classList.add('active');
+    first.setAttribute('aria-selected', 'true');
+    var panel = root.querySelector('[data-panel="' + first.getAttribute('data-tab') + '"]');
+    if (panel) panel.classList.add('active');
+  })(document.currentScript.previousElementSibling);
+</script>
 
 {% schema %}
 {

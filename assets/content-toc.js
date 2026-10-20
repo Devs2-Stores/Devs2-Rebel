@@ -34,7 +34,9 @@
 
       var existingList = this.querySelector('.toc__list');
       if (existingList) existingList.remove();
-      this.headings = Array.from(content.querySelectorAll(this.getHeadingSelector()));
+      this.headings = Array.from(content.querySelectorAll(this.getHeadingSelector())).filter(function(heading) {
+        return heading.textContent.trim() !== '';
+      });
 
       if (this.headings.length === 0) {
         this.style.display = 'none';

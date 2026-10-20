@@ -55,18 +55,19 @@
           </div>
         </div>
       {%- else -%}
-        {%- comment %}Fallback preview when no blocks exist{% endcomment -%}
-        <div class="section-promo__item">
-          <div class="section-promo__inner section-promo__inner--{{ section.settings.text_align }}">
-            <div class="section-promo__content">
-              <div class="section-promo__text-wrap">
-                <p class="section-promo__heading heading-size-{{ section.settings.heading_size }}">
-                  Add a promotion block to get started
-                </p>
+        {%- if request.design_mode -%}
+          <div class="section-promo__item">
+            <div class="section-promo__inner section-promo__inner--{{ section.settings.text_align }}">
+              <div class="section-promo__content">
+                <div class="section-promo__text-wrap">
+                  <p class="section-promo__heading heading-size-{{ section.settings.heading_size }}">
+                    {{ 'sections.promotion_banner.onboarding' | t }}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        {%- endif -%}
       {%- endfor -%}
     </div>
   </div>
@@ -80,11 +81,13 @@
   container.querySelectorAll('[data-promo-banner]').forEach(function(el) {
     var id = el.getAttribute('data-promo-id');
     var key = 'promo_dismissed_' + id;
-    if (sessionStorage.getItem(key)) { el.style.display = 'none'; return; }
+    var dismissed = false;
+    try { dismissed = !!sessionStorage.getItem(key); } catch (e) {}
+    if (dismissed) { el.style.display = 'none'; return; }
     var btn = el.querySelector('[data-promo-close]');
     if (btn) btn.addEventListener('click', function() {
       el.style.display = 'none';
-      sessionStorage.setItem(key, '1');
+      try { sessionStorage.setItem(key, '1'); } catch (e) {}
     });
   });
 })();
@@ -125,78 +128,271 @@
   .section-promo__icon-img { height: 32px; width: auto; }
 
   .section-promo__text-wrap { display: flex; flex-direction: column; gap: 0.125rem; }
-  .section-promo__heading { margin: 0; color: rgb(var(--color-foreground)); font-weight: 700; }
-  .section-promo__text { margin: 0; color: rgba(var(--color-foreground), 0.7); }
+  .section-promo__heading { margin: 0; color: var(--color-ink); font-weight: 600; letter-spacing: var(--heading-tracking); }
+  .section-promo__text { margin: 0; color: var(--color-muted); }
 
   .section-promo__btn {
     display: inline-flex; align-items: center; justify-content: center;
-    font-weight: 600; text-decoration: none;
+    min-height: var(--btn-height);
+    padding: 0 var(--btn-padding-x);
+    font-size: var(--btn-font-size);
+    font-weight: var(--btn-font-weight);
+    letter-spacing: var(--btn-letter-spacing);
+    text-decoration: none;
     border-radius: var(--buttons-radius, 0);
-    transition: opacity 0.2s; cursor: pointer; flex-shrink: 0;
+    transition: background-color var(--duration-default) ease, color var(--duration-default) ease, border-color var(--duration-default) ease;
+    cursor: pointer; flex-shrink: 0;
   }
-  .section-promo__btn:hover { opacity: 0.85; }
   .section-promo__btn--primary {
-    background: rgb(var(--color-button)); color: rgb(var(--color-button-text));
-    border: 1px solid rgb(var(--color-button));
+    background: var(--color-primary); color: rgb(var(--color-button-text));
+    border: 1px solid var(--color-primary);
+  }
+  .section-promo__btn--primary:hover {
+    background: var(--color-primary-strong); border-color: var(--color-primary-strong);
+    color: rgb(var(--color-button-text));
   }
   .section-promo__btn--secondary {
-    background: transparent; color: rgb(var(--color-foreground));
-    border: 1px solid rgba(var(--color-foreground), 0.3);
+    background: transparent; color: var(--color-ink);
+    border: 1px solid var(--color-ink);
+  }
+  .section-promo__btn--secondary:hover {
+    background: var(--color-ink); color: rgb(var(--color-background));
+    border-color: var(--color-ink);
   }
 
   .section-promo__close {
     position: absolute; right: 0; top: 50%; transform: translateY(-50%);
     background: none; border: none; cursor: pointer;
-    color: rgba(var(--color-foreground), 0.4);
-    transition: color 0.3s; padding: 4px;
+    color: var(--color-muted);
+    transition: color var(--duration-default) ease; padding: 4px;
   }
-  .section-promo__close:hover { color: rgb(var(--color-foreground)); }
+  .section-promo__close:hover { color: var(--color-ink); }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "Promotion banner",
+  "name": "t:sections.promotion_banner.name",
   "tag": "section",
   "class": "section-promo-wrapper",
   "settings": [
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" },
-    { "type": "header", "content": "Typography" },
-    { "type": "select", "id": "heading_size", "label": "Heading size", "options": [{ "value": "xs", "label": "XS" },{ "value": "sm", "label": "S" },{ "value": "md", "label": "M" }], "default": "sm" },
-    { "type": "select", "id": "text_size", "label": "Text size", "options": [{ "value": "sm", "label": "S" },{ "value": "md", "label": "M" }], "default": "sm" },
-    { "type": "header", "content": "Button defaults" },
-    { "type": "select", "id": "button_style", "label": "Button style", "options": [{ "value": "primary", "label": "Primary" },{ "value": "secondary", "label": "Secondary" }], "default": "primary" },
-    { "type": "select", "id": "button_size", "label": "Button size", "options": [{ "value": "xs", "label": "XS" },{ "value": "sm", "label": "S" },{ "value": "md", "label": "M" }], "default": "sm" },
-    { "type": "header", "content": "Layout" },
-    { "type": "select", "id": "text_align", "label": "Alignment", "options": [{ "value": "left", "label": "Left" },{ "value": "center", "label": "Center" }], "default": "center" },
-    { "type": "checkbox", "id": "dismissible", "label": "Allow dismiss per block", "default": false },
-    { "type": "range", "id": "block_gap", "min": 0, "max": 24, "step": 2, "unit": "px", "label": "Gap between blocks", "default": 8 },
-    { "type": "header", "content": "Desktop spacing" },
-    { "type": "range", "id": "padding_top_desktop", "min": 0, "max": 60, "step": 5, "unit": "px", "label": "Top", "default": 15 },
-    { "type": "range", "id": "padding_bottom_desktop", "min": 0, "max": 60, "step": 5, "unit": "px", "label": "Bottom", "default": 15 },
-    { "type": "header", "content": "Mobile spacing" },
-    { "type": "range", "id": "padding_top_mobile", "min": 0, "max": 40, "step": 5, "unit": "px", "label": "Top", "default": 10 },
-    { "type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 40, "step": 5, "unit": "px", "label": "Bottom", "default": 10 }
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.promotion_banner.settings.color_scheme.label",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.promotion_banner.settings.header__typography.content"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "t:sections.promotion_banner.settings.heading_size.label",
+      "options": [
+        {
+          "value": "xs",
+          "label": "t:sections.promotion_banner.settings.heading_size.options.xs"
+        },
+        {
+          "value": "sm",
+          "label": "t:sections.promotion_banner.settings.heading_size.options.sm"
+        },
+        {
+          "value": "md",
+          "label": "t:sections.promotion_banner.settings.heading_size.options.md"
+        }
+      ],
+      "default": "sm"
+    },
+    {
+      "type": "select",
+      "id": "text_size",
+      "label": "t:sections.promotion_banner.settings.text_size.label",
+      "options": [
+        {
+          "value": "sm",
+          "label": "t:sections.promotion_banner.settings.text_size.options.sm"
+        },
+        {
+          "value": "md",
+          "label": "t:sections.promotion_banner.settings.text_size.options.md"
+        }
+      ],
+      "default": "sm"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.promotion_banner.settings.header__button_defaults.content"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "t:sections.promotion_banner.settings.button_style.label",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:sections.promotion_banner.settings.button_style.options.primary"
+        },
+        {
+          "value": "secondary",
+          "label": "t:sections.promotion_banner.settings.button_style.options.secondary"
+        }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "select",
+      "id": "button_size",
+      "label": "t:sections.promotion_banner.settings.button_size.label",
+      "options": [
+        {
+          "value": "xs",
+          "label": "t:sections.promotion_banner.settings.button_size.options.xs"
+        },
+        {
+          "value": "sm",
+          "label": "t:sections.promotion_banner.settings.button_size.options.sm"
+        },
+        {
+          "value": "md",
+          "label": "t:sections.promotion_banner.settings.button_size.options.md"
+        }
+      ],
+      "default": "sm"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.promotion_banner.settings.header__layout.content"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "t:sections.promotion_banner.settings.text_align.label",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.promotion_banner.settings.text_align.options.left"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.promotion_banner.settings.text_align.options.center"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "dismissible",
+      "label": "t:sections.promotion_banner.settings.dismissible.label",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "block_gap",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.promotion_banner.settings.block_gap.label",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "t:sections.promotion_banner.settings.header__desktop_spacing.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.promotion_banner.settings.padding_top_desktop.label",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.promotion_banner.settings.padding_bottom_desktop.label",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "t:sections.promotion_banner.settings.header__mobile_spacing.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.promotion_banner.settings.padding_top_mobile.label",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.promotion_banner.settings.padding_bottom_mobile.label",
+      "default": 10
+    }
   ],
   "blocks": [
     {
       "type": "promo_item",
-      "name": "Promotion",
+      "name": "t:sections.promotion_banner.blocks.promo_item.name",
       "settings": [
-        { "type": "image_picker", "id": "icon", "label": "Icon / Image" },
-        { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Limited time offer" },
-        { "type": "inline_richtext", "id": "text", "label": "Text", "default": "Get 20% off your first order with code WELCOME20" },
-        { "type": "header", "content": "Button" },
-        { "type": "text", "id": "button_label", "label": "Button label" },
-        { "type": "url", "id": "button_link", "label": "Button link" }
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "t:sections.promotion_banner.blocks.promo_item.settings.icon.label"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "t:sections.promotion_banner.blocks.promo_item.settings.heading.label",
+          "default": "t:sections.promotion_banner.blocks.promo_item.settings.heading.default"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "t:sections.promotion_banner.blocks.promo_item.settings.text.label",
+          "default": "t:sections.promotion_banner.blocks.promo_item.settings.text.default"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.promotion_banner.blocks.promo_item.settings.header__button.content"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "t:sections.promotion_banner.blocks.promo_item.settings.button_label.label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "t:sections.promotion_banner.blocks.promo_item.settings.button_link.label"
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Promotion banner",
+      "name": "t:sections.promotion_banner.presets.promotion_banner.name",
       "category": "Custom",
       "blocks": [
-        { "type": "promo_item" }
+        {
+          "type": "promo_item"
+        }
       ]
     }
   ]

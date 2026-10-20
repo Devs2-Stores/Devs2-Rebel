@@ -19,9 +19,29 @@
             {%- endif -%}
           </a>
         </div>
-        {%- if section.settings.description != blank -%}
+        {%- if settings.brand_image != blank -%}
+          <div class="footer-info__brand-image">
+            {%- assign brand_image_alt = settings.brand_image.alt | default: shop.name | escape -%}
+            {{
+              settings.brand_image
+              | image_url: width: 1100
+              | image_tag:
+                width: settings.brand_image_width,
+                widths: '110, 275, 550, 1100',
+                sizes: '(max-width: 749px) 100vw, 550px',
+                alt: brand_image_alt,
+                loading: 'lazy',
+                class: 'footer-info__brand-image-img'
+            }}
+          </div>
+        {%- endif -%}
+        {%- if settings.brand_headline != blank -%}
+          <p class="footer-info__headline">{{ settings.brand_headline }}</p>
+        {%- endif -%}
+        {%- assign footer_description = section.settings.description | default: settings.brand_description -%}
+        {%- if footer_description != blank -%}
         <div class="footer-info__description">
-          <p class="footer-info__description-text">{{ section.settings.description }}</p>
+          <div class="footer-info__description-text">{{ footer_description }}</div>
         </div>
         {%- endif -%}
         <div class="footer-info__social-media">
@@ -56,9 +76,10 @@
           {%- if section.settings.cert_dmca_link != blank -%}
           <a href="{{ section.settings.cert_dmca_link }}" class="footer-info__cert-item" target="_blank" rel="noopener noreferrer">
             {%- if section.settings.cert_dmca_image != blank -%}
+            {%- assign cert_alt = 'accessibility.cert_alt' | t: name: 'DMCA' -%}
             {{ section.settings.cert_dmca_image | image_url: width: 260 | image_tag:
               width: 130, height: 50,
-              alt: 'accessibility.cert_alt' | t: name: 'DMCA',
+              alt: cert_alt,
               class: 'footer-info__cert-img',
               loading: 'lazy'
             }}
@@ -69,17 +90,47 @@
         {%- endif -%}
       </div>
       <div class="footer-actions">
-        {%- if section.settings.newsletter_title != blank -%}
+        {%- if section.settings.newsletter_title != blank or section.settings.newsletter_enable -%}
         <div class="footer_actions__slogan">
+          {%- if section.settings.newsletter_title != blank -%}
           <h3 class="footer_actions_slogan-title">{{ section.settings.newsletter_title | escape }}</h3>
+          {%- endif -%}
+          {%- if section.settings.newsletter_enable -%}
+          {%- form 'customer', id: 'FooterNewsletter', class: 'footer-newsletter' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <div class="footer-newsletter__field">
+              <label class="visually-hidden" for="FooterNewsletterEmail-{{ section.id }}">{{ 'general.newsletter.email_label' | t }}</label>
+              <input
+                id="FooterNewsletterEmail-{{ section.id }}"
+                type="email"
+                name="contact[email]"
+                class="footer-newsletter__input"
+                placeholder="{{ 'general.newsletter.email_placeholder' | t }}"
+                autocomplete="email"
+                required
+                {% if form.errors %}aria-invalid="true" aria-describedby="FooterNewsletterError-{{ section.id }}"{% endif %}
+              >
+              <button type="submit" class="footer-newsletter__btn">{{ 'newsletter.button_label' | t }}</button>
+            </div>
+            {%- if form.posted_successfully? -%}
+            <p class="footer-newsletter__message footer-newsletter__message--success" role="status">{{ 'general.newsletter.success' | t }}</p>
+            {%- elsif form.errors -%}
+            <p class="footer-newsletter__message footer-newsletter__message--error" id="FooterNewsletterError-{{ section.id }}" role="alert">{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</p>
+            {%- endif -%}
+          {%- endform -%}
+          {%- endif -%}
         </div>
         {%- endif -%}
         <div class="footer-actions-menus">
           {%- for block in section.blocks -%}
+          {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
           {%- if block.type == 'menu' -%}
           <div class="footer-actions-menu" {{ block.shopify_attributes }}>
-            <h3 class="footer-actions-menu__title">{{ block.settings.heading | escape }}</h3>
-            <ul class="footer-actions-menu__list">
+            <h3 class="footer-actions-menu__title">
+              <button type="button" class="footer-actions-menu__toggle" aria-expanded="false" aria-controls="FooterMenu-{{ section.id }}-{{ block.id }}">{{ block.settings.heading | escape }}</button>
+              <span class="footer-actions-menu__label">{{ block.settings.heading | escape }}</span>
+            </h3>
+            <ul class="footer-actions-menu__list" id="FooterMenu-{{ section.id }}-{{ block.id }}">
               {%- assign menu = linklists[block.settings.menu] -%}
               {%- if block.settings.menu != blank and menu.links != blank -%}
               {%- for link in menu.links -%}
@@ -95,77 +146,91 @@
         </div>
       </div>
     </div>
-    <div class="footer-copyright">
-      <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}</p>
-      {%- if section.settings.show_payment_icons -%}
-        {%- unless shop.enabled_payment_types == empty -%}
-          <ul class="footer-payment-icons" role="list">
-            {%- for type in shop.enabled_payment_types -%}
-              <li class="footer-payment-icons__item">{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>
-            {%- endfor -%}
-          </ul>
-        {%- endunless -%}
-      {%- endif -%}
-      {%- if section.settings.show_follow_on_shop -%}
-        <div class="footer-follow-on-shop">
-          {{ shop | login_button: action: 'follow' }}
+    {%- capture app_blocks -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- if app_blocks != blank -%}
+      <div class="section-apps">{{ app_blocks }}</div>
+    {%- endif -%}
+    <div class="footer-bottom">
+      <div class="footer-copyright">
+        <p class="footer-copyright__text">&copy; {{ 'now' | date: '%Y' }} {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}</p>
+        <div class="footer-contact">
+          {%- if section.settings.address != blank -%}
+          <span class="footer-contact__item">{{ section.settings.address | escape }}</span>
+          {%- endif -%}
+          {%- if section.settings.email != blank -%}
+          <span class="footer-contact__item"><a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></span>
+          {%- endif -%}
+          {%- if section.settings.phone != blank -%}
+          <span class="footer-contact__item"><a href="tel:{{ section.settings.phone }}">{{ section.settings.phone }}</a></span>
+          {%- endif -%}
+          {%- if section.settings.tax_code != blank -%}
+          <span class="footer-contact__item">{{ section.settings.tax_code | escape }}</span>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.show_payment_icons -%}
+          {%- unless shop.enabled_payment_types == empty -%}
+            <ul class="footer-payment-icons" role="list">
+              {%- for type in shop.enabled_payment_types -%}
+                <li class="footer-payment-icons__item">{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>
+              {%- endfor -%}
+            </ul>
+          {%- endunless -%}
+        {%- endif -%}
+        {%- if section.settings.show_follow_on_shop -%}
+          <div class="footer-follow-on-shop">
+            {{ shop | login_button: action: 'follow' }}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment %} ═══ LOCALIZATION ═══ {% endcomment -%}
+      {%- if section.settings.show_country_selector or section.settings.show_language_selector -%}
+        <div class="footer-localization">
+          {%- if section.settings.show_country_selector and localization.available_countries.size > 1 -%}
+            <div class="footer-localization__item">
+              {%- form 'localization', id: 'FooterCountryForm' -%}
+                <label class="footer-localization__label" for="FooterCountrySelect">
+                  {{ 'localization.country_label' | t }}
+                </label>
+                <div class="footer-localization__select-wrap">
+                  <select class="footer-localization__select" id="FooterCountrySelect" name="country_code" data-localization-select>
+                    {%- for country in localization.available_countries -%}
+                      <option value="{{ country.iso_code }}" {% if country.iso_code == localization.country.iso_code %}selected{% endif %}>
+                        {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                </div>
+                <noscript><button type="submit">{{ 'localization.update' | t }}</button></noscript>
+              {%- endform -%}
+            </div>
+          {%- endif -%}
+          {%- if section.settings.show_language_selector and localization.available_languages.size > 1 -%}
+            <div class="footer-localization__item">
+              {%- form 'localization', id: 'FooterLanguageForm' -%}
+                <label class="footer-localization__label" for="FooterLanguageSelect">
+                  {{ 'localization.language_label' | t }}
+                </label>
+                <div class="footer-localization__select-wrap">
+                  <select class="footer-localization__select" id="FooterLanguageSelect" name="locale_code" data-localization-select>
+                    {%- for language in localization.available_languages -%}
+                      <option value="{{ language.iso_code }}" {% if language.iso_code == localization.language.iso_code %}selected{% endif %} lang="{{ language.iso_code }}">
+                        {{ language.endonym_name | capitalize }}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                </div>
+                <noscript><button type="submit">{{ 'localization.update' | t }}</button></noscript>
+              {%- endform -%}
+            </div>
+          {%- endif -%}
         </div>
       {%- endif -%}
-      <div class="footer-contact">
-        {%- if section.settings.address != blank -%}
-        <span class="footer-contact__item">{{ section.settings.address | escape }}</span>
-        {%- endif -%}
-        {%- if section.settings.email != blank -%}
-        <span class="footer-contact__item"><a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></span>
-        {%- endif -%}
-        {%- if section.settings.phone != blank -%}
-        <span class="footer-contact__item"><a href="tel:{{ section.settings.phone }}">{{ section.settings.phone }}</a></span>
-        {%- endif -%}
-        {%- if section.settings.tax_code != blank -%}
-        <span class="footer-contact__item">{{ section.settings.tax_code | escape }}</span>
-        {%- endif -%}
-      </div>
     </div>
-
-    {%- comment %} ═══ LOCALIZATION ═══ {% endcomment -%}
-    {%- if section.settings.show_country_selector or section.settings.show_language_selector -%}
-      <div class="footer-localization">
-        {%- if section.settings.show_country_selector and localization.available_countries.size > 1 -%}
-          <div class="footer-localization__item">
-            {%- form 'localization', id: 'FooterCountryForm' -%}
-              <label class="footer-localization__label" for="FooterCountrySelect">
-                {{ 'localization.country_label' | t }}
-              </label>
-              <select class="footer-localization__select" id="FooterCountrySelect" name="country_code" data-localization-select>
-                {%- for country in localization.available_countries -%}
-                  <option value="{{ country.iso_code }}" {% if country.iso_code == localization.country.iso_code %}selected{% endif %}>
-                    {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
-                  </option>
-                {%- endfor -%}
-              </select>
-              <noscript><button type="submit">{{ 'localization.update' | t }}</button></noscript>
-            {%- endform -%}
-          </div>
-        {%- endif -%}
-        {%- if section.settings.show_language_selector and localization.available_languages.size > 1 -%}
-          <div class="footer-localization__item">
-            {%- form 'localization', id: 'FooterLanguageForm' -%}
-              <label class="footer-localization__label" for="FooterLanguageSelect">
-                {{ 'localization.language_label' | t }}
-              </label>
-              <select class="footer-localization__select" id="FooterLanguageSelect" name="locale_code" data-localization-select>
-                {%- for language in localization.available_languages -%}
-                  <option value="{{ language.iso_code }}" {% if language.iso_code == localization.language.iso_code %}selected{% endif %} lang="{{ language.iso_code }}">
-                    {{ language.endonym_name | capitalize }}
-                  </option>
-                {%- endfor -%}
-              </select>
-              <noscript><button type="submit">{{ 'localization.update' | t }}</button></noscript>
-            {%- endform -%}
-          </div>
-        {%- endif -%}
-      </div>
-    {%- endif -%}
   </div>
 </global-footer>
 
@@ -195,6 +260,13 @@
       "type": "text",
       "id": "newsletter_title",
       "label": "t:sections.footer.settings.newsletter_title.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "newsletter_enable",
+      "label": "t:sections.footer.settings.newsletter_enable.label",
+      "info": "t:sections.footer.settings.newsletter_enable.info",
+      "default": true
     },
     {
       "type": "header",
@@ -286,7 +358,8 @@
         {
           "type": "link_list",
           "id": "menu",
-          "label": "t:sections.footer.blocks.menu.settings.menu.label"
+          "label": "t:sections.footer.blocks.menu.settings.menu.label",
+          "default": "footer"
         }
       ]
     },

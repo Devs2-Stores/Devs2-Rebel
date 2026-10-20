@@ -1,13 +1,14 @@
 {% doc %}
   @description Best sellers carousel — reads block settings instead of orphan global settings
-  @param {boolean} [enabled=true] - Show/hide best sellers
-  @param {string} [title='Best Sellers'] - Section title
-  @param {string} [source='current'] - 'current' collection or 'manual'
+  @param {boolean} [enabled] - Show/hide best sellers. Default: true
+  @param {string} [title] - Section title. The heading is omitted when blank
+  @param {string} [source] - 'current' collection or 'manual'. Default: 'current'
   @param {object} [manual_collection] - Collection object when source=manual
-  @param {number} [limit=10] - Max products to show
-  @param {number} [columns_mobile=2] - Number of products to show on mobile
-  @param {number} [columns_desktop=4] - Number of products to show on desktop
-  @example {%- render 'collection-best', enabled: block.settings.enabled, title: block.settings.title, source: block.settings.source, manual_collection: block.settings.manual_collection, limit: block.settings.limit, columns_mobile: block.settings.columns_mobile, columns_desktop: block.settings.columns_desktop -%}
+  @param {number} [limit] - Max products to show. Default: 10
+  @param {number} [columns_mobile] - Number of products to show on mobile. Default: 2
+  @param {number} [columns_desktop] - Number of products to show on desktop. Default: 4
+  @param {boolean} [priority] - The carousel is the first imagery on the page: load the first desktop row eagerly and give the first image high fetch priority. Default: false
+  @example {%- render 'collection-best', enabled: block.settings.enabled, title: block.settings.title, source: block.settings.source, manual_collection: block.settings.manual_collection, limit: block.settings.limit, columns_mobile: block.settings.columns_mobile, columns_desktop: block.settings.columns_desktop, priority: true -%}
 {% enddoc %}
 
 {%- liquid
@@ -15,7 +16,6 @@
     assign enabled = true
   endif
   assign limit = limit | default: 10
-  assign title = title | default: 'Best Sellers'
   assign source = source | default: 'current'
   assign columns_mobile = columns_mobile | default: 2
   assign columns_desktop = columns_desktop | default: 4
@@ -34,21 +34,33 @@
 
   {%- if target_collection and target_collection.products_count > 0 -%}
     <collection-best class="collection-best">
-      <div class="collection-best__header">
-        <h2 class="collection-best__title">{{ title | escape }}</h2>
-      </div>
+      {%- if title != blank -%}
+        <div class="collection-best__header">
+          <h2 class="collection-best__title">{{ title | escape }}</h2>
+        </div>
+      {%- endif -%}
       <div
         class="collection-best__content swiper"
         data-columns-mobile="{{ columns_mobile }}"
         data-columns-tablet="{{ columns_tablet }}"
         data-columns-laptop="{{ columns_laptop }}"
         data-columns-desktop="{{ columns_desktop }}"
-        style="--swiper-cols-mobile: {{ columns_mobile }}; --swiper-cols-tablet: {{ columns_tablet }}; --swiper-cols-laptop: {{ columns_laptop }}; --swiper-cols-desktop: {{ columns_desktop }}; --swiper-gap-mobile: 10px; --swiper-gap-tablet: 15px; --swiper-gap-laptop: 20px; --swiper-gap-desktop: 20px;"
+        style="--swiper-cols-mobile: {{ columns_mobile }}; --swiper-cols-tablet: {{ columns_tablet }}; --swiper-cols-laptop: {{ columns_laptop }}; --swiper-cols-desktop: {{ columns_desktop }}; --swiper-gap-mobile: 16px; --swiper-gap-tablet: 20px; --swiper-gap-laptop: 24px; --swiper-gap-desktop: 24px;"
       >
         <div class="swiper-wrapper">
           {%- for product in target_collection.products limit: limit -%}
+            {%- liquid
+              assign lazyload = 'lazy'
+              assign fetchpriority = 'auto'
+              if priority and forloop.index <= columns_desktop
+                assign lazyload = 'eager'
+                if forloop.first
+                  assign fetchpriority = 'high'
+                endif
+              endif
+            -%}
             <div class="swiper-slide">
-              {%- render 'product-card', product: product -%}
+              {%- render 'product-card', product: product, lazyload: lazyload, fetchpriority: fetchpriority -%}
             </div>
           {%- endfor -%}
         </div>

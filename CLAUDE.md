@@ -1,4 +1,4 @@
-# CLAUDE.md - Shopify Base Theme `Devs2 Rebel`
+# CLAUDE.md - Shopify Base Theme `Rebel`
 
 The complete theme contract lives in `AGENTS.md`. Claude Code loads that file
 automatically beside this one. This file adds Claude-specific routing and

@@ -1,0 +1,305 @@
+[
+  {
+    "viewport": "375x812",
+    "screenshot": "E:\\Work\\shopify\\plans\\reports\\enhance-ux-ax-261009-2342-storefront\\round-1\\verify\\home\\375x812.png",
+    "outline": [
+      "section#shopify-section-sections--27321871204461__announceme @ x0 y0 375x37",
+      "  announcement-bar.announcement-bar.color-scheme-3 \"Welcome to @ x0 y0 375x37",
+      "section#shopify-section-sections--27321871204461__header.sho @ x0 y37 375x64",
+      "  global-header.header.color-scheme-1 \"Devs2 Rebel 0\" @ x0 y37 375x64",
+      "    div.page-width \"Devs2 Rebel 0\" @ x0 y37 375x64",
+      "      div.header__wrapper \"Devs2 Rebel 0\" @ x15 y37 345x64",
+      "main#MainContent.content-for-layout.focus-none \"Devs2 Rebel  @ x0 y101 375x9186",
+      "  section#shopify-section-template--27321871499373__hero_slide @ x0 y101 375x731",
+      "    div#section-template--27321871499373__hero_slideshow.section @ x0 y101 375x731",
+      "      div.section-slideshow__swiper.swiper \"AW26 — REFINED DEFIANC @ x0 y101 375x731",
+      "  section#shopify-section-template--27321871499373__scrolling_ @ x0 y832 375x76",
+      "    div#section-template--27321871499373__scrolling_tagline.sect @ x0 y832 375x76",
+      "      div.section-marquee__track \"REFINED DEFIANCE — AW26 COLLECTI @ x-337 y852 4304x36",
+      "  section#shopify-section-template--27321871499373__collection @ x0 y908 375x673",
+      "    div#section-template--27321871499373__collection_list.sectio @ x0 y908 375x673",
+      "      div.page-width \"BY CATEGORY Pick your wardrobe Outerwear\" @ x0 y968 375x553",
+      "  section#shopify-section-template--27321871499373__featured_p @ x0 y1580 375x873",
+      "    div#section-template--27321871499373__featured_piece.section @ x0 y1580 375x873",
+      "      div.page-width \"PIECE OF THE WEEK Rebel Tactical Bomber \" @ x0 y1640 375x753",
+      "  section#shopify-section-template--27321871499373__marquee_pr @ x0 y2453 375x570",
+      "    div#section-template--27321871499373__marquee_products.secti @ x0 y2453 375x570",
+      "      div.section-marquee-products__track \"3 Option — Size / Màu / @ x0 y2542 375x441",
+      "  section#shopify-section-template--27321871499373__lookbook_h @ x0 y3023 375x333",
+      "    div#section-template--27321871499373__lookbook_hotspots.sect @ x0 y3023 375x333",
+      "      div \"Shop the lookbook + The Crimson Coat Woo\" @ x0 y3053 375x273",
+      "  section#shopify-section-template--27321871499373__before_aft @ x0 y3356 375x691",
+      "    div#section-template--27321871499373__before_after_craft.sec @ x0 y3356 375x691",
+      "      div.page-width \"CRAFTSMANSHIP From bolt of fabric to fin\" @ x0 y3416 375x571",
+      "  section#shopify-section-template--27321871499373__brand_stor @ x0 y4047 375x670",
+      "    div#section-template--27321871499373__brand_story.section-iw @ x0 y4047 375x670"
+    ],
+    "findings": [
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items."
+      },
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)"
+      },
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "Framing 'https://shop.app/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://shop.app https://admin.shopify.com\". The request has been blocked.\n"
+      },
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "Failed to load resource: net::ERR_FAILED (http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js)"
+      },
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. (http://127.0.0.1:9292/)"
+      },
+      {
+        "severity": "error",
+        "type": "low-contrast",
+        "target": "span.section-slideshow__counter-current \"2\"",
+        "message": "text contrast 1.10:1"
+      },
+      {
+        "severity": "error",
+        "type": "low-contrast",
+        "target": "span.section-slideshow__counter-total \"3\"",
+        "message": "text contrast 1.10:1"
+      },
+      {
+        "severity": "error",
+        "type": "low-contrast",
+        "target": "h3.section-collection-list__title \"Outerwear\"",
+        "message": "text contrast 1.12:1"
+      },
+      {
+        "severity": "error",
+        "type": "low-contrast",
+        "target": "h3.section-collection-list__title \"Casual Shirts\"",
+        "message": "text contrast 1.12:1"
+      },
+      {
+        "severity": "error",
+        "type": "low-contrast",
+        "target": "h3.section-collection-list__title \"Accessories\"",
+        "message": "text contrast 1.12:1"
+      },
+      {
+        "severity": "error",
+        "type": "low-contrast",
+        "target": "h3.section-collection-list__title \"Limited Edition\"",
+        "message": "text contrast 1.12:1"
+      },
+      {
+        "severity": "warn",
+        "type": "low-contrast",
+        "target": "del.section-featured-product__price-compare \"$229.00\"",
+        "message": "text contrast 2.71:1"
+      },
+      {
+        "severity": "warn",
+        "type": "small-touch-target",
+        "target": "",
+        "message": "41 controls smaller than 44px; e.g. a.header__logo-link \"Devs2 Rebel\"; a.section-featured-product__view-link \"View product\"; a.section-marquee-products__view-all \"View all\"; a \"3 Option — Size / Màu / Chất liệu (max)\""
+      }
+    ],
+    "height": 10074
+  },
+  {
+    "viewport": "768x1024",
+    "screenshot": "E:\\Work\\shopify\\plans\\reports\\enhance-ux-ax-261009-2342-storefront\\round-1\\verify\\home\\768x1024.png",
+    "outline": [
+      "section#shopify-section-sections--27321871204461__header.sho @ x0 y37 768x64",
+      "  global-header.header.color-scheme-1 \"Devs2 Rebel 0\" @ x0 y37 768x64",
+      "    div.page-width \"Devs2 Rebel 0\" @ x0 y37 768x64",
+      "      div.header__wrapper \"Devs2 Rebel 0\" @ x30 y37 708x64",
+      "main#MainContent.content-for-layout.focus-none \"Devs2 Rebel  @ x0 y101 768x9791",
+      "  section#shopify-section-template--27321871499373__hero_slide @ x0 y101 768x973",
+      "    div#section-template--27321871499373__hero_slideshow.section @ x0 y101 768x973",
+      "      div.section-slideshow__swiper.swiper \"AW26 — REFINED DEFIANC @ x0 y101 768x973",
+      "  section#shopify-section-template--27321871499373__scrolling_ @ x0 y1074 768x108",
+      "    div#section-template--27321871499373__scrolling_tagline.sect @ x0 y1074 768x108",
+      "      div.section-marquee__track \"REFINED DEFIANCE — AW26 COLLECTI @ x-299 y1104 5850x48",
+      "  section#shopify-section-template--27321871499373__collection @ x0 y1182 768x523",
+      "    div#section-template--27321871499373__collection_list.sectio @ x0 y1182 768x523",
+      "      div.page-width \"BY CATEGORY Pick your wardrobe Outerwear\" @ x0 y1282 768x323",
+      "  section#shopify-section-template--27321871499373__featured_p @ x0 y1705 768x610",
+      "    div#section-template--27321871499373__featured_piece.section @ x0 y1705 768x610",
+      "      div.page-width \"PIECE OF THE WEEK Rebel Tactical Bomber \" @ x0 y1805 768x410",
+      "  section#shopify-section-template--27321871499373__marquee_pr @ x0 y2315 768x660",
+      "    div#section-template--27321871499373__marquee_products.secti @ x0 y2315 768x660",
+      "      div.section-marquee-products__track \"3 Option — Size / Màu / @ x-386 y2429 6720x486",
+      "  section#shopify-section-template--27321871499373__lookbook_h @ x0 y2975 768x662",
+      "    div#section-template--27321871499373__lookbook_hotspots.sect @ x0 y2975 768x662",
+      "      div \"Shop the lookbook + The Crimson Coat Woo\" @ x0 y3055 768x502",
+      "  section#shopify-section-template--27321871499373__before_aft @ x0 y3637 768x1236",
+      "    div#section-template--27321871499373__before_after_craft.sec @ x0 y3637 768x1236",
+      "      div.page-width \"CRAFTSMANSHIP From bolt of fabric to fin\" @ x0 y3737 768x1036",
+      "  section#shopify-section-template--27321871499373__brand_stor @ x0 y4873 768x654",
+      "    div#section-template--27321871499373__brand_story.section-iw @ x0 y4873 768x654",
+      "      div \"INSIDE THE ATELIER Twelve years. One phi\" @ x0 y4973 768x454",
+      "  section#shopify-section-template--27321871499373__layered_at @ x0 y5527 768x955"
+    ],
+    "findings": [
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items."
+      },
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)"
+      },
+      {
+        "severity": "error",
+        "type": "low-contrast",
+        "target": "span.section-slideshow__counter-current \"1\"",
+        "message": "text contrast 1.10:1"
+      },
+      {
+        "severity": "error",
+        "type": "low-contrast",
+        "target": "span.section-slideshow__counter-total \"3\"",
+        "message": "text contrast 1.10:1"
+      },
+      {
+        "severity": "error",
+        "type": "low-contrast",
+        "target": "h3.section-collection-list__title \"Outerwear\"",
+        "message": "text contrast 1.12:1"
+      },
+      {
+        "severity": "error",
+        "type": "low-contrast",
+        "target": "h3.section-collection-list__title \"Casual Shirts\"",
+        "message": "text contrast 1.12:1"
+      },
+      {
+        "severity": "error",
+        "type": "low-contrast",
+        "target": "h3.section-collection-list__title \"Accessories\"",
+        "message": "text contrast 1.12:1"
+      },
+      {
+        "severity": "error",
+        "type": "low-contrast",
+        "target": "h3.section-collection-list__title \"Limited Edition\"",
+        "message": "text contrast 1.12:1"
+      },
+      {
+        "severity": "warn",
+        "type": "low-contrast",
+        "target": "del.section-featured-product__price-compare \"$229.00\"",
+        "message": "text contrast 2.71:1"
+      }
+    ],
+    "height": 11051
+  },
+  {
+    "viewport": "1440x900",
+    "screenshot": "E:\\Work\\shopify\\plans\\reports\\enhance-ux-ax-261009-2342-storefront\\round-1\\verify\\home\\1440x900.png",
+    "outline": [
+      "section#shopify-section-sections--27321871204461__announceme @ x0 y0 1440x37",
+      "  announcement-bar.announcement-bar.color-scheme-3 \"Welcome to @ x0 y0 1440x37",
+      "section#shopify-section-sections--27321871204461__header.sho @ x0 y37 1440x72",
+      "  global-header.header.color-scheme-1 \"Devs2 Rebel Home Shop C @ x0 y37 1440x72",
+      "    div.page-width \"Devs2 Rebel Home Shop Collections Sale L\" @ x0 y37 1440x72",
+      "      div.header__wrapper \"Devs2 Rebel Home Shop Collections Sale  @ x75 y37 1290x72",
+      "main#MainContent.content-for-layout.focus-none \"Devs2 Rebel  @ x0 y109 1440x10140",
+      "  section#shopify-section-template--27321871499373__hero_slide @ x0 y109 1440x855",
+      "    div#section-template--27321871499373__hero_slideshow.section @ x0 y109 1440x855",
+      "      div.section-slideshow__swiper.swiper \"AW26 — REFINED DEFIANC @ x0 y109 1440x855",
+      "  section#shopify-section-template--27321871499373__scrolling_ @ x0 y964 1440x108",
+      "    div#section-template--27321871499373__scrolling_tagline.sect @ x0 y964 1440x108",
+      "      div.section-marquee__track \"REFINED DEFIANCE — AW26 COLLECTI @ x-312 y994 5850x48",
+      "  section#shopify-section-template--27321871499373__collection @ x0 y1072 1440x717",
+      "    div#section-template--27321871499373__collection_list.sectio @ x0 y1072 1440x717",
+      "      div.page-width \"BY CATEGORY Pick your wardrobe Outerwear\" @ x0 y1172 1440x517",
+      "  section#shopify-section-template--27321871499373__featured_p @ x0 y1789 1440x821",
+      "    div#section-template--27321871499373__featured_piece.section @ x0 y1789 1440x821",
+      "      div.page-width \"PIECE OF THE WEEK Rebel Tactical Bomber \" @ x0 y1889 1440x621",
+      "  section#shopify-section-template--27321871499373__marquee_pr @ x0 y2610 1440x660",
+      "    div#section-template--27321871499373__marquee_products.secti @ x0 y2610 1440x660",
+      "      div.section-marquee-products__track \"3 Option — Size / Màu / @ x-403 y2724 6720x486",
+      "  section#shopify-section-template--27321871499373__lookbook_h @ x0 y3270 1440x1040",
+      "    div#section-template--27321871499373__lookbook_hotspots.sect @ x0 y3270 1440x1040",
+      "      div \"Shop the lookbook + The Crimson Coat Woo\" @ x0 y3350 1440x880",
+      "  section#shopify-section-template--27321871499373__before_aft @ x0 y4310 1440x1315",
+      "    div#section-template--27321871499373__before_after_craft.sec @ x0 y4310 1440x1315",
+      "      div.page-width \"CRAFTSMANSHIP From bolt of fabric to fin\" @ x0 y4410 1440x1115",
+      "  section#shopify-section-template--27321871499373__brand_stor @ x0 y5625 1440x740",
+      "    div#section-template--27321871499373__brand_story.section-iw @ x0 y5625 1440x740"
+    ],
+    "findings": [
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items."
+      },
+      {
+        "severity": "error",
+        "type": "runtime-error",
+        "target": "",
+        "message": "Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)"
+      },
+      {
+        "severity": "error",
+        "type": "low-contrast",
+        "target": "span.section-slideshow__counter-current \"1\"",
+        "message": "text contrast 1.10:1"
+      },
+      {
+        "severity": "error",
+        "type": "low-contrast",
+        "target": "span.section-slideshow__counter-total \"3\"",
+        "message": "text contrast 1.10:1"
+      },
+      {
+        "severity": "error",
+        "type": "low-contrast",
+        "target": "h3.section-collection-list__title \"Outerwear\"",
+        "message": "text contrast 1.12:1"
+      },
+      {
+        "severity": "error",
+        "type": "low-contrast",
+        "target": "h3.section-collection-list__title \"Casual Shirts\"",
+        "message": "text contrast 1.12:1"
+      },
+      {
+        "severity": "error",
+        "type": "low-contrast",
+        "target": "h3.section-collection-list__title \"Accessories\"",
+        "message": "text contrast 1.12:1"
+      },
+      {
+        "severity": "error",
+        "type": "low-contrast",
+        "target": "h3.section-collection-list__title \"Limited Edition\"",
+        "message": "text contrast 1.12:1"
+      },
+      {
+        "severity": "warn",
+        "type": "low-contrast",
+        "target": "del.section-featured-product__price-compare \"$229.00\"",
+        "message": "text contrast 2.71:1"
+      }
+    ],
+    "height": 11174
+  }
+]

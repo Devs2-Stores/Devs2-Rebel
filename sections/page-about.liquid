@@ -1,6 +1,6 @@
 <about-page
   class="page-about color-{{ section.settings.color_scheme }}"
-  style="--about-hero-position-desktop: {{ section.settings.hero_focal_point_desktop }}; --about-hero-position-mobile: {{ section.settings.hero_focal_point_mobile }};"
+  style="--about-hero-position-desktop: {{ section.settings.hero_image_desktop.presentation.focal_point | default: '50.0% 50.0%' }}; --about-hero-position-mobile: {{ section.settings.hero_image_mobile.presentation.focal_point | default: section.settings.hero_image_desktop.presentation.focal_point | default: '50.0% 50.0%' }};"
 >
   <section class="about-hero">
     <div class="about-hero__background">
@@ -28,7 +28,7 @@
         {%- if section.settings.hero_title != blank -%}
         <h1 class="about-hero__title">{{ section.settings.hero_title | escape }}</h1>
         {%- else -%}
-        <h1 class="about-hero__title sr-only">{{ page.title | default: 'About us' | escape }}</h1>
+        <h1 class="about-hero__title sr-only">{{ page.title | default: shop.name | escape }}</h1>
         {%- endif -%}
         {%- if section.settings.hero_description != blank -%}
         <div class="about-hero__description">{{ section.settings.hero_description }}</div>
@@ -218,32 +218,6 @@
       "type": "image_picker",
       "id": "hero_image_mobile",
       "label": "t:sections.page_about.settings.hero_image_mobile.label"
-    },
-    {
-      "type": "select",
-      "id": "hero_focal_point_desktop",
-      "label": "t:sections.page_about.settings.hero_focal_point_desktop.label",
-      "options": [
-        { "value": "center center", "label": "t:sections.page_about.settings.hero_focal_point.options__center.label" },
-        { "value": "left center", "label": "t:sections.page_about.settings.hero_focal_point.options__left.label" },
-        { "value": "right center", "label": "t:sections.page_about.settings.hero_focal_point.options__right.label" },
-        { "value": "center top", "label": "t:sections.page_about.settings.hero_focal_point.options__top.label" },
-        { "value": "center bottom", "label": "t:sections.page_about.settings.hero_focal_point.options__bottom.label" }
-      ],
-      "default": "center center"
-    },
-    {
-      "type": "select",
-      "id": "hero_focal_point_mobile",
-      "label": "t:sections.page_about.settings.hero_focal_point_mobile.label",
-      "options": [
-        { "value": "center center", "label": "t:sections.page_about.settings.hero_focal_point.options__center.label" },
-        { "value": "left center", "label": "t:sections.page_about.settings.hero_focal_point.options__left.label" },
-        { "value": "right center", "label": "t:sections.page_about.settings.hero_focal_point.options__right.label" },
-        { "value": "center top", "label": "t:sections.page_about.settings.hero_focal_point.options__top.label" },
-        { "value": "center bottom", "label": "t:sections.page_about.settings.hero_focal_point.options__bottom.label" }
-      ],
-      "default": "center center"
     },
     {
       "type": "text",

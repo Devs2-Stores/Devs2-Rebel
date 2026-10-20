@@ -1,0 +1,1153 @@
+{
+ "/pages/contact": {
+  "motion": {
+   "transitions": [
+    {
+     "prop": "background-color",
+     "dur": "0.2s",
+     "ease": "ease",
+     "flags": [],
+     "n": 37,
+     "samples": [
+      "button.mobile-menu__close",
+      "a.mobile-menu__link",
+      "button.mobile-menu__trigger",
+      "button.mobile-menu__back-btn"
+     ]
+    },
+    {
+     "prop": "color",
+     "dur": "0.15s",
+     "ease": "linear",
+     "flags": [],
+     "n": 30,
+     "samples": [
+      "a.skip-to-content-link",
+      "a.megamenu__trigger",
+      "button.megamenu__trigger",
+      "a.megamenu__simple-link"
+     ]
+    },
+    {
+     "prop": "background",
+     "dur": "0.15s",
+     "ease": "linear",
+     "flags": [],
+     "n": 18,
+     "samples": [
+      "a.megamenu__simple-link"
+     ]
+    },
+    {
+     "prop": "all",
+     "dur": "0.3s",
+     "ease": "linear",
+     "flags": [
+      "all"
+     ],
+     "n": 11,
+     "samples": [
+      "div.contact-main__info-item",
+      "a.shop-social__link",
+      "button.contact-form__submit"
+     ]
+    },
+    {
+     "prop": "color",
+     "dur": "0.2s",
+     "ease": "ease",
+     "flags": [],
+     "n": 10,
+     "samples": [
+      "a.footer-social-media__link",
+      "a",
+      "button.search-modal-submit"
+     ]
+    },
+    {
+     "prop": "all",
+     "dur": "0.15s",
+     "ease": "linear",
+     "flags": [
+      "all"
+     ],
+     "n": 9,
+     "samples": [
+      "button.megamenu__arrow",
+      "button.header__action-btn",
+      "span.header__action-btn",
+      "input.form-control"
+     ]
+    },
+    {
+     "prop": "opacity",
+     "dur": "0.3s",
+     "ease": "ease",
+     "flags": [],
+     "n": 8,
+     "samples": [
+      "mobile-menu.mobile-menu",
+      "button.mobile-menu__overlay",
+      "cart-modal.cart-modal-wrapper",
+      "button.cart-modal-overlay"
+     ]
+    },
+    {
+     "prop": "transform",
+     "dur": "0.3s",
+     "ease": "ease-in-out",
+     "flags": [],
+     "n": 7,
+     "samples": [
+      "div.mobile-menu__drawer",
+      "ul.mobile-menu__submenu",
+      "div.cart-modal-panel",
+      "div.quickview-modal-panel"
+     ]
+    },
+    {
+     "prop": "transform",
+     "dur": "0.3s",
+     "ease": "linear",
+     "flags": [],
+     "n": 5,
+     "samples": [
+      "ul.megamenu__list",
+      "div.megamenu__dropdown"
+     ]
+    },
+    {
+     "prop": "opacity",
+     "dur": "0.3s",
+     "ease": "linear",
+     "flags": [],
+     "n": 5,
+     "samples": [
+      "div.megamenu__dropdown",
+      "div.megamenu__overlay"
+     ]
+    },
+    {
+     "prop": "visibility",
+     "dur": "0.3s",
+     "ease": "linear",
+     "flags": [],
+     "n": 5,
+     "samples": [
+      "div.megamenu__dropdown",
+      "div.megamenu__overlay"
+     ]
+    },
+    {
+     "prop": "color",
+     "dur": "0.3s",
+     "ease": "ease",
+     "flags": [],
+     "n": 4,
+     "samples": [
+      "button.footer-actions-menu__toggle"
+     ]
+    },
+    {
+     "prop": "max-height",
+     "dur": "0.3s",
+     "ease": "ease",
+     "flags": [
+      "layout"
+     ],
+     "n": 4,
+     "samples": [
+      "ul.footer-actions-menu__list"
+     ]
+    },
+    {
+     "prop": "text-decoration-thickness",
+     "dur": "0.2s",
+     "ease": "ease",
+     "flags": [],
+     "n": 4,
+     "samples": [
+      "a"
+     ]
+    },
+    {
+     "prop": "opacity",
+     "dur": "0.2s",
+     "ease": "ease",
+     "flags": [],
+     "n": 3,
+     "samples": [
+      "a.cart-modal-items-empty-button",
+      "a.cart-modal-action-button",
+      "button.cart-modal-action-button"
+     ]
+    },
+    {
+     "prop": "opacity",
+     "dur": "0.15s",
+     "ease": "linear",
+     "flags": [],
+     "n": 2,
+     "samples": [
+      "a.skip-to-content-link",
+      "a.announcement-bar__text"
+     ]
+    },
+    {
+     "prop": "all",
+     "dur": "0.3s",
+     "ease": "ease",
+     "flags": [
+      "all"
+     ],
+     "n": 2,
+     "samples": [
+      "search-modal.search-modal-wrapper",
+      "div.search-modal-panel"
+     ]
+    },
+    {
+     "prop": "transform",
+     "dur": "0.15s",
+     "ease": "linear",
+     "flags": [],
+     "n": 1,
+     "samples": [
+      "a.skip-to-content-link"
+     ]
+    },
+    {
+     "prop": "box-shadow",
+     "dur": "0.15s",
+     "ease": "linear",
+     "flags": [],
+     "n": 1,
+     "samples": [
+      "a.skip-to-content-link"
+     ]
+    },
+    {
+     "prop": "background-color",
+     "dur": "0.15s",
+     "ease": "linear",
+     "flags": [],
+     "n": 1,
+     "samples": [
+      "a.skip-to-content-link"
+     ]
+    },
+    {
+     "prop": "border-color",
+     "dur": "0.15s",
+     "ease": "linear",
+     "flags": [],
+     "n": 1,
+     "samples": [
+      "a.skip-to-content-link"
+     ]
+    },
+    {
+     "prop": "border-color",
+     "dur": "0.3s",
+     "ease": "ease",
+     "flags": [],
+     "n": 1,
+     "samples": [
+      "select.footer-localization__select"
+     ]
+    },
+    {
+     "prop": "all",
+     "dur": "0.2s",
+     "ease": "ease",
+     "flags": [
+      "all"
+     ],
+     "n": 1,
+     "samples": [
+      "input.search-modal-input"
+     ]
+    },
+    {
+     "prop": "background-color",
+     "dur": "0.15s",
+     "ease": "ease",
+     "flags": [],
+     "n": 1,
+     "samples": [
+      "button.quickview-modal-close"
+     ]
+    },
+    {
+     "prop": "all",
+     "dur": "0.5s",
+     "ease": "linear",
+     "flags": [
+      "all"
+     ],
+     "n": 1,
+     "samples": [
+      "div.overlay"
+     ]
+    },
+    {
+     "prop": "visibility",
+     "dur": "0.3s",
+     "ease": "ease",
+     "flags": [],
+     "n": 1,
+     "samples": [
+      "button.back-to-top"
+     ]
+    },
+    {
+     "prop": "transform",
+     "dur": "0.3s",
+     "ease": "ease",
+     "flags": [],
+     "n": 1,
+     "samples": [
+      "button.back-to-top"
+     ]
+    },
+    {
+     "prop": "background",
+     "dur": "0.3s",
+     "ease": "ease",
+     "flags": [],
+     "n": 1,
+     "samples": [
+      "button.back-to-top"
+     ]
+    }
+   ],
+   "animations": [
+    {
+     "name": "spin",
+     "dur": "1s",
+     "iter": "infinite",
+     "ease": "linear",
+     "playState": "running",
+     "n": 3,
+     "samples": [
+      "div.cart-modal-items-loading-spinner",
+      "div.search-modal-loading-spinner",
+      "div.quickview-modal-loading-spinner"
+     ]
+    }
+   ]
+  },
+  "cssom": [
+   {
+    "src": "theme.css",
+    "sel": ":where(.button-primary, .button-secondary, a[class*=\"__btn\"], button[class*=\"__btn\"], .faq-contact__btn, .product-card__quickview, .product-card__add-btn):hover",
+    "props": [
+     "transform:var(--button-hover-transform, translateY(-1px))"
+    ]
+   },
+   {
+    "src": "theme.css",
+    "sel": ".swiper:hover .swiper-button-prev::after, .swiper:hover .swiper-button-next::after",
+    "props": [
+     "opacity:1"
+    ]
+   },
+   {
+    "src": "theme.css",
+    "sel": ".card .card__wrapper:hover .card__media .card__media-inner .card__media-image img",
+    "props": [
+     "transform:scale(1)"
+    ]
+   },
+   {
+    "src": "toast.css",
+    "sel": ".toast-close:hover",
+    "props": [
+     "opacity:1"
+    ]
+   },
+   {
+    "src": "page-contact.css",
+    "sel": ".contact-main__info-item:hover",
+    "props": [
+     "transform:translateY(-2px)"
+    ]
+   },
+   {
+    "src": "page-contact.css",
+    "sel": ".contact-main__social-fallback a:hover",
+    "props": [
+     "transform:translateY(-1px)"
+    ]
+   },
+   {
+    "src": "page-contact.css",
+    "sel": ".contact-form__submit:hover",
+    "props": [
+     "transform:translateY(-2px)"
+    ]
+   },
+   {
+    "src": "announcement-bar.css",
+    "sel": ".announcement-bar__text.announcement-bar__link:hover",
+    "props": [
+     "opacity:0.8"
+    ]
+   },
+   {
+    "src": "header.css",
+    "sel": "global-header .header__actions .header__action-btn:hover",
+    "props": [
+     "transform:scale(1.1)"
+    ]
+   },
+   {
+    "src": "megamenu.css",
+    "sel": ".megamenu__item:hover > .megamenu__dropdown, .megamenu__item:focus-within > .megamenu__dropdown, .megamenu__item.is-open > .megamenu__dropdown",
+    "props": [
+     "opacity:1",
+     "visibility:visible",
+     "transform:translateY(0px)"
+    ]
+   },
+   {
+    "src": "megamenu.css",
+    "sel": ".megamenu__item:hover > .megamenu__trigger .icon, .megamenu__item:focus-within > .megamenu__trigger .icon, .megamenu__item.is-open > .megamenu__trigger .icon",
+    "props": [
+     "transform:rotate(180deg)"
+    ]
+   },
+   {
+    "src": "megamenu.css",
+    "sel": ".megamenu__item .megamenu__trigger:hover span::after, .megamenu__item .megamenu__trigger:focus span::after",
+    "props": [
+     "width:100%"
+    ]
+   },
+   {
+    "src": "megamenu.css",
+    "sel": ".megamenu__item .megamenu__dropdown .megamenu__dropdown-inner .megamenu__grid .megamenu__columns .megamenu__column .megamenu__links .megamenu__link:hover .icon",
+    "props": [
+     "opacity:1"
+    ]
+   },
+   {
+    "src": "megamenu.css",
+    "sel": ".megamenu__item .megamenu__dropdown .megamenu__dropdown-inner .megamenu__grid .megamenu__columns .megamenu__column .megamenu__links .megamenu__link-parent:hover",
+    "props": [
+     "opacity:1",
+     "visibility:visible",
+     "transform:translateX(0px)"
+    ]
+   },
+   {
+    "src": "megamenu.css",
+    "sel": ".megamenu__item .megamenu__dropdown .megamenu__dropdown-inner .megamenu__grid .megamenu__columns .megamenu__column .megamenu__links .megamenu__link-parent:hover",
+    "props": [
+     "transform:translateX(0px)"
+    ]
+   },
+   {
+    "src": "megamenu.css",
+    "sel": ".megamenu__item .megamenu__dropdown .megamenu__dropdown-inner .megamenu__grid .megamenu__featured .megamenu__featured-link:hover .megamenu__featured-image img",
+    "props": [
+     "transform:scale(1.05)"
+    ]
+   },
+   {
+    "src": "megamenu.css",
+    "sel": ".megamenu__item .megamenu__dropdown .megamenu__dropdown-inner .megamenu__simple .megamenu__simple-link:hover .icon, .megamenu__item .megamenu__dropdown .megamen",
+    "props": [
+     "opacity:1"
+    ]
+   },
+   {
+    "src": "megamenu.css",
+    "sel": ".megamenu__item .megamenu__dropdown .megamenu__dropdown-inner .megamenu__simple .megamenu__simple-parent:hover > .megamenu__simple-sub",
+    "props": [
+     "opacity:1",
+     "visibility:visible",
+     "transform:translateX(0px)"
+    ]
+   },
+   {
+    "src": "megamenu.css",
+    "sel": ".megamenu__item .megamenu__dropdown .megamenu__dropdown-inner .megamenu__simple .megamenu__simple-parent:hover > .megamenu__simple-sub.is-flipped",
+    "props": [
+     "transform:translateX(0px)"
+    ]
+   },
+   {
+    "src": "megamenu.css",
+    "sel": ".megamenu__item .megamenu__dropdown .megamenu__dropdown-inner .megamenu__simple .megamenu__simple-sub.is-flipped.megamenu__simple-parent:hover > .megamenu__item",
+    "props": [
+     "transform:translateX(0px)"
+    ]
+   },
+   {
+    "src": "megamenu.css",
+    "sel": ".megamenu__item:not(.is-flipped) .megamenu__simple-parent:hover > .megamenu__simple-sub, .megamenu__item:not(.is-flipped) .megamenu__link-parent:hover > .megame",
+    "props": [
+     "transform:translateX(0px)"
+    ]
+   },
+   {
+    "src": "megamenu.css",
+    "sel": ".megamenu__item.is-flipped .megamenu__simple-parent:hover > .megamenu__simple-sub, .megamenu__item.is-flipped .megamenu__link-parent:hover > .megamenu__sublinks",
+    "props": [
+     "transform:translateX(0px)"
+    ]
+   },
+   {
+    "src": "megamenu.css",
+    "sel": ".megamenu--fullwidth .megamenu__item:hover .megamenu__dropdown, .megamenu--fullwidth .megamenu__item:focus-within .megamenu__dropdown",
+    "props": [
+     "transform:translateX(-50%) translateY(0px)"
+    ]
+   },
+   {
+    "src": "shop-social.css",
+    "sel": ".shop-social__link:hover",
+    "props": [
+     "transform:translateY(-3px)"
+    ]
+   },
+   {
+    "src": "cart-modal.css",
+    "sel": "cart-modal .cart-modal-panel .cart-modal-items .cart-modal-items-empty .cart-modal-items-empty-button:hover",
+    "props": [
+     "opacity:0.9"
+    ]
+   },
+   {
+    "src": "cart-modal.css",
+    "sel": "cart-modal .cart-modal-panel .cart-modal-footer .cart-modal-actions .cart-modal-action-button:hover",
+    "props": [
+     "opacity:0.9"
+    ]
+   },
+   {
+    "src": "cart-modal.css",
+    "sel": ".cart-modal-item:hover .cart-modal-item .cart-modal-item__remove",
+    "props": [
+     "opacity:1"
+    ]
+   },
+   {
+    "src": "search-modal.css",
+    "sel": "search-modal .search-modal-panel .search-modal-results .search-modal-results-content .search-modal-products .search-modal-products-list .search-modal-product-it",
+    "props": [
+     "transform:scale(1.05)"
+    ]
+   },
+   {
+    "src": "search-modal.css",
+    "sel": ".predictive-search__link--product:hover .predictive-search__product-image img, .predictive-search__link--product:hover .predictive-search__product-image .predic",
+    "props": [
+     "transform:scale(1.05)"
+    ]
+   },
+   {
+    "src": "quickview-modal.css",
+    "sel": ".quickview-product__media .quickview-product__thumbs .swiper-slide:hover",
+    "props": [
+     "opacity:0.8"
+    ]
+   },
+   {
+    "src": "quickview-modal.css",
+    "sel": ".quickview-product__add-btn:hover:not(:disabled)",
+    "props": [
+     "transform:translateY(-2px)"
+    ]
+   },
+   {
+    "src": "quickview-modal.css",
+    "sel": ".quickview-product .quickview-product__view-btn:hover",
+    "props": [
+     "transform:translateY(-2px)"
+    ]
+   }
+  ],
+  "links": {
+   "dead": [
+    {
+     "cls": "header__hamburger",
+     "button": "no-name"
+    },
+    {
+     "cls": "megamenu__arrow",
+     "button": "no-name"
+    },
+    {
+     "cls": "megamenu__arrow",
+     "button": "no-name"
+    },
+    {
+     "cls": "header__action-btn",
+     "button": "no-name"
+    },
+    {
+     "cls": "mobile-menu__trigger",
+     "button": "no-name"
+    },
+    {
+     "cls": "mobile-menu__trigger",
+     "button": "no-name"
+    },
+    {
+     "cls": "mobile-menu__trigger",
+     "button": "no-name"
+    },
+    {
+     "cls": "mobile-menu__trigger",
+     "button": "no-name"
+    },
+    {
+     "cls": "search-modal-clear",
+     "button": "no-name"
+    },
+    {
+     "cls": "quickview-modal-close",
+     "button": "no-name"
+    }
+   ],
+   "hrefCount": 27
+  },
+  "hover": [
+   {
+    "i": 0,
+    "sig": "a.skip-to-content-link.button-secondary<gradient",
+    "text": "Skip to content",
+    "docY": 0,
+    "hit": false,
+    "changed": [],
+    "noFeedback": false,
+    "cursor": "pointer",
+    "layoutShift": null,
+    "transition": "transform, box-shadow, background-color, border-color, color, opacity 0.15s, 0.15s, 0.15s, 0.15s, 0.15s, 0.15s"
+   },
+   {
+    "i": 1,
+    "sig": "a.announcement-bar__text.announcement-bar__link<announcement-bar__content",
+    "text": "New season: the tailored anti-uniform has landed",
+    "docY": 8,
+    "hit": true,
+    "changed": [
+     "self"
+    ],
+    "noFeedback": false,
+    "cursor": "pointer",
+    "layoutShift": null,
+    "transition": "opacity 0.15s"
+   },
+   {
+    "i": 2,
+    "sig": "a.header__logo-link<header__logo",
+    "text": "Devs2 Rebel",
+    "docY": 58,
+    "hit": true,
+    "changed": [],
+    "noFeedback": true,
+    "cursor": "pointer",
+    "layoutShift": null,
+    "transition": "all 0s"
+   },
+   {
+    "i": 3,
+    "sig": "a.megamenu__trigger.megamenu__trigger--link<megamenu__item",
+    "text": "Home",
+    "docY": 49,
+    "hit": true,
+    "changed": [
+     "self",
+     "before",
+     "after",
+     "d0"
+    ],
+    "noFeedback": false,
+    "cursor": "pointer",
+    "layoutShift": null,
+    "transition": "color 0.15s"
+   },
+   {
+    "i": 4,
+    "sig": "button.megamenu__trigger<megamenu__item",
+    "text": "Shop",
+    "docY": 49,
+    "hit": true,
+    "changed": [
+     "self",
+     "before",
+     "after",
+     "d0",
+     "d1",
+     "d2"
+    ],
+    "noFeedback": false,
+    "cursor": "pointer",
+    "layoutShift": null,
+    "transition": "color 0.15s"
+   },
+   {
+    "i": 5,
+    "sig": "button.megamenu__trigger<megamenu__item",
+    "text": "Collections",
+    "docY": 49,
+    "hit": true,
+    "changed": [
+     "self",
+     "before",
+     "after",
+     "d0",
+     "d1",
+     "d2"
+    ],
+    "noFeedback": false,
+    "cursor": "pointer",
+    "layoutShift": null,
+    "transition": "color 0.15s"
+   },
+   {
+    "i": 6,
+    "sig": "a.megamenu__trigger.megamenu__trigger--link<megamenu__item",
+    "text": "Contact",
+    "docY": 49,
+    "hit": true,
+    "changed": [
+     "self",
+     "before",
+     "after",
+     "d0"
+    ],
+    "noFeedback": false,
+    "cursor": "pointer",
+    "layoutShift": null,
+    "transition": "color 0.15s"
+   },
+   {
+    "i": 7,
+    "sig": "button.header__action-btn<header__actions",
+    "text": "Search",
+    "docY": 53,
+    "hit": true,
+    "changed": [
+     "self",
+     "before",
+     "after",
+     "d0",
+     "d1"
+    ],
+    "noFeedback": false,
+    "cursor": "pointer",
+    "layoutShift": {
+     "pre": [
+      40,
+      40
+     ],
+     "post": [
+      44,
+      44
+     ]
+    },
+    "transition": "all 0.15s"
+   },
+   {
+    "i": 8,
+    "sig": "button.header__action-btn.header__cart-btn<header__actions",
+    "text": "Open cart 0",
+    "docY": 53,
+    "hit": true,
+    "changed": [
+     "self",
+     "before",
+     "after",
+     "d0",
+     "d1",
+     "d2"
+    ],
+    "noFeedback": false,
+    "cursor": "pointer",
+    "layoutShift": {
+     "pre": [
+      40,
+      40
+     ],
+     "post": [
+      44,
+      44
+     ]
+    },
+    "transition": "all 0.15s"
+   },
+   {
+    "i": 9,
+    "sig": "a.breadcrumb__link<",
+    "text": "Home",
+    "docY": 125,
+    "hit": true,
+    "changed": [
+     "self",
+     "before",
+     "after",
+     "d0"
+    ],
+    "noFeedback": false,
+    "cursor": "pointer",
+    "layoutShift": null,
+    "transition": "color 0.15s"
+   },
+   {
+    "i": 10,
+    "sig": "a.contact-main__info-item-text<contact-main__info-item-content",
+    "text": "+33 1 23 45 67 89",
+    "docY": 801,
+    "hit": true,
+    "changed": [
+     "self",
+     "before",
+     "after"
+    ],
+    "noFeedback": false,
+    "cursor": "pointer",
+    "layoutShift": null,
+    "transition": "color 0.15s"
+   },
+   {
+    "i": 11,
+    "sig": "a.contact-main__info-item-text<contact-main__info-item-content",
+    "text": "contact@devs2-rebel.com",
+    "docY": 899,
+    "hit": true,
+    "changed": [
+     "self",
+     "before",
+     "after"
+    ],
+    "noFeedback": false,
+    "cursor": "pointer",
+    "layoutShift": null,
+    "transition": "color 0.15s"
+   },
+   {
+    "i": 12,
+    "sig": "a.shop-social__link.shop-social__link--facebook<shop-social__item",
+    "text": "Follow us on Facebook",
+    "docY": 1249,
+    "hit": true,
+    "changed": [
+     "self",
+     "before",
+     "after",
+     "d0",
+     "d1"
+    ],
+    "noFeedback": false,
+    "cursor": "pointer",
+    "layoutShift": null,
+    "transition": "all 0.3s"
+   },
+   {
+    "i": 13,
+    "sig": "a.shop-social__link.shop-social__link--instagram<shop-social__item",
+    "text": "Follow us on Instagram",
+    "docY": 1249,
+    "hit": true,
+    "changed": [
+     "self",
+     "before",
+     "after",
+     "d0",
+     "d1"
+    ],
+    "noFeedback": false,
+    "cursor": "pointer",
+    "layoutShift": null,
+    "transition": "all 0.3s"
+   },
+   {
+    "i": 14,
+    "sig": "a.shop-social__link.shop-social__link--youtube<shop-social__item",
+    "text": "Follow us on YouTube",
+    "docY": 1249,
+    "hit": true,
+    "changed": [
+     "self",
+     "before",
+     "after",
+     "d0",
+     "d1"
+    ],
+    "noFeedback": false,
+    "cursor": "pointer",
+    "layoutShift": null,
+    "transition": "all 0.3s"
+   },
+   {
+    "i": 15,
+    "sig": "a.shop-social__link.shop-social__link--tiktok<shop-social__item",
+    "text": "Follow us on TikTok",
+    "docY": 1249,
+    "hit": true,
+    "changed": [
+     "self",
+     "before",
+     "after",
+     "d0",
+     "d1"
+    ],
+    "noFeedback": false,
+    "cursor": "pointer",
+    "layoutShift": null,
+    "transition": "all 0.3s"
+   },
+   {
+    "i": 16,
+    "sig": "a.shop-social__link.shop-social__link--pinterest<shop-social__item",
+    "text": "Follow us on Pinterest",
+    "docY": 1249,
+    "hit": true,
+    "changed": [
+     "self",
+     "before",
+     "after",
+     "d0",
+     "d1"
+    ],
+    "noFeedback": false,
+    "cursor": "pointer",
+    "layoutShift": null,
+    "transition": "all 0.3s"
+   },
+   {
+    "i": 17,
+    "sig": "a.shop-social__link.shop-social__link--twitter<shop-social__item",
+    "text": "X (Twitter) Devs2 Rebel",
+    "docY": 1249,
+    "hit": true,
+    "changed": [
+     "self",
+     "before",
+     "after",
+     "d0",
+     "d1"
+    ],
+    "noFeedback": false,
+    "cursor": "pointer",
+    "layoutShift": null,
+    "transition": "all 0.3s"
+   },
+   {
+    "i": 18,
+    "sig": "label<form-group",
+    "text": "Name",
+    "docY": 468,
+    "hit": true,
+    "changed": [],
+    "noFeedback": true,
+    "cursor": "default",
+    "layoutShift": null,
+    "transition": "all 0s"
+   },
+   {
+    "i": 19,
+    "sig": "input.form-control<",
+    "text": "",
+    "docY": 500,
+    "hit": true,
+    "changed": [],
+    "noFeedback": true,
+    "cursor": "text",
+    "layoutShift": null,
+    "transition": "all 0.15s"
+   }
+  ],
+  "focus": [
+   {
+    "key": "a.announcement-bar__text.announcement-bar__link#@8",
+    "sig": "a.announcement-bar__text.announcement-bar__link",
+    "text": "New season: the tailored anti-uniform ha",
+    "fv": true,
+    "ringOutline": true,
+    "ringShadow": false,
+    "inView": true,
+    "size": [
+     325,
+     21
+    ]
+   },
+   {
+    "key": "a.header__logo-link#@58",
+    "sig": "a.header__logo-link",
+    "text": "Devs2 Rebel",
+    "fv": true,
+    "ringOutline": true,
+    "ringShadow": false,
+    "inView": true,
+    "size": [
+     119,
+     30
+    ]
+   },
+   {
+    "key": "a.megamenu__trigger.megamenu__trigger--link#@49",
+    "sig": "a.megamenu__trigger.megamenu__trigger--link",
+    "text": "Home",
+    "fv": true,
+    "ringOutline": true,
+    "ringShadow": false,
+    "inView": true,
+    "size": [
+     45,
+     48
+    ]
+   },
+   {
+    "key": "button.megamenu__trigger#@49",
+    "sig": "button.megamenu__trigger",
+    "text": "Shop",
+    "fv": true,
+    "ringOutline": true,
+    "ringShadow": false,
+    "inView": true,
+    "size": [
+     67,
+     48
+    ]
+   },
+   {
+    "key": "a.megamenu__simple-link#@122",
+    "sig": "a.megamenu__simple-link",
+    "text": "T-Shirts",
+    "fv": true,
+    "ringOutline": true,
+    "ringShadow": false,
+    "inView": true,
+    "size": [
+     180,
+     37
+    ]
+   },
+   {
+    "key": "a.megamenu__simple-link#@156",
+    "sig": "a.megamenu__simple-link",
+    "text": "Crop Tops",
+    "fv": true,
+    "ringOutline": true,
+    "ringShadow": false,
+    "inView": true,
+    "size": [
+     180,
+     37
+    ]
+   },
+   {
+    "key": "a.megamenu__simple-link#@191",
+    "sig": "a.megamenu__simple-link",
+    "text": "Casual Shirts",
+    "fv": true,
+    "ringOutline": true,
+    "ringShadow": false,
+    "inView": true,
+    "size": [
+     180,
+     37
+    ]
+   },
+   {
+    "key": "a.megamenu__simple-link#@228",
+    "sig": "a.megamenu__simple-link",
+    "text": "Dress Shirts",
+    "fv": true,
+    "ringOutline": true,
+    "ringShadow": false,
+    "inView": true,
+    "size": [
+     180,
+     37
+    ]
+   },
+   {
+    "key": "a.megamenu__simple-link#@265",
+    "sig": "a.megamenu__simple-link",
+    "text": "Denim Shirts",
+    "fv": true,
+    "ringOutline": true,
+    "ringShadow": false,
+    "inView": true,
+    "size": [
+     180,
+     37
+    ]
+   },
+   {
+    "key": "a.megamenu__simple-link#@302",
+    "sig": "a.megamenu__simple-link",
+    "text": "Outerwear",
+    "fv": true,
+    "ringOutline": true,
+    "ringShadow": false,
+    "inView": true,
+    "size": [
+     180,
+     37
+    ]
+   },
+   {
+    "key": "a.megamenu__simple-link#@339",
+    "sig": "a.megamenu__simple-link",
+    "text": "Bottoms",
+    "fv": true,
+    "ringOutline": true,
+    "ringShadow": false,
+    "inView": true,
+    "size": [
+     180,
+     37
+    ]
+   },
+   {
+    "key": "a.megamenu__simple-link#@376",
+    "sig": "a.megamenu__simple-link",
+    "text": "Accessories",
+    "fv": true,
+    "ringOutline": true,
+    "ringShadow": false,
+    "inView": true,
+    "size": [
+     180,
+     37
+    ]
+   }
+  ]
+ },
+ "__links": {
+  "/": 200,
+  "/collections/new-arrivals": 200,
+  "/collections/t-shirts": 200,
+  "/pages/contact": 200,
+  "/collections/casual-shirts": 200,
+  "/collections/dress-shirts": 200,
+  "/collections/crop-tops": 200,
+  "/collections/denim-shirts": 200,
+  "/collections/outerwear": 200,
+  "/collections/accessories": 200,
+  "/collections/bottoms": 200,
+  "/collections/best-sellers": 200,
+  "/collections/back-in-stock": 200,
+  "/collections/limited-edition": 200,
+  "/blogs/style-guides-wardrobe-essentials": 200,
+  "/blogs/trend-forecasts-fashion-insights": 200,
+  "/pages/about": 200,
+  "/blogs/sustainable-fashion-eco-tech": 200,
+  "/pages/stores": 200,
+  "/pages/faq": 200,
+  "/account": 302,
+  "/collections": 200,
+  "/collections/all": 200,
+  "/policies/privacy-policy": 200,
+  "/search?q=New+arrivals": 200,
+  "/search?q=Best+sellers": 200,
+  "/search?q=Sale": 200
+ }
+}

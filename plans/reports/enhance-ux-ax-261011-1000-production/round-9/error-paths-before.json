@@ -1,0 +1,35 @@
+{
+ "seed": {
+  "status": 200,
+  "strings": "There was an error while updating your cart. Please try again.",
+  "loadError": "Could not load products. Please try again."
+ },
+ "drawer": {
+  "abort": "Failed to fetch×",
+  "html500": "Unexpected token '<', \"<!doctype \"... is not valid JSON×",
+  "json422": "PROBE: only 1 left×",
+  "noteAbort": "Failed to fetch×",
+  "loadCart500": "HTTP 500 for /cart.js×"
+ },
+ "cartPage": {
+  "hasTemplate": true,
+  "abort": "Failed to fetch×",
+  "html500": "Unexpected token '<', \"<!doctype \"... is not valid JSON×",
+  "json422": "PROBE: only 1 left×",
+  "sectionAbort": "Failed to fetch×"
+ },
+ "collection": {
+  "filterAbort": null,
+  "loadingCleared": true,
+  "loadMore500": {
+   "disabled": false,
+   "loading": false,
+   "toast": null
+  },
+  "loadMoreOk": {
+   "before": 20,
+   "after": 22,
+   "toast": null
+  }
+ }
+}

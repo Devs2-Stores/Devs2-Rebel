@@ -2,11 +2,25 @@
   @description Collection facet filter — Shopify native Storefront Filtering API
   Renders all available filters dynamically from collection.filters.
   Supports: list (checkboxes), price_range (min/max inputs), boolean.
-  @param {boolean} [collapse_filters=false] - Mặc định thu gọn các filter group
+  @param {object} [results] - Collection or Search object. Default: collection
+  @param {boolean} [collapse_filters] - Collapse filter groups initially. Default: false
   @example {%- render 'collection-facet-filter', collapse_filters: false -%}
 {% enddoc %}
 
 {%- liquid
+  assign results = results | default: collection
+  assign sort_by = results.sort_by | default: results.default_sort_by
+  if results.url
+    assign results_url = results.url
+  else
+    assign terms_encoded = results.terms | replace: '&amp;', '&' | replace: '&#39;', "'" | replace: '&quot;', '"' | replace: '&lt;', '<' | replace: '&gt;', '>' | url_encode
+    assign results_url = routes.search_url | append: '?q=' | append: terms_encoded | append: '&type=product,article,page'
+  endif
+  if results_url contains '?'
+    assign clear_url = results_url | append: '&sort_by=' | append: sort_by
+  else
+    assign clear_url = results_url | append: '?sort_by=' | append: sort_by
+  endif
   assign t_clear_all = 'products.facets.clear_all_filters' | t
   assign t_from = 'products.facets.from' | t
   assign t_to = 'products.facets.to' | t
@@ -20,7 +34,7 @@
 <div class="facet-filters" id="FacetFiltersForm">
   <form class="facet-filters__form" id="FacetFilterForm">
 
-    {%- for filter in collection.filters -%}
+    {%- for filter in results.filters -%}
       {%- liquid
         comment
           Auto-expand filter nếu có active values dù collapse_filters = true
@@ -94,7 +108,12 @@
                     {%- endfor -%}
                   </div>
                 {%- else -%}
-                  <div class="facet-filter__content-list" data-collapse-limit="5">
+                  <div
+                    class="facet-filter__content-list"
+                    data-collapse-limit="5"
+                    data-show-more="{{ 'products.facets.show_more' | t | escape }}"
+                    data-show-less="{{ 'products.facets.show_less' | t | escape }}"
+                  >
                     {%- for value in filter.values -%}
                       <facet-filter-item
                         class="facet-filter-item{% if value.count == 0 and value.active == false %} facet-filter-item--disabled{% endif %}"
@@ -318,7 +337,7 @@
 
     {%- comment %} ── Active filter tags ── {% endcomment -%}
     {%- assign active_count = 0 -%}
-    {%- for filter in collection.filters -%}
+    {%- for filter in results.filters -%}
       {%- if filter.type == 'price_range' -%}
         {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
           {%- assign active_count = active_count | plus: 1 -%}
@@ -331,20 +350,24 @@
     {%- if active_count > 0 -%}
       <div class="facet-filters__active" id="FacetFiltersActive">
         <div class="facet-filters__active-list">
-          {%- for filter in collection.filters -%}
+          {%- for filter in results.filters -%}
             {%- if filter.type == 'price_range' -%}
               {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
-                <a href="{{ filter.url_to_remove }}" class="facet-filters__active-tag" data-filter-remove>
+                {%- capture chip_label -%}
                   {{ filter.label }}:
                   {%- if filter.min_value.value -%}{{ filter.min_value.value | money_without_trailing_zeros }}{%- else -%}{{ 0 | money_without_trailing_zeros }}{%- endif -%}
                   –
                   {%- if filter.max_value.value -%}{{ filter.max_value.value | money_without_trailing_zeros }}{%- else -%}{{ filter.range_max | money_without_trailing_zeros }}{%- endif -%}
+                {%- endcapture -%}
+                {%- assign chip_text = chip_label | strip_html | strip -%}
+                <a href="{{ filter.url_to_remove }}" class="facet-filters__active-tag" data-filter-remove aria-label="{{ 'products.facets.remove_filter_label' | t: label: chip_text }}">
+                  {{ chip_label }}
                   <span class="facet-filters__active-remove" aria-hidden="true">&times;</span>
                 </a>
               {%- endif -%}
             {%- else -%}
               {%- for value in filter.active_values -%}
-                <a href="{{ value.url_to_remove }}" class="facet-filters__active-tag" data-filter-remove>
+                <a href="{{ value.url_to_remove }}" class="facet-filters__active-tag" data-filter-remove aria-label="{{ 'products.facets.remove_filter_label' | t: label: value.label }}">
                   {{ value.label | escape }}
                   <span class="facet-filters__active-remove" aria-hidden="true">&times;</span>
                 </a>
@@ -352,7 +375,7 @@
             {%- endif -%}
           {%- endfor -%}
         </div>
-        <a href="{{ collection.url }}?sort_by={{ collection.sort_by | default: collection.default_sort_by }}" class="facet-filters__clear-all" data-filter-remove>
+        <a href="{{ clear_url }}" class="facet-filters__clear-all" data-filter-remove>
           {{ t_clear_all }}
         </a>
       </div>

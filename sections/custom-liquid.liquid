@@ -70,7 +70,7 @@
   }
 
   .section-custom-liquid__bordered {
-    border: var(--cl-border-width, 1px) var(--cl-border-style, solid) rgba(var(--color-border), var(--cl-border-opacity, 1));
+    border: var(--cl-border-width, 1px) var(--cl-border-style, solid) rgba(var(--color-border-rgb), var(--cl-border-opacity, 1));
     padding: 20px;
   }
 
@@ -83,47 +83,59 @@
 
 {% schema %}
 {
-  "name": "Custom liquid",
+  "name": "t:sections.custom_liquid.name",
   "tag": "section",
   "class": "section-custom-liquid-wrapper",
   "settings": [
     {
       "type": "liquid",
       "id": "liquid_code",
-      "label": "Liquid code",
-      "info": "Add app snippets or other code to create advanced customizations. [Learn more](https://shopify.dev/docs/api/liquid)"
+      "label": "t:sections.custom_liquid.settings.liquid_code.label",
+      "info": "t:sections.custom_liquid.settings.liquid_code.info"
     },
     {
       "type": "header",
-      "content": "Layout"
+      "content": "t:sections.custom_liquid.settings.header__layout.content"
     },
     {
       "type": "select",
       "id": "section_width",
-      "label": "Container",
+      "label": "t:sections.custom_liquid.settings.section_width.label",
       "options": [
-        { "value": "full", "label": "Full" },
-        { "value": "fixed", "label": "Fixed" }
+        {
+          "value": "full",
+          "label": "t:sections.custom_liquid.settings.section_width.options.full"
+        },
+        {
+          "value": "fixed",
+          "label": "t:sections.custom_liquid.settings.section_width.options.fixed"
+        }
       ],
       "default": "fixed"
     },
     {
       "type": "header",
-      "content": "Appearance"
+      "content": "t:sections.custom_liquid.settings.header__appearance.content"
     },
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Color scheme",
+      "label": "t:sections.custom_liquid.settings.color_scheme.label",
       "default": "scheme-1"
     },
     {
       "type": "select",
       "id": "border_style",
-      "label": "Border",
+      "label": "t:sections.custom_liquid.settings.border_style.label",
       "options": [
-        { "value": "none", "label": "None" },
-        { "value": "solid", "label": "Solid" }
+        {
+          "value": "none",
+          "label": "t:sections.custom_liquid.settings.border_style.options.none"
+        },
+        {
+          "value": "solid",
+          "label": "t:sections.custom_liquid.settings.border_style.options.solid"
+        }
       ],
       "default": "none"
     },
@@ -134,7 +146,7 @@
       "max": 10,
       "step": 1,
       "unit": "px",
-      "label": "Border width",
+      "label": "t:sections.custom_liquid.settings.border_width.label",
       "default": 1,
       "visible_if": "{{ section.settings.border_style != 'none' }}"
     },
@@ -145,7 +157,7 @@
       "max": 100,
       "step": 5,
       "unit": "%",
-      "label": "Border opacity",
+      "label": "t:sections.custom_liquid.settings.border_opacity.label",
       "default": 100,
       "visible_if": "{{ section.settings.border_style != 'none' }}"
     },
@@ -156,12 +168,12 @@
       "max": 40,
       "step": 2,
       "unit": "px",
-      "label": "Corner radius",
+      "label": "t:sections.custom_liquid.settings.corner_radius.label",
       "default": 0
     },
     {
       "type": "header",
-      "content": "Desktop spacing"
+      "content": "t:sections.custom_liquid.settings.header__desktop_spacing.content"
     },
     {
       "type": "range",
@@ -170,7 +182,7 @@
       "max": 150,
       "step": 5,
       "unit": "px",
-      "label": "Top",
+      "label": "t:sections.custom_liquid.settings.padding_top_desktop.label",
       "default": 50
     },
     {
@@ -180,12 +192,12 @@
       "max": 150,
       "step": 5,
       "unit": "px",
-      "label": "Bottom",
+      "label": "t:sections.custom_liquid.settings.padding_bottom_desktop.label",
       "default": 50
     },
     {
       "type": "header",
-      "content": "Mobile spacing"
+      "content": "t:sections.custom_liquid.settings.header__mobile_spacing.content"
     },
     {
       "type": "range",
@@ -194,7 +206,7 @@
       "max": 100,
       "step": 5,
       "unit": "px",
-      "label": "Top",
+      "label": "t:sections.custom_liquid.settings.padding_top_mobile.label",
       "default": 30
     },
     {
@@ -204,13 +216,13 @@
       "max": 100,
       "step": 5,
       "unit": "px",
-      "label": "Bottom",
+      "label": "t:sections.custom_liquid.settings.padding_bottom_mobile.label",
       "default": 30
     }
   ],
   "presets": [
     {
-      "name": "Custom liquid",
+      "name": "t:sections.custom_liquid.presets.custom_liquid.name",
       "category": "Custom"
     }
   ]

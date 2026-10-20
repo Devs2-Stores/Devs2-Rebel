@@ -1,0 +1,195 @@
+{
+ "base": "http://127.0.0.1:9292",
+ "at": "2026-10-09T21:41:50.297Z",
+ "rows": [
+  {
+   "name": "home",
+   "route": "/",
+   "viewport": "375x812",
+   "expectStatus": 200,
+   "status": 200,
+   "loadMs": 11339,
+   "probe": {
+    "url": "/",
+    "title": "Devs2 Rebel",
+    "lang": "en",
+    "metaDescription": "Devs2 Rebel",
+    "canonical": "https://devs2-rebel.myshopify.com/",
+    "main": true,
+    "skipLink": true,
+    "overflowX": 0,
+    "offenders": [],
+    "imgCount": 70,
+    "broken": [],
+    "noAlt": [],
+    "noDims": [],
+    "noDimsCount": 0,
+    "dupIds": [],
+    "smallTargets": [
+     {
+      "el": "a.section-featured-product__view-link",
+      "w": 345,
+      "h": 21,
+      "text": "View product"
+     },
+     {
+      "el": "a.section-blog-posts__view-all",
+      "w": 71,
+      "h": 21,
+      "text": "View all"
+     },
+     {
+      "el": "a.footer-logo",
+      "w": 94,
+      "h": 20,
+      "text": "Devs2 Rebel"
+     },
+     {
+      "el": "a",
+      "w": 184,
+      "h": 17,
+      "text": "contact@devs2-rebel.com"
+     },
+     {
+      "el": "a",
+      "w": 122,
+      "h": 17,
+      "text": "+33 1 23 45 67 89"
+     }
+    ],
+    "smallTargetCount": 5,
+    "h1s": [
+     "Devs2 Rebel"
+    ],
+    "newsletterVisible": false,
+    "scrollHeight": 10080
+   },
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "count": 3,
+     "targets": [
+      ".section-featured-product__price-compare",
+      ".section-marquee-products__list:nth-child(1) > .section-marquee-products__item:nth-child(1) > product-card > .product-card__wrapper > .product-card__content > .product-card__price > .product-card__price-compare",
+      ".section-marquee-products__list:nth-child(1) > .section-marquee-products__item:nth-child(11) > product-card > .product-card__wrapper > .product-card__content > .product-card__price > .product-card__price-compare"
+     ],
+     "summary": "Fix any of the following:   Element has insufficient color contrast of 2.71 (foreground color: #9d9d9d, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+    },
+    {
+     "id": "label-content-name-mismatch",
+     "impact": "serious",
+     "count": 4,
+     "targets": [
+      ".header__mobile-actions > .header__cart-btn[data-action=\"open-cart-sidebar\"][aria-label=\"Open cart\"]",
+      ".section-marquee-products__list:nth-child(1) > .section-marquee-products__item:nth-child(5) > product-card > .product-card__wrapper > .product-card__media > a[aria-label=\"View Gift Card\"][href$=\"gift-card\"][title=\"Gift Card\"]",
+      ".section-marquee-products__list:nth-child(1) > .section-marquee-products__item:nth-child(6) > product-card > .product-card__wrapper > .product-card__media > .product-card__media-inner[aria-label=\"View Hết hàng — inventory = 0\"][title=\"Hết hàng — inventory = 0\"]",
+      ".section-marquee-products__list:nth-child(1) > .section-marquee-products__item:nth-child(11) > product-card > .product-card__wrapper > .product-card__media > .product-card__media-inner"
+     ],
+     "summary": "Fix any of the following:   Text inside the element is not included in the accessible name"
+    }
+   ],
+   "screenshot": "plans/reports/test-e2e-261010-storefront/matrix/home-375.jpg",
+   "logs": {
+    "console": [
+     {
+      "text": "Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "url": "http://127.0.0.1:9292/"
+     },
+     {
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js"
+     },
+     {
+      "text": "Framing 'https://shop.app/' violates the following Content Security Policy directive: \"frame-ancestors 'self' https://shop.app https://admin.shopify.com\". The request has been blocked.\n",
+      "url": ""
+     },
+     {
+      "text": "Failed to load resource: the server responded with a status of 400 ()",
+      "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+     },
+     {
+      "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+      "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+     },
+     {
+      "text": "Failed to load resource: the server responded with a status of 400 ()",
+      "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json"
+     },
+     {
+      "text": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+      "url": "https://cdn.shopify.com/storefront/web-components/account.js"
+     },
+     {
+      "text": "Failed to load resource: the server responded with a status of 403 ()",
+      "url": "chrome-error://chromewebdata/"
+     },
+     {
+      "text": "Failed to load resource: the server responded with a status of 403 ()",
+      "url": "chrome-error://chromewebdata/"
+     },
+     {
+      "text": "Failed to load resource: the server responded with a status of 403 ()",
+      "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=6ac02cdb-55a3-4017-bd98-f5bd81acec5a&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+     },
+     {
+      "text": "Failed to load resource: the server responded with a status of 403 ()",
+      "url": "chrome-error://chromewebdata/"
+     },
+     {
+      "text": "Failed to load resource: the server responded with a status of 403 ()",
+      "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=6ac02cdb-55a3-4017-bd98-f5bd81acec5a&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+     },
+     {
+      "text": "Failed to load resource: the server responded with a status of 403 ()",
+      "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=e8522b9c-623c-4b31-bcbc-5c5f599de0f5&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en"
+     },
+     {
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://127.0.0.1:9292/favicon.ico"
+     }
+    ],
+    "pageErrors": [],
+    "badResponses": [
+     {
+      "status": 403,
+      "url": "https://shop.app/pay/hop?analytics_trace_id=0b5c7f72-3b21-4dcb-ad5b-4450ea6e9c28&target_origin=http%3A%2F%2F127.0.0.1%3A9292&client_handle=devs2-rebel.myshopify.com",
+      "cls": "platform"
+     },
+     {
+      "status": 400,
+      "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json",
+      "cls": "platform"
+     },
+     {
+      "status": 400,
+      "url": "https://devs2-rebel.myshopify.com/api/2026-01/graphql.json",
+      "cls": "platform"
+     },
+     {
+      "status": 403,
+      "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=6ac02cdb-55a3-4017-bd98-f5bd81acec5a&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%",
+      "cls": "platform"
+     },
+     {
+      "status": 403,
+      "url": "https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=e8522b9c-623c-4b31-bcbc-5c5f599de0f5&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%",
+      "cls": "platform"
+     }
+    ],
+    "failedRequests": [
+     {
+      "url": "http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js",
+      "err": "net::ERR_FAILED",
+      "cls": "platform"
+     },
+     {
+      "url": "https://shop.app/pay/hop?analytics_trace_id=0b5c7f72-3b21-4dcb-ad5b-4450ea6e9c28&target_origin=http%3A%2F%2F127.0.0.1%3A9292&client_handle=devs2-rebel.myshopify.com",
+      "err": "net::ERR_BLOCKED_BY_RESPONSE",
+      "cls": "platform"
+     }
+    ]
+   }
+  }
+ ]
+}

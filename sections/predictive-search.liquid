@@ -58,7 +58,7 @@
             <span class="predictive-search__product-vendor">{{ product.vendor }}</span>
             {%- endif -%}
             {%- if settings.predictive_search_show_price -%}
-            <span class="predictive-search__product-price">
+            <span class="predictive-search__product-price{% if product.compare_at_price > product.price %} predictive-search__product-price--sale{% endif %}">
               {%- if product.price == 0 -%}
                 {{ 'products.product.price.contact' | t }}
               {%- else -%}

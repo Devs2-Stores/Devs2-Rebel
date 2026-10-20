@@ -1,0 +1,378 @@
+(node:19508) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[NAV] cart-1440 http://127.0.0.1:9292/
+[NAVFAIL] cart-1440 http://127.0.0.1:9292/web-pixels@9f5e2762wb720532ap19708c42m93b2bec3/custom/web-pixel-shopify-custom-pixel@0530/sandbox/modern/ net::ERR_ABORTED
+[NAVFAIL] cart-1440 https://shop.app/pay/hop?analytics_trace_id=0f62358b-ceac-4445-be3a-be865a65f91f&target_origin=http%3A%2F%2F127.0.0.1%3A9292&client_handle=devs2-rebel.myshopify.com net::ERR_BLOCKED_BY_RESPONSE
+[NAVFAIL] cart-1440 https://devs2-rebel.myshopify.com/services/login_with_shop/authorize?analytics_context=loginWithShopEmbed&analytics_trace_id=c8ffe488-a060-41ad-8b65-6b5c5ce38ba6&compact_layout=true&flow=embed&flow_version=account_menu&locale=en&preact=true&redirect_uri=http%3A%2F%2F127.0.0.1%3A9292&response_mode=web_message&response_type=id_token&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&target_origin=http%3A%2F%2F127.0.0.1%3A9292&ux_mode=windoid&ux_role=prompt net::ERR_ABORTED
+[NAVFAIL] cart-1440 https://devs2-rebel.myshopify.com/services/login_with_shop/authorize?analytics_context=loginWithShopEmbed&analytics_trace_id=da524a14-dffc-4f6c-8e7c-423ddc559df3&compact_layout=true&flow=embed&flow_version=account_menu&locale=en&preact=true&redirect_uri=http%3A%2F%2F127.0.0.1%3A9292&response_mode=web_message&response_type=id_token&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&target_origin=http%3A%2F%2F127.0.0.1%3A9292&ux_mode=windoid&ux_role=prompt net::ERR_ABORTED
+[NAVSTATUS] cart-1440 403 https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=da524a14-dffc-4f6c-8e7c-423ddc559df3&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en
+[NAVSTATUS] cart-1440 403 https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=c8ffe488-a060-41ad-8b65-6b5c5ce38ba6&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en
+[PASS] overlay:cart-1440 :: trigger is keyboard focusable with a name
+[PASS] overlay:cart-1440 :: closed at rest: hidden and nothing focusable
+[PASS] overlay:cart-1440 :: opens from keyboard (Enter on trigger)
+[PASS] overlay:cart-1440 :: dialog semantics: role=dialog + aria-modal + name
+[PASS] overlay:cart-1440 :: focus moves inside
+[PASS] overlay:cart-1440 :: panel is topmost layer
+[PASS] overlay:cart-1440 :: panel fits viewport horizontally
+[PASS] overlay:cart-1440 :: panel top inside viewport
+[PASS] overlay:cart-1440 :: page scroll locked
+[PASS] overlay:cart-1440 :: no layout shift of page behind
+[PASS] overlay:cart-1440 :: scroll position kept while open
+[PASS] overlay:cart-1440 :: nothing focusable under aria-hidden
+[PASS] overlay:cart-1440 :: text keeps >= 12px from panel edges
+[PASS] overlay:cart-1440 :: panel text uses a theme font family: body, heading or subheading token (slotted content included)
+[PASS] overlay:cart-1440 :: wheel outside panel does not scroll page
+[PASS] overlay:cart-1440 :: Tab x20 + Shift+Tab x6 stay inside
+[PASS] overlay:cart-1440 :: close button named and >= 24x24
+[PASS] overlay:cart-1440 :: Escape closes
+[PASS] overlay:cart-1440 :: Escape: focus returns to trigger
+[PASS] overlay:cart-1440 :: closed: scroll unlocked and position restored
+[PASS] overlay:cart-1440 :: closed: nothing focusable inside
+[PASS] overlay:cart-1440 :: close button closes
+[PASS] overlay:cart-1440 :: close button: focus returns to trigger
+[PASS] overlay:cart-1440 :: click outside panel closes
+[PASS] overlay:cart-1440 :: third open/close cycle still works
+[PASS] overlay:cart-1440 :: no page errors during cycles
+[NAV] cart-375 http://127.0.0.1:9292/
+[NAVFAIL] cart-375 http://127.0.0.1:9292/web-pixels@9f5e2762wb720532ap19708c42m93b2bec3/custom/web-pixel-shopify-custom-pixel@0530/sandbox/modern/ net::ERR_ABORTED
+[NAVFAIL] cart-375 https://shop.app/pay/hop?analytics_trace_id=0534f25d-d21e-44ef-a51c-e4c7e1e0d5dd&target_origin=http%3A%2F%2F127.0.0.1%3A9292&client_handle=devs2-rebel.myshopify.com net::ERR_BLOCKED_BY_RESPONSE
+[NAVFAIL] cart-375 https://devs2-rebel.myshopify.com/services/login_with_shop/authorize?analytics_context=loginWithShopEmbed&analytics_trace_id=c0d92f70-9f6a-444b-b18c-13b8222b63f1&compact_layout=true&flow=embed&flow_version=account_menu&locale=en&preact=true&redirect_uri=http%3A%2F%2F127.0.0.1%3A9292&response_mode=web_message&response_type=id_token&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&target_origin=http%3A%2F%2F127.0.0.1%3A9292&ux_mode=windoid&ux_role=prompt net::ERR_ABORTED
+[NAVFAIL] cart-375 https://devs2-rebel.myshopify.com/services/login_with_shop/authorize?analytics_context=loginWithShopEmbed&analytics_trace_id=2cceaa47-8263-4467-b3a6-274df748d93e&compact_layout=true&flow=embed&flow_version=account_menu&locale=en&preact=true&redirect_uri=http%3A%2F%2F127.0.0.1%3A9292&response_mode=web_message&response_type=id_token&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&target_origin=http%3A%2F%2F127.0.0.1%3A9292&ux_mode=windoid&ux_role=prompt net::ERR_ABORTED
+[NAVSTATUS] cart-375 403 https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=2cceaa47-8263-4467-b3a6-274df748d93e&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en
+[NAVSTATUS] cart-375 403 https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=c0d92f70-9f6a-444b-b18c-13b8222b63f1&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en
+[PASS] overlay:cart-375 :: trigger is keyboard focusable with a name
+[PASS] overlay:cart-375 :: closed at rest: hidden and nothing focusable
+[PASS] overlay:cart-375 :: opens from keyboard (Enter on trigger)
+[PASS] overlay:cart-375 :: dialog semantics: role=dialog + aria-modal + name
+[PASS] overlay:cart-375 :: focus moves inside
+[PASS] overlay:cart-375 :: panel is topmost layer
+[PASS] overlay:cart-375 :: panel fits viewport horizontally
+[PASS] overlay:cart-375 :: panel top inside viewport
+[PASS] overlay:cart-375 :: page scroll locked
+[PASS] overlay:cart-375 :: no layout shift of page behind
+[PASS] overlay:cart-375 :: scroll position kept while open
+[PASS] overlay:cart-375 :: nothing focusable under aria-hidden
+[PASS] overlay:cart-375 :: text keeps >= 12px from panel edges
+[PASS] overlay:cart-375 :: panel text uses a theme font family: body, heading or subheading token (slotted content included)
+[PASS] overlay:cart-375 :: Tab x20 + Shift+Tab x6 stay inside
+[PASS] overlay:cart-375 :: close button named and >= 24x24
+[PASS] overlay:cart-375 :: Escape closes
+[PASS] overlay:cart-375 :: Escape: focus returns to trigger
+[PASS] overlay:cart-375 :: closed: scroll unlocked and position restored
+[PASS] overlay:cart-375 :: closed: nothing focusable inside
+[PASS] overlay:cart-375 :: close button closes
+[PASS] overlay:cart-375 :: close button: focus returns to trigger
+[INFO] overlay:cart-375 :: click outside panel closes :: "panel covers viewport"
+[PASS] overlay:cart-375 :: third open/close cycle still works
+[PASS] overlay:cart-375 :: no page errors during cycles
+[NAV] search-1440 http://127.0.0.1:9292/
+[NAVFAIL] search-1440 http://127.0.0.1:9292/web-pixels@9f5e2762wb720532ap19708c42m93b2bec3/custom/web-pixel-shopify-custom-pixel@0530/sandbox/modern/ net::ERR_ABORTED
+[NAVFAIL] search-1440 https://shop.app/pay/hop?analytics_trace_id=13cd766c-7120-44e2-af05-3621fb1d7fec&target_origin=http%3A%2F%2F127.0.0.1%3A9292&client_handle=devs2-rebel.myshopify.com net::ERR_BLOCKED_BY_RESPONSE
+[NAVFAIL] search-1440 https://devs2-rebel.myshopify.com/services/login_with_shop/authorize?analytics_context=loginWithShopEmbed&analytics_trace_id=2fe2df94-7022-478d-ab52-3b753e9f908e&compact_layout=true&flow=embed&flow_version=account_menu&locale=en&preact=true&redirect_uri=http%3A%2F%2F127.0.0.1%3A9292&response_mode=web_message&response_type=id_token&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&target_origin=http%3A%2F%2F127.0.0.1%3A9292&ux_mode=windoid&ux_role=prompt net::ERR_ABORTED
+[NAVFAIL] search-1440 https://devs2-rebel.myshopify.com/services/login_with_shop/authorize?analytics_context=loginWithShopEmbed&analytics_trace_id=47372bc4-7fe4-4fa9-aa7a-7ade2fbdd665&compact_layout=true&flow=embed&flow_version=account_menu&locale=en&preact=true&redirect_uri=http%3A%2F%2F127.0.0.1%3A9292&response_mode=web_message&response_type=id_token&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&target_origin=http%3A%2F%2F127.0.0.1%3A9292&ux_mode=windoid&ux_role=prompt net::ERR_ABORTED
+[NAVSTATUS] search-1440 403 https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=47372bc4-7fe4-4fa9-aa7a-7ade2fbdd665&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en
+[NAVSTATUS] search-1440 403 https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=2fe2df94-7022-478d-ab52-3b753e9f908e&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en
+[PASS] overlay:search-1440 :: trigger is keyboard focusable with a name
+[PASS] overlay:search-1440 :: closed at rest: hidden and nothing focusable
+[PASS] overlay:search-1440 :: opens from keyboard (Enter on trigger)
+[PASS] overlay:search-1440 :: dialog semantics: role=dialog + aria-modal + name
+[PASS] overlay:search-1440 :: focus moves inside
+[PASS] overlay:search-1440 :: panel is topmost layer
+[PASS] overlay:search-1440 :: panel fits viewport horizontally
+[PASS] overlay:search-1440 :: panel top inside viewport
+[PASS] overlay:search-1440 :: page scroll locked
+[PASS] overlay:search-1440 :: no layout shift of page behind
+[PASS] overlay:search-1440 :: scroll position kept while open
+[PASS] overlay:search-1440 :: nothing focusable under aria-hidden
+[PASS] overlay:search-1440 :: text keeps >= 12px from panel edges
+[PASS] overlay:search-1440 :: panel text uses a theme font family: body, heading or subheading token (slotted content included)
+[PASS] overlay:search-1440 :: wheel outside panel does not scroll page
+[PASS] overlay:search-1440 :: Tab x20 + Shift+Tab x6 stay inside
+[PASS] overlay:search-1440 :: close button named and >= 24x24
+[PASS] overlay:search-1440 :: Escape closes
+[PASS] overlay:search-1440 :: Escape: focus returns to trigger
+[PASS] overlay:search-1440 :: closed: scroll unlocked and position restored
+[PASS] overlay:search-1440 :: closed: nothing focusable inside
+[PASS] overlay:search-1440 :: close button closes
+[PASS] overlay:search-1440 :: close button: focus returns to trigger
+[PASS] overlay:search-1440 :: click outside panel closes
+[PASS] overlay:search-1440 :: third open/close cycle still works
+[PASS] overlay:search-1440 :: no page errors during cycles
+[NAV] search-375 http://127.0.0.1:9292/
+[NAVFAIL] search-375 http://127.0.0.1:9292/web-pixels@9f5e2762wb720532ap19708c42m93b2bec3/custom/web-pixel-shopify-custom-pixel@0530/sandbox/modern/ net::ERR_ABORTED
+[NAVFAIL] search-375 https://shop.app/pay/hop?analytics_trace_id=6ca8cf33-8d6b-4965-b524-2a9d52b17b25&target_origin=http%3A%2F%2F127.0.0.1%3A9292&client_handle=devs2-rebel.myshopify.com net::ERR_BLOCKED_BY_RESPONSE
+[NAVFAIL] search-375 https://devs2-rebel.myshopify.com/services/login_with_shop/authorize?analytics_context=loginWithShopEmbed&analytics_trace_id=7b9956a5-937b-49ea-a70e-bc739385180e&compact_layout=true&flow=embed&flow_version=account_menu&locale=en&preact=true&redirect_uri=http%3A%2F%2F127.0.0.1%3A9292&response_mode=web_message&response_type=id_token&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&target_origin=http%3A%2F%2F127.0.0.1%3A9292&ux_mode=windoid&ux_role=prompt net::ERR_ABORTED
+[NAVFAIL] search-375 https://devs2-rebel.myshopify.com/services/login_with_shop/authorize?analytics_context=loginWithShopEmbed&analytics_trace_id=1103049a-0501-4979-a540-ca7656aff77f&compact_layout=true&flow=embed&flow_version=account_menu&locale=en&preact=true&redirect_uri=http%3A%2F%2F127.0.0.1%3A9292&response_mode=web_message&response_type=id_token&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&target_origin=http%3A%2F%2F127.0.0.1%3A9292&ux_mode=windoid&ux_role=prompt net::ERR_ABORTED
+[NAVSTATUS] search-375 403 https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=7b9956a5-937b-49ea-a70e-bc739385180e&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en
+[NAVSTATUS] search-375 403 https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=1103049a-0501-4979-a540-ca7656aff77f&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en
+[PASS] overlay:search-375 :: trigger is keyboard focusable with a name
+[PASS] overlay:search-375 :: closed at rest: hidden and nothing focusable
+[PASS] overlay:search-375 :: opens from keyboard (Enter on trigger)
+[PASS] overlay:search-375 :: dialog semantics: role=dialog + aria-modal + name
+[PASS] overlay:search-375 :: focus moves inside
+[PASS] overlay:search-375 :: panel is topmost layer
+[PASS] overlay:search-375 :: panel fits viewport horizontally
+[PASS] overlay:search-375 :: panel top inside viewport
+[PASS] overlay:search-375 :: page scroll locked
+[PASS] overlay:search-375 :: no layout shift of page behind
+[PASS] overlay:search-375 :: scroll position kept while open
+[PASS] overlay:search-375 :: nothing focusable under aria-hidden
+[PASS] overlay:search-375 :: text keeps >= 12px from panel edges
+[PASS] overlay:search-375 :: panel text uses a theme font family: body, heading or subheading token (slotted content included)
+[PASS] overlay:search-375 :: Tab x20 + Shift+Tab x6 stay inside
+[PASS] overlay:search-375 :: close button named and >= 24x24
+[PASS] overlay:search-375 :: Escape closes
+[PASS] overlay:search-375 :: Escape: focus returns to trigger
+[PASS] overlay:search-375 :: closed: scroll unlocked and position restored
+[PASS] overlay:search-375 :: closed: nothing focusable inside
+[PASS] overlay:search-375 :: close button closes
+[PASS] overlay:search-375 :: close button: focus returns to trigger
+[INFO] overlay:search-375 :: click outside panel closes :: "panel covers viewport"
+[PASS] overlay:search-375 :: third open/close cycle still works
+[PASS] overlay:search-375 :: no page errors during cycles
+[NAV] mobile-menu-375 http://127.0.0.1:9292/
+[NAVFAIL] mobile-menu-375 http://127.0.0.1:9292/web-pixels@9f5e2762wb720532ap19708c42m93b2bec3/custom/web-pixel-shopify-custom-pixel@0530/sandbox/modern/ net::ERR_ABORTED
+[NAVFAIL] mobile-menu-375 https://shop.app/pay/hop?analytics_trace_id=35b63d49-1d95-4f16-bc5d-48a06c032877&target_origin=http%3A%2F%2F127.0.0.1%3A9292&client_handle=devs2-rebel.myshopify.com net::ERR_BLOCKED_BY_RESPONSE
+[NAVFAIL] mobile-menu-375 https://devs2-rebel.myshopify.com/services/login_with_shop/authorize?analytics_context=loginWithShopEmbed&analytics_trace_id=ba7b7e4e-32d2-4b26-9cd8-b3fe0938bf50&compact_layout=true&flow=embed&flow_version=account_menu&locale=en&preact=true&redirect_uri=http%3A%2F%2F127.0.0.1%3A9292&response_mode=web_message&response_type=id_token&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&target_origin=http%3A%2F%2F127.0.0.1%3A9292&ux_mode=windoid&ux_role=prompt net::ERR_ABORTED
+[NAVFAIL] mobile-menu-375 https://devs2-rebel.myshopify.com/services/login_with_shop/authorize?analytics_context=loginWithShopEmbed&analytics_trace_id=01ec0bd8-0e50-498b-8d60-85651a4e1f5a&compact_layout=true&flow=embed&flow_version=account_menu&locale=en&preact=true&redirect_uri=http%3A%2F%2F127.0.0.1%3A9292&response_mode=web_message&response_type=id_token&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&target_origin=http%3A%2F%2F127.0.0.1%3A9292&ux_mode=windoid&ux_role=prompt net::ERR_ABORTED
+[NAVSTATUS] mobile-menu-375 403 https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=ba7b7e4e-32d2-4b26-9cd8-b3fe0938bf50&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en
+[NAVSTATUS] mobile-menu-375 403 https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=01ec0bd8-0e50-498b-8d60-85651a4e1f5a&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en
+[PASS] overlay:mobile-menu-375 :: trigger is keyboard focusable with a name
+[PASS] overlay:mobile-menu-375 :: closed at rest: hidden and nothing focusable
+[PASS] overlay:mobile-menu-375 :: opens from keyboard (Enter on trigger)
+[PASS] overlay:mobile-menu-375 :: dialog semantics: role=dialog + aria-modal + name
+[PASS] overlay:mobile-menu-375 :: focus moves inside
+[PASS] overlay:mobile-menu-375 :: panel is topmost layer
+[PASS] overlay:mobile-menu-375 :: panel fits viewport horizontally
+[PASS] overlay:mobile-menu-375 :: panel top inside viewport
+[PASS] overlay:mobile-menu-375 :: page scroll locked
+[PASS] overlay:mobile-menu-375 :: no layout shift of page behind
+[PASS] overlay:mobile-menu-375 :: scroll position kept while open
+[PASS] overlay:mobile-menu-375 :: nothing focusable under aria-hidden
+[PASS] overlay:mobile-menu-375 :: text keeps >= 12px from panel edges
+[PASS] overlay:mobile-menu-375 :: panel text uses a theme font family: body, heading or subheading token (slotted content included)
+[PASS] overlay:mobile-menu-375 :: wheel outside panel does not scroll page
+[PASS] overlay:mobile-menu-375 :: Tab x20 + Shift+Tab x6 stay inside
+[PASS] overlay:mobile-menu-375 :: close button named and >= 24x24
+[PASS] overlay:mobile-menu-375 :: Escape closes
+[PASS] overlay:mobile-menu-375 :: Escape: focus returns to trigger
+[PASS] overlay:mobile-menu-375 :: closed: scroll unlocked and position restored
+[PASS] overlay:mobile-menu-375 :: closed: nothing focusable inside
+[PASS] overlay:mobile-menu-375 :: close button closes
+[PASS] overlay:mobile-menu-375 :: close button: focus returns to trigger
+[PASS] overlay:mobile-menu-375 :: click outside panel closes
+[PASS] overlay:mobile-menu-375 :: third open/close cycle still works
+[PASS] overlay:mobile-menu-375 :: no page errors during cycles
+[NAV] mobile-menu-768 http://127.0.0.1:9292/
+[NAVFAIL] mobile-menu-768 http://127.0.0.1:9292/web-pixels@9f5e2762wb720532ap19708c42m93b2bec3/custom/web-pixel-shopify-custom-pixel@0530/sandbox/modern/ net::ERR_ABORTED
+[NAVFAIL] mobile-menu-768 https://shop.app/pay/hop?analytics_trace_id=2a27b5f3-e7d8-470e-b557-97a689b3a994&target_origin=http%3A%2F%2F127.0.0.1%3A9292&client_handle=devs2-rebel.myshopify.com net::ERR_BLOCKED_BY_RESPONSE
+[NAVFAIL] mobile-menu-768 https://devs2-rebel.myshopify.com/services/login_with_shop/authorize?analytics_context=loginWithShopEmbed&analytics_trace_id=bc62d4d6-4aef-41ce-b9a4-7eeeca3b407a&compact_layout=true&flow=embed&flow_version=account_menu&locale=en&preact=true&redirect_uri=http%3A%2F%2F127.0.0.1%3A9292&response_mode=web_message&response_type=id_token&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&target_origin=http%3A%2F%2F127.0.0.1%3A9292&ux_mode=windoid&ux_role=prompt net::ERR_ABORTED
+[NAVFAIL] mobile-menu-768 https://devs2-rebel.myshopify.com/services/login_with_shop/authorize?analytics_context=loginWithShopEmbed&analytics_trace_id=27d37db4-7917-4e35-8c56-8115a2097edb&compact_layout=true&flow=embed&flow_version=account_menu&locale=en&preact=true&redirect_uri=http%3A%2F%2F127.0.0.1%3A9292&response_mode=web_message&response_type=id_token&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&target_origin=http%3A%2F%2F127.0.0.1%3A9292&ux_mode=windoid&ux_role=prompt net::ERR_ABORTED
+[NAVSTATUS] mobile-menu-768 403 https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=27d37db4-7917-4e35-8c56-8115a2097edb&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en
+[NAVSTATUS] mobile-menu-768 403 https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=bc62d4d6-4aef-41ce-b9a4-7eeeca3b407a&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en
+[PASS] overlay:mobile-menu-768 :: trigger is keyboard focusable with a name
+[PASS] overlay:mobile-menu-768 :: closed at rest: hidden and nothing focusable
+[PASS] overlay:mobile-menu-768 :: opens from keyboard (Enter on trigger)
+[PASS] overlay:mobile-menu-768 :: dialog semantics: role=dialog + aria-modal + name
+[PASS] overlay:mobile-menu-768 :: focus moves inside
+[PASS] overlay:mobile-menu-768 :: panel is topmost layer
+[PASS] overlay:mobile-menu-768 :: panel fits viewport horizontally
+[PASS] overlay:mobile-menu-768 :: panel top inside viewport
+[PASS] overlay:mobile-menu-768 :: page scroll locked
+[PASS] overlay:mobile-menu-768 :: no layout shift of page behind
+[PASS] overlay:mobile-menu-768 :: scroll position kept while open
+[PASS] overlay:mobile-menu-768 :: nothing focusable under aria-hidden
+[PASS] overlay:mobile-menu-768 :: text keeps >= 12px from panel edges
+[PASS] overlay:mobile-menu-768 :: panel text uses a theme font family: body, heading or subheading token (slotted content included)
+[PASS] overlay:mobile-menu-768 :: wheel outside panel does not scroll page
+[PASS] overlay:mobile-menu-768 :: Tab x20 + Shift+Tab x6 stay inside
+[PASS] overlay:mobile-menu-768 :: close button named and >= 24x24
+[PASS] overlay:mobile-menu-768 :: Escape closes
+[PASS] overlay:mobile-menu-768 :: Escape: focus returns to trigger
+[PASS] overlay:mobile-menu-768 :: closed: scroll unlocked and position restored
+[PASS] overlay:mobile-menu-768 :: closed: nothing focusable inside
+[PASS] overlay:mobile-menu-768 :: close button closes
+[PASS] overlay:mobile-menu-768 :: close button: focus returns to trigger
+[PASS] overlay:mobile-menu-768 :: click outside panel closes
+[PASS] overlay:mobile-menu-768 :: third open/close cycle still works
+[PASS] overlay:mobile-menu-768 :: no page errors during cycles
+[NAV] quickview-1440 http://127.0.0.1:9292/collections/all
+[NAVFAIL] quickview-1440 http://127.0.0.1:9292/web-pixels@9f5e2762wb720532ap19708c42m93b2bec3/custom/web-pixel-shopify-custom-pixel@0530/sandbox/modern/collections/all net::ERR_ABORTED
+[NAVFAIL] quickview-1440 https://shop.app/pay/hop?analytics_trace_id=df687a6f-89dd-4b0f-a547-bfa82f5b97d1&target_origin=http%3A%2F%2F127.0.0.1%3A9292&client_handle=devs2-rebel.myshopify.com net::ERR_BLOCKED_BY_RESPONSE
+[NAVFAIL] quickview-1440 https://devs2-rebel.myshopify.com/services/login_with_shop/authorize?analytics_context=loginWithShopEmbed&analytics_trace_id=69f9ca23-0893-467d-9e47-0f109c26e05b&compact_layout=true&flow=embed&flow_version=account_menu&locale=en&preact=true&redirect_uri=http%3A%2F%2F127.0.0.1%3A9292&response_mode=web_message&response_type=id_token&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&target_origin=http%3A%2F%2F127.0.0.1%3A9292&ux_mode=windoid&ux_role=prompt net::ERR_ABORTED
+[NAVFAIL] quickview-1440 https://devs2-rebel.myshopify.com/services/login_with_shop/authorize?analytics_context=loginWithShopEmbed&analytics_trace_id=b4163457-aae2-44c4-87b3-00f729acd476&compact_layout=true&flow=embed&flow_version=account_menu&locale=en&preact=true&redirect_uri=http%3A%2F%2F127.0.0.1%3A9292&response_mode=web_message&response_type=id_token&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&target_origin=http%3A%2F%2F127.0.0.1%3A9292&ux_mode=windoid&ux_role=prompt net::ERR_ABORTED
+[NAVSTATUS] quickview-1440 403 https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=69f9ca23-0893-467d-9e47-0f109c26e05b&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en
+[NAVSTATUS] quickview-1440 403 https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=b4163457-aae2-44c4-87b3-00f729acd476&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en
+[PASS] overlay:quickview-1440 :: trigger is keyboard focusable with a name
+[PASS] overlay:quickview-1440 :: closed at rest: hidden and nothing focusable
+[PASS] overlay:quickview-1440 :: opens from keyboard (Enter on trigger)
+[PASS] overlay:quickview-1440 :: dialog semantics: role=dialog + aria-modal + name
+[PASS] overlay:quickview-1440 :: focus moves inside
+[PASS] overlay:quickview-1440 :: panel is topmost layer
+[PASS] overlay:quickview-1440 :: panel fits viewport horizontally
+[PASS] overlay:quickview-1440 :: panel top inside viewport
+[PASS] overlay:quickview-1440 :: page scroll locked
+[PASS] overlay:quickview-1440 :: no layout shift of page behind
+[PASS] overlay:quickview-1440 :: scroll position kept while open
+[PASS] overlay:quickview-1440 :: nothing focusable under aria-hidden
+[PASS] overlay:quickview-1440 :: text keeps >= 12px from panel edges
+[PASS] overlay:quickview-1440 :: panel text uses a theme font family: body, heading or subheading token (slotted content included)
+[PASS] overlay:quickview-1440 :: wheel outside panel does not scroll page
+[PASS] overlay:quickview-1440 :: Tab x20 + Shift+Tab x6 stay inside
+[PASS] overlay:quickview-1440 :: close button named and >= 24x24
+[PASS] overlay:quickview-1440 :: Escape closes
+[PASS] overlay:quickview-1440 :: Escape: focus returns to trigger
+[PASS] overlay:quickview-1440 :: closed: scroll unlocked and position restored
+[PASS] overlay:quickview-1440 :: closed: nothing focusable inside
+[PASS] overlay:quickview-1440 :: close button closes
+[PASS] overlay:quickview-1440 :: close button: focus returns to trigger
+[PASS] overlay:quickview-1440 :: click outside panel closes
+[PASS] overlay:quickview-1440 :: third open/close cycle still works
+[PASS] overlay:quickview-1440 :: no page errors during cycles
+[NAV] filter-375 http://127.0.0.1:9292/collections/all
+[NAVFAIL] filter-375 http://127.0.0.1:9292/web-pixels@9f5e2762wb720532ap19708c42m93b2bec3/custom/web-pixel-shopify-custom-pixel@0530/sandbox/modern/collections/all net::ERR_ABORTED
+[NAVFAIL] filter-375 https://shop.app/pay/hop?analytics_trace_id=30fa8d06-d04c-47ca-ab75-2dd81d0ffc55&target_origin=http%3A%2F%2F127.0.0.1%3A9292&client_handle=devs2-rebel.myshopify.com net::ERR_BLOCKED_BY_RESPONSE
+[NAVFAIL] filter-375 https://devs2-rebel.myshopify.com/services/login_with_shop/authorize?analytics_context=loginWithShopEmbed&analytics_trace_id=818d7a56-7b4f-4d7a-9a18-e2becc07832e&compact_layout=true&flow=embed&flow_version=account_menu&locale=en&preact=true&redirect_uri=http%3A%2F%2F127.0.0.1%3A9292&response_mode=web_message&response_type=id_token&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&target_origin=http%3A%2F%2F127.0.0.1%3A9292&ux_mode=windoid&ux_role=prompt net::ERR_ABORTED
+[NAVFAIL] filter-375 https://devs2-rebel.myshopify.com/services/login_with_shop/authorize?analytics_context=loginWithShopEmbed&analytics_trace_id=469c28a1-d0fe-4236-83f9-5b776c8edce4&compact_layout=true&flow=embed&flow_version=account_menu&locale=en&preact=true&redirect_uri=http%3A%2F%2F127.0.0.1%3A9292&response_mode=web_message&response_type=id_token&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&target_origin=http%3A%2F%2F127.0.0.1%3A9292&ux_mode=windoid&ux_role=prompt net::ERR_ABORTED
+[NAVSTATUS] filter-375 403 https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=818d7a56-7b4f-4d7a-9a18-e2becc07832e&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en
+[NAVSTATUS] filter-375 403 https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=469c28a1-d0fe-4236-83f9-5b776c8edce4&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en
+[PASS] overlay:filter-375 :: trigger is keyboard focusable with a name
+[PASS] overlay:filter-375 :: closed at rest: hidden and nothing focusable
+[PASS] overlay:filter-375 :: opens from keyboard (Enter on trigger)
+[PASS] overlay:filter-375 :: dialog semantics: role=dialog + aria-modal + name
+[PASS] overlay:filter-375 :: focus moves inside
+[PASS] overlay:filter-375 :: panel is topmost layer
+[PASS] overlay:filter-375 :: panel fits viewport horizontally
+[PASS] overlay:filter-375 :: panel top inside viewport
+[PASS] overlay:filter-375 :: page scroll locked
+[PASS] overlay:filter-375 :: no layout shift of page behind
+[PASS] overlay:filter-375 :: scroll position kept while open
+[PASS] overlay:filter-375 :: nothing focusable under aria-hidden
+[PASS] overlay:filter-375 :: text keeps >= 12px from panel edges
+[PASS] overlay:filter-375 :: panel text uses a theme font family: body, heading or subheading token (slotted content included)
+[PASS] overlay:filter-375 :: wheel outside panel does not scroll page
+[PASS] overlay:filter-375 :: Tab x20 + Shift+Tab x6 stay inside
+[PASS] overlay:filter-375 :: close button named and >= 24x24
+[PASS] overlay:filter-375 :: Escape closes
+[PASS] overlay:filter-375 :: Escape: focus returns to trigger
+[PASS] overlay:filter-375 :: closed: scroll unlocked and position restored
+[PASS] overlay:filter-375 :: closed: nothing focusable inside
+[PASS] overlay:filter-375 :: close button closes
+[PASS] overlay:filter-375 :: close button: focus returns to trigger
+[PASS] overlay:filter-375 :: click outside panel closes
+[PASS] overlay:filter-375 :: third open/close cycle still works
+[PASS] overlay:filter-375 :: no page errors during cycles
+[NAV] pickup-1440 http://127.0.0.1:9292/products/rebel-tactical-bomber-jacket
+[NAVFAIL] pickup-1440 http://127.0.0.1:9292/web-pixels@9f5e2762wb720532ap19708c42m93b2bec3/custom/web-pixel-shopify-custom-pixel@0530/sandbox/modern/products/rebel-tactical-bomber-jacket net::ERR_ABORTED
+[NAVFAIL] pickup-1440 https://shop.app/pay/hop?analytics_trace_id=8f7a7b29-5044-4782-a17a-03d0711bbe6f&target_origin=http%3A%2F%2F127.0.0.1%3A9292&client_handle=devs2-rebel.myshopify.com net::ERR_BLOCKED_BY_RESPONSE
+[NAVFAIL] pickup-1440 https://devs2-rebel.myshopify.com/services/login_with_shop/authorize?analytics_context=loginWithShopEmbed&analytics_trace_id=f26129b8-3344-4e08-a6d8-fb26048d69cc&compact_layout=true&flow=embed&flow_version=account_menu&locale=en&preact=true&redirect_uri=http%3A%2F%2F127.0.0.1%3A9292&response_mode=web_message&response_type=id_token&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&target_origin=http%3A%2F%2F127.0.0.1%3A9292&ux_mode=windoid&ux_role=prompt net::ERR_ABORTED
+[NAVFAIL] pickup-1440 https://devs2-rebel.myshopify.com/services/login_with_shop/authorize?analytics_context=loginWithShopEmbed&analytics_trace_id=3cb75ec0-0b94-45e1-b737-5e94dabe2dde&compact_layout=true&flow=embed&flow_version=account_menu&locale=en&preact=true&redirect_uri=http%3A%2F%2F127.0.0.1%3A9292&response_mode=web_message&response_type=id_token&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&target_origin=http%3A%2F%2F127.0.0.1%3A9292&ux_mode=windoid&ux_role=prompt net::ERR_ABORTED
+[NAVSTATUS] pickup-1440 403 https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=f26129b8-3344-4e08-a6d8-fb26048d69cc&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en
+[NAVSTATUS] pickup-1440 403 https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=3cb75ec0-0b94-45e1-b737-5e94dabe2dde&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en
+[INFO] overlay:pickup-1440 :: trigger rendered :: "#ShowPickupAvailabilityDrawer not visible at 1440 (needs store data: a location with local pickup enabled)"
+[NAV] pickup-375 http://127.0.0.1:9292/products/rebel-tactical-bomber-jacket
+[NAVFAIL] pickup-375 http://127.0.0.1:9292/web-pixels@9f5e2762wb720532ap19708c42m93b2bec3/custom/web-pixel-shopify-custom-pixel@0530/sandbox/modern/products/rebel-tactical-bomber-jacket net::ERR_ABORTED
+[NAVSTATUS] pickup-375 403 https://shop.app/pay/hop?analytics_trace_id=e5446df3-92b8-4add-a960-84bd7a326d68&target_origin=http%3A%2F%2F127.0.0.1%3A9292&client_handle=devs2-rebel.myshopify.com
+[NAVFAIL] pickup-375 https://shop.app/pay/hop?analytics_trace_id=e5446df3-92b8-4add-a960-84bd7a326d68&target_origin=http%3A%2F%2F127.0.0.1%3A9292&client_handle=devs2-rebel.myshopify.com net::ERR_BLOCKED_BY_RESPONSE
+[NAVFAIL] pickup-375 https://devs2-rebel.myshopify.com/services/login_with_shop/authorize?analytics_context=loginWithShopEmbed&analytics_trace_id=2184986f-6204-42d1-9d32-02f0b4ae281e&compact_layout=true&flow=embed&flow_version=account_menu&locale=en&preact=true&redirect_uri=http%3A%2F%2F127.0.0.1%3A9292&response_mode=web_message&response_type=id_token&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&target_origin=http%3A%2F%2F127.0.0.1%3A9292&ux_mode=windoid&ux_role=prompt net::ERR_ABORTED
+[NAVFAIL] pickup-375 https://devs2-rebel.myshopify.com/services/login_with_shop/authorize?analytics_context=loginWithShopEmbed&analytics_trace_id=842c34b6-23c2-42c0-96e7-80b2044ae450&compact_layout=true&flow=embed&flow_version=account_menu&locale=en&preact=true&redirect_uri=http%3A%2F%2F127.0.0.1%3A9292&response_mode=web_message&response_type=id_token&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&target_origin=http%3A%2F%2F127.0.0.1%3A9292&ux_mode=windoid&ux_role=prompt net::ERR_ABORTED
+[NAVSTATUS] pickup-375 403 https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=842c34b6-23c2-42c0-96e7-80b2044ae450&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en
+[NAVSTATUS] pickup-375 403 https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=2184986f-6204-42d1-9d32-02f0b4ae281e&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en
+[INFO] overlay:pickup-375 :: trigger rendered :: "#ShowPickupAvailabilityDrawer not visible at 375 (needs store data: a location with local pickup enabled)"
+[NAV] size-guide-1440 http://127.0.0.1:9292/products/rebel-tactical-bomber-jacket
+[NAVFAIL] size-guide-1440 http://127.0.0.1:9292/web-pixels@9f5e2762wb720532ap19708c42m93b2bec3/custom/web-pixel-shopify-custom-pixel@0530/sandbox/modern/products/rebel-tactical-bomber-jacket net::ERR_ABORTED
+[NAVFAIL] size-guide-1440 https://shop.app/pay/hop?analytics_trace_id=a1a3636f-5215-4dc0-8031-19e93f0f8314&target_origin=http%3A%2F%2F127.0.0.1%3A9292&client_handle=devs2-rebel.myshopify.com net::ERR_BLOCKED_BY_RESPONSE
+[NAVFAIL] size-guide-1440 https://devs2-rebel.myshopify.com/services/login_with_shop/authorize?analytics_context=loginWithShopEmbed&analytics_trace_id=61ce53b9-4936-48f2-a44c-5d2102a44e04&compact_layout=true&flow=embed&flow_version=account_menu&locale=en&preact=true&redirect_uri=http%3A%2F%2F127.0.0.1%3A9292&response_mode=web_message&response_type=id_token&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&target_origin=http%3A%2F%2F127.0.0.1%3A9292&ux_mode=windoid&ux_role=prompt net::ERR_ABORTED
+[NAVFAIL] size-guide-1440 https://devs2-rebel.myshopify.com/services/login_with_shop/authorize?analytics_context=loginWithShopEmbed&analytics_trace_id=210283f7-3c33-4934-ab93-ca0b32c012d4&compact_layout=true&flow=embed&flow_version=account_menu&locale=en&preact=true&redirect_uri=http%3A%2F%2F127.0.0.1%3A9292&response_mode=web_message&response_type=id_token&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&target_origin=http%3A%2F%2F127.0.0.1%3A9292&ux_mode=windoid&ux_role=prompt net::ERR_ABORTED
+[NAVSTATUS] size-guide-1440 403 https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=210283f7-3c33-4934-ab93-ca0b32c012d4&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en
+[NAVSTATUS] size-guide-1440 403 https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=61ce53b9-4936-48f2-a44c-5d2102a44e04&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en
+[INFO] overlay:size-guide-1440 :: opened through element API (no trigger rendered with current settings) :: "size-guide-modal"
+[PASS] overlay:size-guide-1440 :: closed at rest: hidden and nothing focusable
+[PASS] overlay:size-guide-1440 :: dialog semantics: role=dialog + aria-modal + name
+[PASS] overlay:size-guide-1440 :: focus moves inside
+[PASS] overlay:size-guide-1440 :: panel is topmost layer
+[PASS] overlay:size-guide-1440 :: panel fits viewport horizontally
+[PASS] overlay:size-guide-1440 :: panel top inside viewport
+[PASS] overlay:size-guide-1440 :: page scroll locked
+[PASS] overlay:size-guide-1440 :: no layout shift of page behind
+[PASS] overlay:size-guide-1440 :: scroll position kept while open
+[PASS] overlay:size-guide-1440 :: nothing focusable under aria-hidden
+[PASS] overlay:size-guide-1440 :: text keeps >= 12px from panel edges
+[PASS] overlay:size-guide-1440 :: panel text uses a theme font family: body, heading or subheading token (slotted content included)
+[PASS] overlay:size-guide-1440 :: wheel outside panel does not scroll page
+[PASS] overlay:size-guide-1440 :: Tab x20 + Shift+Tab x6 stay inside
+[PASS] overlay:size-guide-1440 :: close button named and >= 24x24
+[PASS] overlay:size-guide-1440 :: Escape closes
+[PASS] overlay:size-guide-1440 :: Escape: focus returns to trigger
+[PASS] overlay:size-guide-1440 :: closed: scroll unlocked and position restored
+[PASS] overlay:size-guide-1440 :: closed: nothing focusable inside
+[PASS] overlay:size-guide-1440 :: close button closes
+[PASS] overlay:size-guide-1440 :: close button: focus returns to trigger
+[PASS] overlay:size-guide-1440 :: click outside panel closes
+[PASS] overlay:size-guide-1440 :: third open/close cycle still works
+[PASS] overlay:size-guide-1440 :: no page errors during cycles
+[NAV] lightbox-1440 http://127.0.0.1:9292/products/rebel-tactical-bomber-jacket
+[NAVFAIL] lightbox-1440 http://127.0.0.1:9292/web-pixels@9f5e2762wb720532ap19708c42m93b2bec3/custom/web-pixel-shopify-custom-pixel@0530/sandbox/modern/products/rebel-tactical-bomber-jacket net::ERR_ABORTED
+[NAVFAIL] lightbox-1440 https://shop.app/pay/hop?analytics_trace_id=21fb0781-0daf-4dd0-aabc-7dce0891bf40&target_origin=http%3A%2F%2F127.0.0.1%3A9292&client_handle=devs2-rebel.myshopify.com net::ERR_BLOCKED_BY_RESPONSE
+[NAVFAIL] lightbox-1440 https://devs2-rebel.myshopify.com/services/login_with_shop/authorize?analytics_context=loginWithShopEmbed&analytics_trace_id=596d26fc-7b80-4e87-ad43-0246e5cd7fa9&compact_layout=true&flow=embed&flow_version=account_menu&locale=en&preact=true&redirect_uri=http%3A%2F%2F127.0.0.1%3A9292&response_mode=web_message&response_type=id_token&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&target_origin=http%3A%2F%2F127.0.0.1%3A9292&ux_mode=windoid&ux_role=prompt net::ERR_ABORTED
+[NAVFAIL] lightbox-1440 https://devs2-rebel.myshopify.com/services/login_with_shop/authorize?analytics_context=loginWithShopEmbed&analytics_trace_id=4f097a0e-d078-4207-9ff0-dc943366de57&compact_layout=true&flow=embed&flow_version=account_menu&locale=en&preact=true&redirect_uri=http%3A%2F%2F127.0.0.1%3A9292&response_mode=web_message&response_type=id_token&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&target_origin=http%3A%2F%2F127.0.0.1%3A9292&ux_mode=windoid&ux_role=prompt net::ERR_ABORTED
+[NAVSTATUS] lightbox-1440 403 https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=4f097a0e-d078-4207-9ff0-dc943366de57&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en
+[NAVSTATUS] lightbox-1440 403 https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=596d26fc-7b80-4e87-ad43-0246e5cd7fa9&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en
+[PASS] overlay:lightbox-1440 :: trigger is keyboard focusable with a name
+[PASS] overlay:lightbox-1440 :: closed at rest: hidden and nothing focusable
+[PASS] overlay:lightbox-1440 :: opens from keyboard (Enter on trigger)
+[PASS] overlay:lightbox-1440 :: dialog semantics: role=dialog + aria-modal + name
+[PASS] overlay:lightbox-1440 :: focus moves inside
+[PASS] overlay:lightbox-1440 :: panel is topmost layer
+[PASS] overlay:lightbox-1440 :: panel fits viewport horizontally
+[PASS] overlay:lightbox-1440 :: panel top inside viewport
+[PASS] overlay:lightbox-1440 :: page scroll locked
+[PASS] overlay:lightbox-1440 :: no layout shift of page behind
+[PASS] overlay:lightbox-1440 :: scroll position kept while open
+[PASS] overlay:lightbox-1440 :: nothing focusable under aria-hidden
+[PASS] overlay:lightbox-1440 :: text keeps >= 12px from panel edges
+[PASS] overlay:lightbox-1440 :: panel text uses a theme font family: body, heading or subheading token (slotted content included)
+[PASS] overlay:lightbox-1440 :: Tab x20 + Shift+Tab x6 stay inside
+[PASS] overlay:lightbox-1440 :: close button named and >= 24x24
+[PASS] overlay:lightbox-1440 :: Escape closes
+[PASS] overlay:lightbox-1440 :: Escape: focus returns to trigger
+[PASS] overlay:lightbox-1440 :: closed: scroll unlocked and position restored
+[PASS] overlay:lightbox-1440 :: closed: nothing focusable inside
+[PASS] overlay:lightbox-1440 :: close button closes
+[PASS] overlay:lightbox-1440 :: close button: focus returns to trigger
+[INFO] overlay:lightbox-1440 :: click outside panel closes :: "panel covers viewport"
+[PASS] overlay:lightbox-1440 :: third open/close cycle still works
+[PASS] overlay:lightbox-1440 :: no page errors during cycles
+[NAV] lightbox-375 http://127.0.0.1:9292/products/rebel-tactical-bomber-jacket
+[NAVFAIL] lightbox-375 http://127.0.0.1:9292/web-pixels@9f5e2762wb720532ap19708c42m93b2bec3/custom/web-pixel-shopify-custom-pixel@0530/sandbox/modern/products/rebel-tactical-bomber-jacket net::ERR_ABORTED
+[NAVFAIL] lightbox-375 https://shop.app/pay/hop?analytics_trace_id=fa0185fc-a514-4ca6-83ac-bee747d5dafe&target_origin=http%3A%2F%2F127.0.0.1%3A9292&client_handle=devs2-rebel.myshopify.com net::ERR_BLOCKED_BY_RESPONSE
+[NAVFAIL] lightbox-375 https://devs2-rebel.myshopify.com/services/login_with_shop/authorize?analytics_context=loginWithShopEmbed&analytics_trace_id=6f1dc319-2f1c-4b7a-9d40-6c3dce0d141d&compact_layout=true&flow=embed&flow_version=account_menu&locale=en&preact=true&redirect_uri=http%3A%2F%2F127.0.0.1%3A9292&response_mode=web_message&response_type=id_token&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&target_origin=http%3A%2F%2F127.0.0.1%3A9292&ux_mode=windoid&ux_role=prompt net::ERR_ABORTED
+[NAVFAIL] lightbox-375 https://devs2-rebel.myshopify.com/services/login_with_shop/authorize?analytics_context=loginWithShopEmbed&analytics_trace_id=50ebb628-6ed7-4de2-9b70-debda7a5aa69&compact_layout=true&flow=embed&flow_version=account_menu&locale=en&preact=true&redirect_uri=http%3A%2F%2F127.0.0.1%3A9292&response_mode=web_message&response_type=id_token&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&target_origin=http%3A%2F%2F127.0.0.1%3A9292&ux_mode=windoid&ux_role=prompt net::ERR_ABORTED
+[NAVSTATUS] lightbox-375 403 https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=6f1dc319-2f1c-4b7a-9d40-6c3dce0d141d&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en
+[NAVSTATUS] lightbox-375 403 https://shop.app/accounts/pre_auth?client_id=ca051ed3-bfc1-452c-a68b-ea9247cd654e&analytics_trace_id=50ebb628-6ed7-4de2-9b70-debda7a5aa69&flow=embed&flow_version=account_menu&target_origin=http%3A%2F%2F127.0.0.1%3A9292&storefront_domain=https%3A%2F%2Fdevs2-rebel.myshopify.com&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=en
+[PASS] overlay:lightbox-375 :: trigger is keyboard focusable with a name
+[PASS] overlay:lightbox-375 :: closed at rest: hidden and nothing focusable
+[PASS] overlay:lightbox-375 :: opens from keyboard (Enter on trigger)
+[PASS] overlay:lightbox-375 :: dialog semantics: role=dialog + aria-modal + name
+[PASS] overlay:lightbox-375 :: focus moves inside
+[PASS] overlay:lightbox-375 :: panel is topmost layer
+[PASS] overlay:lightbox-375 :: panel fits viewport horizontally
+[PASS] overlay:lightbox-375 :: panel top inside viewport
+[PASS] overlay:lightbox-375 :: page scroll locked
+[PASS] overlay:lightbox-375 :: no layout shift of page behind
+[PASS] overlay:lightbox-375 :: scroll position kept while open
+[PASS] overlay:lightbox-375 :: nothing focusable under aria-hidden
+[PASS] overlay:lightbox-375 :: text keeps >= 12px from panel edges
+[PASS] overlay:lightbox-375 :: panel text uses a theme font family: body, heading or subheading token (slotted content included)
+[PASS] overlay:lightbox-375 :: Tab x20 + Shift+Tab x6 stay inside
+[PASS] overlay:lightbox-375 :: close button named and >= 24x24
+[PASS] overlay:lightbox-375 :: Escape closes
+[PASS] overlay:lightbox-375 :: Escape: focus returns to trigger
+[PASS] overlay:lightbox-375 :: closed: scroll unlocked and position restored
+[PASS] overlay:lightbox-375 :: closed: nothing focusable inside
+[PASS] overlay:lightbox-375 :: close button closes
+[PASS] overlay:lightbox-375 :: close button: focus returns to trigger
+[INFO] overlay:lightbox-375 :: click outside panel closes :: "panel covers viewport"
+[PASS] overlay:lightbox-375 :: third open/close cycle still works
+[PASS] overlay:lightbox-375 :: no page errors during cycles
+SUMMARY {"PASS":276,"FAIL":0,"INFO":7}

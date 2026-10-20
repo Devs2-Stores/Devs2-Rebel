@@ -1,0 +1,77 @@
+(node:19984) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+render-check: http://127.0.0.1:9292/collections/new-arrivals
+
+[375x812] page height 5633px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261009-2342-storefront\round-1\verify\collection\375x812.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 375x37
+      announcement-bar.announcement-bar.color-scheme-3 "Welcome to @ x0 y0 375x37
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 375x64
+      global-header.header.color-scheme-1 "Devs2 Rebel 0" @ x0 y37 375x64
+        div.page-width "Devs2 Rebel 0" @ x0 y37 375x64
+          div.header__wrapper "Devs2 Rebel 0" @ x15 y37 345x64
+    main#MainContent.content-for-layout.focus-none "Home / New A @ x0 y101 375x4745
+      section#shopify-section-template--27321871433837__breadcrumb @ x0 y101 375x57
+        div.section-breadcrumbs.color-scheme-1 "Home / New Arrivals" @ x0 y101 375x57
+      section#shopify-section-template--27321871433837__main.shopi @ x0 y158 375x4688
+        div#CollectionMain.collection-template "New Arrivals Discove @ x0 y158 375x4688
+          div.page-width "New Arrivals Discover our New Arrivals c" @ x0 y158 375x4688
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y4894 375x740
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y4894 375x740
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y4894 375x740
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x15 y4894 345x436
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x15 y5329 345x192
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x15 y5521 345x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+  ERROR runtime-error: Framing 'https://shop.app/' violates the following Content Security Policy directive: "frame-ancestors 'self' https://shop.app https://admin.shopify.com". The request has been blocked.
+
+  ERROR runtime-error: Failed to load resource: net::ERR_FAILED (http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js)
+  ERROR runtime-error: Access to script at 'http://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js' from origin 'http://127.0.0.1:9292' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. (http://127.0.0.1:9292/collections/new-arrivals)
+  WARN  small-touch-target: 65 controls smaller than 44px; e.g. a.header__logo-link "Devs2 Rebel"; a.breadcrumb__link "Home"; a "Không quản lý kho — luôn mua được"; a "Tất cả variant hết hàng — toàn bộ sold o"
+
+[768x1024] page height 5534px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261009-2342-storefront\round-1\verify\collection\768x1024.png
+  outline:
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 768x64
+      global-header.header.color-scheme-1 "Devs2 Rebel 0" @ x0 y37 768x64
+        div.page-width "Devs2 Rebel 0" @ x0 y37 768x64
+          div.header__wrapper "Devs2 Rebel 0" @ x30 y37 708x64
+    main#MainContent.content-for-layout.focus-none "Home / New A @ x0 y101 768x4274
+      section#shopify-section-template--27321871433837__breadcrumb @ x0 y101 768x57
+        div.section-breadcrumbs.color-scheme-1 "Home / New Arrivals" @ x0 y101 768x57
+      section#shopify-section-template--27321871433837__main.shopi @ x0 y158 768x4217
+        div#CollectionMain.collection-template "New Arrivals Discove @ x0 y158 768x4217
+          div.page-width "New Arrivals Discover our New Arrivals c" @ x0 y158 768x4217
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y4423 768x1112
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y4423 768x1112
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y4423 768x1112
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x30 y4423 708x834
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x30 y5256 708x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x30 y5422 708x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+
+[1440x900] page height 4977px, screenshot E:\Work\shopify\plans\reports\enhance-ux-ax-261009-2342-storefront\round-1\verify\collection\1440x900.png
+  outline:
+    section#shopify-section-sections--27321871204461__announceme @ x0 y0 1440x37
+      announcement-bar.announcement-bar.color-scheme-3 "Welcome to @ x0 y0 1440x37
+    section#shopify-section-sections--27321871204461__header.sho @ x0 y37 1440x72
+      global-header.header.color-scheme-1 "Devs2 Rebel Home Shop C @ x0 y37 1440x72
+        div.page-width "Devs2 Rebel Home Shop Collections Sale L" @ x0 y37 1440x72
+          div.header__wrapper "Devs2 Rebel Home Shop Collections Sale  @ x75 y37 1290x72
+    main#MainContent.content-for-layout.focus-none "Home / New A @ x0 y109 1440x3943
+      section#shopify-section-template--27321871433837__breadcrumb @ x0 y109 1440x57
+        div.section-breadcrumbs.color-scheme-1 "Home / New Arrivals" @ x0 y109 1440x57
+      section#shopify-section-template--27321871433837__main.shopi @ x0 y166 1440x3886
+        div#CollectionMain.collection-template "New Arrivals Discove @ x0 y166 1440x3886
+          div.page-width "New Arrivals Discover our New Arrivals c" @ x0 y166 1440x3886
+    section#shopify-section-sections--27321871171693__footer.sho @ x0 y4100 1440x877
+      global-footer.footer.color-scheme-1 "Devs2 Rebel Refined def @ x0 y4100 1440x877
+        div.page-width "Devs2 Rebel Refined defiance — luxury fa" @ x0 y4100 1440x877
+          div.footer-wrapper "Devs2 Rebel Refined defiance — luxury fa @ x75 y4100 1290x599
+          div.footer-copyright "© 2026 Devs2 Rebel, Powered by Shopify @ x75 y4699 1290x166
+          div.footer-localization "COUNTRY/REGION Canada (CAD $) Unite @ x75 y4865 1290x112
+  ERROR runtime-error: [shopify-account] Menu "customer-account-main-menu" not found in Storefront API. Falling back to default menu items.
+  ERROR runtime-error: Failed to load resource: the server responded with a status of 400 () (https://devs2-rebel.myshopify.com/api/2026-01/graphql.json)
+
+Summary: 9 errors, 1 warnings. Fix errors first, re-run, then review the screenshots.

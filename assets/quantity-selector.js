@@ -18,9 +18,7 @@
       this.input = this.querySelector('input');
       if (!this.input) return;
 
-      this.min = parseInt(this.input.min) || 1;
-      this.max = parseInt(this.input.max) || 999;
-      this.step = parseInt(this.input.step) || 1;
+      this.readRules();
 
       var self = this;
       this.input.addEventListener('change', function() {
@@ -54,14 +52,30 @@
       if (previousValue !== current) this.handleInputChange();
     }
 
+    readRules() {
+      this.min = parseInt(this.input.min) || 1;
+      this.max = parseInt(this.input.max) || Infinity;
+      this.step = parseInt(this.input.step) || 1;
+    }
+
+    syncRules() {
+      if (!this.input) return;
+      this.readRules();
+      this.input.value = this.alignValue(parseInt(this.input.value));
+      this.onButtonUpdates();
+    }
+
+    alignValue(value) {
+      if (isNaN(value) || value < this.min) return this.min;
+      var aligned = this.min + Math.ceil((value - this.min) / this.step) * this.step;
+      if (aligned > this.max) aligned = this.min + Math.floor((this.max - this.min) / this.step) * this.step;
+      return Math.max(aligned, this.min);
+    }
+
     handleInputChange(event) {
       var currentValue = parseInt(this.input.value);
-      if (isNaN(currentValue) || currentValue < this.min) {
-        this.input.value = this.min;
-      } else if (currentValue > this.max) {
-        this.input.value = this.max;
-        this.reportMaximum();
-      }
+      if (!isNaN(currentValue) && currentValue > this.max) this.reportMaximum();
+      this.input.value = this.alignValue(currentValue);
       this.onButtonUpdates();
 
       var lineItemEl = this.closest('[data-line-item]');

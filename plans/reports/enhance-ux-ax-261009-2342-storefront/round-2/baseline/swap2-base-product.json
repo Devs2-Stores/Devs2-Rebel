@@ -1,0 +1,106 @@
+{
+ "hosts": 4,
+ "checked": 88,
+ "fails": 15,
+ "groups": {
+  "h1.product-template__title": {
+   "n": 1,
+   "ex": {
+    "sel": "h1.product-template__title",
+    "text": "Rebel Tactical Bomber Ja",
+    "color": "rgba(10, 10, 10, 0.7)",
+    "cr": 1.1
+   }
+  },
+  "span.product-template__meta-label": {
+   "n": 3,
+   "ex": {
+    "sel": "span.product-template__meta-label",
+    "text": "SKU:",
+    "color": "rgba(10, 10, 10, 0.7)",
+    "cr": 1.1
+   }
+  },
+  "strong.": {
+   "n": 1,
+   "ex": {
+    "sel": "strong.",
+    "text": "REBEL-BMB-MAT-S",
+    "color": "rgba(10, 10, 10, 0.7)",
+    "cr": 1.1
+   }
+  },
+  "li.product-template__meta-separator": {
+   "n": 2,
+   "ex": {
+    "sel": "li.product-template__meta-separator",
+    "text": "|",
+    "color": "rgba(10, 10, 10, 0.12)",
+    "cr": 1.02
+   }
+  },
+  "a.": {
+   "n": 1,
+   "ex": {
+    "sel": "a.",
+    "text": "Devs2 Rebel",
+    "color": "rgb(188, 30, 44)",
+    "cr": 2.78
+   }
+  },
+  "strong.product-template__status--available": {
+   "n": 1,
+   "ex": {
+    "sel": "strong.product-template__status--available",
+    "text": "In stock",
+    "color": "color(srgb 0.436078 0.763137 0.545882)",
+    "cr": 1.2
+   }
+  },
+  "div.product-template__price-compare": {
+   "n": 1,
+   "ex": {
+    "sel": "div.product-template__price-compare",
+    "text": "$229.00",
+    "color": "rgba(10, 10, 10, 0.7)",
+    "cr": 1.1
+   }
+  },
+  "div.variant-picker__label": {
+   "n": 2,
+   "ex": {
+    "sel": "div.variant-picker__label",
+    "text": "Color:Matte Obsidian",
+    "color": "rgba(10, 10, 10, 0.7)",
+    "cr": 1.1
+   }
+  },
+  "span.variant-picker__selected-value": {
+   "n": 1,
+   "ex": {
+    "sel": "span.variant-picker__selected-value",
+    "text": "Matte Obsidian",
+    "color": "rgb(188, 30, 44)",
+    "cr": 2.78
+   }
+  },
+  "span.": {
+   "n": 1,
+   "ex": {
+    "sel": "span.",
+    "text": "S",
+    "color": "rgb(188, 30, 44)",
+    "cr": 2.78
+   }
+  },
+  "label.product-template__quantity-label": {
+   "n": 1,
+   "ex": {
+    "sel": "label.product-template__quantity-label",
+    "text": "Quantity",
+    "color": "rgb(0, 0, 0)",
+    "cr": 1.21
+   }
+  }
+ }
+}

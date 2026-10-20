@@ -20,10 +20,11 @@
       {%- comment %} Image Column {% endcomment -%}
       <div class="section-iwt__media">
         {%- if section.settings.image != blank -%}
+          {%- assign iwt_alt = section.settings.image.alt | default: shop.name -%}
           {{ section.settings.image | image_url: width: 1200 | image_tag:
             widths: '375, 550, 750, 1000, 1200',
             sizes: '(max-width: 749px) 100vw, 50vw',
-            alt: section.settings.image.alt | default: shop.name,
+            alt: iwt_alt,
             loading: 'lazy',
             decoding: 'async',
             class: 'section-iwt__img'
@@ -95,6 +96,14 @@
         {%- endfor -%}
       </div>
     </div>
+    {%- capture app_blocks -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- if app_blocks != blank -%}
+      <div class="section-apps">{{ app_blocks }}</div>
+    {%- endif -%}
   </div>
 </div>
 
@@ -147,6 +156,10 @@
     gap: 0;
   }
 
+  .section-iwt__grid--full .section-iwt__content {
+    padding-inline: 15px;
+  }
+
   @media (min-width: 750px) {
     .section-iwt__grid--full {
       gap: 0;
@@ -159,7 +172,9 @@
   /* ── Media ── */
   .section-iwt__media {
     overflow: hidden;
-    border-radius: 0.5rem;
+    border-radius: var(--media-radius);
+    border: var(--media-border);
+    box-shadow: var(--media-shadow);
   }
 
   .section-iwt__grid--full .section-iwt__media {
@@ -205,21 +220,24 @@
 
   .section-iwt__subheading {
     margin: 0;
+    font-weight: var(--eyebrow-weight);
+    letter-spacing: var(--eyebrow-tracking);
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: rgb(var(--color-accent));
-    font-weight: 600;
+    color: var(--color-muted);
   }
 
   .section-iwt__heading {
     margin: 0;
-    color: rgb(var(--color-foreground));
-    line-height: 1.2;
+    color: var(--color-ink);
+    line-height: 1.15;
+    letter-spacing: var(--heading-tracking);
   }
 
   .section-iwt__text {
     margin: 0;
-    line-height: 1.7;
+    color: var(--color-muted);
+    line-height: 1.65;
+    max-width: 65ch;
   }
 
   .section-iwt__text:last-child {
@@ -241,95 +259,106 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-weight: 600;
-    letter-spacing: 0.04em;
+    min-height: var(--btn-height);
+    padding: 0 var(--btn-padding-x);
+    font-size: var(--btn-font-size);
+    font-weight: var(--btn-font-weight);
+    letter-spacing: var(--btn-letter-spacing);
     text-decoration: none;
     border-radius: var(--buttons-radius, 0);
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    transition: background-color var(--duration-default) ease, color var(--duration-default) ease, border-color var(--duration-default) ease;
     cursor: pointer;
   }
 
-  .section-iwt__btn:hover {
-    opacity: 0.85;
-    transform: translateY(-1px);
+  .section-iwt__btn--primary {
+    background: var(--color-primary);
+    color: rgb(var(--color-button-text));
+    border: 1px solid var(--color-primary);
   }
 
-  .section-iwt__btn--primary {
-    background: rgb(var(--color-button));
+  .section-iwt__btn--primary:hover {
+    background: var(--color-primary-strong);
+    border-color: var(--color-primary-strong);
     color: rgb(var(--color-button-text));
-    border: 1px solid rgb(var(--color-button));
   }
 
   .section-iwt__btn--secondary {
     background: transparent;
-    color: rgb(var(--color-secondary-button-text));
-    border: 1px solid rgb(var(--color-secondary-button-border));
+    color: var(--color-ink);
+    border: 1px solid var(--color-ink);
+  }
+
+  .section-iwt__btn--secondary:hover {
+    background: var(--color-ink);
+    color: rgb(var(--color-background));
+    border-color: var(--color-ink);
   }
 
   .section-iwt__btn--link {
     background: none;
     border: none;
-    color: rgb(var(--color-accent));
-    padding: 12px 4px;
-    min-width: auto !important;
+    color: var(--color-ink);
+    padding: 0;
+    min-height: auto;
+    min-width: auto;
     text-decoration: underline;
-    text-underline-offset: 4px;
+    text-underline-offset: 0.25em;
   }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "Image with text",
+  "name": "t:sections.image_with_text.name",
   "tag": "section",
   "class": "section-iwt-wrapper",
   "settings": [
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Color scheme",
+      "label": "t:sections.image_with_text.settings.color_scheme.label",
       "default": "scheme-1"
     },
     {
       "type": "header",
-      "content": "Image"
+      "content": "t:sections.image_with_text.settings.header__image.content"
     },
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Image"
+      "label": "t:sections.image_with_text.settings.image.label"
     },
     {
       "type": "select",
       "id": "image_position",
-      "label": "Image position",
+      "label": "t:sections.image_with_text.settings.image_position.label",
       "options": [
         {
           "value": "left",
-          "label": "Left"
+          "label": "t:sections.image_with_text.settings.image_position.options.left"
         },
         {
           "value": "right",
-          "label": "Right"
+          "label": "t:sections.image_with_text.settings.image_position.options.right"
         }
       ],
       "default": "left"
     },
     {
       "type": "header",
-      "content": "Layout"
+      "content": "t:sections.image_with_text.settings.header__layout.content"
     },
     {
       "type": "select",
       "id": "section_width",
-      "label": "Section width",
+      "label": "t:sections.image_with_text.settings.section_width.label",
       "options": [
         {
           "value": "fixed",
-          "label": "Fixed width"
+          "label": "t:sections.image_with_text.settings.section_width.options.fixed"
         },
         {
           "value": "full",
-          "label": "Full width"
+          "label": "t:sections.image_with_text.settings.section_width.options.full"
         }
       ],
       "default": "fixed"
@@ -337,26 +366,26 @@
     {
       "type": "select",
       "id": "text_align",
-      "label": "Text alignment",
+      "label": "t:sections.image_with_text.settings.text_align.label",
       "options": [
         {
           "value": "left",
-          "label": "Left"
+          "label": "t:sections.image_with_text.settings.text_align.options.left"
         },
         {
           "value": "center",
-          "label": "Center"
+          "label": "t:sections.image_with_text.settings.text_align.options.center"
         },
         {
           "value": "right",
-          "label": "Right"
+          "label": "t:sections.image_with_text.settings.text_align.options.right"
         }
       ],
       "default": "left"
     },
     {
       "type": "header",
-      "content": "Desktop spacing"
+      "content": "t:sections.image_with_text.settings.header__desktop_spacing.content"
     },
     {
       "type": "range",
@@ -365,7 +394,7 @@
       "max": 150,
       "step": 5,
       "unit": "px",
-      "label": "Top spacing",
+      "label": "t:sections.image_with_text.settings.padding_top_desktop.label",
       "default": 50
     },
     {
@@ -375,12 +404,12 @@
       "max": 150,
       "step": 5,
       "unit": "px",
-      "label": "Bottom spacing",
+      "label": "t:sections.image_with_text.settings.padding_bottom_desktop.label",
       "default": 50
     },
     {
       "type": "header",
-      "content": "Mobile spacing"
+      "content": "t:sections.image_with_text.settings.header__mobile_spacing.content"
     },
     {
       "type": "range",
@@ -389,7 +418,7 @@
       "max": 100,
       "step": 5,
       "unit": "px",
-      "label": "Top spacing",
+      "label": "t:sections.image_with_text.settings.padding_top_mobile.label",
       "default": 30
     },
     {
@@ -399,42 +428,42 @@
       "max": 100,
       "step": 5,
       "unit": "px",
-      "label": "Bottom spacing",
+      "label": "t:sections.image_with_text.settings.padding_bottom_mobile.label",
       "default": 30
     }
   ],
   "blocks": [
     {
       "type": "subheading",
-      "name": "Subheading",
+      "name": "t:sections.image_with_text.blocks.subheading.name",
       "limit": 1,
       "settings": [
         {
           "type": "inline_richtext",
           "id": "subheading",
-          "label": "Subheading",
-          "default": "Subheading"
+          "label": "t:sections.image_with_text.blocks.subheading.settings.subheading.label",
+          "default": "t:sections.image_with_text.blocks.subheading.settings.subheading.default"
         },
         {
           "type": "select",
           "id": "subheading_size",
-          "label": "Subheading size",
+          "label": "t:sections.image_with_text.blocks.subheading.settings.subheading_size.label",
           "options": [
             {
               "value": "xs",
-              "label": "Extra small"
+              "label": "t:sections.image_with_text.blocks.subheading.settings.subheading_size.options.xs"
             },
             {
               "value": "sm",
-              "label": "Small"
+              "label": "t:sections.image_with_text.blocks.subheading.settings.subheading_size.options.sm"
             },
             {
               "value": "md",
-              "label": "Medium"
+              "label": "t:sections.image_with_text.blocks.subheading.settings.subheading_size.options.md"
             },
             {
               "value": "lg",
-              "label": "Large"
+              "label": "t:sections.image_with_text.blocks.subheading.settings.subheading_size.options.lg"
             }
           ],
           "default": "sm"
@@ -443,43 +472,43 @@
     },
     {
       "type": "heading",
-      "name": "Heading",
+      "name": "t:sections.image_with_text.blocks.heading.name",
       "limit": 1,
       "settings": [
         {
           "type": "inline_richtext",
           "id": "heading",
-          "label": "Heading",
-          "default": "Image with text"
+          "label": "t:sections.image_with_text.blocks.heading.settings.heading.label",
+          "default": "t:sections.image_with_text.blocks.heading.settings.heading.default"
         },
         {
           "type": "select",
           "id": "heading_size",
-          "label": "Heading size",
+          "label": "t:sections.image_with_text.blocks.heading.settings.heading_size.label",
           "options": [
             {
               "value": "xs",
-              "label": "Extra small"
+              "label": "t:sections.image_with_text.blocks.heading.settings.heading_size.options.xs"
             },
             {
               "value": "sm",
-              "label": "Small"
+              "label": "t:sections.image_with_text.blocks.heading.settings.heading_size.options.sm"
             },
             {
               "value": "md",
-              "label": "Medium"
+              "label": "t:sections.image_with_text.blocks.heading.settings.heading_size.options.md"
             },
             {
               "value": "lg",
-              "label": "Large"
+              "label": "t:sections.image_with_text.blocks.heading.settings.heading_size.options.lg"
             },
             {
               "value": "xl",
-              "label": "Extra large"
+              "label": "t:sections.image_with_text.blocks.heading.settings.heading_size.options.xl"
             },
             {
               "value": "2xl",
-              "label": "2X large"
+              "label": "t:sections.image_with_text.blocks.heading.settings.heading_size.options._2xl"
             }
           ],
           "default": "lg"
@@ -487,23 +516,23 @@
         {
           "type": "select",
           "id": "heading_tag",
-          "label": "Heading tag (SEO)",
+          "label": "t:sections.image_with_text.blocks.heading.settings.heading_tag.label",
           "options": [
             {
               "value": "h2",
-              "label": "H2"
+              "label": "t:sections.image_with_text.blocks.heading.settings.heading_tag.options.h2"
             },
             {
               "value": "h3",
-              "label": "H3"
+              "label": "t:sections.image_with_text.blocks.heading.settings.heading_tag.options.h3"
             },
             {
               "value": "h4",
-              "label": "H4"
+              "label": "t:sections.image_with_text.blocks.heading.settings.heading_tag.options.h4"
             },
             {
               "value": "p",
-              "label": "Paragraph"
+              "label": "t:sections.image_with_text.blocks.heading.settings.heading_tag.options.p"
             }
           ],
           "default": "h2"
@@ -512,39 +541,39 @@
     },
     {
       "type": "text",
-      "name": "Text",
+      "name": "t:sections.image_with_text.blocks.text.name",
       "limit": 2,
       "settings": [
         {
           "type": "richtext",
           "id": "text",
-          "label": "Content",
-          "default": "<p>Pair text with an image to focus on your chosen product, collection, or blog post.</p>"
+          "label": "t:sections.image_with_text.blocks.text.settings.text.label",
+          "default": "t:sections.image_with_text.blocks.text.settings.text.default"
         },
         {
           "type": "select",
           "id": "content_size",
-          "label": "Content size",
+          "label": "t:sections.image_with_text.blocks.text.settings.content_size.label",
           "options": [
             {
               "value": "xs",
-              "label": "Extra small"
+              "label": "t:sections.image_with_text.blocks.text.settings.content_size.options.xs"
             },
             {
               "value": "sm",
-              "label": "Small"
+              "label": "t:sections.image_with_text.blocks.text.settings.content_size.options.sm"
             },
             {
               "value": "md",
-              "label": "Medium"
+              "label": "t:sections.image_with_text.blocks.text.settings.content_size.options.md"
             },
             {
               "value": "lg",
-              "label": "Large"
+              "label": "t:sections.image_with_text.blocks.text.settings.content_size.options.lg"
             },
             {
               "value": "xl",
-              "label": "Extra large"
+              "label": "t:sections.image_with_text.blocks.text.settings.content_size.options.xl"
             }
           ],
           "default": "md"
@@ -553,33 +582,33 @@
     },
     {
       "type": "button",
-      "name": "Buttons",
+      "name": "t:sections.image_with_text.blocks.button.name",
       "limit": 1,
       "settings": [
         {
           "type": "select",
           "id": "button_size",
-          "label": "Button size",
+          "label": "t:sections.image_with_text.blocks.button.settings.button_size.label",
           "options": [
             {
               "value": "xs",
-              "label": "Extra small"
+              "label": "t:sections.image_with_text.blocks.button.settings.button_size.options.xs"
             },
             {
               "value": "sm",
-              "label": "Small"
+              "label": "t:sections.image_with_text.blocks.button.settings.button_size.options.sm"
             },
             {
               "value": "md",
-              "label": "Medium"
+              "label": "t:sections.image_with_text.blocks.button.settings.button_size.options.md"
             },
             {
               "value": "lg",
-              "label": "Large"
+              "label": "t:sections.image_with_text.blocks.button.settings.button_size.options.lg"
             },
             {
               "value": "xl",
-              "label": "Extra large"
+              "label": "t:sections.image_with_text.blocks.button.settings.button_size.options.xl"
             }
           ],
           "default": "md"
@@ -587,30 +616,30 @@
         {
           "type": "text",
           "id": "button_label_1",
-          "label": "Button 1 label",
-          "default": "Learn more"
+          "label": "t:sections.image_with_text.blocks.button.settings.button_label_1.label",
+          "default": "t:sections.image_with_text.blocks.button.settings.button_label_1.default"
         },
         {
           "type": "url",
           "id": "button_link_1",
-          "label": "Button 1 link"
+          "label": "t:sections.image_with_text.blocks.button.settings.button_link_1.label"
         },
         {
           "type": "select",
           "id": "button_style_1",
-          "label": "Button 1 style",
+          "label": "t:sections.image_with_text.blocks.button.settings.button_style_1.label",
           "options": [
             {
               "value": "primary",
-              "label": "Primary"
+              "label": "t:sections.image_with_text.blocks.button.settings.button_style_1.options.primary"
             },
             {
               "value": "secondary",
-              "label": "Secondary (outline)"
+              "label": "t:sections.image_with_text.blocks.button.settings.button_style_1.options.secondary"
             },
             {
               "value": "link",
-              "label": "Link"
+              "label": "t:sections.image_with_text.blocks.button.settings.button_style_1.options.link"
             }
           ],
           "default": "primary"
@@ -618,29 +647,29 @@
         {
           "type": "text",
           "id": "button_label_2",
-          "label": "Button 2 label"
+          "label": "t:sections.image_with_text.blocks.button.settings.button_label_2.label"
         },
         {
           "type": "url",
           "id": "button_link_2",
-          "label": "Button 2 link"
+          "label": "t:sections.image_with_text.blocks.button.settings.button_link_2.label"
         },
         {
           "type": "select",
           "id": "button_style_2",
-          "label": "Button 2 style",
+          "label": "t:sections.image_with_text.blocks.button.settings.button_style_2.label",
           "options": [
             {
               "value": "primary",
-              "label": "Primary"
+              "label": "t:sections.image_with_text.blocks.button.settings.button_style_2.options.primary"
             },
             {
               "value": "secondary",
-              "label": "Secondary (outline)"
+              "label": "t:sections.image_with_text.blocks.button.settings.button_style_2.options.secondary"
             },
             {
               "value": "link",
-              "label": "Link"
+              "label": "t:sections.image_with_text.blocks.button.settings.button_style_2.options.link"
             }
           ],
           "default": "secondary"
@@ -649,7 +678,7 @@
     },
     {
       "type": "empty_space",
-      "name": "Empty space",
+      "name": "t:sections.image_with_text.blocks.empty_space.name",
       "settings": [
         {
           "type": "range",
@@ -658,7 +687,7 @@
           "max": 60,
           "step": 4,
           "unit": "px",
-          "label": "Spacing",
+          "label": "t:sections.image_with_text.blocks.empty_space.settings.spacing.label",
           "default": 20
         }
       ]
@@ -669,7 +698,7 @@
   ],
   "presets": [
     {
-      "name": "Image with text",
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
       "category": "Image",
       "blocks": [
         {

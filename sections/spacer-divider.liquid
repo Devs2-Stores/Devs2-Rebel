@@ -18,16 +18,18 @@
   "
 >
   {%- if section.settings.show_divider -%}
-    <div class="section-spacer__line section-spacer__line--{{ section.settings.divider_align }} section-spacer__color--{{ section.settings.divider_color }} page-width">
-      {%- if section.settings.divider_style == 'gradient' -%}
-        <div class="section-spacer__hr section-spacer__hr--gradient"></div>
-      {%- elsif section.settings.divider_style == 'shadow' -%}
-        <div class="section-spacer__hr section-spacer__hr--shadow"></div>
-      {%- elsif section.settings.divider_style == 'zigzag' -%}
-        <div class="section-spacer__hr section-spacer__hr--zigzag"></div>
-      {%- else -%}
-        <hr class="section-spacer__hr section-spacer__hr--{{ section.settings.divider_style }}">
-      {%- endif -%}
+    <div class="page-width">
+      <div class="section-spacer__line section-spacer__line--{{ section.settings.divider_align }} section-spacer__color--{{ section.settings.divider_color }}">
+        {%- if section.settings.divider_style == 'gradient' -%}
+          <div class="section-spacer__hr section-spacer__hr--gradient"></div>
+        {%- elsif section.settings.divider_style == 'shadow' -%}
+          <div class="section-spacer__hr section-spacer__hr--shadow"></div>
+        {%- elsif section.settings.divider_style == 'zigzag' -%}
+          <div class="section-spacer__hr section-spacer__hr--zigzag"></div>
+        {%- else -%}
+          <hr class="section-spacer__hr section-spacer__hr--{{ section.settings.divider_style }}">
+        {%- endif -%}
+      </div>
     </div>
   {%- endif -%}
 </div>
@@ -76,7 +78,7 @@
   }
 
   /* ── Divider color source ── */
-  .section-spacer__color--border { --divider-color: var(--color-border); }
+  .section-spacer__color--border { --divider-color: var(--color-border-rgb); }
   .section-spacer__color--accent { --divider-color: var(--color-accent); }
   .section-spacer__color--button { --divider-color: var(--color-button); }
   .section-spacer__color--text { --divider-color: var(--color-foreground); }
@@ -135,61 +137,103 @@
 
 {% schema %}
 {
-  "name": "Spacer & Divider",
+  "name": "t:sections.spacer_divider.name",
   "tag": "div",
   "class": "section-spacer-wrapper",
   "settings": [
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Color scheme",
+      "label": "t:sections.spacer_divider.settings.color_scheme.label",
       "default": "scheme-1"
     },
     {
       "type": "header",
-      "content": "Divider"
+      "content": "t:sections.spacer_divider.settings.header__divider.content"
     },
     {
       "type": "checkbox",
       "id": "show_divider",
-      "label": "Show divider",
+      "label": "t:sections.spacer_divider.settings.show_divider.label",
       "default": true
     },
     {
       "type": "select",
       "id": "divider_style",
-      "label": "Divider style",
+      "label": "t:sections.spacer_divider.settings.divider_style.label",
       "options": [
-        { "value": "solid", "label": "Solid" },
-        { "value": "dashed", "label": "Dashed" },
-        { "value": "dotted", "label": "Dotted" },
-        { "value": "double", "label": "Double" },
-        { "value": "gradient", "label": "Gradient fade" },
-        { "value": "shadow", "label": "Shadow" },
-        { "value": "zigzag", "label": "Zigzag" }
+        {
+          "value": "solid",
+          "label": "t:sections.spacer_divider.settings.divider_style.options.solid"
+        },
+        {
+          "value": "dashed",
+          "label": "t:sections.spacer_divider.settings.divider_style.options.dashed"
+        },
+        {
+          "value": "dotted",
+          "label": "t:sections.spacer_divider.settings.divider_style.options.dotted"
+        },
+        {
+          "value": "double",
+          "label": "t:sections.spacer_divider.settings.divider_style.options.double"
+        },
+        {
+          "value": "gradient",
+          "label": "t:sections.spacer_divider.settings.divider_style.options.gradient"
+        },
+        {
+          "value": "shadow",
+          "label": "t:sections.spacer_divider.settings.divider_style.options.shadow"
+        },
+        {
+          "value": "zigzag",
+          "label": "t:sections.spacer_divider.settings.divider_style.options.zigzag"
+        }
       ],
       "default": "solid"
     },
     {
       "type": "select",
       "id": "divider_align",
-      "label": "Divider alignment",
+      "label": "t:sections.spacer_divider.settings.divider_align.label",
       "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" },
-        { "value": "right", "label": "Right" }
+        {
+          "value": "left",
+          "label": "t:sections.spacer_divider.settings.divider_align.options.left"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.spacer_divider.settings.divider_align.options.center"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.spacer_divider.settings.divider_align.options.right"
+        }
       ],
       "default": "center"
     },
     {
       "type": "select",
       "id": "divider_color",
-      "label": "Divider color",
+      "label": "t:sections.spacer_divider.settings.divider_color.label",
       "options": [
-        { "value": "border", "label": "Border" },
-        { "value": "accent", "label": "Accent (red)" },
-        { "value": "button", "label": "Button" },
-        { "value": "text", "label": "Text" }
+        {
+          "value": "border",
+          "label": "t:sections.spacer_divider.settings.divider_color.options.border"
+        },
+        {
+          "value": "accent",
+          "label": "t:sections.spacer_divider.settings.divider_color.options.accent"
+        },
+        {
+          "value": "button",
+          "label": "t:sections.spacer_divider.settings.divider_color.options.button"
+        },
+        {
+          "value": "text",
+          "label": "t:sections.spacer_divider.settings.divider_color.options.text"
+        }
       ],
       "default": "border"
     },
@@ -200,7 +244,7 @@
       "max": 10,
       "step": 1,
       "unit": "px",
-      "label": "Divider height",
+      "label": "t:sections.spacer_divider.settings.divider_height.label",
       "default": 1
     },
     {
@@ -210,12 +254,12 @@
       "max": 100,
       "step": 5,
       "unit": "%",
-      "label": "Divider width",
+      "label": "t:sections.spacer_divider.settings.divider_width.label",
       "default": 100
     },
     {
       "type": "header",
-      "content": "Desktop spacing"
+      "content": "t:sections.spacer_divider.settings.header__desktop_spacing.content"
     },
     {
       "type": "range",
@@ -224,7 +268,7 @@
       "max": 150,
       "step": 5,
       "unit": "px",
-      "label": "Top spacing",
+      "label": "t:sections.spacer_divider.settings.padding_top_desktop.label",
       "default": 40
     },
     {
@@ -234,12 +278,12 @@
       "max": 150,
       "step": 5,
       "unit": "px",
-      "label": "Bottom spacing",
+      "label": "t:sections.spacer_divider.settings.padding_bottom_desktop.label",
       "default": 40
     },
     {
       "type": "header",
-      "content": "Mobile spacing"
+      "content": "t:sections.spacer_divider.settings.header__mobile_spacing.content"
     },
     {
       "type": "range",
@@ -248,7 +292,7 @@
       "max": 100,
       "step": 5,
       "unit": "px",
-      "label": "Top spacing",
+      "label": "t:sections.spacer_divider.settings.padding_top_mobile.label",
       "default": 20
     },
     {
@@ -258,13 +302,13 @@
       "max": 100,
       "step": 5,
       "unit": "px",
-      "label": "Bottom spacing",
+      "label": "t:sections.spacer_divider.settings.padding_bottom_mobile.label",
       "default": 20
     }
   ],
   "presets": [
     {
-      "name": "Spacer & Divider",
+      "name": "t:sections.spacer_divider.presets.spacer_divider.name",
       "category": "Custom"
     }
   ]

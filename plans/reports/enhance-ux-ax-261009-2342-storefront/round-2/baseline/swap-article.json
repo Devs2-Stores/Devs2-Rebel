@@ -1,0 +1,34 @@
+{
+ "hosts": 2,
+ "checked": 42,
+ "fails": 10,
+ "groups": {
+  "span.": {
+   "n": 2,
+   "ex": {
+    "sel": "span.",
+    "text": "Home",
+    "color": "rgba(10, 10, 10, 0.75)",
+    "cr": 1.11
+   }
+  },
+  "h3.footer-actions-menu__title": {
+   "n": 4,
+   "ex": {
+    "sel": "h3.footer-actions-menu__title",
+    "text": "Shop",
+    "color": "rgb(10, 10, 10)",
+    "cr": 1.14
+   }
+  },
+  "a.": {
+   "n": 4,
+   "ex": {
+    "sel": "a.",
+    "text": "Devs2 Rebel",
+    "color": "rgb(10, 10, 10)",
+    "cr": 1.14
+   }
+  }
+ }
+}

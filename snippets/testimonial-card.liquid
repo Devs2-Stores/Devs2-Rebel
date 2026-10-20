@@ -21,9 +21,10 @@
   {%- if block.settings.author != blank -%}
     <div class="testimonial-card__author">
       {%- if block.settings.avatar != blank -%}
+        {%- assign avatar_alt = block.settings.author | escape -%}
         {{ block.settings.avatar | image_url: width: 80 | image_tag:
           loading: 'lazy', class: 'testimonial-card__avatar',
-          alt: block.settings.author | escape
+          alt: avatar_alt
         }}
       {%- else -%}
         <div class="testimonial-card__avatar-placeholder">

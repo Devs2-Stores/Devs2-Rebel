@@ -7,8 +7,11 @@
 
 {%- liquid
   assign selected_variant = product.selected_or_first_available_variant | default: product.variants.first
-  assign inv = selected_variant.inventory_quantity
   assign stock_threshold = block.settings.stock_threshold
+  assign inv = 0
+  if selected_variant.inventory_management == 'shopify' and selected_variant.inventory_policy == 'deny'
+    assign inv = selected_variant.inventory_quantity
+  endif
 -%}
 
 <div
@@ -17,9 +20,20 @@
   data-threshold="{{ stock_threshold }}"
   {{ block.shopify_attributes }}
 >
-  <span class="stock-counter__text">
-    {{ 'products.product.inventory_low_stock_show_count' | t: quantity: inv }}
+  <span class="stock-counter__text" data-stock-text data-template="{{ 'products.product.inventory_low_stock_show_count' | t: quantity: '[qty]' | escape }}">
+    {{- 'products.product.inventory_low_stock_show_count' | t: quantity: inv -}}
   </span>
+  <script type="application/json" data-stock-levels>
+    {
+    {%- assign stock_separator = '' -%}
+    {%- for variant in product.variants -%}
+      {%- if variant.inventory_management == 'shopify' and variant.inventory_policy == 'deny' and variant.inventory_quantity > 0 and variant.inventory_quantity <= stock_threshold -%}
+        {{ stock_separator }}"{{ variant.id }}":{{ variant.inventory_quantity }}
+        {%- assign stock_separator = ',' -%}
+      {%- endif -%}
+    {%- endfor -%}
+    }
+  </script>
 </div>
 
 {% schema %}

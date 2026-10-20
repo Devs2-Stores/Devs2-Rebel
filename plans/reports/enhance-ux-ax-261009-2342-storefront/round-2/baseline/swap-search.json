@@ -1,0 +1,43 @@
+{
+ "hosts": 3,
+ "checked": 62,
+ "fails": 11,
+ "groups": {
+  "span.": {
+   "n": 1,
+   "ex": {
+    "sel": "span.",
+    "text": "Home",
+    "color": "rgba(10, 10, 10, 0.75)",
+    "cr": 1.11
+   }
+  },
+  "button.search-template__tab": {
+   "n": 2,
+   "ex": {
+    "sel": "button.search-template__tab",
+    "text": "Articles 2",
+    "color": "rgba(10, 10, 10, 0.58)",
+    "cr": 1.2
+   }
+  },
+  "h3.footer-actions-menu__title": {
+   "n": 4,
+   "ex": {
+    "sel": "h3.footer-actions-menu__title",
+    "text": "Shop",
+    "color": "rgb(10, 10, 10)",
+    "cr": 1.14
+   }
+  },
+  "a.": {
+   "n": 4,
+   "ex": {
+    "sel": "a.",
+    "text": "Devs2 Rebel",
+    "color": "rgb(10, 10, 10)",
+    "cr": 1.14
+   }
+  }
+ }
+}

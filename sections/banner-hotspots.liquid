@@ -15,10 +15,12 @@
 >
   <div class="{% if section.settings.section_width == 'fixed' %}page-width{% endif %}">
     {%- if section.settings.heading != blank -%}
-      <div class="section-hotspot__head page-width">
-        <{{ section.settings.heading_tag }} class="section-hotspot__heading heading-size-{{ section.settings.heading_size }}">
-          {{- section.settings.heading -}}
-        </{{ section.settings.heading_tag }}>
+      <div class="page-width">
+        <div class="section-hotspot__head">
+          <{{ section.settings.heading_tag }} class="section-hotspot__heading heading-size-{{ section.settings.heading_size }}">
+            {{- section.settings.heading -}}
+          </{{ section.settings.heading_tag }}>
+        </div>
       </div>
     {%- endif -%}
 
@@ -33,6 +35,7 @@
       {%- endif -%}
 
       {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
         {%- liquid
           assign hotspot_product = block.settings.product
           assign hotspot_product_handle = block.settings.product_handle
@@ -71,6 +74,14 @@
         </div>
       {%- endfor -%}
     </div>
+    {%- capture app_blocks -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- if app_blocks != blank -%}
+      <div class="section-apps">{{ app_blocks }}</div>
+    {%- endif -%}
   </div>
 </div>
 
@@ -179,10 +190,9 @@
   @media (min-width: 750px) {
     .section-hotspot { padding-block: var(--hs-dt) var(--hs-db); }
   }
-  .section-hotspot__head { text-align: center; margin-bottom: 2rem; }
-  .section-hotspot__heading { margin: 0; color: rgb(var(--color-foreground)); }
-
-  .section-hotspot__wrapper { position: relative; border-radius: 0.5rem; overflow: hidden; }
+  .section-hotspot__head { text-align: center; margin-bottom: var(--section-head-gap); }
+  .section-hotspot__heading { margin: 0; color: var(--color-ink); letter-spacing: var(--heading-tracking); }
+  .section-hotspot__wrapper { position: relative; border-radius: var(--media-radius); border: var(--media-border); box-shadow: var(--media-shadow); overflow: hidden; }
   .section-hotspot__img { width: 100%; height: auto; display: block; }
   .section-hotspot__ph { aspect-ratio: 16/9; background: rgba(var(--color-foreground), 0.04); display: flex; align-items: center; justify-content: center; }
   .section-hotspot__ph svg { width: 30%; opacity: 0.1; }
@@ -201,25 +211,28 @@
 
   .section-hotspot__pulse {
     width: 2rem; height: 2rem; border-radius: 50%;
-    background: rgba(255,255,255,0.9); border: 2px solid rgba(0,0,0,0.1);
+    background: var(--color-white); border: 1px solid var(--color-black);
     display: flex; align-items: center; justify-content: center;
-    cursor: pointer; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    transition: transform 0.3s;
+    cursor: pointer; position: relative; box-shadow: none;
+    transition: transform var(--duration-default) ease, background-color var(--duration-default) ease, color var(--duration-default) ease;
   }
-  .section-hotspot__pulse:hover { transform: scale(1.15); }
+  @media (hover: hover) {
+    .section-hotspot__pulse:hover { transform: scale(1.1); }
+  }
   .section-hotspot__pulse::before {
     content: ''; position: absolute; inset: -4px;
-    border-radius: 50%; border: 2px solid rgba(255,255,255,0.5);
+    border-radius: 50%; border: 1px solid rgba(255,255,255,0.6);
     animation: hotspot-ping 2s ease-out infinite;
   }
-  .section-hotspot__plus { font-size: 1.125rem; font-weight: 700; color: #333; line-height: 1; }
+  .section-hotspot__plus { font-size: 1rem; font-weight: 600; color: var(--color-black); line-height: 1; }
 
   .section-hotspot__tooltip {
     position: absolute; z-index: 10;
-    background: rgb(var(--color-background)); border-radius: 0.5rem;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    background: rgb(var(--color-background));
+    border: var(--popup-border); border-radius: var(--popup-corner-radius);
+    box-shadow: var(--popup-shadow);
     min-width: 200px; opacity: 0; pointer-events: none;
-    transform: translateY(8px); transition: opacity 0.25s, transform 0.25s;
+    transform: translateY(8px); transition: opacity var(--duration-default) ease, transform var(--duration-default) ease;
   }
   .section-hotspot__tooltip.is-open {
     opacity: 1; pointer-events: auto; transform: translateY(0);
@@ -237,14 +250,14 @@
     display: flex; gap: 0.75rem; padding: 0.75rem;
     text-decoration: none; color: inherit;
   }
-  .section-hotspot__tooltip-img { width: 60px; height: 60px; border-radius: 0.25rem; object-fit: cover; flex-shrink: 0; }
+  .section-hotspot__tooltip-img { width: 60px; height: 60px; border-radius: var(--media-radius); object-fit: cover; flex-shrink: 0; }
   .section-hotspot__tooltip-info { display: flex; flex-direction: column; gap: 0.25rem; justify-content: center; }
-  .section-hotspot__tooltip-title { font-size: 0.8125rem; font-weight: 600; color: rgb(var(--color-foreground)); line-height: 1.3; }
-  .section-hotspot__tooltip-price { font-size: 0.75rem; font-weight: 700; color: rgb(var(--color-accent)); }
+  .section-hotspot__tooltip-title { font-size: 0.8125rem; font-weight: 600; color: var(--color-ink); line-height: 1.3; }
+  .section-hotspot__tooltip-price { font-size: 0.75rem; font-weight: 500; color: var(--color-ink); }
 
-  .section-hotspot__tooltip-custom { padding: 0.75rem; display: flex; flex-direction: column; gap: 0.25rem; }
-  .section-hotspot__tooltip-custom strong { font-size: 0.8125rem; color: rgb(var(--color-foreground)); }
-  .section-hotspot__tooltip-custom span { font-size: 0.75rem; color: rgba(var(--color-foreground), 0.6); }
+  .section-hotspot__tooltip-custom { padding: 0.875rem 1rem; display: flex; flex-direction: column; gap: 0.25rem; }
+  .section-hotspot__tooltip-custom strong { font-size: 0.8125rem; font-weight: 600; color: var(--color-ink); }
+  .section-hotspot__tooltip-custom span { font-size: 0.75rem; color: var(--color-muted); }
 {% endstylesheet %}
 
 {% schema %}
@@ -267,7 +280,7 @@
       "type": "inline_richtext",
       "id": "heading",
       "label": "t:sections.banner_hotspots.settings.heading.label",
-      "default": "Shop the look"
+      "default": "t:sections.banner_hotspots.settings.heading.default"
     },
     {
       "type": "select",
@@ -276,15 +289,15 @@
       "options": [
         {
           "value": "md",
-          "label": "M"
+          "label": "t:sections.banner_hotspots.settings.heading_size.options.md"
         },
         {
           "value": "lg",
-          "label": "L"
+          "label": "t:sections.banner_hotspots.settings.heading_size.options.lg"
         },
         {
           "value": "xl",
-          "label": "XL"
+          "label": "t:sections.banner_hotspots.settings.heading_size.options.xl"
         }
       ],
       "default": "lg"
@@ -296,11 +309,11 @@
       "options": [
         {
           "value": "h2",
-          "label": "H2"
+          "label": "t:sections.banner_hotspots.settings.heading_tag.options.h2"
         },
         {
           "value": "h3",
-          "label": "H3"
+          "label": "t:sections.banner_hotspots.settings.heading_tag.options.h3"
         }
       ],
       "default": "h2"
@@ -321,18 +334,18 @@
       "options": [
         {
           "value": "fixed",
-          "label": "Fixed"
+          "label": "t:sections.banner_hotspots.settings.section_width.options.fixed"
         },
         {
           "value": "full",
-          "label": "Full"
+          "label": "t:sections.banner_hotspots.settings.section_width.options.full"
         }
       ],
       "default": "fixed"
     },
     {
       "type": "header",
-      "content": "Desktop spacing"
+      "content": "t:sections.banner_hotspots.settings.header__desktop_spacing.content"
     },
     {
       "type": "range",
@@ -356,7 +369,7 @@
     },
     {
       "type": "header",
-      "content": "Mobile spacing"
+      "content": "t:sections.banner_hotspots.settings.header__mobile_spacing.content"
     },
     {
       "type": "range",
@@ -411,19 +424,19 @@
           "options": [
             {
               "value": "bottom",
-              "label": "Bottom"
+              "label": "t:sections.banner_hotspots.blocks.hotspot.settings.tooltip_position.options.bottom"
             },
             {
               "value": "top",
-              "label": "Top"
+              "label": "t:sections.banner_hotspots.blocks.hotspot.settings.tooltip_position.options.top"
             },
             {
               "value": "left",
-              "label": "Left"
+              "label": "t:sections.banner_hotspots.blocks.hotspot.settings.tooltip_position.options.left"
             },
             {
               "value": "right",
-              "label": "Right"
+              "label": "t:sections.banner_hotspots.blocks.hotspot.settings.tooltip_position.options.right"
             }
           ],
           "default": "bottom"
@@ -436,7 +449,7 @@
         {
           "type": "text",
           "id": "product_handle",
-          "label": "Product handle fallback"
+          "label": "t:sections.banner_hotspots.blocks.hotspot.settings.product_handle.label"
         },
         {
           "type": "header",

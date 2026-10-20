@@ -3,11 +3,15 @@
 
   Renders the quantity input bound to the product form.
 {% enddoc %}
-
 {%- liquid
   assign selected_variant = product.selected_or_first_available_variant | default: product.variants.first
   assign product_form_id = 'product-form-' | append: section.id
+  assign min_qty = selected_variant.quantity_rule.min | default: 1
+  assign step_qty = selected_variant.quantity_rule.increment | default: 1
+  assign max_qty = selected_variant.quantity_rule.max
 -%}
+{{ 'quantity-selector.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'quantity-selector.js' | asset_url }}" defer="defer"></script>
 
 <div class="product-template__quantity-group" {{ block.shopify_attributes }}>
   <label class="product-template__quantity-label">{{ 'products.product.quantity.label' | t }}</label>
@@ -16,9 +20,10 @@
     name: 'quantity',
     product: product,
     variant: selected_variant,
-    value: 1,
-    min: 1,
-    step: 1
+    value: min_qty,
+    min: min_qty,
+    step: step_qty,
+    max: max_qty
   -%}
 </div>
 

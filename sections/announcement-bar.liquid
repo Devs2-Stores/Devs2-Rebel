@@ -3,9 +3,11 @@
 <script src="{{ 'announcement-bar.js' | asset_url }}" defer="defer"></script>
 <announcement-bar class="announcement-bar color-{{ section.settings.color_scheme }}" role="region" aria-label="{{ 'sections.announcement_bar.label' | t }}">
   <div class="announcement-bar__container">
+    {%- assign announcement_count = section.blocks | where: 'type', 'announcement' | size -%}
     <div class="swiper announcement-bar__swiper">
       <div class="swiper-wrapper">
         {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
         <div class="swiper-slide announcement-bar__slide" {{ block.shopify_attributes }}>
           <div class="announcement-bar__content">
             {%- if block.settings.link != blank -%}
@@ -18,9 +20,17 @@
         {%- endfor -%}
       </div>
     </div>
-    {%- if section.blocks.size > 1 -%}
+    {%- if announcement_count > 1 -%}
     <button type="button" class="announcement-bar__nav announcement-bar__nav--prev swiper-button-prev" aria-label="{{ 'accessibility.previous' | t }}"></button>
     <button type="button" class="announcement-bar__nav announcement-bar__nav--next swiper-button-next" aria-label="{{ 'accessibility.next' | t }}"></button>
+    {%- endif -%}
+    {%- capture app_blocks -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- if app_blocks != blank -%}
+      <div class="section-apps">{{ app_blocks }}</div>
     {%- endif -%}
   </div>
 </announcement-bar>
@@ -55,7 +65,7 @@
           "type": "text",
           "id": "text",
           "label": "t:sections.announcement_bar.blocks.announcement.settings.text.label",
-          "default": "Welcome to our store"
+          "default": "t:sections.announcement_bar.blocks.announcement.settings.text.default"
         },
         {
           "type": "url",

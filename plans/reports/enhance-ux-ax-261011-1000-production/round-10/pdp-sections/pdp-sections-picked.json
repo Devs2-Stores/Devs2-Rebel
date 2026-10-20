@@ -1,0 +1,461 @@
+{
+  "375 fresh": {
+    "ok": true,
+    "blocks": [
+      {
+        "name": "main",
+        "box": {
+          "top": 179,
+          "bottom": 1864,
+          "left": 15,
+          "right": 360
+        },
+        "headTop": null,
+        "contentBottom": 1864,
+        "cards": 0,
+        "carousel": true,
+        "cardLeft": null,
+        "cardRight": null
+      },
+      {
+        "name": "complementary",
+        "box": {
+          "top": 1888,
+          "bottom": 2764,
+          "left": 0,
+          "right": 375
+        },
+        "headTop": 1912,
+        "contentBottom": 2764,
+        "cards": 4,
+        "carousel": false,
+        "cardLeft": 15,
+        "cardRight": 360
+      },
+      {
+        "name": "related",
+        "box": {
+          "top": 2764,
+          "bottom": 3342,
+          "left": 0,
+          "right": 375
+        },
+        "headTop": 2788,
+        "contentBottom": 3342,
+        "cards": 4,
+        "carousel": true,
+        "cardLeft": 15,
+        "cardRight": 1202
+      }
+    ],
+    "gaps": [
+      {
+        "between": "main>complementary",
+        "gap": 48
+      },
+      {
+        "between": "complementary>related",
+        "gap": 24
+      }
+    ],
+    "complementaryHost": {
+      "connected": true,
+      "productId": "",
+      "hidden": false
+    },
+    "docOverflow": 0,
+    "vw": 375
+  },
+  "375 history": {
+    "ok": true,
+    "blocks": [
+      {
+        "name": "main",
+        "box": {
+          "top": 179,
+          "bottom": 1864,
+          "left": 15,
+          "right": 360
+        },
+        "headTop": null,
+        "contentBottom": 1864,
+        "cards": 0,
+        "carousel": true,
+        "cardLeft": null,
+        "cardRight": null
+      },
+      {
+        "name": "viewed",
+        "box": {
+          "top": 1888,
+          "bottom": 2443,
+          "left": 15,
+          "right": 360
+        },
+        "headTop": 1888,
+        "contentBottom": 2443,
+        "cards": 1,
+        "carousel": true,
+        "cardLeft": 15,
+        "cardRight": 300
+      },
+      {
+        "name": "complementary",
+        "box": {
+          "top": 2443,
+          "bottom": 3319,
+          "left": 0,
+          "right": 375
+        },
+        "headTop": 2467,
+        "contentBottom": 3319,
+        "cards": 4,
+        "carousel": false,
+        "cardLeft": 15,
+        "cardRight": 360
+      },
+      {
+        "name": "related",
+        "box": {
+          "top": 3319,
+          "bottom": 3898,
+          "left": 0,
+          "right": 375
+        },
+        "headTop": 3343,
+        "contentBottom": 3898,
+        "cards": 4,
+        "carousel": true,
+        "cardLeft": 15,
+        "cardRight": 1202
+      }
+    ],
+    "gaps": [
+      {
+        "between": "main>viewed",
+        "gap": 24
+      },
+      {
+        "between": "viewed>complementary",
+        "gap": 24
+      },
+      {
+        "between": "complementary>related",
+        "gap": 24
+      }
+    ],
+    "complementaryHost": {
+      "connected": true,
+      "productId": "",
+      "hidden": false
+    },
+    "docOverflow": 0,
+    "vw": 375
+  },
+  "768 fresh": {
+    "ok": true,
+    "blocks": [
+      {
+        "name": "main",
+        "box": {
+          "top": 158,
+          "bottom": 1210,
+          "left": 30,
+          "right": 738
+        },
+        "headTop": null,
+        "contentBottom": 1210,
+        "cards": 0,
+        "carousel": true,
+        "cardLeft": null,
+        "cardRight": null
+      },
+      {
+        "name": "complementary",
+        "box": {
+          "top": 1234,
+          "bottom": 2233,
+          "left": 0,
+          "right": 768
+        },
+        "headTop": 1258,
+        "contentBottom": 2233,
+        "cards": 4,
+        "carousel": false,
+        "cardLeft": 30,
+        "cardRight": 738
+      },
+      {
+        "name": "related",
+        "box": {
+          "top": 2233,
+          "bottom": 2729,
+          "left": 0,
+          "right": 768
+        },
+        "headTop": 2257,
+        "contentBottom": 2729,
+        "cards": 4,
+        "carousel": true,
+        "cardLeft": 30,
+        "cardRight": 981
+      }
+    ],
+    "gaps": [
+      {
+        "between": "main>complementary",
+        "gap": 48
+      },
+      {
+        "between": "complementary>related",
+        "gap": 24
+      }
+    ],
+    "complementaryHost": {
+      "connected": true,
+      "productId": "",
+      "hidden": false
+    },
+    "docOverflow": 0,
+    "vw": 768
+  },
+  "768 history": {
+    "ok": true,
+    "blocks": [
+      {
+        "name": "main",
+        "box": {
+          "top": 158,
+          "bottom": 1210,
+          "left": 30,
+          "right": 738
+        },
+        "headTop": null,
+        "contentBottom": 1210,
+        "cards": 0,
+        "carousel": true,
+        "cardLeft": null,
+        "cardRight": null
+      },
+      {
+        "name": "viewed",
+        "box": {
+          "top": 1234,
+          "bottom": 1706,
+          "left": 30,
+          "right": 738
+        },
+        "headTop": 1234,
+        "contentBottom": 1706,
+        "cards": 1,
+        "carousel": true,
+        "cardLeft": 30,
+        "cardRight": 253
+      },
+      {
+        "name": "complementary",
+        "box": {
+          "top": 1706,
+          "bottom": 2705,
+          "left": 0,
+          "right": 768
+        },
+        "headTop": 1730,
+        "contentBottom": 2705,
+        "cards": 4,
+        "carousel": false,
+        "cardLeft": 30,
+        "cardRight": 738
+      },
+      {
+        "name": "related",
+        "box": {
+          "top": 2705,
+          "bottom": 3201,
+          "left": 0,
+          "right": 768
+        },
+        "headTop": 2729,
+        "contentBottom": 3201,
+        "cards": 4,
+        "carousel": true,
+        "cardLeft": 30,
+        "cardRight": 981
+      }
+    ],
+    "gaps": [
+      {
+        "between": "main>viewed",
+        "gap": 24
+      },
+      {
+        "between": "viewed>complementary",
+        "gap": 24
+      },
+      {
+        "between": "complementary>related",
+        "gap": 24
+      }
+    ],
+    "complementaryHost": {
+      "connected": true,
+      "productId": "",
+      "hidden": false
+    },
+    "docOverflow": 0,
+    "vw": 768
+  },
+  "1440 fresh": {
+    "ok": true,
+    "blocks": [
+      {
+        "name": "main",
+        "box": {
+          "top": 166,
+          "bottom": 1231,
+          "left": 75,
+          "right": 1365
+        },
+        "headTop": null,
+        "contentBottom": 1231,
+        "cards": 0,
+        "carousel": true,
+        "cardLeft": null,
+        "cardRight": null
+      },
+      {
+        "name": "complementary",
+        "box": {
+          "top": 1255,
+          "bottom": 1918,
+          "left": 0,
+          "right": 1440
+        },
+        "headTop": 1279,
+        "contentBottom": 1918,
+        "cards": 4,
+        "carousel": false,
+        "cardLeft": 75,
+        "cardRight": 1365
+      },
+      {
+        "name": "related",
+        "box": {
+          "top": 1918,
+          "bottom": 2545,
+          "left": 0,
+          "right": 1440
+        },
+        "headTop": 1942,
+        "contentBottom": 2545,
+        "cards": 4,
+        "carousel": true,
+        "cardLeft": 75,
+        "cardRight": 1365
+      }
+    ],
+    "gaps": [
+      {
+        "between": "main>complementary",
+        "gap": 48
+      },
+      {
+        "between": "complementary>related",
+        "gap": 24
+      }
+    ],
+    "complementaryHost": {
+      "connected": true,
+      "productId": "",
+      "hidden": false
+    },
+    "docOverflow": 0,
+    "vw": 1440
+  },
+  "1440 history": {
+    "ok": true,
+    "blocks": [
+      {
+        "name": "main",
+        "box": {
+          "top": 166,
+          "bottom": 1231,
+          "left": 75,
+          "right": 1365
+        },
+        "headTop": null,
+        "contentBottom": 1231,
+        "cards": 0,
+        "carousel": true,
+        "cardLeft": null,
+        "cardRight": null
+      },
+      {
+        "name": "viewed",
+        "box": {
+          "top": 1255,
+          "bottom": 1857,
+          "left": 75,
+          "right": 1365
+        },
+        "headTop": 1255,
+        "contentBottom": 1857,
+        "cards": 1,
+        "carousel": true,
+        "cardLeft": 75,
+        "cardRight": 380
+      },
+      {
+        "name": "complementary",
+        "box": {
+          "top": 1857,
+          "bottom": 2520,
+          "left": 0,
+          "right": 1440
+        },
+        "headTop": 1881,
+        "contentBottom": 2520,
+        "cards": 4,
+        "carousel": false,
+        "cardLeft": 75,
+        "cardRight": 1365
+      },
+      {
+        "name": "related",
+        "box": {
+          "top": 2520,
+          "bottom": 3147,
+          "left": 0,
+          "right": 1440
+        },
+        "headTop": 2544,
+        "contentBottom": 3147,
+        "cards": 4,
+        "carousel": true,
+        "cardLeft": 75,
+        "cardRight": 1365
+      }
+    ],
+    "gaps": [
+      {
+        "between": "main>viewed",
+        "gap": 24
+      },
+      {
+        "between": "viewed>complementary",
+        "gap": 24
+      },
+      {
+        "between": "complementary>related",
+        "gap": 24
+      }
+    ],
+    "complementaryHost": {
+      "connected": true,
+      "productId": "",
+      "hidden": false
+    },
+    "docOverflow": 0,
+    "vw": 1440
+  }
+}
