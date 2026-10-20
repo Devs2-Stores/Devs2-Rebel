@@ -455,7 +455,10 @@
     },
     "cart": {
       "title": "Your cart",
-      "caption": "items",
+      "item_count_label": {
+        "one": "{{ count }} item",
+        "other": "{{ count }} items"
+      },
       "remove_title": "Remove {{ title }}",
       "estimated_total": "Estimated total",
       "note": "Order special instructions",

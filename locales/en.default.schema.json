@@ -3312,14 +3312,19 @@
               "default": "Email"
             },
             "value": {
-              "label": "Value"
+              "label": "Value",
+              "default": "Add your support email address"
             }
           }
         }
       },
       "presets": {
         "contact_form": {
-          "name": "Contact form"
+          "name": "Contact form",
+          "phone_label": "Phone",
+          "phone_value": "Add your phone number",
+          "hours_label": "Hours",
+          "hours_value": "Add your opening hours"
         }
       }
     },
