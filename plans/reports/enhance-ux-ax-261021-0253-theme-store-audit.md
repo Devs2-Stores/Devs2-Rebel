@@ -2,7 +2,7 @@
 
 ## Verdict
 
-DONE_WITH_CONCERNS. All five rounds are closed and the close pass is done. The four Must proposals pass their acceptance checks. P5-P19 are implemented except P15 (rejected with evidence) and P17 (carried below). Final suite after the close pass: node 0 FAIL, JSON 0 FAIL, locale and range validators exit 0, axe 0 violations on 45 route-viewports, lifecycles done. Journeys 93/3, with all three failures in `search1440`; that journey passes 17/0 on two isolated reruns, so it was a timing flake (the run took 1621 s against 781 s before). REVIEW.md gates: `settings-usage` exit 0, `target-spacing` 36 runs 0 failing, `overlay-contract` 276 pass / 0 fail, `font-spacing-icon` 563 pass / 1 fail (classified in the close row). Round-5 capture: 48/48 with 0 overflow, 0 clipped text, 0 broken images. Two gates stay open. No AntiFan receipt is `CERTIFIED`; every touched route is `FAIL` / `STRUCTURAL` with classified findings only, which is not a pass. `shopify theme check` needs separate approval. This review does not change the Theme Store blockers outside the code: docs/support URLs, the client transfer demo store, passwordless Lighthouse.
+DONE_WITH_CONCERNS. All five rounds are closed and the close pass is done. The four Must proposals pass their acceptance checks. P5-P19 are implemented except P15 (rejected with evidence) and P17 (carried below). Final suite after the close pass: node 0 FAIL, JSON 0 FAIL, locale and range validators exit 0, axe 0 violations on 45 route-viewports, lifecycles done. Journeys 93/3, with all three failures in `search1440`; that journey passes 17/0 on two isolated reruns, so it was a timing flake (the run took 1621 s against 781 s before). REVIEW.md gates: `settings-usage` exit 0, `target-spacing` 36 runs 0 failing, `overlay-contract` 276 pass / 0 fail, `font-spacing-icon` 563 pass / 1 fail (classified in the close row). `shopify theme check` (approved): 244 files, no offenses. Round-5 capture: 48/48 with 0 overflow, 0 clipped text, 0 broken images. One gate stays open: no AntiFan receipt is `CERTIFIED`; every touched route is `FAIL` / `STRUCTURAL` with classified findings only, which is not a pass. This review does not change the Theme Store blockers outside the code: docs/support URLs, the client transfer demo store, passwordless Lighthouse.
 
 ## Scope and environment
 
@@ -10,7 +10,7 @@ DONE_WITH_CONCERNS. All five rounds are closed and the close pass is done. The f
 - Running theme: `shopify theme dev` at `http://127.0.0.1:9292` (user-started on `devs2-rebel.myshopify.com`, development theme `#187420049517`). The demo store `rebel-streetwear-hn0q7d9h.myshopify.com` is used only to cross-check platform output.
 - Git: `--git-dir=.git-nested`, branch `main`, HEAD `81c1636` before this review, theme directories clean.
 - Evidence folder: `enhance-ux-ax-261021-0253-theme-store-audit/round-N/` (`suite/`, `capture/`, `qa/`, `vision-*.md`).
-- Not run: `shopify theme check` (needs approval), real touch devices, Safari, a screen reader.
+- Not run: real touch devices, Safari, a screen reader. `shopify theme check` ran once after user approval, at close.
 - `prefers-reduced-motion` is forbidden in this workspace (`AGENTS.md` section 5), so the reduced-motion check from the skill does not apply.
 
 ## Baseline evidence
@@ -118,8 +118,8 @@ Not proposals (with reason)
 2. Mobile collection toolbar uses 3 rows (filter button, count, sort); compacting it is a layout decision for the merchant-facing design, not a defect.
 3. Hero pagination bullets and pause control are Swiper-generated, so the tablet first paint shows them only after JS.
 4. Demo-store content gaps (About "This page exists..." page body, "Devs2 Admin" author, duplicate posts, truncated comments, one-link footer menu, inactive gift card) need store content work on the client transfer demo store.
-5. `shopify theme check` was not run in this review; it needs separate approval.
+5. `shopify theme check` ran after approval on 2026-10-21 with instrumentation off: 244 files inspected, no offenses (`round-5/gates/theme-check.txt`). Resolved.
 6. AntiFan state-matrix misreads on `footer-actions-menu__toggle` and `#search-articles-tab` were reported to `xd://report_issue`; receipts stay `STRUCTURAL` until the tool classifies inline disclosures and ARIA tabs.
 7. The quickview SKU row does not toggle `hidden` when the variant changes (`quickview-modal.js` writes the text only), and the PDP `setMetaValue` toggle was not exercised by a variant-change probe.
-8. Settings labels changed in `locales/en.default.schema.json` ("City or region", "Area"). The devs2.org settings docs are generated from the schema: rerun `node scripts/export-rebel-docs-data.mjs ../shopify` in `E:/Work/master` (separate repo, deploys on push).
+8. Docs data regenerated with `node scripts/export-rebel-docs-data.mjs ../shopify` in `E:/Work/master`: `src/data/rebel-theme.json` (25 setting groups, 63 sections, 21 theme blocks, 25 templates) now carries "City or region" / "Area" and the earlier label changes; `npm run build` completes and `/themes/rebel/sections/` shows "City or region". The file is uncommitted there; pushing `main` in that repo deploys devs2.org and stays with the user.
 9. Card `%` badges still follow the first available variant while the range strike follows the lowest-priced variant, so a range card can show a strike without a badge.
