@@ -207,10 +207,10 @@
         {%- if price == 0 -%}
           <span class="product-card__price-contact">{{ t_contact | escape }}</span>
           {%- elsif product.price_varies -%}
-            {%- if product.compare_at_price_max > product.price_min -%}
-              <del class="product-card__price-compare">{{ product.compare_at_price_max | money }}</del>
+            {%- if product.compare_at_price > product.price -%}
+              <del class="product-card__price-compare">{%- if settings.currency_code_enabled -%}{{ product.compare_at_price | money_with_currency }}{%- else -%}{{ product.compare_at_price | money }}{%- endif -%}</del>
             {%- endif -%}
-            <span class="product-card__price-range{% if product.compare_at_price_max > product.price_min %} product-card__price-sale--on-sale{% endif %}">
+            <span class="product-card__price-range{% if product.compare_at_price > product.price %} product-card__price-sale--on-sale{% endif %}">
             {%- if settings.currency_code_enabled -%}
               <span class="product-card__price-amount">{{ product.price_min | money_with_currency }}</span> – <span class="product-card__price-amount">{{ product.price_max | money_with_currency }}</span>
             {%- else -%}

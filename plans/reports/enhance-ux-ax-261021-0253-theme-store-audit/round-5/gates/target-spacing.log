@@ -1,0 +1,40 @@
+selftest true {"gap4":[false,false],"gap8":[true,true],"gap24":[true,true],"inline":[true]}
+[PASS] 320 / :: targets 68, under 24px 2, failing 2.5.8 0
+[PASS] 375 / :: targets 68, under 24px 2, failing 2.5.8 0
+[PASS] 768 / :: targets 55, under 24px 4, failing 2.5.8 0
+[PASS] 1440 / :: targets 58, under 24px 4, failing 2.5.8 0
+[PASS] 320 /collections/all :: targets 88, under 24px 2, failing 2.5.8 0
+[PASS] 375 /collections/all :: targets 88, under 24px 2, failing 2.5.8 0
+[PASS] 768 /collections/all :: targets 68, under 24px 4, failing 2.5.8 0
+[PASS] 1440 /collections/all :: targets 96, under 24px 21, failing 2.5.8 0
+[PASS] 320 /products/rebel-tactical-bomber-jacket :: targets 50, under 24px 3, failing 2.5.8 0
+[PASS] 375 /products/rebel-tactical-bomber-jacket :: targets 50, under 24px 3, failing 2.5.8 0
+[PASS] 768 /products/rebel-tactical-bomber-jacket :: targets 48, under 24px 5, failing 2.5.8 0
+[PASS] 1440 /products/rebel-tactical-bomber-jacket :: targets 51, under 24px 5, failing 2.5.8 0
+[PASS] 320 /products/gift-card :: targets 44, under 24px 3, failing 2.5.8 0
+[PASS] 375 /products/gift-card :: targets 44, under 24px 3, failing 2.5.8 0
+[PASS] 768 /products/gift-card :: targets 42, under 24px 5, failing 2.5.8 0
+[PASS] 1440 /products/gift-card :: targets 45, under 24px 5, failing 2.5.8 0
+[PASS] 320 /blogs/sustainable-fashion-eco-tech :: targets 39, under 24px 2, failing 2.5.8 0
+[PASS] 375 /blogs/sustainable-fashion-eco-tech :: targets 39, under 24px 2, failing 2.5.8 0
+[PASS] 768 /blogs/sustainable-fashion-eco-tech :: targets 39, under 24px 4, failing 2.5.8 0
+[PASS] 1440 /blogs/sustainable-fashion-eco-tech :: targets 44, under 24px 4, failing 2.5.8 0
+[PASS] 320 /blogs/sustainable-fashion-eco-tech/bio-textiles-mycelium-algae-and-the-lab-grown-revolution :: targets 45, under 24px 2, failing 2.5.8 0
+[PASS] 375 /blogs/sustainable-fashion-eco-tech/bio-textiles-mycelium-algae-and-the-lab-grown-revolution :: targets 45, under 24px 2, failing 2.5.8 0
+[PASS] 768 /blogs/sustainable-fashion-eco-tech/bio-textiles-mycelium-algae-and-the-lab-grown-revolution :: targets 45, under 24px 4, failing 2.5.8 0
+[PASS] 1440 /blogs/sustainable-fashion-eco-tech/bio-textiles-mycelium-algae-and-the-lab-grown-revolution :: targets 50, under 24px 4, failing 2.5.8 0
+[PASS] 320 /search?q=jacket :: targets 49, under 24px 2, failing 2.5.8 0
+[PASS] 375 /search?q=jacket :: targets 49, under 24px 2, failing 2.5.8 0
+[PASS] 768 /search?q=jacket :: targets 42, under 24px 4, failing 2.5.8 0
+[PASS] 1440 /search?q=jacket :: targets 67, under 24px 17, failing 2.5.8 0
+[PASS] 320 /pages/faq :: targets 25, under 24px 2, failing 2.5.8 0
+[PASS] 375 /pages/faq :: targets 25, under 24px 2, failing 2.5.8 0
+[PASS] 768 /pages/faq :: targets 25, under 24px 4, failing 2.5.8 0
+[PASS] 1440 /pages/faq :: targets 30, under 24px 4, failing 2.5.8 0
+[PASS] 320 /cart :: targets 15, under 24px 2, failing 2.5.8 0
+[PASS] 375 /cart :: targets 15, under 24px 2, failing 2.5.8 0
+[PASS] 768 /cart :: targets 15, under 24px 4, failing 2.5.8 0
+[PASS] 1440 /cart :: targets 20, under 24px 4, failing 2.5.8 0
+SUMMARY {"runs":36,"failing":0}
+
+--stderr--

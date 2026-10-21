@@ -1,0 +1,6 @@
+selftest true [{"owner":"self","id":"unused","type":"text"},{"owner":"block:b","id":"link","type":"url"}] [{"owner":"self","id":"dead","type":"range"}] [{"owner":"global","id":"section_only","type":"text"},{"owner":"global","id":"float_c_enable","type":"checkbox"},{"owner":"global","id":"dead_tok","type":"range"},{"owner":"scheme:color_schemes","id":"unused_role","type":"color"}]
+selftest app blocks true [["offers @app blocks but never renders them","block loop at offset 3 does not skip @app"],[]]
+settings 895 unread or unrendered 0
+global settings 187 unread 0
+
+--stderr--

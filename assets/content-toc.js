@@ -129,7 +129,7 @@
       if (!this.headings.length) return;
 
       var ticking = false;
-      this._scrollFallback = function() {
+      this._onScroll = function() {
         if (ticking) return;
         ticking = true;
         requestAnimationFrame(function() {
@@ -141,8 +141,8 @@
           self.setActiveHeading(active.id);
         });
       };
-      window.addEventListener('scroll', this._scrollFallback, { passive: true });
-      this._scrollFallback();
+      window.addEventListener('scroll', this._onScroll, { passive: true });
+      this._onScroll();
     }
 
     setupCollapse() {
@@ -159,8 +159,8 @@
     }
 
     disconnectObservers() {
-      if (this._scrollFallback) window.removeEventListener('scroll', this._scrollFallback);
-      this._scrollFallback = null;
+      if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
+      this._onScroll = null;
     }
 
     disconnectedCallback() {

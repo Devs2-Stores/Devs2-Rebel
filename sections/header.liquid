@@ -42,7 +42,7 @@
         {%- capture cart_trigger_inner -%}
           <span class="visually-hidden">{{ 'accessibility.open_cart' | t }}</span>
           {%- render 'icon', name: 'cart' -%}
-          <span class="cart-count" data-cart-count aria-live="polite" aria-atomic="true"{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>
+          <span class="cart-count" data-cart-count aria-live="polite" aria-atomic="true"{% if cart.item_count == 0 %} data-empty{% endif %}>{{ cart.item_count }}</span>
         {%- endcapture -%}
         {%- if settings.cart_type == 'page' -%}
           <a href="{{ routes.cart_url }}" class="header__action-btn header__cart-btn">{{ cart_trigger_inner }}</a>
@@ -199,8 +199,9 @@ global-header .header__actions .header__cart-btn .cart-count {
   border-radius: var(--radius-full);
   line-height: 1;
 }
-global-header .header__actions .header__cart-btn .cart-count[hidden] {
-  display: none;
+global-header .header__actions .header__cart-btn .cart-count[data-empty] {
+  opacity: 0;
+  transform: scale(0.5);
 }
 global-header .header__hamburger {
   display: inline-flex;

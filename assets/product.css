@@ -1285,6 +1285,10 @@ size-guide-modal .size-guide-modal-panel .size-guide-modal-content ul li strong 
   --swiper-gap-desktop: 24px;
 }
 @media (max-width: 749px) {
+  .product-viewed__wrap {
+    --swiper-cols-tablet: 2.1;
+    --swiper-gap-tablet: 12px;
+  }
   .product-viewed__wrap > .swiper-button-prev,
   .product-viewed__wrap > .swiper-button-next {
     display: none;

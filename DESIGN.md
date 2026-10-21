@@ -119,8 +119,11 @@ carry it; chrome stays out of the way.
   (`slidesPerView: 2.1`, with the matching pre-init `--swiper-cols-mobile`) and
   relies on swipe: hide prev/next there, because arrows centred on a tall card
   land on the quick-add button or the badges.
-- **Icons.** Outline icons use one stroke: `stroke-width="1.5"` on a 24 px
-  viewBox. Full-colour payment icons and filled brand glyphs are exempt.
+- **Icons.** Outline interface icons render a 1-1.25 px line:
+  `stroke-width="1.5"` on a 24 px viewBox drawn at 16-24 px. The 12 px link
+  chevron in icon boxes keeps 2.5 for the same rendered weight, and 40 px+
+  empty-state illustrations use 1. Full-colour payment icons and filled brand
+  glyphs are exempt.
 - **Page titles.** Every page H1 (collection title and hero, cart, search,
   list pages) uses `--font-heading-weight`; do not hard-code a bold weight.
 

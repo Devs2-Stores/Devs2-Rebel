@@ -253,7 +253,7 @@
       var cartCountEl = document.querySelectorAll("[data-cart-count]");
       if (cartCountEl.length) cartCountEl.forEach(function(el) {
         el.innerText = number;
-        if (el.classList.contains('cart-count')) el.hidden = Number(number) === 0;
+        if (el.classList.contains('cart-count')) el.toggleAttribute('data-empty', Number(number) === 0);
       });
     },
 

@@ -30,6 +30,10 @@
   --swiper-gap-desktop: 24px;
 }
 @media (max-width: 749px) {
+  .product-template__relate-wrap {
+    --swiper-cols-tablet: 2.1;
+    --swiper-gap-tablet: 12px;
+  }
   .product-template__relate-wrap > .swiper-button-prev,
   .product-template__relate-wrap > .swiper-button-next {
     display: none;

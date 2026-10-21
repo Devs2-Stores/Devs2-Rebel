@@ -1,0 +1,773 @@
+{
+ "runId": "run-632f2673-b1cf-4ab1-be59-72e00109262c",
+ "attemptId": "attempt-07039893-e1d8-4fc4-80e6-d84e11a9ad26",
+ "workspaceId": "workspace-e853bfef-f8df-4ea2-bf13-7c3dd8387b61",
+ "target": {
+  "projectId": "project-b1c5dce6-514d-43fe-9ebb-9b95a89c11fe",
+  "workspaceId": "workspace-e853bfef-f8df-4ea2-bf13-7c3dd8387b61",
+  "runtimeId": "binding-7d68cd62-68cf-4ab9-bd70-e0e7405543da",
+  "tabId": "37fe7dda-e353-4109-aea8-ab9d98f90da5",
+  "browserEpoch": 1,
+  "documentGeneration": 307,
+  "url": "http://127.0.0.1:9292/collections"
+ },
+ "viewport": {
+  "width": 375,
+  "height": 812,
+  "requestedWidth": 375,
+  "observedWidth": 375
+ },
+ "summary": {
+  "passed": false,
+  "verdict": "FAIL",
+  "totalIssues": 14,
+  "criticalCount": 13,
+  "pageCriticalCount": 13,
+  "responsive": true,
+  "viewport": {
+   "width": 375,
+   "height": 812,
+   "requestedWidth": 375,
+   "observedWidth": 375
+  },
+  "thresholdsSource": "default",
+  "matrixVerdict": "FAIL",
+  "certification": "STRUCTURAL",
+  "certificationReasons": [
+   "visual baseline missing at desktop: pass viewports.desktop {mismatchPercent, passed} from a baseline comparison",
+   "visual baseline missing at tablet: pass viewports.tablet {mismatchPercent, passed} from a baseline comparison",
+   "visual baseline missing at mobile: pass viewports.mobile {mismatchPercent, passed} from a baseline comparison",
+   "visualFidelity unmeasured: Visual diff unmeasured (no baseline comparison supplied)",
+   "cssModularity unmeasured: CSS modularity unmeasured (this workflow runs no stylesheet-modularity scanner)",
+   "interactiveOperability unmeasured: Interactive operability unmeasured (no interaction probe executed in this run)",
+   "responsiveParity unmeasured: Responsive viewports unmeasured (no baseline comparison supplied)",
+   "performanceCWV unmeasured: Core Web Vitals and performance unmeasured (no CWV telemetry measured in this run)"
+  ]
+ },
+ "checklist": {
+  "layout": true,
+  "responsive": true,
+  "overflow": true,
+  "diagnostics": false,
+  "liquidClean": true,
+  "assetsValid": true,
+  "hsCompliant": true
+ },
+ "findings": {
+  "platform": {
+   "platform": "shopify",
+   "confidence": 0.5,
+   "indicators": [
+    "sections/*.liquid templates found",
+    "DOM contains cdn.shopify.com CDN or Shopify JS objects"
+   ],
+   "source": "hybrid"
+  },
+  "liquid": {
+   "hasErrors": false,
+   "errors": [],
+   "scannedElementsCount": 124
+  },
+  "overflow": {
+   "viewport": {
+    "name": "active",
+    "width": 375,
+    "height": 812
+   },
+   "measured": true,
+   "hasOverflow": false,
+   "deltaX": 0,
+   "scrollWidth": 375,
+   "clientWidth": 375,
+   "culprits": []
+  },
+  "assets": {
+   "hasBrokenAssets": false,
+   "brokenAssets": [],
+   "totalImagesScanned": 12,
+   "totalStylesheetsScanned": 12
+  },
+  "hsRules": {
+   "passed": true,
+   "totalViolations": 0,
+   "errorsCount": 0,
+   "warningsCount": 0,
+   "violations": [],
+   "cartTelemetry": {
+    "observedRequests": [],
+    "forms": [
+     {
+      "action": "/contact#newsletter-form",
+      "method": "POST",
+      "contactEmailField": "contact[email]"
+     },
+     {
+      "action": "/contact#FooterNewsletter",
+      "method": "POST",
+      "contactEmailField": "contact[email]"
+     },
+     {
+      "action": "/cart",
+      "method": "POST"
+     }
+    ],
+    "contracts": {
+     "add": null,
+     "change": null,
+     "read": null
+    }
+   }
+  },
+  "serverCrash": {
+   "hasCrash": false,
+   "errorsCount": 0,
+   "findings": []
+  },
+  "diagnosticIssues": [
+   {
+    "kind": "console",
+    "origin": "127.0.0.1",
+    "message": "[HotReload] Connection closed by the server, attempting to reconnect..."
+   },
+   {
+    "kind": "console",
+    "origin": "127.0.0.1",
+    "message": "Framing 'https://shop.app/' violates the following Content Security Policy directive: \"frame-ancestors https://devs2-rebel.myshopify.com https://devs2-rebel.account.myshopify.com https://shopify.com\".\u2026"
+   },
+   {
+    "kind": "console",
+    "origin": "cdn.shopify.com",
+    "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items."
+   },
+   {
+    "kind": "console",
+    "origin": "cdn.shopify.com",
+    "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items."
+   },
+   {
+    "kind": "console",
+    "origin": "127.0.0.1",
+    "message": "[HotReload] Connection closed by the server, attempting to reconnect..."
+   },
+   {
+    "kind": "console",
+    "origin": "cdn.shopify.com",
+    "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items."
+   },
+   {
+    "kind": "console",
+    "origin": "cdn.shopify.com",
+    "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items."
+   }
+  ],
+  "diagnosticWarnings": [
+   {
+    "kind": "network",
+    "origin": "shop.app",
+    "message": "ERR_BLOCKED_BY_RESPONSE \u2014 https://shop.app/pay/hop"
+   }
+  ],
+  "domSemantics": {
+   "measured": true,
+   "score": 81,
+   "summary": {
+    "h1Count": 1,
+    "headingLevelSkipsCount": 1,
+    "imgMissingAltCount": 0,
+    "controlsMissingNameCount": 0,
+    "formControlsMissingLabelCount": 0,
+    "duplicateIdCount": 0,
+    "hasHtmlLang": true,
+    "htmlLang": "en",
+    "hasMetaDescription": true,
+    "metaDescriptionLength": 11,
+    "hasCanonical": true,
+    "canonicalUrl": "https://devs2-rebel.myshopify.com/collections",
+    "hasOgTitle": true,
+    "hasOgImage": false,
+    "jsonLdBlocksCount": 1,
+    "jsonLdInvalidCount": 0,
+    "jsonLdTypes": [
+     "ItemList"
+    ],
+    "touchTargetsSub24Count": 3
+   },
+   "findings": [
+    {
+     "type": "heading_level_skip",
+     "severity": "warning",
+     "message": "Heading level skipped from H1 to H3",
+     "selector": "h3.collection-card__title",
+     "details": {
+      "from": 1,
+      "to": 3
+     }
+    },
+    {
+     "type": "meta_description_too_short",
+     "severity": "warning",
+     "message": "Meta description is too short (11 chars; recommended 50-160)",
+     "details": {
+      "length": 11
+     }
+    },
+    {
+     "type": "missing_og_image",
+     "severity": "warning",
+     "message": "Page is missing an Open Graph image (<meta property=\"og:image\">)"
+    },
+    {
+     "type": "touch_target_too_small",
+     "severity": "warning",
+     "message": "Interactive element touch target is 46x17px (< 24x24px)",
+     "selector": "a",
+     "details": {
+      "width": 46,
+      "height": 17
+     }
+    },
+    {
+     "type": "touch_target_too_small",
+     "severity": "warning",
+     "message": "Interactive element touch target is 77x16px (< 24x24px)",
+     "selector": "a",
+     "details": {
+      "width": 77,
+      "height": 16
+     }
+    },
+    {
+     "type": "touch_target_too_small",
+     "severity": "warning",
+     "message": "Interactive element touch target is 123x16px (< 24x24px)",
+     "selector": "a",
+     "details": {
+      "width": 123,
+      "height": 16
+     }
+    }
+   ]
+  },
+  "visualQuality": {
+   "measured": true,
+   "viewport": {
+    "width": 375,
+    "height": 812
+   },
+   "mobile": true,
+   "findings": [
+    {
+     "ruleId": "icon-stroke-mismatch",
+     "severity": "warning",
+     "selector": "svg",
+     "details": "Outline icon in svg renders a 0.92px stroke; the page icon stroke is 1.25px",
+     "rect": {
+      "x": 15,
+      "y": 2905,
+      "w": 35,
+      "h": 22
+     },
+     "measured": {
+      "renderedStrokePx": 0.92,
+      "modalStrokePx": 1.25
+     },
+     "occurrences": 3
+    },
+    {
+     "ruleId": "title-scale",
+     "severity": "warning",
+     "selector": "h2.footer-actions-menu__title",
+     "details": "H2 h2.footer-actions-menu__title is 12px while the same-level headings of other sections use 30px",
+     "rect": {
+      "x": 15,
+      "y": 2682,
+      "w": 345,
+      "h": 48
+     },
+     "measured": {
+      "level": "h2",
+      "fontSizePx": 12,
+      "modalPx": 30
+     },
+     "occurrences": 1
+    }
+   ],
+   "stats": {
+    "textElementsChecked": 42,
+    "contrastIndeterminate": 0,
+    "controlsChecked": 23,
+    "floatingWidgets": 0,
+    "scrollPositions": 2,
+    "durationMs": 80,
+    "truncated": false,
+    "truncatedReasons": [],
+    "measuredRules": [
+     "contrast-low",
+     "font-below-min",
+     "control-height-band",
+     "wrapped-label",
+     "icon-stroke-mismatch",
+     "overlay-fit",
+     "title-scale",
+     "input-height-band",
+     "tap-target-tiny",
+     "floating-widget-overlap",
+     "invisible-click-blocker"
+    ],
+    "unmeasuredRules": []
+   }
+  },
+  "preReloadDiagnostics": {
+   "criticalIssues": [
+    {
+     "kind": "console",
+     "origin": "127.0.0.1",
+     "message": "[HotReload] Connection closed by the server, attempting to reconnect..."
+    },
+    {
+     "kind": "console",
+     "origin": "127.0.0.1",
+     "message": "Framing 'https://shop.app/' violates the following Content Security Policy directive: \"frame-ancestors https://devs2-rebel.myshopify.com https://devs2-rebel.account.myshopify.com https://shopify.com\".\u2026"
+    },
+    {
+     "kind": "console",
+     "origin": "cdn.shopify.com",
+     "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items."
+    },
+    {
+     "kind": "console",
+     "origin": "cdn.shopify.com",
+     "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items."
+    }
+   ],
+   "warnings": [
+    {
+     "kind": "network",
+     "origin": "shop.app",
+     "message": "ERR_BLOCKED_BY_RESPONSE \u2014 https://shop.app/pay/hop"
+    }
+   ]
+  },
+  "differential": {
+   "preExistingIssues": [
+    {
+     "category": "diagnostics",
+     "signature": "diagnostics:console:127.0.0.1:[HotReload] Connection closed by the server, attempting to reconnect...",
+     "severity": "critical",
+     "message": "[HotReload] Connection closed by the server, attempting to reconnect...",
+     "origin": "127.0.0.1"
+    },
+    {
+     "category": "diagnostics",
+     "signature": "diagnostics:console:127.0.0.1:Framing 'https://shop.app/' violates the following Content Security Policy directive: \"frame-ancestors https://devs2-rebel.myshopify.com https://devs2-rebel.account.myshopify.com https://shopify.com\".\u2026",
+     "severity": "critical",
+     "message": "Framing 'https://shop.app/' violates the following Content Security Policy directive: \"frame-ancestors https://devs2-rebel.myshopify.com https://devs2-rebel.account.myshopify.com https://shopify.com\".\u2026",
+     "origin": "127.0.0.1"
+    },
+    {
+     "category": "diagnostics",
+     "signature": "diagnostics:console:cdn.shopify.com:[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "severity": "critical",
+     "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "origin": "cdn.shopify.com"
+    },
+    {
+     "category": "diagnostics",
+     "signature": "diagnostics:console:cdn.shopify.com:[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "severity": "critical",
+     "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "origin": "cdn.shopify.com"
+    }
+   ],
+   "resolvedIssues": [],
+   "introducedRegressions": [
+    {
+     "category": "diagnostics",
+     "signature": "diagnostics:console:127.0.0.1:[HotReload] Connection closed by the server, attempting to reconnect...",
+     "severity": "critical",
+     "message": "[HotReload] Connection closed by the server, attempting to reconnect...",
+     "origin": "127.0.0.1"
+    },
+    {
+     "category": "diagnostics",
+     "signature": "diagnostics:console:cdn.shopify.com:[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "severity": "critical",
+     "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "origin": "cdn.shopify.com"
+    },
+    {
+     "category": "diagnostics",
+     "signature": "diagnostics:console:cdn.shopify.com:[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "severity": "critical",
+     "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "origin": "cdn.shopify.com"
+    },
+    {
+     "category": "visual_quality",
+     "signature": "visual_quality:icon-stroke-mismatch:svg:Outline icon in svg renders a 0.92px stroke; the page icon stroke is 1.25px",
+     "severity": "critical",
+     "message": "Visual quality icon-stroke-mismatch: Outline icon in svg renders a 0.92px stroke; the page icon stroke is 1.25px",
+     "details": {
+      "ruleId": "icon-stroke-mismatch",
+      "selector": "svg",
+      "rect": {
+       "x": 15,
+       "y": 2905,
+       "w": 35,
+       "h": 22
+      }
+     }
+    },
+    {
+     "category": "visual_quality",
+     "signature": "visual_quality:title-scale:h2.footer-actions-menu__title:H2 h2.footer-actions-menu__title is 12px while the same-level headings of other ",
+     "severity": "critical",
+     "message": "Visual quality title-scale: H2 h2.footer-actions-menu__title is 12px while the same-level headings of other sections use 30px",
+     "details": {
+      "ruleId": "title-scale",
+      "selector": "h2.footer-actions-menu__title",
+      "rect": {
+       "x": 15,
+       "y": 2682,
+       "w": 345,
+       "h": 48
+      }
+     }
+    },
+    {
+     "category": "visual_quality",
+     "signature": "visual_quality:image-crop:img:Image img (187x281) is cropped by 16.8% to fill its 165x206px frame with object-",
+     "severity": "critical",
+     "message": "Visual quality image-crop: Image img (187x281) is cropped by 16.8% to fill its 165x206px frame with object-fit: cover",
+     "details": {
+      "ruleId": "image-crop",
+      "selector": "img",
+      "rect": {
+       "x": 15,
+       "y": 354,
+       "w": 165,
+       "h": 206
+      }
+     }
+    },
+    {
+     "category": "state_matrix",
+     "signature": "state_matrix:button.footer-actions-menu__toggle:OVERLAY_TOO_SMALL",
+     "severity": "critical",
+     "message": "Overlay button.footer-actions-menu__toggle: OVERLAY_TOO_SMALL - drawer panel is 345x39px, under the 200x120 minimum",
+     "details": {
+      "trigger": "button.footer-actions-menu__toggle",
+      "code": "OVERLAY_TOO_SMALL"
+     }
+    },
+    {
+     "category": "state_matrix",
+     "signature": "state_matrix:button.footer-actions-menu__toggle:CLOSE_CONTROL_MISSING",
+     "severity": "critical",
+     "message": "Overlay button.footer-actions-menu__toggle: CLOSE_CONTROL_MISSING - no visible close control inside the open panel",
+     "details": {
+      "trigger": "button.footer-actions-menu__toggle",
+      "code": "CLOSE_CONTROL_MISSING"
+     }
+    },
+    {
+     "category": "state_matrix",
+     "signature": "state_matrix:button.footer-actions-menu__toggle:CLOSE_ESCAPE_FAILED",
+     "severity": "critical",
+     "message": "Overlay button.footer-actions-menu__toggle: CLOSE_ESCAPE_FAILED - Escape does not close the drawer",
+     "details": {
+      "trigger": "button.footer-actions-menu__toggle",
+      "code": "CLOSE_ESCAPE_FAILED"
+     }
+    }
+   ],
+   "hasRegressions": true
+  },
+  "layoutIntegrity": {
+   "measured": true,
+   "viewport": {
+    "name": "active",
+    "width": 375,
+    "height": 812
+   },
+   "findings": [],
+   "stats": {
+    "elements": 948,
+    "textRuns": 49,
+    "controls": 25,
+    "sweepSteps": 5,
+    "truncated": false,
+    "truncatedReasons": [],
+    "failedDetectors": [],
+    "durationMs": 162,
+    "phaseMs": {
+     "setup+controls": 41,
+     "runs": 11,
+     "spacing": 27,
+     "clipping": 39,
+     "textOverText": 1,
+     "controlStack": 8,
+     "siblingBoxes": 5,
+     "coverSweep": 30
+    },
+    "spacingMeasured": 63,
+    "spacingFlagged": 0,
+    "cls": 0.002
+   }
+  },
+  "responsive": {
+   "320": {
+    "documentOverflow": false,
+    "criticalOverflow": 0,
+    "criticalOverlap": 0,
+    "criticalClipping": 0,
+    "criticalOcclusion": 0,
+    "criticalOffscreen": 0,
+    "spacingWarnings": 0
+   },
+   "375": {
+    "documentOverflow": false,
+    "criticalOverflow": 0,
+    "criticalOverlap": 0,
+    "criticalClipping": 0,
+    "criticalOcclusion": 0,
+    "criticalOffscreen": 0,
+    "spacingWarnings": 0
+   },
+   "768": {
+    "documentOverflow": false,
+    "criticalOverflow": 0,
+    "criticalOverlap": 0,
+    "criticalClipping": 0,
+    "criticalOcclusion": 0,
+    "criticalOffscreen": 0,
+    "spacingWarnings": 0
+   },
+   "1024": {
+    "documentOverflow": false,
+    "criticalOverflow": 0,
+    "criticalOverlap": 0,
+    "criticalClipping": 0,
+    "criticalOcclusion": 0,
+    "criticalOffscreen": 0,
+    "spacingWarnings": 0
+   },
+   "1440": {
+    "documentOverflow": false,
+    "criticalOverflow": 0,
+    "criticalOverlap": 0,
+    "criticalClipping": 0,
+    "criticalOcclusion": 0,
+    "criticalOffscreen": 0,
+    "spacingWarnings": 0
+   }
+  },
+  "diagnosticScreenshot": {
+   "artifactId": "artifact-3e3cd479-8ab4-4639-a930-a8ec28fe32ef",
+   "artifactRef": {
+    "id": "artifact-3e3cd479-8ab4-4639-a930-a8ec28fe32ef",
+    "runId": "run-632f2673-b1cf-4ab1-be59-72e00109262c",
+    "attemptId": "attempt-07039893-e1d8-4fc4-80e6-d84e11a9ad26",
+    "projectId": "project-b1c5dce6-514d-43fe-9ebb-9b95a89c11fe",
+    "workspaceId": "workspace-e853bfef-f8df-4ea2-bf13-7c3dd8387b61",
+    "kind": "screenshot",
+    "path": "E:\\Work\\.antifan-data\\control-plane-v2\\artifacts\\run-632f2673-b1cf-4ab1-be59-72e00109262c\\678d7fdcac95dd73daac7502be87b297d73f2ceae9dbdcfebb40542e0215b87b.artifact",
+    "byteLength": 657996,
+    "sha256": "678d7fdcac95dd73daac7502be87b297d73f2ceae9dbdcfebb40542e0215b87b",
+    "mime": "image/png",
+    "truncated": false,
+    "redacted": false,
+    "createdAt": 1792546676409
+   },
+   "certifying": false,
+   "reason": "Diagnostic viewport capture only; cannot certify visual parity without multi-viewport baseline comparison (anti.visual.compare)"
+  }
+ },
+ "artifacts": [
+  {
+   "id": "artifact-0b312b76-c918-4d15-a37a-8f82289b9ea5",
+   "runId": "run-632f2673-b1cf-4ab1-be59-72e00109262c",
+   "attemptId": "attempt-07039893-e1d8-4fc4-80e6-d84e11a9ad26",
+   "projectId": "project-b1c5dce6-514d-43fe-9ebb-9b95a89c11fe",
+   "workspaceId": "workspace-e853bfef-f8df-4ea2-bf13-7c3dd8387b61",
+   "kind": "dom",
+   "path": "E:\\Work\\.antifan-data\\control-plane-v2\\artifacts\\run-632f2673-b1cf-4ab1-be59-72e00109262c\\342d2490ed286c6ecaa322c99354fd0cc194fd854200e3275e899bb2779a7d8d.artifact",
+   "byteLength": 185012,
+   "sha256": "342d2490ed286c6ecaa322c99354fd0cc194fd854200e3275e899bb2779a7d8d",
+   "mime": "text/html",
+   "truncated": false,
+   "redacted": true,
+   "createdAt": 1792546674975
+  },
+  {
+   "id": "artifact-3e3cd479-8ab4-4639-a930-a8ec28fe32ef",
+   "runId": "run-632f2673-b1cf-4ab1-be59-72e00109262c",
+   "attemptId": "attempt-07039893-e1d8-4fc4-80e6-d84e11a9ad26",
+   "projectId": "project-b1c5dce6-514d-43fe-9ebb-9b95a89c11fe",
+   "workspaceId": "workspace-e853bfef-f8df-4ea2-bf13-7c3dd8387b61",
+   "kind": "screenshot",
+   "path": "E:\\Work\\.antifan-data\\control-plane-v2\\artifacts\\run-632f2673-b1cf-4ab1-be59-72e00109262c\\678d7fdcac95dd73daac7502be87b297d73f2ceae9dbdcfebb40542e0215b87b.artifact",
+   "byteLength": 657996,
+   "sha256": "678d7fdcac95dd73daac7502be87b297d73f2ceae9dbdcfebb40542e0215b87b",
+   "mime": "image/png",
+   "truncated": false,
+   "redacted": false,
+   "createdAt": 1792546676409
+  },
+  {
+   "id": "artifact-bd55f819-f086-4166-9e1d-82e21af68555",
+   "runId": "run-632f2673-b1cf-4ab1-be59-72e00109262c",
+   "attemptId": "attempt-07039893-e1d8-4fc4-80e6-d84e11a9ad26",
+   "projectId": "project-b1c5dce6-514d-43fe-9ebb-9b95a89c11fe",
+   "workspaceId": "workspace-e853bfef-f8df-4ea2-bf13-7c3dd8387b61",
+   "kind": "report",
+   "path": "E:\\Work\\.antifan-data\\control-plane-v2\\artifacts\\run-632f2673-b1cf-4ab1-be59-72e00109262c\\9c3388622766b7ed5ae154d02338894548097a4ad5b27886e486dc3876a00ddf.artifact",
+   "byteLength": 21130,
+   "sha256": "9c3388622766b7ed5ae154d02338894548097a4ad5b27886e486dc3876a00ddf",
+   "mime": "application/json",
+   "truncated": false,
+   "redacted": false,
+   "createdAt": 1792546703550,
+   "retentionPolicy": "run-durable"
+  }
+ ],
+ "qaMatrix": {
+  "timestamp": "2026-10-21T01:38:23.507Z",
+  "overallScore": 94,
+  "passed": false,
+  "verdict": "FAIL",
+  "coverage": {
+   "measuredDimensions": 3,
+   "totalDimensions": 8,
+   "measuredViewports": 0,
+   "totalViewports": 3
+  },
+  "dimensions": {
+   "visualFidelity": {
+    "score": null,
+    "details": "Visual diff unmeasured (no baseline comparison supplied)"
+   },
+   "domSemantics": {
+    "score": 81,
+    "details": "Score 81/100: H1: 1, Alt gaps: 0, Name gaps: 0, Unlabeled: 0, Dup IDs: 0, JSON-LD: 1 block(s) [@type: ItemList]"
+   },
+   "cssModularity": {
+    "score": null,
+    "details": "CSS modularity unmeasured (this workflow runs no stylesheet-modularity scanner)"
+   },
+   "interactiveOperability": {
+    "score": null,
+    "details": "Interactive operability unmeasured (no interaction probe executed in this run)"
+   },
+   "haravanCompliance": {
+    "score": 100,
+    "details": "Liquid syntax clean per scanner static/browser checks (does not certify full Haravan OS 2.0 or runtime platform compliance)"
+   },
+   "assetIntegrity": {
+    "score": 100,
+    "details": "All assets and local font subsets resolved without broken links"
+   },
+   "responsiveParity": {
+    "score": null,
+    "details": "Responsive viewports unmeasured (no baseline comparison supplied)"
+   },
+   "performanceCWV": {
+    "score": null,
+    "details": "Core Web Vitals and performance unmeasured (no CWV telemetry measured in this run)"
+   }
+  },
+  "viewports": {
+   "desktop": {
+    "mismatchPercent": null,
+    "passed": false,
+    "measured": false,
+    "verdict": "INCONCLUSIVE"
+   },
+   "tablet": {
+    "mismatchPercent": null,
+    "passed": false,
+    "measured": false,
+    "verdict": "INCONCLUSIVE"
+   },
+   "mobile": {
+    "mismatchPercent": null,
+    "passed": false,
+    "measured": false,
+    "verdict": "INCONCLUSIVE"
+   }
+  }
+ },
+ "settleReceipt": {
+  "settleComplete": true,
+  "gates": {
+   "network": true,
+   "fonts": true,
+   "images": true,
+   "dom": true
+  },
+  "timingsMs": {
+   "network": 668,
+   "fonts": 14,
+   "images": 5,
+   "dom": 211,
+   "total": 898
+  },
+  "brokenImages": [],
+  "ignoreSelectors": [
+   "[data-countdown]",
+   "[data-timer]",
+   ".timer",
+   ".countdown",
+   "[data-live-visitor]",
+   ".live-views",
+   ".marquee"
+  ]
+ },
+ "trackerIsolation": {
+  "opened": true,
+  "released": true
+ },
+ "verification": "FAIL",
+ "execution": "COMPLETED",
+ "recovery": {
+  "attempted": 0,
+  "succeeded": 0
+ },
+ "evidenceCoverage": 1,
+ "profile": "build-strict",
+ "thresholdsSource": "default",
+ "coverage": {
+  "measured": 9,
+  "expected": 9
+ },
+ "coverageFloor": 1,
+ "measuredRules": [
+  "liquid",
+  "layout-overflow",
+  "assets",
+  "hs-gate",
+  "diagnostics",
+  "layout-integrity",
+  "responsive",
+  "dom-semantics",
+  "state-matrix",
+  "contrast-low",
+  "font-below-min",
+  "control-height-band",
+  "wrapped-label",
+  "icon-stroke-mismatch",
+  "overlay-fit",
+  "title-scale",
+  "input-height-band",
+  "tap-target-tiny",
+  "floating-widget-overlap",
+  "invisible-click-blocker",
+  "image-crop",
+  "image-low-res"
+ ],
+ "createdAt": 1792546703558,
+ "receipt": {
+  "written": true,
+  "path": "E:\\Work\\shopify\\.antifan\\qa-receipts\\1792546703568-run-632f2673-b1cf-4ab1-be59-72e00109262c-2881f179.json"
+ }
+}

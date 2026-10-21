@@ -1046,15 +1046,11 @@ class ProductTemplateRelate extends HTMLElement {
 				prevEl: '.swiper-button-prev'
 			},
 			breakpoints: {
-				576: {
-					slidesPerView: 2,
-					spaceBetween: 16
-				},
-				768: {
+				750: {
 					slidesPerView: 3,
 					spaceBetween: 20
 				},
-				992: {
+				1024: {
 					slidesPerView: 4,
 					spaceBetween: 24
 				}
@@ -1198,9 +1194,8 @@ class ProductViewed extends HTMLElement {
 				prevEl: swiperEl.querySelector('.swiper-button-prev')
 			},
 			breakpoints: {
-				576: { slidesPerView: 2, spaceBetween: 16 },
-				768: { slidesPerView: 3, spaceBetween: 20 },
-				992: { slidesPerView: 4, spaceBetween: 24 }
+				750: { slidesPerView: 3, spaceBetween: 20 },
+				1024: { slidesPerView: 4, spaceBetween: 24 }
 			}
 		});
 		}, swiperEl);
