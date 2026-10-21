@@ -92,6 +92,10 @@
   padding-bottom: var(--space-lg);
   border-bottom: 1px solid var(--color-hairline);
 }
+.article-template__main > content-toc:first-of-type {
+  padding-top: 0;
+  border-top: 0;
+}
 .article-template__info-author,
 .article-template__info-date,
 .article-template__info-comments {
@@ -103,6 +107,7 @@
 .article-template__info-date .icon,
 .article-template__info-comments .icon { display: none; }
 a.article-template__info-comments {
+  min-height: 1.5rem;
   color: var(--color-muted);
   text-decoration: none;
   transition: color var(--transition-fast);
@@ -130,6 +135,9 @@ a.article-template__info-comments:hover {
   .article-template__info-category { flex-basis: auto; }
 }
 .article-template__info-category a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.5rem;
   color: inherit;
   line-height: 1.2;
   font-size: var(--eyebrow-size);
@@ -246,7 +254,11 @@ a.article-template__info-comments:hover {
   border: 0;
   border-top: 1px solid var(--color-hairline);
   border-radius: 0;
-  background: transparent;
+  background:
+    linear-gradient(to right, rgb(var(--color-background)) 30%, rgba(var(--color-background), 0)) left center / 2.5rem 100% no-repeat local,
+    linear-gradient(to left, rgb(var(--color-background)) 30%, rgba(var(--color-background), 0)) right center / 2.5rem 100% no-repeat local,
+    radial-gradient(farthest-side at 0 50%, rgba(var(--color-foreground), 0.18), rgba(var(--color-foreground), 0)) left center / 0.875rem 100% no-repeat scroll,
+    radial-gradient(farthest-side at 100% 50%, rgba(var(--color-foreground), 0.18), rgba(var(--color-foreground), 0)) right center / 0.875rem 100% no-repeat scroll;
   overflow-x: auto;
 }
 .article-template__table:focus-visible {
@@ -259,7 +271,7 @@ a.article-template__info-comments:hover {
   margin: 0;
   border-collapse: collapse;
   border-spacing: 0;
-  table-layout: fixed;
+  table-layout: auto;
   background: transparent;
   border-radius: 0;
 }
@@ -273,8 +285,7 @@ a.article-template__info-comments:hover {
   vertical-align: top;
   font-size: var(--font-xs);
   line-height: var(--line-height-normal);
-  overflow-wrap: anywhere;
-  word-break: break-word;
+  overflow-wrap: break-word;
 }
 @media (min-width: 750px) {
   .article-template__content th,
@@ -291,6 +302,7 @@ a.article-template__info-comments:hover {
   letter-spacing: var(--eyebrow-tracking);
   text-transform: uppercase;
   border-bottom: 1px solid var(--color-ink);
+  white-space: nowrap;
 }
 .article-template__content tbody tr:nth-child(odd),
 .article-template__content tbody tr:nth-child(even),

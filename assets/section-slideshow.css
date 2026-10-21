@@ -156,25 +156,25 @@
 }
 
 /* ── Slide Text Animation ── */
-.section-slideshow__subheading,
-.section-slideshow__heading,
-.section-slideshow__text,
-.section-slideshow__buttons {
+.section-slideshow__swiper.swiper-initialized .section-slideshow__subheading,
+.section-slideshow__swiper.swiper-initialized .section-slideshow__heading,
+.section-slideshow__swiper.swiper-initialized .section-slideshow__text,
+.section-slideshow__swiper.swiper-initialized .section-slideshow__buttons {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.swiper-slide-active .section-slideshow__subheading {
+.section-slideshow__swiper.swiper-initialized .swiper-slide-active .section-slideshow__subheading {
   opacity: 1; transform: translateY(0); transition-delay: 0.3s;
 }
-.swiper-slide-active .section-slideshow__heading {
+.section-slideshow__swiper.swiper-initialized .swiper-slide-active .section-slideshow__heading {
   opacity: 1; transform: translateY(0); transition-delay: 0.5s;
 }
-.swiper-slide-active .section-slideshow__text {
+.section-slideshow__swiper.swiper-initialized .swiper-slide-active .section-slideshow__text {
   opacity: 1; transform: translateY(0); transition-delay: 0.7s;
 }
-.swiper-slide-active .section-slideshow__buttons {
+.section-slideshow__swiper.swiper-initialized .swiper-slide-active .section-slideshow__buttons {
   opacity: 1; transform: translateY(0); transition-delay: 0.9s;
 }
 

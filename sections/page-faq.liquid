@@ -77,7 +77,15 @@
     </div>
   </section>
 
-  {%- if section.settings.show_contact -%}
+  {%- liquid
+    assign faq_contact_visible = false
+    if section.settings.show_contact
+      if section.settings.contact_phone != blank or section.settings.contact_email != blank or request.design_mode
+        assign faq_contact_visible = true
+      endif
+    endif
+  -%}
+  {%- if faq_contact_visible -%}
     <section class="faq-contact section-padding-bg">
       <div class="page-width">
         <div class="faq-contact__wrap">
@@ -185,6 +193,7 @@
       "type": "checkbox",
       "id": "show_contact",
       "label": "t:sections.page_faq.settings.show_contact.label",
+      "info": "t:sections.page_faq.settings.show_contact.info",
       "default": true
     },
     {

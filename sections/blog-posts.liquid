@@ -9,6 +9,14 @@
   assign columns_d = section.settings.columns_desktop
 -%}
 
+{%- liquid
+  assign blog_has_posts = false
+  if blog != blank and blog.articles.size > 0
+    assign blog_has_posts = true
+  endif
+-%}
+{%- if blog_has_posts or request.design_mode -%}
+
 <div
   id="section-{{ section.id }}"
   class="section-blog-posts color-{{ section.settings.color_scheme }}"
@@ -34,13 +42,13 @@
         {%- if section.settings.show_view_all and blog != blank -%}
           <a href="{{ blog.url }}" class="section-blog-posts__view-all">
             {{ 'general.view_all' | t }}
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
           </a>
         {%- endif -%}
       </div>
     {%- endif -%}
 
-    {%- if blog != blank and blog.articles.size > 0 -%}
+    {%- if blog_has_posts -%}
       <div class="section-blog-posts__grid">
         {%- for article in blog.articles limit: posts_to_show -%}
           <article class="section-blog-posts__card">
@@ -67,7 +75,7 @@
               {%- endif -%}
               <a href="{{ article.url }}" class="section-blog-posts__read-more">
                 {{ 'blogs.article.read_more' | t }}
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
               </a>
             </div>
           </article>
@@ -80,6 +88,7 @@
     {%- endif -%}
   </div>
 </div>
+{%- endif -%}
 
 
 {% schema %}

@@ -8,6 +8,7 @@
   assign variant = product.selected_or_first_available_variant
 -%}
 
+{%- if product != blank or request.design_mode -%}
 {{ 'product.css' | asset_url | stylesheet_tag }}
 <div
   id="section-{{ section.id }}"
@@ -131,7 +132,7 @@
           {%- if section.settings.show_view_link -%}
             <a href="{{ product.url }}" class="section-featured-product__view-link">
               {{ 'general.view_product' | t }}
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </a>
           {%- endif -%}
 
@@ -183,6 +184,7 @@
     });
   })();
 </script>
+{%- endif -%}
 {%- assign first_3d_model = product.media | where: 'media_type', 'model' | first -%}
 {%- if first_3d_model -%}
   <script type="application/json" id="ModelJson-{{ section.id }}">

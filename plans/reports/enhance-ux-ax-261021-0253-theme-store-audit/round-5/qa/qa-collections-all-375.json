@@ -1,0 +1,903 @@
+{
+ "runId": "run-632f2673-b1cf-4ab1-be59-72e00109262c",
+ "attemptId": "attempt-07039893-e1d8-4fc4-80e6-d84e11a9ad26",
+ "workspaceId": "workspace-e853bfef-f8df-4ea2-bf13-7c3dd8387b61",
+ "target": {
+  "projectId": "project-b1c5dce6-514d-43fe-9ebb-9b95a89c11fe",
+  "workspaceId": "workspace-e853bfef-f8df-4ea2-bf13-7c3dd8387b61",
+  "runtimeId": "binding-7d68cd62-68cf-4ab9-bd70-e0e7405543da",
+  "tabId": "37fe7dda-e353-4109-aea8-ab9d98f90da5",
+  "browserEpoch": 1,
+  "documentGeneration": 250,
+  "url": "http://127.0.0.1:9292/collections/all"
+ },
+ "viewport": {
+  "width": 375,
+  "height": 812,
+  "requestedWidth": 375,
+  "observedWidth": 375
+ },
+ "summary": {
+  "passed": false,
+  "verdict": "FAIL",
+  "totalIssues": 16,
+  "criticalCount": 14,
+  "pageCriticalCount": 14,
+  "responsive": true,
+  "viewport": {
+   "width": 375,
+   "height": 812,
+   "requestedWidth": 375,
+   "observedWidth": 375
+  },
+  "thresholdsSource": "default",
+  "matrixVerdict": "FAIL",
+  "certification": "STRUCTURAL",
+  "certificationReasons": [
+   "visual baseline missing at desktop: pass viewports.desktop {mismatchPercent, passed} from a baseline comparison",
+   "visual baseline missing at tablet: pass viewports.tablet {mismatchPercent, passed} from a baseline comparison",
+   "visual baseline missing at mobile: pass viewports.mobile {mismatchPercent, passed} from a baseline comparison",
+   "visualFidelity unmeasured: Visual diff unmeasured (no baseline comparison supplied)",
+   "cssModularity unmeasured: CSS modularity unmeasured (this workflow runs no stylesheet-modularity scanner)",
+   "interactiveOperability unmeasured: Interactive operability unmeasured (no interaction probe executed in this run)",
+   "responsiveParity unmeasured: Responsive viewports unmeasured (no baseline comparison supplied)",
+   "performanceCWV unmeasured: Core Web Vitals and performance unmeasured (no CWV telemetry measured in this run)"
+  ]
+ },
+ "checklist": {
+  "layout": true,
+  "responsive": true,
+  "overflow": true,
+  "diagnostics": false,
+  "liquidClean": true,
+  "assetsValid": true,
+  "hsCompliant": true
+ },
+ "findings": {
+  "platform": {
+   "platform": "shopify",
+   "confidence": 0.5,
+   "indicators": [
+    "sections/*.liquid templates found",
+    "DOM contains cdn.shopify.com CDN or Shopify JS objects"
+   ],
+   "source": "hybrid"
+  },
+  "liquid": {
+   "hasErrors": false,
+   "errors": [],
+   "scannedElementsCount": 186
+  },
+  "overflow": {
+   "viewport": {
+    "name": "active",
+    "width": 375,
+    "height": 812
+   },
+   "measured": true,
+   "hasOverflow": false,
+   "deltaX": 0,
+   "scrollWidth": 375,
+   "clientWidth": 375,
+   "culprits": []
+  },
+  "assets": {
+   "hasBrokenAssets": false,
+   "brokenAssets": [],
+   "totalImagesScanned": 39,
+   "totalStylesheetsScanned": 12
+  },
+  "hsRules": {
+   "passed": true,
+   "totalViolations": 1,
+   "errorsCount": 0,
+   "warningsCount": 1,
+   "violations": [
+    {
+     "ruleId": "HS-05",
+     "ruleTitle": "Featured Image CDN URL",
+     "severity": "warning",
+     "platform": "shopify",
+     "message": "Featured image does not use an absolute (not protocol-relative) platform CDN URL",
+     "recommendation": "Use an absolute URL served from the platform CDN",
+     "selector": "img"
+    }
+   ],
+   "cartTelemetry": {
+    "observedRequests": [],
+    "forms": [
+     {
+      "action": "",
+      "method": "POST",
+      "variantField": "id"
+     },
+     {
+      "action": "",
+      "method": "POST",
+      "variantField": "id"
+     },
+     {
+      "action": "",
+      "method": "POST",
+      "variantField": "id"
+     },
+     {
+      "action": "",
+      "method": "POST",
+      "variantField": "id"
+     },
+     {
+      "action": "",
+      "method": "POST",
+      "variantField": "id"
+     },
+     {
+      "action": "",
+      "method": "POST",
+      "variantField": "id"
+     },
+     {
+      "action": "",
+      "method": "POST",
+      "variantField": "id"
+     },
+     {
+      "action": "",
+      "method": "POST",
+      "variantField": "id"
+     },
+     {
+      "action": "",
+      "method": "POST",
+      "variantField": "id"
+     },
+     {
+      "action": "",
+      "method": "POST",
+      "variantField": "id"
+     },
+     {
+      "action": "",
+      "method": "POST",
+      "variantField": "id"
+     },
+     {
+      "action": "",
+      "method": "POST",
+      "variantField": "id"
+     },
+     {
+      "action": "",
+      "method": "POST",
+      "variantField": "id"
+     },
+     {
+      "action": "",
+      "method": "POST",
+      "variantField": "id"
+     },
+     {
+      "action": "",
+      "method": "POST",
+      "variantField": "id"
+     },
+     {
+      "action": "",
+      "method": "POST",
+      "variantField": "id"
+     },
+     {
+      "action": "",
+      "method": "POST",
+      "variantField": "id"
+     },
+     {
+      "action": "",
+      "method": "POST",
+      "variantField": "id"
+     },
+     {
+      "action": "",
+      "method": "POST",
+      "variantField": "id"
+     },
+     {
+      "action": "",
+      "method": "POST",
+      "variantField": "id"
+     },
+     {
+      "action": "/contact#FooterNewsletter",
+      "method": "POST",
+      "contactEmailField": "contact[email]"
+     },
+     {
+      "action": "/cart",
+      "method": "POST"
+     }
+    ],
+    "contracts": {
+     "add": null,
+     "change": null,
+     "read": null
+    }
+   }
+  },
+  "serverCrash": {
+   "hasCrash": false,
+   "errorsCount": 0,
+   "findings": []
+  },
+  "diagnosticIssues": [
+   {
+    "kind": "console",
+    "origin": "127.0.0.1",
+    "message": "[HotReload] Connection closed by the server, attempting to reconnect..."
+   },
+   {
+    "kind": "console",
+    "origin": "cdn.shopify.com",
+    "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items."
+   },
+   {
+    "kind": "console",
+    "origin": "cdn.shopify.com",
+    "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items."
+   },
+   {
+    "kind": "console",
+    "origin": "127.0.0.1",
+    "message": "[HotReload] Connection closed by the server, attempting to reconnect..."
+   },
+   {
+    "kind": "console",
+    "origin": "cdn.shopify.com",
+    "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items."
+   },
+   {
+    "kind": "console",
+    "origin": "cdn.shopify.com",
+    "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items."
+   }
+  ],
+  "diagnosticWarnings": [],
+  "domSemantics": {
+   "measured": true,
+   "score": 81,
+   "summary": {
+    "h1Count": 1,
+    "headingLevelSkipsCount": 1,
+    "imgMissingAltCount": 0,
+    "controlsMissingNameCount": 0,
+    "formControlsMissingLabelCount": 0,
+    "duplicateIdCount": 0,
+    "hasHtmlLang": true,
+    "htmlLang": "en",
+    "hasMetaDescription": true,
+    "metaDescriptionLength": 11,
+    "hasCanonical": true,
+    "canonicalUrl": "https://devs2-rebel.myshopify.com/collections/all",
+    "hasOgTitle": true,
+    "hasOgImage": false,
+    "jsonLdBlocksCount": 1,
+    "jsonLdInvalidCount": 0,
+    "jsonLdTypes": [
+     "BreadcrumbList"
+    ],
+    "touchTargetsSub24Count": 3
+   },
+   "findings": [
+    {
+     "type": "heading_level_skip",
+     "severity": "warning",
+     "message": "Heading level skipped from H1 to H3",
+     "selector": "h3.product-card__title",
+     "details": {
+      "from": 1,
+      "to": 3
+     }
+    },
+    {
+     "type": "meta_description_too_short",
+     "severity": "warning",
+     "message": "Meta description is too short (11 chars; recommended 50-160)",
+     "details": {
+      "length": 11
+     }
+    },
+    {
+     "type": "missing_og_image",
+     "severity": "warning",
+     "message": "Page is missing an Open Graph image (<meta property=\"og:image\">)"
+    },
+    {
+     "type": "touch_target_too_small",
+     "severity": "warning",
+     "message": "Interactive element touch target is 46x17px (< 24x24px)",
+     "selector": "a",
+     "details": {
+      "width": 46,
+      "height": 17
+     }
+    },
+    {
+     "type": "touch_target_too_small",
+     "severity": "warning",
+     "message": "Interactive element touch target is 77x16px (< 24x24px)",
+     "selector": "a",
+     "details": {
+      "width": 77,
+      "height": 16
+     }
+    },
+    {
+     "type": "touch_target_too_small",
+     "severity": "warning",
+     "message": "Interactive element touch target is 123x16px (< 24x24px)",
+     "selector": "a",
+     "details": {
+      "width": 123,
+      "height": 16
+     }
+    }
+   ]
+  },
+  "visualQuality": {
+   "measured": true,
+   "viewport": {
+    "width": 375,
+    "height": 812
+   },
+   "mobile": true,
+   "findings": [],
+   "stats": {
+    "textElementsChecked": 86,
+    "contrastIndeterminate": 7,
+    "controlsChecked": 82,
+    "floatingWidgets": 0,
+    "scrollPositions": 2,
+    "durationMs": 136,
+    "truncated": false,
+    "truncatedReasons": [],
+    "measuredRules": [
+     "contrast-low",
+     "font-below-min",
+     "control-height-band",
+     "wrapped-label",
+     "icon-stroke-mismatch",
+     "overlay-fit",
+     "title-scale",
+     "input-height-band",
+     "tap-target-tiny",
+     "floating-widget-overlap",
+     "invisible-click-blocker"
+    ],
+    "unmeasuredRules": []
+   }
+  },
+  "preReloadDiagnostics": {
+   "criticalIssues": [
+    {
+     "kind": "console",
+     "origin": "127.0.0.1",
+     "message": "[HotReload] Connection closed by the server, attempting to reconnect..."
+    },
+    {
+     "kind": "console",
+     "origin": "cdn.shopify.com",
+     "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items."
+    },
+    {
+     "kind": "console",
+     "origin": "cdn.shopify.com",
+     "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items."
+    }
+   ],
+   "warnings": []
+  },
+  "differential": {
+   "preExistingIssues": [
+    {
+     "category": "diagnostics",
+     "signature": "diagnostics:console:127.0.0.1:[HotReload] Connection closed by the server, attempting to reconnect...",
+     "severity": "critical",
+     "message": "[HotReload] Connection closed by the server, attempting to reconnect...",
+     "origin": "127.0.0.1"
+    },
+    {
+     "category": "diagnostics",
+     "signature": "diagnostics:console:cdn.shopify.com:[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "severity": "critical",
+     "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "origin": "cdn.shopify.com"
+    },
+    {
+     "category": "diagnostics",
+     "signature": "diagnostics:console:cdn.shopify.com:[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "severity": "critical",
+     "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "origin": "cdn.shopify.com"
+    }
+   ],
+   "resolvedIssues": [],
+   "introducedRegressions": [
+    {
+     "category": "diagnostics",
+     "signature": "diagnostics:console:127.0.0.1:[HotReload] Connection closed by the server, attempting to reconnect...",
+     "severity": "critical",
+     "message": "[HotReload] Connection closed by the server, attempting to reconnect...",
+     "origin": "127.0.0.1"
+    },
+    {
+     "category": "diagnostics",
+     "signature": "diagnostics:console:cdn.shopify.com:[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "severity": "critical",
+     "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "origin": "cdn.shopify.com"
+    },
+    {
+     "category": "diagnostics",
+     "signature": "diagnostics:console:cdn.shopify.com:[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "severity": "critical",
+     "message": "[shopify-account] Menu \"customer-account-main-menu\" not found in Storefront API. Falling back to default menu items.",
+     "origin": "cdn.shopify.com"
+    },
+    {
+     "category": "visual_quality",
+     "signature": "visual_quality:image-crop:img.product-card__img-primary:Image img.product-card__img-primary (187x105) is cropped by 62.6% to fill its 16",
+     "severity": "critical",
+     "message": "Visual quality image-crop: Image img.product-card__img-primary (187x105) is cropped by 62.6% to fill its 166x249px frame with object-fit: cover",
+     "details": {
+      "ruleId": "image-crop",
+      "selector": "img.product-card__img-primary",
+      "rect": {
+       "x": 195,
+       "y": 812,
+       "w": 166,
+       "h": 249
+      }
+     }
+    },
+    {
+     "category": "visual_quality",
+     "signature": "visual_quality:image-crop:img.product-card__img-primary:Image img.product-card__img-primary (187x333) is cropped by 15.8% to fill its 16",
+     "severity": "critical",
+     "message": "Visual quality image-crop: Image img.product-card__img-primary (187x333) is cropped by 15.8% to fill its 166x249px frame with object-fit: cover",
+     "details": {
+      "ruleId": "image-crop",
+      "selector": "img.product-card__img-primary",
+      "rect": {
+       "x": 195,
+       "y": 2276,
+       "w": 166,
+       "h": 249
+      }
+     }
+    },
+    {
+     "category": "visual_quality",
+     "signature": "visual_quality:image-crop:img.product-card__img-primary:Image img.product-card__img-primary (187x187) is cropped by 33.3% to fill its 16",
+     "severity": "critical",
+     "message": "Visual quality image-crop: Image img.product-card__img-primary (187x187) is cropped by 33.3% to fill its 166x249px frame with object-fit: cover",
+     "details": {
+      "ruleId": "image-crop",
+      "selector": "img.product-card__img-primary",
+      "rect": {
+       "x": 14,
+       "y": 3891,
+       "w": 166,
+       "h": 249
+      }
+     }
+    },
+    {
+     "category": "layout_integrity",
+     "signature": "layout_integrity@375:min-gap:div#CollectionProductGrid > div.collection-sort > div.collection-sort__view > button.collection-sort__view-btn:Interactive siblings div#CollectionProductGrid > div.collection-sort > div.colle",
+     "severity": "critical",
+     "message": "Layout integrity min-gap (375px): Interactive siblings div#CollectionProductGrid > div.collection-sort > div.collection-sort__view > button.collection-sort__view-btn and div#CollectionProductGrid > div.collection-sort > div.collection-sort__view > button.collection-sort_...",
+     "details": {
+      "kind": "spacing",
+      "ruleId": "min-gap",
+      "width": 375,
+      "selector": "div#CollectionProductGrid > div.collection-sort > div.collection-sort__view > button.collection-sort__view-btn",
+      "rect": {
+       "x": 324,
+       "y": 319,
+       "w": 36,
+       "h": 36
+      }
+     }
+    },
+    {
+     "category": "layout_integrity",
+     "signature": "layout_integrity@320:min-gap:div#CollectionProductGrid > div.collection-sort > div.collection-sort__view > button.collection-sort__view-btn:Interactive siblings div#CollectionProductGrid > div.collection-sort > div.colle",
+     "severity": "critical",
+     "message": "Layout integrity min-gap (320px): Interactive siblings div#CollectionProductGrid > div.collection-sort > div.collection-sort__view > button.collection-sort__view-btn and div#CollectionProductGrid > div.collection-sort > div.collection-sort__view > button.collection-sort_...",
+     "details": {
+      "kind": "spacing",
+      "ruleId": "min-gap",
+      "width": 320,
+      "selector": "div#CollectionProductGrid > div.collection-sort > div.collection-sort__view > button.collection-sort__view-btn",
+      "rect": {
+       "x": 269,
+       "y": 319,
+       "w": 36,
+       "h": 36
+      }
+     }
+    },
+    {
+     "category": "state_matrix",
+     "signature": "state_matrix:button.footer-actions-menu__toggle:OVERLAY_TOO_SMALL",
+     "severity": "critical",
+     "message": "Overlay button.footer-actions-menu__toggle: OVERLAY_TOO_SMALL - drawer panel is 345x39px, under the 200x120 minimum",
+     "details": {
+      "trigger": "button.footer-actions-menu__toggle",
+      "code": "OVERLAY_TOO_SMALL"
+     }
+    },
+    {
+     "category": "state_matrix",
+     "signature": "state_matrix:button.footer-actions-menu__toggle:CLOSE_CONTROL_MISSING",
+     "severity": "critical",
+     "message": "Overlay button.footer-actions-menu__toggle: CLOSE_CONTROL_MISSING - no visible close control inside the open panel",
+     "details": {
+      "trigger": "button.footer-actions-menu__toggle",
+      "code": "CLOSE_CONTROL_MISSING"
+     }
+    },
+    {
+     "category": "state_matrix",
+     "signature": "state_matrix:button.footer-actions-menu__toggle:CLOSE_ESCAPE_FAILED",
+     "severity": "critical",
+     "message": "Overlay button.footer-actions-menu__toggle: CLOSE_ESCAPE_FAILED - Escape does not close the drawer",
+     "details": {
+      "trigger": "button.footer-actions-menu__toggle",
+      "code": "CLOSE_ESCAPE_FAILED"
+     }
+    }
+   ],
+   "hasRegressions": true
+  },
+  "layoutIntegrity": {
+   "measured": true,
+   "viewport": {
+    "name": "active",
+    "width": 375,
+    "height": 812
+   },
+   "findings": [
+    {
+     "kind": "spacing",
+     "ruleId": "min-gap",
+     "severity": "warning",
+     "selector": "div#CollectionProductGrid > div.collection-sort > div.collection-sort__view > button.collection-sort__view-btn",
+     "relatedSelector": "div#CollectionProductGrid > div.collection-sort > div.collection-sort__view > button.collection-sort__view-btn",
+     "actualPx": 6,
+     "details": "Interactive siblings div#CollectionProductGrid > div.collection-sort > div.collection-sort__view > button.collection-sort__view-btn and div#CollectionProductGrid > div.collection-sort > div.collection-sort__view > button.collection-sort_...",
+     "rect": {
+      "x": 324,
+      "y": 319,
+      "w": 36,
+      "h": 36
+     }
+    }
+   ],
+   "stats": {
+    "elements": 1505,
+    "textRuns": 107,
+    "controls": 87,
+    "sweepSteps": 8,
+    "truncated": false,
+    "truncatedReasons": [],
+    "failedDetectors": [],
+    "durationMs": 358,
+    "phaseMs": {
+     "setup+controls": 24,
+     "runs": 57,
+     "spacing": 97,
+     "clipping": 70,
+     "textOverText": 1,
+     "controlStack": 20,
+     "siblingBoxes": 8,
+     "coverSweep": 82
+    },
+    "spacingMeasured": 147,
+    "spacingFlagged": 1,
+    "cls": 0
+   }
+  },
+  "visualAmbiguities": [
+   "[spacing] div#CollectionProductGrid > div.collection-sort > div.collection-sort__view > button.collection-sort__view-btn \u2014 Interactive siblings div#CollectionProductGrid > div.collection-sort > div.collection-sort__view > button.collection-sort__view-btn and div#CollectionProductGrid > div.collection-sort > div.collection-sort__view > button.collection-sort_...",
+   "[spacing@320] div#CollectionProductGrid > div.collection-sort > div.collection-sort__view > button.collection-sort__view-btn \u2014 Interactive siblings div#CollectionProductGrid > div.collection-sort > div.collection-sort__view > button.collection-sort__view-btn and div#CollectionProductGrid > div.collection-sort > div.collection-sort__view > button.collection-sort_..."
+  ],
+  "responsive": {
+   "320": {
+    "documentOverflow": false,
+    "criticalOverflow": 0,
+    "criticalOverlap": 0,
+    "criticalClipping": 0,
+    "criticalOcclusion": 0,
+    "criticalOffscreen": 0,
+    "spacingWarnings": 1,
+    "findings": [
+     {
+      "kind": "spacing",
+      "ruleId": "min-gap",
+      "severity": "warning",
+      "selector": "div#CollectionProductGrid > div.collection-sort > div.collection-sort__view > button.collection-sort__view-btn",
+      "relatedSelector": "div#CollectionProductGrid > div.collection-sort > div.collection-sort__view > button.collection-sort__view-btn",
+      "actualPx": 6,
+      "details": "Interactive siblings div#CollectionProductGrid > div.collection-sort > div.collection-sort__view > button.collection-sort__view-btn and div#CollectionProductGrid > div.collection-sort > div.collection-sort__view > button.collection-sort_...",
+      "rect": {
+       "x": 269,
+       "y": 319,
+       "w": 36,
+       "h": 36
+      }
+     }
+    ]
+   },
+   "375": {
+    "documentOverflow": false,
+    "criticalOverflow": 0,
+    "criticalOverlap": 0,
+    "criticalClipping": 0,
+    "criticalOcclusion": 0,
+    "criticalOffscreen": 0,
+    "spacingWarnings": 1,
+    "findings": [
+     {
+      "kind": "spacing",
+      "ruleId": "min-gap",
+      "severity": "warning",
+      "selector": "div#CollectionProductGrid > div.collection-sort > div.collection-sort__view > button.collection-sort__view-btn",
+      "relatedSelector": "div#CollectionProductGrid > div.collection-sort > div.collection-sort__view > button.collection-sort__view-btn",
+      "actualPx": 6,
+      "details": "Interactive siblings div#CollectionProductGrid > div.collection-sort > div.collection-sort__view > button.collection-sort__view-btn and div#CollectionProductGrid > div.collection-sort > div.collection-sort__view > button.collection-sort_...",
+      "rect": {
+       "x": 324,
+       "y": 319,
+       "w": 36,
+       "h": 36
+      }
+     }
+    ]
+   },
+   "768": {
+    "documentOverflow": false,
+    "criticalOverflow": 0,
+    "criticalOverlap": 0,
+    "criticalClipping": 0,
+    "criticalOcclusion": 0,
+    "criticalOffscreen": 0,
+    "spacingWarnings": 0
+   },
+   "1024": {
+    "documentOverflow": false,
+    "criticalOverflow": 0,
+    "criticalOverlap": 0,
+    "criticalClipping": 0,
+    "criticalOcclusion": 0,
+    "criticalOffscreen": 0,
+    "spacingWarnings": 0
+   },
+   "1440": {
+    "documentOverflow": false,
+    "criticalOverflow": 0,
+    "criticalOverlap": 0,
+    "criticalClipping": 0,
+    "criticalOcclusion": 0,
+    "criticalOffscreen": 0,
+    "spacingWarnings": 0
+   }
+  },
+  "diagnosticScreenshot": {
+   "artifactId": "artifact-55dac659-d394-405a-a9ce-38112e91394f",
+   "artifactRef": {
+    "id": "artifact-55dac659-d394-405a-a9ce-38112e91394f",
+    "runId": "run-632f2673-b1cf-4ab1-be59-72e00109262c",
+    "attemptId": "attempt-07039893-e1d8-4fc4-80e6-d84e11a9ad26",
+    "projectId": "project-b1c5dce6-514d-43fe-9ebb-9b95a89c11fe",
+    "workspaceId": "workspace-e853bfef-f8df-4ea2-bf13-7c3dd8387b61",
+    "kind": "screenshot",
+    "path": "E:\\Work\\.antifan-data\\control-plane-v2\\artifacts\\run-632f2673-b1cf-4ab1-be59-72e00109262c\\6bea061de7269f01800a4be315e5ba23f53811988d3a8be0405b3d4c858cd99e.artifact",
+    "byteLength": 235850,
+    "sha256": "6bea061de7269f01800a4be315e5ba23f53811988d3a8be0405b3d4c858cd99e",
+    "mime": "image/png",
+    "truncated": false,
+    "redacted": false,
+    "createdAt": 1792542612069
+   },
+   "certifying": false,
+   "reason": "Diagnostic viewport capture only; cannot certify visual parity without multi-viewport baseline comparison (anti.visual.compare)"
+  }
+ },
+ "artifacts": [
+  {
+   "id": "artifact-0b3986ec-234b-419b-bee6-9cca45c406da",
+   "runId": "run-632f2673-b1cf-4ab1-be59-72e00109262c",
+   "attemptId": "attempt-07039893-e1d8-4fc4-80e6-d84e11a9ad26",
+   "projectId": "project-b1c5dce6-514d-43fe-9ebb-9b95a89c11fe",
+   "workspaceId": "workspace-e853bfef-f8df-4ea2-bf13-7c3dd8387b61",
+   "kind": "dom",
+   "path": "E:\\Work\\.antifan-data\\control-plane-v2\\artifacts\\run-632f2673-b1cf-4ab1-be59-72e00109262c\\a9bd2c3cc5b0ed87c48d74a7cf78cf4b3aaceb19fa668c59207d3d5816f9b40c.artifact",
+   "byteLength": 290231,
+   "sha256": "a9bd2c3cc5b0ed87c48d74a7cf78cf4b3aaceb19fa668c59207d3d5816f9b40c",
+   "mime": "text/html",
+   "truncated": false,
+   "redacted": true,
+   "createdAt": 1792542610897
+  },
+  {
+   "id": "artifact-55dac659-d394-405a-a9ce-38112e91394f",
+   "runId": "run-632f2673-b1cf-4ab1-be59-72e00109262c",
+   "attemptId": "attempt-07039893-e1d8-4fc4-80e6-d84e11a9ad26",
+   "projectId": "project-b1c5dce6-514d-43fe-9ebb-9b95a89c11fe",
+   "workspaceId": "workspace-e853bfef-f8df-4ea2-bf13-7c3dd8387b61",
+   "kind": "screenshot",
+   "path": "E:\\Work\\.antifan-data\\control-plane-v2\\artifacts\\run-632f2673-b1cf-4ab1-be59-72e00109262c\\6bea061de7269f01800a4be315e5ba23f53811988d3a8be0405b3d4c858cd99e.artifact",
+   "byteLength": 235850,
+   "sha256": "6bea061de7269f01800a4be315e5ba23f53811988d3a8be0405b3d4c858cd99e",
+   "mime": "image/png",
+   "truncated": false,
+   "redacted": false,
+   "createdAt": 1792542612069
+  },
+  {
+   "id": "artifact-bc8e0c9e-1e46-4368-a4ae-04cd283ce16a",
+   "runId": "run-632f2673-b1cf-4ab1-be59-72e00109262c",
+   "attemptId": "attempt-07039893-e1d8-4fc4-80e6-d84e11a9ad26",
+   "projectId": "project-b1c5dce6-514d-43fe-9ebb-9b95a89c11fe",
+   "workspaceId": "workspace-e853bfef-f8df-4ea2-bf13-7c3dd8387b61",
+   "kind": "report",
+   "path": "E:\\Work\\.antifan-data\\control-plane-v2\\artifacts\\run-632f2673-b1cf-4ab1-be59-72e00109262c\\dec5ca03816790bd94c1b43b5a575fa8dd757de0a31ca5c93ff6d0412e43abfa.artifact",
+   "byteLength": 26640,
+   "sha256": "dec5ca03816790bd94c1b43b5a575fa8dd757de0a31ca5c93ff6d0412e43abfa",
+   "mime": "application/json",
+   "truncated": false,
+   "redacted": false,
+   "createdAt": 1792542645812,
+   "retentionPolicy": "run-durable"
+  }
+ ],
+ "qaMatrix": {
+  "timestamp": "2026-10-21T00:30:45.807Z",
+  "overallScore": 94,
+  "passed": false,
+  "verdict": "FAIL",
+  "coverage": {
+   "measuredDimensions": 3,
+   "totalDimensions": 8,
+   "measuredViewports": 0,
+   "totalViewports": 3
+  },
+  "dimensions": {
+   "visualFidelity": {
+    "score": null,
+    "details": "Visual diff unmeasured (no baseline comparison supplied)"
+   },
+   "domSemantics": {
+    "score": 81,
+    "details": "Score 81/100: H1: 1, Alt gaps: 0, Name gaps: 0, Unlabeled: 0, Dup IDs: 0, JSON-LD: 1 block(s) [@type: BreadcrumbList]"
+   },
+   "cssModularity": {
+    "score": null,
+    "details": "CSS modularity unmeasured (this workflow runs no stylesheet-modularity scanner)"
+   },
+   "interactiveOperability": {
+    "score": null,
+    "details": "Interactive operability unmeasured (no interaction probe executed in this run)"
+   },
+   "haravanCompliance": {
+    "score": 100,
+    "details": "Liquid syntax clean per scanner static/browser checks (does not certify full Haravan OS 2.0 or runtime platform compliance)"
+   },
+   "assetIntegrity": {
+    "score": 100,
+    "details": "All assets and local font subsets resolved without broken links"
+   },
+   "responsiveParity": {
+    "score": null,
+    "details": "Responsive viewports unmeasured (no baseline comparison supplied)"
+   },
+   "performanceCWV": {
+    "score": null,
+    "details": "Core Web Vitals and performance unmeasured (no CWV telemetry measured in this run)"
+   }
+  },
+  "viewports": {
+   "desktop": {
+    "mismatchPercent": null,
+    "passed": false,
+    "measured": false,
+    "verdict": "INCONCLUSIVE"
+   },
+   "tablet": {
+    "mismatchPercent": null,
+    "passed": false,
+    "measured": false,
+    "verdict": "INCONCLUSIVE"
+   },
+   "mobile": {
+    "mismatchPercent": null,
+    "passed": false,
+    "measured": false,
+    "verdict": "INCONCLUSIVE"
+   }
+  }
+ },
+ "settleReceipt": {
+  "settleComplete": true,
+  "gates": {
+   "network": true,
+   "fonts": true,
+   "images": true,
+   "dom": true
+  },
+  "timingsMs": {
+   "network": 507,
+   "fonts": 3,
+   "images": 3,
+   "dom": 187,
+   "total": 700
+  },
+  "brokenImages": [],
+  "ignoreSelectors": [
+   "[data-countdown]",
+   "[data-timer]",
+   ".timer",
+   ".countdown",
+   "[data-live-visitor]",
+   ".live-views",
+   ".marquee"
+  ]
+ },
+ "trackerIsolation": {
+  "opened": true,
+  "released": true
+ },
+ "verification": "FAIL",
+ "execution": "COMPLETED",
+ "recovery": {
+  "attempted": 0,
+  "succeeded": 0
+ },
+ "evidenceCoverage": 1,
+ "profile": "build-strict",
+ "thresholdsSource": "default",
+ "coverage": {
+  "measured": 9,
+  "expected": 9
+ },
+ "coverageFloor": 1,
+ "measuredRules": [
+  "liquid",
+  "layout-overflow",
+  "assets",
+  "hs-gate",
+  "diagnostics",
+  "layout-integrity",
+  "responsive",
+  "dom-semantics",
+  "state-matrix",
+  "contrast-low",
+  "font-below-min",
+  "control-height-band",
+  "wrapped-label",
+  "icon-stroke-mismatch",
+  "overlay-fit",
+  "title-scale",
+  "input-height-band",
+  "tap-target-tiny",
+  "floating-widget-overlap",
+  "invisible-click-blocker",
+  "image-crop",
+  "image-low-res"
+ ],
+ "createdAt": 1792542645815,
+ "receipt": {
+  "written": true,
+  "path": "E:\\Work\\shopify\\.antifan\\qa-receipts\\1792542645817-run-632f2673-b1cf-4ab1-be59-72e00109262c-734d6b2d.json"
+ }
+}

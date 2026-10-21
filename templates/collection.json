@@ -29,15 +29,6 @@
             "items_limit": 10
           }
         },
-        "best_sellers": {
-          "type": "best_sellers",
-          "settings": {
-            "enabled": true,
-            "title": "Best Sellers",
-            "source": "current",
-            "limit": 10
-          }
-        },
         "description": {
           "type": "description",
           "settings": {}
@@ -46,7 +37,6 @@
       "block_order": [
         "collection_image",
         "subcollections",
-        "best_sellers",
         "description"
       ],
       "settings": {

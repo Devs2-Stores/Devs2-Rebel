@@ -100,7 +100,7 @@
 .collection-hero__heading {
   margin: 0;
   font-family: var(--font-heading-family);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-heading-weight);
   letter-spacing: var(--heading-tracking);
   line-height: var(--line-height-tight);
   color: var(--color-ink);
@@ -169,7 +169,7 @@
 .collection-template__title h1 {
   margin: 0;
   font-family: var(--font-heading-family);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-heading-weight);
   font-size: clamp(1.75rem, 3vw, 2.5rem);
   letter-spacing: var(--heading-tracking);
   line-height: var(--line-height-tight);
@@ -206,6 +206,10 @@
   padding-block-start: var(--space-2xl);
   margin-block-start: var(--space-xl);
   border-block-start: 1px solid var(--color-hairline);
+}
+:is(.collection-template__title, .collection-hero) + .collection-template__wrapper {
+  padding-block-start: 0;
+  border-block-start: 0;
 }
 .collection-template__wrapper--no-filter {
   grid-template-columns: 1fr;

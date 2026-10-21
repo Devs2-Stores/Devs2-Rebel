@@ -30,7 +30,7 @@ select:focus-visible,
 textarea:focus-visible,
 [role="button"]:focus-visible,
 [tabindex]:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; border-radius: var(--buttons-radius); }
-.section-heading { font-weight: var(--font-weight-bold); }
+.section-heading { font-weight: var(--font-heading-weight); }
 .section-heading .section-heading-link { color: var(--color-paragraph); transition: color var(--transition-base); cursor: pointer; }
 .section-heading .section-heading-link:hover { color: var(--color-ink); }
 .sticky { position: sticky; top: var(--header-height-sticky); }
@@ -149,7 +149,6 @@ table tbody tr:last-child { border-bottom: none; }
 table tbody tr:last-child td:first-child { border-bottom-left-radius: var(--text-boxes-radius); }
 table tbody tr:last-child td:last-child { border-bottom-right-radius: var(--text-boxes-radius); }
 table tbody tr td { padding: var(--space-lg) var(--space-2xl); color: var(--color-gray-dark); transition: color var(--transition-fast); }
-.sold_out { opacity: 0.25; background: var(--color-gray-light); color: rgb(var(--color-foreground)); }
 .swiper:not(.swiper-initialized) { overflow: hidden; }
 .swiper:not(.swiper-initialized) > .swiper-button-prev,
 .swiper:not(.swiper-initialized) > .swiper-button-next { display: none; }

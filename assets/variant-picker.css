@@ -78,14 +78,22 @@
   border-color: var(--color-hairline);
 }
 
-/* Cross-out unavailable — buttons */
+/* Sold-out variants */
+.variant-picker__item.sold_out .variant-picker__item-label {
+  color: var(--color-muted);
+  border-color: var(--color-hairline);
+}
+.variant-picker__item.sold_out .variant-picker__item-input:checked + .variant-picker__item-label:not(.variant-picker__item-label--image) {
+  border-color: var(--color-muted);
+  background: transparent;
+  color: var(--color-ink);
+  box-shadow: inset 0 0 0 1px var(--color-muted);
+}
+.variant-picker__item.sold_out .variant-picker__item-label--image {
+  opacity: 0.45;
+}
 [data-cross-out-unavailable] .variant-picker__item.sold_out .variant-picker__item-label {
   text-decoration: line-through;
-  opacity: var(--variant-unavailable-opacity, 0.45);
-}
-[data-cross-out-unavailable] .variant-picker__item.sold_out .variant-picker__item-input:checked + label {
-  text-decoration: line-through;
-  opacity: calc(var(--variant-unavailable-opacity, 0.45) + 0.25);
 }
 
 .variant-picker__item-label--image {

@@ -353,19 +353,20 @@ class ProductTemplate extends HTMLElement {
 		else this._pendingSlide = index;
 	}
 
-	metaUnavailableText() {
-		var strings = typeof themeConfig !== 'undefined' && themeConfig.strings && themeConfig.strings.variant;
-		return strings && strings.metaUnavailable ? strings.metaUnavailable : '';
+	setMetaValue(el, value) {
+		if (!el) return;
+		var text = value && value.trim() ? value.trim() : '';
+		el.textContent = text;
+		var row = el.closest('.product-template__meta-item');
+		if (row) row.hidden = text === '';
 	}
 
 	updateSku(sku) {
-		if (!this.skuEl) return;
-		this.skuEl.textContent = sku && sku.trim() ? sku.trim() : this.metaUnavailableText();
+		this.setMetaValue(this.skuEl, sku);
 	}
 
 	updateBarcode(barcode) {
-		if (!this.barcodeEl) return;
-		this.barcodeEl.textContent = barcode && barcode.trim() ? barcode.trim() : this.metaUnavailableText();
+		this.setMetaValue(this.barcodeEl, barcode);
 	}
 
 	updateAvailable(available) {
@@ -1032,8 +1033,8 @@ class ProductTemplateRelate extends HTMLElement {
 
 		(window.swiperReady || function(cb){ cb(); })(function(){
 		new Swiper(swiperEl, {
-			slidesPerView: 1.2,
-			spaceBetween: 16,
+			slidesPerView: 2.1,
+			spaceBetween: 12,
 			loop: slideCount > 4,
 			a11y: { slideRole: 'listitem' },
 			pagination: {
@@ -1188,8 +1189,8 @@ class ProductViewed extends HTMLElement {
 
 		(window.swiperReady || function(cb){ cb(); })(function(){
 		new Swiper(swiperEl, {
-			slidesPerView: 1.2,
-			spaceBetween: 16,
+			slidesPerView: 2.1,
+			spaceBetween: 12,
 			loop: slideCount > 4,
 			a11y: { slideRole: 'listitem' },
 			navigation: {

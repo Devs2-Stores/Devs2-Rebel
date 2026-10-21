@@ -198,14 +198,14 @@ quickview-modal .quickview-modal-panel .quickview-modal-content .quickview-modal
 }
 .quickview-product__media .quickview-product__thumbs .swiper-slide {
   cursor: pointer;
-  opacity: 0.55;
+  opacity: 0.8;
   transition: opacity var(--transition-fast), border-color var(--transition-fast);
   border-radius: var(--media-radius);
   border: 1px solid transparent;
   overflow: hidden;
   aspect-ratio: var(--aspect-ratio-product);
 }
-.quickview-product__media .quickview-product__thumbs .swiper-slide:hover { opacity: 0.85; }
+.quickview-product__media .quickview-product__thumbs .swiper-slide:hover { opacity: 1; }
 .quickview-product__media .quickview-product__thumbs .swiper-slide.swiper-slide-thumb-active {
   opacity: 1;
   border-color: var(--color-selected);

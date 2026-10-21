@@ -21,7 +21,7 @@
 .search-template__title {
   font-family: var(--font-heading-family);
   font-size: clamp(1.75rem, 3vw, 2.5rem);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-heading-weight);
   letter-spacing: var(--heading-tracking);
   line-height: var(--line-height-tight);
   color: var(--color-ink);

@@ -374,10 +374,12 @@
 .blog-sidebar__tags {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-xs);
+  gap: var(--space-sm);
 }
 .blog-sidebar__tag {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.5rem;
   padding: var(--space-2xs) var(--space-md);
   border-radius: var(--variant-pills-radius);
   border: var(--variant-pills-border);

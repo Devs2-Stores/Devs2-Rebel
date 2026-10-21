@@ -85,11 +85,14 @@ carry it; chrome stays out of the way.
   panel on the page background. Cards, tabs, accordions, testimonials,
   inputs and images carry no shadow by default. Group with space; separate
   with one hairline (`1px solid var(--color-hairline)`) when a divider is
-  needed. Fields, pills, media frames, content boxes, pop-ups and drawers take
-  their border and shadow from their family token, so the Theme settings
-  panels reach them; never hard-code a border or `--shadow-float` on them.
+  needed. Where two components meet, only one of them draws the divider (a
+  title rule followed by a toolbar rule reads as a double line). Fields,
+  pills, media frames, content boxes, pop-ups and drawers take their border
+  and shadow from their family token, so the Theme settings panels reach
+  them; never hard-code a border or `--shadow-float` on them.
 - **Cards.** The image runs flush; the text sits under it with
-  `0.875rem` above. Title medium weight in ink, price regular weight, sale
+  `0.875rem` above. Title medium weight in ink, shown in full (no line clamp),
+  price regular weight with each amount kept on one line, sale
   price in `--color-sale-price`. Card hover is an image zoom of 3% at most and
   an underline on the title, no lift. A lift happens only when the merchant
   picks Theme settings > Animations > Hover effect (`vertical-lift`,
@@ -111,7 +114,15 @@ carry it; chrome stays out of the way.
   carries meaning (dark testimonial band, oxblood newsletter). Alternating
   bone and white between ordinary sections is noise.
 - **Sliders.** A product slider starts on the page-width left edge and may
-  bleed only to the right. Arrows are quiet ink icons; dots are ink.
+  bleed only to the right. Arrows are quiet ink icons; dots are ink. Below
+  750 px a product carousel shows about two cards plus a peek
+  (`slidesPerView: 2.1`, with the matching pre-init `--swiper-cols-mobile`) and
+  relies on swipe: hide prev/next there, because arrows centred on a tall card
+  land on the quick-add button or the badges.
+- **Icons.** Outline icons use one stroke: `stroke-width="1.5"` on a 24 px
+  viewBox. Full-colour payment icons and filled brand glyphs are exempt.
+- **Page titles.** Every page H1 (collection title and hero, cart, search,
+  list pages) uses `--font-heading-weight`; do not hard-code a bold weight.
 
 ## Motion
 
@@ -131,7 +142,8 @@ carry it; chrome stays out of the way.
   query. Reveals that also open on `:focus-within` are not decorative.
 - Content a script fades in starts visible. Scope the hidden start state to
   the upgraded element (`my-element:defined .item`), so the content shows when
-  the script never runs.
+  the script never runs. A count-up renders its final value in Liquid; the
+  script resets it to 0 only when it can animate.
 
 ## Component rules
 
@@ -155,6 +167,9 @@ carry it; chrome stays out of the way.
   photo backdrops (`--color-primary`, `--color-{status}`, overlays).
 - Separators between inline items are CSS (`::before` on the next item), not
   `<li>|</li>` text, so screen readers do not count them as list items.
+- Empty data renders nothing on the storefront: a blank SKU or barcode hides
+  its row (never "N/A"), and a section whose product or blog is blank or empty
+  renders only its editor placeholder under `request.design_mode`.
 - Text over images reaches 4.5:1 (3:1 at 24 px+, or 18.66 px+ bold) against
   every backdrop pixel of the text box. Measured settings: the hero uses opaque
   white text, and the about hero uses a flat overlay of 55. The slideshow

@@ -19,3 +19,19 @@
   color: var(--color-ink);
   text-wrap: balance;
 }
+.product-template__relate-wrap {
+  --swiper-cols-mobile: 2.1;
+  --swiper-gap-mobile: 12px;
+  --swiper-cols-tablet: 3;
+  --swiper-gap-tablet: 20px;
+  --swiper-cols-laptop: 4;
+  --swiper-gap-laptop: 24px;
+  --swiper-cols-desktop: 4;
+  --swiper-gap-desktop: 24px;
+}
+@media (max-width: 749px) {
+  .product-template__relate-wrap > .swiper-button-prev,
+  .product-template__relate-wrap > .swiper-button-next {
+    display: none;
+  }
+}

@@ -35,7 +35,7 @@
             </div>
           {%- endif -%}
           <span class="section-stats__number heading-size-{{ section.settings.number_size }}">
-            <span class="section-stats__prefix">{{ block.settings.prefix }}</span><span data-stat-value>0</span><span class="section-stats__suffix">{{ block.settings.suffix }}</span>
+            <span class="section-stats__prefix">{{ block.settings.prefix }}</span><span data-stat-value>{{ block.settings.number }}</span><span class="section-stats__suffix">{{ block.settings.suffix }}</span>
           </span>
           {%- if block.settings.label != blank -%}
             <span class="section-stats__label">{{ block.settings.label }}</span>
@@ -75,6 +75,7 @@
   }
 
   if ('IntersectionObserver' in window) {
+    items.forEach(function(item) { item.querySelector('[data-stat-value]').textContent = '0'; });
     var obs = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) {
         if (e.isIntersecting) { animateCounters(); obs.disconnect(); }

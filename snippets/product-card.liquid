@@ -210,8 +210,12 @@
             {%- if product.compare_at_price_max > product.price_min -%}
               <del class="product-card__price-compare">{{ product.compare_at_price_max | money }}</del>
             {%- endif -%}
-            <span class="product-card__price-range">
-            {% if settings.currency_code_enabled %}{{ product.price_min | money_with_currency }} – {{ product.price_max | money_with_currency }}{% else %}{{ product.price_min | money }} – {{ product.price_max | money }}{% endif %}
+            <span class="product-card__price-range{% if product.compare_at_price_max > product.price_min %} product-card__price-sale--on-sale{% endif %}">
+            {%- if settings.currency_code_enabled -%}
+              <span class="product-card__price-amount">{{ product.price_min | money_with_currency }}</span> – <span class="product-card__price-amount">{{ product.price_max | money_with_currency }}</span>
+            {%- else -%}
+              <span class="product-card__price-amount">{{ product.price_min | money }}</span> – <span class="product-card__price-amount">{{ product.price_max | money }}</span>
+            {%- endif -%}
           </span>
         {%- else -%}
           {%- if compare > price -%}
@@ -417,6 +421,7 @@
 .product-card__price-contact,
 .product-card__price-sale { color: rgb(var(--color-price)); font-size: inherit; line-height: inherit; }
 .product-card__price-sale--on-sale { color: rgb(var(--color-sale-price)); }
+.product-card__price-amount { white-space: nowrap; }
 .product-card__price-compare {
   color: var(--color-gray);
   text-decoration: line-through;

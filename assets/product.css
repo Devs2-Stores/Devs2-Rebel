@@ -71,8 +71,6 @@
 .product-template__media-slider .product-template__media-image {
   width: 100%;
   height: auto;
-  aspect-ratio: var(--aspect-ratio-product);
-  object-fit: cover;
   display: block;
   transition: transform var(--transition-base);
 }
@@ -123,12 +121,12 @@
 }
 .product-template__media-thumbs .swiper-slide {
   cursor: pointer;
-  opacity: 0.55;
+  opacity: 0.8;
   transition: opacity var(--transition-fast);
   border-radius: var(--media-radius);
   overflow: hidden;
 }
-.product-template__media-thumbs .swiper-slide:hover { opacity: 0.85; }
+.product-template__media-thumbs .swiper-slide:hover { opacity: 1; }
 .product-template__media-thumbs .swiper-slide.swiper-slide-thumb-active { opacity: 1; }
 .product-template__media-thumbs .swiper-slide.swiper-slide-thumb-active .product-template__media-thumb-image {
   border-color: var(--color-selected);
@@ -185,7 +183,10 @@
   align-items: center;
   gap: var(--space-2xs);
 }
-.product-template__info .product-template__meta-item + .product-template__meta-item::before {
+.product-template__info .product-template__meta-item[hidden] {
+  display: none;
+}
+.product-template__info .product-template__meta-item:not([hidden]) ~ .product-template__meta-item::before {
   content: '';
   position: absolute;
   top: 0.2em;
@@ -297,6 +298,7 @@
   list-style: none;
   display: inline-flex;
   align-items: center;
+  min-height: 1.5rem;
   gap: var(--space-sm);
   font-size: var(--font-sm);
   font-weight: var(--font-weight-medium);
@@ -480,6 +482,7 @@
   background: transparent;
   border-color: var(--color-hairline);
   color: var(--color-muted);
+  opacity: 1;
   cursor: not-allowed;
 }
 .product-template__info button.button-primary .button-spinner {
@@ -1271,6 +1274,22 @@ size-guide-modal .size-guide-modal-panel .size-guide-modal-content ul li strong 
 }
 .product-viewed[hidden] { display: none; }
 .product-viewed__empty { display: none; }
+.product-viewed__wrap {
+  --swiper-cols-mobile: 2.1;
+  --swiper-gap-mobile: 12px;
+  --swiper-cols-tablet: 3;
+  --swiper-gap-tablet: 20px;
+  --swiper-cols-laptop: 4;
+  --swiper-gap-laptop: 24px;
+  --swiper-cols-desktop: 4;
+  --swiper-gap-desktop: 24px;
+}
+@media (max-width: 749px) {
+  .product-viewed__wrap > .swiper-button-prev,
+  .product-viewed__wrap > .swiper-button-next {
+    display: none;
+  }
+}
 .product-viewed__heading {
   margin: 0 0 var(--section-head-gap);
   font-family: var(--font-heading-family);

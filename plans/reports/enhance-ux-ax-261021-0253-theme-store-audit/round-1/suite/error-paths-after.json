@@ -1,0 +1,35 @@
+{
+ "seed": {
+  "status": 200,
+  "strings": "There was an error while updating your cart. Please try again.",
+  "loadError": "Could not load products. Please try again."
+ },
+ "drawer": {
+  "abort": "There was an error while updating your cart. Please try again.×",
+  "html500": "There was an error while updating your cart. Please try again.×",
+  "json422": "PROBE: only 1 left×",
+  "noteAbort": "Could not save note. Please try again.×",
+  "loadCart500": null
+ },
+ "cartPage": {
+  "hasTemplate": true,
+  "abort": "There was an error while updating your cart. Please try again.×",
+  "html500": "There was an error while updating your cart. Please try again.×",
+  "json422": "PROBE: only 1 left×",
+  "sectionAbort": "There was an error while updating your cart. Please try again.×"
+ },
+ "collection": {
+  "filterAbort": "Could not load products. Please try again.×",
+  "loadingCleared": true,
+  "loadMore500": {
+   "disabled": false,
+   "loading": false,
+   "toast": "Could not load products. Please try again.×"
+  },
+  "loadMoreOk": {
+   "before": 20,
+   "after": 22,
+   "toast": null
+  }
+ }
+}

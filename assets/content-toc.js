@@ -128,29 +128,21 @@
       var self = this;
       if (!this.headings.length) return;
 
-      if (!('IntersectionObserver' in window)) {
-        this._scrollFallback = ThemeUtils.debounce(function() {
+      var ticking = false;
+      this._scrollFallback = function() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+          ticking = false;
           var active = self.headings[0];
           self.headings.forEach(function(heading) {
             if (heading.getBoundingClientRect().top <= 140) active = heading;
           });
           self.setActiveHeading(active.id);
-        }, 100);
-        window.addEventListener('scroll', this._scrollFallback, { passive: true });
-        this._scrollFallback();
-        return;
-      }
-
-      this._headingObserver = new IntersectionObserver(function() {
-        var active = self.headings[0];
-        self.headings.forEach(function(heading) {
-          if (heading.getBoundingClientRect().top <= 140) active = heading;
         });
-        self.setActiveHeading(active.id);
-      }, { rootMargin: '-140px 0px 0px 0px', threshold: 0 });
-
-      this.headings.forEach(function(heading) { self._headingObserver.observe(heading); });
-      this.setActiveHeading(this.headings[0].id);
+      };
+      window.addEventListener('scroll', this._scrollFallback, { passive: true });
+      this._scrollFallback();
     }
 
     setupCollapse() {
@@ -167,9 +159,7 @@
     }
 
     disconnectObservers() {
-      if (this._headingObserver) this._headingObserver.disconnect();
       if (this._scrollFallback) window.removeEventListener('scroll', this._scrollFallback);
-      this._headingObserver = null;
       this._scrollFallback = null;
     }
 

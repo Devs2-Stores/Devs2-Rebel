@@ -3,7 +3,7 @@
 Use this checklist for every storefront UI change and every UX/AX review. Read
 `DESIGN.md` for the direction and `AGENTS.md` for the mandatory code gates. The
 latest full review is
-`plans/reports/enhance-ux-ax-261010-0634-storefront.md`.
+`plans/reports/enhance-ux-ax-261021-0253-theme-store-audit.md`.
 
 ## Evidence rule
 
@@ -11,6 +11,15 @@ Every UI change ships with screenshots of each changed page at 1440x900,
 768x1024 and 375x812, taken from the running theme (`shopify theme dev` or a
 `?preview_theme_id=` preview). A claim without a screenshot, a measured value
 or command output is not evidence.
+
+A full-page screenshot is one frame with the page at scroll 0, so it cannot
+show sticky columns or scroll regions. Before reporting "empty column" or
+"cut-off panel", scroll the live page and measure the element's position and
+`scrollHeight` against `clientHeight`. Scroll-driven state (TOC active item,
+sticky bars) must also hold after an instant jump to the bottom and back to
+the top, not only after a smooth scroll. Store data (page content, comments,
+menus, inventory, product imagery) is a content gap for the demo store, not a
+theme defect.
 
 ## Rubric (score 0-3, evidence per area)
 

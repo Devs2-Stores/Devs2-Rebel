@@ -8,20 +8,19 @@
 {%- liquid
   assign selected_variant = product.selected_or_first_available_variant | default: product.variants.first
   assign available = product.selected_or_first_available_variant.available
-  assign meta_unavailable = 'products.product.meta_unavailable' | t
 -%}
 
 <ul class="product-template__meta" {{ block.shopify_attributes }}>
   {%- if block.settings.show_sku -%}
-    <li class="product-template__meta-item">
+    <li class="product-template__meta-item"{% if selected_variant.sku == blank %} hidden{% endif %}>
       <span class="product-template__meta-label">{{ 'products.product.sku' | t }}:</span>
-      <strong data-product-sku>{{- selected_variant.sku | default: meta_unavailable -}}</strong>
+      <strong data-product-sku>{{- selected_variant.sku -}}</strong>
     </li>
   {%- endif -%}
   {%- if block.settings.show_barcode -%}
-    <li class="product-template__meta-item">
+    <li class="product-template__meta-item"{% if selected_variant.barcode == blank %} hidden{% endif %}>
       <span class="product-template__meta-label">{{ 'products.product.barcode' | t }}:</span>
-      <strong data-product-barcode>{{- selected_variant.barcode | default: meta_unavailable -}}</strong>
+      <strong data-product-barcode>{{- selected_variant.barcode -}}</strong>
     </li>
   {%- endif -%}
   {%- if block.settings.show_vendor and product.vendor != blank -%}
