@@ -1,0 +1,23 @@
+{%- doc -%}
+  Text row (with optional fly-out of third-level links) for a mega menu dropdown.
+
+  @param {object} link - Second-level menu link
+{%- enddoc -%}
+
+{%- assign has_level3 = false -%}
+{%- if link.links.size > 0 -%}{%- assign has_level3 = true -%}{%- endif -%}
+<li{% if has_level3 %} class="megamenu__simple-parent"{% endif %}>
+  <a href="{{ link.url }}" title="{{ link.title | escape }}" class="megamenu__simple-link">
+    <span>{{ link.title | escape }}</span>
+    {%- if has_level3 -%}{%- render 'icon', name: 'chevron-right', size: '13' -%}{%- endif -%}
+  </a>
+  {%- if has_level3 -%}
+  <ul class="megamenu__simple-sub">
+    {%- for link_3 in link.links -%}
+    <li>
+      <a href="{{ link_3.url }}" title="{{ link_3.title | escape }}" class="megamenu__simple-sublink">{{ link_3.title | escape }}</a>
+    </li>
+    {%- endfor -%}
+  </ul>
+  {%- endif -%}
+</li>

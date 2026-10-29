@@ -2,12 +2,15 @@
   @description Product card component with image, title, price, badges and quick actions
   @param {product} product - Product object (required)
   @param {boolean} [show_vendor] - Show vendor/brand. Default: false
-  @param {boolean} [show_secondary_image] - Show the second image on hover. Default: true
-  @param {boolean} [show_quickview] - Show the quick view button. Default: true
-  @param {boolean} [show_add_to_cart] - Show the add to cart button. Default: true
+  @param {boolean} [show_secondary_image] - Show the second image on hover. Default: settings.card_hover_image_enable
+  @param {boolean} [show_quickview] - Show the quick view button. Default: settings.card_quick_view_enable
+  @param {boolean} [show_add_to_cart] - Show the add to cart button. Default: settings.card_add_button_enable
   @param {string} [lazyload] - Loading strategy: lazy or eager. Default: 'lazy'
   @param {string} [fetchpriority] - Fetch priority: auto or high. Default: 'auto'
   @param {string} [image_ratio] - Image ratio: adapt, portrait, square, landscape. Default: 'portrait'
+  @param {string} [sizes] - Full sizes attribute for the card images. Overrides columns. Default: derived from columns or '(max-width: 749px) 50vw, 25vw'
+  @param {number} [columns] - Desktop column count of the grid the card sits in; used to build sizes
+  @param {number} [columns_mobile] - Mobile column count of the grid the card sits in; used to build sizes. Default: 2
   @example {% render 'product-card', product: product, show_vendor: true %}
 {% enddoc %}
 
@@ -21,12 +24,33 @@
   endif
   if show_secondary_image == nil
     assign show_secondary_image = true
+    if settings.card_hover_image_enable == false
+      assign show_secondary_image = false
+    endif
   endif
   if show_quickview == nil
     assign show_quickview = true
+    if settings.card_quick_view_enable == false
+      assign show_quickview = false
+    endif
   endif
   if show_add_to_cart == nil
     assign show_add_to_cart = true
+    if settings.card_add_button_enable == false
+      assign show_add_to_cart = false
+    endif
+  endif
+
+  assign card_sizes = sizes
+  if card_sizes == blank
+    assign card_sizes = '(max-width: 749px) 50vw, 25vw'
+    assign columns_count = columns | plus: 0
+    if columns_count > 0
+      assign columns_mobile_count = columns_mobile | default: 2 | plus: 0
+      assign vw_mobile = 100.0 | divided_by: columns_mobile_count | round: 1
+      assign vw_desktop = 100.0 | divided_by: columns_count | round: 1
+      assign card_sizes = '(max-width: 749px) ' | append: vw_mobile | append: 'vw, ' | append: vw_desktop | append: 'vw'
+    endif
   endif
   assign lazyload = lazyload | default: 'lazy'
   assign fetchpriority = fetchpriority | default: 'auto'
@@ -44,6 +68,7 @@
   assign t_view_product = 'products.product_card.view_product' | t
   assign t_quick_view = 'products.product_card.quick_view' | t
   assign t_add_to_cart = 'products.product_card.add_to_cart' | t
+  assign t_choose_options = 'products.product.choose_options' | t
   assign t_sold_out = settings.product_soldout_text | strip
   if t_sold_out == blank
     assign t_sold_out = 'products.product_card.sold_out' | t
@@ -53,8 +78,8 @@
   if t_contact == blank
     assign t_contact = 'products.product_card.contact_price' | t
   endif
-  assign card_style = settings.card_style | default: 'standard'
-  assign badge_position = settings.badge_position | default: 'bottom left' | replace: ' ', '-'
+  assign card_style = settings.product_card_style | default: 'standard'
+  assign badge_position = settings.badge_anchor | default: 'bottom left' | replace: ' ', '-'
   assign is_new = false
   if product.tags contains 'new' or product.tags contains 'New'
     assign is_new = true
@@ -63,7 +88,7 @@
 
 {%- if product and product != empty -%}
 <product-card class="product-card product-card--{{ card_style }}">
-  <article class="product-card__wrapper{% if card_style == 'card' and settings.card_color_scheme != blank %} color-{{ settings.card_color_scheme }}{% endif %}">
+  <article class="product-card__wrapper{% if card_style == 'card' and settings.product_card_scheme != blank %} color-{{ settings.product_card_scheme }}{% endif %}">
     {%- comment %} ── Media ─────────────────────── {% endcomment -%}
     <div class="product-card__media">
       {%- capture media_badges -%}
@@ -80,7 +105,7 @@
               | image_url: width: 800
               | image_tag:
                 widths: '300, 400, 600, 800',
-                sizes: '(max-width: 749px) 50vw, 25vw',
+                sizes: card_sizes,
                 alt: primary_image_alt,
                 loading: lazyload,
                 fetchpriority: fetchpriority,
@@ -95,7 +120,7 @@
                 | image_url: width: 800
                 | image_tag:
                   widths: '300, 400, 600, 800',
-                  sizes: '(max-width: 749px) 50vw, 25vw',
+                  sizes: card_sizes,
                   alt: secondary_alt,
                   loading: 'lazy',
                   decoding: 'async',
@@ -116,13 +141,13 @@
         {%- unless product.available and is_new == false and discount_percentage == 0 -%}
           <div class="product-card__badges product-card__badges--{{ badge_position }}">
             {%- unless product.available -%}
-              <span class="product-card__badge product-card__badge--soldout{% if settings.sold_out_badge_color_scheme != blank %} color-{{ settings.sold_out_badge_color_scheme }}{% endif %}">{{ t_sold_out | escape }}</span>
+              <span class="product-card__badge product-card__badge--soldout{% if settings.badge_sold_out_scheme != blank %} color-{{ settings.badge_sold_out_scheme }}{% endif %}">{{ t_sold_out | escape }}</span>
             {%- endunless -%}
             {%- if is_new and product.available -%}
               <span class="product-card__badge product-card__badge--new">{{ t_new }}</span>
             {%- endif -%}
             {%- if discount_percentage > 0 and product.available -%}
-              <span class="product-card__badge product-card__badge--discount{% if settings.sale_badge_color_scheme != blank %} color-{{ settings.sale_badge_color_scheme }}{% endif %}">-{{ discount_percentage }}%</span>
+              <span class="product-card__badge product-card__badge--discount{% if settings.badge_sale_scheme != blank %} color-{{ settings.badge_sale_scheme }}{% endif %}">-{{ discount_percentage }}%</span>
             {%- endif -%}
           </div>
         {%- endunless -%}
@@ -136,13 +161,27 @@
       {%- endif -%}
 
       {%- if show_add_to_cart -%}
-        <form class="product-card__add-form" method="POST">
-          <input type="hidden" name="id" value="{{ variant.id }}">
-          <input type="hidden" name="quantity" value="1">
-          <button type="submit" formaction="{{ routes.cart_add_url }}" class="product-card__add-btn" aria-label="{{ t_add_to_cart }} {{ product.title | escape }}" title="{{ t_add_to_cart }}" {%- unless product.available -%}disabled{%- endunless -%}>
-            {%- render 'icon', name: 'cart' -%}
-          </button>
-        </form>
+        {%- if product.has_only_default_variant -%}
+          <form class="product-card__add-form" method="POST">
+            <input type="hidden" name="id" value="{{ variant.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit" formaction="{{ routes.cart_add_url }}" class="product-card__add-btn" aria-label="{{ t_add_to_cart }} {{ product.title | escape }}" title="{{ t_add_to_cart }}"{% unless product.available %} disabled{% endunless %}>
+              {%- render 'icon', name: 'cart' -%}
+            </button>
+          </form>
+        {%- elsif show_quickview -%}
+          <div class="product-card__add-form">
+            <button type="button" class="product-card__add-btn" data-action="open-quickview" data-product-handle="{{ product.handle }}" aria-label="{{ t_choose_options }} {{ product.title | escape }}" title="{{ t_choose_options }}"{% unless product.available %} disabled{% endunless %}>
+              {%- render 'icon', name: 'cart' -%}
+            </button>
+          </div>
+        {%- else -%}
+          <div class="product-card__add-form">
+            <a class="product-card__add-btn" href="{{ product.url }}" aria-label="{{ t_choose_options }} {{ product.title | escape }}" title="{{ t_choose_options }}">
+              {%- render 'icon', name: 'cart' -%}
+            </a>
+          </div>
+        {%- endif -%}
       {%- endif -%}
 
     </div>
@@ -208,10 +247,10 @@
           <span class="product-card__price-contact">{{ t_contact | escape }}</span>
           {%- elsif product.price_varies -%}
             {%- if product.compare_at_price > product.price -%}
-              <del class="product-card__price-compare">{%- if settings.currency_code_enabled -%}{{ product.compare_at_price | money_with_currency }}{%- else -%}{{ product.compare_at_price | money }}{%- endif -%}</del>
+              <del class="product-card__price-compare">{%- if settings.price_currency_code_enabled -%}{{ product.compare_at_price | money_with_currency }}{%- else -%}{{ product.compare_at_price | money }}{%- endif -%}</del>
             {%- endif -%}
             <span class="product-card__price-range{% if product.compare_at_price > product.price %} product-card__price-sale--on-sale{% endif %}">
-            {%- if settings.currency_code_enabled -%}
+            {%- if settings.price_currency_code_enabled -%}
               <span class="product-card__price-amount">{{ product.price_min | money_with_currency }}</span> – <span class="product-card__price-amount">{{ product.price_max | money_with_currency }}</span>
             {%- else -%}
               <span class="product-card__price-amount">{{ product.price_min | money }}</span> – <span class="product-card__price-amount">{{ product.price_max | money }}</span>
@@ -222,7 +261,7 @@
             <del class="product-card__price-compare">{{ compare | money }}</del>
           {%- endif -%}
           <span class="product-card__price-sale{% if compare > price %} product-card__price-sale--on-sale{% endif %}">
-            {%- if settings.currency_code_enabled -%}{{ price | money_with_currency }}{%- else -%}{{ price | money }}{%- endif -%}
+            {%- if settings.price_currency_code_enabled -%}{{ price | money_with_currency }}{%- else -%}{{ price | money }}{%- endif -%}
           </span>
           {%- if product.selected_or_first_available_variant.unit_price -%}
             <span class="product-card__unit-price">

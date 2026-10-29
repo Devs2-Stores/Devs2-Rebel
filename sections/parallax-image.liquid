@@ -75,6 +75,9 @@
 {% schema %}
 {
   "name": "t:sections.parallax_image.name",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "tag": "section",
   "class": "section-parallax-wrapper",
   "settings": [
@@ -310,7 +313,7 @@
   "presets": [
     {
       "name": "t:sections.parallax_image.presets.parallax_image.name",
-      "category": "Image"
+      "category": "t:categories.banners"
     }
   ]
 }

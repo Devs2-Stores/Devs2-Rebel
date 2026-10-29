@@ -107,6 +107,9 @@
 {% schema %}
 {
   "name": "t:sections.gallery.name",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "tag": "section",
   "class": "section-gallery-wrapper",
   "settings": [
@@ -303,7 +306,7 @@
   "presets": [
     {
       "name": "t:sections.gallery.presets.gallery.name",
-      "category": "Image",
+      "category": "t:categories.media",
       "blocks": [
         {
           "type": "image"

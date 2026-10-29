@@ -1,4 +1,7 @@
 {{ 'section-featured-collection.css' | asset_url | stylesheet_tag }}
+{%- if section.settings.layout == 'editorial' -%}
+  {{ 'section-list-layouts.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
 {%- comment %}
   Section: Featured Collection
   Shows products from one collection as a grid or slider.
@@ -84,12 +87,17 @@
           </button>
         </div>
       {%- else -%}
-        <div class="section-featured-collection__grid">
+        <div
+          class="section-featured-collection__grid"
+          {%- if layout == 'editorial' %} data-list-layout="editorial"{% endif %}
+        >
           {%- for product in collection.products limit: products_to_show -%}
             {%- render 'product-card',
               product: product,
               show_vendor: show_vendor,
               show_secondary_image: show_secondary_image,
+              columns: columns_desktop,
+              columns_mobile: columns_mobile,
               image_ratio: image_ratio
             -%}
           {%- endfor -%}
@@ -153,6 +161,9 @@
 {% schema %}
 {
   "name": "t:sections.featured_collection.name",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "tag": "section",
   "class": "section-featured-collection-wrapper",
   "settings": [
@@ -274,6 +285,10 @@
         {
           "value": "slider",
           "label": "t:sections.featured_collection.settings.layout.options.slider"
+        },
+        {
+          "value": "editorial",
+          "label": "t:sections.featured_collection.settings.layout.options.editorial"
         }
       ],
       "default": "grid"
@@ -403,7 +418,7 @@
   "presets": [
     {
       "name": "t:sections.featured_collection.presets.featured_collection.name",
-      "category": "Collection"
+      "category": "t:categories.collections"
     }
   ]
 }

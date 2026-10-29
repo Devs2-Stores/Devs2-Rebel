@@ -5,6 +5,35 @@
     "footer": {
       "type": "footer",
       "blocks": {
+        "logo": {
+          "type": "logo",
+          "settings": {
+            "placement": "brand"
+          }
+        },
+        "brand": {
+          "type": "brand",
+          "settings": {
+            "placement": "brand",
+            "show_image": true,
+            "headline": "",
+            "description": "<p>Tailored streetwear and outerwear, cut to be worn every day.</p>"
+          }
+        },
+        "social": {
+          "type": "social",
+          "settings": {
+            "placement": "brand",
+            "heading": ""
+          }
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "heading": "Stay in the know",
+            "show_form": true
+          }
+        },
         "menu-shop": {
           "type": "menu",
           "settings": {
@@ -12,39 +41,29 @@
             "menu": "footer"
           }
         },
-        "menu-help": {
+        "menu-explore": {
           "type": "menu",
           "settings": {
-            "heading": "Help",
-            "menu": ""
+            "heading": "Explore",
+            "menu": "main-menu"
           }
         },
-        "menu-company": {
-          "type": "menu",
+        "payment": {
+          "type": "payment",
           "settings": {
-            "heading": "Company",
-            "menu": ""
-          }
-        },
-        "menu-legal": {
-          "type": "menu",
-          "settings": {
-            "heading": "Legal",
-            "menu": ""
+            "placement": "bottom"
           }
         }
       },
-      "block_order": ["menu-shop", "menu-help", "menu-company", "menu-legal"],
+      "block_order": ["logo", "brand", "social", "newsletter", "menu-shop", "menu-explore", "payment"],
       "settings": {
         "color_scheme": "scheme-1",
-        "description": "<p>Tailored streetwear and outerwear, cut to be worn every day.</p>",
-        "newsletter_title": "Stay in the know",
         "address": "",
         "email": "",
         "phone": "",
         "show_country_selector": true,
         "show_language_selector": true,
-        "show_payment_icons": true,
+        "show_policies": true,
         "show_follow_on_shop": true
       }
     }

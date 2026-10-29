@@ -23,8 +23,17 @@
       "type": "header",
       "settings": {
         "color_scheme": "scheme-1",
+        "logo_position": "left",
+        "menu_placement": "inline",
         "menu": "main-menu",
-        "sticky_enable": true
+        "sticky_mode": "always",
+        "show_country_selector": false,
+        "show_language_selector": false,
+        "transparent_home": true,
+        "transparent_collection": false,
+        "transparent_product": false,
+        "transparent_text_color": "#FFFFFF",
+        "transparent_scrim_color": "#000000"
       }
     }
   },

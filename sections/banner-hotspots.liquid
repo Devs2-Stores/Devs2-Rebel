@@ -205,6 +205,9 @@
 {% schema %}
 {
   "name": "t:sections.banner_hotspots.name",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "tag": "section",
   "class": "section-hotspot-wrapper",
   "settings": [
@@ -413,7 +416,7 @@
   "presets": [
     {
       "name": "t:sections.banner_hotspots.presets.banner_hotspots.name",
-      "category": "Image",
+      "category": "t:categories.banners",
       "blocks": [
         {
           "type": "hotspot",

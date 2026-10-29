@@ -21,6 +21,11 @@ the top, not only after a smooth scroll. Store data (page content, comments,
 menus, inventory, product imagery) is a content gap for the demo store, not a
 theme defect.
 
+With Reveal sections on scroll on (the demo preset), a capture that never
+scrolls shows every section below the first screen at opacity 0. Scroll the
+page to the bottom and back before a full-page capture, and never report such
+a blank band as missing content until you have done that. Print is exempt.
+
 ## Rubric (score 0-3, evidence per area)
 
 | Area | Check |

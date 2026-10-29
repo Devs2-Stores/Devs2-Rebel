@@ -1,0 +1,42 @@
+{% doc %}
+  @description Sort <select> shared by the collection toolbar and the mobile filter panels
+  @param {object} results - Collection or Search object
+  @param {string} select_id - DOM id for the select
+  @param {string} [allowed_sort_options] - Comma-separated list of allowed sort values; blank allows all
+  @example {%- render 'collection-sort-select', results: collection, select_id: 'SortBy' -%}
+{% enddoc %}
+
+{%- liquid
+  assign allowed_list = allowed_sort_options | split: ','
+  assign current_sort = results.sort_by | default: results.default_sort_by
+  assign t_sort_by = 'products.facets.sort_by_label' | t
+-%}
+<div class="collection-sort__select-wrapper">
+  <select name="sort_by" id="{{ select_id }}" class="collection-sort__select" aria-label="{{ t_sort_by }}">
+    {%- for option in results.sort_options -%}
+      {%- liquid
+        assign show_option = false
+        if allowed_sort_options == blank
+          assign show_option = true
+        else
+          for allowed in allowed_list
+            assign allowed_trimmed = allowed | strip
+            if option.value == allowed_trimmed
+              assign show_option = true
+              break
+            endif
+          endfor
+        endif
+      -%}
+      {%- if show_option -%}
+        <option
+          value="{{ option.value | escape }}"
+          {% if option.value == current_sort %}selected{% endif %}
+        >
+          {{ option.name | escape }}
+        </option>
+      {%- endif -%}
+    {%- endfor -%}
+  </select>
+  <svg class="collection-sort__icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+</div>

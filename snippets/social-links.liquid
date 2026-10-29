@@ -1,0 +1,48 @@
+{% doc %}
+  Renders every profile entered in Theme settings > Social media. This is the only place that knows the list of networks; the footer block and the contact page both render it.
+
+  @param {string} [list_class] - Block class of the list. Items and links use `list_class__item`, `list_class__link` and `list_class__link--network`. Defaults to `social-links`.
+
+  @example
+  {% render 'social-links', list_class: 'footer-social' %}
+{% enddoc %}
+{%- liquid
+  assign list_class = list_class | default: 'social-links'
+  assign networks = 'facebook,instagram,youtube,tiktok,pinterest,twitter,threads,linkedin,bluesky,snapchat,tumblr,vimeo,other' | split: ','
+-%}
+{%- capture items -%}
+  {%- for network_id in networks -%}
+    {%- liquid
+      assign setting_key = 'social_' | append: network_id | append: '_profile'
+      assign network_url = settings[setting_key] | strip
+      if network_id == 'other'
+        assign network_name = network_url | split: '//' | last | remove: 'www.' | split: '/' | first
+        assign icon_name = 'link'
+      else
+        assign label_key = 'general.social.links.' | append: network_id
+        assign network_name = label_key | t
+        assign icon_name = network_id
+      endif
+    -%}
+    {%- if network_url != blank -%}
+      <li class="{{ list_class }}__item">
+        <a
+          href="{{ network_url }}"
+          class="{{ list_class }}__link {{ list_class }}__link--{{ network_id }}"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="{{ 'accessibility.follow_on' | t: platform: network_name }}"
+          aria-describedby="a11y-new-window-message"
+          title="{{ 'general.social.follow_on' | t: platform: network_name }}"
+        >
+          {%- render 'icon', name: icon_name -%}
+        </a>
+      </li>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- if items != blank -%}
+  <ul class="{{ list_class }}" role="list">
+    {{- items -}}
+  </ul>
+{%- endif -%}

@@ -1,4 +1,7 @@
 {{ 'section-blog-posts.css' | asset_url | stylesheet_tag }}
+{%- if section.settings.layout == 'carousel' or section.settings.layout == 'editorial' -%}
+  {{ 'section-list-layouts.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
 {%- comment %}
   Section: Related Blog Posts
 {% endcomment -%}
@@ -7,6 +10,9 @@
   assign blog = section.settings.blog
   assign posts_to_show = section.settings.posts_to_show
   assign columns_d = section.settings.columns_desktop
+  assign layout = section.settings.layout | default: 'grid'
+  assign list_count = blog.articles.size | at_most: posts_to_show
+  assign list_cols_d = columns_d | at_most: list_count | at_least: 1
 -%}
 
 {%- liquid
@@ -49,7 +55,10 @@
     {%- endif -%}
 
     {%- if blog_has_posts -%}
-      <div class="section-blog-posts__grid">
+      <div
+        class="section-blog-posts__grid"
+        {%- if layout != 'grid' %} data-list-layout="{{ layout }}" style="--list-cols-d: {{ list_cols_d }}; --list-cols-m: 1; --list-ed-cols-m: 1;"{% endif %}
+      >
         {%- for article in blog.articles limit: posts_to_show -%}
           <article class="section-blog-posts__card">
             {%- if article.image -%}
@@ -94,6 +103,9 @@
 {% schema %}
 {
   "name": "t:sections.blog_posts.name",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "tag": "section",
   "class": "section-blog-posts-wrapper",
   "settings": [
@@ -188,6 +200,26 @@
       "content": "t:sections.blog_posts.settings.header__layout.content"
     },
     {
+      "type": "select",
+      "id": "layout",
+      "label": "t:sections.blog_posts.settings.layout.label",
+      "options": [
+        {
+          "value": "grid",
+          "label": "t:sections.blog_posts.settings.layout.options.grid"
+        },
+        {
+          "value": "carousel",
+          "label": "t:sections.blog_posts.settings.layout.options.carousel"
+        },
+        {
+          "value": "editorial",
+          "label": "t:sections.blog_posts.settings.layout.options.editorial"
+        }
+      ],
+      "default": "grid"
+    },
+    {
       "type": "range",
       "id": "posts_to_show",
       "min": 2,
@@ -275,7 +307,7 @@
   "presets": [
     {
       "name": "t:sections.blog_posts.presets.blog_posts.name",
-      "category": "Blog"
+      "category": "t:categories.blog"
     }
   ]
 }

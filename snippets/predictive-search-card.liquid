@@ -1,0 +1,43 @@
+{%- doc -%}
+  Product card for the search modal's idle state (recommended and recently viewed products).
+
+  @param {object} product - Product to render
+{%- enddoc -%}
+
+<li class="predictive-search__item predictive-search__item--card{% unless product.available %} predictive-search__item--sold-out{% endunless %}" role="option">
+  <a href="{{ product.url }}" class="predictive-search__link predictive-search__link--product predictive-search__link--card">
+    <span class="predictive-search__card-media">
+      {%- if product.featured_image != blank -%}
+        {%- assign card_alt = product.featured_image.alt | default: product.title -%}
+        {{ product.featured_image | image_url: width: 360 | image_tag:
+          loading: 'lazy',
+          widths: '180, 270, 360',
+          sizes: '(min-width: 750px) 15rem, 40vw',
+          alt: card_alt,
+          class: 'predictive-search__img'
+        }}
+      {%- endif -%}
+    </span>
+    <span class="predictive-search__product-info">
+      <span class="predictive-search__product-title">{{ product.title | escape }}</span>
+      {%- unless product.available -%}
+      <span class="predictive-search__product-status">{{ 'products.product.sold_out' | t }}</span>
+      {%- endunless -%}
+      {%- if settings.search_suggest_vendor_enabled and product.vendor != blank -%}
+      <span class="predictive-search__product-vendor">{{ product.vendor }}</span>
+      {%- endif -%}
+      {%- if settings.search_suggest_price_enabled -%}
+      <span class="predictive-search__product-price{% if product.compare_at_price > product.price %} predictive-search__product-price--sale{% endif %}">
+        {%- if product.price == 0 -%}
+          {{ 'products.product.price.contact' | t }}
+        {%- else -%}
+          {{ product.price | money }}
+          {%- if product.compare_at_price > product.price -%}
+          <del class="predictive-search__product-compare-price">{{ product.compare_at_price | money }}</del>
+          {%- endif -%}
+        {%- endif -%}
+      </span>
+      {%- endif -%}
+    </span>
+  </a>
+</li>

@@ -8,6 +8,7 @@
   assign default_view = section.settings.default_view | default: 'grid'
   assign pagination_type = section.settings.pagination_type | default: 'pagination'
   assign filter_layout = section.settings.filter_layout | default: 'sidebar'
+  assign density_toggle = section.settings.mobile_density_toggle | default: false
   assign is_all_collection = false
   if collection.handle == 'all' or collection.url contains '/collections/all'
     assign is_all_collection = true
@@ -55,6 +56,8 @@
   id="CollectionMain"
   data-collection-url="{{ collection.url }}"
   data-default-view="{{ default_view }}"
+  data-default-columns-mobile="{{ columns_mobile }}"
+  {% if density_toggle %}data-density-toggle{% endif %}
   style="--columns-desktop: {{ columns_desktop }}; --columns-mobile: {{ columns_mobile }};"
 >
   <div class="page-width">
@@ -173,9 +176,49 @@
       {%- endcase -%}
     {%- endfor -%}
 
+    {%- liquid
+      assign active_filter_count = 0
+      for filter in collection.filters
+        if filter.type == 'price_range'
+          if filter.min_value.value != null or filter.max_value.value != null
+            assign active_filter_count = active_filter_count | plus: 1
+          endif
+        else
+          assign active_filter_count = active_filter_count | plus: filter.active_values.size
+        endif
+      endfor
+
+      assign allowed_sort_options = ''
+      if section.settings.sort_best_selling
+        assign allowed_sort_options = allowed_sort_options | append: 'best-selling,'
+      endif
+      if section.settings.sort_title_asc
+        assign allowed_sort_options = allowed_sort_options | append: 'title-ascending,'
+      endif
+      if section.settings.sort_title_desc
+        assign allowed_sort_options = allowed_sort_options | append: 'title-descending,'
+      endif
+      if section.settings.sort_price_asc
+        assign allowed_sort_options = allowed_sort_options | append: 'price-ascending,'
+      endif
+      if section.settings.sort_price_desc
+        assign allowed_sort_options = allowed_sort_options | append: 'price-descending,'
+      endif
+      if section.settings.sort_created_desc
+        assign allowed_sort_options = allowed_sort_options | append: 'created-descending,'
+      endif
+      if section.settings.sort_created_asc
+        assign allowed_sort_options = allowed_sort_options | append: 'created-ascending,'
+      endif
+      if section.settings.sort_manual
+        assign allowed_sort_options = allowed_sort_options | append: 'manual,'
+      endif
+      assign allowed_sort_options = allowed_sort_options | remove_last: ','
+    -%}
+
     {%- comment %} ── Products grid + filter sidebar ── {% endcomment -%}
       <facet-filters
-        class="collection-template__wrapper{% unless enable_filtering %} collection-template__wrapper--no-filter{% endunless %}{% if filter_layout == 'modal' and enable_filtering %} collection-template__wrapper--no-filter{% endif %}"
+        class="collection-template__wrapper{% unless enable_filtering %} collection-template__wrapper--no-filter{% endunless %}{% if filter_layout == 'modal' and enable_filtering %} collection-template__wrapper--no-filter{% endif %}{% if filter_layout == 'horizontal' and enable_filtering %} collection-template__wrapper--horizontal{% endif %}"
         data-section-id="{{ section.id }}"
         data-collection-url="{{ collection.url }}"
         data-pagination-type="{{ pagination_type }}"
@@ -185,64 +228,12 @@
           enable_filtering: enable_filtering,
           filter_layout: filter_layout,
           collection: collection,
-          price_filter_style: section.settings.price_filter_style
+          price_filter_style: section.settings.price_filter_style,
+          enable_sorting: enable_sorting,
+          allowed_sort_options: allowed_sort_options
         -%}
 
         <div class="collection-template__products-container" id="CollectionProductGrid">
-          {%- assign active_filter_count = 0 -%}
-          {%- for filter in collection.filters -%}
-            {%- if filter.type == 'price_range' -%}
-              {%- if filter.min_value.value != null or filter.max_value.value != null -%}
-                {%- assign active_filter_count = active_filter_count | plus: 1 -%}
-              {%- endif -%}
-            {%- else -%}
-              {%- assign active_filter_count = active_filter_count | plus: filter.active_values.size -%}
-            {%- endif -%}
-          {%- endfor -%}
-          {%- if enable_filtering -%}
-            <div class="collection-template__mobile-filter-ctrl">
-              <button
-                type="button"
-                class="collection-template__filter-btn"
-                data-action="open-filter"
-                aria-label="{{ 'products.facets.filter_button' | t }}"
-              >
-                {%- render 'icon', name: 'filter' -%}
-                <span>{{ 'products.facets.filter_button' | t }}</span>
-                {%- if active_filter_count > 0 -%}
-                  <span class="collection-template__filter-badge">{{ active_filter_count }}</span>
-                {%- endif -%}
-              </button>
-            </div>
-          {%- endif -%}
-          {%- liquid
-            assign allowed_sort_options = ''
-            if section.settings.sort_best_selling
-              assign allowed_sort_options = allowed_sort_options | append: 'best-selling,'
-            endif
-            if section.settings.sort_title_asc
-              assign allowed_sort_options = allowed_sort_options | append: 'title-ascending,'
-            endif
-            if section.settings.sort_title_desc
-              assign allowed_sort_options = allowed_sort_options | append: 'title-descending,'
-            endif
-            if section.settings.sort_price_asc
-              assign allowed_sort_options = allowed_sort_options | append: 'price-ascending,'
-            endif
-            if section.settings.sort_price_desc
-              assign allowed_sort_options = allowed_sort_options | append: 'price-descending,'
-            endif
-            if section.settings.sort_created_desc
-              assign allowed_sort_options = allowed_sort_options | append: 'created-descending,'
-            endif
-            if section.settings.sort_created_asc
-              assign allowed_sort_options = allowed_sort_options | append: 'created-ascending,'
-            endif
-            if section.settings.sort_manual
-              assign allowed_sort_options = allowed_sort_options | append: 'manual,'
-            endif
-            assign allowed_sort_options = allowed_sort_options | remove_last: ','
-          -%}
           {%- render 'collection-sort',
             limit: products_per_page,
             paginate: paginate,
@@ -250,7 +241,9 @@
             show_product_count: show_product_count,
             enable_sorting: enable_sorting,
             enable_filtering: enable_filtering,
-            filter_layout: filter_layout
+            filter_layout: filter_layout,
+            active_filter_count: active_filter_count,
+            density_toggle: density_toggle
           -%}
 
           {%- render 'collection-active-filters', collection: collection -%}
@@ -274,7 +267,9 @@
                     lazyload: lazyload,
                     fetchpriority: fetchpriority,
                     show_vendor: show_vendor,
-                    image_ratio: image_ratio
+                    image_ratio: image_ratio,
+                    columns: columns_desktop,
+                    columns_mobile: columns_mobile
                   -%}
                 </li>
               {%- else -%}
@@ -289,45 +284,7 @@
           </div>
 
           <div class="collection-template__pagination" id="CollectionPagination">
-            {%- if pagination_type == 'pagination' -%}
-              {%- render 'section-pagination', paginate: paginate -%}
-            {%- elsif pagination_type == 'load_more' -%}
-              {%- if paginate.next -%}
-                <div class="collection-template__load-more">
-                  <button
-                    type="button"
-                    class="collection-template__load-more-btn"
-                    data-next-url="{{ paginate.next.url }}"
-                    data-action="load-more"
-                  >
-                    {{ 'products.facets.load_more' | t }}
-                  </button>
-                </div>
-              {%- endif -%}
-            {%- elsif pagination_type == 'infinite' -%}
-              {%- if paginate.next -%}
-                <div
-                  class="collection-template__infinite-sentinel"
-                  data-next-url="{{ paginate.next.url }}"
-                  data-action="infinite-scroll"
-                >
-                  <div class="collection-template__infinite-loader" aria-hidden="true">
-                    <svg
-                      class="collection-template__spinner"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.5"
-                    >
-                      <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
-                    </svg>
-                  </div>
-                </div>
-              {%- endif -%}
-            {%- endif -%}
+            {%- render 'collection-pagination', paginate: paginate, pagination_type: pagination_type -%}
           </div>
         </div>
       </facet-filters>
@@ -465,6 +422,13 @@
       "default": "2"
     },
     {
+      "type": "checkbox",
+      "id": "mobile_density_toggle",
+      "label": "t:sections.main_collection.settings.mobile_density_toggle.label",
+      "info": "t:sections.main_collection.settings.mobile_density_toggle.info",
+      "default": false
+    },
+    {
       "type": "header",
       "content": "t:sections.main_collection.settings.header__pagination.content"
     },
@@ -513,6 +477,10 @@
         {
           "value": "modal",
           "label": "t:sections.main_collection.settings.filter_layout.options__modal.label"
+        },
+        {
+          "value": "horizontal",
+          "label": "t:sections.main_collection.settings.filter_layout.options__horizontal.label"
         }
       ],
       "default": "sidebar"

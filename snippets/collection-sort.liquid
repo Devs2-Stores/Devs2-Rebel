@@ -1,5 +1,5 @@
 {% doc %}
-  @description Collection sort toolbar — filter button, product count, sort dropdown
+  @description Collection sort toolbar — filter button, product count, sort dropdown, view and density toggles
   @param {object} [results] - Collection or Search object. Default: collection
   @param {number} limit - Products per page (for count calculation)
   @param {object} paginate - Paginate object from {% paginate %} block
@@ -7,7 +7,9 @@
   @param {boolean} [show_product_count] - Show product count. Default: true
   @param {boolean} [enable_sorting] - Show sort dropdown. Default: true
   @param {boolean} [enable_filtering] - Enable filtering. Default: true
-  @param {string} [filter_layout] - Filter layout type (sidebar or modal). Default: 'sidebar'
+  @param {string} [filter_layout] - Filter layout type (sidebar, modal or horizontal). Default: 'sidebar'
+  @param {number} [active_filter_count] - Number of active filters shown as a badge on the filter button. Default: 0
+  @param {boolean} [density_toggle] - Show the mobile one/two column toggle. Default: false
   @example {%- render 'collection-sort', limit: 20, paginate: paginate, allowed_sort_options: 'best-selling,price-ascending' -%}
 {% enddoc %}
 
@@ -26,7 +28,6 @@
   assign t_products_label = 'products.facets.products_label' | t
   assign t_sort_by = 'products.facets.sort_by_label' | t
   assign t_filter = 'products.facets.filter_button' | t
-  assign allowed_list = allowed_sort_options | split: ','
 
   if show_product_count == nil
     assign show_product_count = true
@@ -40,25 +41,35 @@
   if filter_layout == nil
     assign filter_layout = 'sidebar'
   endif
+  assign active_filter_count = active_filter_count | default: 0
+  assign sort_in_drawer = false
+  if enable_filtering and enable_sorting
+    assign sort_in_drawer = true
+  endif
+  assign filter_action = 'open-filter'
+  if filter_layout == 'modal'
+    assign filter_action = 'open-filter-modal'
+  endif
 -%}
 
-<div class="collection-sort">
-  {%- comment %} Left: Filter button — only for modal layout (sidebar is always visible) {% endcomment -%}
-  {%- if enable_filtering and filter_layout == 'modal' -%}
+<div class="collection-sort collection-sort--{{ filter_layout }}{% if enable_filtering %} collection-sort--has-filter{% endif %}{% if sort_in_drawer %} collection-sort--sort-in-drawer{% endif %}{% if density_toggle %} collection-sort--has-density{% endif %}">
+  {%- if enable_filtering -%}
     <div class="collection-sort__filter-trigger">
       <button
         type="button"
         class="collection-sort__filter-btn"
-        data-action="open-filter-modal"
+        data-action="{{ filter_action }}"
         aria-label="{{ t_filter }}"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
         <span>{{ t_filter }}</span>
+        {%- if active_filter_count > 0 -%}
+          <span class="collection-template__filter-badge">{{ active_filter_count }}</span>
+        {%- endif -%}
       </button>
     </div>
   {%- endif -%}
 
-  {%- comment %} Center: Product count {% endcomment -%}
   {%- if show_product_count -%}
     <div class="collection-sort__count">
       {%- if total_count > 0 -%}
@@ -73,44 +84,13 @@
     </div>
   {%- endif -%}
 
-  {%- comment %} Right: Sort dropdown {% endcomment -%}
   {%- if enable_sorting -%}
     <div class="collection-sort__by">
       <label for="SortBy" class="collection-sort__label">{{ t_sort_by }}:</label>
-      <div class="collection-sort__select-wrapper">
-        {%- assign current_sort = results.sort_by | default: results.default_sort_by -%}
-        <select name="sort_by" id="SortBy" class="collection-sort__select" aria-label="{{ t_sort_by }}">
-          {%- for option in results.sort_options -%}
-            {%- liquid
-              assign show_option = false
-              if allowed_sort_options == blank
-                assign show_option = true
-              else
-                for allowed in allowed_list
-                  assign allowed_trimmed = allowed | strip
-                  if option.value == allowed_trimmed
-                    assign show_option = true
-                    break
-                  endif
-                endfor
-              endif
-            -%}
-            {%- if show_option -%}
-              <option
-                value="{{ option.value | escape }}"
-                {% if option.value == current_sort %}selected{% endif %}
-              >
-                {{ option.name | escape }}
-              </option>
-            {%- endif -%}
-          {%- endfor -%}
-        </select>
-        <svg class="collection-sort__icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-      </div>
+      {%- render 'collection-sort-select', results: results, select_id: 'SortBy', allowed_sort_options: allowed_sort_options -%}
     </div>
   {%- endif -%}
 
-  {%- comment %} Right-most: Grid / List toggle {% endcomment -%}
   <div class="collection-sort__view">
     <button type="button" class="collection-sort__view-btn collection-sort__view-btn--active" data-view="grid" aria-label="{{ 'products.facets.grid_view' | t }}">
       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
@@ -119,4 +99,15 @@
       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
     </button>
   </div>
+
+  {%- if density_toggle -%}
+    <div class="collection-sort__density" role="group" aria-label="{{ 'products.facets.density_label' | t }}">
+      <button type="button" class="collection-sort__view-btn collection-sort__density-btn" data-density="1" aria-pressed="false" aria-label="{{ 'products.facets.density_one' | t }}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4" width="14" height="16"/></svg>
+      </button>
+      <button type="button" class="collection-sort__view-btn collection-sort__density-btn" data-density="2" aria-pressed="false" aria-label="{{ 'products.facets.density_two' | t }}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="7" height="16"/><rect x="14" y="4" width="7" height="16"/></svg>
+      </button>
+    </div>
+  {%- endif -%}
 </div>

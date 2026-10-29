@@ -1,0 +1,191 @@
+{% doc %}
+  Generic group block.
+
+  A container that holds other theme and app blocks, including more groups. It
+  lays its children out vertically or horizontally and can paint a colour
+  scheme background with padding.
+{% enddoc %}
+
+{{ 'block-generic.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign group_classes = 'block-group blocks-flow block-group--' | append: block.settings.width
+  if block.settings.direction == 'row'
+    if block.settings.stack_on_mobile
+      assign group_classes = group_classes | append: ' blocks-flow--row-wide'
+    else
+      assign group_classes = group_classes | append: ' blocks-flow--row-always'
+    endif
+  endif
+  if block.settings.show_background
+    assign group_classes = group_classes | append: ' color-' | append: block.settings.color_scheme
+  endif
+
+  case block.settings.alignment
+    when 'center'
+      assign flow_horizontal = 'center'
+    when 'right'
+      assign flow_horizontal = 'flex-end'
+    else
+      assign flow_horizontal = 'flex-start'
+  endcase
+  case block.settings.vertical_alignment
+    when 'center'
+      assign flow_vertical = 'center'
+    when 'bottom'
+      assign flow_vertical = 'flex-end'
+    else
+      assign flow_vertical = 'flex-start'
+  endcase
+-%}
+<div
+  class="{{ group_classes }}"
+  style="--flow-gap: {{ block.settings.gap }}px; --flow-h: {{ flow_horizontal }}; --flow-v: {{ flow_vertical }}; --flow-text: {{ block.settings.alignment }}; --group-padding: {{ block.settings.padding }}px;"
+  {{ block.shopify_attributes }}
+>
+  {%- content_for 'blocks' -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:blocks.group.name",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:blocks.common.header_layout.content"
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "t:blocks.common.direction.label",
+      "options": [
+        {
+          "value": "column",
+          "label": "t:blocks.common.direction.options.column"
+        },
+        {
+          "value": "row",
+          "label": "t:blocks.common.direction.options.row"
+        }
+      ],
+      "default": "column"
+    },
+    {
+      "type": "checkbox",
+      "id": "stack_on_mobile",
+      "label": "t:blocks.common.stack_on_mobile.label",
+      "default": true,
+      "visible_if": "{{ block.settings.direction == 'row' }}"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "t:blocks.common.gap.label",
+      "min": 0,
+      "max": 96,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "t:blocks.common.alignment.label",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:blocks.common.alignment.options.left"
+        },
+        {
+          "value": "center",
+          "label": "t:blocks.common.alignment.options.center"
+        },
+        {
+          "value": "right",
+          "label": "t:blocks.common.alignment.options.right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "t:blocks.common.vertical_alignment.label",
+      "options": [
+        {
+          "value": "top",
+          "label": "t:blocks.common.vertical_alignment.options.top"
+        },
+        {
+          "value": "center",
+          "label": "t:blocks.common.vertical_alignment.options.center"
+        },
+        {
+          "value": "bottom",
+          "label": "t:blocks.common.vertical_alignment.options.bottom"
+        }
+      ],
+      "default": "top"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:blocks.group.settings.width.label",
+      "info": "t:blocks.group.settings.width.info",
+      "options": [
+        {
+          "value": "fill",
+          "label": "t:blocks.group.settings.width.options.fill"
+        },
+        {
+          "value": "fit",
+          "label": "t:blocks.group.settings.width.options.fit"
+        }
+      ],
+      "default": "fill"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.common.header_appearance.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_background",
+      "label": "t:blocks.group.settings.show_background.label",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:blocks.common.color_scheme.label",
+      "default": "scheme-2",
+      "visible_if": "{{ block.settings.show_background }}"
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "label": "t:blocks.group.settings.padding.label",
+      "min": 0,
+      "max": 96,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.group.name",
+      "category": "t:blocks.common.categories.layout"
+    }
+  ]
+}
+{% endschema %}

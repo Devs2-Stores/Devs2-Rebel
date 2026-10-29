@@ -10,7 +10,7 @@
       </button>
     </div>
     <div class="mobile-menu__body">
-      <nav class="mobile-menu__nav">
+      <nav class="mobile-menu__nav" aria-label="{{ 'accessibility.mobile_navigation' | t }}">
         <ul class="mobile-menu__list">
           {%- if resolved_menu_handle != blank -%}
             {%- for link in linklists[resolved_menu_handle].links -%}
@@ -89,6 +89,16 @@
           </a>
         {%- endif -%}
       </div>
+      {%- if show_country or show_language -%}
+        <div class="mobile-menu__localization">
+          {%- if show_country -%}
+            {%- render 'localization-selector', kind: 'country', form_id: 'MobileCountryForm', variant: 'inline' -%}
+          {%- endif -%}
+          {%- if show_language -%}
+            {%- render 'localization-selector', kind: 'language', form_id: 'MobileLanguageForm', variant: 'inline' -%}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
     </div>
   </div>
 </mobile-menu>
@@ -292,10 +302,18 @@ mobile-menu .mobile-menu__footer {
   border-top: 1px solid var(--color-hairline);
   flex-shrink: 0;
   background: var(--color-surface);
+  max-height: 70%;
+  overflow-y: auto;
 }
 mobile-menu .mobile-menu__actions {
   display: flex;
   gap: 0.75rem;
+}
+mobile-menu .mobile-menu__localization {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
 }
 mobile-menu .mobile-menu__action-link {
   display: inline-flex;

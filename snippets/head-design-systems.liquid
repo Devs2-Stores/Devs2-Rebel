@@ -27,20 +27,73 @@
 
 
 
-    --font-heading-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
-    --font-heading-style: {{ settings.type_header_font.style }};
-    --font-heading-weight: {{ settings.type_header_font.weight }};
+    --font-heading-family: {{ settings.type_font_heading.family }}, {{ settings.type_font_heading.fallback_families }};
+    --font-heading-style: {{ settings.type_font_heading.style }};
+    --font-heading-weight: {{ settings.type_font_heading.weight }};
 
-    --font-subheading-family: {{ settings.type_subheading_font.family }}, {{ settings.type_subheading_font.fallback_families }};
-    --font-subheading-style: {{ settings.type_subheading_font.style }};
-    --font-subheading-weight: {{ settings.type_subheading_font.weight }};
+    --font-subheading-family: {{ settings.type_font_subheading.family }}, {{ settings.type_font_subheading.fallback_families }};
+    --font-subheading-style: {{ settings.type_font_subheading.style }};
+    --font-subheading-weight: {{ settings.type_font_subheading.weight }};
 
-    --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
-    --font-body-style: {{ settings.type_body_font.style }};
-    --font-body-weight: {{ settings.type_body_font.weight }};
+    --font-body-family: {{ settings.type_font_body.family }}, {{ settings.type_font_body.fallback_families }};
+    --font-body-style: {{ settings.type_font_body.style }};
+    --font-body-weight: {{ settings.type_font_body.weight }};
 
-    --font-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
-    --font-heading-scale: {{ settings.heading_scale | divided_by: 100.0 }};
+    --font-body-scale: {{ settings.type_scale_body | divided_by: 100.0 }};
+    --font-heading-scale: {{ settings.type_scale_heading | divided_by: 100.0 }};
+
+    {%- if settings.type_accent_custom %}
+    --font-accent-family: {{ settings.type_accent_face.family }}, {{ settings.type_accent_face.fallback_families }};
+    --font-accent-style: {{ settings.type_accent_face.style }};
+    --font-accent-weight: {{ settings.type_accent_face.weight }};
+    {%- endif %}
+
+    --type-mobile-ratio: {{ settings.type_mobile_size_ratio | divided_by: 100.0 }};
+    --display-scale: {{ settings.type_display_scale | divided_by: 100.0 }};
+    --display-scale-mobile: calc(1 + (var(--display-scale) - 1) * var(--type-mobile-ratio));
+
+    --h1-scale: {{ settings.type_h1_scale | divided_by: 100.0 }};
+    --h1-scale-mobile: calc(1 + (var(--h1-scale) - 1) * var(--type-mobile-ratio));
+    --h1-line-height: {{ settings.type_h1_line_height | divided_by: 100.0 }};
+    --h1-tracking: {{ settings.type_h1_tracking | divided_by: 1000.0 }}em;
+    {%- if settings.type_h1_case == 'uppercase' %}
+    --h1-case: uppercase;
+    {%- endif %}
+    --h2-scale: {{ settings.type_h2_scale | divided_by: 100.0 }};
+    --h2-scale-mobile: calc(1 + (var(--h2-scale) - 1) * var(--type-mobile-ratio));
+    --h2-line-height: {{ settings.type_h2_line_height | divided_by: 100.0 }};
+    --h2-tracking: {{ settings.type_h2_tracking | divided_by: 1000.0 }}em;
+    {%- if settings.type_h2_case == 'uppercase' %}
+    --h2-case: uppercase;
+    {%- endif %}
+    --h3-scale: {{ settings.type_h3_scale | divided_by: 100.0 }};
+    --h3-scale-mobile: calc(1 + (var(--h3-scale) - 1) * var(--type-mobile-ratio));
+    --h3-line-height: {{ settings.type_h3_line_height | divided_by: 100.0 }};
+    --h3-tracking: {{ settings.type_h3_tracking | divided_by: 1000.0 }}em;
+    {%- if settings.type_h3_case == 'uppercase' %}
+    --h3-case: uppercase;
+    {%- endif %}
+    --h4-scale: {{ settings.type_h4_scale | divided_by: 100.0 }};
+    --h4-scale-mobile: calc(1 + (var(--h4-scale) - 1) * var(--type-mobile-ratio));
+    --h4-line-height: {{ settings.type_h4_line_height | divided_by: 100.0 }};
+    --h4-tracking: {{ settings.type_h4_tracking | divided_by: 1000.0 }}em;
+    {%- if settings.type_h4_case == 'uppercase' %}
+    --h4-case: uppercase;
+    {%- endif %}
+    --h5-scale: {{ settings.type_h5_scale | divided_by: 100.0 }};
+    --h5-scale-mobile: calc(1 + (var(--h5-scale) - 1) * var(--type-mobile-ratio));
+    --h5-line-height: {{ settings.type_h5_line_height | divided_by: 100.0 }};
+    --h5-tracking: {{ settings.type_h5_tracking | divided_by: 1000.0 }}em;
+    {%- if settings.type_h5_case == 'uppercase' %}
+    --h5-case: uppercase;
+    {%- endif %}
+    --h6-scale: {{ settings.type_h6_scale | divided_by: 100.0 }};
+    --h6-scale-mobile: calc(1 + (var(--h6-scale) - 1) * var(--type-mobile-ratio));
+    --h6-line-height: {{ settings.type_h6_line_height | divided_by: 100.0 }};
+    --h6-tracking: {{ settings.type_h6_tracking | divided_by: 1000.0 }}em;
+    {%- if settings.type_h6_case == 'uppercase' %}
+    --h6-case: uppercase;
+    {%- endif %}
 
     /* ═══════════ FONT SIZES ═══════════ */
     --font-xs: calc(0.75rem * var(--font-body-scale));
@@ -83,12 +136,12 @@
     --stack-gap: 1.25rem;
 
     /* ═══════════ LAYOUT (from settings_schema) ═══════════ */
-    --page-width: {{ settings.page_width }}px;
+    --page-width: {{ settings.layout_page_width }}px;
     --header-height: 80px;
-    --spacing-sections-desktop: {{ settings.spacing_sections }}px;
-    --spacing-sections-mobile: {%- if settings.spacing_sections < 24 -%}{{ settings.spacing_sections }}{%- else -%}{{ settings.spacing_sections | times: 0.7 | round | at_least: 20 }}{%- endif -%}px;
-    --grid-horizontal-spacing: {{ settings.spacing_grid_horizontal }}px;
-    --grid-vertical-spacing: {{ settings.spacing_grid_vertical }}px;
+    --spacing-sections-desktop: {{ settings.layout_section_gap }}px;
+    --spacing-sections-mobile: {%- if settings.layout_section_gap < 24 -%}{{ settings.layout_section_gap }}{%- else -%}{{ settings.layout_section_gap | times: 0.7 | round | at_least: 20 }}{%- endif -%}px;
+    --grid-horizontal-spacing: {{ settings.layout_grid_gap_x }}px;
+    --grid-vertical-spacing: {{ settings.layout_grid_gap_y }}px;
 
     /* ═══════════ BORDERS ═══════════ */
     --radius-sm: 4px;
@@ -99,84 +152,85 @@
     --radius-control-lg: 8px;
 
     /* ═══════════ BUTTONS (from settings_schema) ═══════════ */
-    --buttons-radius: {{ settings.buttons_radius }}px;
-    --buttons-border-width: {{ settings.buttons_border_thickness }}px;
-    --buttons-border-opacity: {{ settings.buttons_border_opacity | divided_by: 100.0 }};
-    --buttons-shadow-opacity: {{ settings.buttons_shadow_opacity | divided_by: 100.0 }};
-    --buttons-shadow-horizontal-offset: {{ settings.buttons_shadow_horizontal_offset }}px;
-    --buttons-shadow-vertical-offset: {{ settings.buttons_shadow_vertical_offset }}px;
-    --buttons-shadow-blur-radius: {{ settings.buttons_shadow_blur }}px;
+    --buttons-radius: {{ settings.button_corner_radius }}px;
+    --buttons-border-width: {{ settings.button_stroke_width }}px;
+    --buttons-border-opacity: {{ settings.button_stroke_opacity | divided_by: 100.0 }};
+    --buttons-shadow-opacity: {{ settings.button_shadow_alpha | divided_by: 100.0 }};
+    --buttons-shadow-horizontal-offset: {{ settings.button_shadow_offset_x }}px;
+    --buttons-shadow-vertical-offset: {{ settings.button_shadow_offset_y }}px;
+    --buttons-shadow-blur-radius: {{ settings.button_shadow_blur_radius }}px;
 
     /* ═══════════ INPUTS ═══════════ */
-    --inputs-radius: {{ settings.inputs_radius }}px;
-    --inputs-border-width: {{ settings.inputs_border_thickness }}px;
-    --inputs-border-opacity: {{ settings.inputs_border_opacity | divided_by: 100.0 }};
-    --inputs-shadow-opacity: {{ settings.inputs_shadow_opacity | divided_by: 100.0 }};
-    --inputs-shadow-horizontal-offset: {{ settings.inputs_shadow_horizontal_offset }}px;
-    --inputs-shadow-vertical-offset: {{ settings.inputs_shadow_vertical_offset }}px;
-    --inputs-shadow-blur-radius: {{ settings.inputs_shadow_blur }}px;
+    --inputs-radius: {{ settings.input_corner_radius }}px;
+    --inputs-border-width: {{ settings.input_stroke_width }}px;
+    --inputs-border-opacity: {{ settings.input_stroke_opacity | divided_by: 100.0 }};
+    --inputs-shadow-opacity: {{ settings.input_shadow_alpha | divided_by: 100.0 }};
+    --inputs-shadow-horizontal-offset: {{ settings.input_shadow_offset_x }}px;
+    --inputs-shadow-vertical-offset: {{ settings.input_shadow_offset_y }}px;
+    --inputs-shadow-blur-radius: {{ settings.input_shadow_blur_radius }}px;
 
     /* ═══════════ VARIANT PILLS ═══════════ */
-    --variant-pills-radius: {{ settings.variant_pills_radius }}px;
-    --variant-pills-border-width: {{ settings.variant_pills_border_thickness }}px;
-    --variant-pills-border-opacity: {{ settings.variant_pills_border_opacity | divided_by: 100.0 }};
-    --variant-pills-shadow-opacity: {{ settings.variant_pills_shadow_opacity | divided_by: 100.0 }};
-    --variant-pills-shadow-horizontal-offset: {{ settings.variant_pills_shadow_horizontal_offset }}px;
-    --variant-pills-shadow-vertical-offset: {{ settings.variant_pills_shadow_vertical_offset }}px;
-    --variant-pills-shadow-blur-radius: {{ settings.variant_pills_shadow_blur }}px;
+    --variant-pills-radius: {{ settings.variant_chip_corner_radius }}px;
+    --variant-pills-border-width: {{ settings.variant_chip_stroke_width }}px;
+    --variant-pills-border-opacity: {{ settings.variant_chip_stroke_opacity | divided_by: 100.0 }};
+    --variant-pills-shadow-opacity: {{ settings.variant_chip_shadow_alpha | divided_by: 100.0 }};
+    --variant-pills-shadow-horizontal-offset: {{ settings.variant_chip_shadow_offset_x }}px;
+    --variant-pills-shadow-vertical-offset: {{ settings.variant_chip_shadow_offset_y }}px;
+    --variant-pills-shadow-blur-radius: {{ settings.variant_chip_shadow_blur_radius }}px;
 
     /* ═══════════ CARDS ═══════════ */
-    --card-image-padding: {{ settings.card_image_padding | divided_by: 10.0 }}rem;
-    --card-corner-radius: {{ settings.card_corner_radius | divided_by: 10.0 }}rem;
-    --card-text-alignment: {{ settings.card_text_alignment }};
-    --card-border-width: {{ settings.card_border_thickness | divided_by: 10.0 }}rem;
-    --card-border-opacity: {{ settings.card_border_opacity | divided_by: 100.0 }};
-    --card-shadow-opacity: {{ settings.card_shadow_opacity | divided_by: 100.0 }};
-    --card-shadow-horizontal-offset: {{ settings.card_shadow_horizontal_offset | divided_by: 10.0 }}rem;
-    --card-shadow-vertical-offset: {{ settings.card_shadow_vertical_offset | divided_by: 10.0 }}rem;
-    --card-shadow-blur-radius: {{ settings.card_shadow_blur | divided_by: 10.0 }}rem;
+    --card-image-padding: {{ settings.product_card_image_inset | divided_by: 10.0 }}rem;
+    --card-corner-radius: {{ settings.product_card_corner_radius | divided_by: 10.0 }}rem;
+    --card-text-alignment: {{ settings.product_card_text_align }};
+    --card-border-width: {{ settings.product_card_stroke_width | divided_by: 10.0 }}rem;
+    --card-border-opacity: {{ settings.product_card_stroke_opacity | divided_by: 100.0 }};
+    --card-shadow-opacity: {{ settings.product_card_shadow_alpha | divided_by: 100.0 }};
+    --card-shadow-horizontal-offset: {{ settings.product_card_shadow_offset_x | divided_by: 10.0 }}rem;
+    --card-shadow-vertical-offset: {{ settings.product_card_shadow_offset_y | divided_by: 10.0 }}rem;
+    --card-shadow-blur-radius: {{ settings.product_card_shadow_blur_radius | divided_by: 10.0 }}rem;
 
     /* ═══════════ MEDIA ═══════════ */
-    --media-border-width: {{ settings.media_border_thickness }}px;
-    --media-border-opacity: {{ settings.media_border_opacity | divided_by: 100.0 }};
-    --media-radius: {{ settings.media_radius }}px;
-    --media-shadow-opacity: {{ settings.media_shadow_opacity | divided_by: 100.0 }};
-    --media-shadow-horizontal-offset: {{ settings.media_shadow_horizontal_offset }}px;
-    --media-shadow-vertical-offset: {{ settings.media_shadow_vertical_offset }}px;
-    --media-shadow-blur-radius: {{ settings.media_shadow_blur }}px;
+    --media-border-width: {{ settings.media_frame_stroke_width }}px;
+    --media-border-opacity: {{ settings.media_frame_stroke_opacity | divided_by: 100.0 }};
+    --media-radius: {{ settings.media_frame_corner_radius }}px;
+    --media-shadow-opacity: {{ settings.media_frame_shadow_alpha | divided_by: 100.0 }};
+    --media-shadow-horizontal-offset: {{ settings.media_frame_shadow_offset_x }}px;
+    --media-shadow-vertical-offset: {{ settings.media_frame_shadow_offset_y }}px;
+    --media-shadow-blur-radius: {{ settings.media_frame_shadow_blur_radius }}px;
 
     /* ═══════════ TEXT BOXES ═══════════ */
-    --text-boxes-border-width: {{ settings.text_boxes_border_thickness | divided_by: 10.0 }}rem;
-    --text-boxes-border-opacity: {{ settings.text_boxes_border_opacity | divided_by: 100.0 }};
-    --text-boxes-radius: {{ settings.text_boxes_radius | divided_by: 10.0 }}rem;
-    --text-boxes-shadow-opacity: {{ settings.text_boxes_shadow_opacity | divided_by: 100.0 }};
-    --text-boxes-shadow-horizontal-offset: {{ settings.text_boxes_shadow_horizontal_offset | divided_by: 10.0 }}rem;
-    --text-boxes-shadow-vertical-offset: {{ settings.text_boxes_shadow_vertical_offset | divided_by: 10.0 }}rem;
-    --text-boxes-shadow-blur-radius: {{ settings.text_boxes_shadow_blur | divided_by: 10.0 }}rem;
+    --text-boxes-border-width: {{ settings.content_box_stroke_width | divided_by: 10.0 }}rem;
+    --text-boxes-border-opacity: {{ settings.content_box_stroke_opacity | divided_by: 100.0 }};
+    --text-boxes-radius: {{ settings.content_box_corner_radius | divided_by: 10.0 }}rem;
+    --text-boxes-shadow-opacity: {{ settings.content_box_shadow_alpha | divided_by: 100.0 }};
+    --text-boxes-shadow-horizontal-offset: {{ settings.content_box_shadow_offset_x | divided_by: 10.0 }}rem;
+    --text-boxes-shadow-vertical-offset: {{ settings.content_box_shadow_offset_y | divided_by: 10.0 }}rem;
+    --text-boxes-shadow-blur-radius: {{ settings.content_box_shadow_blur_radius | divided_by: 10.0 }}rem;
 
     /* ═══════════ POPUPS & DRAWERS ═══════════ */
-    --popup-border-width: {{ settings.popup_border_thickness }}px;
-    --popup-border-opacity: {{ settings.popup_border_opacity | divided_by: 100.0 }};
-    --popup-corner-radius: {{ settings.popup_corner_radius }}px;
-    --popup-shadow-opacity: {{ settings.popup_shadow_opacity | divided_by: 100.0 }};
-    --popup-shadow-horizontal-offset: {{ settings.popup_shadow_horizontal_offset }}px;
-    --popup-shadow-vertical-offset: {{ settings.popup_shadow_vertical_offset }}px;
-    --popup-shadow-blur-radius: {{ settings.popup_shadow_blur }}px;
+    --popup-border-width: {{ settings.modal_stroke_width }}px;
+    --popup-border-opacity: {{ settings.modal_stroke_opacity | divided_by: 100.0 }};
+    --popup-corner-radius: {{ settings.modal_corner_radius }}px;
+    --popup-shadow-opacity: {{ settings.modal_shadow_alpha | divided_by: 100.0 }};
+    --popup-shadow-horizontal-offset: {{ settings.modal_shadow_offset_x }}px;
+    --popup-shadow-vertical-offset: {{ settings.modal_shadow_offset_y }}px;
+    --popup-shadow-blur-radius: {{ settings.modal_shadow_blur_radius }}px;
 
-    --drawer-border-width: {{ settings.drawer_border_thickness }}px;
-    --drawer-border-opacity: {{ settings.drawer_border_opacity | divided_by: 100.0 }};
-    --drawer-shadow-opacity: {{ settings.drawer_shadow_opacity | divided_by: 100.0 }};
-    --drawer-shadow-horizontal-offset: {{ settings.drawer_shadow_horizontal_offset }}px;
-    --drawer-shadow-vertical-offset: {{ settings.drawer_shadow_vertical_offset }}px;
-    --drawer-shadow-blur-radius: {{ settings.drawer_shadow_blur }}px;
+    --drawer-border-width: {{ settings.panel_stroke_width }}px;
+    --drawer-border-opacity: {{ settings.panel_stroke_opacity | divided_by: 100.0 }};
+    --drawer-shadow-opacity: {{ settings.panel_shadow_alpha | divided_by: 100.0 }};
+    --drawer-shadow-horizontal-offset: {{ settings.panel_shadow_offset_x }}px;
+    --drawer-shadow-vertical-offset: {{ settings.panel_shadow_offset_y }}px;
+    --drawer-shadow-blur-radius: {{ settings.panel_shadow_blur_radius }}px;
 
     /* ═══════════ BADGES ═══════════ */
-    --badge-corner-radius: {{ settings.badge_corner_radius }}px;
+    --badge-corner-radius: {{ settings.badge_corner }}px;
 
     /* ═══════════ TRANSITIONS ═══════════ */
-    --transition-fast: 150ms linear;
-    --transition-base: 300ms linear;
-    --transition-slow: 500ms linear;
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --transition-fast: 150ms var(--ease-out);
+    --transition-base: 300ms var(--ease-out);
+    --transition-slow: 500ms var(--ease-out);
     --duration-short: 100ms;
     --duration-default: 200ms;
     --duration-medium: 300ms;
@@ -245,6 +299,15 @@
     --marquee-duration: 30s;
     --read-more-height: 4.5em;
   }
+
+  {%- if settings.type_accent_custom %}
+  [class*="eyebrow"],
+  .font-accent {
+    font-family: var(--font-accent-family);
+    font-style: var(--font-accent-style);
+  }
+  .font-accent { font-weight: var(--font-accent-weight); }
+  {%- endif %}
 
   {%- liquid
     assign scheme_selectors = ':root'

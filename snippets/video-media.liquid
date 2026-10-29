@@ -1,0 +1,70 @@
+{%- doc -%}
+  Autoplaying, muted, looping video that fills its positioned parent. Pair with video-control.
+  Hosted file video wins over external video; renders nothing when neither is set.
+
+  @param {string} id - Unique id shared with video-control
+  @param {string} label - Accessible name for the video
+  @param {object} [video] - Shopify-hosted video
+  @param {object} [video_url] - External YouTube or Vimeo video
+  @param {object} [poster] - Image used as the poster of a hosted video
+  @param {boolean} [eager] - Load and play immediately instead of when near the viewport
+  @param {boolean} [hold] - Keep paused and unloaded until a media-video:hold event releases it
+{%- enddoc -%}
+{{ 'section-video.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign vm_poster = poster
+  assign vm_poster_url = blank
+  if video != blank
+    if vm_poster != blank
+      assign vm_poster_url = vm_poster | image_url: width: 1920
+    elsif video.preview_image != blank
+      assign vm_poster_url = video.preview_image | image_url: width: 1920
+    endif
+  endif
+  assign vm_host = video_url.type
+  assign vm_embed_id = video_url.id
+  assign vm_embed_src = blank
+  if vm_embed_id != blank
+    if vm_host == 'vimeo'
+      assign vm_embed_src = 'https://player.vimeo.com/video/' | append: vm_embed_id | append: '?autoplay=1&muted=1&loop=1&background=1&playsinline=1'
+    else
+      assign vm_embed_src = 'https://www.youtube-nocookie.com/embed/' | append: vm_embed_id | append: '?autoplay=1&mute=1&loop=1&playlist=' | append: vm_embed_id | append: '&controls=0&playsinline=1&rel=0&modestbranding=1&disablekb=1&enablejsapi=1'
+    endif
+  endif
+-%}
+
+{%- if video != blank -%}
+  <div class="media-video" id="media-video-{{ id }}" data-media-video="file"{% if eager %} data-eager{% endif %}{% if hold %} data-hold{% endif %}>
+    <video
+      class="media-video__el"
+      aria-label="{{ label | escape }}"
+      autoplay
+      loop
+      muted
+      playsinline
+      preload="metadata"
+      {% if vm_poster_url != blank %}poster="{{ vm_poster_url }}"{% endif %}
+      data-media-video-el
+    >
+      {%- for source in video.sources -%}
+        {%- if eager -%}
+          <source src="{{ source.url }}" type="{{ source.mime_type }}">
+        {%- else -%}
+          <source data-src="{{ source.url }}" type="{{ source.mime_type }}">
+        {%- endif -%}
+      {%- endfor -%}
+    </video>
+  </div>
+{%- elsif vm_embed_src != blank -%}
+  <div
+    class="media-video"
+    id="media-video-{{ id }}"
+    data-media-video="embed"
+    data-embed-host="{{ vm_host | default: 'youtube' }}"
+    data-embed-src="{{ vm_embed_src }}"
+    data-embed-title="{{ label | escape }}"
+    {% if eager %}data-eager{% endif %}
+    {% if hold %}data-hold{% endif %}
+  ></div>
+{%- endif -%}

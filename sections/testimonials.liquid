@@ -109,6 +109,9 @@
 {% schema %}
 {
   "name": "t:sections.testimonials.name",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "tag": "section",
   "class": "section-testimonials-wrapper",
   "settings": [
@@ -314,7 +317,7 @@
   "presets": [
     {
       "name": "t:sections.testimonials.presets.testimonials.name",
-      "category": "Custom",
+      "category": "t:categories.storytelling",
       "blocks": [
         {
           "type": "testimonial"

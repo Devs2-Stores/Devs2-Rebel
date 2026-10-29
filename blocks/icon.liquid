@@ -1,0 +1,85 @@
+{% doc %}
+  Generic icon block.
+
+  Renders one icon from the theme sprite at a chosen size. The icon is
+  decorative: put the meaning in the text next to it.
+{% enddoc %}
+
+{{ 'block-generic.css' | asset_url | stylesheet_tag }}
+
+<div class="block-icon" {{ block.shopify_attributes }}>
+  {%- render 'icon', name: block.settings.icon, size: block.settings.size -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:blocks.icon.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "t:blocks.icon.settings.icon.label",
+      "options": [
+        {
+          "value": "check-circle",
+          "label": "t:blocks.icon.settings.icon.options.check_circle"
+        },
+        {
+          "value": "order",
+          "label": "t:blocks.icon.settings.icon.options.order"
+        },
+        {
+          "value": "location",
+          "label": "t:blocks.icon.settings.icon.options.location"
+        },
+        {
+          "value": "email",
+          "label": "t:blocks.icon.settings.icon.options.email"
+        },
+        {
+          "value": "heart",
+          "label": "t:blocks.icon.settings.icon.options.heart"
+        },
+        {
+          "value": "user",
+          "label": "t:blocks.icon.settings.icon.options.user"
+        },
+        {
+          "value": "cart",
+          "label": "t:blocks.icon.settings.icon.options.cart"
+        },
+        {
+          "value": "calendar",
+          "label": "t:blocks.icon.settings.icon.options.calendar"
+        },
+        {
+          "value": "info",
+          "label": "t:blocks.icon.settings.icon.options.info"
+        },
+        {
+          "value": "quote-open",
+          "label": "t:blocks.icon.settings.icon.options.quote_open"
+        }
+      ],
+      "default": "check-circle"
+    },
+    {
+      "type": "range",
+      "id": "size",
+      "label": "t:blocks.icon.settings.size.label",
+      "min": 16,
+      "max": 96,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.icon.name",
+      "category": "t:blocks.common.categories.basic"
+    }
+  ]
+}
+{% endschema %}

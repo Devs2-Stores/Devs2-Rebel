@@ -1,39 +1,103 @@
-{%- assign product_media_sizes = '(max-width: 749px) calc(100vw - 30px), (max-width: 991px) calc(50vw - 40px), (min-width: 1600px) 580px, 34vw' -%}
+{%- liquid
+  assign media_layout = section.settings.media_layout | default: 'carousel'
+  assign media_ratio = section.settings.media_aspect_ratio | default: 'adapt'
+  assign thumb_position = section.settings.thumbnail_position | default: 'bottom'
+  assign grid_columns = section.settings.media_grid_columns | default: '1'
+  assign filter_media = section.settings.hide_variants
+  assign selected_variant = product.selected_or_first_available_variant
+  assign selected_variant_key = selected_variant.id | append: ''
+  assign selected_has_media = false
+  if filter_media and selected_variant.featured_media != blank
+    assign selected_has_media = true
+  endif
+
+  assign product_media_sizes = '(max-width: 749px) calc(100vw - 30px), (max-width: 991px) calc(50vw - 40px), (min-width: 1600px) 580px, 34vw'
+  if media_layout == 'stacked' and grid_columns == '2'
+    assign product_media_sizes = '(max-width: 749px) calc(100vw - 30px), (max-width: 991px) calc(25vw - 20px), (min-width: 1600px) 290px, 17vw'
+  endif
+
+  assign media_wrapper_class = 'product-template__media-wrapper product-template__media-wrapper--' | append: media_layout | append: ' product-template__media-wrapper--ratio-' | append: media_ratio
+  if media_layout == 'stacked'
+    assign media_wrapper_class = media_wrapper_class | append: ' product-template__media-wrapper--cols-' | append: grid_columns
+  else
+    assign media_wrapper_class = media_wrapper_class | append: ' product-template__media-wrapper--thumbs-' | append: thumb_position
+  endif
+  if section.settings.enable_lightbox
+    assign media_wrapper_class = media_wrapper_class | append: ' lightbox-enabled'
+  endif
+
+  assign visible_count = 0
+  assign slides_html = ''
+  assign slide_groups = ''
+  assign slide_flags = ''
+  for media in product.media
+    assign group_ids = ''
+    assign slide_hidden = false
+    if filter_media
+      for variant_item in product.variants
+        if variant_item.featured_media.id == media.id
+          assign group_ids = group_ids | append: variant_item.id | append: ' '
+        endif
+      endfor
+      if group_ids != blank and selected_has_media
+        assign group_list = group_ids | split: ' '
+        unless group_list contains selected_variant_key
+          assign slide_hidden = true
+        endunless
+      endif
+    endif
+
+    assign media_loading = 'lazy'
+    assign media_fetchpriority = 'low'
+    assign media_preload = false
+    unless slide_hidden
+      assign visible_count = visible_count | plus: 1
+      if visible_count == 1
+        assign media_loading = 'eager'
+        assign media_fetchpriority = 'high'
+        assign media_preload = true
+      endif
+    endunless
+
+    capture slide_html
+      render 'product-media-item', media: media, product: product, sizes: product_media_sizes, loading: media_loading, fetchpriority: media_fetchpriority, preload: media_preload, enable_zoom: true, image_class: 'product-template__media-image'
+    endcapture
+    assign slides_html = slides_html | append: slide_html | append: '<!--slide-->'
+    assign slide_groups = slide_groups | append: group_ids | append: '|'
+    assign slide_flags = slide_flags | append: slide_hidden | append: '|'
+  endfor
+  assign slide_html_list = slides_html | split: '<!--slide-->'
+  assign slide_group_list = slide_groups | split: '|'
+  assign slide_flag_list = slide_flags | split: '|'
+-%}
+
+<script src="{{ 'product-card.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'product-recommendations.js' | asset_url }}" defer="defer"></script>
 
 <product-template class="product-template color-{{ section.settings.color_scheme }}">
   <div class="page-width">
     <div class="product-template__wrapper">
       {%- comment %} ═══ MEDIA GALLERY ═══ {% endcomment -%}
-      <div class="product-template__media-wrapper{% if section.settings.enable_lightbox %} lightbox-enabled{% endif %}">
-        <div class="swiper product-template__media-slider">
-          <div class="swiper-wrapper">
+      <div
+        class="{{ media_wrapper_class }}"
+        data-media-layout="{{ media_layout }}"
+        data-thumbnail-position="{{ thumb_position }}"
+        data-hide-variants="{{ filter_media }}"
+      >
+        <div class="product-template__media-slider{% if media_layout == 'carousel' %} swiper{% endif %}">
+          <div class="{% if media_layout == 'carousel' %}swiper-wrapper{% else %}product-template__media-list{% endif %}">
             {%- if product.media.size > 0 -%}
               {%- for media in product.media -%}
+                {%- assign slide_index = forloop.index0 -%}
+                {%- assign slide_group_ids = slide_group_list[slide_index] | strip -%}
                 <div
-                  class="swiper-slide product-template__media-slide product-template__media-slide--{{ media.media_type }}"
+                  class="{% if media_layout == 'carousel' %}swiper-slide {% endif %}product-template__media-slide product-template__media-slide--{{ media.media_type }}"
                   data-media-id="{{ media.id }}"
+                  {% if slide_group_ids != blank %}data-variant-ids="{{ slide_group_ids }}"{% endif %}
+                  {% if slide_flag_list[slide_index] == 'true' %}hidden{% endif %}
                   {% if media.media_type == 'external_video' %}data-video-host="{{ media.host }}"{% endif %}
                 >
-                  {%- liquid
-                    assign media_loading = 'lazy'
-                    assign media_fetchpriority = 'low'
-                    assign media_preload = false
-                    if forloop.first
-                      assign media_loading = 'eager'
-                      assign media_fetchpriority = 'high'
-                      assign media_preload = true
-                    endif
-                  -%}
-                  {%- render 'product-media-item',
-                    media: media,
-                    product: product,
-                    sizes: product_media_sizes,
-                    loading: media_loading,
-                    fetchpriority: media_fetchpriority,
-                    preload: media_preload,
-                    enable_zoom: true,
-                    image_class: 'product-template__media-image'
-                  -%}
+                  {{- slide_html_list[slide_index] -}}
                   {%- if section.settings.enable_lightbox and media.media_type == 'image' -%}
                     <button
                       type="button"
@@ -48,20 +112,27 @@
                 </div>
               {%- endfor -%}
             {%- else -%}
-              <div class="swiper-slide product-template__media-slide">
+              <div class="{% if media_layout == 'carousel' %}swiper-slide {% endif %}product-template__media-slide">
                 {{ 'product-1' | placeholder_svg_tag: 'product-template__media-image product-template__media-image--placeholder' }}
               </div>
             {%- endif -%}
           </div>
-          <button type="button" class="swiper-button-next" aria-label="{{ 'accessibility.next' | t }}"></button>
-          <button type="button" class="swiper-button-prev" aria-label="{{ 'accessibility.previous' | t }}"></button>
+          {%- if media_layout == 'carousel' -%}
+            <button type="button" class="swiper-button-next" aria-label="{{ 'accessibility.next' | t }}"></button>
+            <button type="button" class="swiper-button-prev" aria-label="{{ 'accessibility.previous' | t }}"></button>
+          {%- endif -%}
         </div>
 
-        {%- if product.media.size > 1 -%}
-          <div class="swiper product-template__media-thumbs">
+        {%- if media_layout == 'carousel' and product.media.size > 1 -%}
+          <div class="swiper product-template__media-thumbs" role="group" aria-label="{{ 'products.product.media.thumbnails' | t }}"{% if visible_count < 2 %} hidden{% endif %}>
             <div class="swiper-wrapper">
               {%- for media in product.media -%}
-                <div class="swiper-slide product-template__media-thumb product-template__media-thumb--{{ media.media_type }}" data-media-id="{{ media.id }}">
+                {%- assign slide_index = forloop.index0 -%}
+                <div
+                  class="swiper-slide product-template__media-thumb product-template__media-thumb--{{ media.media_type }}"
+                  data-media-id="{{ media.id }}"
+                  {% if slide_flag_list[slide_index] == 'true' %}hidden{% endif %}
+                >
                   {%- if media.preview_image -%}
                     {{
                       media.preview_image
@@ -105,16 +176,34 @@
 
 {%- render 'product-sticky-add' -%}
 {%- if section.settings.enable_lightbox -%}
-  <product-lightbox class="product-lightbox" role="dialog" aria-modal="true" aria-label="{{ 'accessibility.image_lightbox' | t }}">
+  <product-lightbox
+    class="product-lightbox"
+    role="dialog"
+    tabindex="-1"
+    aria-modal="true"
+    aria-label="{{ 'accessibility.image_lightbox' | t }}"
+    data-counter-template="{{ 'products.product.media.lightbox_counter' | t: current: '[current]', total: '[total]' }}"
+    data-thumb-label-template="{{ 'products.product.media.load_image' | t: index: '[index]' }}"
+  >
     <div class="lightbox-overlay"></div>
     <div class="lightbox-content">
-      <button type="button" class="lightbox-close" aria-label="{{ 'accessibility.close' | t }}">
-        {%- render 'icon', name: 'close', size: '20' -%}
-      </button>
-      <div class="lightbox-image-wrapper">
+      <p class="lightbox-counter" data-lightbox-counter aria-live="polite" hidden></p>
+      <div class="lightbox-toolbar">
+        <button type="button" class="lightbox-zoom-out" data-lightbox-zoom-out aria-label="{{ 'accessibility.zoom_out' | t }}">
+          {%- render 'icon', name: 'minus', size: '20' -%}
+        </button>
+        <button type="button" class="lightbox-zoom-in" data-lightbox-zoom-in aria-label="{{ 'accessibility.zoom_in' | t }}">
+          {%- render 'icon', name: 'plus', size: '20' -%}
+        </button>
+        <button type="button" class="lightbox-close" aria-label="{{ 'accessibility.close' | t }}">
+          {%- render 'icon', name: 'close', size: '20' -%}
+        </button>
+      </div>
+      <div class="lightbox-image-wrapper" data-lightbox-stage>
         <button type="button" class="lightbox-prev swiper-button-prev" aria-label="{{ 'accessibility.previous' | t }}"></button>
         <button type="button" class="lightbox-next swiper-button-next" aria-label="{{ 'accessibility.next' | t }}"></button>
       </div>
+      <div class="lightbox-thumbs" role="group" data-lightbox-thumbs aria-label="{{ 'products.product.media.thumbnails' | t }}" hidden></div>
     </div>
   </product-lightbox>
 {%- endif -%}
@@ -144,6 +233,92 @@
     {
       "type": "header",
       "content": "t:sections.main_product.settings.header__media.content"
+    },
+    {
+      "type": "select",
+      "id": "media_layout",
+      "label": "t:sections.main_product.settings.media_layout.label",
+      "options": [
+        {
+          "value": "carousel",
+          "label": "t:sections.main_product.settings.media_layout.options__carousel.label"
+        },
+        {
+          "value": "stacked",
+          "label": "t:sections.main_product.settings.media_layout.options__stacked.label"
+        }
+      ],
+      "default": "carousel"
+    },
+    {
+      "type": "select",
+      "id": "media_grid_columns",
+      "label": "t:sections.main_product.settings.media_grid_columns.label",
+      "options": [
+        {
+          "value": "1",
+          "label": "t:sections.main_product.settings.media_grid_columns.options__1.label"
+        },
+        {
+          "value": "2",
+          "label": "t:sections.main_product.settings.media_grid_columns.options__2.label"
+        }
+      ],
+      "default": "1",
+      "visible_if": "{{ section.settings.media_layout == 'stacked' }}"
+    },
+    {
+      "type": "select",
+      "id": "thumbnail_position",
+      "label": "t:sections.main_product.settings.thumbnail_position.label",
+      "info": "t:sections.main_product.settings.thumbnail_position.info",
+      "options": [
+        {
+          "value": "bottom",
+          "label": "t:sections.main_product.settings.thumbnail_position.options__bottom.label"
+        },
+        {
+          "value": "left",
+          "label": "t:sections.main_product.settings.thumbnail_position.options__left.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.main_product.settings.thumbnail_position.options__right.label"
+        }
+      ],
+      "default": "bottom",
+      "visible_if": "{{ section.settings.media_layout == 'carousel' }}"
+    },
+    {
+      "type": "select",
+      "id": "media_aspect_ratio",
+      "label": "t:sections.main_product.settings.media_aspect_ratio.label",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.main_product.settings.media_aspect_ratio.options__adapt.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.main_product.settings.media_aspect_ratio.options__square.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.main_product.settings.media_aspect_ratio.options__portrait.label"
+        },
+        {
+          "value": "landscape",
+          "label": "t:sections.main_product.settings.media_aspect_ratio.options__landscape.label"
+        }
+      ],
+      "default": "adapt"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_variants",
+      "label": "t:sections.main_product.settings.hide_variants.label",
+      "info": "t:sections.main_product.settings.hide_variants.info",
+      "default": false
     },
     {
       "type": "checkbox",

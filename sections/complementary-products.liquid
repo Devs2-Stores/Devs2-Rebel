@@ -1,6 +1,4 @@
 {{ 'section-complementary-products.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'product-card.js' | asset_url }}" defer="defer"></script>
-<script src="{{ 'product-recommendations.js' | asset_url }}" defer="defer"></script>
 
 {%- liquid
   assign container_width = section.settings.container_width | default: 'fixed'

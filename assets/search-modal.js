@@ -97,6 +97,60 @@ class SearchModal extends HTMLElement {
     }, 100);
     ThemeUtils.lockScroll();
     ThemeUtils.trapFocus(this);
+    this.loadIdleProducts();
+  }
+
+  loadIdleProducts() {
+    if (this._idleLoaded) return;
+    this._idleLoaded = true;
+    var self = this;
+    var root = this.getRootUrl();
+
+    if (this.dataset.idleRecommended === 'true') {
+      fetch(root + '?section_id=predictive-search-empty')
+        .then(function(response) {
+          if (!response.ok) throw new Error('Idle products request failed');
+          return response.text();
+        })
+        .then(function(html) {
+          html = html.trim();
+          if (html) self.fillIdleSlot('recommended', function() { return html; });
+        })
+        .catch(function() {});
+    }
+
+    if (this.dataset.idleRecent === 'true') {
+      var stored = ThemeUtils.storage.getJSON('product_viewed');
+      var handles = Array.isArray(stored) ? stored.map(function(item) { return item && item.handle; }).filter(Boolean).slice(0, 4) : [];
+      if (!handles.length) return;
+      Promise.all(handles.map(function(handle) {
+        return fetch(root + 'products/' + encodeURIComponent(handle) + '?section_id=predictive-search-card')
+          .then(function(response) { return response.ok ? response.text() : ''; })
+          .catch(function() { return ''; });
+      })).then(function(parts) {
+        var cards = parts.map(function(part) { return part.trim(); }).filter(Boolean).join('');
+        if (!cards) return;
+        self.fillIdleSlot('recent', function(slot) {
+          return '<h3 id="ps-idle-recent">' + ThemeUtils.escapeHtml(slot.dataset.heading) + '</h3>' +
+            '<ul class="predictive-search__list predictive-search__grid" role="group" aria-labelledby="ps-idle-recent">' + cards + '</ul>';
+        });
+      });
+    }
+  }
+
+  fillIdleSlot(key, build) {
+    var selector = '[data-idle-slot="' + key + '"]';
+    var template = document.createElement('div');
+    template.innerHTML = this.initialResultsMarkup;
+    this.writeIdleSlot(template.querySelector(selector), build);
+    this.initialResultsMarkup = template.innerHTML;
+    if (this.resultsContainer) this.writeIdleSlot(this.resultsContainer.querySelector(selector), build);
+  }
+
+  writeIdleSlot(slot, build) {
+    if (!slot) return;
+    slot.innerHTML = build(slot);
+    slot.hidden = false;
   }
 
   close() {

@@ -80,7 +80,12 @@
         "instagram": "Instagram",
         "youtube": "YouTube",
         "tiktok": "TikTok",
-        "linkedin": "LinkedIn"
+        "linkedin": "LinkedIn",
+        "threads": "Threads",
+        "bluesky": "Bluesky",
+        "snapchat": "Snapchat",
+        "tumblr": "Tumblr",
+        "vimeo": "Vimeo"
       },
       "follow_on": "Follow on {{ platform }}",
       "contact": "Contact",
@@ -122,6 +127,10 @@
       "other": "{{ count }} products"
     }
   },
+  "megamenu": {
+    "shop_collection": "Shop {{ title }}",
+    "view_product": "View {{ title }}"
+  },
   "newsletter": {
     "label": "Email",
     "success": "Thanks for subscribing",
@@ -130,6 +139,7 @@
   },
   "accessibility": {
     "navigation": "Main navigation",
+    "mobile_navigation": "Mobile navigation",
     "scroll_left": "Scroll left",
     "scroll_right": "Scroll right",
     "skip_to_text": "Skip to content",
@@ -159,9 +169,13 @@
     "close_popup": "Close popup",
     "dismiss": "Dismiss",
     "play_video": "Play video",
+    "pause_video": "Pause video",
+    "background_video": "Background video",
     "social_link": "Social link",
     "follow_on": "Follow us on {{ platform }}",
     "image_lightbox": "Image lightbox",
+    "zoom_in": "Zoom in",
+    "zoom_out": "Zoom out",
     "comparison_slider": "Comparison slider",
     "view_details": "View details",
     "share_on": "Share on {{ platform }}",
@@ -251,6 +265,8 @@
       "media": {
         "gallery_viewer": "Gallery Viewer",
         "load_image": "Load image {{ index }} in gallery view",
+        "lightbox_counter": "{{ current }} / {{ total }}",
+        "thumbnails": "Image thumbnails",
         "load_video": "Play video {{ index }} in gallery view",
         "image_available": "Image {{ index }} is now available in gallery view",
         "open_media": "Open media {{ index }} in modal",
@@ -350,6 +366,13 @@
       "collapse_filters": "Collapse filters",
       "load_more": "Load more",
       "apply_filters": "Apply",
+      "see_results": {
+        "one": "See {{ count }} item",
+        "other": "See {{ count }} items"
+      },
+      "density_label": "Products per row",
+      "density_one": "One product per row",
+      "density_two": "Two products per row",
       "read_more": "Read more"
     }
   },
@@ -404,6 +427,7 @@
       "featured_categories": "Featured categories",
       "no_results_for": "No results found for ‘{{ terms }}’",
       "recommended_products": "Recommended products",
+      "view_all_products": "View all products",
       "view_all_results": "View all {{ count }} results for ‘{{ terms }}’",
       "suggestions_unavailable": "Search suggestions are unavailable.",
       "view_search_results": "View search results"
@@ -480,10 +504,26 @@
       "item_count": "Items",
       "subtotal": "Subtotal",
       "shipping": "Shipping",
-      "shipping_calculated": "Calculated at next step"
+      "shipping_calculated": "Calculated at next step",
+      "discount": {
+        "label": "Discount code",
+        "apply": "Apply",
+        "remove": "Remove discount code {{ code }}",
+        "list_label": "Applied discount codes",
+        "invalid": "This discount code is not valid for your cart.",
+        "shipping": "This code can only be used on shipping and cannot be shown in the cart."
+      },
+      "announce": {
+        "item_removed": "{{ title }} removed from your cart.",
+        "quantity_changed": "Quantity of {{ title }} changed to {{ quantity }}.",
+        "discount_applied": "Discount code {{ code }} applied.",
+        "discount_removed": "Discount code {{ code }} removed.",
+        "total": "Estimated total {{ total }}."
+      }
     },
     "footer": {
-      "payment": "Payment methods"
+      "payment": "Payment methods",
+      "policies_label": "Store policies"
     },
     "featured_blog": {
       "view_all": "View all",
@@ -755,6 +795,8 @@
     "country_label": "Country/region",
     "language_label": "Language",
     "update": "Update",
+    "search_label": "Search countries and regions",
+    "no_results": "No countries or regions match your search",
     "update_language": "Update language",
     "update_country": "Update country/region"
   },

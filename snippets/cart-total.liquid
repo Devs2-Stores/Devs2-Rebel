@@ -5,7 +5,7 @@
       <span>{{ 'sections.cart.item_count' | t }}:</span>
       <strong><span data-cart-count>{{ cart.item_count }}</span></strong>
     </li>
-    <li>
+    <li class="cart-total__subtotal">
       <span>{{ 'sections.cart.subtotal' | t }}:</span>
       <strong>{{ cart.original_total_price | money }}</strong>
     </li>
@@ -21,9 +21,10 @@
     </li>
     <li class="cart-total__estimated-total">
       <span>{{ 'sections.cart.estimated_total' | t }}:</span>
-      <strong class="cart-price">{% if settings.currency_code_enabled %}{{ cart.total_price | money_with_currency }}{% else %}{{ cart.total_price | money }}{% endif %}</strong>
+      <strong class="cart-price">{% if settings.price_currency_code_enabled %}{{ cart.total_price | money_with_currency }}{% else %}{{ cart.total_price | money }}{% endif %}</strong>
     </li>
   </ul>
+  {%- render 'cart-discount', context: 'page' -%}
   {%- if cart.taxes_included or shop.shipping_policy.body != blank -%}
     <div class="cart-total__policies">
       {%- if cart.taxes_included -%}
@@ -36,7 +37,7 @@
   {%- endif -%}
   <div class="cart-total__actions">
     <button type="submit" name="checkout" form="cart" class="button-primary active">{{ 'sections.cart.checkout' | t }}</button>
-    {%- if additional_checkout_buttons -%}
+    {%- if additional_checkout_buttons and settings.cart_accelerated_checkout_enabled -%}
       <div class="cart-total__dynamic-checkout">
         {{ content_for_additional_checkout_buttons }}
       </div>

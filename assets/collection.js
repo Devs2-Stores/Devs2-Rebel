@@ -31,7 +31,8 @@ class FacetFilters extends HTMLElement {
     this.collectionUrl = this.dataset.collectionUrl || window.location.pathname;
 
     this.filterForm = this.querySelector('#FacetFilterForm');
-    this.sortSelect = this.querySelector('#SortBy, .collection-sort__select');
+    this.sortSelects = Array.from(this.querySelectorAll('.collection-sort__select'));
+    this.sortSelect = this.sortSelects[0] || null;
 
     this.debouncedSubmit = debounce(this.submitFilters.bind(this), 300);
 
@@ -50,6 +51,8 @@ class FacetFilters extends HTMLElement {
     this.bindViewToggle();
     this.bindActiveFilterRemove();
     this.initCollapsibleLists();
+    this.initHorizontalFilters(-1);
+    this.bindHorizontalFilterDismiss();
     this.bindDescToggle();
     var self = this;
     window.addEventListener('popstate', function() {
@@ -216,14 +219,18 @@ class FacetFilters extends HTMLElement {
   /* ── Sort ────────────────────────────────────────── */
 
   bindSortEvents() {
-    if (!this.sortSelect) return;
+    if (this.sortSelects.length === 0) return;
     var self = this;
 
-    this.sortSelect.addEventListener('change', function() {
-      var searchParams = self.buildSearchParams();
-      searchParams.set('sort_by', this.value);
-      var url = self.buildTargetUrl(searchParams);
-      self.fetchAndRender(url);
+    this.sortSelects.forEach(function(select) {
+      select.addEventListener('change', function() {
+        var value = this.value;
+        self.sortSelects.forEach(function(other) { other.value = value; });
+        var searchParams = self.buildSearchParams();
+        searchParams.set('sort_by', value);
+        var url = self.buildTargetUrl(searchParams);
+        self.fetchAndRender(url);
+      });
     });
   }
 
@@ -335,14 +342,16 @@ class FacetFilters extends HTMLElement {
     if (newPagination && currentPagination) {
       currentPagination.innerHTML = newPagination.innerHTML;
     }
+    if (this.paginationType === 'infinite') this.observeInfiniteSentinel();
 
     // Replace filters (to update counts & active states)
     var newFilters = doc.querySelector('#FacetFiltersContainer');
     var currentFilters = document.querySelector('#FacetFiltersContainer');
     if (newFilters && currentFilters) {
+      var openIdx = this.openFacetIndex();
       currentFilters.innerHTML = newFilters.innerHTML;
       // Re-init collapsible lists and events on new filter HTML
-      this.reinitFilters();
+      this.reinitFilters(openIdx);
     }
 
     // Replace active filter tags above grid
@@ -383,9 +392,9 @@ class FacetFilters extends HTMLElement {
     }
 
     // Update mobile filter badge
-    var newBadge = doc.querySelector('.collection-template__filter-badge');
-    var currentBadgeContainer = document.querySelector('.collection-template__filter-btn');
-    var currentBadge = document.querySelector('.collection-template__filter-badge');
+    var newBadge = doc.querySelector('.collection-sort__filter-btn .collection-template__filter-badge');
+    var currentBadgeContainer = document.querySelector('.collection-sort__filter-btn');
+    var currentBadge = document.querySelector('.collection-sort__filter-btn .collection-template__filter-badge');
     if (currentBadgeContainer) {
       if (newBadge) {
         if (currentBadge) {
@@ -397,6 +406,18 @@ class FacetFilters extends HTMLElement {
       } else if (currentBadge) {
         currentBadge.remove();
       }
+    }
+
+    var newApplyLabel = doc.querySelector('[data-filter-apply-label]');
+    if (newApplyLabel) {
+      document.querySelectorAll('[data-filter-apply-label]').forEach(function(el) {
+        el.textContent = newApplyLabel.textContent;
+      });
+    }
+
+    var newSortSelect = doc.querySelector('.collection-sort__select');
+    if (newSortSelect) {
+      this.sortSelects.forEach(function(select) { select.value = newSortSelect.value; });
     }
 
     var liveRegion = document.getElementById('CollectionLiveRegion');
@@ -446,7 +467,7 @@ class FacetFilters extends HTMLElement {
     return Array.from(container.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), select:not([disabled])'));
   }
 
-  reinitFilters() {
+  reinitFilters(openIdx) {
     // Re-bind filter form
     this.filterForm = this.querySelector('#FacetFilterForm');
     if (this.filterForm) {
@@ -466,6 +487,57 @@ class FacetFilters extends HTMLElement {
 
     // Re-init collapsible
     this.initCollapsibleLists();
+    this.initHorizontalFilters(openIdx);
+  }
+
+  /* ── Horizontal filter bar (desktop dropdowns) ─────── */
+
+  isHorizontalBar() {
+    return this.filterLayout === 'horizontal' && window.matchMedia('(min-width: 1024px)').matches;
+  }
+
+  openFacetIndex() {
+    var open = this.querySelector('#FacetFiltersContainer .facet-filter__details[open]');
+    if (!open) return -1;
+    return Array.from(this.querySelectorAll('#FacetFiltersContainer facet-filter')).indexOf(open.closest('facet-filter'));
+  }
+
+  initHorizontalFilters(openIdx) {
+    if (!this.isHorizontalBar()) return;
+    var facets = this.querySelectorAll('#FacetFiltersContainer facet-filter');
+    facets.forEach(function(facet, i) {
+      var details = facet.querySelector('.facet-filter__details');
+      if (!details) return;
+      if (i === openIdx) details.setAttribute('open', '');
+      else details.removeAttribute('open');
+    });
+  }
+
+  bindHorizontalFilterDismiss() {
+    if (this.filterLayout !== 'horizontal') return;
+    var self = this;
+    var signal = this.lifecycle.signal;
+    var closeAll = function(except) {
+      self.querySelectorAll('#FacetFiltersContainer .facet-filter__details[open]').forEach(function(d) {
+        if (d !== except) d.removeAttribute('open');
+      });
+    };
+    this.addEventListener('toggle', function(e) {
+      if (!self.isHorizontalBar() || !e.target.matches('.facet-filter__details') || !e.target.open) return;
+      closeAll(e.target);
+    }, { capture: true, signal: signal });
+    document.addEventListener('click', function(e) {
+      if (!self.isHorizontalBar() || e.target.closest('facet-filter')) return;
+      closeAll(null);
+    }, { signal: signal });
+    document.addEventListener('keydown', function(e) {
+      if (e.key !== 'Escape' || !self.isHorizontalBar()) return;
+      var open = self.querySelector('#FacetFiltersContainer .facet-filter__details[open]');
+      if (!open) return;
+      open.removeAttribute('open');
+      var summary = open.querySelector('summary');
+      if (summary) summary.focus();
+    }, { signal: signal });
   }
 
   /* ── Filter drawer (mobile) ─────────────────────── */
@@ -575,6 +647,8 @@ class FacetFilters extends HTMLElement {
           });
         }
 
+        if (self.hasAttribute('data-search-results')) self.appendSearchContent(doc);
+
         // Update pagination area
         var newPagination = doc.querySelector('#CollectionPagination');
         var currentPagination = self.querySelector('#CollectionPagination');
@@ -615,6 +689,42 @@ class FacetFilters extends HTMLElement {
         }
         self.showLoadError();
       });
+  }
+
+  appendSearchContent(doc) {
+    var self = this;
+    doc.querySelectorAll('[data-search-panel]').forEach(function(panel) {
+      var type = panel.getAttribute('data-search-panel');
+      if (type === 'products') return;
+      var current = self.querySelector('[data-search-panel="' + type + '"]');
+      if (current) {
+        var list = current.querySelector('.search-template__content-list');
+        if (!list) return;
+        panel.querySelectorAll('.search-template__content-item').forEach(function(item) { list.appendChild(item); });
+      } else {
+        var pagination = self.querySelector('#CollectionPagination');
+        if (!pagination) return;
+        panel.hidden = true;
+        pagination.insertAdjacentElement('beforebegin', panel);
+      }
+    });
+
+    var addCount = function(currentEl, newEl) {
+      var added = parseInt((newEl.textContent.match(/\d+/) || ['0'])[0], 10);
+      currentEl.textContent = currentEl.textContent.replace(/\d+/, function(m) { return String(parseInt(m, 10) + added); });
+      return added;
+    };
+    doc.querySelectorAll('[data-search-tab]').forEach(function(newTab) {
+      var currentTab = self.querySelector('[data-search-tab="' + newTab.getAttribute('data-search-tab') + '"]');
+      var currentSpan = currentTab && currentTab.querySelector('span');
+      var newSpan = newTab.querySelector('span');
+      if (!currentSpan || !newSpan) return;
+      if (addCount(currentSpan, newSpan) > 0) currentTab.disabled = false;
+    });
+    doc.querySelectorAll('[data-search-tab-count]').forEach(function(newInfo) {
+      var currentInfo = self.querySelector('[data-search-tab-count="' + newInfo.getAttribute('data-search-tab-count') + '"]');
+      if (currentInfo) addCount(currentInfo, newInfo);
+    });
   }
 
   /* ── Infinite scroll ───────────────────────────── */
@@ -684,15 +794,17 @@ class FacetFilters extends HTMLElement {
     }, { signal: this.lifecycle.signal });
   }
 
-  /* ── View toggle (grid/list) ────────────────────── */
+  /* ── View toggle (grid/list) and mobile density ─── */
 
   bindViewToggle() {
     var self = this;
-    var viewBtns = document.querySelectorAll('.collection-sort__view-btn');
+    var viewBtns = document.querySelectorAll('.collection-sort__view-btn[data-view]');
     if (viewBtns.length === 0) return;
 
     var mainContainer = document.getElementById('CollectionMain');
     var defaultView = (mainContainer && mainContainer.dataset.defaultView) || 'grid';
+    this.densityEnabled = !!(mainContainer && mainContainer.hasAttribute('data-density-toggle'));
+    this.phoneQuery = window.matchMedia('(max-width: 749px)');
     var savedView = this.readViewMode() || defaultView;
     this.setViewMode(savedView);
 
@@ -703,6 +815,38 @@ class FacetFilters extends HTMLElement {
         ThemeUtils.storage.set('collection_view', mode);
       });
     });
+
+    this.bindDensityToggle(mainContainer);
+  }
+
+  bindDensityToggle(mainContainer) {
+    if (!this.densityEnabled) return;
+    var self = this;
+    var saved = ThemeUtils.storage.get('collection_density');
+    var fallback = mainContainer.dataset.defaultColumnsMobile || '2';
+    this.setDensity(saved === '1' || saved === '2' ? saved : fallback);
+
+    document.querySelectorAll('.collection-sort__density-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var value = this.getAttribute('data-density');
+        self.setDensity(value);
+        ThemeUtils.storage.set('collection_density', value);
+      });
+    });
+
+    this.phoneQuery.addEventListener('change', function() {
+      self.setViewMode(self.readViewMode() || 'grid');
+    }, { signal: this.lifecycle.signal });
+  }
+
+  setDensity(value) {
+    var mainContainer = document.getElementById('CollectionMain');
+    if (mainContainer) mainContainer.style.setProperty('--columns-mobile', value);
+    document.querySelectorAll('.collection-sort__density-btn').forEach(function(btn) {
+      var active = btn.getAttribute('data-density') === value;
+      btn.setAttribute('aria-pressed', String(active));
+      btn.classList.toggle('collection-sort__view-btn--active', active);
+    });
   }
 
   readViewMode() {
@@ -711,18 +855,15 @@ class FacetFilters extends HTMLElement {
 
   setViewMode(mode) {
     var container = document.querySelector('#CollectionProducts .product-cards');
-    var viewBtns = document.querySelectorAll('.collection-sort__view-btn');
+    var viewBtns = document.querySelectorAll('.collection-sort__view-btn[data-view]');
     if (!container) return;
 
     viewBtns.forEach(function(btn) {
       btn.classList.toggle('collection-sort__view-btn--active', btn.getAttribute('data-view') === mode);
     });
 
-    if (mode === 'list') {
-      container.classList.add('product-cards--list');
-    } else {
-      container.classList.remove('product-cards--list');
-    }
+    var listForced = mode === 'list' && this.densityEnabled && this.phoneQuery.matches;
+    container.classList.toggle('product-cards--list', mode === 'list' && !listForced);
   }
 
   /* ── Collapsible filter lists ───────────────────── */

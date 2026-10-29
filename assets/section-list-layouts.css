@@ -1,0 +1,77 @@
+/* Shared layout variants for card lists: carousel and editorial.
+   The default grid stays in each section's own stylesheet; a list opts in with
+   data-list-layout="carousel|editorial" on the element that holds the cards. */
+[data-list-layout] {
+  --list-gap: 12px;
+  --list-media-h: clamp(15rem, 30vw, 28rem);
+  gap: var(--list-gap);
+  list-style: none;
+  padding-inline: 0;
+}
+@media (min-width: 750px) {
+  [data-list-layout] { --list-gap: 20px; }
+}
+[data-list-layout] > * { min-width: 0; }
+
+/* -- Carousel: CSS scroll-snap row, peeks the next card on phones -- */
+[data-list-layout='carousel'] {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  padding-block-end: var(--space-md);
+}
+[data-list-layout='carousel'] > * {
+  flex: 0 0 calc((100% - var(--list-cols-m, 2) * var(--list-gap)) / (var(--list-cols-m, 2) + 0.4));
+  scroll-snap-align: start;
+}
+@media (min-width: 750px) {
+  [data-list-layout='carousel'] > * {
+    flex-basis: calc((100% - (var(--list-cols-d, 3) - 1) * var(--list-gap)) / var(--list-cols-d, 3));
+  }
+}
+
+/* -- Editorial: asymmetric 7/5 pairs, equal media height, no empty cells -- */
+[data-list-layout='editorial'] {
+  display: grid;
+  grid-template-columns: repeat(var(--list-ed-cols-m, 2), minmax(0, 1fr));
+  align-items: start;
+}
+@media (max-width: 749px) {
+  [data-list-layout='editorial'] > :first-child,
+  [data-list-layout='editorial'] > :last-child:nth-child(even) {
+    grid-column: 1 / -1;
+  }
+}
+@media (min-width: 750px) {
+  [data-list-layout='editorial'] {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+  [data-list-layout='editorial'] > :nth-child(4n + 1),
+  [data-list-layout='editorial'] > :nth-child(4n) {
+    grid-column: span 7;
+  }
+  [data-list-layout='editorial'] > :nth-child(4n + 2),
+  [data-list-layout='editorial'] > :nth-child(4n + 3) {
+    grid-column: span 5;
+  }
+  [data-list-layout='editorial'] > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Media of every card kind that can sit in these lists */
+[data-list-layout='editorial'] .section-collection-list__card {
+  aspect-ratio: auto;
+  height: var(--list-media-h);
+}
+[data-list-layout='editorial'] .collection-card__image.collection-card__image,
+[data-list-layout='editorial'] .section-blog-posts__media.section-blog-posts__media,
+[data-list-layout='editorial'] .product-card__media-image.product-card__media-image {
+  aspect-ratio: auto;
+  height: var(--list-media-h);
+}
+[data-list-layout='editorial'] .section-blog-posts__media.section-blog-posts__media {
+  height: calc(var(--list-media-h) * 0.75);
+}

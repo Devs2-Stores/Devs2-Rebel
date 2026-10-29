@@ -107,6 +107,9 @@
 {% schema %}
 {
   "name": "t:sections.team.name",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "tag": "section",
   "class": "section-team-wrapper",
   "settings": [
@@ -296,7 +299,7 @@
   "presets": [
     {
       "name": "t:sections.team.presets.team.name",
-      "category": "Custom",
+      "category": "t:categories.storytelling",
       "blocks": [
         {
           "type": "member"

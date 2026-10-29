@@ -100,6 +100,9 @@
 {% schema %}
 {
   "name": "t:sections.tabs.name",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "tag": "section",
   "class": "section-tabs-wrapper",
   "settings": [
@@ -242,7 +245,7 @@
   "presets": [
     {
       "name": "t:sections.tabs.presets.tabs.name",
-      "category": "Custom",
+      "category": "t:categories.text",
       "blocks": [
         {
           "type": "tab",

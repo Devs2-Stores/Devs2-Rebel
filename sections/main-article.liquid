@@ -57,16 +57,16 @@
               assign hero_alt = article.image.alt | default: article.title | escape
               if container_width == 'fixed'
                 assign hero_sizes = '(min-width: 1024px) calc(100vw - 150px), (min-width: 750px) calc(100vw - 60px), calc(100vw - 30px)'
-                assign hero_cap = settings.page_width | minus: 150
+                assign hero_cap = settings.layout_page_width | minus: 150
                 if has_sidebar
-                  assign hero_cap_sidebar = settings.page_width | minus: 462
-                  if settings.page_width >= 1280
-                    assign hero_sizes = '(min-width: ' | append: settings.page_width | append: 'px) ' | append: hero_cap_sidebar | append: 'px, (min-width: 1280px) calc(100vw - 462px), ' | append: hero_sizes
+                  assign hero_cap_sidebar = settings.layout_page_width | minus: 462
+                  if settings.layout_page_width >= 1280
+                    assign hero_sizes = '(min-width: ' | append: settings.layout_page_width | append: 'px) ' | append: hero_cap_sidebar | append: 'px, (min-width: 1280px) calc(100vw - 462px), ' | append: hero_sizes
                   else
-                    assign hero_sizes = '(min-width: 1280px) ' | append: hero_cap_sidebar | append: 'px, (min-width: ' | append: settings.page_width | append: 'px) ' | append: hero_cap | append: 'px, ' | append: hero_sizes
+                    assign hero_sizes = '(min-width: 1280px) ' | append: hero_cap_sidebar | append: 'px, (min-width: ' | append: settings.layout_page_width | append: 'px) ' | append: hero_cap | append: 'px, ' | append: hero_sizes
                   endif
                 else
-                  assign hero_sizes = '(min-width: ' | append: settings.page_width | append: 'px) ' | append: hero_cap | append: 'px, ' | append: hero_sizes
+                  assign hero_sizes = '(min-width: ' | append: settings.layout_page_width | append: 'px) ' | append: hero_cap | append: 'px, ' | append: hero_sizes
                 endif
               elsif has_sidebar
                 assign hero_sizes = '(min-width: 1280px) calc(100vw - 342px), calc(100vw - 30px)'

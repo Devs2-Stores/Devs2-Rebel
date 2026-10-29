@@ -70,6 +70,22 @@
             if block.settings.heading != blank or block.settings.subheading != blank or block.settings.text != blank or block.settings.button_label_1 != blank
               assign has_content = true
             endif
+            assign slide_video = block.settings.video
+            assign slide_video_url = block.settings.video_url
+            assign slide_has_video = false
+            if slide_video != blank or slide_video_url != blank
+              assign slide_has_video = true
+              assign slide_video_label = block.settings.heading | strip_html
+              if slide_video_label == blank
+                assign slide_video_label = 'accessibility.background_video' | t
+              endif
+            endif
+            assign slide_video_first = false
+            assign slide_video_hold = true
+            if slide_index == 1
+              assign slide_video_first = true
+              assign slide_video_hold = false
+            endif
           -%}
 
           <div
@@ -114,6 +130,17 @@
                   {{ 'lifestyle-1' | placeholder_svg_tag: 'section-slideshow__placeholder-svg' }}
                 </div>
               {%- endif -%}
+              {%- if slide_has_video -%}
+                {%- render 'video-media',
+                  id: block.id,
+                  video: slide_video,
+                  video_url: slide_video_url,
+                  poster: desktop_img,
+                  label: slide_video_label,
+                  eager: slide_video_first,
+                  hold: slide_video_hold
+                -%}
+              {%- endif -%}
             </div>
 
             {%- comment %} Overlay {% endcomment -%}
@@ -122,6 +149,10 @@
                 class="section-slideshow__overlay"
                 style="--slideshow-overlay: {{ overlay_opacity }};"
               ></div>
+            {%- endif -%}
+
+            {%- if slide_has_video -%}
+              {%- render 'video-control', id: block.id -%}
             {%- endif -%}
 
             {%- comment %} Content {% endcomment -%}
@@ -264,7 +295,10 @@
 
     var syncHiddenSlides = function() {
       swiperInstance.slides.forEach(function(slide, index) {
-        slide.inert = index !== swiperInstance.activeIndex;
+        var inactive = index !== swiperInstance.activeIndex;
+        slide.inert = inactive;
+        var media = slide.querySelector('[data-media-video]');
+        if (media) media.dispatchEvent(new CustomEvent('media-video:hold', { detail: { hold: inactive } }));
       });
     };
     syncHiddenSlides();
@@ -331,6 +365,9 @@
 {% schema %}
 {
   "name": "t:sections.slideshow.name",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "tag": "section",
   "class": "section-slideshow-wrapper",
   "settings": [
@@ -441,6 +478,22 @@
           "id": "image_mobile",
           "label": "t:sections.slideshow.blocks.slide.settings.image_mobile.label",
           "info": "t:sections.slideshow.blocks.slide.settings.image_mobile.info"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "t:sections.slideshow.blocks.slide.settings.video.label",
+          "info": "t:sections.slideshow.blocks.slide.settings.video.info"
+        },
+        {
+          "type": "video_url",
+          "id": "video_url",
+          "accept": [
+            "youtube",
+            "vimeo"
+          ],
+          "label": "t:sections.slideshow.blocks.slide.settings.video_url.label",
+          "info": "t:sections.slideshow.blocks.slide.settings.video_url.info"
         },
         {
           "type": "range",
@@ -731,7 +784,7 @@
   "presets": [
     {
       "name": "t:sections.slideshow.presets.slideshow.name",
-      "category": "Image",
+      "category": "t:categories.banners",
       "blocks": [
         {
           "type": "slide",

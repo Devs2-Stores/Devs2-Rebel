@@ -1,0 +1,140 @@
+{% doc %}
+  Generic image block.
+
+  Renders a responsive image with width and height attributes, an optional
+  fixed aspect ratio and the theme media radius. A block with no image shows a
+  placeholder in the theme editor and nothing on the storefront.
+{% enddoc %}
+
+{{ 'block-generic.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign image = block.settings.image
+  assign image_alt = block.settings.alt
+  if image_alt == blank
+    assign image_alt = image.alt
+  endif
+  case block.settings.ratio
+    when 'square'
+      assign image_ratio = '1 / 1'
+    when 'portrait'
+      assign image_ratio = '4 / 5'
+    when 'landscape'
+      assign image_ratio = '3 / 2'
+    when 'wide'
+      assign image_ratio = '16 / 9'
+    else
+      assign image_ratio = image.aspect_ratio | default: 1.25
+  endcase
+  case block.settings.width
+    when 'large'
+      assign image_width = '75%'
+    when 'medium'
+      assign image_width = '50%'
+    when 'small'
+      assign image_width = '25%'
+    else
+      assign image_width = '100%'
+  endcase
+-%}
+{%- if image != blank or request.design_mode -%}
+  <div
+    class="block-image block-image--{{ block.settings.width }}"
+    style="--block-image-ratio: {{ image_ratio }}; --block-image-width: {{ image_width }};"
+    {{ block.shopify_attributes }}
+  >
+    {%- if image != blank -%}
+      {{
+        image
+        | image_url: width: 1600
+        | image_tag:
+          widths: '375, 550, 750, 1000, 1200, 1600',
+          sizes: '(max-width: 749px) 100vw, min(1200px, 100vw)',
+          alt: image_alt,
+          loading: 'lazy',
+          decoding: 'async',
+          class: 'block-image__img'
+      }}
+    {%- else -%}
+      {{ 'image' | placeholder_svg_tag: 'block-image__placeholder' }}
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:blocks.image.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:blocks.image.settings.image.label"
+    },
+    {
+      "type": "text",
+      "id": "alt",
+      "label": "t:blocks.image.settings.alt.label",
+      "info": "t:blocks.image.settings.alt.info"
+    },
+    {
+      "type": "select",
+      "id": "ratio",
+      "label": "t:blocks.image.settings.ratio.label",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:blocks.image.settings.ratio.options.adapt"
+        },
+        {
+          "value": "square",
+          "label": "t:blocks.image.settings.ratio.options.square"
+        },
+        {
+          "value": "portrait",
+          "label": "t:blocks.image.settings.ratio.options.portrait"
+        },
+        {
+          "value": "landscape",
+          "label": "t:blocks.image.settings.ratio.options.landscape"
+        },
+        {
+          "value": "wide",
+          "label": "t:blocks.image.settings.ratio.options.wide"
+        }
+      ],
+      "default": "adapt"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:blocks.image.settings.width.label",
+      "options": [
+        {
+          "value": "fill",
+          "label": "t:blocks.image.settings.width.options.fill"
+        },
+        {
+          "value": "large",
+          "label": "t:blocks.image.settings.width.options.large"
+        },
+        {
+          "value": "medium",
+          "label": "t:blocks.image.settings.width.options.medium"
+        },
+        {
+          "value": "small",
+          "label": "t:blocks.image.settings.width.options.small"
+        }
+      ],
+      "default": "fill"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.image.name",
+      "category": "t:blocks.common.categories.basic"
+    }
+  ]
+}
+{% endschema %}

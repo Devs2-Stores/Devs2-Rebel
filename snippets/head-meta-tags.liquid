@@ -79,8 +79,8 @@
 <meta property="og:locale" content="{{ request.locale.iso_code | replace: '-', '_' }}">
 
 {%- comment %} — Twitter Cards — {% endcomment %}
-{% if settings.social_twitter_link != blank %}
-  {%- assign twitter_handle = settings.social_twitter_link | split: '?' | first | split: '/' | last | remove: '@' -%}
+{% if settings.social_twitter_profile != blank %}
+  {%- assign twitter_handle = settings.social_twitter_profile | split: '?' | first | split: '/' | last | remove: '@' -%}
   <meta name="twitter:site" content="@{{ twitter_handle | escape }}">
 {% endif %}
 <meta name="twitter:card" content="summary_large_image">
@@ -119,7 +119,7 @@
       {%- assign same_as_started = false %}
       "sameAs": [
         {%- for network in social_networks -%}
-          {%- assign social_key = 'social_' | append: network | append: '_link' -%}
+          {%- assign social_key = 'social_' | append: network | append: '_profile' -%}
           {%- assign social_url = settings[social_key] | strip -%}
           {%- if social_url != blank -%}
             {%- if same_as_started %},{% endif -%}

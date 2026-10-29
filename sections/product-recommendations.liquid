@@ -1,6 +1,4 @@
 {{ 'section-product-recommendations.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'product-card.js' | asset_url }}" defer="defer"></script>
-<script src="{{ 'product-recommendations.js' | asset_url }}" defer="defer"></script>
 
 {%- assign container_width = section.settings.container_width | default: 'fixed' -%}
 
@@ -25,7 +23,8 @@
                     product: related_product,
                     lazyload: 'lazy',
                     fetchpriority: 'auto',
-                    show_vendor: true
+                    show_vendor: true,
+                    sizes: '(max-width: 749px) 47vw, (max-width: 1023px) 30vw, 22vw'
                   -%}
                 </li>
               {%- endfor -%}

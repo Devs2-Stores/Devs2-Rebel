@@ -181,6 +181,9 @@
 {% schema %}
 {
   "name": "t:sections.video.name",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "tag": "section",
   "class": "section-video-wrapper",
   "settings": [
@@ -443,7 +446,7 @@
   "presets": [
     {
       "name": "t:sections.video.presets.video.name",
-      "category": "Video"
+      "category": "t:categories.media"
     }
   ]
 }

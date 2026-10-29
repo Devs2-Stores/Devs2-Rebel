@@ -27,7 +27,7 @@
         </a>
         <div class="cart-item__info">
           <div>
-            {%- if settings.show_vendor and item.product.vendor != blank -%}
+            {%- if settings.vendor_name_enabled and item.product.vendor != blank -%}
               <p class="cart-item__vendor">{{ item.product.vendor | escape }}</p>
             {%- endif -%}
             <a href="{{ item.url }}" class="cart-item__title">{{ item.product.title | escape }}</a>

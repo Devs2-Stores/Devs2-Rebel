@@ -94,6 +94,9 @@
 {% schema %}
 {
   "name": "t:sections.layered_images.name",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "tag": "section",
   "class": "section-layered-wrapper",
   "settings": [
@@ -356,7 +359,7 @@
   "presets": [
     {
       "name": "t:sections.layered_images.presets.layered_images_with_text.name",
-      "category": "Image",
+      "category": "t:categories.banners",
       "blocks": [
         {
           "type": "feature",

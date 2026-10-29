@@ -7,7 +7,7 @@
   window.themeConfig = {
     shopUrl: '{{ request.origin }}',
     formatMoney: {{ shop.money_format | json }},
-    priceFormat: {% if settings.currency_code_enabled %}{{ shop.money_with_currency_format | json }}{% else %}{{ shop.money_format | json }}{% endif %},
+    priceFormat: {% if settings.price_currency_code_enabled %}{{ shop.money_with_currency_format | json }}{% else %}{{ shop.money_format | json }}{% endif %},
 
     routes: {
       root_url: {{ routes.root_url | append: '/' | replace: '//', '/' | json }},
@@ -18,7 +18,7 @@
       get_cart_url: '{{ routes.cart_url }}.js',
       checkout_url: '/checkout',
       all_products_url: '{{ routes.all_products_collection_url }}',
-      predictive_search_url: '{% if settings.predictive_search_enabled %}{{ routes.predictive_search_url }}{% endif %}',
+      predictive_search_url: '{% if settings.search_suggest_enabled %}{{ routes.predictive_search_url }}{% endif %}',
       search_url: '{{ routes.search_url }}'
     },
 
@@ -31,8 +31,8 @@
         item_remove: "cart-item-removed",
         updated: "cart:updated"
       },
-      type: {{ settings.cart_type | default: 'drawer' | json }},
-      auto_open_sidebar: {% if settings.cart_type == 'page' or settings.cart_type == 'notification' %}false{% else %}true{% endif %}
+      type: {{ settings.cart_mode | default: 'drawer' | json }},
+      auto_open_sidebar: {% if settings.cart_mode == 'page' or settings.cart_mode == 'notification' %}false{% else %}true{% endif %}
     },
 
     strings: {
@@ -167,6 +167,12 @@
   })();
 </script>
 <script defer src="{{ 'theme.js' | asset_url }}"></script>
+{%- if settings.motion_reveal_on_scroll -%}
+  <script defer src="{{ 'reveal-on-scroll.js' | asset_url }}"></script>
+{%- endif -%}
+{%- if request.design_mode -%}
+  <script defer src="{{ 'theme-editor.js' | asset_url }}"></script>
+{%- endif -%}
 <script defer src="{{ 'toast.js' | asset_url }}"></script>
 <script defer src="{{ 'back-to-top.js' | asset_url }}"></script>
 
@@ -178,8 +184,6 @@
   <script defer src="{{ 'cart.js' | asset_url }}"></script>
 {%- elsif template contains 'customer' -%}
   <script defer src="{{ 'customer.js' | asset_url }}"></script>
-{%- elsif template == 'page.about' -%}
-  <script defer src="{{ 'page-about.js' | asset_url }}"></script>
 {%- elsif template == 'page.contact' -%}
   <script defer src="{{ 'page-contact.js' | asset_url }}"></script>
 {%- elsif template == 'page.stores' -%}

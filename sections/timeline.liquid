@@ -63,6 +63,9 @@
 {% schema %}
 {
   "name": "t:sections.timeline.name",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "tag": "section",
   "class": "section-timeline-wrapper",
   "settings": [
@@ -266,7 +269,7 @@
   "presets": [
     {
       "name": "t:sections.timeline.presets.timeline.name",
-      "category": "Custom",
+      "category": "t:categories.storytelling",
       "blocks": [
         {
           "type": "event",

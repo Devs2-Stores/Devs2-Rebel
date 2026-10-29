@@ -1,0 +1,17 @@
+{%- comment -%}
+  Polite status region for cart changes. Scripts write into it; the strings are locale-backed
+  templates carrying [title], [quantity], [code] and [total] placeholders.
+{%- endcomment -%}
+<div
+  class="visually-hidden"
+  role="status"
+  aria-live="polite"
+  aria-atomic="true"
+  data-cart-live
+  data-item-removed="{{ 'sections.cart.announce.item_removed' | t: title: '[title]' | escape }}"
+  data-quantity-changed="{{ 'sections.cart.announce.quantity_changed' | t: title: '[title]', quantity: '[quantity]' | escape }}"
+  data-discount-applied="{{ 'sections.cart.announce.discount_applied' | t: code: '[code]' | escape }}"
+  data-discount-removed="{{ 'sections.cart.announce.discount_removed' | t: code: '[code]' | escape }}"
+  data-total="{{ 'sections.cart.announce.total' | t: total: '[total]' | escape }}"
+  data-empty="{{ 'sections.cart.empty' | t | escape }}"
+></div>

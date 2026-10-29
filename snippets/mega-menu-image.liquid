@@ -1,0 +1,16 @@
+{%- doc -%}
+  Renders the image of the collection or product a menu link points to.
+  Outputs nothing when the link has no such image.
+
+  @param {object} link - Menu link
+{%- enddoc -%}
+
+{%- liquid
+  if link.type == 'collection_link' or link.type == 'product_link'
+    assign media_image = link.object.featured_image | default: link.object.image
+  endif
+  if media_image != blank
+    assign media_alt = media_image.alt | default: link.title
+    echo media_image | image_url: width: 360 | image_tag: loading: 'lazy', widths: '180, 270, 360', sizes: '9rem', alt: media_alt, class: 'megamenu__card-img'
+  endif
+-%}

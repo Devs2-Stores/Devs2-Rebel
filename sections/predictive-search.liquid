@@ -54,10 +54,10 @@
             {%- unless product.available -%}
             <span class="predictive-search__product-status">{{ 'products.product.sold_out' | t }}</span>
             {%- endunless -%}
-            {%- if settings.predictive_search_show_vendor and product.vendor != blank -%}
+            {%- if settings.search_suggest_vendor_enabled and product.vendor != blank -%}
             <span class="predictive-search__product-vendor">{{ product.vendor }}</span>
             {%- endif -%}
-            {%- if settings.predictive_search_show_price -%}
+            {%- if settings.search_suggest_price_enabled -%}
             <span class="predictive-search__product-price{% if product.compare_at_price > product.price %} predictive-search__product-price--sale{% endif %}">
               {%- if product.price == 0 -%}
                 {{ 'products.product.price.contact' | t }}

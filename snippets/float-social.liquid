@@ -13,6 +13,7 @@
   assign channels = 'hotline,facebook,messenger,tiktok,telegram,email,map,instagram,youtube' | split: ','
   assign channel_icons = 'icon-hotline,icon-facebook,icon-comments,icon-tiktok,icon-telegram,icon-email,icon-location,icon-instagram,icon-youtube' | split: ','
   assign item_index = 0
+  assign shared_social_channels = 'facebook,tiktok,instagram,youtube' | split: ','
 -%}
 <float-social class="float-social" data-position="{{ settings.float_social_position | default: 'right' }}">
   <button type="button" class="float-social__toggle" aria-label="{{ 'general.social.contact' | t }}" aria-expanded="false" aria-controls="float-social-panel">
@@ -38,6 +39,9 @@
           assign setting_prefix = 'float_' | append: channel
           assign enable_key = setting_prefix | append: '_enable'
           assign link_key = setting_prefix | append: '_link'
+          if shared_social_channels contains channel
+            assign link_key = 'social_' | append: channel | append: '_profile'
+          endif
           assign channel_link = settings[link_key] | strip
         -%}
         {%- if settings[enable_key] and channel_link != blank -%}

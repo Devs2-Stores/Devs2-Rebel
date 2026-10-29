@@ -29,6 +29,20 @@
   if desktop_img != blank and mobile_img != desktop_img
     assign has_mobile_art = true
   endif
+  assign hero_video = section.settings.video
+  assign hero_video_url = section.settings.video_url
+  assign has_video = false
+  if hero_video != blank or hero_video_url != blank
+    assign has_video = true
+    assign video_label = section.settings.image_alt
+    if video_label == blank
+      assign video_label = 'accessibility.background_video' | t
+    endif
+  endif
+  assign video_eager = false
+  if fetch_priority == 'high'
+    assign video_eager = true
+  endif
 -%}
 
 <div
@@ -82,11 +96,26 @@
         {{ 'lifestyle-1' | placeholder_svg_tag: 'section-hero__placeholder-svg' }}
       </div>
     {%- endif -%}
+    {%- if has_video -%}
+      {%- render 'video-media',
+        id: section.id,
+        video: hero_video,
+        video_url: hero_video_url,
+        poster: desktop_img,
+        label: video_label,
+        eager: video_eager,
+        hold: false
+      -%}
+    {%- endif -%}
   </div>
 
   {%- comment %} Overlay {% endcomment -%}
   {%- if overlay_opacity > 0 -%}
     <div class="section-hero__overlay{% if section.settings.overlay_gradient %} section-hero__overlay--gradient{% endif %}"></div>
+  {%- endif -%}
+
+  {%- if has_video -%}
+    {%- render 'video-control', id: section.id -%}
   {%- endif -%}
 
   {%- comment %} Content blocks {% endcomment -%}
@@ -269,6 +298,22 @@
       "id": "image_alt",
       "label": "t:sections.hero.settings.image_alt.label",
       "info": "t:sections.hero.settings.image_alt.info"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "t:sections.hero.settings.video.label",
+      "info": "t:sections.hero.settings.video.info"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "accept": [
+        "youtube",
+        "vimeo"
+      ],
+      "label": "t:sections.hero.settings.video_url.label",
+      "info": "t:sections.hero.settings.video_url.info"
     },
     {
       "type": "header",
@@ -787,7 +832,7 @@
   "presets": [
     {
       "name": "t:sections.hero.presets.hero_centered.name",
-      "category": "Banners",
+      "category": "t:categories.banners",
       "blocks": [
         {
           "type": "subheading",
@@ -821,7 +866,7 @@
     },
     {
       "name": "t:sections.hero.presets.hero_bottom_left.name",
-      "category": "Banners",
+      "category": "t:categories.banners",
       "blocks": [
         {
           "type": "subheading",
@@ -860,7 +905,7 @@
     },
     {
       "name": "t:sections.hero.presets.hero_top_left.name",
-      "category": "Banners",
+      "category": "t:categories.banners",
       "blocks": [
         {
           "type": "heading",
@@ -895,7 +940,7 @@
     },
     {
       "name": "t:sections.hero.presets.hero_countdown.name",
-      "category": "Banners",
+      "category": "t:categories.banners",
       "blocks": [
         {
           "type": "heading",

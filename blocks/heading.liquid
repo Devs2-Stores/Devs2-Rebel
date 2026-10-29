@@ -1,0 +1,179 @@
+{% doc %}
+  Generic heading block.
+
+  Renders a heading in the heading font, or a small uppercase eyebrow line.
+  The tag is chosen by the merchant so a page can keep a single h1.
+{% enddoc %}
+
+{{ 'block-generic.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign heading_tag = block.settings.tag
+  assign heading_classes = 'block-heading block-heading--' | append: block.settings.style
+  assign heading_classes = heading_classes | append: ' block-width--' | append: block.settings.width
+  if block.settings.style == 'heading'
+    assign heading_classes = heading_classes | append: ' heading-size-' | append: block.settings.size
+  endif
+  if block.settings.text_align != 'inherit'
+    assign heading_classes = heading_classes | append: ' block-align--' | append: block.settings.text_align
+  endif
+-%}
+{%- if block.settings.heading != blank or request.design_mode -%}
+  <{{ heading_tag }} class="{{ heading_classes }}" {{ block.shopify_attributes }}>
+    {{- block.settings.heading -}}
+  </{{ heading_tag }}>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:blocks.heading.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:blocks.heading.settings.heading.label",
+      "default": "t:blocks.heading.settings.heading.default"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "t:blocks.heading.settings.style.label",
+      "options": [
+        {
+          "value": "heading",
+          "label": "t:blocks.heading.settings.style.options.heading"
+        },
+        {
+          "value": "eyebrow",
+          "label": "t:blocks.heading.settings.style.options.eyebrow"
+        }
+      ],
+      "default": "heading"
+    },
+    {
+      "type": "select",
+      "id": "tag",
+      "label": "t:blocks.heading.settings.tag.label",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:blocks.heading.settings.tag.options.h1"
+        },
+        {
+          "value": "h2",
+          "label": "t:blocks.heading.settings.tag.options.h2"
+        },
+        {
+          "value": "h3",
+          "label": "t:blocks.heading.settings.tag.options.h3"
+        },
+        {
+          "value": "h4",
+          "label": "t:blocks.heading.settings.tag.options.h4"
+        },
+        {
+          "value": "h5",
+          "label": "t:blocks.heading.settings.tag.options.h5"
+        },
+        {
+          "value": "h6",
+          "label": "t:blocks.heading.settings.tag.options.h6"
+        },
+        {
+          "value": "p",
+          "label": "t:blocks.heading.settings.tag.options.p"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "select",
+      "id": "size",
+      "label": "t:blocks.heading.settings.size.label",
+      "options": [
+        {
+          "value": "xs",
+          "label": "t:blocks.common.size.options.xs"
+        },
+        {
+          "value": "sm",
+          "label": "t:blocks.common.size.options.sm"
+        },
+        {
+          "value": "md",
+          "label": "t:blocks.common.size.options.md"
+        },
+        {
+          "value": "lg",
+          "label": "t:blocks.common.size.options.lg"
+        },
+        {
+          "value": "xl",
+          "label": "t:blocks.common.size.options.xl"
+        },
+        {
+          "value": "2xl",
+          "label": "t:blocks.common.size.options._2xl"
+        }
+      ],
+      "default": "lg",
+      "visible_if": "{{ block.settings.style == 'heading' }}"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:blocks.common.width.label",
+      "options": [
+        {
+          "value": "narrow",
+          "label": "t:blocks.common.width.options.narrow"
+        },
+        {
+          "value": "medium",
+          "label": "t:blocks.common.width.options.medium"
+        },
+        {
+          "value": "wide",
+          "label": "t:blocks.common.width.options.wide"
+        },
+        {
+          "value": "full",
+          "label": "t:blocks.common.width.options.full"
+        }
+      ],
+      "default": "full"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "t:blocks.common.text_align.label",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:blocks.common.text_align.options.inherit"
+        },
+        {
+          "value": "left",
+          "label": "t:blocks.common.text_align.options.left"
+        },
+        {
+          "value": "center",
+          "label": "t:blocks.common.text_align.options.center"
+        },
+        {
+          "value": "right",
+          "label": "t:blocks.common.text_align.options.right"
+        }
+      ],
+      "default": "inherit"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.heading.name",
+      "category": "t:blocks.common.categories.basic"
+    }
+  ]
+}
+{% endschema %}

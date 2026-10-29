@@ -92,6 +92,9 @@
 {% schema %}
 {
   "name": "t:sections.marquee_products.name",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "tag": "section",
   "class": "section-marquee-products-wrapper",
   "settings": [
@@ -209,7 +212,7 @@
   "presets": [
     {
       "name": "t:sections.marquee_products.presets.marquee_products.name",
-      "category": "Collection"
+      "category": "t:categories.collections"
     }
   ]
 }

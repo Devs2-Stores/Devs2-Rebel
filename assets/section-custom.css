@@ -1,0 +1,27 @@
+/* ── Custom section ── */
+.section-custom {
+  padding-block-start: var(--custom-mt);
+  padding-block-end: var(--custom-mb);
+}
+
+@media (min-width: 750px) {
+  .section-custom {
+    padding-block-start: var(--custom-dt);
+    padding-block-end: var(--custom-db);
+  }
+}
+
+.section-custom__full {
+  padding-inline: 15px;
+}
+
+@media (min-width: 750px) {
+  .section-custom__full {
+    padding-inline: 30px;
+  }
+}
+
+.section-custom__flow--narrow {
+  max-width: 800px;
+  margin-inline: auto;
+}

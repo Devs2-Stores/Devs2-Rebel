@@ -64,9 +64,36 @@
 
     handleExternalUpdate(event) {
       if (!event.detail || event.detail.source === this || !event.detail.cart) return;
-      this.refreshSection().catch(function(error) {
+      var cart = event.detail.cart;
+      var fromDiscount = event.detail.source && event.detail.source.localName === 'cart-discount';
+      this.refreshSection().then(function() {
+        if (fromDiscount) this.syncDiscounts(cart);
+      }.bind(this)).catch(function(error) {
         this.showError(error.message);
       }.bind(this));
+    }
+
+    syncDiscounts(cart) {
+      var discount = this.querySelector('cart-discount');
+      if (discount && typeof discount.renderCodes === 'function') discount.renderCodes(cart);
+      var subtotal = this.querySelector('.cart-total__subtotal');
+      if (subtotal) {
+        this.querySelectorAll('.cart-total__discount-code').forEach(function(row) {
+          row.remove();
+        });
+        var rows = (cart.cart_level_discount_applications || []).map(function(application) {
+          var row = document.createElement('li');
+          var title = document.createElement('span');
+          var amount = document.createElement('strong');
+          row.className = 'cart-total__discount-code';
+          title.textContent = application.title + ':';
+          amount.textContent = '-' + formatMoney(application.total_allocated_amount || 0);
+          row.append(title, amount);
+          return row;
+        });
+        subtotal.after.apply(subtotal, rows);
+      }
+      updateCartMoney(cart.total_price || 0);
     }
 
     async updateCart(params) {
@@ -78,6 +105,10 @@
       this.updateController = new AbortController();
       var controller = this.updateController;
       this.setUpdating(true);
+      var lineItem = this.querySelector('cart-item[data-line-item="' + line + '"]');
+      var titleEl = lineItem ? lineItem.querySelector('.cart-item__title') : null;
+      var title = titleEl ? titleEl.textContent.trim() : '';
+      var focusSelector = this.focusSelector(document.activeElement);
 
       try {
         var cart = await this.requestCart(this.getCartRoute('change'), { line: line, quantity: quantity }, 'error', controller.signal);
@@ -88,6 +119,8 @@
         }
 
         await this.refreshSection(controller.signal);
+        this.restoreFocus(line, quantity === 0, focusSelector);
+        this.announceChange(cart, quantity === 0 ? title : (updatedItem ? updatedItem.product_title : title), quantity === 0 ? null : (updatedItem ? updatedItem.quantity : quantity));
         await updateCartData(cart, { source: this });
       } catch (error) {
         if (error.name === 'AbortError') return;
@@ -163,6 +196,7 @@
       var newContent = documentFragment.querySelector('cart-template');
       if (!newContent) throw new Error(this.getString('error'));
 
+      var activeId = this.contains(document.activeElement) ? document.activeElement.id : '';
       var noteValue = this.noteInput ? this.noteInput.value : null;
       var invoiceValues = {};
       this.invoiceInputs.forEach(function(input) {
@@ -176,6 +210,71 @@
       this.invoiceInputs.forEach(function(input) {
         if (invoiceValues[input.name] !== undefined) input.value = invoiceValues[input.name];
       });
+      if (activeId) {
+        var restored = document.getElementById(activeId);
+        if (restored) restored.focus();
+      }
+    }
+
+    visible(item, selector) {
+      return Array.prototype.find.call(item.querySelectorAll(selector), function(element) {
+        return element.getClientRects().length > 0;
+      }) || null;
+    }
+
+    focusSelector(element) {
+      if (!element || !this.contains(element) || !element.closest('cart-item')) return null;
+      if (element.dataset.action) return '[data-action="' + element.dataset.action + '"]';
+      if (element.matches('.quantity-selector__input')) return '.quantity-selector__input';
+      return null;
+    }
+
+    restoreFocus(line, removed, selector) {
+      var heading = this.querySelector('.cart-template__title');
+      var item = this.querySelector('cart-item[data-line-item="' + line + '"]');
+      var target = null;
+      if (removed) {
+        target = item ? this.visible(item, '[data-action="delete-item"]') : null;
+      } else if (item && selector) {
+        target = this.visible(item, selector);
+        if (target && target.disabled) target = this.visible(item, '.quantity-selector__input');
+      }
+      if (target) {
+        target.focus();
+        return;
+      }
+      if (document.activeElement === document.body || !this.contains(document.activeElement)) heading.focus();
+    }
+
+    liveText(key) {
+      var region = this.liveRegion();
+      return region ? region.dataset[key] || '' : '';
+    }
+
+    liveRegion() {
+      var section = this.closest('.shopify-section');
+      return section ? section.querySelector('[data-cart-live]') : null;
+    }
+
+    announceChange(cart, title, quantity) {
+      var region = this.liveRegion();
+      if (!region) return;
+      var fill = function(template, values) {
+        return Object.keys(values).reduce(function(text, key) {
+          return text.split('[' + key + ']').join(values[key]);
+        }, template);
+      };
+      var message = quantity === null
+        ? fill(this.liveText('itemRemoved'), { title: title })
+        : fill(this.liveText('quantityChanged'), { title: title, quantity: quantity });
+      var tail = cart.item_count === 0
+        ? this.liveText('empty')
+        : fill(this.liveText('total'), { total: formatMoney(cart.total_price || 0, themeConfig.priceFormat) });
+      region.textContent = '';
+      clearTimeout(region.announceTimer);
+      region.announceTimer = setTimeout(function() {
+        region.textContent = message + ' ' + tail;
+      }, 60);
     }
 
     restoreQuantity(line) {

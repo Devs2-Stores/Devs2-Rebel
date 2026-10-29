@@ -94,6 +94,7 @@
           method: 'GET'
         });
         await this.renderCart(cart);
+        if (cart.item_count === 0) this.announce(this.liveText('empty'));
         await updateCartData(cart, { source: this });
       } catch (error) {
         this.showError(this.getString('error'));
@@ -105,6 +106,8 @@
 
     async renderCart(cart) {
       this.updateTotals(cart);
+      var discount = this.querySelector('cart-discount');
+      if (discount && typeof discount.renderCodes === 'function') discount.renderCodes(cart);
       if (this.noteInput && document.activeElement !== this.noteInput) this.noteInput.value = cart.note || '';
 
       var isEmpty = cart.item_count === 0;
@@ -139,12 +142,18 @@
       this.updateController = new AbortController();
       var controller = this.updateController;
       this.classList.add('is-updating');
+      var lineItem = this.lineElement(line);
+      var titleEl = lineItem ? lineItem.querySelector('.cart-modal-item__title') : null;
+      var title = titleEl ? titleEl.textContent.trim() : '';
+      var focusSelector = this.focusSelector(document.activeElement);
 
       try {
         var cart = await this.postCart((themeConfig.routes && themeConfig.routes.cart_change_url) || '/cart/change.js', { line: line, quantity: quantity }, 'error', controller.signal);
         var updatedItem = cart.items[line - 1];
         if (quantity > 0 && updatedItem && updatedItem.quantity !== quantity) this.showQuantityError(updatedItem.quantity);
         await this.renderCart(cart);
+        this.restoreFocus(line, quantity === 0, focusSelector);
+        this.announceChange(cart, quantity === 0 ? title : (updatedItem ? updatedItem.product_title : title), quantity === 0 ? null : (updatedItem ? updatedItem.quantity : quantity));
         await updateCartData(cart, { source: this });
       } catch (error) {
         if (error.name !== 'AbortError') {
@@ -157,6 +166,64 @@
           this.classList.remove('is-updating');
         }
       }
+    }
+
+    lineElement(line) {
+      return this.itemsContainer ? this.itemsContainer.querySelector('[data-line-item="' + line + '"]') : null;
+    }
+
+    focusSelector(element) {
+      if (!element || !this.itemsContainer || !this.itemsContainer.contains(element)) return null;
+      if (element.dataset.action) return '[data-action="' + element.dataset.action + '"]';
+      if (element.matches('.quantity-selector__input')) return '.quantity-selector__input';
+      return null;
+    }
+
+    restoreFocus(line, removed, selector) {
+      var heading = this.querySelector('#cart-modal-title');
+      var item = this.lineElement(line);
+      var target = null;
+      if (removed) {
+        target = item ? item.querySelector('[data-action="remove-cart-item"]') : null;
+      } else if (item && selector) {
+        target = item.querySelector(selector);
+        if (target && target.disabled) target = item.querySelector('.quantity-selector__input');
+      }
+      if (target) {
+        target.focus();
+        return;
+      }
+      if (document.activeElement === document.body || !this.contains(document.activeElement)) heading.focus();
+    }
+
+    liveText(key) {
+      var region = this.querySelector('[data-cart-live]');
+      return region ? region.dataset[key] || '' : '';
+    }
+
+    announce(text) {
+      var region = this.querySelector('[data-cart-live]');
+      if (!region || !text) return;
+      region.textContent = '';
+      clearTimeout(region.announceTimer);
+      region.announceTimer = setTimeout(function() {
+        region.textContent = text;
+      }, 60);
+    }
+
+    announceChange(cart, title, quantity) {
+      var fill = function(template, values) {
+        return Object.keys(values).reduce(function(text, key) {
+          return text.split('[' + key + ']').join(values[key]);
+        }, template);
+      };
+      var message = quantity === null
+        ? fill(this.liveText('itemRemoved'), { title: title })
+        : fill(this.liveText('quantityChanged'), { title: title, quantity: quantity });
+      var tail = cart.item_count === 0
+        ? this.liveText('empty')
+        : fill(this.liveText('total'), { total: formatMoney(cart.total_price || 0, themeConfig.priceFormat) });
+      this.announce(message + ' ' + tail);
     }
 
     async updateNote() {

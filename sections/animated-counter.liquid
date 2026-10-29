@@ -92,6 +92,9 @@
 {% schema %}
 {
   "name": "t:sections.animated_counter.name",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "tag": "section",
   "class": "section-stats-wrapper",
   "settings": [
@@ -277,7 +280,7 @@
   "presets": [
     {
       "name": "t:sections.animated_counter.presets.animated_counter.name",
-      "category": "Custom",
+      "category": "t:categories.storytelling",
       "blocks": [
         {
           "type": "stat",

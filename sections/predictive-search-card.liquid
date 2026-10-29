@@ -1,0 +1,8 @@
+{%- layout none -%}
+{%- comment %}
+  Search modal idle state: one recently viewed product.
+  Usage: /products/{handle}?section_id=predictive-search-card
+{% endcomment -%}
+{%- if product != blank -%}
+  {%- render 'predictive-search-card', product: product -%}
+{%- endif -%}

@@ -99,6 +99,9 @@
 {% schema %}
 {
   "name": "t:sections.promotion_banner.name",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "tag": "section",
   "class": "section-promo-wrapper",
   "settings": [
@@ -315,7 +318,7 @@
   "presets": [
     {
       "name": "t:sections.promotion_banner.presets.promotion_banner.name",
-      "category": "Custom",
+      "category": "t:categories.banners",
       "blocks": [
         {
           "type": "promo_item"

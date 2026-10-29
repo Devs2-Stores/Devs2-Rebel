@@ -139,22 +139,14 @@
       // Reset first
       dropdown.classList.remove('is-flipped');
 
-      // Get positions
+      // Default: left edge of the dropdown sits on the menu item and extends RIGHT.
+      // Flipped (right: 0): extends LEFT when the dropdown would pass the viewport's right edge.
+      // offsetWidth is 0 while the dropdown is closed and skipped by content-visibility, so
+      // this only flips on hover/focus, when the dropdown is being shown.
       var itemRect = menuItem.getBoundingClientRect();
-      var viewportWidth = window.innerWidth;
-      var triggerCenter = itemRect.left + itemRect.width / 2;
-
-      // Default: right: 0 (dropdown extends LEFT from menu item) - good for right-side items
-      // Flipped: left: 0 (dropdown extends RIGHT from menu item) - good for left-side items
-      // Only flip for menu items in the LEFT 1/3 of viewport
-      var oneThirdPoint = viewportWidth / 3;
-      if (itemRect.left < oneThirdPoint) {
+      var gutter = 16;
+      if (itemRect.left + dropdown.offsetWidth > window.innerWidth - gutter) {
         dropdown.classList.add('is-flipped');
-        // Arrow offset from left edge = trigger center - dropdown left (which is item left)
-        dropdown.style.setProperty('--arrow-offset', Math.round(triggerCenter - itemRect.left) + 'px');
-      } else {
-        // Arrow offset from right edge = dropdown right (which is item right) - trigger center
-        dropdown.style.setProperty('--arrow-offset', Math.round(itemRect.right - triggerCenter) + 'px');
       }
     }
 

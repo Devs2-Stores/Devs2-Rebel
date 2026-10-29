@@ -67,6 +67,11 @@
         else
           assign enable_sorting = section.settings.enable_sorting
         endif
+        assign pagination_type = section.settings.pagination_type | default: 'pagination'
+        assign enable_filtering_panel = false
+        if enable_filtering and search.filters.size > 0
+          assign enable_filtering_panel = true
+        endif
       -%}
       {%- if search.results_count > 0 or active_filter_count > 0 -%}
         {%- paginate search.results by section.settings.products_per_page -%}
@@ -75,7 +80,7 @@
           data-search-results
           data-section-id="{{ section.id }}"
           data-collection-url="{{ search_base_url | escape }}"
-          data-pagination-type="pagination"
+          data-pagination-type="{{ pagination_type }}"
           data-filter-layout="sidebar"
         >
           {%- assign has_products = false -%}
@@ -104,37 +109,21 @@
                 enable_filtering: enable_filtering,
                 filter_layout: 'sidebar',
                 results: search,
-                price_filter_style: 'input'
+                price_filter_style: 'input',
+                enable_sorting: enable_sorting
               -%}
             {%- endif -%}
 
             <div class="collection-template__products-container" id="CollectionProductGrid">
-              {%- if enable_filtering and search.filters.size > 0 -%}
-                <div class="collection-template__mobile-filter-ctrl">
-                  <button
-                    type="button"
-                    class="collection-template__filter-btn"
-                    data-action="open-filter"
-                    aria-label="{{ 'products.facets.filter_button' | t }}"
-                    aria-expanded="false"
-                    aria-controls="CollectionFilterDrawer"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
-                    <span>{{ 'products.facets.filter_button' | t }}</span>
-                    {%- if active_filter_count > 0 -%}
-                      <span class="collection-template__filter-badge">{{ active_filter_count }}</span>
-                    {%- endif -%}
-                  </button>
-                </div>
-              {%- endif -%}
               {%- render 'collection-sort',
                 results: search,
                 limit: section.settings.products_per_page,
                 paginate: paginate,
                 show_product_count: true,
                 enable_sorting: enable_sorting,
-                enable_filtering: enable_filtering,
-                filter_layout: 'sidebar'
+                enable_filtering: enable_filtering_panel,
+                filter_layout: 'sidebar',
+                active_filter_count: active_filter_count
               -%}
               {%- render 'collection-active-filters', results: search -%}
               <div id="CollectionLiveRegion" class="visually-hidden" role="status" aria-live="polite"></div>
@@ -212,9 +201,7 @@
               {%- endif -%}
 
               <div class="search-template__pagination" id="CollectionPagination">
-                {%- if paginate.pages > 1 -%}
-                  {%- render 'section-pagination', paginate: paginate -%}
-                {%- endif -%}
+                {%- render 'collection-pagination', paginate: paginate, pagination_type: pagination_type -%}
               </div>
             </div>
           </div>
@@ -297,6 +284,26 @@
       "id": "enable_sorting",
       "label": "t:sections.main_collection.settings.enable_sorting.label",
       "default": true
+    },
+    {
+      "type": "select",
+      "id": "pagination_type",
+      "label": "t:sections.main_collection.settings.pagination_type.label",
+      "options": [
+        {
+          "value": "pagination",
+          "label": "t:sections.main_collection.settings.pagination_type.options__pagination.label"
+        },
+        {
+          "value": "load_more",
+          "label": "t:sections.main_collection.settings.pagination_type.options__load_more.label"
+        },
+        {
+          "value": "infinite",
+          "label": "t:sections.main_collection.settings.pagination_type.options__infinite.label"
+        }
+      ],
+      "default": "pagination"
     },
     {
       "type": "collection",

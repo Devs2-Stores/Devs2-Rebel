@@ -29,6 +29,18 @@
       endif
     endfor
   endif
+  assign layout = section.settings.layout | default: 'grid'
+  assign list_attrs_count = source_total
+  if collection_source == 'all'
+    assign list_attrs_count = source_total | at_most: section.settings.per_page
+  endif
+  assign list_cols_d = columns_desktop | at_most: list_attrs_count | at_least: 1
+  assign list_layout_attrs = ''
+  if layout != 'grid'
+    capture list_layout_attrs
+      echo 'data-list-layout="' | append: layout | append: '" style="--list-cols-d: ' | append: list_cols_d | append: '; --list-cols-m: ' | append: section.settings.columns_mobile | append: ';"'
+    endcapture
+  endif
 -%}
 
 {%- style -%}
@@ -37,6 +49,10 @@
     --columns-mobile: {{ section.settings.columns_mobile | default: 2 }};
   }
 {%- endstyle -%}
+
+{%- if layout != 'grid' -%}
+  {{ 'section-list-layouts.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
 
 <div class="list-collections-template section-padding">
   <div class="{% if section.settings.container_width == 'fixed' %}page-width{% endif %}">
@@ -54,7 +70,7 @@
 
     {%- if collection_source == 'all' -%}
       {%- paginate collections by section.settings.per_page -%}
-      <ul class="collection-grid column-gap-{{ section.settings.column_gap }}" role="list">
+      <ul class="collection-grid column-gap-{{ section.settings.column_gap }}" role="list" {{ list_layout_attrs }}>
         {%- for collection in collections -%}
           {%- liquid
             assign collection_handle = collection.handle | downcase
@@ -96,7 +112,7 @@
       {%- endif -%}
       {%- endpaginate -%}
     {%- else -%}
-      <ul class="collection-grid column-gap-{{ section.settings.column_gap }}" role="list">
+      <ul class="collection-grid column-gap-{{ section.settings.column_gap }}" role="list" {{ list_layout_attrs }}>
         {%- for link in collection_menu.links -%}
           {%- if link.type == 'collection_link' and link.object != blank -%}
             {%- assign collection = link.object -%}
@@ -346,6 +362,26 @@
     {
       "type": "header",
       "content": "t:sections.main_list_collections.settings.header__layout.content"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "t:sections.main_list_collections.settings.layout.label",
+      "options": [
+        {
+          "value": "grid",
+          "label": "t:sections.main_list_collections.settings.layout.options.grid"
+        },
+        {
+          "value": "carousel",
+          "label": "t:sections.main_list_collections.settings.layout.options.carousel"
+        },
+        {
+          "value": "editorial",
+          "label": "t:sections.main_list_collections.settings.layout.options.editorial"
+        }
+      ],
+      "default": "grid"
     },
     {
       "type": "select",

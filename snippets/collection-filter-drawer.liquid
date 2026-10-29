@@ -1,6 +1,14 @@
 {% doc %}
   Collection Filter Drawer / Modal snippet.
-  Renders either the sidebar drawer or the slide-in modal depending on filter_layout.
+  Renders the sidebar drawer (also the desktop sidebar) or the slide-in modal depending on filter_layout.
+  On narrow screens the panel carries the sort control and a footer with the live result count.
+
+  @param {boolean} enable_filtering - Render the panel
+  @param {string} filter_layout - sidebar, modal or horizontal
+  @param {object} [results] - Collection or Search object. Default: collection
+  @param {string} [price_filter_style] - Price filter style
+  @param {boolean} [enable_sorting] - Render the sort control inside the panel on narrow screens. Default: false
+  @param {string} [allowed_sort_options] - Comma-separated list of allowed sort values
 {% enddoc %}
 
 {%- liquid
@@ -17,10 +25,11 @@
   else
     assign clear_url = results_url | append: '?sort_by=' | append: sort_by
   endif
+  assign result_count = results.products_count | default: results.results_count | default: 0
 -%}
 
 {%- if enable_filtering -%}
-  {%- if filter_layout == 'sidebar' -%}
+  {%- if filter_layout == 'sidebar' or filter_layout == 'horizontal' -%}
     <div class="collection-template__facet-filter" id="CollectionFilterDrawer">
       <div class="collection-template__facet-filter-header">
         <span class="collection-template__facet-filter-header-title" id="CollectionFilterDrawerTitle">
@@ -35,11 +44,25 @@
           {%- render 'icon', name: 'close' -%}
         </button>
       </div>
+      {%- if enable_sorting -%}
+        <div class="collection-template__facet-filter-sort">
+          <label for="SortByDrawer" class="collection-sort__label">{{ 'products.facets.sort_by_label' | t }}</label>
+          {%- render 'collection-sort-select', results: results, select_id: 'SortByDrawer', allowed_sort_options: allowed_sort_options -%}
+        </div>
+      {%- endif -%}
       <div class="collection-template__facet-filter-title">
         <strong>{{ 'products.facets.filter_by_label' | t }}</strong>
       </div>
       <div class="collection-template__facet-filter-content" id="FacetFiltersContainer">
         {%- render 'collection-facet-filter', results: results, price_filter_style: price_filter_style -%}
+      </div>
+      <div class="collection-template__facet-filter-footer">
+        <a href="{{ clear_url }}" class="collection-template__facet-filter-clear" data-filter-remove>
+          {{ 'products.facets.clear_all_filters' | t }}
+        </a>
+        <button type="button" class="collection-template__facet-filter-apply" data-action="close-filter" data-filter-apply-label>
+          {{- 'products.facets.see_results' | t: count: result_count -}}
+        </button>
       </div>
     </div>
     <div class="collection-template__filter-overlay" data-action="close-filter"></div>
@@ -74,6 +97,12 @@
             {%- render 'icon', name: 'close' -%}
           </button>
         </div>
+        {%- if enable_sorting -%}
+          <div class="collection-template__facet-filter-sort">
+            <label for="SortByDrawer" class="collection-sort__label">{{ 'products.facets.sort_by_label' | t }}</label>
+            {%- render 'collection-sort-select', results: results, select_id: 'SortByDrawer', allowed_sort_options: allowed_sort_options -%}
+          </div>
+        {%- endif -%}
         <div class="collection-filter-modal__body" id="FacetFiltersContainer">
           {%- render 'collection-facet-filter', results: results, collapse_filters: false, price_filter_style: price_filter_style -%}
         </div>
@@ -85,8 +114,8 @@
           >
             {{ 'products.facets.clear_all_filters' | t }}
           </a>
-          <button type="button" class="collection-filter-modal__apply-btn" data-action="close-filter-modal">
-            {{ 'products.facets.apply_filters' | t }}
+          <button type="button" class="collection-filter-modal__apply-btn" data-action="close-filter-modal" data-filter-apply-label>
+            {{- 'products.facets.see_results' | t: count: result_count -}}
           </button>
         </div>
       </div>

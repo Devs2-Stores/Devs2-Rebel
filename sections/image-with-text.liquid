@@ -33,6 +33,20 @@
             {{ 'image' | placeholder_svg_tag: 'section-iwt__placeholder-svg' }}
           </div>
         {%- endif -%}
+        {%- if section.settings.video != blank or section.settings.video_url != blank -%}
+          {%- assign iwt_video_label = section.settings.image.alt -%}
+          {%- if iwt_video_label == blank -%}
+            {%- assign iwt_video_label = 'accessibility.background_video' | t -%}
+          {%- endif -%}
+          {%- render 'video-media',
+            id: section.id,
+            video: section.settings.video,
+            video_url: section.settings.video_url,
+            poster: section.settings.image,
+            label: iwt_video_label
+          -%}
+          {%- render 'video-control', id: section.id -%}
+        {%- endif -%}
       </div>
 
       {%- comment %} Content Column {% endcomment -%}
@@ -102,6 +116,9 @@
 {% schema %}
 {
   "name": "t:sections.image_with_text.name",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "tag": "section",
   "class": "section-iwt-wrapper",
   "settings": [
@@ -119,6 +136,22 @@
       "type": "image_picker",
       "id": "image",
       "label": "t:sections.image_with_text.settings.image.label"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "t:sections.image_with_text.settings.video.label",
+      "info": "t:sections.image_with_text.settings.video.info"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "accept": [
+        "youtube",
+        "vimeo"
+      ],
+      "label": "t:sections.image_with_text.settings.video_url.label",
+      "info": "t:sections.image_with_text.settings.video_url.info"
     },
     {
       "type": "select",
@@ -489,7 +522,7 @@
   "presets": [
     {
       "name": "t:sections.image_with_text.presets.image_with_text.name",
-      "category": "Image",
+      "category": "t:categories.storytelling",
       "blocks": [
         {
           "type": "subheading"

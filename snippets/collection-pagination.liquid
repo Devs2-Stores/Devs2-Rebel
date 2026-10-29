@@ -1,0 +1,47 @@
+{% doc %}
+  @description Pagination block for collection and search grids: numbered pages, load-more button or infinite-scroll sentinel
+  @param {object} paginate - Paginate object from {% paginate %} block
+  @param {string} [pagination_type] - pagination, load_more or infinite. Default: 'pagination'
+  @example {%- render 'collection-pagination', paginate: paginate, pagination_type: 'infinite' -%}
+{% enddoc %}
+
+{%- assign pagination_type = pagination_type | default: 'pagination' -%}
+{%- if pagination_type == 'pagination' -%}
+  {%- render 'section-pagination', paginate: paginate -%}
+{%- elsif pagination_type == 'load_more' -%}
+  {%- if paginate.next -%}
+    <div class="collection-template__load-more">
+      <button
+        type="button"
+        class="collection-template__load-more-btn"
+        data-next-url="{{ paginate.next.url }}"
+        data-action="load-more"
+      >
+        {{ 'products.facets.load_more' | t }}
+      </button>
+    </div>
+  {%- endif -%}
+{%- elsif pagination_type == 'infinite' -%}
+  {%- if paginate.next -%}
+    <div
+      class="collection-template__infinite-sentinel"
+      data-next-url="{{ paginate.next.url }}"
+      data-action="infinite-scroll"
+    >
+      <div class="collection-template__infinite-loader" aria-hidden="true">
+        <svg
+          class="collection-template__spinner"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+        >
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+        </svg>
+      </div>
+    </div>
+  {%- endif -%}
+{%- endif -%}

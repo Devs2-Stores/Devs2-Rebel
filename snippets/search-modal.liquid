@@ -1,7 +1,7 @@
 {{- 'search-modal.css' | asset_url | stylesheet_tag -}}
 <script src="{{ 'search-modal.js' | asset_url }}" defer="defer"></script>
 
-<search-modal class="search-modal-wrapper" role="dialog" aria-modal="true" aria-labelledby="search-modal-title" data-placeholder="{{ 'templates.search.enter_keyword' | t }}" data-tab-products="{{ 'templates.search.products' | t }}" data-tab-articles="{{ 'templates.search.articles' | t }}" data-tab-pages="{{ 'templates.search.pages' | t }}" data-tabs-label="{{ 'templates.search.tabs_label' | t }}">
+<search-modal class="search-modal-wrapper" role="dialog" aria-modal="true" aria-labelledby="search-modal-title" data-placeholder="{{ 'templates.search.enter_keyword' | t }}" data-tab-products="{{ 'templates.search.products' | t }}" data-tab-articles="{{ 'templates.search.articles' | t }}" data-tab-pages="{{ 'templates.search.pages' | t }}" data-tabs-label="{{ 'templates.search.tabs_label' | t }}"{% if settings.search_suggest_idle_products_enabled %} data-idle-recommended="true"{% endif %}{% if settings.search_suggest_recent_enabled %} data-idle-recent="true"{% endif %}>
 	<button type="button" class="search-modal-overlay" data-action="close-search-modal" aria-label="{{ 'accessibility.close' | t }}"></button>
 	<div class="search-modal-panel">
 		<div class="search-modal-header">
@@ -11,7 +11,7 @@
 			</button>
 		</div>
 		<div class="search-modal-input-wrapper">
-			<form class="search-modal-form" action="{{ routes.search_url }}" method="get" role="search">
+			<form class="search-modal-form" action="{{ routes.search_url }}" method="get" role="search" aria-label="{{ 'general.search.search' | t }}">
 				<div class="search-modal-form-inner">
 					<input type="hidden" name="type" value="product,article,page">
 					<label for="search-modal-input" class="sr-only">{{ 'general.search.search' | t }}</label>
@@ -26,7 +26,7 @@
 			</form>
 		</div>
 		<div class="search-modal-results" aria-live="polite" aria-atomic="false">
-			<div class="search-modal-results-content" role="listbox">
+			<div class="search-modal-results-content" role="listbox" aria-label="{{ 'templates.search.suggestions' | t }}">
 				<div class="search-modal-initial">
 					{%- assign trending_terms = settings.predictive_search_trending_terms | split: ',' -%}
 					{%- assign predictive_content_menu = settings.predictive_search_featured_menu | default: linklists['main-menu'] -%}
@@ -52,6 +52,12 @@
 							{%- endfor -%}
 						</ul>
 					</div>
+					{%- endif -%}
+					{%- if settings.search_suggest_idle_products_enabled -%}
+					<div class="search-modal-initial__group search-modal-initial__group--products" data-idle-slot="recommended" hidden></div>
+					{%- endif -%}
+					{%- if settings.search_suggest_recent_enabled -%}
+					<div class="search-modal-initial__group search-modal-initial__group--products" data-idle-slot="recent" data-heading="{{ 'products.product.recently_viewed' | t | escape }}" hidden></div>
 					{%- endif -%}
 					{%- if settings.predictive_search_trending_terms == blank and predictive_content_menu.links.size == 0 -%}
 					<p class="search-modal-initial__placeholder">{{ 'templates.search.enter_keyword' | t }}</p>

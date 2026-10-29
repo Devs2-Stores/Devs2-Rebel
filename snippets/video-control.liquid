@@ -1,0 +1,119 @@
+{%- doc -%}
+  Pause/play button and playback script for a video-media instance. Render it after any overlay so it stays clickable.
+
+  @param {string} id - Same id passed to video-media
+{%- enddoc -%}
+
+<button
+  type="button"
+  class="media-video__toggle"
+  data-media-video-for="{{ id }}"
+  data-label-pause="{{ 'accessibility.pause_video' | t | escape }}"
+  data-label-play="{{ 'accessibility.play_video' | t | escape }}"
+  aria-label="{{ 'accessibility.pause_video' | t | escape }}"
+  hidden
+>
+  <svg class="media-video__icon-pause" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+  <svg class="media-video__icon-play" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="7 4 20 12 7 20 7 4"></polygon></svg>
+</button>
+
+<script>
+  (function() {
+    var root = document.getElementById('media-video-{{ id }}');
+    var toggle = document.querySelector('[data-media-video-for="{{ id }}"]');
+    if (!root || !toggle) return;
+
+    var kind = root.getAttribute('data-media-video');
+    var video = root.querySelector('[data-media-video-el]');
+    var frame = null;
+    var userPaused = false;
+    var holds = { offscreen: false, external: root.hasAttribute('data-hold') };
+    var loaded = kind === 'file' && root.hasAttribute('data-eager');
+    var origins = { youtube: 'https://www.youtube-nocookie.com', vimeo: 'https://player.vimeo.com' };
+
+    function shouldPlay() {
+      return !userPaused && !holds.offscreen && !holds.external;
+    }
+
+    function sendEmbed(play) {
+      if (!frame || !frame.contentWindow) return;
+      var host = root.getAttribute('data-embed-host');
+      var message = host === 'vimeo'
+        ? { method: play ? 'play' : 'pause' }
+        : { event: 'command', func: play ? 'playVideo' : 'pauseVideo', args: '' };
+      frame.contentWindow.postMessage(JSON.stringify(message), origins[host] || '*');
+    }
+
+    function setUserPaused(value) {
+      userPaused = value;
+      root.setAttribute('data-user-paused', value ? 'true' : 'false');
+      toggle.classList.toggle('is-paused', value);
+      toggle.setAttribute('aria-label', toggle.getAttribute(value ? 'data-label-play' : 'data-label-pause'));
+    }
+
+    function apply() {
+      var play = shouldPlay();
+      if (kind === 'file' && video) {
+        if (!loaded) return;
+        if (play) {
+          var attempt = video.play();
+          if (attempt && attempt.catch) {
+            attempt.catch(function(error) {
+              if (error && error.name === 'NotAllowedError') setUserPaused(true);
+            });
+          }
+        } else {
+          video.pause();
+        }
+      } else if (kind === 'embed') {
+        sendEmbed(play);
+      }
+    }
+
+    function load() {
+      if (loaded) return;
+      loaded = true;
+      if (kind === 'file' && video) {
+        video.querySelectorAll('source[data-src]').forEach(function(source) {
+          source.src = source.getAttribute('data-src');
+          source.removeAttribute('data-src');
+        });
+        video.load();
+      } else if (kind === 'embed') {
+        frame = document.createElement('iframe');
+        frame.className = 'media-video__el';
+        frame.src = root.getAttribute('data-embed-src');
+        frame.title = root.getAttribute('data-embed-title');
+        frame.setAttribute('allow', 'autoplay; encrypted-media');
+        frame.setAttribute('loading', 'lazy');
+        frame.setAttribute('tabindex', '-1');
+        root.appendChild(frame);
+      }
+    }
+
+    toggle.hidden = false;
+    toggle.addEventListener('click', function() {
+      setUserPaused(!userPaused);
+      apply();
+    });
+
+    root.addEventListener('media-video:hold', function(event) {
+      holds.external = !!event.detail.hold;
+      if (!holds.external && !holds.offscreen) load();
+      apply();
+    });
+
+    if (kind === 'embed' && root.hasAttribute('data-eager')) load();
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(entries) {
+        var visible = entries[entries.length - 1].isIntersecting;
+        holds.offscreen = !visible;
+        if (visible && !holds.external) load();
+        apply();
+      }, { rootMargin: '200px 0px' }).observe(root);
+    } else if (!holds.external) {
+      load();
+    }
+  })();
+</script>

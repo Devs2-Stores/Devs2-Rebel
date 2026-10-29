@@ -1,0 +1,30 @@
+{%- doc -%}
+  Image card for a mega menu dropdown.
+
+  @param {object} link - Menu link the card points to
+  @param {string} media - Rendered image markup from mega-menu-image
+  @param {boolean} [featured] - Render as the featured card of a top-level item (no child links)
+{%- enddoc -%}
+
+<div class="megamenu__card{% if featured %} megamenu__card--featured{% endif %}">
+  <a href="{{ link.url }}" class="megamenu__card-link">
+    <span class="megamenu__card-media">{{ media }}</span>
+    <span class="megamenu__card-title">{{ link.title | escape }}</span>
+    {%- if featured -%}
+      <span class="megamenu__card-cta">
+        {%- if link.type == 'product_link' -%}
+          {{ 'megamenu.view_product' | t: title: link.title }}
+        {%- else -%}
+          {{ 'megamenu.shop_collection' | t: title: link.title }}
+        {%- endif -%}
+      </span>
+    {%- endif -%}
+  </a>
+  {%- if featured != true and link.links.size > 0 -%}
+    <ul class="megamenu__card-sub">
+      {%- for child in link.links -%}
+        <li><a href="{{ child.url }}" class="megamenu__card-sublink">{{ child.title | escape }}</a></li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+</div>

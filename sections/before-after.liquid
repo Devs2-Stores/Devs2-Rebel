@@ -3,6 +3,20 @@
   Section: Before/After Slider
 {% endcomment -%}
 
+{%- liquid
+  case section.settings.image_ratio
+    when 'portrait'
+      assign cmp_ratio = '4 / 5'
+    when 'square'
+      assign cmp_ratio = '1 / 1'
+    when 'wide'
+      assign cmp_ratio = '16 / 9'
+    when 'adapt'
+      assign cmp_ratio = section.settings.image_before.aspect_ratio | default: 1.5
+    else
+      assign cmp_ratio = '3 / 2'
+  endcase
+-%}
 <div
   id="section-{{ section.id }}"
   class="section-compare color-{{ section.settings.color_scheme }}"
@@ -11,6 +25,9 @@
     --cmp-db: {{ section.settings.padding_bottom_desktop }}px;
     --cmp-mt: {{ section.settings.padding_top_mobile }}px;
     --cmp-mb: {{ section.settings.padding_bottom_mobile }}px;
+    --cmp-ratio: {{ cmp_ratio }};
+    --cmp-max-w: {{ section.settings.max_width }}px;
+    --cmp-max-h: {{ section.settings.max_height }}px;
   "
 >
   <div class="page-width">
@@ -122,6 +139,9 @@
 {% schema %}
 {
   "name": "t:sections.before_after.name",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "tag": "section",
   "class": "section-compare-wrapper",
   "settings": [
@@ -229,6 +249,58 @@
     },
     {
       "type": "header",
+      "content": "t:sections.before_after.settings.header__size.content"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "t:sections.before_after.settings.image_ratio.label",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.before_after.settings.image_ratio.options.adapt"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.before_after.settings.image_ratio.options.portrait"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.before_after.settings.image_ratio.options.square"
+        },
+        {
+          "value": "landscape",
+          "label": "t:sections.before_after.settings.image_ratio.options.landscape"
+        },
+        {
+          "value": "wide",
+          "label": "t:sections.before_after.settings.image_ratio.options.wide"
+        }
+      ],
+      "default": "landscape"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 480,
+      "max": 1600,
+      "step": 40,
+      "unit": "px",
+      "label": "t:sections.before_after.settings.max_width.label",
+      "default": 1600
+    },
+    {
+      "type": "range",
+      "id": "max_height",
+      "min": 300,
+      "max": 1000,
+      "step": 50,
+      "unit": "px",
+      "label": "t:sections.before_after.settings.max_height.label",
+      "default": 750
+    },
+    {
+      "type": "header",
       "content": "t:sections.before_after.settings.header__desktop_spacing.content"
     },
     {
@@ -279,7 +351,7 @@
   "presets": [
     {
       "name": "t:sections.before_after.presets.before_after.name",
-      "category": "Image"
+      "category": "t:categories.storytelling"
     }
   ]
 }

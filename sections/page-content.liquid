@@ -18,6 +18,9 @@
 {% schema %}
 {
   "name": "t:sections.page_content.name",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "tag": "section",
   "class": "section-page-content-wrapper",
   "settings": [
@@ -60,6 +63,7 @@
   ],
   "presets": [
     {
+      "category": "t:categories.text",
       "name": "t:sections.page_content.name"
     }
   ]

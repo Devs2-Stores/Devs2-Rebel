@@ -1,0 +1,111 @@
+{% doc %}
+  Generic button block.
+
+  Renders a link styled as a solid, outline, light or text button. A block with
+  no label renders nothing on the storefront.
+{% enddoc %}
+
+{{ 'block-generic.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  case block.settings.style
+    when 'solid'
+      assign button_classes = 'button-primary active'
+    when 'outline'
+      assign button_classes = 'button-secondary'
+    when 'light'
+      assign button_classes = 'button-primary white'
+    else
+      assign button_classes = 'block-button__link--text'
+  endcase
+-%}
+{%- if block.settings.label != blank or request.design_mode -%}
+  <div class="block-button block-button--{{ block.settings.width }}" {{ block.shopify_attributes }}>
+    {%- if block.settings.label != blank -%}
+      <a
+        class="block-button__link {{ button_classes }}"
+        {% if block.settings.link != blank %}
+          href="{{ block.settings.link }}"
+        {% endif %}
+        {% if block.settings.open_in_new_tab %}
+          target="_blank"
+          rel="noopener"
+        {% endif %}
+      >
+        {{- block.settings.label | escape -}}
+      </a>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:blocks.button.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:blocks.button.settings.label.label",
+      "default": "t:blocks.button.settings.label.default"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:blocks.common.link.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_in_new_tab",
+      "label": "t:blocks.common.open_in_new_tab.label",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "t:blocks.button.settings.style.label",
+      "options": [
+        {
+          "value": "solid",
+          "label": "t:blocks.button.settings.style.options.solid"
+        },
+        {
+          "value": "outline",
+          "label": "t:blocks.button.settings.style.options.outline"
+        },
+        {
+          "value": "light",
+          "label": "t:blocks.button.settings.style.options.light"
+        },
+        {
+          "value": "text",
+          "label": "t:blocks.button.settings.style.options.text"
+        }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:blocks.button.settings.width.label",
+      "options": [
+        {
+          "value": "auto",
+          "label": "t:blocks.button.settings.width.options.auto"
+        },
+        {
+          "value": "full",
+          "label": "t:blocks.button.settings.width.options.full"
+        }
+      ],
+      "default": "auto"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.button.name",
+      "category": "t:blocks.common.categories.basic"
+    }
+  ]
+}
+{% endschema %}

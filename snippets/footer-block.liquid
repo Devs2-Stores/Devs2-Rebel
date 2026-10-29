@@ -1,0 +1,169 @@
+{% doc %}
+  Renders one footer section block (everything except app blocks, which the footer section renders itself).
+
+  @param {object} block - The footer block
+  @param {object} section - The footer section
+
+  @example
+  {% render 'footer-block', block: block, section: section %}
+{% enddoc %}
+  {%- case block.type -%}
+    {%- when 'menu' -%}
+      {%- assign menu = linklists[block.settings.menu] -%}
+      {%- if block.settings.menu != blank and menu.links != blank -%}
+        {%- assign menu_heading = block.settings.heading | default: menu.title -%}
+        <div class="footer-actions-menu" {{ block.shopify_attributes }}>
+          <h2 class="footer-actions-menu__title">
+            <button type="button" class="footer-actions-menu__toggle" aria-expanded="false" aria-controls="FooterMenu-{{ section.id }}-{{ block.id }}">{{ menu_heading | escape }}</button>
+            <span class="footer-actions-menu__label">{{ menu_heading | escape }}</span>
+          </h2>
+          <nav aria-label="{{ menu_heading | escape }}">
+            <ul class="footer-actions-menu__list" id="FooterMenu-{{ section.id }}-{{ block.id }}">
+              {%- for link in menu.links -%}
+                <li>
+                  <a title="{{ link.title | escape }}" href="{{ link.url }}">{{ link.title | escape }}</a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </nav>
+        </div>
+      {%- endif -%}
+
+    {%- when 'logo' -%}
+      <div class="footer-block footer-block--logo footer-info__logo" {{ block.shopify_attributes }}>
+        <a href="{{ routes.root_url }}" title="{{ shop.name | escape }}" class="footer-logo">
+          {%- if settings.footer_logo != blank -%}
+            {{ settings.footer_logo | image_url: width: 400 | image_tag:
+              alt: shop.name,
+              width: settings.footer_logo_width,
+              height: 60,
+              class: 'footer-logo__image',
+              loading: 'lazy'
+            }}
+          {%- else -%}
+            <span class="footer-logo__text">{{ shop.name }}</span>
+          {%- endif -%}
+        </a>
+      </div>
+
+    {%- when 'brand' -%}
+      {%- assign brand_headline = block.settings.headline | default: settings.brand_story_title -%}
+      {%- assign brand_description = block.settings.description | default: settings.brand_story_text -%}
+      <div class="footer-block footer-block--brand" {{ block.shopify_attributes }}>
+        {%- if block.settings.show_image and settings.brand_story_image != blank -%}
+          <div class="footer-info__brand-image">
+            {%- assign brand_image_alt = settings.brand_story_image.alt | default: shop.name | escape -%}
+            {{
+              settings.brand_story_image
+              | image_url: width: 1100
+              | image_tag:
+                width: settings.brand_story_image_width,
+                widths: '110, 275, 550, 1100',
+                sizes: '(max-width: 749px) 100vw, 550px',
+                alt: brand_image_alt,
+                loading: 'lazy',
+                class: 'footer-info__brand-image-img'
+            }}
+          </div>
+        {%- endif -%}
+        {%- if brand_headline != blank -%}
+          <p class="footer-info__headline">{{ brand_headline }}</p>
+        {%- endif -%}
+        {%- if brand_description != blank -%}
+          <div class="footer-info__description">
+            <div class="footer-info__description-text">{{ brand_description }}</div>
+          </div>
+        {%- endif -%}
+      </div>
+
+    {%- when 'text' -%}
+      {%- if block.settings.heading != blank or block.settings.text != blank -%}
+        <div class="footer-block footer-block--text" {{ block.shopify_attributes }}>
+          {%- if block.settings.heading != blank -%}
+            <h2 class="footer-block__heading">{{ block.settings.heading | escape }}</h2>
+          {%- endif -%}
+          {%- if block.settings.text != blank -%}
+            <div class="footer-block__text">{{ block.settings.text }}</div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+    {%- when 'image' -%}
+      {%- if block.settings.image != blank -%}
+        <div class="footer-block footer-block--image" {{ block.shopify_attributes }}>
+          {%- capture block_image -%}
+            {{
+              block.settings.image
+              | image_url: width: 800
+              | image_tag:
+                width: block.settings.image_width,
+                widths: '160, 320, 640, 800',
+                sizes: '(max-width: 749px) 100vw, 400px',
+                alt: block.settings.image.alt | default: shop.name,
+                loading: 'lazy',
+                class: 'footer-block__image'
+            }}
+          {%- endcapture -%}
+          {%- if block.settings.link != blank -%}
+            <a href="{{ block.settings.link }}" class="footer-block__image-link">{{ block_image }}</a>
+          {%- else -%}
+            {{ block_image }}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+    {%- when 'social' -%}
+      {%- capture social_markup -%}
+        {%- render 'social-links', list_class: 'footer-social' -%}
+      {%- endcapture -%}
+      {%- if social_markup != blank -%}
+        <div class="footer-block footer-block--social" {{ block.shopify_attributes }}>
+          {%- if block.settings.heading != blank -%}
+            <h2 class="footer-block__heading">{{ block.settings.heading | escape }}</h2>
+          {%- endif -%}
+          {{ social_markup }}
+        </div>
+      {%- endif -%}
+
+    {%- when 'newsletter' -%}
+      {%- if block.settings.heading != blank or block.settings.show_form -%}
+        <div class="footer_actions__slogan" {{ block.shopify_attributes }}>
+          {%- if block.settings.heading != blank -%}
+            <h2 class="footer_actions_slogan-title">{{ block.settings.heading | escape }}</h2>
+          {%- endif -%}
+          {%- if block.settings.show_form -%}
+            {%- form 'customer', id: 'FooterNewsletter', class: 'footer-newsletter' -%}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <div class="footer-newsletter__field">
+                <label class="visually-hidden" for="FooterNewsletterEmail-{{ block.id }}">{{ 'general.newsletter.email_label' | t }}</label>
+                <input
+                  id="FooterNewsletterEmail-{{ block.id }}"
+                  type="email"
+                  name="contact[email]"
+                  class="footer-newsletter__input"
+                  placeholder="{{ 'general.newsletter.email_placeholder' | t }}"
+                  autocomplete="email"
+                  required
+                  {% if form.errors %}aria-invalid="true" aria-describedby="FooterNewsletterError-{{ block.id }}"{% endif %}
+                >
+                <button type="submit" class="footer-newsletter__btn">{{ 'newsletter.button_label' | t }}</button>
+              </div>
+              {%- if form.posted_successfully? -%}
+                <p class="footer-newsletter__message footer-newsletter__message--success" role="status">{{ 'general.newsletter.success' | t }}</p>
+              {%- elsif form.errors -%}
+                <p class="footer-newsletter__message footer-newsletter__message--error" id="FooterNewsletterError-{{ block.id }}" role="alert">{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</p>
+              {%- endif -%}
+            {%- endform -%}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+    {%- when 'payment' -%}
+      {%- unless shop.enabled_payment_types == empty -%}
+        <ul class="footer-payment-icons" role="list" aria-label="{{ 'sections.footer.payment' | t }}" {{ block.shopify_attributes }}>
+          {%- for type in shop.enabled_payment_types -%}
+            <li class="footer-payment-icons__item">{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>
+          {%- endfor -%}
+        </ul>
+      {%- endunless -%}
+  {%- endcase -%}

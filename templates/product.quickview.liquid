@@ -83,7 +83,7 @@
         {%- if quickview_is_contact -%}
           {{ 'products.product.price.contact' | t }}
         {%- else -%}
-          {%- if settings.currency_code_enabled -%}{{ selected_variant.price | money_with_currency }}{%- else -%}{{ selected_variant.price | money }}{%- endif -%}
+          {%- if settings.price_currency_code_enabled -%}{{ selected_variant.price | money_with_currency }}{%- else -%}{{ selected_variant.price | money }}{%- endif -%}
         {%- endif -%}
       </span>
       <s class="quickview-product__price-compare{% unless quickview_on_sale %} hidden{% endunless %}" data-product-compare>{%- if quickview_on_sale -%}{{ selected_variant.compare_at_price | money }}{%- endif -%}</s>

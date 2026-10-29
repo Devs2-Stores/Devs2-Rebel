@@ -488,3 +488,7 @@
   min-width: 1ch;
   text-align: right;
 }
+
+.section-slideshow:has(.section-slideshow__counter) .media-video__toggle {
+  bottom: 3.5rem;
+}

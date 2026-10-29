@@ -1,0 +1,136 @@
+{% doc %}
+  Generic text block.
+
+  Renders rich text in the colour scheme of the section or group that holds it.
+  Alignment follows the parent unless the block sets its own.
+{% enddoc %}
+
+{{ 'block-generic.css' | asset_url | stylesheet_tag }}
+
+{%- if block.settings.text != blank or request.design_mode -%}
+  <div
+    class="block-text block-text--{{ block.settings.tone }} block-width--{{ block.settings.width }}{% if block.settings.text_align != 'inherit' %} block-align--{{ block.settings.text_align }}{% endif %}"
+    {{ block.shopify_attributes }}
+  >
+    <div class="rte content-size-{{ block.settings.text_size }}">
+      {{- block.settings.text -}}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:blocks.text.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:blocks.text.settings.text.label",
+      "default": "t:blocks.text.settings.text.default"
+    },
+    {
+      "type": "select",
+      "id": "text_size",
+      "label": "t:blocks.text.settings.text_size.label",
+      "options": [
+        {
+          "value": "xs",
+          "label": "t:blocks.common.size.options.xs"
+        },
+        {
+          "value": "sm",
+          "label": "t:blocks.common.size.options.sm"
+        },
+        {
+          "value": "md",
+          "label": "t:blocks.common.size.options.md"
+        },
+        {
+          "value": "lg",
+          "label": "t:blocks.common.size.options.lg"
+        },
+        {
+          "value": "xl",
+          "label": "t:blocks.common.size.options.xl"
+        }
+      ],
+      "default": "md"
+    },
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "t:blocks.common.tone.label",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:blocks.common.tone.options.default"
+        },
+        {
+          "value": "muted",
+          "label": "t:blocks.common.tone.options.muted"
+        },
+        {
+          "value": "ink",
+          "label": "t:blocks.common.tone.options.ink"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:blocks.common.width.label",
+      "options": [
+        {
+          "value": "narrow",
+          "label": "t:blocks.common.width.options.narrow"
+        },
+        {
+          "value": "medium",
+          "label": "t:blocks.common.width.options.medium"
+        },
+        {
+          "value": "wide",
+          "label": "t:blocks.common.width.options.wide"
+        },
+        {
+          "value": "full",
+          "label": "t:blocks.common.width.options.full"
+        }
+      ],
+      "default": "wide"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "t:blocks.common.text_align.label",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:blocks.common.text_align.options.inherit"
+        },
+        {
+          "value": "left",
+          "label": "t:blocks.common.text_align.options.left"
+        },
+        {
+          "value": "center",
+          "label": "t:blocks.common.text_align.options.center"
+        },
+        {
+          "value": "right",
+          "label": "t:blocks.common.text_align.options.right"
+        }
+      ],
+      "default": "inherit"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.text.name",
+      "category": "t:blocks.common.categories.basic"
+    }
+  ]
+}
+{% endschema %}

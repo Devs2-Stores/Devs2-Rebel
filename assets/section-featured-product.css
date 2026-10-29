@@ -210,5 +210,8 @@
 
 .section-featured-product__empty {
   margin: 0;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px dashed var(--color-hairline);
+  border-radius: var(--media-radius);
   color: var(--color-muted);
 }

@@ -211,7 +211,6 @@
 
 /* Hide product facets and product sort bar when viewing Articles or Pages tabs */
 .search-template__results:has(#search-products-panel[hidden]) .collection-template__facet-filter,
-.search-template__results:has(#search-products-panel[hidden]) .collection-template__mobile-filter-ctrl,
 .search-template__results:has(#search-products-panel[hidden]) .collection-sort,
 .search-template__results:has(#search-products-panel[hidden]) .collection-active-filters {
   display: none;

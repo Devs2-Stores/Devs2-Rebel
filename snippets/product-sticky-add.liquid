@@ -32,7 +32,7 @@
 							{%- if sticky_variant.price == 0 -%}
 								{{ 'products.product.price.contact' | t }}
 							{%- else -%}
-								{%- if settings.currency_code_enabled -%}{{ sticky_variant.price | money_with_currency }}{%- else -%}{{ sticky_variant.price | money }}{%- endif -%}
+								{%- if settings.price_currency_code_enabled -%}{{ sticky_variant.price | money_with_currency }}{%- else -%}{{ sticky_variant.price | money }}{%- endif -%}
 							{%- endif -%}
 						</span>
 						<span class="price-compare"{% unless sticky_variant.compare_at_price > sticky_variant.price %} hidden{% endunless %}>

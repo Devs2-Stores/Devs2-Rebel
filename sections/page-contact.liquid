@@ -113,8 +113,9 @@
             {%- endif -%}
 
             {%- if section.settings.show_social -%}
-              {%- capture contact_social_markup -%}{%- render 'shop-social' -%}{%- endcapture -%}
+              {%- capture contact_social_markup -%}{%- render 'social-links', list_class: 'shop-social' -%}{%- endcapture -%}
               {%- if contact_social_markup != blank -%}
+                {{ 'shop-social.css' | asset_url | stylesheet_tag }}
                 <div class="contact-main__info-social">
                   <h3 class="contact-main__info-social-title">{{ 'sections.page_contact.follow_us' | t }}</h3>
                   {{- contact_social_markup -}}

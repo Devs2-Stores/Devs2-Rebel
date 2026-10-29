@@ -61,6 +61,7 @@
 
 /* ── Media ── */
 .section-iwt__media {
+  position: relative;
   overflow: hidden;
   border-radius: var(--media-radius);
   border: var(--media-border);

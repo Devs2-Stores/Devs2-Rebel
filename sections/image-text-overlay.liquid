@@ -74,6 +74,9 @@
 {% schema %}
 {
   "name": "t:sections.image_text_overlay.name",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "tag": "section",
   "class": "section-ito-wrapper",
   "settings": [
@@ -362,7 +365,7 @@
   "presets": [
     {
       "name": "t:sections.image_text_overlay.presets.image_with_text_overlay.name",
-      "category": "Image",
+      "category": "t:categories.banners",
       "blocks": [
         {
           "type": "subheading"

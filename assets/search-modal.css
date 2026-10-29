@@ -682,3 +682,54 @@ search-modal .search-modal-panel .search-modal-loading .search-modal-loading-con
 .predictive-search__status {
   display: none;
 }
+
+/* Idle state product cards */
+.predictive-search__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-lg) var(--space-md);
+}
+@media (min-width: 750px) {
+  .predictive-search__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-lg) var(--space-sm);
+  }
+}
+.predictive-search__grid > .predictive-search__item {
+  margin-top: 0;
+}
+.predictive-search__link--card {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-xs);
+  padding: 0;
+}
+.predictive-search__link--card:hover,
+.predictive-search__link--card:focus-visible {
+  background: transparent;
+}
+.predictive-search__link--card:focus-visible {
+  outline-offset: 2px;
+}
+.predictive-search__card-media {
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--media-radius);
+  background: var(--color-gray-light);
+}
+.predictive-search__card-media .predictive-search__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-base);
+}
+@media (hover: hover) {
+  .predictive-search__link--card:hover .predictive-search__card-media .predictive-search__img {
+    transform: scale(1.03);
+  }
+}
+.predictive-search__link--card .predictive-search__product-info {
+  flex: 0 1 auto;
+}

@@ -1,0 +1,49 @@
+{% doc %}
+  Generic divider block.
+
+  Draws one hairline in the scheme border colour. It runs horizontally in a
+  vertical stack and becomes a vertical rule inside a horizontal group.
+{% enddoc %}
+
+{{ 'block-generic.css' | asset_url | stylesheet_tag }}
+
+<hr
+  class="block-divider"
+  style="--block-divider-thickness: {{ block.settings.thickness }}px; --block-divider-width: {{ block.settings.width }}%;"
+  {{ block.shopify_attributes }}
+>
+
+{% schema %}
+{
+  "name": "t:blocks.divider.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "range",
+      "id": "thickness",
+      "label": "t:blocks.divider.settings.thickness.label",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "width",
+      "label": "t:blocks.divider.settings.width.label",
+      "min": 10,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "default": 100
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.divider.name",
+      "category": "t:blocks.common.categories.layout"
+    }
+  ]
+}
+{% endschema %}

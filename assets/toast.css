@@ -12,7 +12,7 @@
 @media (max-width: 600px) {
   .toast-container { right: var(--space-2xl); left: var(--space-2xl); width: calc(100% - 48px); }
 }
-.toast-wrapper { transform: translateY(100px); opacity: 0; transition: transform var(--transition-base) cubic-bezier(0.4, 0, 0.2, 1), opacity var(--transition-base) cubic-bezier(0.4, 0, 0.2, 1); }
+.toast-wrapper { transform: translateY(100px); opacity: 0; transition: transform var(--transition-base), opacity var(--transition-base); }
 .toast-wrapper.toast-show { transform: translateY(0); opacity: 1; }
 .toast-wrapper.toast-hide { transform: translateY(-20px); opacity: 0; }
 .toast {

@@ -21,8 +21,8 @@ the photograph first.
   badges and the cart count. Everything else is bone, black or oxblood: see
   "Clean system" for the colour roles.
 - Square corners on buttons, inputs, cards, media and popups. Badges and variant
-  pills are rounded (Rebel `badge_corner_radius` and `variant_pills_radius` 40).
-- One Inter family for headings, subheadings and body (`type_*_font` default
+  pills are rounded (Rebel `badge_corner` and `variant_chip_corner_radius` 40).
+- One Inter family for headings, subheadings and body (`type_font_*` default
   `inter_n4`). Hierarchy comes from the type scale, weight and uppercase
   tracking on subheadings, not from extra faces.
 - Hero copy is short and declarative, using tailoring vocabulary: "Cut, draped,
@@ -44,6 +44,16 @@ settings: scheme colours, radii, and type settings. The current preset is Rebel.
 
 A new preset adds settings and scheme values only. It must not add selectors or
 markup branches.
+
+Global setting ids follow `<component>_<property>_<unit>`, for example
+`button_corner_radius`, `product_card_stroke_width`, `panel_shadow_alpha`. They
+are the theme's own contract and are not copied from Dawn or Horizon. Four ids
+stay conventional (`favicon`, `logo`, `logo_width`, `color_schemes`) because
+merchants and tooling look for them by name. Renaming a global id means
+renaming it in `config/settings_schema.json`, every `settings.<id>` reader
+(including keys built with `append`, such as `social_<network>_profile`), the
+`t:settings_schema.*` keys in `locales/en.default.schema.json`, and the preset
+values in `config/settings_data.json`, all in one change.
 
 ## Tokens
 
@@ -147,6 +157,13 @@ carry it; chrome stays out of the way.
   the upgraded element (`my-element:defined .item`), so the content shows when
   the script never runs. A count-up renders its final value in Liquid; the
   script resets it to 0 only when it can animate.
+- Theme settings > Animations > Reveal sections on scroll is owned by
+  `assets/reveal-on-scroll.js`, loaded only when the setting is on. It animates
+  `#MainContent .shopify-section` blocks that start below the fold; the
+  `reveal-on-scroll` keyframes use fill `backwards`, so no `transform` or
+  `opacity` is left on the section afterwards (a leftover transform would
+  become the containing block for `position: fixed` and sticky children). Pages
+  never ship their own reveal.
 
 ## Component rules
 
@@ -214,6 +231,117 @@ carry it; chrome stays out of the way.
   shopper's device clock. With no zone known it stays blank. A status a timer
   refreshes is not a live region.
 
+## Behaviour rules
+
+### Blocks, sections and the editor
+
+- Generic blocks in `blocks/` are public (accepted by every `@theme` section),
+  style from scheme tokens only, and render nothing on the storefront when
+  their content is blank.
+- A flow container (`.blocks-flow`) owns layout: it sets `--flow-h`, `--flow-v`,
+  `--flow-gap` and `--flow-text` from its settings, and children never set
+  their own parent alignment. Row-to-column stacking uses the `--row-wide` and
+  `--row-always` modifier pair.
+- `hr` in `reset.css` has `height: 0`. A vertical divider sets `height: auto`
+  to stretch.
+- Editor-only behaviour (`shopify:block:*`, `shopify:section:*`) lives in
+  `assets/theme-editor.js`, loaded by `head-script.liquid` only under
+  `request.design_mode`. Sections do not register their own editor listeners.
+- Content sections that are page-level (slideshow, video, collections, product
+  and story sections) set `disabled_on` for the header and footer groups.
+  Small footer-friendly sections (`newsletter`, `custom-liquid`, `rich-text`,
+  `collapsible-content`, `icon-boxes`, `trust-badges`, `logo-list`,
+  `scrolling-text`, `spacer-divider`) stay placeable anywhere. `hero` is also
+  blocked from both groups, and `section` from the header group.
+- Preset categories are `t:categories.*` keys in `locales/en.default.schema.json`
+  (banners, storytelling, collections, products, text, layout, media, blog,
+  forms, advanced). A new section picks one; it does not add a literal English
+  category.
+- A section that offers `@app` blocks renders them with `render block` in its
+  own file, because the settings-usage gate reads only the section file.
+
+### Typography and transitions
+
+- Every heading level reads `--hN-scale`, `--hN-line-height`, `--hN-tracking`
+  and `--hN-case`. New text styles are added by token. Emit a token only when
+  its setting is non-default if an always-emitted value (such as a CSS-wide
+  keyword) would change inheritance.
+- UI transitions use `--ease-out` through `--transition-fast`, `--transition-base`
+  and `--transition-slow`. `linear` is only for continuous loops (marquee,
+  spinner, progress).
+
+### Header, navigation and search
+
+- A transparent header overlays the page only when `body:has()` finds a
+  full-bleed media section as the first section of `main`. Its
+  `--color-foreground` override plus a scrim keeps the text readable, and it
+  turns solid on scroll, hover, focus-within and open disclosures.
+- Header overlays measure the announcement bar into `--announcement-height`
+  with an inline script before paint, so pulling the hero to y=0 never shifts
+  layout.
+- Country and language selectors are one shared snippet
+  (`localization-selector`) built on `details` plus submit buttons. Reuse it
+  instead of a `<select>`.
+- Mega menu images come only from `link.object` of collection and product
+  links. A dropdown without any such image keeps the text-only markup.
+- Closed image panels use `content-visibility: hidden` so lazy images do not
+  load until the menu opens. Width measurements run on hover or focus, never on
+  a closed panel.
+- Search modal idle content is fetched through Section Rendering on first open
+  and written into `hidden` slots placed after the existing chips, so it cannot
+  shift visible content.
+
+### Footer and social
+
+- Any list of social networks comes from `snippets/social-links.liquid` and the
+  `social_*_profile` theme settings. Never hard-code networks in a section or
+  snippet.
+- Footer content belongs in footer blocks with a `placement`. Add new footer
+  content as a block type in `sections/footer.liquid` plus
+  `snippets/footer-block.liquid`, not as a fixed section setting.
+
+### Cart
+
+- Cart mutations that re-render lines (drawer `changeLine`, page `updateCart`)
+  restore focus to the equivalent control and write a locale-backed message
+  into the `[data-cart-live]` region. Never leave focus on a detached node.
+- A script inside HTML injected through `innerHTML` does not run. Any custom
+  element the drawer HTML depends on (`quantity-selector`) is loaded by the
+  shell snippet (`cart-modal.liquid`), not by the fetched section.
+- Discount codes go through `/cart/update.js` with `discount` as a
+  comma-joined list built from the visible chips. The page reconciles chips,
+  discount rows and total from that AJAX response after the section refresh.
+
+### Product and collection
+
+- A scroll or zoom state element inside a dialog calls `focus()` on the dialog
+  on pointerdown. Otherwise pointer use drops focus to body and breaks the
+  focus trap.
+- Side-thumbnail Swiper slides have `height: auto`. The default
+  `height: 100%` stretches each slide to the full rail.
+- Product card toggles read global settings only when the caller passes
+  nothing (nil check), so an explicit `false` still wins.
+- List variants (carousel, editorial) opt in with `data-list-layout` on the
+  card container and the shared `assets/section-list-layouts.css`. The default
+  grid stays in each section's own stylesheet.
+- A list variant never leaves an empty grid cell: editorial uses 7/5 pairs with
+  a full-width trailing odd item, and carousel caps its desktop columns at the
+  item count.
+- A filter panel shown as a drawer has a footer with the live result count
+  (`See N items`) and Clear. Sort lives in the drawer on phones so the first
+  product card stays above y=330 at 375.
+
+### Video
+
+- Video in a story section is a `video-media` plus `video-control` pair over the
+  existing image. The image stays the poster, the LCP element and the layout
+  box. The video is always muted and looping with a pause button, and it loads
+  and plays only while visible.
+- A section that can hold several videos (slideshow) holds inactive slides'
+  videos with `media-video:hold`, so only the visible slide loads and plays.
+- A demo preset picks a product handle that exists in the demo store. A blank
+  product still renders only its editor placeholder under `request.design_mode`.
+
 ## Voice and tone
 
 - Short declarative lines in English, stored in `locales/en.default.json`. No
@@ -238,3 +366,10 @@ carry it; chrome stays out of the way.
 | Wrap long article navigation titles in full | A two-line clamp on right-aligned text: Chrome drops the ellipsis there |
 | `inert` on a duplicated marquee track | Focusable links inside an `aria-hidden` clone |
 | Let product, collection and article titles wrap in full (Theme Store: not truncated). Keep `collection.description` reachable in full, rendered whole or behind a Read more toggle | `line-clamp` or `truncatewords` on those titles, or a cut `collection.description` with no way to expand it |
+
+## Product card actions
+
+- A card whose product has only the default variant adds it in one click. Any
+  other card shows a choose-options button that opens quick view (or links to
+  the product when quick view is off); it never adds a variant the shopper did
+  not pick.

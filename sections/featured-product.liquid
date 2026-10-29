@@ -96,7 +96,7 @@
 
           <div class="section-featured-product__price">
             <span class="section-featured-product__price-current{% if variant.compare_at_price > variant.price %} section-featured-product__price-current--sale{% endif %}">
-              {%- if settings.currency_code_enabled -%}{{ variant.price | money_with_currency }}{%- else -%}{{ variant.price | money }}{%- endif -%}
+              {%- if settings.price_currency_code_enabled -%}{{ variant.price | money_with_currency }}{%- else -%}{{ variant.price | money }}{%- endif -%}
             </span>
             {%- if variant.compare_at_price > variant.price -%}
               <del class="section-featured-product__price-compare">{{ variant.compare_at_price | money }}</del>
@@ -199,6 +199,9 @@
 {% schema %}
 {
   "name": "t:sections.featured_product.name",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "tag": "section",
   "class": "section-featured-product-wrapper",
   "settings": [
@@ -396,7 +399,7 @@
   "presets": [
     {
       "name": "t:sections.featured_product.presets.featured_product.name",
-      "category": "Product"
+      "category": "t:categories.products"
     }
   ]
 }

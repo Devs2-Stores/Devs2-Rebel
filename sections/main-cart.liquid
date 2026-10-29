@@ -17,7 +17,7 @@
 <cart-template>
   <div class="color-{{ section.settings.color_scheme }}">
   <div class="page-width">
-    <h1 class="cart-template__title">
+    <h1 class="cart-template__title" tabindex="-1">
       {{ 'sections.cart.title' | t }}
       <span class="cart-template__count">({{ 'sections.cart.item_count_label' | t: count: cart.item_count }})</span>
     </h1>
@@ -83,6 +83,7 @@
   </div>
   </div>
 </cart-template>
+{%- render 'cart-live-region' -%}
 
 {% schema %}
 {

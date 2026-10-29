@@ -10,7 +10,7 @@
     {{ content_for_header }}
   </head>
 
-  <body class="gradient{% if settings.animations_reveal_on_scroll %} animate--enabled{% endif %} animate--hover-{{ settings.animations_hover_elements | default: 'default' }}">
+  <body class="gradient{% if settings.motion_reveal_on_scroll %} animate--enabled{% endif %} animate--hover-{{ settings.motion_hover_effect | default: 'default' }}">
     {%- assign skip_to_content_text = 'accessibility.skip_to_text' | t -%}
     {%- render 'skip-to-content-link', href: '#MainContent', text: skip_to_content_text -%}
     {%- render 'icons-sprite' -%}

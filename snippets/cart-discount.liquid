@@ -1,0 +1,49 @@
+{%- comment -%}
+  Discount code field for the cart drawer and the cart page.
+  Accepts:
+  - context: {String} 'drawer' or 'page'. The drawer list is filled by script from the cart JSON; the page list is rendered here.
+  Gated by settings.cart_discount_code_enabled.
+{%- endcomment -%}
+{%- if settings.cart_discount_code_enabled -%}
+  {{ 'cart-discount.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'cart-discount.js' | asset_url }}" defer="defer"></script>
+  {%- assign discount_id = 'cart-discount-' | append: context -%}
+  <cart-discount
+    class="cart-discount"
+    data-context="{{ context }}"
+    data-remove-label="{{ 'sections.cart.discount.remove' | t: code: '[code]' | escape }}"
+  >
+    <label class="cart-discount__label" for="{{ discount_id }}-input">{{ 'sections.cart.discount.label' | t }}</label>
+    <div class="cart-discount__row">
+      <input
+        class="cart-discount__input"
+        id="{{ discount_id }}-input"
+        type="text"
+        autocomplete="off"
+        autocapitalize="characters"
+        spellcheck="false"
+        aria-describedby="{{ discount_id }}-error"
+      >
+      <button type="button" class="cart-discount__apply" id="{{ discount_id }}-apply" data-action="apply-discount">{{ 'sections.cart.discount.apply' | t }}</button>
+    </div>
+    <p class="cart-discount__error" id="{{ discount_id }}-error" data-error="invalid" role="alert" hidden>{{ 'sections.cart.discount.invalid' | t }}</p>
+    <p class="cart-discount__error" data-error="shipping" role="alert" hidden>{{ 'sections.cart.discount.shipping' | t }}</p>
+    {%- assign has_code_chip = false -%}
+    {%- capture code_chips -%}
+      {%- for application in cart.discount_applications -%}
+        {%- if application.type == 'discount_code' -%}
+          {%- assign has_code_chip = true -%}
+          <li class="cart-discount__chip" data-discount-code="{{ application.title | escape }}">
+            <span class="cart-discount__code">{{ application.title | escape }}</span>
+            <button type="button" class="cart-discount__remove" data-action="remove-discount" aria-label="{{ 'sections.cart.discount.remove' | t: code: application.title | escape }}">
+              {%- render 'icon', name: 'close', size: '12' -%}
+            </button>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    <ul class="cart-discount__list" role="list" aria-label="{{ 'sections.cart.discount.list_label' | t }}"{% unless has_code_chip %} hidden{% endunless %}>
+      {{- code_chips -}}
+    </ul>
+  </cart-discount>
+{%- endif -%}

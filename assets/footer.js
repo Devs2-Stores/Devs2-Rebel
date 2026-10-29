@@ -18,23 +18,9 @@
     });
   }
 
-  function initLocalizationSelectors() {
-    var selectors = document.querySelectorAll('[data-localization-select]');
-    selectors.forEach(function(sel) {
-      if (sel.dataset.bound) return;
-      sel.dataset.bound = '1';
-      sel.addEventListener('change', function() {
-        var form = this.closest('form');
-        if (form) form.submit();
-      });
-    });
-  }
-
   function initAll() {
     initFooterMenu();
-    initLocalizationSelectors();
   }
-
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initAll);
   } else {

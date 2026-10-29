@@ -1,0 +1,16 @@
+{%- layout none -%}
+{%- comment %}
+  Search modal idle state: recommended products.
+  Fetched once per page via the Section Rendering API: /?section_id=predictive-search-empty
+{% endcomment -%}
+
+{%- assign recommendation_collection = settings.predictive_search_recommendation_collection | default: collections.all -%}
+{%- if settings.search_suggest_idle_products_enabled and recommendation_collection.products.size > 0 -%}
+<h3 id="ps-idle-recommended">{{ 'templates.search.recommended_products' | t }}</h3>
+<ul class="predictive-search__list predictive-search__grid" role="group" aria-labelledby="ps-idle-recommended">
+  {%- for product in recommendation_collection.products limit: 4 -%}
+    {%- render 'predictive-search-card', product: product -%}
+  {%- endfor -%}
+</ul>
+<a class="predictive-search__view-all" href="{{ recommendation_collection.url }}">{{ 'templates.search.view_all_products' | t }}</a>
+{%- endif -%}

@@ -1,4 +1,7 @@
 {{ 'section-collection-list.css' | asset_url | stylesheet_tag }}
+{%- if section.settings.layout == 'carousel' or section.settings.layout == 'editorial' -%}
+  {{ 'section-list-layouts.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
 {%- comment %}
   Section: Collection List
 {% endcomment -%}
@@ -55,8 +58,16 @@
         echo ', '
         echo desktop_card_size
       endcapture
+      assign layout = section.settings.layout | default: 'grid'
+      assign list_cols_d = section.settings.columns_desktop
+      if section.blocks.size < list_cols_d
+        assign list_cols_d = section.blocks.size | at_least: 1
+      endif
     -%}
-    <div class="section-collection-list__grid">
+    <div
+      class="section-collection-list__grid"
+      {%- if layout != 'grid' %} data-list-layout="{{ layout }}" style="--list-cols-d: {{ list_cols_d }}; --list-cols-m: {{ section.settings.columns_mobile }};"{% endif %}
+    >
       {%- for block in section.blocks -%}
         {%- liquid
           assign col = block.settings.collection
@@ -124,6 +135,9 @@
 {% schema %}
 {
   "name": "t:sections.collection_list.name",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "tag": "section",
   "class": "section-collection-list-wrapper",
   "settings": [
@@ -211,6 +225,26 @@
     {
       "type": "header",
       "content": "t:sections.collection_list.settings.header__layout.content"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "t:sections.collection_list.settings.layout.label",
+      "options": [
+        {
+          "value": "grid",
+          "label": "t:sections.collection_list.settings.layout.options.grid"
+        },
+        {
+          "value": "carousel",
+          "label": "t:sections.collection_list.settings.layout.options.carousel"
+        },
+        {
+          "value": "editorial",
+          "label": "t:sections.collection_list.settings.layout.options.editorial"
+        }
+      ],
+      "default": "grid"
     },
     {
       "type": "range",
@@ -340,7 +374,7 @@
   "presets": [
     {
       "name": "t:sections.collection_list.presets.collection_list.name",
-      "category": "Collection",
+      "category": "t:categories.collections",
       "blocks": [
         {
           "type": "collection_card"

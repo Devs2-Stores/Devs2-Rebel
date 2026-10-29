@@ -1,10 +1,14 @@
 <script src="{{ 'megamenu.js' | asset_url }}" defer="defer"></script>
-<mega-menu class="megamenu" role="navigation" aria-label="{{ 'accessibility.navigation' | t }}">
+{%- liquid
+  assign mega_show_images = settings.megamenu_show_images
+  assign mega_show_featured = settings.megamenu_show_featured
+-%}
+<mega-menu class="megamenu megamenu--ratio-{{ settings.megamenu_image_ratio | default: 'portrait' }}">
   <button type="button" class="megamenu__arrow megamenu__arrow--left" aria-label="{{ 'accessibility.scroll_left' | t }}" hidden>
     {%- render 'icon', name: 'chevron-left', size: '16' -%}
   </button>
   <div class="megamenu__container">
-    <nav class="megamenu__nav">
+    <nav class="megamenu__nav" aria-label="{{ 'accessibility.navigation' | t }}">
       <ul class="megamenu__list">
         {%- assign nav_menu = menu | default: linklists['main-menu'] -%}
         {%- if nav_menu != blank and nav_menu.links != blank -%}
@@ -14,37 +18,75 @@
         {%- if link.links.size > 0 -%}{%- assign has_children = true -%}{%- endif -%}
 
         {%- if has_children -%}
+        {%- assign card_count = 0 -%}
+        {%- assign featured_media = '' -%}
+        {%- capture cards_markup -%}
+          {%- if mega_show_images -%}
+            {%- for link_2 in link.links -%}
+              {%- capture card_media -%}{%- render 'mega-menu-image', link: link_2 -%}{%- endcapture -%}
+              {%- assign card_media = card_media | strip -%}
+              {%- if card_media != blank -%}
+                {%- assign card_count = card_count | plus: 1 -%}
+                {%- render 'mega-menu-card', link: link_2, media: card_media -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+        {%- endcapture -%}
+        {%- if mega_show_images and mega_show_featured -%}
+          {%- capture featured_media -%}{%- render 'mega-menu-image', link: link -%}{%- endcapture -%}
+          {%- assign featured_media = featured_media | strip -%}
+        {%- endif -%}
+        {%- assign is_visual = false -%}
+        {%- if card_count > 0 or featured_media != blank -%}{%- assign is_visual = true -%}{%- endif -%}
+        {%- assign card_columns = card_count | at_most: 4 -%}
+
         <li class="megamenu__item">
           <button type="button" class="megamenu__trigger" aria-expanded="false" aria-controls="megamenu-{{ menu_index }}">
             <span>{{ link.title | escape }}</span>
             {%- render 'icon', name: 'chevron-down', size: '13', class: 'megamenu__icon' -%}
           </button>
 
-          <div id="megamenu-{{ menu_index }}" class="megamenu__dropdown">
+          <div id="megamenu-{{ menu_index }}" class="megamenu__dropdown{% if is_visual %} megamenu__dropdown--visual{% endif %}">
             <div class="megamenu__dropdown-inner">
+              {%- if is_visual -%}
+              <div class="megamenu__panel">
+                <div class="megamenu__panel-main">
+                  {%- if card_count > 0 -%}
+                  <div class="megamenu__cards" style="--megamenu-columns: {{ card_columns }}">
+                    {{ cards_markup }}
+                  </div>
+                  {%- endif -%}
+                  {%- capture text_markup -%}
+                    {%- for link_2 in link.links -%}
+                      {%- capture text_media -%}{%- if card_count > 0 -%}{%- render 'mega-menu-image', link: link_2 -%}{%- endif -%}{%- endcapture -%}
+                      {%- assign text_media = text_media | strip -%}
+                      {%- if text_media == blank -%}
+                        {%- render 'mega-menu-link', link: link_2 -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                  {%- endcapture -%}
+                  {%- assign text_markup = text_markup | strip -%}
+                  {%- if text_markup != blank -%}
+                  <div class="megamenu__simple">
+                    <ul class="megamenu__simple-list">
+                      {{ text_markup }}
+                    </ul>
+                  </div>
+                  {%- endif -%}
+                </div>
+                {%- if featured_media != blank -%}
+                  {%- render 'mega-menu-card', link: link, media: featured_media, featured: true -%}
+                {%- endif -%}
+              </div>
+              {%- else -%}
               <div class="megamenu__simple">
                 <ul class="megamenu__simple-list">
                   {%- for link_2 in link.links -%}
-                  {%- assign has_level3 = false -%}
-                  {%- if link_2.links.size > 0 -%}{%- assign has_level3 = true -%}{%- endif -%}
-                  <li{% if has_level3 %} class="megamenu__simple-parent"{% endif %}>
-                    <a href="{{ link_2.url }}" title="{{ link_2.title | escape }}" class="megamenu__simple-link">
-                      <span>{{ link_2.title | escape }}</span>
-                      {%- if has_level3 -%}{%- render 'icon', name: 'chevron-right', size: '13' -%}{%- endif -%}
-                    </a>
-                    {%- if has_level3 -%}
-                    <ul class="megamenu__simple-sub">
-                      {%- for link_3 in link_2.links -%}
-                      <li>
-                        <a href="{{ link_3.url }}" title="{{ link_3.title | escape }}" class="megamenu__simple-sublink">{{ link_3.title | escape }}</a>
-                      </li>
-                      {%- endfor -%}
-                    </ul>
-                    {%- endif -%}
-                  </li>
+                    {%- render 'mega-menu-link', link: link_2 -%}
                   {%- endfor -%}
                 </ul>
               </div>
+              {%- endif -%}
             </div>
           </div>
         </li>
@@ -338,6 +380,126 @@
   margin-left: 0;
   margin-right: 2px;
   transform: translateX(6px);
+}
+.megamenu--ratio-portrait {
+  --megamenu-image-ratio: 4 / 5;
+}
+.megamenu--ratio-square {
+  --megamenu-image-ratio: 1 / 1;
+}
+.megamenu--ratio-landscape {
+  --megamenu-image-ratio: 4 / 3;
+}
+.megamenu__item .megamenu__dropdown--visual {
+  content-visibility: hidden;
+  transition: opacity var(--transition-fast), visibility var(--transition-fast), transform var(--transition-fast), content-visibility var(--transition-fast) allow-discrete;
+}
+.megamenu__item:hover > .megamenu__dropdown--visual,
+.megamenu__item:focus-within > .megamenu__dropdown--visual,
+.megamenu__item.is-open > .megamenu__dropdown--visual {
+  content-visibility: visible;
+}
+.megamenu__item.is-dismissed > .megamenu__dropdown--visual {
+  content-visibility: hidden;
+}
+.megamenu__item .megamenu__dropdown--visual .megamenu__dropdown-inner {
+  padding: var(--space-lg);
+}
+.megamenu__panel {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xl);
+}
+.megamenu__panel-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  min-width: 0;
+}
+.megamenu__cards {
+  display: grid;
+  grid-template-columns: repeat(var(--megamenu-columns, 1), 9rem);
+  gap: var(--space-lg) var(--space-md);
+}
+.megamenu__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  min-width: 0;
+}
+.megamenu__card--featured {
+  flex: 0 0 auto;
+  width: 12rem;
+}
+.megamenu__card-link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  color: var(--color-ink);
+  text-decoration: none;
+}
+.megamenu__card-link:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+.megamenu__card-media {
+  display: block;
+  aspect-ratio: var(--megamenu-image-ratio, 4 / 5);
+  overflow: hidden;
+  border-radius: var(--media-radius);
+  background: var(--color-gray-light);
+}
+.megamenu__card-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-base);
+}
+@media (hover: hover) {
+  .megamenu__card-link:hover .megamenu__card-img {
+    transform: scale(1.03);
+  }
+}
+.megamenu__card-title {
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-snug);
+}
+.megamenu__card-link:hover .megamenu__card-title,
+.megamenu__card-link:focus-visible .megamenu__card-title {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.megamenu__card-cta {
+  font-size: var(--eyebrow-size, 0.75rem);
+  font-weight: var(--eyebrow-weight, 600);
+  letter-spacing: var(--eyebrow-tracking, 0.14em);
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+.megamenu__card-sub {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.megamenu__card-sublink {
+  font-size: var(--font-xs);
+  color: var(--color-muted);
+  text-decoration: none;
+}
+.megamenu__card-sublink:hover {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.megamenu__card-sublink:focus-visible {
+  color: var(--color-ink);
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
 }
 .megamenu__overlay {
   position: fixed;

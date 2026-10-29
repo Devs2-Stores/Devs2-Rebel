@@ -18,7 +18,7 @@
     {%- if selected_variant.price == 0 -%}
       {{ 'products.product.price.contact' | t }}
     {%- else -%}
-      {%- if settings.currency_code_enabled -%}{{ selected_variant.price | money_with_currency }}{%- else -%}{{ selected_variant.price | money }}{%- endif -%}
+      {%- if settings.price_currency_code_enabled -%}{{ selected_variant.price | money_with_currency }}{%- else -%}{{ selected_variant.price | money }}{%- endif -%}
     {%- endif -%}
   </div>
   <div
