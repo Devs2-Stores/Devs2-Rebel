@@ -1,0 +1,621 @@
+[PASS] 375 / :: fonts: every text element uses a theme family
+[PASS] 375 / :: fonts: form controls inherit theme family
+[PASS] 375 / :: fonts: used families are loaded
+[PASS] 375 / :: fonts: every used weight/style has its own face
+[PASS] 375 / :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 375 / :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 375 / :: fonts: multi-line text keeps line-height >= 1
+[INFO] 375 / :: fonts: inputs >= 16px on mobile (iOS zoom, advisory) :: [".section-newsletter__form > input.section-newsletter__input 15px"]
+[PASS] 375 / :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 375 / :: spacing: text keeps >= 12px viewport gutter
+[PASS] 375 / :: spacing: overlapping targets keep >= 24px each
+[INFO] 375 / :: spacing: layered targets by design (advisory) :: [".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",".product-card__media > a.product-card__media
+[PASS] 375 / :: icons: every <use> resolves to a drawn symbol
+[PASS] 375 / :: icons: no empty or collapsed icon
+[PASS] 375 / :: icons: icon-only controls have a name
+[PASS] 375 / :: icons: icon-only targets >= 24px or spaced
+[PASS] 375 / :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 375 / :: icons: icon centred with its label (<= 3px)
+[INFO] 375 / :: icons: decorative svg exposed to AT (advisory) :: 22
+[PASS] 375 /collections/all :: fonts: every text element uses a theme family
+[PASS] 375 /collections/all :: fonts: form controls inherit theme family
+[PASS] 375 /collections/all :: fonts: used families are loaded
+[PASS] 375 /collections/all :: fonts: every used weight/style has its own face
+[PASS] 375 /collections/all :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 375 /collections/all :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 375 /collections/all :: fonts: multi-line text keeps line-height >= 1
+[INFO] 375 /collections/all :: fonts: inputs >= 16px on mobile (iOS zoom, advisory) :: [".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"]
+[PASS] 375 /collections/all :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 375 /collections/all :: spacing: text keeps >= 12px viewport gutter
+[PASS] 375 /collections/all :: spacing: overlapping targets keep >= 24px each
+[INFO] 375 /collections/all :: spacing: layered targets by design (advisory) :: [".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",".product-card__media > a.product-card__media
+[PASS] 375 /collections/all :: icons: every <use> resolves to a drawn symbol
+[PASS] 375 /collections/all :: icons: no empty or collapsed icon
+[PASS] 375 /collections/all :: icons: icon-only controls have a name
+[PASS] 375 /collections/all :: icons: icon-only targets >= 24px or spaced
+[PASS] 375 /collections/all :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 375 /collections/all :: icons: icon centred with its label (<= 3px)
+[INFO] 375 /collections/all :: icons: decorative svg exposed to AT (advisory) :: 1
+[PASS] 375 /products/rebel-tactical-bomber-jacket :: fonts: every text element uses a theme family
+[PASS] 375 /products/rebel-tactical-bomber-jacket :: fonts: form controls inherit theme family
+[PASS] 375 /products/rebel-tactical-bomber-jacket :: fonts: used families are loaded
+[PASS] 375 /products/rebel-tactical-bomber-jacket :: fonts: every used weight/style has its own face
+[PASS] 375 /products/rebel-tactical-bomber-jacket :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 375 /products/rebel-tactical-bomber-jacket :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 375 /products/rebel-tactical-bomber-jacket :: fonts: multi-line text keeps line-height >= 1
+[INFO] 375 /products/rebel-tactical-bomber-jacket :: fonts: inputs >= 16px on mobile (iOS zoom, advisory) :: [".quantity-selector > input#quantity-49835586027591.quantity-selector__input 14px",".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"]
+[PASS] 375 /products/rebel-tactical-bomber-jacket :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 375 /products/rebel-tactical-bomber-jacket :: spacing: text keeps >= 12px viewport gutter
+[PASS] 375 /products/rebel-tactical-bomber-jacket :: spacing: overlapping targets keep >= 24px each
+[INFO] 375 /products/rebel-tactical-bomber-jacket :: spacing: layered targets by design (advisory) :: [".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",".product-card__media > a.product-card__media
+[PASS] 375 /products/rebel-tactical-bomber-jacket :: icons: every <use> resolves to a drawn symbol
+[PASS] 375 /products/rebel-tactical-bomber-jacket :: icons: no empty or collapsed icon
+[PASS] 375 /products/rebel-tactical-bomber-jacket :: icons: icon-only controls have a name
+[PASS] 375 /products/rebel-tactical-bomber-jacket :: icons: icon-only targets >= 24px or spaced
+[PASS] 375 /products/rebel-tactical-bomber-jacket :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 375 /products/rebel-tactical-bomber-jacket :: icons: icon centred with its label (<= 3px)
+[INFO] 375 /products/rebel-tactical-bomber-jacket :: icons: decorative svg exposed to AT (advisory) :: 0
+[PASS] 375 /cart :: fonts: every text element uses a theme family
+[PASS] 375 /cart :: fonts: form controls inherit theme family
+[PASS] 375 /cart :: fonts: used families are loaded
+[PASS] 375 /cart :: fonts: every used weight/style has its own face
+[PASS] 375 /cart :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 375 /cart :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 375 /cart :: fonts: multi-line text keeps line-height >= 1
+[INFO] 375 /cart :: fonts: inputs >= 16px on mobile (iOS zoom, advisory) :: [".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"]
+[PASS] 375 /cart :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 375 /cart :: spacing: text keeps >= 12px viewport gutter
+[PASS] 375 /cart :: spacing: overlapping targets keep >= 24px each
+[PASS] 375 /cart :: icons: every <use> resolves to a drawn symbol
+[PASS] 375 /cart :: icons: no empty or collapsed icon
+[PASS] 375 /cart :: icons: icon-only controls have a name
+[PASS] 375 /cart :: icons: icon-only targets >= 24px or spaced
+[PASS] 375 /cart :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 375 /cart :: icons: icon centred with its label (<= 3px)
+[INFO] 375 /cart :: icons: decorative svg exposed to AT (advisory) :: 0
+[PASS] 375 /search?q=jacket :: fonts: every text element uses a theme family
+[PASS] 375 /search?q=jacket :: fonts: form controls inherit theme family
+[PASS] 375 /search?q=jacket :: fonts: used families are loaded
+[PASS] 375 /search?q=jacket :: fonts: every used weight/style has its own face
+[PASS] 375 /search?q=jacket :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 375 /search?q=jacket :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 375 /search?q=jacket :: fonts: multi-line text keeps line-height >= 1
+[INFO] 375 /search?q=jacket :: fonts: inputs >= 16px on mobile (iOS zoom, advisory) :: [".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"]
+[PASS] 375 /search?q=jacket :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 375 /search?q=jacket :: spacing: text keeps >= 12px viewport gutter
+[PASS] 375 /search?q=jacket :: spacing: overlapping targets keep >= 24px each
+[INFO] 375 /search?q=jacket :: spacing: layered targets by design (advisory) :: [".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",".product-card__media > a.product-card__media
+[PASS] 375 /search?q=jacket :: icons: every <use> resolves to a drawn symbol
+[PASS] 375 /search?q=jacket :: icons: no empty or collapsed icon
+[PASS] 375 /search?q=jacket :: icons: icon-only controls have a name
+[PASS] 375 /search?q=jacket :: icons: icon-only targets >= 24px or spaced
+[PASS] 375 /search?q=jacket :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 375 /search?q=jacket :: icons: icon centred with its label (<= 3px)
+[INFO] 375 /search?q=jacket :: icons: decorative svg exposed to AT (advisory) :: 0
+[PASS] 375 /pages/contact :: fonts: every text element uses a theme family
+[PASS] 375 /pages/contact :: fonts: form controls inherit theme family
+[PASS] 375 /pages/contact :: fonts: used families are loaded
+[PASS] 375 /pages/contact :: fonts: every used weight/style has its own face
+[PASS] 375 /pages/contact :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 375 /pages/contact :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 375 /pages/contact :: fonts: multi-line text keeps line-height >= 1
+[INFO] 375 /pages/contact :: fonts: inputs >= 16px on mobile (iOS zoom, advisory) :: [".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"]
+[PASS] 375 /pages/contact :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 375 /pages/contact :: spacing: text keeps >= 12px viewport gutter
+[PASS] 375 /pages/contact :: spacing: overlapping targets keep >= 24px each
+[PASS] 375 /pages/contact :: icons: every <use> resolves to a drawn symbol
+[PASS] 375 /pages/contact :: icons: no empty or collapsed icon
+[PASS] 375 /pages/contact :: icons: icon-only controls have a name
+[PASS] 375 /pages/contact :: icons: icon-only targets >= 24px or spaced
+[PASS] 375 /pages/contact :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 375 /pages/contact :: icons: icon centred with its label (<= 3px)
+[INFO] 375 /pages/contact :: icons: decorative svg exposed to AT (advisory) :: 0
+[PASS] 375 /pages/contact?view=faq :: fonts: every text element uses a theme family
+[PASS] 375 /pages/contact?view=faq :: fonts: form controls inherit theme family
+[PASS] 375 /pages/contact?view=faq :: fonts: used families are loaded
+[PASS] 375 /pages/contact?view=faq :: fonts: every used weight/style has its own face
+[PASS] 375 /pages/contact?view=faq :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 375 /pages/contact?view=faq :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 375 /pages/contact?view=faq :: fonts: multi-line text keeps line-height >= 1
+[INFO] 375 /pages/contact?view=faq :: fonts: inputs >= 16px on mobile (iOS zoom, advisory) :: [".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"]
+[PASS] 375 /pages/contact?view=faq :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 375 /pages/contact?view=faq :: spacing: text keeps >= 12px viewport gutter
+[PASS] 375 /pages/contact?view=faq :: spacing: overlapping targets keep >= 24px each
+[PASS] 375 /pages/contact?view=faq :: icons: every <use> resolves to a drawn symbol
+[PASS] 375 /pages/contact?view=faq :: icons: no empty or collapsed icon
+[PASS] 375 /pages/contact?view=faq :: icons: icon-only controls have a name
+[PASS] 375 /pages/contact?view=faq :: icons: icon-only targets >= 24px or spaced
+[PASS] 375 /pages/contact?view=faq :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 375 /pages/contact?view=faq :: icons: icon centred with its label (<= 3px)
+[INFO] 375 /pages/contact?view=faq :: icons: decorative svg exposed to AT (advisory) :: 0
+[PASS] 375 /pages/contact?view=stores :: fonts: every text element uses a theme family
+[PASS] 375 /pages/contact?view=stores :: fonts: form controls inherit theme family
+[PASS] 375 /pages/contact?view=stores :: fonts: used families are loaded
+[PASS] 375 /pages/contact?view=stores :: fonts: every used weight/style has its own face
+[PASS] 375 /pages/contact?view=stores :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 375 /pages/contact?view=stores :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 375 /pages/contact?view=stores :: fonts: multi-line text keeps line-height >= 1
+[INFO] 375 /pages/contact?view=stores :: fonts: inputs >= 16px on mobile (iOS zoom, advisory) :: [".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"]
+[PASS] 375 /pages/contact?view=stores :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 375 /pages/contact?view=stores :: spacing: text keeps >= 12px viewport gutter
+[PASS] 375 /pages/contact?view=stores :: spacing: overlapping targets keep >= 24px each
+[PASS] 375 /pages/contact?view=stores :: icons: every <use> resolves to a drawn symbol
+[PASS] 375 /pages/contact?view=stores :: icons: no empty or collapsed icon
+[PASS] 375 /pages/contact?view=stores :: icons: icon-only controls have a name
+[PASS] 375 /pages/contact?view=stores :: icons: icon-only targets >= 24px or spaced
+[PASS] 375 /pages/contact?view=stores :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 375 /pages/contact?view=stores :: icons: icon centred with its label (<= 3px)
+[INFO] 375 /pages/contact?view=stores :: icons: decorative svg exposed to AT (advisory) :: 0
+[PASS] 375 /pages/about :: fonts: every text element uses a theme family
+[PASS] 375 /pages/about :: fonts: form controls inherit theme family
+[PASS] 375 /pages/about :: fonts: used families are loaded
+[PASS] 375 /pages/about :: fonts: every used weight/style has its own face
+[PASS] 375 /pages/about :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 375 /pages/about :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 375 /pages/about :: fonts: multi-line text keeps line-height >= 1
+[INFO] 375 /pages/about :: fonts: inputs >= 16px on mobile (iOS zoom, advisory) :: [".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"]
+[PASS] 375 /pages/about :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 375 /pages/about :: spacing: text keeps >= 12px viewport gutter
+[PASS] 375 /pages/about :: spacing: overlapping targets keep >= 24px each
+[PASS] 375 /pages/about :: icons: every <use> resolves to a drawn symbol
+[PASS] 375 /pages/about :: icons: no empty or collapsed icon
+[PASS] 375 /pages/about :: icons: icon-only controls have a name
+[PASS] 375 /pages/about :: icons: icon-only targets >= 24px or spaced
+[PASS] 375 /pages/about :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 375 /pages/about :: icons: icon centred with its label (<= 3px)
+[INFO] 375 /pages/about :: icons: decorative svg exposed to AT (advisory) :: 0
+[PASS] 375 /blogs/sustainable-fashion-eco-tech :: fonts: every text element uses a theme family
+[PASS] 375 /blogs/sustainable-fashion-eco-tech :: fonts: form controls inherit theme family
+[PASS] 375 /blogs/sustainable-fashion-eco-tech :: fonts: used families are loaded
+[PASS] 375 /blogs/sustainable-fashion-eco-tech :: fonts: every used weight/style has its own face
+[PASS] 375 /blogs/sustainable-fashion-eco-tech :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 375 /blogs/sustainable-fashion-eco-tech :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 375 /blogs/sustainable-fashion-eco-tech :: fonts: multi-line text keeps line-height >= 1
+[INFO] 375 /blogs/sustainable-fashion-eco-tech :: fonts: inputs >= 16px on mobile (iOS zoom, advisory) :: [".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"]
+[PASS] 375 /blogs/sustainable-fashion-eco-tech :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 375 /blogs/sustainable-fashion-eco-tech :: spacing: text keeps >= 12px viewport gutter
+[PASS] 375 /blogs/sustainable-fashion-eco-tech :: spacing: overlapping targets keep >= 24px each
+[INFO] 375 /blogs/sustainable-fashion-eco-tech :: spacing: layered targets by design (advisory) :: [".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",".product-card__media > a.product-card__media
+[PASS] 375 /blogs/sustainable-fashion-eco-tech :: icons: every <use> resolves to a drawn symbol
+[PASS] 375 /blogs/sustainable-fashion-eco-tech :: icons: no empty or collapsed icon
+[PASS] 375 /blogs/sustainable-fashion-eco-tech :: icons: icon-only controls have a name
+[PASS] 375 /blogs/sustainable-fashion-eco-tech :: icons: icon-only targets >= 24px or spaced
+[PASS] 375 /blogs/sustainable-fashion-eco-tech :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 375 /blogs/sustainable-fashion-eco-tech :: icons: icon centred with its label (<= 3px)
+[INFO] 375 /blogs/sustainable-fashion-eco-tech :: icons: decorative svg exposed to AT (advisory) :: 1
+[PASS] 375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: fonts: every text element uses a theme family
+[PASS] 375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: fonts: form controls inherit theme family
+[PASS] 375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: fonts: used families are loaded
+[PASS] 375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: fonts: every used weight/style has its own face
+[PASS] 375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: fonts: multi-line text keeps line-height >= 1
+[INFO] 375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: fonts: inputs >= 16px on mobile (iOS zoom, advisory) :: [".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"]
+[PASS] 375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: spacing: text keeps >= 12px viewport gutter
+[PASS] 375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: spacing: overlapping targets keep >= 24px each
+[INFO] 375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: spacing: layered targets by design (advisory) :: [".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",".product-card__media > a.product-card__media
+[PASS] 375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: icons: every <use> resolves to a drawn symbol
+[PASS] 375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: icons: no empty or collapsed icon
+[PASS] 375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: icons: icon-only controls have a name
+[PASS] 375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: icons: icon-only targets >= 24px or spaced
+[PASS] 375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: icons: icon centred with its label (<= 3px)
+[INFO] 375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: icons: decorative svg exposed to AT (advisory) :: 1
+[PASS] 375 /pages/does-not-exist-404 :: fonts: every text element uses a theme family
+[PASS] 375 /pages/does-not-exist-404 :: fonts: form controls inherit theme family
+[PASS] 375 /pages/does-not-exist-404 :: fonts: used families are loaded
+[PASS] 375 /pages/does-not-exist-404 :: fonts: every used weight/style has its own face
+[PASS] 375 /pages/does-not-exist-404 :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 375 /pages/does-not-exist-404 :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 375 /pages/does-not-exist-404 :: fonts: multi-line text keeps line-height >= 1
+[INFO] 375 /pages/does-not-exist-404 :: fonts: inputs >= 16px on mobile (iOS zoom, advisory) :: [".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"]
+[PASS] 375 /pages/does-not-exist-404 :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 375 /pages/does-not-exist-404 :: spacing: text keeps >= 12px viewport gutter
+[PASS] 375 /pages/does-not-exist-404 :: spacing: overlapping targets keep >= 24px each
+[INFO] 375 /pages/does-not-exist-404 :: spacing: layered targets by design (advisory) :: [".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",".product-card__media > a.product-card__media
+[PASS] 375 /pages/does-not-exist-404 :: icons: every <use> resolves to a drawn symbol
+[PASS] 375 /pages/does-not-exist-404 :: icons: no empty or collapsed icon
+[PASS] 375 /pages/does-not-exist-404 :: icons: icon-only controls have a name
+[PASS] 375 /pages/does-not-exist-404 :: icons: icon-only targets >= 24px or spaced
+[PASS] 375 /pages/does-not-exist-404 :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 375 /pages/does-not-exist-404 :: icons: icon centred with its label (<= 3px)
+[INFO] 375 /pages/does-not-exist-404 :: icons: decorative svg exposed to AT (advisory) :: 1
+[PASS] 768 / :: fonts: every text element uses a theme family
+[PASS] 768 / :: fonts: form controls inherit theme family
+[PASS] 768 / :: fonts: used families are loaded
+[PASS] 768 / :: fonts: every used weight/style has its own face
+[PASS] 768 / :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 768 / :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 768 / :: fonts: multi-line text keeps line-height >= 1
+[PASS] 768 / :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 768 / :: spacing: text keeps >= 12px viewport gutter
+[PASS] 768 / :: spacing: overlapping targets keep >= 24px each
+[PASS] 768 / :: icons: every <use> resolves to a drawn symbol
+[PASS] 768 / :: icons: no empty or collapsed icon
+[PASS] 768 / :: icons: icon-only controls have a name
+[PASS] 768 / :: icons: icon-only targets >= 24px or spaced
+[PASS] 768 / :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 768 / :: icons: icon centred with its label (<= 3px)
+[INFO] 768 / :: icons: decorative svg exposed to AT (advisory) :: 22
+[PASS] 768 /collections/all :: fonts: every text element uses a theme family
+[PASS] 768 /collections/all :: fonts: form controls inherit theme family
+[PASS] 768 /collections/all :: fonts: used families are loaded
+[PASS] 768 /collections/all :: fonts: every used weight/style has its own face
+[PASS] 768 /collections/all :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 768 /collections/all :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 768 /collections/all :: fonts: multi-line text keeps line-height >= 1
+[PASS] 768 /collections/all :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 768 /collections/all :: spacing: text keeps >= 12px viewport gutter
+[PASS] 768 /collections/all :: spacing: overlapping targets keep >= 24px each
+[PASS] 768 /collections/all :: icons: every <use> resolves to a drawn symbol
+[PASS] 768 /collections/all :: icons: no empty or collapsed icon
+[PASS] 768 /collections/all :: icons: icon-only controls have a name
+[PASS] 768 /collections/all :: icons: icon-only targets >= 24px or spaced
+[PASS] 768 /collections/all :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 768 /collections/all :: icons: icon centred with its label (<= 3px)
+[INFO] 768 /collections/all :: icons: decorative svg exposed to AT (advisory) :: 1
+[PASS] 768 /products/rebel-tactical-bomber-jacket :: fonts: every text element uses a theme family
+[PASS] 768 /products/rebel-tactical-bomber-jacket :: fonts: form controls inherit theme family
+[PASS] 768 /products/rebel-tactical-bomber-jacket :: fonts: used families are loaded
+[PASS] 768 /products/rebel-tactical-bomber-jacket :: fonts: every used weight/style has its own face
+[PASS] 768 /products/rebel-tactical-bomber-jacket :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 768 /products/rebel-tactical-bomber-jacket :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 768 /products/rebel-tactical-bomber-jacket :: fonts: multi-line text keeps line-height >= 1
+[PASS] 768 /products/rebel-tactical-bomber-jacket :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 768 /products/rebel-tactical-bomber-jacket :: spacing: text keeps >= 12px viewport gutter
+[PASS] 768 /products/rebel-tactical-bomber-jacket :: spacing: overlapping targets keep >= 24px each
+[INFO] 768 /products/rebel-tactical-bomber-jacket :: spacing: layered targets by design (advisory) :: [".product-card__media > a.product-card__media-inner x .product-template__relate-wrap > button.swiper-button-prev.swiper-button-disabled (27x40)",".product-card__media > a.product-card__media-inner x .product-template__relate-wrap > button.swiper-button-next (27x40)"]
+[PASS] 768 /products/rebel-tactical-bomber-jacket :: icons: every <use> resolves to a drawn symbol
+[PASS] 768 /products/rebel-tactical-bomber-jacket :: icons: no empty or collapsed icon
+[PASS] 768 /products/rebel-tactical-bomber-jacket :: icons: icon-only controls have a name
+[PASS] 768 /products/rebel-tactical-bomber-jacket :: icons: icon-only targets >= 24px or spaced
+[PASS] 768 /products/rebel-tactical-bomber-jacket :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 768 /products/rebel-tactical-bomber-jacket :: icons: icon centred with its label (<= 3px)
+[INFO] 768 /products/rebel-tactical-bomber-jacket :: icons: decorative svg exposed to AT (advisory) :: 0
+[PASS] 768 /cart :: fonts: every text element uses a theme family
+[PASS] 768 /cart :: fonts: form controls inherit theme family
+[PASS] 768 /cart :: fonts: used families are loaded
+[PASS] 768 /cart :: fonts: every used weight/style has its own face
+[PASS] 768 /cart :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 768 /cart :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 768 /cart :: fonts: multi-line text keeps line-height >= 1
+[PASS] 768 /cart :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 768 /cart :: spacing: text keeps >= 12px viewport gutter
+[PASS] 768 /cart :: spacing: overlapping targets keep >= 24px each
+[PASS] 768 /cart :: icons: every <use> resolves to a drawn symbol
+[PASS] 768 /cart :: icons: no empty or collapsed icon
+[PASS] 768 /cart :: icons: icon-only controls have a name
+[PASS] 768 /cart :: icons: icon-only targets >= 24px or spaced
+[PASS] 768 /cart :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 768 /cart :: icons: icon centred with its label (<= 3px)
+[INFO] 768 /cart :: icons: decorative svg exposed to AT (advisory) :: 0
+[PASS] 768 /search?q=jacket :: fonts: every text element uses a theme family
+[PASS] 768 /search?q=jacket :: fonts: form controls inherit theme family
+[PASS] 768 /search?q=jacket :: fonts: used families are loaded
+[PASS] 768 /search?q=jacket :: fonts: every used weight/style has its own face
+[PASS] 768 /search?q=jacket :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 768 /search?q=jacket :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 768 /search?q=jacket :: fonts: multi-line text keeps line-height >= 1
+[PASS] 768 /search?q=jacket :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 768 /search?q=jacket :: spacing: text keeps >= 12px viewport gutter
+[PASS] 768 /search?q=jacket :: spacing: overlapping targets keep >= 24px each
+[PASS] 768 /search?q=jacket :: icons: every <use> resolves to a drawn symbol
+[PASS] 768 /search?q=jacket :: icons: no empty or collapsed icon
+[PASS] 768 /search?q=jacket :: icons: icon-only controls have a name
+[PASS] 768 /search?q=jacket :: icons: icon-only targets >= 24px or spaced
+[PASS] 768 /search?q=jacket :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 768 /search?q=jacket :: icons: icon centred with its label (<= 3px)
+[INFO] 768 /search?q=jacket :: icons: decorative svg exposed to AT (advisory) :: 0
+[PASS] 768 /pages/contact :: fonts: every text element uses a theme family
+[PASS] 768 /pages/contact :: fonts: form controls inherit theme family
+[PASS] 768 /pages/contact :: fonts: used families are loaded
+[PASS] 768 /pages/contact :: fonts: every used weight/style has its own face
+[PASS] 768 /pages/contact :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 768 /pages/contact :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 768 /pages/contact :: fonts: multi-line text keeps line-height >= 1
+[PASS] 768 /pages/contact :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 768 /pages/contact :: spacing: text keeps >= 12px viewport gutter
+[PASS] 768 /pages/contact :: spacing: overlapping targets keep >= 24px each
+[PASS] 768 /pages/contact :: icons: every <use> resolves to a drawn symbol
+[PASS] 768 /pages/contact :: icons: no empty or collapsed icon
+[PASS] 768 /pages/contact :: icons: icon-only controls have a name
+[PASS] 768 /pages/contact :: icons: icon-only targets >= 24px or spaced
+[PASS] 768 /pages/contact :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 768 /pages/contact :: icons: icon centred with its label (<= 3px)
+[INFO] 768 /pages/contact :: icons: decorative svg exposed to AT (advisory) :: 0
+[PASS] 768 /pages/contact?view=faq :: fonts: every text element uses a theme family
+[PASS] 768 /pages/contact?view=faq :: fonts: form controls inherit theme family
+[PASS] 768 /pages/contact?view=faq :: fonts: used families are loaded
+[PASS] 768 /pages/contact?view=faq :: fonts: every used weight/style has its own face
+[PASS] 768 /pages/contact?view=faq :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 768 /pages/contact?view=faq :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 768 /pages/contact?view=faq :: fonts: multi-line text keeps line-height >= 1
+[PASS] 768 /pages/contact?view=faq :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 768 /pages/contact?view=faq :: spacing: text keeps >= 12px viewport gutter
+[PASS] 768 /pages/contact?view=faq :: spacing: overlapping targets keep >= 24px each
+[PASS] 768 /pages/contact?view=faq :: icons: every <use> resolves to a drawn symbol
+[PASS] 768 /pages/contact?view=faq :: icons: no empty or collapsed icon
+[PASS] 768 /pages/contact?view=faq :: icons: icon-only controls have a name
+[PASS] 768 /pages/contact?view=faq :: icons: icon-only targets >= 24px or spaced
+[PASS] 768 /pages/contact?view=faq :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 768 /pages/contact?view=faq :: icons: icon centred with its label (<= 3px)
+[INFO] 768 /pages/contact?view=faq :: icons: decorative svg exposed to AT (advisory) :: 0
+[PASS] 768 /pages/contact?view=stores :: fonts: every text element uses a theme family
+[PASS] 768 /pages/contact?view=stores :: fonts: form controls inherit theme family
+[PASS] 768 /pages/contact?view=stores :: fonts: used families are loaded
+[PASS] 768 /pages/contact?view=stores :: fonts: every used weight/style has its own face
+[PASS] 768 /pages/contact?view=stores :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 768 /pages/contact?view=stores :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 768 /pages/contact?view=stores :: fonts: multi-line text keeps line-height >= 1
+[PASS] 768 /pages/contact?view=stores :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 768 /pages/contact?view=stores :: spacing: text keeps >= 12px viewport gutter
+[PASS] 768 /pages/contact?view=stores :: spacing: overlapping targets keep >= 24px each
+[PASS] 768 /pages/contact?view=stores :: icons: every <use> resolves to a drawn symbol
+[PASS] 768 /pages/contact?view=stores :: icons: no empty or collapsed icon
+[PASS] 768 /pages/contact?view=stores :: icons: icon-only controls have a name
+[PASS] 768 /pages/contact?view=stores :: icons: icon-only targets >= 24px or spaced
+[PASS] 768 /pages/contact?view=stores :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 768 /pages/contact?view=stores :: icons: icon centred with its label (<= 3px)
+[INFO] 768 /pages/contact?view=stores :: icons: decorative svg exposed to AT (advisory) :: 0
+[PASS] 768 /pages/about :: fonts: every text element uses a theme family
+[PASS] 768 /pages/about :: fonts: form controls inherit theme family
+[PASS] 768 /pages/about :: fonts: used families are loaded
+[PASS] 768 /pages/about :: fonts: every used weight/style has its own face
+[PASS] 768 /pages/about :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 768 /pages/about :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 768 /pages/about :: fonts: multi-line text keeps line-height >= 1
+[PASS] 768 /pages/about :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 768 /pages/about :: spacing: text keeps >= 12px viewport gutter
+[PASS] 768 /pages/about :: spacing: overlapping targets keep >= 24px each
+[PASS] 768 /pages/about :: icons: every <use> resolves to a drawn symbol
+[PASS] 768 /pages/about :: icons: no empty or collapsed icon
+[PASS] 768 /pages/about :: icons: icon-only controls have a name
+[PASS] 768 /pages/about :: icons: icon-only targets >= 24px or spaced
+[PASS] 768 /pages/about :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 768 /pages/about :: icons: icon centred with its label (<= 3px)
+[INFO] 768 /pages/about :: icons: decorative svg exposed to AT (advisory) :: 0
+[PASS] 768 /blogs/sustainable-fashion-eco-tech :: fonts: every text element uses a theme family
+[PASS] 768 /blogs/sustainable-fashion-eco-tech :: fonts: form controls inherit theme family
+[PASS] 768 /blogs/sustainable-fashion-eco-tech :: fonts: used families are loaded
+[PASS] 768 /blogs/sustainable-fashion-eco-tech :: fonts: every used weight/style has its own face
+[PASS] 768 /blogs/sustainable-fashion-eco-tech :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 768 /blogs/sustainable-fashion-eco-tech :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 768 /blogs/sustainable-fashion-eco-tech :: fonts: multi-line text keeps line-height >= 1
+[PASS] 768 /blogs/sustainable-fashion-eco-tech :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 768 /blogs/sustainable-fashion-eco-tech :: spacing: text keeps >= 12px viewport gutter
+[PASS] 768 /blogs/sustainable-fashion-eco-tech :: spacing: overlapping targets keep >= 24px each
+[PASS] 768 /blogs/sustainable-fashion-eco-tech :: icons: every <use> resolves to a drawn symbol
+[PASS] 768 /blogs/sustainable-fashion-eco-tech :: icons: no empty or collapsed icon
+[PASS] 768 /blogs/sustainable-fashion-eco-tech :: icons: icon-only controls have a name
+[PASS] 768 /blogs/sustainable-fashion-eco-tech :: icons: icon-only targets >= 24px or spaced
+[PASS] 768 /blogs/sustainable-fashion-eco-tech :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 768 /blogs/sustainable-fashion-eco-tech :: icons: icon centred with its label (<= 3px)
+[INFO] 768 /blogs/sustainable-fashion-eco-tech :: icons: decorative svg exposed to AT (advisory) :: 1
+[PASS] 768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: fonts: every text element uses a theme family
+[PASS] 768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: fonts: form controls inherit theme family
+[PASS] 768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: fonts: used families are loaded
+[PASS] 768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: fonts: every used weight/style has its own face
+[PASS] 768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: fonts: multi-line text keeps line-height >= 1
+[PASS] 768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: spacing: text keeps >= 12px viewport gutter
+[PASS] 768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: spacing: overlapping targets keep >= 24px each
+[PASS] 768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: icons: every <use> resolves to a drawn symbol
+[PASS] 768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: icons: no empty or collapsed icon
+[PASS] 768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: icons: icon-only controls have a name
+[PASS] 768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: icons: icon-only targets >= 24px or spaced
+[PASS] 768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: icons: icon centred with its label (<= 3px)
+[INFO] 768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: icons: decorative svg exposed to AT (advisory) :: 1
+[PASS] 768 /pages/does-not-exist-404 :: fonts: every text element uses a theme family
+[PASS] 768 /pages/does-not-exist-404 :: fonts: form controls inherit theme family
+[PASS] 768 /pages/does-not-exist-404 :: fonts: used families are loaded
+[PASS] 768 /pages/does-not-exist-404 :: fonts: every used weight/style has its own face
+[PASS] 768 /pages/does-not-exist-404 :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 768 /pages/does-not-exist-404 :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 768 /pages/does-not-exist-404 :: fonts: multi-line text keeps line-height >= 1
+[PASS] 768 /pages/does-not-exist-404 :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 768 /pages/does-not-exist-404 :: spacing: text keeps >= 12px viewport gutter
+[PASS] 768 /pages/does-not-exist-404 :: spacing: overlapping targets keep >= 24px each
+[PASS] 768 /pages/does-not-exist-404 :: icons: every <use> resolves to a drawn symbol
+[PASS] 768 /pages/does-not-exist-404 :: icons: no empty or collapsed icon
+[PASS] 768 /pages/does-not-exist-404 :: icons: icon-only controls have a name
+[PASS] 768 /pages/does-not-exist-404 :: icons: icon-only targets >= 24px or spaced
+[PASS] 768 /pages/does-not-exist-404 :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 768 /pages/does-not-exist-404 :: icons: icon centred with its label (<= 3px)
+[INFO] 768 /pages/does-not-exist-404 :: icons: decorative svg exposed to AT (advisory) :: 1
+[PASS] 1440 / :: fonts: every text element uses a theme family
+[PASS] 1440 / :: fonts: form controls inherit theme family
+[PASS] 1440 / :: fonts: used families are loaded
+[PASS] 1440 / :: fonts: every used weight/style has its own face
+[PASS] 1440 / :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 1440 / :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 1440 / :: fonts: multi-line text keeps line-height >= 1
+[PASS] 1440 / :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 1440 / :: spacing: overlapping targets keep >= 24px each
+[PASS] 1440 / :: icons: every <use> resolves to a drawn symbol
+[PASS] 1440 / :: icons: no empty or collapsed icon
+[PASS] 1440 / :: icons: icon-only controls have a name
+[PASS] 1440 / :: icons: icon-only targets >= 24px or spaced
+[PASS] 1440 / :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 1440 / :: icons: icon centred with its label (<= 3px)
+[INFO] 1440 / :: icons: decorative svg exposed to AT (advisory) :: 22
+[PASS] 1440 /collections/all :: fonts: every text element uses a theme family
+[PASS] 1440 /collections/all :: fonts: form controls inherit theme family
+[PASS] 1440 /collections/all :: fonts: used families are loaded
+[PASS] 1440 /collections/all :: fonts: every used weight/style has its own face
+[PASS] 1440 /collections/all :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 1440 /collections/all :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 1440 /collections/all :: fonts: multi-line text keeps line-height >= 1
+[PASS] 1440 /collections/all :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 1440 /collections/all :: spacing: overlapping targets keep >= 24px each
+[PASS] 1440 /collections/all :: icons: every <use> resolves to a drawn symbol
+[PASS] 1440 /collections/all :: icons: no empty or collapsed icon
+[PASS] 1440 /collections/all :: icons: icon-only controls have a name
+[PASS] 1440 /collections/all :: icons: icon-only targets >= 24px or spaced
+[PASS] 1440 /collections/all :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 1440 /collections/all :: icons: icon centred with its label (<= 3px)
+[INFO] 1440 /collections/all :: icons: decorative svg exposed to AT (advisory) :: 1
+[PASS] 1440 /products/rebel-tactical-bomber-jacket :: fonts: every text element uses a theme family
+[PASS] 1440 /products/rebel-tactical-bomber-jacket :: fonts: form controls inherit theme family
+[PASS] 1440 /products/rebel-tactical-bomber-jacket :: fonts: used families are loaded
+[PASS] 1440 /products/rebel-tactical-bomber-jacket :: fonts: every used weight/style has its own face
+[PASS] 1440 /products/rebel-tactical-bomber-jacket :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 1440 /products/rebel-tactical-bomber-jacket :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 1440 /products/rebel-tactical-bomber-jacket :: fonts: multi-line text keeps line-height >= 1
+[PASS] 1440 /products/rebel-tactical-bomber-jacket :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 1440 /products/rebel-tactical-bomber-jacket :: spacing: overlapping targets keep >= 24px each
+[PASS] 1440 /products/rebel-tactical-bomber-jacket :: icons: every <use> resolves to a drawn symbol
+[PASS] 1440 /products/rebel-tactical-bomber-jacket :: icons: no empty or collapsed icon
+[PASS] 1440 /products/rebel-tactical-bomber-jacket :: icons: icon-only controls have a name
+[PASS] 1440 /products/rebel-tactical-bomber-jacket :: icons: icon-only targets >= 24px or spaced
+[PASS] 1440 /products/rebel-tactical-bomber-jacket :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 1440 /products/rebel-tactical-bomber-jacket :: icons: icon centred with its label (<= 3px)
+[INFO] 1440 /products/rebel-tactical-bomber-jacket :: icons: decorative svg exposed to AT (advisory) :: 0
+[PASS] 1440 /cart :: fonts: every text element uses a theme family
+[PASS] 1440 /cart :: fonts: form controls inherit theme family
+[PASS] 1440 /cart :: fonts: used families are loaded
+[PASS] 1440 /cart :: fonts: every used weight/style has its own face
+[PASS] 1440 /cart :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 1440 /cart :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 1440 /cart :: fonts: multi-line text keeps line-height >= 1
+[PASS] 1440 /cart :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 1440 /cart :: spacing: overlapping targets keep >= 24px each
+[PASS] 1440 /cart :: icons: every <use> resolves to a drawn symbol
+[PASS] 1440 /cart :: icons: no empty or collapsed icon
+[PASS] 1440 /cart :: icons: icon-only controls have a name
+[PASS] 1440 /cart :: icons: icon-only targets >= 24px or spaced
+[PASS] 1440 /cart :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 1440 /cart :: icons: icon centred with its label (<= 3px)
+[INFO] 1440 /cart :: icons: decorative svg exposed to AT (advisory) :: 0
+[PASS] 1440 /search?q=jacket :: fonts: every text element uses a theme family
+[PASS] 1440 /search?q=jacket :: fonts: form controls inherit theme family
+[PASS] 1440 /search?q=jacket :: fonts: used families are loaded
+[PASS] 1440 /search?q=jacket :: fonts: every used weight/style has its own face
+[PASS] 1440 /search?q=jacket :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 1440 /search?q=jacket :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 1440 /search?q=jacket :: fonts: multi-line text keeps line-height >= 1
+[PASS] 1440 /search?q=jacket :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 1440 /search?q=jacket :: spacing: overlapping targets keep >= 24px each
+[PASS] 1440 /search?q=jacket :: icons: every <use> resolves to a drawn symbol
+[PASS] 1440 /search?q=jacket :: icons: no empty or collapsed icon
+[PASS] 1440 /search?q=jacket :: icons: icon-only controls have a name
+[PASS] 1440 /search?q=jacket :: icons: icon-only targets >= 24px or spaced
+[PASS] 1440 /search?q=jacket :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 1440 /search?q=jacket :: icons: icon centred with its label (<= 3px)
+[INFO] 1440 /search?q=jacket :: icons: decorative svg exposed to AT (advisory) :: 0
+[PASS] 1440 /pages/contact :: fonts: every text element uses a theme family
+[PASS] 1440 /pages/contact :: fonts: form controls inherit theme family
+[PASS] 1440 /pages/contact :: fonts: used families are loaded
+[PASS] 1440 /pages/contact :: fonts: every used weight/style has its own face
+[PASS] 1440 /pages/contact :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 1440 /pages/contact :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 1440 /pages/contact :: fonts: multi-line text keeps line-height >= 1
+[PASS] 1440 /pages/contact :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 1440 /pages/contact :: spacing: overlapping targets keep >= 24px each
+[PASS] 1440 /pages/contact :: icons: every <use> resolves to a drawn symbol
+[PASS] 1440 /pages/contact :: icons: no empty or collapsed icon
+[PASS] 1440 /pages/contact :: icons: icon-only controls have a name
+[PASS] 1440 /pages/contact :: icons: icon-only targets >= 24px or spaced
+[PASS] 1440 /pages/contact :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 1440 /pages/contact :: icons: icon centred with its label (<= 3px)
+[INFO] 1440 /pages/contact :: icons: decorative svg exposed to AT (advisory) :: 0
+[PASS] 1440 /pages/contact?view=faq :: fonts: every text element uses a theme family
+[PASS] 1440 /pages/contact?view=faq :: fonts: form controls inherit theme family
+[PASS] 1440 /pages/contact?view=faq :: fonts: used families are loaded
+[PASS] 1440 /pages/contact?view=faq :: fonts: every used weight/style has its own face
+[PASS] 1440 /pages/contact?view=faq :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 1440 /pages/contact?view=faq :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 1440 /pages/contact?view=faq :: fonts: multi-line text keeps line-height >= 1
+[PASS] 1440 /pages/contact?view=faq :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 1440 /pages/contact?view=faq :: spacing: overlapping targets keep >= 24px each
+[PASS] 1440 /pages/contact?view=faq :: icons: every <use> resolves to a drawn symbol
+[PASS] 1440 /pages/contact?view=faq :: icons: no empty or collapsed icon
+[PASS] 1440 /pages/contact?view=faq :: icons: icon-only controls have a name
+[PASS] 1440 /pages/contact?view=faq :: icons: icon-only targets >= 24px or spaced
+[PASS] 1440 /pages/contact?view=faq :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 1440 /pages/contact?view=faq :: icons: icon centred with its label (<= 3px)
+[INFO] 1440 /pages/contact?view=faq :: icons: decorative svg exposed to AT (advisory) :: 0
+[PASS] 1440 /pages/contact?view=stores :: fonts: every text element uses a theme family
+[PASS] 1440 /pages/contact?view=stores :: fonts: form controls inherit theme family
+[PASS] 1440 /pages/contact?view=stores :: fonts: used families are loaded
+[PASS] 1440 /pages/contact?view=stores :: fonts: every used weight/style has its own face
+[PASS] 1440 /pages/contact?view=stores :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 1440 /pages/contact?view=stores :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 1440 /pages/contact?view=stores :: fonts: multi-line text keeps line-height >= 1
+[PASS] 1440 /pages/contact?view=stores :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 1440 /pages/contact?view=stores :: spacing: overlapping targets keep >= 24px each
+[PASS] 1440 /pages/contact?view=stores :: icons: every <use> resolves to a drawn symbol
+[PASS] 1440 /pages/contact?view=stores :: icons: no empty or collapsed icon
+[PASS] 1440 /pages/contact?view=stores :: icons: icon-only controls have a name
+[PASS] 1440 /pages/contact?view=stores :: icons: icon-only targets >= 24px or spaced
+[PASS] 1440 /pages/contact?view=stores :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 1440 /pages/contact?view=stores :: icons: icon centred with its label (<= 3px)
+[INFO] 1440 /pages/contact?view=stores :: icons: decorative svg exposed to AT (advisory) :: 0
+[PASS] 1440 /pages/about :: fonts: every text element uses a theme family
+[PASS] 1440 /pages/about :: fonts: form controls inherit theme family
+[PASS] 1440 /pages/about :: fonts: used families are loaded
+[PASS] 1440 /pages/about :: fonts: every used weight/style has its own face
+[PASS] 1440 /pages/about :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 1440 /pages/about :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 1440 /pages/about :: fonts: multi-line text keeps line-height >= 1
+[PASS] 1440 /pages/about :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 1440 /pages/about :: spacing: overlapping targets keep >= 24px each
+[PASS] 1440 /pages/about :: icons: every <use> resolves to a drawn symbol
+[PASS] 1440 /pages/about :: icons: no empty or collapsed icon
+[PASS] 1440 /pages/about :: icons: icon-only controls have a name
+[PASS] 1440 /pages/about :: icons: icon-only targets >= 24px or spaced
+[PASS] 1440 /pages/about :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 1440 /pages/about :: icons: icon centred with its label (<= 3px)
+[INFO] 1440 /pages/about :: icons: decorative svg exposed to AT (advisory) :: 0
+[PASS] 1440 /blogs/sustainable-fashion-eco-tech :: fonts: every text element uses a theme family
+[PASS] 1440 /blogs/sustainable-fashion-eco-tech :: fonts: form controls inherit theme family
+[PASS] 1440 /blogs/sustainable-fashion-eco-tech :: fonts: used families are loaded
+[PASS] 1440 /blogs/sustainable-fashion-eco-tech :: fonts: every used weight/style has its own face
+[PASS] 1440 /blogs/sustainable-fashion-eco-tech :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 1440 /blogs/sustainable-fashion-eco-tech :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 1440 /blogs/sustainable-fashion-eco-tech :: fonts: multi-line text keeps line-height >= 1
+[PASS] 1440 /blogs/sustainable-fashion-eco-tech :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 1440 /blogs/sustainable-fashion-eco-tech :: spacing: overlapping targets keep >= 24px each
+[PASS] 1440 /blogs/sustainable-fashion-eco-tech :: icons: every <use> resolves to a drawn symbol
+[PASS] 1440 /blogs/sustainable-fashion-eco-tech :: icons: no empty or collapsed icon
+[PASS] 1440 /blogs/sustainable-fashion-eco-tech :: icons: icon-only controls have a name
+[PASS] 1440 /blogs/sustainable-fashion-eco-tech :: icons: icon-only targets >= 24px or spaced
+[PASS] 1440 /blogs/sustainable-fashion-eco-tech :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 1440 /blogs/sustainable-fashion-eco-tech :: icons: icon centred with its label (<= 3px)
+[INFO] 1440 /blogs/sustainable-fashion-eco-tech :: icons: decorative svg exposed to AT (advisory) :: 1
+[PASS] 1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: fonts: every text element uses a theme family
+[PASS] 1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: fonts: form controls inherit theme family
+[PASS] 1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: fonts: used families are loaded
+[PASS] 1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: fonts: every used weight/style has its own face
+[PASS] 1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: fonts: multi-line text keeps line-height >= 1
+[PASS] 1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: spacing: overlapping targets keep >= 24px each
+[PASS] 1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: icons: every <use> resolves to a drawn symbol
+[PASS] 1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: icons: no empty or collapsed icon
+[PASS] 1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: icons: icon-only controls have a name
+[PASS] 1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: icons: icon-only targets >= 24px or spaced
+[PASS] 1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: icons: icon centred with its label (<= 3px)
+[INFO] 1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027 :: icons: decorative svg exposed to AT (advisory) :: 1
+[PASS] 1440 /pages/does-not-exist-404 :: fonts: every text element uses a theme family
+[PASS] 1440 /pages/does-not-exist-404 :: fonts: form controls inherit theme family
+[PASS] 1440 /pages/does-not-exist-404 :: fonts: used families are loaded
+[PASS] 1440 /pages/does-not-exist-404 :: fonts: every used weight/style has its own face
+[PASS] 1440 /pages/does-not-exist-404 :: fonts: no text below the 11px micro step (DESIGN.md)
+[PASS] 1440 /pages/does-not-exist-404 :: fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)
+[PASS] 1440 /pages/does-not-exist-404 :: fonts: multi-line text keeps line-height >= 1
+[PASS] 1440 /pages/does-not-exist-404 :: spacing: adjacent sections do not touch (< 8px)
+[PASS] 1440 /pages/does-not-exist-404 :: spacing: overlapping targets keep >= 24px each
+[PASS] 1440 /pages/does-not-exist-404 :: icons: every <use> resolves to a drawn symbol
+[PASS] 1440 /pages/does-not-exist-404 :: icons: no empty or collapsed icon
+[PASS] 1440 /pages/does-not-exist-404 :: icons: icon-only controls have a name
+[PASS] 1440 /pages/does-not-exist-404 :: icons: icon-only targets >= 24px or spaced
+[PASS] 1440 /pages/does-not-exist-404 :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 1440 /pages/does-not-exist-404 :: icons: icon centred with its label (<= 3px)
+[INFO] 1440 /pages/does-not-exist-404 :: icons: decorative svg exposed to AT (advisory) :: 1
+SUMMARY {"PASS":564,"FAIL":0,"INFO":56}

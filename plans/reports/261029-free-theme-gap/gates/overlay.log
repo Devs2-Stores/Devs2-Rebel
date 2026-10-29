@@ -1,0 +1,8 @@
+[PASS] overlay:lightbox-375 :: close button closes
+[PASS] overlay:lightbox-375 :: close button: focus returns to trigger
+[INFO] overlay:lightbox-375 :: click outside panel closes :: "panel covers viewport"
+[PASS] overlay:lightbox-375 :: third open/close cycle still works
+[PASS] overlay:lightbox-375 :: no page errors during cycles
+ERR Error: EISDIR: illegal operation on a directory, open 'E:\Work\shopify\plans\reports\261029-free-theme-gap\gates\overlay'
+    at Object.writeFileSync (node:fs:2427:20)
+    at E:\Work\shopify\runs\e2e\overlay-contract.cjs:240:6

@@ -1,0 +1,8 @@
+[PASS] 1440 /pages/does-not-exist-404 :: icons: icon-only controls have a name
+[PASS] 1440 /pages/does-not-exist-404 :: icons: icon-only targets >= 24px or spaced
+[PASS] 1440 /pages/does-not-exist-404 :: icons: icon contrast >= 3:1 on solid backgrounds
+[PASS] 1440 /pages/does-not-exist-404 :: icons: icon centred with its label (<= 3px)
+[INFO] 1440 /pages/does-not-exist-404 :: icons: decorative svg exposed to AT (advisory) :: 1
+ERR Error: EISDIR: illegal operation on a directory, open 'E:\Work\shopify\plans\reports\261029-free-theme-gap\gates\fsi'
+    at Object.writeFileSync (node:fs:2427:20)
+    at E:\Work\shopify\runs\e2e\font-spacing-icon.cjs:263:6

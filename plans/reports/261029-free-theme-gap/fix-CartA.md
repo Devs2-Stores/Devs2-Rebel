@@ -1,0 +1,34 @@
+# fix-CartA: cart slice
+
+All live results below are provisional (shared dev server). Probe: `scratch/CartA/probe.cjs`, 1440x900 and 375x812, drawer and `/cart`, hot-reload script blocked so other agents' edits do not reload the page. Setting values read: `cart_discount_code_enabled` true, `cart_accelerated_checkout_enabled` true (new keys added to `settings_data.json` `current`). Console: 0 page errors and 0 errors from theme assets; the only console/network errors are platform ones also present on a bare `/cart` load (shopify CDN CORS, shop.app 403/framing, Storefront API 400, monorail/web-pixels).
+
+## 02 #1 Discount-code field (drawer + cart page): done
+- New `snippets/cart-discount.liquid` (rendered by `cart-modal.liquid` with `context: 'drawer'` and `cart-total.liquid` with `context: 'page'`), `assets/cart-discount.js` (`<cart-discount>` element), `assets/cart-discount.css`. Whole block is gated by new global setting `cart_discount_code_enabled` (default true).
+- JS posts `{discount: "<codes joined by ','>"}` to `/cart/update.js` (same contract as Fabric `cart-discount.js`). Codes already applied are read from the chips, so apply = existing + new, remove = existing minus one (empty string when none left).
+- Invalid or inapplicable code: `discount_codes[].applicable === false` (or missing) shows locale error `sections.cart.discount.invalid`, `aria-invalid` on the input, totals untouched (no refresh). Applicable code with no `discount_code` application (shipping-only) shows `sections.cart.discount.shipping`.
+- Valid code: chip with remove button (`aria-label` "Remove discount code X", 24px target), then `updateCartData(cart, {source})` fires the existing `cart:updated` path: drawer `renderCart` (chips from `cart.discount_applications`, discount row from `cart_level_discount_applications`, total), page `refreshSection` followed by `syncDiscounts(cart)` which reconciles chips, discount rows and total from the AJAX response.
+- Measured (mock = Playwright route on `**/cart/update.js` returning the real cart plus a `SAVE5` discount_applications entry of 500 cents; invalid case hits the real endpoint with `NOTACODE123`; the page section fetch was also intercepted to inject the chip the server would render):
+  - drawer 1440 / 375, page 1440 / 375: field count 1, visible; page scrollWidth == clientWidth.
+  - invalid: text "This discount code is not valid for your cart.", total unchanged ($254.00 USD), 0 chips.
+  - valid: chip "SAVE5", discount row "SAVE5 -$5.00" (drawer) / "SAVE5: -$5.00" (page), total $254.00 -> $249.00, live text "Discount code SAVE5 applied. Estimated total $249.00 USD.".
+  - remove chip: request body `{"discount":""}`, chips 0, total back to $254.00 USD, live text "Discount code SAVE5 removed. Estimated total $254.00 USD.".
+  - Setting off: `liquidjs` render of the snippet with the setting false produces empty output; true produces the field (static proof, not a live toggle).
+- Known gap: the invalid code stays stored on the cart as `applicable:false` until the next update (same as Fabric); the next apply/remove overwrites it. The field is inert without JS (progressive enhancement: checkout still works; Enter in the drawer field is intercepted so it never submits the checkout form).
+
+## 02 #7 Drawer a11y: done
+- `snippets/cart-live-region.liquid`: one `role="status" aria-live="polite" aria-atomic` region (drawer: inside `<cart-modal>`; page: sibling of `<cart-template>` so the section swap does not replace it), strings are locale-backed data attributes (`sections.cart.announce.*`).
+- Announced and measured: item removed ("Crimson Merino Scarf removed from your cart. Estimated total $189.00 USD."), quantity changed ("Quantity of Crimson Merino Scarf changed to 2. Estimated total $319.00 USD."), discount applied/removed, new total, empty cart ("Rebel Tactical Bomber Jacket removed from your cart. Your cart is currently empty."; also announced when the drawer opens on an empty cart).
+- Focus: after removing a line the focus goes to the next line's remove control; when none is left it goes to the drawer heading `#cart-modal-title` (`tabindex="-1"`). Measured drawer 1440 and 375: `BUTTON.cart-modal-item__remove` (label "Remove Rebel Tactical Bomber Jacket"), after last line `H2#cart-modal-title`, always inside the dialog, never `BODY`. After a quantity step the focus stays on the same stepper button (`quantity-selector__increase`). Same behaviour on the cart page (`cart-item__delete`, then `h1.cart-template__title` with `tabindex="-1"`); after a discount apply/remove focus is kept on the field/Apply button (restored by id after the page section swap).
+- Fixed a related defect: `quantity-selector.js` was only loaded on cart/PDP templates, and a `<script>` inside the drawer HTML is not executed by `innerHTML`, so the drawer stepper was inert on e.g. the home page (measured: `customElements.get('quantity-selector')` false, no `/cart/change` request). `cart-modal.liquid` now loads it; afterwards the drawer quantity change announced and updated totals.
+
+## 01 #15 Cart settings subset: done
+- `cart_discount_code_enabled` (default true) and `cart_accelerated_checkout_enabled` (default true; `cart-total.liquid` renders `content_for_additional_checkout_buttons` only when on). Registered in `config/settings_schema.json` (Cart group), `locales/en.default.schema.json`, `config/settings_data.json`. Names do not exist in Dawn or Fabric schemas.
+- Validators: `validate-locales` SUCCESS, `validate-schema-ranges` SUCCESS, `node --check` on `cart.js`, `cart-modal.js`, `cart-discount.js` ok, JSON parse ok, `runs/e2e/settings-usage.cjs` exit 0 (985 settings, 0 unread, 0 unrendered; 228 global, 0 unread). Accelerated toggle was not exercised live (demo store has no accelerated buttons on the cart page).
+
+## Files
+New: `snippets/cart-discount.liquid`, `snippets/cart-live-region.liquid`, `assets/cart-discount.js`, `assets/cart-discount.css`. Edited: `snippets/cart-modal.liquid`, `snippets/cart-total.liquid`, `sections/main-cart.liquid`, `assets/cart.js`, `assets/cart-modal.js`; shared: `config/settings_schema.json`, `config/settings_data.json`, `locales/en.default.json`, `locales/en.default.schema.json`.
+
+## Durable rules
+- Cart mutations that re-render lines (drawer `changeLine`, page `updateCart`) must restore focus to the equivalent control and write a locale-backed message into the `[data-cart-live]` region; never leave focus on a detached node.
+- A script inside HTML injected via `innerHTML` does not run: any custom element the drawer HTML depends on (`quantity-selector`) must be loaded by the shell snippet (`cart-modal.liquid`), not by the fetched section.
+- Discount codes go through `/cart/update.js` with `discount` as a comma-joined list built from the visible chips, and the page reconciles chips, discount rows and total from that AJAX response after the section refresh.

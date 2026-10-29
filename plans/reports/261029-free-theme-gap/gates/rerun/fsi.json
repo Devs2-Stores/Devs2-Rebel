@@ -1,0 +1,5489 @@
+{
+ "results": [
+  {
+   "journey": "375 /",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "375 /",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /",
+   "name": "fonts: inputs >= 16px on mobile (iOS zoom, advisory)",
+   "ok": null,
+   "detail": [
+    ".section-newsletter__form > input.section-newsletter__input 15px"
+   ]
+  },
+  {
+   "journey": "375 /",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 16,
+    "touching": []
+   }
+  },
+  {
+   "journey": "375 /",
+   "name": "spacing: text keeps >= 12px viewport gutter",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /",
+   "name": "spacing: layered targets by design (advisory)",
+   "ok": null,
+   "detail": [
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)"
+   ]
+  },
+  {
+   "journey": "375 /",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "375 /",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 18,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "375 /",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 22
+  },
+  {
+   "journey": "375 /collections/all",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /collections/all",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /collections/all",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "375 /collections/all",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /collections/all",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /collections/all",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /collections/all",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /collections/all",
+   "name": "fonts: inputs >= 16px on mobile (iOS zoom, advisory)",
+   "ok": null,
+   "detail": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ]
+  },
+  {
+   "journey": "375 /collections/all",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 3,
+    "touching": []
+   }
+  },
+  {
+   "journey": "375 /collections/all",
+   "name": "spacing: text keeps >= 12px viewport gutter",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /collections/all",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /collections/all",
+   "name": "spacing: layered targets by design (advisory)",
+   "ok": null,
+   "detail": [
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)"
+   ]
+  },
+  {
+   "journey": "375 /collections/all",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /collections/all",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "375 /collections/all",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 26,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "375 /collections/all",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /collections/all",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /collections/all",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /collections/all",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 1
+  },
+  {
+   "journey": "375 /products/rebel-tactical-bomber-jacket",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /products/rebel-tactical-bomber-jacket",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /products/rebel-tactical-bomber-jacket",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "375 /products/rebel-tactical-bomber-jacket",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /products/rebel-tactical-bomber-jacket",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /products/rebel-tactical-bomber-jacket",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /products/rebel-tactical-bomber-jacket",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /products/rebel-tactical-bomber-jacket",
+   "name": "fonts: inputs >= 16px on mobile (iOS zoom, advisory)",
+   "ok": null,
+   "detail": [
+    ".quantity-selector > input#quantity-49835586027591.quantity-selector__input 14px",
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ]
+  },
+  {
+   "journey": "375 /products/rebel-tactical-bomber-jacket",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 4,
+    "touching": []
+   }
+  },
+  {
+   "journey": "375 /products/rebel-tactical-bomber-jacket",
+   "name": "spacing: text keeps >= 12px viewport gutter",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /products/rebel-tactical-bomber-jacket",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /products/rebel-tactical-bomber-jacket",
+   "name": "spacing: layered targets by design (advisory)",
+   "ok": null,
+   "detail": [
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)"
+   ]
+  },
+  {
+   "journey": "375 /products/rebel-tactical-bomber-jacket",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /products/rebel-tactical-bomber-jacket",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "375 /products/rebel-tactical-bomber-jacket",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 22,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "375 /products/rebel-tactical-bomber-jacket",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /products/rebel-tactical-bomber-jacket",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /products/rebel-tactical-bomber-jacket",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /products/rebel-tactical-bomber-jacket",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 0
+  },
+  {
+   "journey": "375 /cart",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /cart",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /cart",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "375 /cart",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /cart",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /cart",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /cart",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /cart",
+   "name": "fonts: inputs >= 16px on mobile (iOS zoom, advisory)",
+   "ok": null,
+   "detail": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ]
+  },
+  {
+   "journey": "375 /cart",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 3,
+    "touching": []
+   }
+  },
+  {
+   "journey": "375 /cart",
+   "name": "spacing: text keeps >= 12px viewport gutter",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /cart",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /cart",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /cart",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "375 /cart",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 3,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "375 /cart",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /cart",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /cart",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /cart",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 0
+  },
+  {
+   "journey": "375 /search?q=jacket",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /search?q=jacket",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /search?q=jacket",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "375 /search?q=jacket",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /search?q=jacket",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /search?q=jacket",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /search?q=jacket",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /search?q=jacket",
+   "name": "fonts: inputs >= 16px on mobile (iOS zoom, advisory)",
+   "ok": null,
+   "detail": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ]
+  },
+  {
+   "journey": "375 /search?q=jacket",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 3,
+    "touching": []
+   }
+  },
+  {
+   "journey": "375 /search?q=jacket",
+   "name": "spacing: text keeps >= 12px viewport gutter",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /search?q=jacket",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /search?q=jacket",
+   "name": "spacing: layered targets by design (advisory)",
+   "ok": null,
+   "detail": [
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)"
+   ]
+  },
+  {
+   "journey": "375 /search?q=jacket",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /search?q=jacket",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "375 /search?q=jacket",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 12,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "375 /search?q=jacket",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /search?q=jacket",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /search?q=jacket",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /search?q=jacket",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 0
+  },
+  {
+   "journey": "375 /pages/contact",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "375 /pages/contact",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact",
+   "name": "fonts: inputs >= 16px on mobile (iOS zoom, advisory)",
+   "ok": null,
+   "detail": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ]
+  },
+  {
+   "journey": "375 /pages/contact",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 3,
+    "touching": []
+   }
+  },
+  {
+   "journey": "375 /pages/contact",
+   "name": "spacing: text keeps >= 12px viewport gutter",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "375 /pages/contact",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 3,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "375 /pages/contact",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 0
+  },
+  {
+   "journey": "375 /pages/contact?view=faq",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact?view=faq",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact?view=faq",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "375 /pages/contact?view=faq",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact?view=faq",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact?view=faq",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact?view=faq",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact?view=faq",
+   "name": "fonts: inputs >= 16px on mobile (iOS zoom, advisory)",
+   "ok": null,
+   "detail": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ]
+  },
+  {
+   "journey": "375 /pages/contact?view=faq",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 4,
+    "touching": []
+   }
+  },
+  {
+   "journey": "375 /pages/contact?view=faq",
+   "name": "spacing: text keeps >= 12px viewport gutter",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact?view=faq",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact?view=faq",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact?view=faq",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "375 /pages/contact?view=faq",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 3,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "375 /pages/contact?view=faq",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact?view=faq",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact?view=faq",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact?view=faq",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 0
+  },
+  {
+   "journey": "375 /pages/contact?view=stores",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact?view=stores",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact?view=stores",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "375 /pages/contact?view=stores",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact?view=stores",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact?view=stores",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact?view=stores",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact?view=stores",
+   "name": "fonts: inputs >= 16px on mobile (iOS zoom, advisory)",
+   "ok": null,
+   "detail": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ]
+  },
+  {
+   "journey": "375 /pages/contact?view=stores",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 3,
+    "touching": []
+   }
+  },
+  {
+   "journey": "375 /pages/contact?view=stores",
+   "name": "spacing: text keeps >= 12px viewport gutter",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact?view=stores",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact?view=stores",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact?view=stores",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "375 /pages/contact?view=stores",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 3,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "375 /pages/contact?view=stores",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact?view=stores",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact?view=stores",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/contact?view=stores",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 0
+  },
+  {
+   "journey": "375 /pages/about",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/about",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/about",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "375 /pages/about",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/about",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/about",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/about",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/about",
+   "name": "fonts: inputs >= 16px on mobile (iOS zoom, advisory)",
+   "ok": null,
+   "detail": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ]
+  },
+  {
+   "journey": "375 /pages/about",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 10,
+    "touching": []
+   }
+  },
+  {
+   "journey": "375 /pages/about",
+   "name": "spacing: text keeps >= 12px viewport gutter",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/about",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/about",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/about",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "375 /pages/about",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 3,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "375 /pages/about",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/about",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/about",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/about",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 0
+  },
+  {
+   "journey": "375 /blogs/sustainable-fashion-eco-tech",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /blogs/sustainable-fashion-eco-tech",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /blogs/sustainable-fashion-eco-tech",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "375 /blogs/sustainable-fashion-eco-tech",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /blogs/sustainable-fashion-eco-tech",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /blogs/sustainable-fashion-eco-tech",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /blogs/sustainable-fashion-eco-tech",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /blogs/sustainable-fashion-eco-tech",
+   "name": "fonts: inputs >= 16px on mobile (iOS zoom, advisory)",
+   "ok": null,
+   "detail": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ]
+  },
+  {
+   "journey": "375 /blogs/sustainable-fashion-eco-tech",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 3,
+    "touching": []
+   }
+  },
+  {
+   "journey": "375 /blogs/sustainable-fashion-eco-tech",
+   "name": "spacing: text keeps >= 12px viewport gutter",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /blogs/sustainable-fashion-eco-tech",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /blogs/sustainable-fashion-eco-tech",
+   "name": "spacing: layered targets by design (advisory)",
+   "ok": null,
+   "detail": [
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)"
+   ]
+  },
+  {
+   "journey": "375 /blogs/sustainable-fashion-eco-tech",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /blogs/sustainable-fashion-eco-tech",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "375 /blogs/sustainable-fashion-eco-tech",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 8,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "375 /blogs/sustainable-fashion-eco-tech",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /blogs/sustainable-fashion-eco-tech",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /blogs/sustainable-fashion-eco-tech",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /blogs/sustainable-fashion-eco-tech",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 1
+  },
+  {
+   "journey": "375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "fonts: inputs >= 16px on mobile (iOS zoom, advisory)",
+   "ok": null,
+   "detail": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ]
+  },
+  {
+   "journey": "375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 3,
+    "touching": []
+   }
+  },
+  {
+   "journey": "375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "spacing: text keeps >= 12px viewport gutter",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "spacing: layered targets by design (advisory)",
+   "ok": null,
+   "detail": [
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)"
+   ]
+  },
+  {
+   "journey": "375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 8,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 1
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "fonts: inputs >= 16px on mobile (iOS zoom, advisory)",
+   "ok": null,
+   "detail": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ]
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 3,
+    "touching": []
+   }
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "spacing: text keeps >= 12px viewport gutter",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "spacing: layered targets by design (advisory)",
+   "ok": null,
+   "detail": [
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)"
+   ]
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 8,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "375 /pages/does-not-exist-404",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 1
+  },
+  {
+   "journey": "768 /",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "768 /",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 16,
+    "touching": []
+   }
+  },
+  {
+   "journey": "768 /",
+   "name": "spacing: text keeps >= 12px viewport gutter",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "768 /",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 6,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "768 /",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 22
+  },
+  {
+   "journey": "768 /collections/all",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /collections/all",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /collections/all",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "768 /collections/all",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /collections/all",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /collections/all",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /collections/all",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /collections/all",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 3,
+    "touching": []
+   }
+  },
+  {
+   "journey": "768 /collections/all",
+   "name": "spacing: text keeps >= 12px viewport gutter",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /collections/all",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /collections/all",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /collections/all",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "768 /collections/all",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 6,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "768 /collections/all",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /collections/all",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /collections/all",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /collections/all",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 1
+  },
+  {
+   "journey": "768 /products/rebel-tactical-bomber-jacket",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /products/rebel-tactical-bomber-jacket",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /products/rebel-tactical-bomber-jacket",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "768 /products/rebel-tactical-bomber-jacket",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /products/rebel-tactical-bomber-jacket",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /products/rebel-tactical-bomber-jacket",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /products/rebel-tactical-bomber-jacket",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /products/rebel-tactical-bomber-jacket",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 4,
+    "touching": []
+   }
+  },
+  {
+   "journey": "768 /products/rebel-tactical-bomber-jacket",
+   "name": "spacing: text keeps >= 12px viewport gutter",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /products/rebel-tactical-bomber-jacket",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /products/rebel-tactical-bomber-jacket",
+   "name": "spacing: layered targets by design (advisory)",
+   "ok": null,
+   "detail": [
+    ".product-card__media > a.product-card__media-inner x .product-template__relate-wrap > button.swiper-button-prev.swiper-button-disabled (27x40)",
+    ".product-card__media > a.product-card__media-inner x .product-template__relate-wrap > button.swiper-button-next (27x40)"
+   ]
+  },
+  {
+   "journey": "768 /products/rebel-tactical-bomber-jacket",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /products/rebel-tactical-bomber-jacket",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "768 /products/rebel-tactical-bomber-jacket",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 18,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "768 /products/rebel-tactical-bomber-jacket",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /products/rebel-tactical-bomber-jacket",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /products/rebel-tactical-bomber-jacket",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /products/rebel-tactical-bomber-jacket",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 0
+  },
+  {
+   "journey": "768 /cart",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /cart",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /cart",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "768 /cart",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /cart",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /cart",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /cart",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /cart",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 3,
+    "touching": []
+   }
+  },
+  {
+   "journey": "768 /cart",
+   "name": "spacing: text keeps >= 12px viewport gutter",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /cart",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /cart",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /cart",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "768 /cart",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 3,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "768 /cart",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /cart",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /cart",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /cart",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 0
+  },
+  {
+   "journey": "768 /search?q=jacket",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /search?q=jacket",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /search?q=jacket",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "768 /search?q=jacket",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /search?q=jacket",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /search?q=jacket",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /search?q=jacket",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /search?q=jacket",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 3,
+    "touching": []
+   }
+  },
+  {
+   "journey": "768 /search?q=jacket",
+   "name": "spacing: text keeps >= 12px viewport gutter",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /search?q=jacket",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /search?q=jacket",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /search?q=jacket",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "768 /search?q=jacket",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 5,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "768 /search?q=jacket",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /search?q=jacket",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /search?q=jacket",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /search?q=jacket",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 0
+  },
+  {
+   "journey": "768 /pages/contact",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "768 /pages/contact",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 3,
+    "touching": []
+   }
+  },
+  {
+   "journey": "768 /pages/contact",
+   "name": "spacing: text keeps >= 12px viewport gutter",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "768 /pages/contact",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 3,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "768 /pages/contact",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 0
+  },
+  {
+   "journey": "768 /pages/contact?view=faq",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact?view=faq",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact?view=faq",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "768 /pages/contact?view=faq",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact?view=faq",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact?view=faq",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact?view=faq",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact?view=faq",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 4,
+    "touching": []
+   }
+  },
+  {
+   "journey": "768 /pages/contact?view=faq",
+   "name": "spacing: text keeps >= 12px viewport gutter",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact?view=faq",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact?view=faq",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact?view=faq",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "768 /pages/contact?view=faq",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 3,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "768 /pages/contact?view=faq",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact?view=faq",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact?view=faq",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact?view=faq",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 0
+  },
+  {
+   "journey": "768 /pages/contact?view=stores",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact?view=stores",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact?view=stores",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "768 /pages/contact?view=stores",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact?view=stores",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact?view=stores",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact?view=stores",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact?view=stores",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 3,
+    "touching": []
+   }
+  },
+  {
+   "journey": "768 /pages/contact?view=stores",
+   "name": "spacing: text keeps >= 12px viewport gutter",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact?view=stores",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact?view=stores",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact?view=stores",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "768 /pages/contact?view=stores",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 3,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "768 /pages/contact?view=stores",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact?view=stores",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact?view=stores",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/contact?view=stores",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 0
+  },
+  {
+   "journey": "768 /pages/about",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/about",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/about",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "768 /pages/about",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/about",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/about",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/about",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/about",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 10,
+    "touching": []
+   }
+  },
+  {
+   "journey": "768 /pages/about",
+   "name": "spacing: text keeps >= 12px viewport gutter",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/about",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/about",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/about",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "768 /pages/about",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 3,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "768 /pages/about",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/about",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/about",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/about",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 0
+  },
+  {
+   "journey": "768 /blogs/sustainable-fashion-eco-tech",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /blogs/sustainable-fashion-eco-tech",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /blogs/sustainable-fashion-eco-tech",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "768 /blogs/sustainable-fashion-eco-tech",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /blogs/sustainable-fashion-eco-tech",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /blogs/sustainable-fashion-eco-tech",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /blogs/sustainable-fashion-eco-tech",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /blogs/sustainable-fashion-eco-tech",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 3,
+    "touching": []
+   }
+  },
+  {
+   "journey": "768 /blogs/sustainable-fashion-eco-tech",
+   "name": "spacing: text keeps >= 12px viewport gutter",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /blogs/sustainable-fashion-eco-tech",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /blogs/sustainable-fashion-eco-tech",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /blogs/sustainable-fashion-eco-tech",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "768 /blogs/sustainable-fashion-eco-tech",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 3,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "768 /blogs/sustainable-fashion-eco-tech",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /blogs/sustainable-fashion-eco-tech",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /blogs/sustainable-fashion-eco-tech",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /blogs/sustainable-fashion-eco-tech",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 1
+  },
+  {
+   "journey": "768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 3,
+    "touching": []
+   }
+  },
+  {
+   "journey": "768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "spacing: text keeps >= 12px viewport gutter",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 3,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 1
+  },
+  {
+   "journey": "768 /pages/does-not-exist-404",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/does-not-exist-404",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/does-not-exist-404",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "768 /pages/does-not-exist-404",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/does-not-exist-404",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/does-not-exist-404",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/does-not-exist-404",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/does-not-exist-404",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 3,
+    "touching": []
+   }
+  },
+  {
+   "journey": "768 /pages/does-not-exist-404",
+   "name": "spacing: text keeps >= 12px viewport gutter",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/does-not-exist-404",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/does-not-exist-404",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/does-not-exist-404",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "768 /pages/does-not-exist-404",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 3,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "768 /pages/does-not-exist-404",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/does-not-exist-404",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/does-not-exist-404",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "768 /pages/does-not-exist-404",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 1
+  },
+  {
+   "journey": "1440 /",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "1440 /",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 16,
+    "touching": []
+   }
+  },
+  {
+   "journey": "1440 /",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "1440 /",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 5,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "1440 /",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 22
+  },
+  {
+   "journey": "1440 /collections/all",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /collections/all",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /collections/all",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "1440 /collections/all",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /collections/all",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /collections/all",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /collections/all",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /collections/all",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 3,
+    "touching": []
+   }
+  },
+  {
+   "journey": "1440 /collections/all",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /collections/all",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /collections/all",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "1440 /collections/all",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 5,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "1440 /collections/all",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /collections/all",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /collections/all",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /collections/all",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 1
+  },
+  {
+   "journey": "1440 /products/rebel-tactical-bomber-jacket",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /products/rebel-tactical-bomber-jacket",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /products/rebel-tactical-bomber-jacket",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "1440 /products/rebel-tactical-bomber-jacket",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /products/rebel-tactical-bomber-jacket",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /products/rebel-tactical-bomber-jacket",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /products/rebel-tactical-bomber-jacket",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /products/rebel-tactical-bomber-jacket",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 4,
+    "touching": []
+   }
+  },
+  {
+   "journey": "1440 /products/rebel-tactical-bomber-jacket",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /products/rebel-tactical-bomber-jacket",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /products/rebel-tactical-bomber-jacket",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "1440 /products/rebel-tactical-bomber-jacket",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 17,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "1440 /products/rebel-tactical-bomber-jacket",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /products/rebel-tactical-bomber-jacket",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /products/rebel-tactical-bomber-jacket",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /products/rebel-tactical-bomber-jacket",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 0
+  },
+  {
+   "journey": "1440 /cart",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /cart",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /cart",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "1440 /cart",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /cart",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /cart",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /cart",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /cart",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 3,
+    "touching": []
+   }
+  },
+  {
+   "journey": "1440 /cart",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /cart",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /cart",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "1440 /cart",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 2,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "1440 /cart",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /cart",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /cart",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /cart",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 0
+  },
+  {
+   "journey": "1440 /search?q=jacket",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /search?q=jacket",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /search?q=jacket",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "1440 /search?q=jacket",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /search?q=jacket",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /search?q=jacket",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /search?q=jacket",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /search?q=jacket",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 3,
+    "touching": []
+   }
+  },
+  {
+   "journey": "1440 /search?q=jacket",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /search?q=jacket",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /search?q=jacket",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "1440 /search?q=jacket",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 4,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "1440 /search?q=jacket",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /search?q=jacket",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /search?q=jacket",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /search?q=jacket",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 0
+  },
+  {
+   "journey": "1440 /pages/contact",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "1440 /pages/contact",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 3,
+    "touching": []
+   }
+  },
+  {
+   "journey": "1440 /pages/contact",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "1440 /pages/contact",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 2,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "1440 /pages/contact",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 0
+  },
+  {
+   "journey": "1440 /pages/contact?view=faq",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact?view=faq",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact?view=faq",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "1440 /pages/contact?view=faq",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact?view=faq",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact?view=faq",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact?view=faq",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact?view=faq",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 4,
+    "touching": []
+   }
+  },
+  {
+   "journey": "1440 /pages/contact?view=faq",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact?view=faq",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact?view=faq",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "1440 /pages/contact?view=faq",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 2,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "1440 /pages/contact?view=faq",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact?view=faq",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact?view=faq",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact?view=faq",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 0
+  },
+  {
+   "journey": "1440 /pages/contact?view=stores",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact?view=stores",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact?view=stores",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "1440 /pages/contact?view=stores",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact?view=stores",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact?view=stores",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact?view=stores",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact?view=stores",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 3,
+    "touching": []
+   }
+  },
+  {
+   "journey": "1440 /pages/contact?view=stores",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact?view=stores",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact?view=stores",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "1440 /pages/contact?view=stores",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 2,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "1440 /pages/contact?view=stores",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact?view=stores",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact?view=stores",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/contact?view=stores",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 0
+  },
+  {
+   "journey": "1440 /pages/about",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/about",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/about",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "1440 /pages/about",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/about",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/about",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/about",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/about",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 10,
+    "touching": []
+   }
+  },
+  {
+   "journey": "1440 /pages/about",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/about",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/about",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "1440 /pages/about",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 2,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "1440 /pages/about",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/about",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/about",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/about",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 0
+  },
+  {
+   "journey": "1440 /blogs/sustainable-fashion-eco-tech",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /blogs/sustainable-fashion-eco-tech",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /blogs/sustainable-fashion-eco-tech",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "1440 /blogs/sustainable-fashion-eco-tech",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /blogs/sustainable-fashion-eco-tech",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /blogs/sustainable-fashion-eco-tech",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /blogs/sustainable-fashion-eco-tech",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /blogs/sustainable-fashion-eco-tech",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 3,
+    "touching": []
+   }
+  },
+  {
+   "journey": "1440 /blogs/sustainable-fashion-eco-tech",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /blogs/sustainable-fashion-eco-tech",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /blogs/sustainable-fashion-eco-tech",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "1440 /blogs/sustainable-fashion-eco-tech",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 2,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "1440 /blogs/sustainable-fashion-eco-tech",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /blogs/sustainable-fashion-eco-tech",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /blogs/sustainable-fashion-eco-tech",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /blogs/sustainable-fashion-eco-tech",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 1
+  },
+  {
+   "journey": "1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 3,
+    "touching": []
+   }
+  },
+  {
+   "journey": "1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 2,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 1
+  },
+  {
+   "journey": "1440 /pages/does-not-exist-404",
+   "name": "fonts: every text element uses a theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/does-not-exist-404",
+   "name": "fonts: form controls inherit theme family",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/does-not-exist-404",
+   "name": "fonts: used families are loaded",
+   "ok": true,
+   "detail": {
+    "status": "loaded",
+    "missing": []
+   }
+  },
+  {
+   "journey": "1440 /pages/does-not-exist-404",
+   "name": "fonts: every used weight/style has its own face",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/does-not-exist-404",
+   "name": "fonts: no text below the 11px micro step (DESIGN.md)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/does-not-exist-404",
+   "name": "fonts: 11px text is a micro label (uppercase, count pill or .content-size-xs)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/does-not-exist-404",
+   "name": "fonts: multi-line text keeps line-height >= 1",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/does-not-exist-404",
+   "name": "spacing: adjacent sections do not touch (< 8px)",
+   "ok": true,
+   "detail": {
+    "measured": 3,
+    "touching": []
+   }
+  },
+  {
+   "journey": "1440 /pages/does-not-exist-404",
+   "name": "spacing: overlapping targets keep >= 24px each",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/does-not-exist-404",
+   "name": "icons: every <use> resolves to a drawn symbol",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/does-not-exist-404",
+   "name": "icons: no empty or collapsed icon",
+   "ok": true,
+   "detail": {
+    "empty": [],
+    "collapsed": []
+   }
+  },
+  {
+   "journey": "1440 /pages/does-not-exist-404",
+   "name": "icons: icon-only controls have a name",
+   "ok": true,
+   "detail": {
+    "iconOnly": 2,
+    "unnamed": []
+   }
+  },
+  {
+   "journey": "1440 /pages/does-not-exist-404",
+   "name": "icons: icon-only targets >= 24px or spaced",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/does-not-exist-404",
+   "name": "icons: icon contrast >= 3:1 on solid backgrounds",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/does-not-exist-404",
+   "name": "icons: icon centred with its label (<= 3px)",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "journey": "1440 /pages/does-not-exist-404",
+   "name": "icons: decorative svg exposed to AT (advisory)",
+   "ok": null,
+   "detail": 1
+  }
+ ],
+ "raw": {
+  "375 /": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".section-newsletter__form > input.section-newsletter__input 15px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 16,
+   "gutter": [],
+   "overlap": [],
+   "layered": [
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)"
+   ],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 22,
+   "iconOnly": 18,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "375 /collections/all": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 3,
+   "gutter": [],
+   "overlap": [],
+   "layered": [
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)"
+   ],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 1,
+   "iconOnly": 26,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "375 /products/rebel-tactical-bomber-jacket": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".quantity-selector > input#quantity-49835586027591.quantity-selector__input 14px",
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 4,
+   "gutter": [],
+   "overlap": [],
+   "layered": [
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)"
+   ],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 0,
+   "iconOnly": 22,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "375 /cart": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 3,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 0,
+   "iconOnly": 3,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "375 /search?q=jacket": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 3,
+   "gutter": [],
+   "overlap": [],
+   "layered": [
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)"
+   ],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 0,
+   "iconOnly": 12,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "375 /pages/contact": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 3,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 0,
+   "iconOnly": 3,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "375 /pages/contact?view=faq": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 4,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 0,
+   "iconOnly": 3,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "375 /pages/contact?view=stores": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 3,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 0,
+   "iconOnly": 3,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "375 /pages/about": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 10,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 0,
+   "iconOnly": 3,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "375 /blogs/sustainable-fashion-eco-tech": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 3,
+   "gutter": [],
+   "overlap": [],
+   "layered": [
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)"
+   ],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 1,
+   "iconOnly": 8,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "375 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 3,
+   "gutter": [],
+   "overlap": [],
+   "layered": [
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)"
+   ],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 1,
+   "iconOnly": 8,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "375 /pages/does-not-exist-404": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 3,
+   "gutter": [],
+   "overlap": [],
+   "layered": [
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)",
+    ".product-card__media > a.product-card__media-inner x .product-card__add-form > button.product-card__add-btn (40x40)"
+   ],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 1,
+   "iconOnly": 8,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "768 /": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".section-newsletter__form > input.section-newsletter__input 15px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 16,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 22,
+   "iconOnly": 6,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "768 /collections/all": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".collection-sort__select-wrapper > select#SortBy.collection-sort__select 14px",
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 3,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 1,
+   "iconOnly": 6,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "768 /products/rebel-tactical-bomber-jacket": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".quantity-selector > input#quantity-49835586027591.quantity-selector__input 14px",
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 4,
+   "gutter": [],
+   "overlap": [],
+   "layered": [
+    ".product-card__media > a.product-card__media-inner x .product-template__relate-wrap > button.swiper-button-prev.swiper-button-disabled (27x40)",
+    ".product-card__media > a.product-card__media-inner x .product-template__relate-wrap > button.swiper-button-next (27x40)"
+   ],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 0,
+   "iconOnly": 18,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "768 /cart": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 3,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 0,
+   "iconOnly": 3,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "768 /search?q=jacket": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".collection-sort__select-wrapper > select#SortBy.collection-sort__select 14px",
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 3,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 0,
+   "iconOnly": 5,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "768 /pages/contact": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 3,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 0,
+   "iconOnly": 3,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "768 /pages/contact?view=faq": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 4,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 0,
+   "iconOnly": 3,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "768 /pages/contact?view=stores": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 3,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 0,
+   "iconOnly": 3,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "768 /pages/about": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 10,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 0,
+   "iconOnly": 3,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "768 /blogs/sustainable-fashion-eco-tech": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 3,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 1,
+   "iconOnly": 3,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "768 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 3,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 1,
+   "iconOnly": 3,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "768 /pages/does-not-exist-404": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 3,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 1,
+   "iconOnly": 3,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "1440 /": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".section-newsletter__form > input.section-newsletter__input 15px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 16,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 22,
+   "iconOnly": 5,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "1440 /collections/all": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".collection-sort__select-wrapper > select#SortBy.collection-sort__select 14px",
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 3,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 1,
+   "iconOnly": 5,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "1440 /products/rebel-tactical-bomber-jacket": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".quantity-selector > input#quantity-49835586027591.quantity-selector__input 14px",
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 4,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 0,
+   "iconOnly": 17,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "1440 /cart": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 3,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 0,
+   "iconOnly": 2,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "1440 /search?q=jacket": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".facet-filter__price-input-wrap > input#Filter-filter-v-price-gte.facet-filter__price-input 14px",
+    ".facet-filter__price-input-wrap > input#Filter-filter-v-price-lte.facet-filter__price-input 14px",
+    ".collection-sort__select-wrapper > select#SortBy.collection-sort__select 14px",
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 3,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 0,
+   "iconOnly": 4,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "1440 /pages/contact": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 3,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 0,
+   "iconOnly": 2,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "1440 /pages/contact?view=faq": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 4,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 0,
+   "iconOnly": 2,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "1440 /pages/contact?view=stores": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 3,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 0,
+   "iconOnly": 2,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "1440 /pages/about": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 10,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 0,
+   "iconOnly": 2,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "1440 /blogs/sustainable-fashion-eco-tech": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 3,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 1,
+   "iconOnly": 2,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "1440 /blogs/style-guides-wardrobe-essentials/augmented-reality-fitting-rooms-shopping-and-styling-in-2027": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 3,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 1,
+   "iconOnly": 2,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  },
+  "1440 /pages/does-not-exist-404": {
+   "fam": {
+    "body": "inter",
+    "heading": "inter",
+    "subheading": "inter"
+   },
+   "fontsStatus": "loaded",
+   "foreign": [],
+   "controlFont": [],
+   "missingFamily": [],
+   "weightMismatch": [],
+   "tiny": [],
+   "micro": [],
+   "tightLh": [],
+   "smallInputs": [
+    ".footer-newsletter__field > input#FooterNewsletterEmail-newsletter.footer-newsletter__input 14px"
+   ],
+   "touching": [],
+   "tight": [],
+   "sectionsMeasured": 3,
+   "gutter": [],
+   "overlap": [],
+   "layered": [],
+   "unresolved": [],
+   "empty": [],
+   "collapsed": [],
+   "exposed": 1,
+   "iconOnly": 2,
+   "unnamed": [],
+   "small": [],
+   "lowContrast": [],
+   "misaligned": []
+  }
+ }
+}
