@@ -1642,8 +1642,7 @@
         "type": "collection",
         "id": "predictive_search_recommendation_collection",
         "label": "t:settings_schema.search_input.settings.predictive_search_recommendation_collection.label",
-        "info": "t:settings_schema.search_input.settings.predictive_search_recommendation_collection.info",
-        "visible_if": "{{ settings.search_suggest_enabled }}"
+        "info": "t:settings_schema.search_input.settings.predictive_search_recommendation_collection.info"
       },
       {
         "type": "checkbox",
@@ -1734,8 +1733,7 @@
         "type": "collection",
         "id": "cart_panel_collection",
         "label": "t:settings_schema.cart.settings.cart_drawer.collection.label",
-        "info": "t:settings_schema.cart.settings.cart_drawer.collection.info",
-        "visible_if": "{{ settings.cart_mode == 'drawer' }}"
+        "info": "t:settings_schema.cart.settings.cart_drawer.collection.info"
       },
       {
         "type": "color_scheme",
@@ -1982,8 +1980,7 @@
       {
         "type": "page",
         "id": "product_size_guide_page",
-        "label": "t:settings_schema.product.settings.size_guide_page.label",
-        "visible_if": "{{ settings.product_size_guide_enable }}"
+        "label": "t:settings_schema.product.settings.size_guide_page.label"
       },
       {
         "type": "text",
