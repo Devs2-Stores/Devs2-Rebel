@@ -1,9 +1,16 @@
 .section-marquee {
+  display: flex;
+  align-items: center;
   padding-block: var(--mq-mt) var(--mq-mb);
   background: rgb(var(--color-background));
   border-block: 1px solid var(--color-hairline);
   overflow: hidden;
   max-width: 100%;
+}
+.section-marquee__viewport {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
 }
 .section-marquee-wrapper {
   overflow: hidden;
@@ -21,9 +28,40 @@
   display: flex; width: fit-content;
   animation: marquee-scroll var(--mq-speed, 20s) linear infinite;
 }
-.section-marquee:hover .section-marquee__track {
+.section-marquee:hover .section-marquee__track,
+.section-marquee.is-paused .section-marquee__track {
   animation-play-state: paused;
 }
+
+.section-marquee__control {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  margin-inline: 0.75rem 1rem;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--buttons-radius, 0);
+  background: transparent;
+  color: rgb(var(--color-foreground));
+  cursor: pointer;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+.section-marquee__control[hidden] { display: none; }
+.section-marquee__control:hover {
+  background: rgb(var(--color-foreground));
+  border-color: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+}
+.section-marquee__control:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+.section-marquee__control-play,
+.section-marquee.is-paused .section-marquee__control-pause { display: none; }
+.section-marquee.is-paused .section-marquee__control-play { display: block; }
 
 .section-marquee__segment {
   display: flex; align-items: center; flex-shrink: 0;

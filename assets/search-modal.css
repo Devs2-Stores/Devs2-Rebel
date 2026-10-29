@@ -42,7 +42,7 @@ search-modal .search-modal-panel {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform var(--duration-medium) ease-in-out;
+  transition: transform var(--transition-base);
   transform: translateX(100%);
 }
 @media (min-width: 750px) {
@@ -114,7 +114,7 @@ search-modal .search-modal-panel .search-modal-input-wrapper .search-modal-form 
   box-shadow: var(--inputs-shadow);
   background-color: rgb(var(--color-form-bg));
   color: rgb(var(--color-form-text));
-  font-size: var(--font-sm);
+  font-size: var(--font-input);
   transition: border-color var(--transition-fast);
 }
 search-modal .search-modal-clear {

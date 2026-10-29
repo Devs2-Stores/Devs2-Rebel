@@ -33,7 +33,7 @@
 .section-layered__layer {
   position: absolute; border-radius: var(--media-radius); overflow: hidden;
   box-shadow: none;
-  transition: transform var(--duration-long) ease;
+  transition: transform var(--transition-slow);
 }
 @media (hover: hover) {
   .section-layered__layer:hover { transform: translateY(-2px); }
@@ -91,7 +91,7 @@
   font-weight: var(--btn-font-weight);
   letter-spacing: var(--btn-letter-spacing);
   text-decoration: none; border-radius: var(--buttons-radius, 0);
-  cursor: pointer; transition: background-color var(--duration-default) ease, color var(--duration-default) ease, border-color var(--duration-default) ease;
+  cursor: pointer; transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
   align-self: flex-start; margin-top: 0.5rem;
 }
 .section-layered__btn--primary { background: var(--color-primary); color: rgb(var(--color-button-text)); border: 1px solid var(--color-primary); }

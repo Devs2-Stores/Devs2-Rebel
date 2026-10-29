@@ -53,13 +53,26 @@
   display: block;
 }
 .section-featured-product__thumbs {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+  display: flex;
   gap: var(--space-sm);
+  overflow-x: auto;
+  padding: 4px;
+  scrollbar-width: thin;
+}
+.section-featured-product__thumbs > * {
+  flex: 0 0 4rem;
 }
 @media (min-width: 750px) {
   .section-featured-product__thumbs {
+    display: grid;
     grid-template-columns: repeat(6, minmax(0, 1fr));
+    overflow: visible;
+  }
+  .section-featured-product__thumbs {
+    padding: 0;
+  }
+  .section-featured-product__thumbs > * {
+    flex: none;
   }
 }
 .section-featured-product__thumb {

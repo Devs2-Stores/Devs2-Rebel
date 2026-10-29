@@ -11,6 +11,7 @@
 <div
   id="section-{{ section.id }}"
   class="section-marquee color-{{ section.settings.color_scheme }}"
+  data-marquee
   style="
     --mq-dt: {{ section.settings.padding_top_desktop }}px;
     --mq-db: {{ section.settings.padding_bottom_desktop }}px;
@@ -19,21 +20,36 @@
     --mq-speed: {{ speed }}s;
   "
 >
-  <div class="section-marquee__track">
-    {%- for i in (1..3) -%}
-      <div class="section-marquee__segment" aria-hidden="{% if i > 1 %}true{% else %}false{% endif %}">
-        {%- for block in section.blocks -%}
-          {%- if block.settings.text != blank -%}
-            <span class="section-marquee__item heading-size-{{ section.settings.text_size }}" {{ block.shopify_attributes }}>
-              {{- block.settings.text -}}
-            </span>
-            <span class="section-marquee__sep" aria-hidden="true">{{ separator }}</span>
-          {%- endif -%}
-        {%- endfor -%}
-      </div>
-    {%- endfor -%}
+  <div class="section-marquee__viewport">
+    <div class="section-marquee__track">
+      {%- for i in (1..3) -%}
+        <div class="section-marquee__segment" aria-hidden="{% if i > 1 %}true{% else %}false{% endif %}">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.text != blank -%}
+              <span class="section-marquee__item heading-size-{{ section.settings.text_size }}" {{ block.shopify_attributes }}>
+                {{- block.settings.text -}}
+              </span>
+              <span class="section-marquee__sep" aria-hidden="true">{{ separator }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endfor -%}
+    </div>
   </div>
+  <button
+    type="button"
+    class="section-marquee__control"
+    data-marquee-toggle
+    data-label-pause="{{ 'accessibility.pause_marquee' | t | escape }}"
+    data-label-play="{{ 'accessibility.play_marquee' | t | escape }}"
+    aria-label="{{ 'accessibility.pause_marquee' | t }}"
+    hidden
+  >
+    <svg class="section-marquee__control-pause" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+    <svg class="section-marquee__control-play" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="7 4 20 12 7 20 7 4"></polygon></svg>
+  </button>
 </div>
+<script src="{{ 'marquee-control.js' | asset_url }}" defer></script>
 
 
 {% schema %}

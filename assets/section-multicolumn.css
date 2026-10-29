@@ -52,7 +52,7 @@
   text-decoration: underline; text-underline-offset: 0.25em;
 }
 .section-multicolumn__item-link:hover { color: var(--color-ink); }
-.section-multicolumn__item-link svg { transition: transform var(--duration-default) ease; }
+.section-multicolumn__item-link svg { transition: transform var(--transition-fast); }
 @media (hover: hover) {
   .section-multicolumn__item-link:hover svg { transform: translateX(3px); }
 }

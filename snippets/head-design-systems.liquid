@@ -98,6 +98,7 @@
     /* ═══════════ FONT SIZES ═══════════ */
     --font-xs: calc(0.75rem * var(--font-body-scale));
     --font-sm: calc(0.875rem * var(--font-body-scale));
+    --font-input: var(--font-sm);
     --font-base: calc(1rem * var(--font-body-scale));
     --font-lg: calc(1.125rem * var(--font-body-scale));
     --font-xl: calc(1.25rem * var(--font-heading-scale));
@@ -298,6 +299,11 @@
     /* Animation defaults */
     --marquee-duration: 30s;
     --read-more-height: 4.5em;
+  }
+  @media (max-width: 749px) {
+    :root {
+      --font-input: 16px;
+    }
   }
 
   {%- if settings.type_accent_custom %}

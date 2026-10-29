@@ -184,6 +184,8 @@
     "slideshow": "Slideshow",
     "pause_slideshow": "Pause slideshow",
     "play_slideshow": "Play slideshow",
+    "pause_marquee": "Pause scrolling text",
+    "play_marquee": "Play scrolling text",
     "video_hero_title": "Video hero",
     "video": "Video",
     "brand_logo": "Brand logo"
@@ -406,7 +408,10 @@
       "search_for": "Search for “{{ terms }}”",
       "placeholder": "Search products...",
       "placeholder_text": "Enter a keyword to get started",
-      "results_count": "{{ count }} results found",
+      "results_count": {
+        "one": "{{ count }} result found",
+        "other": "{{ count }} results found"
+      },
       "results_showing": "Showing {{ from }}-{{ to }} of {{ total }} results",
       "no_results_title": "No results found",
       "suggestion_1": "Check the spelling of your keyword",
@@ -428,7 +433,10 @@
       "no_results_for": "No results found for ‘{{ terms }}’",
       "recommended_products": "Recommended products",
       "view_all_products": "View all products",
-      "view_all_results": "View all {{ count }} results for ‘{{ terms }}’",
+      "view_all_results": {
+        "one": "View {{ count }} result for ‘{{ terms }}’",
+        "other": "View all {{ count }} results for ‘{{ terms }}’"
+      },
       "suggestions_unavailable": "Search suggestions are unavailable.",
       "view_search_results": "View search results"
     },

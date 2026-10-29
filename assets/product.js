@@ -214,9 +214,27 @@ class ProductTemplate extends HTMLElement {
 				if (lessText) lessText.classList.toggle('hidden', !expanded);
 			};
 
+			var settleTimer = null;
+			var settle = function() {
+				clearTimeout(settleTimer);
+				settleTimer = null;
+				descContent.removeEventListener('transitionend', onEnd);
+				descContent.style.maxHeight = '';
+			};
+			var onEnd = function(e) {
+				if (e.target === descContent && e.propertyName === 'max-height') settle();
+			};
+
 			toggleBtn.addEventListener('click', function() {
+				clearTimeout(settleTimer);
+				descContent.removeEventListener('transitionend', onEnd);
+				descContent.style.maxHeight = descContent.offsetHeight + 'px';
+				void descContent.offsetHeight;
 				expanded = !expanded;
 				render();
+				descContent.style.maxHeight = (expanded ? descContent.scrollHeight : maxHeight) + 'px';
+				descContent.addEventListener('transitionend', onEnd);
+				settleTimer = setTimeout(settle, 450);
 			});
 
 			if ('ResizeObserver' in window) new ResizeObserver(render).observe(descContent);

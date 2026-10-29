@@ -63,7 +63,7 @@
   border: 1px solid var(--color-hairline);
   background: transparent;
   color: var(--color-ink);
-  transition: color var(--duration-default) ease, background-color var(--duration-default) ease, border-color var(--duration-default) ease;
+  transition: color var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast);
 }
 .section-team__social-link svg { width: 16px; height: 16px; }
 .section-team__social-link:hover {

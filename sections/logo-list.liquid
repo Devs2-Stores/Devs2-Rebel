@@ -40,32 +40,47 @@
 
   {%- if logo_count > 0 -%}
     {%- if layout == 'marquee' -%}
-      <div class="section-logo-list__marquee">
-        <div class="section-logo-list__track">
-          {%- for i in (1..2) -%}
-            {%- for block in section.blocks -%}
-              {%- unless block.settings.image != blank or request.design_mode -%}{%- continue -%}{%- endunless -%}
-              <div class="section-logo-list__item"{% if i == 1 %} {{ block.shopify_attributes }}{% else %} aria-hidden="true" inert{% endif %}>
-                {%- if block.settings.image != blank -%}
-                  {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" class="section-logo-list__link">{%- endif -%}
-                    {%- assign logo_alt = 'accessibility.brand_logo' | t -%}
-                    {%- assign logo_alt = block.settings.image.alt | default: logo_alt -%}
-                    {{ block.settings.image | image_url: height: 120 | image_tag:
-                      loading: 'lazy', decoding: 'async',
-                      alt: logo_alt,
-                      class: 'section-logo-list__logo'
-                    }}
-                  {%- if block.settings.link != blank -%}</a>{%- endif -%}
-                {%- else -%}
-                  <div class="section-logo-list__ph">
-                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                  </div>
-                {%- endif -%}
-              </div>
+      <div class="section-logo-list__marquee" data-marquee>
+        <div class="section-logo-list__viewport">
+          <div class="section-logo-list__track">
+            {%- for i in (1..2) -%}
+              {%- for block in section.blocks -%}
+                {%- unless block.settings.image != blank or request.design_mode -%}{%- continue -%}{%- endunless -%}
+                <div class="section-logo-list__item"{% if i == 1 %} {{ block.shopify_attributes }}{% else %} aria-hidden="true" inert{% endif %}>
+                  {%- if block.settings.image != blank -%}
+                    {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" class="section-logo-list__link">{%- endif -%}
+                      {%- assign logo_alt = 'accessibility.brand_logo' | t -%}
+                      {%- assign logo_alt = block.settings.image.alt | default: logo_alt -%}
+                      {{ block.settings.image | image_url: height: 120 | image_tag:
+                        loading: 'lazy', decoding: 'async',
+                        alt: logo_alt,
+                        class: 'section-logo-list__logo'
+                      }}
+                    {%- if block.settings.link != blank -%}</a>{%- endif -%}
+                  {%- else -%}
+                    <div class="section-logo-list__ph">
+                      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                    </div>
+                  {%- endif -%}
+                </div>
+              {%- endfor -%}
             {%- endfor -%}
-          {%- endfor -%}
+          </div>
         </div>
+        <button
+          type="button"
+          class="section-logo-list__control"
+          data-marquee-toggle
+          data-label-pause="{{ 'accessibility.pause_marquee' | t | escape }}"
+          data-label-play="{{ 'accessibility.play_marquee' | t | escape }}"
+          aria-label="{{ 'accessibility.pause_marquee' | t }}"
+          hidden
+        >
+          <svg class="section-logo-list__control-pause" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+          <svg class="section-logo-list__control-play" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="7 4 20 12 7 20 7 4"></polygon></svg>
+        </button>
       </div>
+      <script src="{{ 'marquee-control.js' | asset_url }}" defer></script>
     {%- else -%}
       <div class="page-width">
         <div class="section-logo-list__grid" style="--ll-cols: {{ section.settings.columns_desktop }};">

@@ -59,7 +59,7 @@
   font-weight: var(--btn-font-weight);
   letter-spacing: var(--btn-letter-spacing);
   text-decoration: none; border-radius: var(--buttons-radius, 0);
-  cursor: pointer; transition: background-color var(--duration-default) ease, color var(--duration-default) ease, border-color var(--duration-default) ease;
+  cursor: pointer; transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
   margin-top: 0.5rem;
 }
 .section-parallax__btn:focus-visible { outline: 2px solid var(--color-white); outline-offset: 2px; }

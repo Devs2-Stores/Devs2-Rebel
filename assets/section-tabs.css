@@ -22,7 +22,7 @@
   margin-bottom: -1px; cursor: pointer;
   font-size: 0.875rem; font-weight: 600;
   color: var(--color-muted);
-  transition: color var(--duration-default) ease, border-color var(--duration-default) ease;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
   white-space: nowrap;
 }
 .section-tabs__trigger:hover { color: var(--color-ink); }

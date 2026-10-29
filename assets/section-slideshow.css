@@ -162,20 +162,20 @@
 .section-slideshow__swiper.swiper-initialized .section-slideshow__buttons {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
 }
 
 .section-slideshow__swiper.swiper-initialized .swiper-slide-active .section-slideshow__subheading {
-  opacity: 1; transform: translateY(0); transition-delay: 0.3s;
+  opacity: 1; transform: translateY(0); transition-delay: 0.1s;
 }
 .section-slideshow__swiper.swiper-initialized .swiper-slide-active .section-slideshow__heading {
-  opacity: 1; transform: translateY(0); transition-delay: 0.5s;
+  opacity: 1; transform: translateY(0); transition-delay: 0.18s;
 }
 .section-slideshow__swiper.swiper-initialized .swiper-slide-active .section-slideshow__text {
-  opacity: 1; transform: translateY(0); transition-delay: 0.7s;
+  opacity: 1; transform: translateY(0); transition-delay: 0.26s;
 }
 .section-slideshow__swiper.swiper-initialized .swiper-slide-active .section-slideshow__buttons {
-  opacity: 1; transform: translateY(0); transition-delay: 0.9s;
+  opacity: 1; transform: translateY(0); transition-delay: 0.34s;
 }
 
 /* ── Typography ── */
@@ -232,7 +232,7 @@
   letter-spacing: var(--btn-letter-spacing);
   text-decoration: none;
   border-radius: var(--buttons-radius, 0);
-  transition: background-color var(--duration-default) ease, color var(--duration-default) ease, border-color var(--duration-default) ease;
+  transition: background-color var(--duration-default) var(--ease-out), color var(--duration-default) var(--ease-out), border-color var(--duration-default) var(--ease-out);
   cursor: pointer;
 }
 
@@ -290,7 +290,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color var(--duration-default) ease, border-color var(--duration-default) ease, color var(--duration-default) ease;
+  transition: background-color var(--duration-default) var(--ease-out), border-color var(--duration-default) var(--ease-out), color var(--duration-default) var(--ease-out);
 }
 
 .section-slideshow__nav:hover {
@@ -350,7 +350,7 @@
   position: relative;
   cursor: pointer;
   pointer-events: auto;
-  transition: width var(--duration-medium) ease;
+  transition: width var(--duration-medium) var(--ease-out);
 }
 
 .section-slideshow__pagination .swiper-pagination-bullet::before,
@@ -365,11 +365,16 @@
 
 .section-slideshow__pagination .swiper-pagination-bullet::before {
   background: rgba(255, 255, 255, 0.4);
-  transition: background-color var(--duration-medium) ease;
+  transition: background-color var(--duration-medium) var(--ease-out);
 }
 
 .section-slideshow__pagination .swiper-pagination-bullet:hover::before {
   background: rgba(255, 255, 255, 0.75);
+}
+
+.section-slideshow__pagination .swiper-pagination-bullet:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 2px;
 }
 
 .section-slideshow__pagination .swiper-pagination-bullet-active {
@@ -432,7 +437,7 @@
   background: rgba(0, 0, 0, 0.45);
   color: var(--color-white);
   cursor: pointer;
-  transition: background-color var(--duration-default) ease, border-color var(--duration-default) ease, color var(--duration-default) ease;
+  transition: background-color var(--duration-default) var(--ease-out), border-color var(--duration-default) var(--ease-out), color var(--duration-default) var(--ease-out);
 }
 
 .section-slideshow__rotation:hover {

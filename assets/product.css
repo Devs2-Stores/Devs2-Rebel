@@ -694,7 +694,7 @@
 .product-template__info .product-template__tab-panel { display: none; }
 .product-template__info .product-template__tab-panel.active {
   display: block;
-  animation: fadeIn 0.25s ease-out;
+  animation: fadeIn var(--transition-base);
 }
 @keyframes fadeIn {
   from { opacity: 0; }
@@ -1264,13 +1264,13 @@ size-guide-modal.size-guide-modal-wrapper {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity var(--duration-medium) ease, visibility 0s linear var(--duration-medium);
+  transition: opacity var(--transition-base), visibility 0s linear var(--duration-medium);
 }
 size-guide-modal.size-guide-modal-wrapper:not(.hidden) {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transition: opacity var(--duration-medium) ease, visibility 0s linear 0s;
+  transition: opacity var(--transition-base), visibility 0s linear 0s;
 }
 size-guide-modal.size-guide-modal-wrapper:not(.hidden) .size-guide-modal-overlay { opacity: 1; }
 size-guide-modal.size-guide-modal-wrapper:not(.hidden) .size-guide-modal-panel { transform: none; }
@@ -1307,7 +1307,7 @@ size-guide-modal .size-guide-modal-panel {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform var(--duration-medium) ease-in-out;
+  transition: transform var(--transition-base);
   transform: translateX(110%);
 }
 @media (min-width: 750px) {

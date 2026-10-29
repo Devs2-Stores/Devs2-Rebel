@@ -234,6 +234,21 @@ carry it; chrome stays out of the way.
   shopper's device clock. With no zone known it stays blank. A status a timer
   refreshes is not a live region.
 
+### Motion controls and form sizing
+
+- A marquee that scrolls on its own (`scrolling-text`, `logo-list` marquee
+  layout) carries a visible pause control (WCAG 2.2.2), wired by
+  `assets/marquee-control.js` through `data-marquee`. A `:hover` pause alone
+  does not satisfy it.
+- Form controls render at 16px below 750px so iOS does not zoom on focus. The
+  token `--font-input` (`theme.css`) is `--font-sm` on desktop and 16px on
+  phones; a component input rule sets `font-size: var(--font-input)` instead of
+  its own size.
+- Slideshow bullets use the white focus ring like the other slideshow
+  controls, and the preset overlay is 55 or more so 12px eyebrow text on photos
+  reaches 4.5:1.
+- A row of thumbnails scrolls in one line on phones; it does not wrap.
+
 ## Behaviour rules
 
 ### Blocks, sections and the editor

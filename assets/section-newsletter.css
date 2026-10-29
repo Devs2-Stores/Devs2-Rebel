@@ -41,7 +41,7 @@
   border-radius: var(--inputs-radius);
   box-shadow: var(--inputs-shadow);
   overflow: hidden;
-  transition: border-color var(--duration-default) ease;
+  transition: border-color var(--transition-fast);
 }
 .section-newsletter__form:focus-within {
   border-color: var(--color-ink);
@@ -58,7 +58,7 @@
   min-width: 0;
   min-height: var(--btn-height);
   padding: 0 1rem;
-  font-size: 0.9375rem;
+  font-size: var(--font-input);
   background: transparent;
   color: var(--color-ink);
   font-family: inherit;
@@ -81,7 +81,7 @@
   color: rgb(var(--color-button-text));
   border: none; cursor: pointer;
   white-space: nowrap;
-  transition: background-color var(--duration-default) ease, color var(--duration-default) ease;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
   border-radius: var(--buttons-radius, 0);
 }
 .section-newsletter__btn:hover {

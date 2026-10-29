@@ -30,7 +30,7 @@
   background: var(--color-white); border: 1px solid var(--color-black);
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; position: relative; box-shadow: none;
-  transition: transform var(--duration-default) ease, background-color var(--duration-default) ease, color var(--duration-default) ease;
+  transition: transform var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast);
 }
 @media (hover: hover) {
   .section-hotspot__pulse:hover { transform: scale(1.1); }
@@ -50,7 +50,7 @@
   width: max-content; min-width: 200px; max-width: min(17rem, calc(100vw - 2rem));
   translate: var(--hs-shift-x, 0px) var(--hs-shift-y, 0px);
   opacity: 0; pointer-events: none;
-  transform: translateY(8px); transition: opacity var(--duration-default) ease, transform var(--duration-default) ease;
+  transform: translateY(8px); transition: opacity var(--transition-fast), transform var(--transition-fast);
 }
 .section-hotspot__tooltip.is-open {
   opacity: 1; pointer-events: auto; transform: translateY(0);

@@ -166,6 +166,9 @@
         {%- for variant in product.variants -%}
           {
             "@type": "Offer",
+            {%- unless product.has_only_default_variant %}
+            "name": {{ product.title | append: ' - ' | append: variant.title | json }},
+            {%- endunless %}
             "priceCurrency": {{ cart.currency.iso_code | json }},
             "price": {{ variant.price | divided_by: 100.0 | json }},
             "availability": "https://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",

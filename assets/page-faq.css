@@ -146,7 +146,7 @@
   padding: 0 var(--space-4xl) var(--space-xl) 0;
   color: var(--color-paragraph);
   line-height: var(--line-height-relaxed);
-  animation: faq-answer-in .25s ease both;
+  animation: faq-answer-in var(--transition-base) both;
 }
 .faq-item__answer > :last-child { margin-bottom: 0; }
 .faq-empty,

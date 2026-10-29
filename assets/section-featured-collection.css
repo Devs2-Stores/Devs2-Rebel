@@ -54,7 +54,7 @@
   text-decoration: underline;
   text-decoration-color: transparent;
   text-underline-offset: 0.25em;
-  transition: text-decoration-color var(--duration-default) ease;
+  transition: text-decoration-color var(--transition-fast);
 }
 
 .section-featured-collection__view-all:hover {
@@ -63,7 +63,7 @@
 }
 
 .section-featured-collection__view-all svg {
-  transition: transform var(--duration-default) ease;
+  transition: transform var(--transition-fast);
 }
 
 @media (hover: hover) {
@@ -111,7 +111,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color var(--duration-default) ease, border-color var(--duration-default) ease, color var(--duration-default) ease;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
 }
 
 .section-featured-collection__nav:hover {

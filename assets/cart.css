@@ -121,7 +121,7 @@ cart-template .cart-template__note textarea {
   box-shadow: var(--inputs-shadow);
   resize: vertical;
   font-family: inherit;
-  font-size: var(--font-sm);
+  font-size: var(--font-input);
   color: rgb(var(--color-form-text));
   transition: border-color var(--transition-fast);
 }
@@ -158,7 +158,7 @@ cart-template .cart-template__note .invoice-input {
   border-radius: var(--inputs-radius);
   box-shadow: var(--inputs-shadow);
   font-family: inherit;
-  font-size: var(--font-sm);
+  font-size: var(--font-input);
   color: rgb(var(--color-form-text));
   transition: border-color var(--transition-fast);
 }
@@ -481,7 +481,7 @@ cart-item .quantity-selector .quantity-selector__button:focus-visible {
 cart-item .quantity-selector .quantity-selector__input {
   width: 2.25rem;
   height: 2.25rem;
-  font-size: var(--font-sm);
+  font-size: var(--font-input);
   font-weight: var(--font-weight-medium);
   color: var(--color-ink);
 }

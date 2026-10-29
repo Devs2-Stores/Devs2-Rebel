@@ -10,18 +10,17 @@ quickview-modal.quickview-modal-wrapper {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity var(--duration-medium) ease, visibility 0s linear var(--duration-medium);
+  transition: opacity var(--transition-base), visibility 0s linear var(--duration-medium);
 }
-quickview-modal.quickview-modal-wrapper:not(.hidden) {
+quickview-modal.quickview-modal-wrapper.is-open {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transition: opacity var(--duration-medium) ease, visibility 0s linear 0s;
+  transition: opacity var(--transition-base), visibility 0s linear 0s;
 }
-quickview-modal.quickview-modal-wrapper:not(.hidden) .quickview-modal-overlay { opacity: 1; }
-quickview-modal.quickview-modal-wrapper:not(.hidden) .quickview-modal-panel { transform: none; }
-quickview-modal.quickview-modal-wrapper.hidden { display: none; visibility: hidden; opacity: 0; }
-quickview-modal.quickview-modal-wrapper.hidden .quickview-modal-panel { transform: translateX(110%); }
+quickview-modal.quickview-modal-wrapper.is-open .quickview-modal-overlay { opacity: 1; }
+quickview-modal.quickview-modal-wrapper.is-open .quickview-modal-panel { transform: none; }
+quickview-modal.quickview-modal-wrapper.hidden { display: none; }
 
 /* -------------------------------------------------------------------------- */
 /*  Overlay                                                                    */
@@ -30,7 +29,7 @@ quickview-modal .quickview-modal-overlay {
   position: fixed;
   inset: 0;
   background: var(--bg-overlay);
-  transition: opacity var(--duration-medium);
+  transition: opacity var(--transition-base);
   opacity: 0;
   z-index: -1;
 }
@@ -54,7 +53,7 @@ quickview-modal .quickview-modal-panel {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform var(--duration-medium) ease-in-out;
+  transition: transform var(--transition-base);
   transform: translateX(110%);
 }
 @media (min-width: 750px) {

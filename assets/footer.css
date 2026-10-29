@@ -147,7 +147,6 @@ global-footer .footer-actions .footer_actions__slogan {
   gap: var(--space-md);
   margin-bottom: var(--space-2xl);
   padding-bottom: var(--space-2xl);
-  border-bottom: 1px solid var(--color-hairline);
 }
 @media (min-width: 750px) {
   global-footer .footer-actions .footer_actions__slogan {
@@ -155,6 +154,7 @@ global-footer .footer-actions .footer_actions__slogan {
     align-items: center;
     justify-content: space-between;
     gap: var(--space-xl);
+    border-bottom: 1px solid var(--color-hairline);
   }
 }
 @media (min-width: 1024px) {
@@ -202,7 +202,7 @@ global-footer .footer-newsletter__input {
   background: transparent;
   color: var(--color-ink);
   font: inherit;
-  font-size: var(--font-sm);
+  font-size: var(--font-input);
 }
 global-footer .footer-newsletter__input::placeholder {
   color: var(--color-muted);
@@ -374,7 +374,7 @@ global-footer .footer-actions .footer-actions-menus .footer-actions-menu .footer
   max-height: 0;
   overflow: hidden;
   visibility: hidden;
-  transition: max-height var(--duration-medium) ease, visibility 0s linear var(--duration-medium), padding var(--duration-medium) ease;
+  transition: max-height var(--duration-medium) var(--ease-out), visibility 0s linear var(--duration-medium), padding var(--duration-medium) var(--ease-out);
 }
 @media (min-width: 750px) {
   global-footer .footer-actions .footer-actions-menus .footer-actions-menu .footer-actions-menu__toggle {
@@ -410,7 +410,7 @@ global-footer .footer-actions .footer-actions-menus .footer-actions-menu.active 
   max-height: 500px;
   padding-block: 0.25rem 1rem;
   visibility: visible;
-  transition: max-height var(--duration-medium) ease, visibility 0s, padding var(--duration-medium) ease;
+  transition: max-height var(--duration-medium) var(--ease-out), visibility 0s, padding var(--duration-medium) var(--ease-out);
 }
 
 /* ═══ QUIET BOTTOM BAR (Copyright + Contact + Payment + Localization) ═══ */

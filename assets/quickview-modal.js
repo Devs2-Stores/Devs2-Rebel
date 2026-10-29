@@ -102,10 +102,10 @@
 
     disconnectedCallback() {
       if (this._boundEscHandler) document.removeEventListener('keydown', this._boundEscHandler);
+      clearTimeout(this._closeTimer);
     }
 
     async open(productHandle, trigger) {
-      var self = this;
       if (this.isOpen && this.currentProductHandle === productHandle) return;
       // Close viewed modal if open
       var viewedModal = document.querySelector('viewed-modal');
@@ -113,21 +113,17 @@
         viewedModal.close();
       }
 
+      clearTimeout(this._closeTimer);
+      this._closeTimer = null;
       this.currentProductHandle = productHandle;
       this.isOpen = true;
       this.classList.remove('hidden');
+      void this.offsetWidth;
+      this.classList.add('is-open');
       ThemeUtils.lockScroll();
       this.trigger = trigger || null;
       if (this.trigger) this.trigger.classList.add('is-active');
       ThemeUtils.trapFocus(this, this.trigger);
-
-      // Trigger animation
-      setTimeout(function() {
-        if (self.panel) {
-          self.panel.classList.remove('scale-95', 'opacity-0');
-          self.panel.classList.add('scale-100', 'opacity-100');
-        }
-      }, 10);
 
       // Load product
       await this.loadProduct(productHandle);
@@ -143,10 +139,7 @@
       if (typeof themeConfig !== 'undefined' && themeConfig.quickview) {
         themeConfig.quickview.data = null;
       }
-      if (this.panel) {
-        this.panel.classList.remove('scale-100', 'opacity-100');
-        this.panel.classList.add('scale-95', 'opacity-0');
-      }
+      this.classList.remove('is-open');
       if (!closeOptions.preserveScrollLock) {
         ThemeUtils.unlockScroll();
       }
@@ -158,7 +151,9 @@
         this.trigger = null;
       }
 
-      setTimeout(function() {
+      clearTimeout(this._closeTimer);
+      this._closeTimer = setTimeout(function() {
+        self._closeTimer = null;
         self.classList.add('hidden');
         if (self.content) self.content.innerHTML = '';
         self.currentProductHandle = null;
@@ -167,7 +162,13 @@
         if (typeof themeConfig !== 'undefined' && themeConfig.quickview) {
           themeConfig.quickview.data = null;
         }
-      }, closeOptions.immediate ? 0 : 300);
+      }, closeOptions.immediate ? 0 : this._closeDelay());
+    }
+
+    _closeDelay() {
+      var raw = this.panel ? getComputedStyle(this.panel).transitionDuration.split(',')[0].trim() : '';
+      var ms = parseFloat(raw) * (/ms$/.test(raw) ? 1 : 1000);
+      return ms > 0 ? ms : 300;
     }
 
     async loadProduct(handle) {

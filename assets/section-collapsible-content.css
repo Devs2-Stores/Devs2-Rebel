@@ -43,10 +43,10 @@
 
 .section-collapsible__icon {
   flex-shrink: 0; display: flex;
-  transition: transform 0.25s ease;
+  transition: transform var(--transition-base);
 }
 .section-collapsible__icon line:first-child {
-  transition: transform 0.25s ease; transform-origin: center;
+  transition: transform var(--transition-base); transform-origin: center;
 }
 details[open] .section-collapsible__icon {
   transform: rotate(45deg);

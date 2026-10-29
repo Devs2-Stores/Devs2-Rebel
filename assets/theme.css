@@ -15,6 +15,11 @@ textarea { box-sizing: border-box; box-shadow: none; border: none; outline: none
 :where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]), select, textarea) {
   border-radius: var(--inputs-radius);
 }
+@media (max-width: 749px) {
+  :where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="hidden"]), select, textarea) {
+    font-size: var(--font-input);
+  }
+}
 :where(button, a.button-primary, a.button-secondary, [class*="__btn"], .button-primary, .button-secondary) {
   border-radius: var(--buttons-radius);
 }

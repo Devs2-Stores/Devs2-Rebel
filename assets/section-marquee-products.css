@@ -67,7 +67,7 @@
   background: transparent;
   color: var(--color-ink);
   cursor: pointer;
-  transition: background-color var(--duration-default) ease, color var(--duration-default) ease, border-color var(--duration-default) ease;
+  transition: background-color var(--duration-default) var(--ease-out), color var(--duration-default) var(--ease-out), border-color var(--duration-default) var(--ease-out);
 }
 .section-marquee-products__nav:hover {
   background: var(--color-ink);
@@ -98,7 +98,7 @@
   gap: 16px;
 }
 .section-marquee-products__item {
-  width: min(44vw, 220px);
+  width: min(40vw, 220px);
   flex-shrink: 0;
   scroll-snap-align: start;
 }

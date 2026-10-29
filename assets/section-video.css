@@ -58,7 +58,7 @@
   border: none;
   cursor: pointer;
   z-index: 2;
-  transition: transform var(--duration-medium) ease, opacity var(--duration-medium) ease;
+  transition: transform var(--transition-base), opacity var(--transition-base);
 }
 @media (hover: hover) {
   .section-video__facade:hover .section-video__play {
@@ -130,7 +130,7 @@
   background: rgba(0, 0, 0, 0.45);
   color: var(--color-white);
   cursor: pointer;
-  transition: background-color var(--duration-default) ease, border-color var(--duration-default) ease, color var(--duration-default) ease;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
 }
 
 .media-video__toggle[hidden] { display: none; }

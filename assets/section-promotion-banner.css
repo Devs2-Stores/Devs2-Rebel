@@ -43,7 +43,7 @@
   letter-spacing: var(--btn-letter-spacing);
   text-decoration: none;
   border-radius: var(--buttons-radius, 0);
-  transition: background-color var(--duration-default) ease, color var(--duration-default) ease, border-color var(--duration-default) ease;
+  transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
   cursor: pointer; flex-shrink: 0;
 }
 .section-promo__btn--primary {
@@ -67,6 +67,6 @@
   position: absolute; right: 0; top: 50%; transform: translateY(-50%);
   background: none; border: none; cursor: pointer;
   color: var(--color-muted);
-  transition: color var(--duration-default) ease; padding: 4px;
+  transition: color var(--transition-fast); padding: 4px;
 }
 .section-promo__close:hover { color: var(--color-ink); }
