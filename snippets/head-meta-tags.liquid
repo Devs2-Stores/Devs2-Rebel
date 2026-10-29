@@ -115,7 +115,7 @@
       {%- if settings.logo != blank %}
         "logo": "https:{{ settings.logo | image_url: width: 500 }}",
       {%- endif %}
-      {%- assign social_networks = 'facebook,instagram,youtube,tiktok,twitter,pinterest' | split: ',' -%}
+      {%- assign social_networks = 'facebook,instagram,youtube,tiktok,pinterest,twitter,threads,linkedin,bluesky,snapchat,tumblr,vimeo,other' | split: ',' -%}
       {%- assign same_as_started = false %}
       "sameAs": [
         {%- for network in social_networks -%}

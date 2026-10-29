@@ -45,11 +45,13 @@ settings: scheme colours, radii, and type settings. The current preset is Rebel.
 A new preset adds settings and scheme values only. It must not add selectors or
 markup branches.
 
-Global setting ids follow `<component>_<property>_<unit>`, for example
-`button_corner_radius`, `product_card_stroke_width`, `panel_shadow_alpha`. They
-are the theme's own contract and are not copied from Dawn or Horizon. Four ids
-stay conventional (`favicon`, `logo`, `logo_width`, `color_schemes`) because
-merchants and tooling look for them by name. Renaming a global id means
+Global setting ids follow `<component>_<property>`, with a trailing unit only
+where one exists, for example `button_corner_radius`, `product_card_stroke_width`,
+`panel_shadow_alpha`, `badge_anchor`, `motion_hover_effect`. They are the
+theme's own contract and are not copied from Dawn or Horizon. Four ids stay
+conventional (`favicon`, `logo`, `logo_width`, `color_schemes`), kept by
+convention because Shopify's own examples use them; no Shopify document that
+was checked states that the editor requires these names. Renaming a global id means
 renaming it in `config/settings_schema.json`, every `settings.<id>` reader
 (including keys built with `append`, such as `social_<network>_profile`), the
 `t:settings_schema.*` keys in `locales/en.default.schema.json`, and the preset
@@ -140,7 +142,8 @@ carry it; chrome stays out of the way.
 ## Motion
 
 - Durations: `--transition-fast` 150 ms, `--transition-base` 300 ms,
-  `--transition-slow` 500 ms (all `linear`). `--duration-short/default/medium/long`
+  `--transition-slow` 500 ms, all eased with `--ease-out`
+  (`cubic-bezier(0.22, 1, 0.36, 1)`). `--duration-short/default/medium/long`
   are 100 / 200 / 300 / 500 ms; use them where a rule keeps its own easing.
   Marquee: `--marquee-duration` 30 s.
 - Keep intentional motion: press, reveal, hover, marquee, slider and drawer

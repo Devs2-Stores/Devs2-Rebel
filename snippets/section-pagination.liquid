@@ -12,7 +12,6 @@
     assign t_pagination = 'general.pagination.label' | t
     assign t_prev = 'general.pagination.previous' | t
     assign t_next = 'general.pagination.next' | t
-    assign t_page_template = 'general.pagination.page'
   -%}
 
   <div class="section-pagination">
@@ -41,7 +40,7 @@
         {%- endif -%}
 
         {%- for part in paginate.parts -%}
-          {%- assign t_page = t_page_template | t: number: part.title -%}
+          {%- assign t_page = 'general.pagination.page' | t: number: part.title -%}
           <li class="section-pagination__item">
             {%- if part.is_link -%}
               <a

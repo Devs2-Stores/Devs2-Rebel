@@ -32,7 +32,7 @@
       {%- if section.settings.show_policies -%}
         {%- for policy in shop.policies -%}
           {%- if policy.body != blank -%}
-            <li class="footer-policies__item"><a href="{{ policy.url }}">{{ policy.title | escape }}</a></li>
+            <li class="footer-policies__item"><a class="footer-policies__link" href="{{ policy.url }}">{{ policy.title | escape }}</a></li>
           {%- endif -%}
         {%- endfor -%}
       {%- endif -%}
