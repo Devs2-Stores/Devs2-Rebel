@@ -93,9 +93,9 @@
             {%- if item.object_type == 'page' -%}{%- assign page_count = page_count | plus: 1 -%}{%- endif -%}
           {%- endfor -%}
           <div class="search-template__tabs" role="tablist" aria-label="{{ 'templates.search.tabs_types' | t }}">
-            <button type="button" class="search-template__tab" role="tab" aria-controls="search-products-panel" data-search-tab="products" aria-selected="false"{% if product_count == 0 and active_filter_count == 0 %} disabled{% endif %}>{{ 'templates.search.products' | t }} <span>{{ product_count }}</span></button>
-            <button type="button" class="search-template__tab" role="tab" aria-controls="search-articles-panel" data-search-tab="articles" aria-selected="false"{% if article_count == 0 %} disabled{% endif %}>{{ 'templates.search.articles_tab' | t }} <span>{{ article_count }}</span></button>
-            <button type="button" class="search-template__tab" role="tab" aria-controls="search-pages-panel" data-search-tab="pages" aria-selected="false"{% if page_count == 0 %} disabled{% endif %}>{{ 'templates.search.pages' | t }} <span>{{ page_count }}</span></button>
+            <button type="button" class="search-template__tab" role="tab" id="search-products-tab" aria-controls="search-products-panel" data-search-tab="products" aria-selected="false"{% if product_count == 0 and active_filter_count == 0 %} disabled{% endif %}>{{ 'templates.search.products' | t }} <span>{{ product_count }}</span></button>
+            <button type="button" class="search-template__tab" role="tab" id="search-articles-tab" aria-controls="search-articles-panel" data-search-tab="articles" aria-selected="false"{% if article_count == 0 %} disabled{% endif %}>{{ 'templates.search.articles_tab' | t }} <span>{{ article_count }}</span></button>
+            <button type="button" class="search-template__tab" role="tab" id="search-pages-tab" aria-controls="search-pages-panel" data-search-tab="pages" aria-selected="false"{% if page_count == 0 %} disabled{% endif %}>{{ 'templates.search.pages' | t }} <span>{{ page_count }}</span></button>
           </div>
           <div class="search-template__results-header" aria-live="polite">
             <span class="search-template__results-info" data-search-tab-count="products" hidden>{{ 'templates.search.results_count' | t: count: product_count }}</span>
@@ -147,7 +147,7 @@
                       {%- case item.object_type -%}
                         {%- when 'product' -%}
                           <li class="product-cards__item" role="listitem">
-                            {%- render 'product-card', product: item, lazyload: lazyload, fetchpriority: fetchpriority, show_vendor: true -%}
+                            {%- render 'product-card', product: item, lazyload: lazyload, fetchpriority: fetchpriority, show_vendor: true, heading_tag: 'h2' -%}
                           </li>
                       {%- endcase -%}
                     {%- endfor -%}
@@ -171,7 +171,7 @@
                       {%- assign content_loading = 'lazy' -%}
                       {%- if forloop.index <= 3 -%}{%- assign content_loading = 'eager' -%}{%- endif -%}
                       <li class="search-template__content-item" role="listitem">
-                        {%- render 'article-card', article: item, layout: 'grid', lazyload: content_loading, show_category: true -%}
+                        {%- render 'article-card', article: item, layout: 'grid', lazyload: content_loading, show_category: true, heading_tag: 'h2' -%}
                       </li>
                     {%- endif -%}{%- endfor -%}
                   </ul>

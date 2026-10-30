@@ -97,6 +97,10 @@ auth-form.recover-layout .form-login {
   margin-bottom: var(--space-sm);
 }
 
+.form .form-group label span.required::after {
+  content: "*" / "";
+}
+
 :where(
   .login-template,
   .register-template,
@@ -117,8 +121,66 @@ auth-form.recover-layout .form-login {
   .change-password-template,
   address-modal
 ) .form .form-group .form-group-input {
+  display: block;
   position: relative;
   width: 100%;
+}
+
+:where(
+  .login-template,
+  .register-template,
+  .activate-account-template,
+  .change-password-template
+) .form .form-group .form-group-input--password .form-control {
+  display: block;
+  width: 100%;
+  min-height: var(--btn-height);
+  padding: 0.375rem 3rem 0.375rem 2.5rem;
+  font-size: var(--font-input);
+  color: rgb(var(--color-form-text));
+  background-color: rgb(var(--color-form-bg));
+  border: var(--inputs-border);
+  border-radius: var(--inputs-radius);
+  box-shadow: var(--inputs-shadow);
+  transition: border-color var(--transition-fast);
+}
+
+:where(
+  .login-template,
+  .register-template,
+  .activate-account-template,
+  .change-password-template
+) .form .form-group .form-group-input--password .form-control::placeholder {
+  color: var(--color-muted);
+}
+
+:where(
+  .login-template,
+  .register-template,
+  .activate-account-template,
+  .change-password-template
+) .form .form-group .form-group-input--password .form-control:focus,
+:where(
+  .login-template,
+  .register-template,
+  .activate-account-template,
+  .change-password-template
+) .form .form-group .form-group-input--password .form-control:focus-visible {
+  border-color: var(--color-ink);
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+:where(
+  .login-template,
+  .register-template,
+  .activate-account-template,
+  .change-password-template
+) .form .form-group .form-group-input--password > svg {
+  position: absolute;
+  top: 50%;
+  left: var(--space-md);
+  transform: translateY(-50%);
 }
 
 :where(
@@ -130,7 +192,7 @@ auth-form.recover-layout .form-login {
 ) .form .form-group label .form-control {
   min-height: var(--btn-height);
   padding: 0.75rem 1rem 0.75rem 2.75rem;
-  font-size: var(--font-sm);
+  font-size: var(--font-input);
   color: rgb(var(--color-form-text));
   background-color: rgb(var(--color-form-bg));
   border: var(--inputs-border);
@@ -185,14 +247,21 @@ auth-form.recover-layout .form-login {
   .login-template,
   .register-template,
   .activate-account-template,
-  .change-password-template,
-  address-modal
-) .form .form-group .form-group-input > svg.right {
-  width: 1.5rem;
-  height: 1.5rem;
-  padding: 0.125rem;
+  .change-password-template
+) .form .form-group .toggle-password__button {
+  position: absolute;
+  top: 50%;
+  right: var(--space-xs);
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  background: transparent;
+  border: 0;
   color: var(--color-muted);
-  pointer-events: auto;
   cursor: pointer;
 }
 
@@ -200,10 +269,30 @@ auth-form.recover-layout .form-login {
   .login-template,
   .register-template,
   .activate-account-template,
-  .change-password-template,
-  address-modal
-) .form .form-group .form-group-input > svg.right:hover {
+  .change-password-template
+) .form .form-group .toggle-password__button:hover {
   color: var(--color-ink);
+}
+
+:where(
+  .login-template,
+  .register-template,
+  .activate-account-template,
+  .change-password-template
+) .form .form-group .toggle-password__button:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+:where(
+  .login-template,
+  .register-template,
+  .activate-account-template,
+  .change-password-template
+) .form .form-group .toggle-password__button svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  pointer-events: none;
 }
 
 :where(
@@ -215,17 +304,21 @@ auth-form.recover-layout .form-login {
   width: 100%;
 }
 
-.login-template__form .label-password .auth-layout-trigger {
+.login-template__form .login-template__forgot {
+  display: flex;
+  width: fit-content;
+  min-height: 1.5rem;
+  align-items: center;
+  margin: var(--space-xs) 0 0 auto;
   font-size: var(--meta-size);
   font-weight: var(--font-weight-medium);
   color: var(--color-muted);
   text-decoration: underline;
   text-underline-offset: 0.2em;
-  margin-bottom: var(--space-sm);
   transition: color var(--transition-fast);
 }
 
-.login-template__form .label-password .auth-layout-trigger:hover {
+.login-template__form .login-template__forgot:hover {
   color: var(--color-ink);
 }
 
@@ -239,6 +332,15 @@ auth-form.recover-layout .form-login {
 
 .form-error:empty {
   display: none;
+}
+
+.form-error p {
+  margin: 0;
+  font-size: inherit;
+}
+
+.form-error p + p {
+  margin-top: var(--space-xs);
 }
 
 .form-error {
@@ -357,6 +459,10 @@ auth-form.recover-layout .form-login {
 }
 
 .customer-sidebar__name {
+  font-family: var(--font-heading-family);
+  font-style: var(--font-heading-style, normal);
+  letter-spacing: var(--h3-tracking);
+  text-transform: var(--h3-case, inherit);
   font-size: var(--meta-size);
   font-weight: var(--font-weight-normal);
   color: var(--color-muted);
@@ -996,6 +1102,7 @@ auth-form.recover-layout .form-login {
   font-size: var(--eyebrow-size);
   font-weight: var(--eyebrow-weight);
   letter-spacing: var(--eyebrow-tracking);
+  line-height: var(--h4-line-height);
   text-transform: uppercase;
   color: var(--color-muted);
   margin: 0 0 var(--space-md);
@@ -1035,6 +1142,8 @@ auth-form.recover-layout .form-login {
   font-size: var(--font-lg);
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--heading-tracking);
+  line-height: var(--h4-line-height);
+  text-transform: var(--h4-case, inherit);
   color: var(--color-ink);
   margin: 0 0 var(--space-lg);
 }
@@ -1377,11 +1486,6 @@ address-modal .address-modal-footer {
 }
 
 /* ── Toggle Password ───────────────────────────── */
-toggle-password .icon-eye-show,
-toggle-password .icon-eye-hide {
-  cursor: pointer;
-}
-
 toggle-password .icon-eye-hide {
   display: none;
 }

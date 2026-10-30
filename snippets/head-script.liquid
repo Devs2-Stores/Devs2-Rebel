@@ -197,7 +197,7 @@
 
 <script type="speculationrules">
 {
-  "prerender": [
+  "prefetch": [
     {
       "source": "document",
       "where": {
@@ -207,15 +207,6 @@
         ]
       },
       "eagerness": "moderate"
-    }
-  ],
-  "prefetch": [
-    {
-      "source": "document",
-      "where": {
-        "href_matches": ["/collections/*", "/products/*", "/blogs/*"]
-      },
-      "eagerness": "conservative"
     }
   ]
 }

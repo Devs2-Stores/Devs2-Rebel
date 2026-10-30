@@ -12,6 +12,7 @@
   Inverted surfaces (background = scheme text): --color-inverse-button keeps the
   scheme button when it reaches 3:1 against the text colour, otherwise it uses
   the scheme background with the text colour as its label.
+  Field borders: --color-input-border-rgb is the scheme border mixed toward the text colour (5% steps) until it reaches 3.1:1 on background, background_2 and form_bg.
 {% endcomment %}
 
 {%- assign status_colors = 'success:#15803d,warning:#a16207,error:#dc2626' | split: ',' -%}
@@ -103,6 +104,21 @@
         endfor
       %}
       --text-alpha-floor: {{ text_alpha_floor }};
+      {%- liquid
+        assign input_border = scheme.settings.text
+        for step in (0..20)
+          assign border_weight = step | times: 5
+          assign candidate = scheme.settings.text | color_mix: scheme.settings.border, border_weight
+          assign ratio_bg = candidate | color_contrast: scheme.settings.background
+          assign ratio_bg_2 = candidate | color_contrast: scheme.settings.background_2
+          assign ratio_form = candidate | color_contrast: scheme.settings.form_bg
+          if ratio_bg >= 3.1 and ratio_bg_2 >= 3.1 and ratio_form >= 3.1
+            assign input_border = candidate
+            break
+          endif
+        endfor
+      -%}
+      --color-input-border-rgb: {{ input_border | color_extract: 'red' }}, {{ input_border | color_extract: 'green' }}, {{ input_border | color_extract: 'blue' }};
       {%- liquid
         assign inverse_button = scheme.settings.button
         assign inverse_button_text = scheme.settings.button_label

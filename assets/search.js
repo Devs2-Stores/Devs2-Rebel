@@ -53,7 +53,6 @@ class SearchTemplate extends HTMLElement {
       const active = tab.dataset.searchTab === type;
       tab.setAttribute('aria-selected', String(active));
       tab.tabIndex = active ? 0 : -1;
-      tab.id = `search-${tab.dataset.searchTab}-tab`;
     });
     this.querySelectorAll('[data-search-panel]').forEach((panel) => {
       panel.hidden = panel.dataset.searchPanel !== type;

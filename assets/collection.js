@@ -9,7 +9,6 @@ function formatPriceNumber(value) {
  * collection.js — Shopify Native Storefront Filtering
  *
  * Uses Shopify Section Rendering API for AJAX filtering, sorting, and pagination.
- * Replaces the old Haravan-based ThemeSearch.SearchFilter system.
  */
 
 /* ═══════════════════════════════════════════════════

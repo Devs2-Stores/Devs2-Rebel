@@ -2,7 +2,7 @@
   display: inline-flex;
   align-items: center;
   height: var(--btn-height);
-  border: 1px solid var(--color-hairline);
+  border: var(--inputs-border);
   border-radius: var(--inputs-radius);
   background: var(--color-surface);
   color: var(--color-ink);

@@ -145,6 +145,8 @@
   font-size: var(--font-base);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-snug);
+  letter-spacing: var(--h3-tracking);
+  text-transform: var(--h3-case, inherit);
   overflow-wrap: anywhere;
 }
 

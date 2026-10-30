@@ -77,7 +77,8 @@ values in `config/settings_data.json`, all in one change.
 | Component sizing | `--btn-height` 3 rem, `--btn-padding-x` 1.75 rem, `--btn-font-size` 0.875 rem, `--btn-font-weight` 600, `--eyebrow-size` 0.75 rem, `--eyebrow-weight` 600, `--eyebrow-tracking` 0.14 em, `--heading-tracking` -0.02 em, `--meta-size` 0.8125 rem | Shared by every section's buttons, eyebrows and meta lines |
 | Rhythm | `--space-6xl` 4 rem, `--space-7xl` 6 rem, `--section-head-gap` (2 rem, 2.5 rem from 1024 px), `--stack-gap` 1.25 rem | Section heading to content, and between stacked text blocks |
 | Floating layer | `--shadow-float` | Floating buttons, the sticky add-to-cart bar and toasts |
-| Component families | `--{inputs,variant-pills,media,text-boxes,popup,drawer}-{border,shadow,radius}`, `--buttons-shadow`, `--buttons-outline-border`, `--color-form-bg`, `--color-form-text` | Built from the Theme settings panels of the same name and the scheme form colours. Rebel stores 1 px hairline borders on inputs, pills, pop-ups and drawers, no media border, and `--shadow-float` values on pop-ups and drawers |
+| Component families | `--{inputs,variant-pills,media,text-boxes,popup,drawer}-{border,shadow,radius}`, `--buttons-shadow`, `--buttons-outline-border`, `--color-form-bg`, `--color-form-text` | Built from the Theme settings panels of the same name and the scheme form colours. Inputs, selects, textareas, the quantity stepper, the newsletter field and the localization search use `--inputs-border`, built from the per-scheme `--color-input-border-rgb` (see "Input border"), so a field edge reaches 3.1:1 (WCAG 1.4.11). Variant pills, pop-ups, drawers and dividers keep the 1 px hairline. Rebel stores no media border and `--shadow-float` values on pop-ups and drawers. `input_stroke_opacity` defaults to 100; lowering it is the merchant's call |
+| Input border | `--color-input-border-rgb`, `--inputs-border-opacity` | Per scheme, in `snippets/head-color-schemes.liquid`: the scheme border mixed toward the scheme text in 5% steps (`color_mix`) until `color_contrast` is at least 3.1 against `background`, `background_2` and the form fill (`form_bg`). A scheme whose own border already passes is unchanged. `snippets/head-design-systems.liquid` builds `--inputs-border` from it and the opacity setting; this triplet is the only consumer of `--inputs-border-opacity` |
 | Card | `--card-border`, `--card-shadow`, `--card-image-padding`, `--card-corner-radius` | Built from the merchant card settings. Rebel sets every one to 0 |
 
 ## Clean system
@@ -229,6 +230,10 @@ carry it; chrome stays out of the way.
   `'now' | date: '%z'`), runs one timer per element that stops on disconnect,
   and uses `role="timer"` without `aria-live`, so screen readers are not told
   every second.
+- A hero countdown block uses the same `countdown-banner` element and
+  `assets/countdown-banner.js`, never its own inline script. `end_date` and
+  `end_time` are read in the store time zone, and a blank or past date hides the
+  block.
 - A status that depends on the time of day (store "Open now") is computed in
   the place's own IANA time zone, falling back to the shop offset, never the
   shopper's device clock. With no zone known it stays blank. A status a timer
@@ -240,6 +245,12 @@ carry it; chrome stays out of the way.
   layout) carries a visible pause control (WCAG 2.2.2), wired by
   `assets/marquee-control.js` through `data-marquee`. A `:hover` pause alone
   does not satisfy it.
+- A rotating announcement bar (more than one block) carries a visible
+  pause/play control (WCAG 2.2.2), wired in `assets/announcement-bar.js`. Three
+  hold sources (pointer, focus, user) stop autoplay and the user hold stays
+  until the shopper presses play. The slider rewinds instead of looping, so no
+  cloned slides exist, and non-active slides are `inert`. A bar with one block
+  renders no control.
 - Form controls render at 16px below 750px so iOS does not zoom on focus. The
   token `--font-input` (`theme.css`) is `--font-sm` on desktop and 16px on
   phones; a component input rule sets `font-size: var(--font-input)` instead of
@@ -284,6 +295,12 @@ carry it; chrome stays out of the way.
   and `--hN-case`. New text styles are added by token. Emit a token only when
   its setting is non-default if an always-emitted value (such as a CSS-wide
   keyword) would change inheritance.
+- Card titles pass a `heading_tag` parameter (`product-card`, `article-card`).
+  Listing pages (collection, search) pass `h2`, because the page title is the
+  `h1`; every other context defaults to `h3`. `collection-card` is always `h2`.
+  The title rule pins `letter-spacing: var(--h3-tracking)` and
+  `text-transform: var(--h3-case, inherit)`, so changing the level never changes
+  the look. Never skip a heading level (axe `heading-order`).
 - UI transitions use `--ease-out` through `--transition-fast`, `--transition-base`
   and `--transition-slow`. `linear` is only for continuous loops (marquee,
   spinner, progress).
@@ -329,6 +346,22 @@ carry it; chrome stays out of the way.
 - Discount codes go through `/cart/update.js` with `discount` as a
   comma-joined list built from the visible chips. The page reconciles chips,
   discount rows and total from that AJAX response after the section refresh.
+
+### Customer forms
+
+- A field wrapper in the customer templates is the `<input-field>` element,
+  never a `div`, and no `div` or `a` sits inside a `label`. An inline link such
+  as "Forgot password" follows the label as a sibling.
+- A password show/hide toggle is a real `<button>` with a locale-backed name,
+  never a click handler on an `aria-hidden` icon.
+- Customer and cart text fields carry a valid `autocomplete` token: `email`,
+  `current-password` (sign in), `new-password` (register, activate, reset),
+  `given-name`, `family-name`, `tel`, `organization`, `address-line1`,
+  `address-line2`, `address-level1`, `address-level2`, `postal-code`,
+  `country-name`. Tax ID, notes and number inputs carry none.
+- A page has one `<main>`: `layout/theme.liquid` and `layout/password.liquid`
+  own it, and a section never adds a second. `main-gift-card.liquid` is the
+  exception, because `layout/gift_card.liquid` has no `<main>`.
 
 ### Product and collection
 

@@ -26,20 +26,22 @@
       <div class="cart-template__data"{% if cart.item_count == 0 %} hidden{% endif %}>
         {%- render 'cart-items' -%}
         <div class="cart-template__footer">
-          {%- if section.settings.show_note -%}
+          {%- if section.settings.show_note or section.settings.show_invoice -%}
             <div class="cart-template__note">
-              <h2>{{ 'sections.cart.note' | t }}</h2>
-              <label for="cart-template__note-input" class="sr-only">{{ 'sections.cart.note' | t }}</label>
-              <textarea name="note" id="cart-template__note-input" form="cart" placeholder="{{ 'sections.cart.note' | t }}">{{ cart.note | escape }}</textarea>
+              {%- if section.settings.show_note -%}
+                <h2>{{ 'sections.cart.note' | t }}</h2>
+                <label for="cart-template__note-input" class="sr-only">{{ 'sections.cart.note' | t }}</label>
+                <textarea name="note" id="cart-template__note-input" form="cart" placeholder="{{ 'sections.cart.note' | t }}">{{ cart.note | escape }}</textarea>
+              {%- endif -%}
 
               {%- if section.settings.show_invoice -%}
                 <h2 class="invoice-title">{{ section.settings.invoice_title | escape }}</h2>
                 <label for="invoice-name" class="sr-only">{{ section.settings.invoice_company_label | escape }}</label>
-                <input type="text" name="attributes[invoice_name]" id="invoice-name" value="{{ cart.attributes.invoice_name | escape }}" class="invoice-input" form="cart" placeholder="{{ section.settings.invoice_company_label | escape }}">
+                <input type="text" name="attributes[invoice_name]" id="invoice-name" value="{{ cart.attributes.invoice_name | escape }}" class="invoice-input" form="cart" autocomplete="organization" placeholder="{{ section.settings.invoice_company_label | escape }}">
                 <label for="invoice-taxcode" class="sr-only">{{ section.settings.invoice_tax_label | escape }}</label>
                 <input type="text" name="attributes[invoice_taxcode]" id="invoice-taxcode" value="{{ cart.attributes.invoice_taxcode | escape }}" class="invoice-input" form="cart" placeholder="{{ section.settings.invoice_tax_label | escape }}">
                 <label for="invoice-address" class="sr-only">{{ section.settings.invoice_address_label | escape }}</label>
-                <input type="text" name="attributes[invoice_address]" id="invoice-address" value="{{ cart.attributes.invoice_address | escape }}" class="invoice-input" form="cart" placeholder="{{ section.settings.invoice_address_label | escape }}">
+                <input type="text" name="attributes[invoice_address]" id="invoice-address" value="{{ cart.attributes.invoice_address | escape }}" class="invoice-input" form="cart" autocomplete="address-line1" placeholder="{{ section.settings.invoice_address_label | escape }}">
               {%- endif -%}
             </div>
           {%- endif -%}
@@ -113,25 +115,29 @@
       "type": "text",
       "id": "invoice_title",
       "label": "t:sections.main_cart.settings.invoice_title.label",
-      "default": "t:sections.main_cart.settings.invoice_title.default"
+      "default": "t:sections.main_cart.settings.invoice_title.default",
+      "visible_if": "{{ section.settings.show_invoice }}"
     },
     {
       "type": "text",
       "id": "invoice_company_label",
       "label": "t:sections.main_cart.settings.invoice_company_label.label",
-      "default": "t:sections.main_cart.settings.invoice_company_label.default"
+      "default": "t:sections.main_cart.settings.invoice_company_label.default",
+      "visible_if": "{{ section.settings.show_invoice }}"
     },
     {
       "type": "text",
       "id": "invoice_tax_label",
       "label": "t:sections.main_cart.settings.invoice_tax_label.label",
-      "default": "t:sections.main_cart.settings.invoice_tax_label.default"
+      "default": "t:sections.main_cart.settings.invoice_tax_label.default",
+      "visible_if": "{{ section.settings.show_invoice }}"
     },
     {
       "type": "text",
       "id": "invoice_address_label",
       "label": "t:sections.main_cart.settings.invoice_address_label.label",
-      "default": "t:sections.main_cart.settings.invoice_address_label.default"
+      "default": "t:sections.main_cart.settings.invoice_address_label.default",
+      "visible_if": "{{ section.settings.show_invoice }}"
     },
     {
       "type": "header",

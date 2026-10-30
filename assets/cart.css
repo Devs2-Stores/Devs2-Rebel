@@ -79,6 +79,9 @@ cart-template .cart-template__footer {
     align-items: start;
     padding-top: var(--space-3xl);
   }
+  cart-template .cart-template__summary:only-child {
+    grid-column: 2;
+  }
 }
 
 /* ── Flat sections: note, summary, upsale ──────── */
@@ -146,6 +149,9 @@ cart-template .cart-template__note .invoice-title {
   letter-spacing: var(--eyebrow-tracking);
   text-transform: uppercase;
   color: var(--color-muted);
+}
+cart-template .cart-template__note .invoice-title:first-child {
+  margin-top: 0;
 }
 cart-template .cart-template__note .invoice-input {
   display: block;
@@ -456,7 +462,7 @@ cart-item .cart-item__quantity {
 
 /* Quiet quantity stepper */
 cart-item .quantity-selector {
-  border: 1px solid var(--color-hairline);
+  border: var(--inputs-border);
   border-radius: var(--inputs-radius);
   background: var(--color-surface);
   color: var(--color-ink);

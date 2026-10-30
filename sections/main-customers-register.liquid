@@ -18,49 +18,51 @@
           <div class="form-group">
             <label for="register-lastname">
               <span class="required">{{ 'customer.register.last_name' | t }}</span>
-              <div class="form-group-input">
+              <input-field class="form-group-input">
                 {%- render 'icon', name: 'user' -%}
-                <input type="text" id="register-lastname" class="form-control" name="customer[last_name]" required placeholder="{{ 'customer.register.last_name_placeholder' | t }}">
-              </div>
+                <input type="text" id="register-lastname" class="form-control" name="customer[last_name]" required autocomplete="family-name" placeholder="{{ 'customer.register.last_name_placeholder' | t }}">
+              </input-field>
             </label>
           </div>
           <div class="form-group">
             <label for="register-firstname">
               <span class="required">{{ 'customer.register.first_name' | t }}</span>
-              <div class="form-group-input">
+              <input-field class="form-group-input">
                 {%- render 'icon', name: 'user' -%}
-                <input type="text" id="register-firstname" class="form-control" name="customer[first_name]" required placeholder="{{ 'customer.register.first_name_placeholder' | t }}">
-              </div>
+                <input type="text" id="register-firstname" class="form-control" name="customer[first_name]" required autocomplete="given-name" placeholder="{{ 'customer.register.first_name_placeholder' | t }}">
+              </input-field>
             </label>
           </div>
           <div class="form-group">
             <label for="register-phone">
-              <span class="required">{{ 'customer.register.phone' | t }}</span>
-              <div class="form-group-input">
+              <span>{{ 'customer.register.phone' | t }}</span>
+              <input-field class="form-group-input">
                 {%- render 'icon', name: 'phone' -%}
-                <input type="tel" id="register-phone" class="form-control" name="customer[phone]" required placeholder="{{ 'customer.register.phone_placeholder' | t }}" pattern="^\+?\d{1,10}$">
-              </div>
+                <input type="tel" id="register-phone" class="form-control" name="customer[phone]" autocomplete="tel" placeholder="{{ 'customer.register.phone_placeholder' | t }}">
+              </input-field>
             </label>
           </div>
           <div class="form-group">
             <label for="register-email">
               <span class="required">{{ 'customer.login_page.email' | t }}</span>
-              <div class="form-group-input">
+              <input-field class="form-group-input">
                 {%- render 'icon', name: 'email' -%}
-                <input type="email" id="register-email" class="form-control" name="customer[email]" required placeholder="{{ 'customer.login_page.email_placeholder' | t }}">
-              </div>
+                <input type="email" id="register-email" class="form-control" name="customer[email]" required autocomplete="email" placeholder="{{ 'customer.login_page.email_placeholder' | t }}">
+              </input-field>
             </label>
           </div>
           <toggle-password class="form-group">
             <label for="register-password" class="label-password">
               <span class="required">{{ 'customer.login_page.password' | t }}</span>
-              <div class="form-group-input">
-                {%- render 'icon', name: 'password' -%}
-                <input type="password" id="register-password" class="form-control" name="customer[password]" required placeholder="{{ 'customer.login_page.password_placeholder' | t }}">
-                {%- render 'icon', name: 'eye-show', class: 'icon-eye-show right' -%}
-                {%- render 'icon', name: 'eye-hide', class: 'icon-eye-hide right', style: 'display:none;' -%}
-              </div>
             </label>
+            <input-field class="form-group-input form-group-input--password">
+              {%- render 'icon', name: 'password' -%}
+              <input type="password" id="register-password" class="form-control" name="customer[password]" required autocomplete="new-password" placeholder="{{ 'customer.login_page.password_placeholder' | t }}">
+              <button type="button" class="toggle-password__button" aria-controls="register-password" aria-label="{{ 'accessibility.show_password' | t }}" data-label-show="{{ 'accessibility.show_password' | t }}" data-label-hide="{{ 'accessibility.hide_password' | t }}">
+                {%- render 'icon', name: 'eye-show', class: 'icon-eye-show' -%}
+                {%- render 'icon', name: 'eye-hide', class: 'icon-eye-hide' -%}
+              </button>
+            </input-field>
           </toggle-password>
           <div class="form-group">
             <button type="submit" class="button-primary active form-submit" title="{{ 'customer.register.submit' | t }}">{{ 'customer.register.submit' | t }}</button>

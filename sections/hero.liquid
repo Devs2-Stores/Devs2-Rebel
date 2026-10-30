@@ -175,36 +175,43 @@
             </div>
 
           {%- when 'countdown' -%}
-            <div
-              {% if block.settings.end_date == blank %}hidden{% endif %}
+            {%- liquid
+              assign countdown_time = block.settings.end_time
+              if block.settings.end_date contains 'T'
+                assign countdown_time = block.settings.end_date | slice: 11, 5
+              endif
+            -%}
+            <countdown-banner
               class="section-hero__countdown"
+              role="timer"
               {{ block.shopify_attributes }}
-              data-countdown-end="{{ block.settings.end_date }}"
-              data-countdown-label-days="{{ block.settings.label_days }}"
-              data-countdown-label-hours="{{ block.settings.label_hours }}"
-              data-countdown-label-mins="{{ block.settings.label_mins }}"
-              data-countdown-label-secs="{{ block.settings.label_secs }}"
+              {% if block.settings.end_date == blank %}hidden{% endif %}
+              data-end-date="{{ block.settings.end_date | slice: 0, 10 }}"
+              data-end-time="{{ countdown_time }}"
+              data-tz-offset="{{ 'now' | date: '%z' }}"
+              data-show-after-expired="false"
             >
               <div class="section-hero__countdown-item">
-                <span class="section-hero__countdown-value" data-countdown="days">00</span>
+                <span class="section-hero__countdown-value" data-countdown-days>00</span>
                 <span class="section-hero__countdown-label">{{ block.settings.label_days }}</span>
               </div>
-              <span class="section-hero__countdown-sep">:</span>
+              <span class="section-hero__countdown-sep" aria-hidden="true">:</span>
               <div class="section-hero__countdown-item">
-                <span class="section-hero__countdown-value" data-countdown="hours">00</span>
+                <span class="section-hero__countdown-value" data-countdown-hours>00</span>
                 <span class="section-hero__countdown-label">{{ block.settings.label_hours }}</span>
               </div>
-              <span class="section-hero__countdown-sep">:</span>
+              <span class="section-hero__countdown-sep" aria-hidden="true">:</span>
               <div class="section-hero__countdown-item">
-                <span class="section-hero__countdown-value" data-countdown="mins">00</span>
+                <span class="section-hero__countdown-value" data-countdown-minutes>00</span>
                 <span class="section-hero__countdown-label">{{ block.settings.label_mins }}</span>
               </div>
-              <span class="section-hero__countdown-sep">:</span>
+              <span class="section-hero__countdown-sep" aria-hidden="true">:</span>
               <div class="section-hero__countdown-item">
-                <span class="section-hero__countdown-value" data-countdown="secs">00</span>
+                <span class="section-hero__countdown-value" data-countdown-seconds>00</span>
                 <span class="section-hero__countdown-label">{{ block.settings.label_secs }}</span>
               </div>
-            </div>
+            </countdown-banner>
+            <script src="{{ 'countdown-banner.js' | asset_url }}" defer></script>
 
           {%- when 'empty_space' -%}
             <div
@@ -224,46 +231,6 @@
     {{ 'sections.hero.onboarding' | t }}
   </div>
 {%- endif -%}
-
-<script>
-  (function() {
-    var countdowns = document.querySelectorAll('#section-{{ section.id }} .section-hero__countdown');
-    if (!countdowns.length) return;
-
-    countdowns.forEach(function(el) {
-      var endDate = new Date(el.dataset.countdownEnd).getTime();
-      if (isNaN(endDate)) { el.hidden = true; return; }
-
-      var daysEl = el.querySelector('[data-countdown="days"]');
-      var hoursEl = el.querySelector('[data-countdown="hours"]');
-      var minsEl = el.querySelector('[data-countdown="mins"]');
-      var secsEl = el.querySelector('[data-countdown="secs"]');
-
-      function tick() {
-        var now = Date.now();
-        var diff = Math.max(0, endDate - now);
-        if (diff === 0) { el.hidden = true; return; }
-
-        var days = Math.floor(diff / 86400000);
-        var hours = Math.floor((diff % 86400000) / 3600000);
-        var mins = Math.floor((diff % 3600000) / 60000);
-        var secs = Math.floor((diff % 60000) / 1000);
-
-        if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
-        if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
-        if (minsEl) minsEl.textContent = String(mins).padStart(2, '0');
-        if (secsEl) secsEl.textContent = String(secs).padStart(2, '0');
-
-        if (diff > 0) {
-          requestAnimationFrame(function() { setTimeout(tick, 1000); });
-        }
-      }
-
-      tick();
-    });
-  })();
-</script>
-
 
 {% schema %}
 {
@@ -785,6 +752,13 @@
           "id": "end_date",
           "label": "t:sections.hero.blocks.countdown.settings.end_date.label",
           "info": "t:sections.hero.blocks.countdown.settings.end_date.info"
+        },
+        {
+          "type": "text",
+          "id": "end_time",
+          "default": "23:59",
+          "label": "t:sections.hero.blocks.countdown.settings.end_time.label",
+          "info": "t:sections.hero.blocks.countdown.settings.end_time.info"
         },
         {
           "type": "text",

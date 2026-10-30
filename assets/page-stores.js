@@ -1,6 +1,6 @@
 /**
  * Store Locator Page
- * - Vietnamese diacritics-insensitive search
+ * - Diacritics-insensitive search
  * - Cascading province → district filter
  * - Lazy-load storefront images with a visual loading state
  */

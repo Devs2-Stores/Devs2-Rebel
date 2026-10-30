@@ -20,7 +20,7 @@
           </div>
         </section>
       </aside>
-      <main class="account-template__orders-column">
+      <div class="account-template__orders-column">
         <section class="account-template__order" aria-labelledby="account-orders-title">
           <h2 id="account-orders-title" class="account-template__section-title"><i>{%- render 'icon', name: 'order' -%}</i>{{ 'customer.orders.title' | t }}</h2>
           {%- paginate customer.orders by 20 -%}
@@ -41,7 +41,7 @@
             {%- else -%}<div class="account-template__order-empty"><i>{%- render 'icon', name: 'sad' -%}</i><p>{{ 'customer.orders.none' | t }}</p><a href="{{ routes.all_products_collection_url }}" class="button-primary active" title="{{ 'general.continue_shopping' | t }}">{{ 'general.continue_shopping' | t }}</a></div>{%- endif -%}
           {%- endpaginate -%}
         </section>
-      </main>
+      </div>
     </div>
   </div>
 </div>

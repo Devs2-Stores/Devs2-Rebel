@@ -1,8 +1,8 @@
 {%- if section.settings.enable -%}
+{%- assign announcement_count = section.blocks | where: 'type', 'announcement' | size -%}
 <script src="{{ 'announcement-bar.js' | asset_url }}" defer="defer"></script>
-<announcement-bar class="announcement-bar color-{{ section.settings.color_scheme }}" role="region" aria-label="{{ 'sections.announcement_bar.label' | t }}">
+<announcement-bar class="announcement-bar color-{{ section.settings.color_scheme }}{% if announcement_count > 1 %} announcement-bar--rotating{% endif %}" role="region" aria-label="{{ 'sections.announcement_bar.label' | t }}">
   <div class="announcement-bar__container">
-    {%- assign announcement_count = section.blocks | where: 'type', 'announcement' | size -%}
     <div class="swiper announcement-bar__swiper">
       <div class="swiper-wrapper">
         {%- for block in section.blocks -%}
@@ -20,6 +20,18 @@
     </div>
     {%- if announcement_count > 1 -%}
     <button type="button" class="announcement-bar__nav announcement-bar__nav--prev swiper-button-prev" aria-label="{{ 'accessibility.previous' | t }}"></button>
+    <button
+      type="button"
+      class="announcement-bar__rotation"
+      data-announcement-rotation
+      data-label-pause="{{ 'accessibility.pause_announcements' | t | escape }}"
+      data-label-play="{{ 'accessibility.play_announcements' | t | escape }}"
+      aria-label="{{ 'accessibility.pause_announcements' | t }}"
+      hidden
+    >
+      <svg class="announcement-bar__rotation-pause" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+      <svg class="announcement-bar__rotation-play" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="7 4 20 12 7 20 7 4"></polygon></svg>
+    </button>
     <button type="button" class="announcement-bar__nav announcement-bar__nav--next swiper-button-next" aria-label="{{ 'accessibility.next' | t }}"></button>
     {%- endif -%}
   </div>
@@ -73,6 +85,33 @@
 }
 .announcement-bar__nav:hover:after { color: var(--color-ink); }
 .announcement-bar__nav:after { color: inherit; font-size: var(--font-xs); opacity: 1; }
+.announcement-bar--rotating .announcement-bar__content { padding-inline: 2.5rem 4.25rem; }
+.announcement-bar__rotation {
+  position: absolute;
+  inset-block: 0;
+  margin-block: auto;
+  inset-inline-end: 2.75rem;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgb(var(--color-foreground, 10 10 10));
+  cursor: pointer;
+}
+.announcement-bar__rotation[hidden] { display: none; }
+.announcement-bar__rotation:hover { color: var(--color-ink); }
+.announcement-bar__rotation:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+.announcement-bar__rotation-play,
+.is-rotation-user-stopped .announcement-bar__rotation-pause { display: none; }
+.is-rotation-user-stopped .announcement-bar__rotation-play { display: block; }
 {% endstylesheet %}
 
 {% schema %}

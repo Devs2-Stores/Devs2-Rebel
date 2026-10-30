@@ -11,6 +11,10 @@
   assign show_comment_count = show_comment_count | default: false, allow_false: true
   assign show_tags = show_tags | default: false, allow_false: true
   assign show_category = show_category | default: false, allow_false: true
+  assign title_tag = 'h3'
+  if heading_tag == 'h2' or heading_tag == 'h4'
+    assign title_tag = heading_tag
+  endif
 
   assign card_class = 'article-card'
   if layout == 'list'
@@ -51,9 +55,9 @@
       </div>
     {%- endif -%}
 
-    <h3 class="article-card__title">
+    <{{ title_tag }} class="article-card__title">
       <a href="{{ article.url | escape }}" title="{{ article.title | escape }}">{{ article.title | escape }}</a>
-    </h3>
+    </{{ title_tag }}>
 
     {%- if show_date or show_author or show_comment_count -%}
       <div class="article-card__meta">

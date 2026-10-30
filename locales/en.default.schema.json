@@ -961,7 +961,7 @@
       "settings": {
         "width": {
           "label": "Width in parent",
-          "info": "Fill shares the row or column equally with its neighbours. Fit hugs the content.",
+          "info": "Fill shares the row or column equally with its neighbors. Fit hugs the content.",
           "options": {
             "fill": "Fill",
             "fit": "Fit to content"
@@ -1919,8 +1919,8 @@
           "default": "Company name"
         },
         "invoice_tax_label": {
-          "label": "Tax code placeholder",
-          "default": "Tax code"
+          "label": "Tax ID placeholder",
+          "default": "Tax ID"
         },
         "invoice_address_label": {
           "label": "Invoice address placeholder",
@@ -3467,8 +3467,12 @@
           "name": "Countdown timer",
           "settings": {
             "end_date": {
-              "label": "End date (ISO format)",
-              "info": "Format: YYYY-MM-DDTHH:MM:SS. Example: 2026-12-31T23:59:59"
+              "label": "End date",
+              "info": "Format: YYYY-MM-DD (e.g. 2026-12-31), in the store time zone"
+            },
+            "end_time": {
+              "label": "End time",
+              "info": "Format: HH:MM in 24h (e.g. 23:59), in the store time zone"
             },
             "label_days": {
               "label": "Days label",

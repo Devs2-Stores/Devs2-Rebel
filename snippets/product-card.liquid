@@ -11,6 +11,7 @@
   @param {string} [sizes] - Full sizes attribute for the card images. Overrides columns. Default: derived from columns or '(max-width: 749px) 50vw, 25vw'
   @param {number} [columns] - Desktop column count of the grid the card sits in; used to build sizes
   @param {number} [columns_mobile] - Mobile column count of the grid the card sits in; used to build sizes. Default: 2
+  @param {string} [heading_tag] - Heading element for the title: h2, h3 or h4. Default: 'h3'
   @example {% render 'product-card', product: product, show_vendor: true %}
 {% enddoc %}
 
@@ -55,6 +56,10 @@
   assign lazyload = lazyload | default: 'lazy'
   assign fetchpriority = fetchpriority | default: 'auto'
   assign image_ratio = image_ratio | default: 'portrait'
+  assign title_tag = 'h3'
+  if heading_tag == 'h2' or heading_tag == 'h4'
+    assign title_tag = heading_tag
+  endif
 
   assign variant = product.selected_or_first_available_variant
   assign price = variant.price
@@ -192,9 +197,9 @@
         <div class="product-card__vendor">{{ product.vendor | escape }}</div>
       {%- endif -%}
 
-      <h3 class="product-card__title">
+      <{{ title_tag }} class="product-card__title">
         <a href="{{ product.url }}" title="{{ product.title | escape }}">{{ product.title | escape }}</a>
-      </h3>
+      </{{ title_tag }}>
 
       {%- if product.options_with_values != blank -%}
         {%- for option in product.options_with_values -%}
@@ -412,6 +417,8 @@
   font-size: 0.9375rem;
   font-weight: var(--font-weight-medium);
   line-height: 1.4;
+  letter-spacing: var(--h3-tracking);
+  text-transform: var(--h3-case, inherit);
   margin: 0;
   color: var(--color-ink);
 }

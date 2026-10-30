@@ -194,27 +194,19 @@
   class TogglePassword extends HTMLElement {
     connectedCallback() {
       this.input = this.querySelector('input[type="password"], input[type="text"]');
-      this.iconShow = this.querySelector('.icon-eye-show');
-      this.iconHide = this.querySelector('.icon-eye-hide');
-
-      if (this.input && (this.iconShow || this.iconHide)) {
-        // Click on either icon to toggle
-        [this.iconShow, this.iconHide].forEach(icon => {
-          if (icon) {
-            icon.addEventListener('click', (e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              this.toggle();
-            });
-          }
-        });
-      }
+      this.button = this.querySelector('.toggle-password__button');
+      if (!this.input || !this.button) return;
+      this.button.addEventListener('click', () => this.toggle(), { signal: (this.abort = new AbortController()).signal });
+    }
+    disconnectedCallback() {
+      if (this.abort) this.abort.abort();
     }
 
     toggle() {
       const isPassword = this.input.type === 'password';
       this.input.type = isPassword ? 'text' : 'password';
       this.classList.toggle('is-visible', isPassword);
+      this.button.setAttribute('aria-label', isPassword ? this.button.dataset.labelHide : this.button.dataset.labelShow);
     }
   }
   if (!customElements.get('toggle-password')) customElements.define('toggle-password', TogglePassword);

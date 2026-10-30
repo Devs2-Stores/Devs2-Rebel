@@ -58,6 +58,7 @@
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-snug);
   letter-spacing: var(--heading-tracking);
+  text-transform: var(--h3-case, inherit);
   color: var(--color-ink);
   overflow-wrap: anywhere;
 }

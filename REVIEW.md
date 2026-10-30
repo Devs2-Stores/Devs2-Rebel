@@ -79,6 +79,31 @@ be recorded as an unresolved question.
   slides in on hover but not on focus, so its Privacy and Terms links focus
   off-screen. It is platform-owned: record it and do not restyle it from the
   theme.
+- Heading order: axe `heading-order` reports 0 on `/collections/all`,
+  `/search?q=jacket`, `/collections`, `/account`, `/account/addresses` and an
+  order page. Card titles on listing pages are `h2`; a card title's computed
+  size, letter-spacing and text-transform match the `h3` they replaced.
+- Field border contrast (WCAG 1.4.11): for every colour scheme, the computed
+  `border-top-color` of `.form-control` (read on a host of that scheme) is at
+  least 3:1 against `background`, `background_2` and `form_bg`. Cover the
+  quantity stepper, the footer newsletter field and the localization search
+  input as well. Pills, pop-ups, drawers and dividers keep the hairline and are
+  exempt.
+- Announcement pause: with two or more announcement blocks the pause button is
+  at least 24 x 24 px, does not overlap the text at 375, pressing it leaves
+  `swiper.autoplay.running` false, `.swiper-slide-duplicate` count is 0, and
+  every non-active slide is `inert`. With one block no button renders and the
+  header height (`--announcement-height`) is unchanged.
+- Autocomplete: axe `autocomplete-valid` reports 0 on `/account/login`,
+  `/account/register`, `/account/addresses`, a reset or activate page and
+  `/cart`. A scan finds no text-like customer or cart input without a token,
+  except tax ID, notes, gift-card recipient, number and search inputs.
+- One `<main>` per page: `rg '<main' layout sections` lists only
+  `layout/theme.liquid`, `layout/password.liquid` and
+  `sections/main-gift-card.liquid`, and a rendered page contains exactly one
+  `main` landmark (axe `landmark-one-main`, `landmark-no-duplicate-main`).
+- Customer form markup: no `div` or `a` inside a `label`, and the password
+  toggle is a focusable `button` reachable by keyboard.
 
 ## Discovery surfaces
 

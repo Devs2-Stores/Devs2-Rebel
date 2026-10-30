@@ -582,7 +582,7 @@ cart-modal .cart-modal-panel .cart-modal-footer .cart-modal-actions .cart-modal-
 
 /* Quiet quantity stepper inside drawer */
 .cart-modal-item .quantity-selector {
-  border: 1px solid var(--color-hairline);
+  border: var(--inputs-border);
   border-radius: var(--inputs-radius);
   background: var(--color-surface);
   color: var(--color-ink);
