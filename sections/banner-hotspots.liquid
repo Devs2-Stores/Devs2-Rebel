@@ -44,6 +44,7 @@
           else
             assign hotspot_label = 'accessibility.view_details' | t
           endif
+          assign hotspot_label_template = 'accessibility.view_details_for' | t: title: '__title__'
         -%}
         <div
           class="section-hotspot__dot"
@@ -57,7 +58,7 @@
             aria-label="{{ hotspot_label | escape }}"
             aria-expanded="false"
             aria-controls="hotspot-tooltip-{{ block.id }}"
-            {% if hotspot_product_handle != blank %}data-label-template="{{ 'accessibility.view_details_for' | t: title: '{title}' | escape }}"{% endif %}
+            {% if hotspot_product_handle != blank %}data-label-template="{{ hotspot_label_template | escape }}"{% endif %}
             data-hotspot-btn
           >
             <span class="section-hotspot__plus" aria-hidden="true">+</span>
@@ -204,7 +205,7 @@
   function labelFromProduct(btn, tip) {
     var template = btn.getAttribute('data-label-template');
     var product = productCache[tip.getAttribute('data-product-handle')];
-    if (template && product && product.title) btn.setAttribute('aria-label', template.replace('{title}', product.title));
+    if (template && product && product.title) btn.setAttribute('aria-label', template.replace('__title__', product.title));
   }
 
   dots.forEach(function(dot) {
