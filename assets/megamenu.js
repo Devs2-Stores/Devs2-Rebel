@@ -115,6 +115,16 @@
           self.syncExpanded(item);
         });
       });
+
+      this._boundDocKeydown = function(e) {
+        if (e.key !== 'Escape') return;
+        self.querySelectorAll('.megamenu__item > .megamenu__trigger[aria-expanded="true"]').forEach(function(openTrigger) {
+          var openItem = openTrigger.parentElement;
+          openItem.classList.add('is-dismissed');
+          self.syncExpanded(openItem);
+        });
+      };
+      document.addEventListener('keydown', this._boundDocKeydown);
     }
 
     syncExpanded(item, focusInside) {
