@@ -362,7 +362,7 @@
 }
 .product-template__info .product-template__price-compare[hidden] { display: none; }
 .product-template__info .product-template__price-sale {
-  background: rgb(var(--color-sale-price));
+  background: rgb(var(--color-sale-badge));
   color: rgb(var(--color-button-text));
   padding: 0.1875rem 0.5rem;
   border-radius: var(--badge-corner-radius);

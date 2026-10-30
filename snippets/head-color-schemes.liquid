@@ -13,6 +13,7 @@
   scheme button when it reaches 3:1 against the text colour, otherwise it uses
   the scheme background with the text colour as its label.
   Field borders: --color-input-border-rgb is the scheme border mixed toward the text colour (5% steps) until it reaches 3.1:1 on background, background_2 and form_bg.
+  Sale price: --color-sale-price (text) is the scheme sale_price mixed toward the text colour (10% steps) until it reaches 4.6:1 on the surface, background and background_2; --color-sale-badge keeps the raw sale_price for fills that carry the button label.
 {% endcomment %}
 
 {%- assign status_colors = 'success:#15803d,warning:#a16207,error:#dc2626' | split: ',' -%}
@@ -53,7 +54,22 @@
       -%}
       --color-surface: {{ surface }};
       --color-price: {{ scheme.settings.color_price.red }}, {{ scheme.settings.color_price.green }}, {{ scheme.settings.color_price.blue }};
-      --color-sale-price: {{ scheme.settings.sale_price.red }}, {{ scheme.settings.sale_price.green }}, {{ scheme.settings.sale_price.blue }};
+      {%- liquid
+        assign sale_text = scheme.settings.text
+        for step in (0..10)
+          assign sale_weight = step | times: 10
+          assign candidate = scheme.settings.text | color_mix: scheme.settings.sale_price, sale_weight
+          assign sale_ratio_surface = candidate | color_contrast: surface
+          assign sale_ratio_bg = candidate | color_contrast: scheme.settings.background
+          assign sale_ratio_bg_2 = candidate | color_contrast: scheme.settings.background_2
+          if sale_ratio_surface >= 4.6 and sale_ratio_bg >= 4.6 and sale_ratio_bg_2 >= 4.6
+            assign sale_text = candidate
+            break
+          endif
+        endfor
+      -%}
+      --color-sale-price: {{ sale_text | color_extract: 'red' }}, {{ sale_text | color_extract: 'green' }}, {{ sale_text | color_extract: 'blue' }};
+      --color-sale-badge: {{ scheme.settings.sale_price.red }}, {{ scheme.settings.sale_price.green }}, {{ scheme.settings.sale_price.blue }};
       {%- for status in status_colors -%}
         {%- liquid
           assign status_pair = status | split: ':'

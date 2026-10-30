@@ -390,8 +390,10 @@ carry it; chrome stays out of the way.
   and plays only while visible.
 - A section that can hold several videos (slideshow) holds inactive slides'
   videos with `media-video:hold`, so only the visible slide loads and plays.
-- A demo preset picks a product handle that exists in the demo store. A blank
-  product still renders only its editor placeholder under `request.design_mode`.
+- Shipped templates and groups carry no demo-store resources: no `shopify://`
+  image refs, no product handles and no fixed `/pages/*` links. Demo imagery and
+  handles live only in the demo store. A blank product still renders only its
+  editor placeholder under `request.design_mode`.
 
 ## Voice and tone
 
@@ -423,4 +425,5 @@ carry it; chrome stays out of the way.
 - A card whose product has only the default variant adds it in one click. Any
   other card shows a choose-options button that opens quick view (or links to
   the product when quick view is off); it never adds a variant the shopper did
-  not pick.
+  not pick. A product that requires a selling plan always gets the
+  choose-options link to its product page, never a direct-add form.

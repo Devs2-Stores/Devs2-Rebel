@@ -4,6 +4,9 @@
   Renders product tags as badge chips, skipping hidden/system tags.
 {% enddoc %}
 
+{%- assign product = closest.product | default: product -%}
+{%- if product != blank -%}
+
 <div class="product-template__badges" {{ block.shopify_attributes }}>
   {%- for tag in product.tags -%}
     {%- assign tag_lower = tag | downcase -%}
@@ -12,6 +15,7 @@
     {%- endunless -%}
   {%- endfor -%}
 </div>
+{%- endif -%}
 
 {% schema %}
 {

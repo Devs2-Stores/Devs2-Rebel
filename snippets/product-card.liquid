@@ -166,7 +166,13 @@
       {%- endif -%}
 
       {%- if show_add_to_cart -%}
-        {%- if product.has_only_default_variant -%}
+        {%- if product.requires_selling_plan or product.has_only_default_variant == false and show_quickview == false -%}
+          <div class="product-card__add-form">
+            <a class="product-card__add-btn" href="{{ product.url }}" aria-label="{{ t_choose_options }} {{ product.title | escape }}" title="{{ t_choose_options }}">
+              {%- render 'icon', name: 'cart' -%}
+            </a>
+          </div>
+        {%- elsif product.has_only_default_variant -%}
           <form class="product-card__add-form" method="POST">
             <input type="hidden" name="id" value="{{ variant.id }}">
             <input type="hidden" name="quantity" value="1">
@@ -174,17 +180,11 @@
               {%- render 'icon', name: 'cart' -%}
             </button>
           </form>
-        {%- elsif show_quickview -%}
+        {%- else -%}
           <div class="product-card__add-form">
             <button type="button" class="product-card__add-btn" data-action="open-quickview" data-product-handle="{{ product.handle }}" aria-label="{{ t_choose_options }} {{ product.title | escape }}" title="{{ t_choose_options }}"{% unless product.available %} disabled{% endunless %}>
               {%- render 'icon', name: 'cart' -%}
             </button>
-          </div>
-        {%- else -%}
-          <div class="product-card__add-form">
-            <a class="product-card__add-btn" href="{{ product.url }}" aria-label="{{ t_choose_options }} {{ product.title | escape }}" title="{{ t_choose_options }}">
-              {%- render 'icon', name: 'cart' -%}
-            </a>
           </div>
         {%- endif -%}
       {%- endif -%}

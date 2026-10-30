@@ -4,12 +4,16 @@
   Renders the product title with a configurable heading size.
 {% enddoc %}
 
+{%- assign product = closest.product | default: product -%}
+{%- if product != blank -%}
+
 <h1
   class="product-template__title heading-size-{{ block.settings.heading_size }}"
   {{ block.shopify_attributes }}
 >
   {{ product.title | escape }}
 </h1>
+{%- endif -%}
 
 {% schema %}
 {

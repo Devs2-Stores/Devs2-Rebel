@@ -6,6 +6,8 @@
   Content source is selected via `content_type`.
 {% enddoc %}
 
+{%- assign product = closest.product | default: product -%}
+
 {%- liquid
   assign has_content = false
   case block.settings.content_type

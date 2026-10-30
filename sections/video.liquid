@@ -67,7 +67,7 @@
     <div class="section-video__wrapper" data-video-section>
       {%- if video_type == 'youtube' and yt_id != blank -%}
         {%- comment %} YouTube — Facade pattern for performance {% endcomment -%}
-        <div class="section-video__facade" data-yt-id="{{ yt_id }}" data-video-host="{{ video_host }}" data-autoplay="{{ autoplay }}" data-loop="{{ loop }}" data-muted="{{ muted }}">
+        <div class="section-video__facade" data-yt-id="{{ yt_id }}" data-video-host="{{ video_host }}" data-autoplay="{{ autoplay }}" data-loop="{{ loop }}" data-muted="{{ muted }}" data-title="{{ 'accessibility.video_player' | t | escape }}">
           {%- assign poster_alt = 'accessibility.video' | t -%}
           {%- assign poster_alt = section.settings.heading | strip_html | default: poster_alt -%}
           {%- if poster != blank -%}
@@ -82,11 +82,11 @@
             {{ 'lifestyle-1' | placeholder_svg_tag: 'section-video__poster placeholder-svg' }}
           {%- else -%}
             <img
-              src="//i.ytimg.com/vi/{{ yt_id }}/maxresdefault.jpg"
+              src="//i.ytimg.com/vi/{{ yt_id }}/hqdefault.jpg"
               alt="{{ poster_alt | escape }}"
               loading="lazy"
-              width="1280"
-              height="720"
+              width="480"
+              height="360"
               class="section-video__poster"
             >
           {%- endif -%}
@@ -100,13 +100,18 @@
 
       {%- elsif video_type == 'mp4' and mp4_video != blank -%}
         {%- comment %} Self-hosted MP4 {% endcomment -%}
+        {%- assign video_label = section.settings.heading | strip_html | strip -%}
+        {%- if video_label == blank -%}
+          {%- assign video_label = 'accessibility.video_player' | t -%}
+        {%- endif -%}
         <video
           class="section-video__player"
+          aria-label="{{ video_label | escape }}"
           {%- if poster != blank %} poster="{{ poster | image_url: width: 1920 }}"{% endif %}
           {%- if autoplay %} autoplay{% endif %}
           {%- if loop %} loop{% endif %}
           {%- if muted or autoplay %} muted{% endif %}
-          {%- if controls %} controls{% endif %}
+          {%- if controls or autoplay %} controls{% endif %}
           playsinline
           preload="metadata"
         >
@@ -159,6 +164,7 @@
         iframe.src = '//www.youtube-nocookie.com/embed/' + ytId + '?autoplay=1&rel=0&modestbranding=1' + (mute ? '&mute=1' : '') + (loop ? '&loop=1&playlist=' + ytId : '');
       }
       iframe.setAttribute('allow', 'autoplay; encrypted-media');
+      iframe.title = facade.getAttribute('data-title') || '';
       iframe.setAttribute('allowfullscreen', '');
       iframe.className = 'section-video__iframe';
       facade.replaceWith(iframe);

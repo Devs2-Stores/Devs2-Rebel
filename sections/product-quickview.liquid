@@ -1,4 +1,8 @@
-{%- layout none -%}
+{%- comment %}
+  Product quick view fragment.
+  Fetched by assets/quickview-modal.js through the Section Rendering API:
+  /products/{handle}?section_id=product-quickview
+{% endcomment -%}
 {{ 'variant-picker.css' | asset_url | stylesheet_tag }}
 {{ 'quantity-selector.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'quantity-selector.js' | asset_url }}" defer="defer"></script>
@@ -97,6 +101,11 @@
     {%- endif -%}
 
     <div class="quickview-product__actions">
+      {%- if product.requires_selling_plan -%}
+      <a href="{{ product.url }}" class="button-primary active quickview-product__add-btn">
+        {{- 'products.product.choose_options' | t -}}
+      </a>
+      {%- else -%}
       {%- render 'quantity-selector', product: product -%}
       <button
         type="button"
@@ -114,6 +123,7 @@
           {%- endif -%}
         </span>
       </button>
+      {%- endif -%}
     </div>
 
     <a href="{{ product.url }}" class="quickview-product__full-link">
@@ -127,3 +137,9 @@
     {{ product.media | where: 'media_type', 'model' | json }}
   </script>
 {%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.product_quickview.name"
+}
+{% endschema %}

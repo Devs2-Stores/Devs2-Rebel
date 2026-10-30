@@ -49,11 +49,11 @@
   box-shadow: var(--popup-shadow);
   width: max-content; min-width: 200px; max-width: min(17rem, calc(100vw - 2rem));
   translate: var(--hs-shift-x, 0px) var(--hs-shift-y, 0px);
-  opacity: 0; pointer-events: none;
-  transform: translateY(8px); transition: opacity var(--transition-fast), transform var(--transition-fast);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transform: translateY(8px); transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
 }
 .section-hotspot__tooltip.is-open {
-  opacity: 1; pointer-events: auto; transform: translateY(0);
+  opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0);
 }
 .section-hotspot__tooltip--bottom { top: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(8px); }
 .section-hotspot__tooltip--bottom.is-open { transform: translateX(-50%) translateY(0); }

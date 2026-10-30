@@ -108,7 +108,7 @@ be recorded as an unresolved question.
 ## Discovery surfaces
 
 Theme-owned surfaces live in `snippets/head-meta-tags.liquid`: canonical,
-`hreflang`, Open Graph/Twitter, and JSON-LD for WebSite, Organization, Product,
+Open Graph/Twitter, and JSON-LD for WebSite, Organization, Product,
 BreadcrumbList and BlogPosting. Section-owned JSON-LD: ItemList in
 `main-blog` and `main-list-collections`, FAQPage in `page-faq`,
 LocalBusiness in `page-stores`.

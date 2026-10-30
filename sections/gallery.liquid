@@ -35,10 +35,16 @@
       {%- for block in section.blocks -%}
         <div class="section-gallery__item" {{ block.shopify_attributes }} data-gallery-item>
           {%- if block.settings.image != blank -%}
+            {%- liquid
+              assign item_label = block.settings.caption | default: block.settings.image.alt
+              if item_label == blank
+                assign item_label = 'accessibility.view_image' | t
+              endif
+            -%}
             {%- if block.settings.link != blank -%}
-              <a href="{{ block.settings.link }}" class="section-gallery__link">
+              <a href="{{ block.settings.link }}" class="section-gallery__link" aria-label="{{ item_label | escape }}">
             {%- else -%}
-              <button type="button" class="section-gallery__link" data-gallery-open="{{ gallery_index }}">
+              <button type="button" class="section-gallery__link" aria-label="{{ item_label | escape }}" data-gallery-open="{{ gallery_index }}">
             {%- endif -%}
               {{ block.settings.image | image_url: width: 900 | image_tag:
                 widths: '300, 450, 600, 900',
@@ -83,15 +89,21 @@
       var img = btn.querySelector('img');
       if (!img) return;
       lbImg.src = img.currentSrc || img.src;
-      lbImg.alt = img.alt;
+      lbImg.alt = img.alt || btn.getAttribute('aria-label') || '';
       lb.hidden = false;
-      if (window.ThemeUtils) ThemeUtils.lockScroll();
+      if (window.ThemeUtils) {
+        ThemeUtils.lockScroll();
+        ThemeUtils.trapFocus(lb, btn);
+      }
     });
   });
 
   var closeLightbox = function() {
     lb.hidden = true;
-    if (window.ThemeUtils) ThemeUtils.unlockScroll();
+    if (window.ThemeUtils) {
+      ThemeUtils.unlockScroll();
+      ThemeUtils.releaseFocus(lb);
+    }
   };
   w.querySelector('[data-gallery-close]').addEventListener('click', closeLightbox);
   lb.addEventListener('click', function(e) {

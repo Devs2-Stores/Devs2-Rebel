@@ -10,8 +10,38 @@
     <h1 class="login-template__title">{{ 'customer.login_page.title' | t }}</h1>
     <div class="login-template__wrapper">
       <auth-form class="login-template__form login-layout">
+        <div class="form form-recover" id="form-recover">
+          {%- form 'recover_customer_password' -%}
+          {%- assign recover_success = form.posted_successfully? -%}
+          {%- if recover_success -%}
+          <p class="form-success" role="status">{{ 'customer.recover_password.success' | t }}</p>
+          {%- endif -%}
+          {%- if form.errors -%}
+          <div class="form-error" role="alert">{{ form.errors | default_errors }}</div>
+          {%- endif -%}
+          <p class="login-template__recover-subtext">{{ 'customer.recover_password.subtext' | t }}</p>
+          <div class="form-group">
+            <label for="recover-email">
+              <span class="required">{{ 'customer.login_page.email' | t }}</span>
+              <input-field class="form-group-input">
+                {%- render 'icon', name: 'email' -%}
+                <input type="email" id="recover-email" class="form-control" name="email" required autocomplete="email" placeholder="{{ 'customer.login_page.email_placeholder' | t }}">
+              </input-field>
+            </label>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="button-primary active form-submit" title="{{ 'customer.login_page.submit' | t }}">{{ 'customer.login_page.submit' | t }}</button>
+          </div>
+          <div class="form-group form-group--text-center">
+            <span class="form-text">{{ 'customer.login_page.has_account' | t }} </span><a class="link auth-layout-trigger" href="#login" data-layout="login-layout" title="{{ 'customer.login_page.sign_in' | t }}">{{ 'customer.login_page.sign_in' | t }}</a>
+          </div>
+          {%- endform -%}
+        </div>
         <div class="form form-login" id="form-login">
           {%- form 'customer_login' -%}
+          {%- if recover_success -%}
+          <p class="form-success" role="status">{{ 'customer.recover_password.success' | t }}</p>
+          {%- endif -%}
           {%- if form.errors -%}
           <div class="form-error" role="alert">
             {%- for error in form.errors -%}{{ form.errors.messages[error] }}<br />{%- endfor -%}
@@ -45,29 +75,6 @@
           </div>
           <div class="form-group form-group--text-center">
             <span class="form-text">{{ 'customer.login_page.no_account' | t }} </span><a class="link" href="{{ routes.account_register_url }}" title="{{ 'customer.login_page.create_account' | t }}">{{ 'customer.login_page.create_account' | t }}</a>
-          </div>
-          {%- endform -%}
-        </div>
-        <div class="form form-recover" id="form-recover">
-          {%- form 'recover_customer_password' -%}
-          {%- if form.errors -%}
-          <div class="form-error" role="alert">{{ form.errors | default_errors }}</div>
-          {%- endif -%}
-          <p class="login-template__recover-subtext">{{ 'customer.recover_password.subtext' | t }}</p>
-          <div class="form-group">
-            <label for="recover-email">
-              <span class="required">{{ 'customer.login_page.email' | t }}</span>
-              <input-field class="form-group-input">
-                {%- render 'icon', name: 'email' -%}
-                <input type="email" id="recover-email" class="form-control" name="email" required autocomplete="email" placeholder="{{ 'customer.login_page.email_placeholder' | t }}">
-              </input-field>
-            </label>
-          </div>
-          <div class="form-group">
-            <button type="submit" class="button-primary active form-submit" title="{{ 'customer.login_page.submit' | t }}">{{ 'customer.login_page.submit' | t }}</button>
-          </div>
-          <div class="form-group form-group--text-center">
-            <span class="form-text">{{ 'customer.login_page.has_account' | t }} </span><a class="link auth-layout-trigger" href="#login" data-layout="login-layout" title="{{ 'customer.login_page.sign_in' | t }}">{{ 'customer.login_page.sign_in' | t }}</a>
           </div>
           {%- endform -%}
         </div>

@@ -17,18 +17,10 @@ ignore:
   - ".antifan/**"
   - "specs/**"
 
-# Allow larger templates and assets
+# Allow larger templates
 TemplateLength:
   enabled: true
   max_length: 600
-
-AssetSizeCSS:
-  enabled: true
-  threshold_in_bytes: 150000
-
-AssetSizeJavaScript:
-  enabled: true
-  threshold_in_bytes: 150000
 
 DeprecatedTag:
   enabled: true
@@ -38,26 +30,9 @@ DeprecatedTag:
 UnknownFilter:
   enabled: true
 
-# UndefinedObject: older Theme Check versions do not parse {% doc %} LiquidDoc params.
-# These snippets declare their params with {% doc %}.
+# UndefinedObject stays at the default: this Theme Check version parses {% doc %} params.
 UndefinedObject:
   enabled: true
-  ignore:
-    - "snippets/icon.liquid"
-    - "snippets/collection-best.liquid"
-    - "snippets/collection-card.liquid"
-    - "snippets/collection-menu.liquid"
-    - "snippets/collection-sort.liquid"
-    - "snippets/collection-facet-filter.liquid"
-    - "snippets/countdown-banner.liquid"
-    - "snippets/product-card.liquid"
-    - "snippets/product-variant-dropdown.liquid"
-    - "layout/password.liquid"
-    - "snippets/product-variant-picker.liquid"
-    - "snippets/swatch.liquid"
-    - "snippets/collection-hero.liquid"
-    - "snippets/collection-filter-drawer.liquid"
-    - "snippets/collection-active-filters.liquid"
 
 # OrphanedSnippet: skip-to-content-link.liquid is rendered from layout/theme.liquid,
 # but Theme Check does not detect that call site.
@@ -66,11 +41,8 @@ OrphanedSnippet:
   ignore:
     - "snippets/skip-to-content-link.liquid"
 
-# RemoteAsset: intentional cases
-# - sections/gallery.liquid: inline base64 SVG placeholder for the lightbox
-# - sections/video.liquid: protocol-relative YouTube thumbnail poster
+# RemoteAsset: sections/video.liquid builds a protocol-relative YouTube thumbnail poster.
 RemoteAsset:
   enabled: true
   ignore:
-    - "sections/gallery.liquid"
     - "sections/video.liquid"

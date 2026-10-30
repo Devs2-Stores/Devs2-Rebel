@@ -151,6 +151,8 @@
     "zoom_out": "Zoom out",
     "comparison_slider": "Comparison slider",
     "view_details": "View details",
+    "view_details_for": "View details for {{ title }}",
+    "view_image": "View image",
     "share_on": "Share on {{ platform }}",
     "share_via_email": "Share via email",
     "slide_number": "Slide {{ number }}",
@@ -164,6 +166,7 @@
     "show_password": "Show password",
     "hide_password": "Hide password",
     "video": "Video",
+    "video_player": "Video player",
     "brand_logo": "Brand logo"
   },
   "blogs": {
@@ -793,7 +796,8 @@
       "view_order": "View details"
     },
     "recover_password": {
-      "subtext": "We will send you an email to reset your password"
+      "subtext": "We will send you an email to reset your password",
+      "success": "We've sent you an email with a link to update your password."
     },
     "register": {
       "title": "Create account",

@@ -4,6 +4,8 @@
   Renders the product description with an optional read-more toggle.
 {% enddoc %}
 
+{%- assign product = closest.product | default: product -%}
+
 {%- if product.description != blank -%}
   <div class="product-template__description" {{ block.shopify_attributes }}>
     <div class="product-template__description-wrapper" data-description-wrapper>

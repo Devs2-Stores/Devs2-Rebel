@@ -5,6 +5,9 @@
   below the configured threshold.
 {% enddoc %}
 
+{%- assign product = closest.product | default: product -%}
+{%- if product != blank -%}
+
 {%- liquid
   assign selected_variant = product.selected_or_first_available_variant | default: product.variants.first
   assign stock_threshold = block.settings.stock_threshold
@@ -35,6 +38,7 @@
     }
   </script>
 </div>
+{%- endif -%}
 
 {% schema %}
 {

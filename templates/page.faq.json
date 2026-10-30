@@ -26,14 +26,14 @@
           "type": "question",
           "settings": {
             "question": "How can I track my order?",
-            "answer": "<p>Once your order ships, we will email you a tracking link. You can also review the latest status from your customer account.</p>"
+            "answer": "<p>Add the answer to this question.</p>"
           }
         },
         "question_cancel": {
           "type": "question",
           "settings": {
             "question": "Can I change or cancel my order?",
-            "answer": "<p>Contact our support team as soon as possible. We can update or cancel an order before it enters the fulfillment process.</p>"
+            "answer": "<p>Add the answer to this question.</p>"
           }
         },
         "heading_shipping": {
@@ -46,14 +46,14 @@
           "type": "question",
           "settings": {
             "question": "How long does delivery take?",
-            "answer": "<p>Delivery times depend on your location and the shipping method selected at checkout. Your estimated delivery window appears during checkout.</p>"
+            "answer": "<p>Add the answer to this question.</p>"
           }
         },
         "question_international": {
           "type": "question",
           "settings": {
             "question": "Do you ship internationally?",
-            "answer": "<p>Yes. Available destinations and shipping rates are shown at checkout after you enter your delivery address.</p>"
+            "answer": "<p>Add the answer to this question.</p>"
           }
         },
         "heading_returns": {
@@ -66,14 +66,14 @@
           "type": "question",
           "settings": {
             "question": "What is your return policy?",
-            "answer": "<p>Eligible unused items can be returned within the return window shown in our policy. Keep the original packaging and proof of purchase.</p>"
+            "answer": "<p>Add the answer to this question.</p>"
           }
         },
         "question_size": {
           "type": "question",
           "settings": {
             "question": "How do I choose the right size?",
-            "answer": "<p>Use the size guide on the product page and compare the measurements with an item that already fits you well.</p>"
+            "answer": "<p>Add the answer to this question.</p>"
           }
         }
       },
@@ -89,15 +89,15 @@
         "question_size"
       ],
       "settings": {
-        "description": "<p>Quick answers about orders, delivery, returns, and our products.</p>"
+        "description": "<p>Add a short introduction to your frequently asked questions.</p>"
       }
     },
     "contact_form": {
       "type": "contact-form",
       "settings": {
         "subheading": "Still need help?",
-        "heading": "Ask the studio",
-        "text": "<p>Send your order number or the piece you are asking about. The studio replies within one working day.</p>",
+        "heading": "Contact us",
+        "text": "<p>Add a short note about how customers can get in touch.</p>",
         "padding_top_desktop": 40,
         "padding_bottom_desktop": 80,
         "padding_top_mobile": 30,

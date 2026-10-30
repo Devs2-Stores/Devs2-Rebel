@@ -7,6 +7,8 @@
   @param {number} [limit] - Max products to show. Default: 10
   @param {number} [columns_mobile] - Number of products to show on mobile. Default: 2
   @param {number} [columns_desktop] - Number of products to show on desktop. Default: 4
+  @param {number} [columns_tablet] - Number of products to show on tablet. Default: columns_desktop
+  @param {number} [columns_laptop] - Number of products to show on laptop. Default: columns_desktop
   @param {boolean} [priority] - The carousel is the first imagery on the page: load the first desktop row eagerly and give the first image high fetch priority. Default: false
   @example {%- render 'collection-best', enabled: block.settings.enabled, title: block.settings.title, source: block.settings.source, manual_collection: block.settings.manual_collection, limit: block.settings.limit, columns_mobile: block.settings.columns_mobile, columns_desktop: block.settings.columns_desktop, priority: true -%}
 {% enddoc %}

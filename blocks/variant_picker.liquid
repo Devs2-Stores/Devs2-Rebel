@@ -4,6 +4,9 @@
   Renders the button or dropdown variant picker for the product.
 {% enddoc %}
 
+{%- assign product = closest.product | default: product -%}
+{%- if product != blank -%}
+
 <div
   class="product-template__variant-picker"
   style="--variant-picker-spacing: {{ block.settings.option_spacing }}px; --variant-unavailable-opacity: {{ block.settings.unavailable_opacity | divided_by: 100.0 }};"
@@ -14,11 +17,12 @@
     assign cross_out = block.settings.cross_out_unavailable
   -%}
   {%- if picker_type == 'dropdown' -%}
-    {%- render 'product-variant-dropdown', cross_out_unavailable: cross_out -%}
+    {%- render 'product-variant-dropdown', product: product, cross_out_unavailable: cross_out -%}
   {%- else -%}
-    {%- render 'product-variant-picker', cross_out_unavailable: cross_out -%}
+    {%- render 'product-variant-picker', product: product, cross_out_unavailable: cross_out -%}
   {%- endif -%}
 </div>
+{%- endif -%}
 
 {% schema %}
 {

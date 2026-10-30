@@ -185,12 +185,14 @@
 
       try {
         const storeRoot = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) ? window.Shopify.routes.root : '/';
-        const url = storeRoot + 'products/' + encodeURIComponent(handle) + '?view=quickview';
+        const url = storeRoot + 'products/' + encodeURIComponent(handle) + '?section_id=product-quickview';
         const res = await fetch(url);
         if (!res.ok) throw new Error('HTTP ' + res.status);
-        const html = await res.text();
+        const responseText = await res.text();
         if (requestId !== this.loadRequestId || this.currentProductHandle !== handle) return;
-        if (this.content) this.content.innerHTML = html;
+        const sectionEl = new DOMParser().parseFromString(responseText, 'text/html').querySelector('.shopify-section');
+        if (!sectionEl) throw new Error('Quickview section missing');
+        if (this.content) this.content.innerHTML = sectionEl.innerHTML;
 
         var scriptTag = this.content ? (this.content.querySelector('script[type="application/json"][id="quickview-product-json"]') || this.content.querySelector('script[type="application/json"][id="quickview-variant-json"]')) : null;
         if (!scriptTag) {
@@ -354,6 +356,12 @@
      * Handle add to cart
      */
     async handleAddToCart() {
+      const sellingPlanProduct = themeConfig.quickview ? themeConfig.quickview.data : null;
+      if (sellingPlanProduct && sellingPlanProduct.requires_selling_plan && sellingPlanProduct.url) {
+        window.location.assign(sellingPlanProduct.url);
+        return;
+      }
+
       // Use currentVariantId (already set by handleQuickviewVariantChange)
       if (!this.currentVariantId) {
         // Fallback: get from quickview data

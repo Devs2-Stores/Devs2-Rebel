@@ -10,14 +10,14 @@
         "eyebrow": {
           "type": "subheading",
           "settings": {
-            "subheading": "Inside the atelier",
+            "subheading": "Add a subheading",
             "subheading_size": "sm"
           }
         },
         "title": {
           "type": "heading",
           "settings": {
-            "heading": "Inside Rebel",
+            "heading": "About us",
             "heading_size": "2xl",
             "heading_tag": "h1"
           }
@@ -25,7 +25,7 @@
         "description": {
           "type": "text",
           "settings": {
-            "text": "<p>A study in structure, proportion, and quiet defiance. We build a wardrobe around tactile materials, exacting cuts, and pieces that reward repeat wear.</p>",
+            "text": "<p>Describe your company in a few sentences.</p>",
             "content_size": "lg"
           }
         },
@@ -33,20 +33,14 @@
           "type": "button",
           "settings": {
             "button_size": "md",
-            "button_label_1": "Explore collections",
+            "button_label_1": "Shop all",
             "button_link_1": "/collections",
-            "button_style_1": "primary",
-            "button_label_2": "Contact the atelier",
-            "button_link_2": "/pages/contact",
-            "button_style_2": "secondary"
+            "button_style_1": "primary"
           }
         }
       },
       "block_order": ["eyebrow", "title", "description", "actions"],
       "settings": {
-        "image_mobile": "shopify:\/\/shop_images\/rebel-page-about-hero-mobile.jpg",
-        "image_desktop": "shopify:\/\/shop_images\/rebel-about-hero-atelier.jpg",
-        "image_alt": "Inside the Rebel atelier",
         "height_desktop": "80",
         "height_mobile": "80",
         "overlay_opacity": 55,
@@ -63,14 +57,14 @@
         "eyebrow": {
           "type": "subheading",
           "settings": {
-            "subheading": "Our purpose",
+            "subheading": "Add a subheading",
             "subheading_size": "sm"
           }
         },
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "A sharper kind of luxury",
+            "heading": "Add a heading",
             "heading_size": "xl",
             "heading_tag": "h2"
           }
@@ -78,7 +72,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Rebel designs clothing for a considered wardrobe: fewer pieces, stronger silhouettes, and materials chosen for texture, memory, and longevity.</p>",
+            "text": "<p>Describe your mission or values in a few sentences.</p>",
             "content_size": "lg"
           }
         }
@@ -101,14 +95,14 @@
         "eyebrow": {
           "type": "subheading",
           "settings": {
-            "subheading": "Material studies",
+            "subheading": "Add a subheading",
             "subheading_size": "sm"
           }
         },
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Material first",
+            "heading": "Add a heading",
             "heading_size": "lg",
             "heading_tag": "h2"
           }
@@ -116,14 +110,13 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>We start from fabric hand-feel and drape before sketching silhouettes, so each piece holds its own structure and movement.</p>",
+            "text": "<p>Describe a product, a material or a process. Add an image to illustrate it.</p>",
             "content_size": "md"
           }
         }
       },
       "block_order": ["eyebrow", "heading", "text"],
       "settings": {
-        "image": "shopify:\/\/shop_images\/freepik__natural-fashion-editorial-photography-inspired-by-__88129.jpg",
         "color_scheme": "scheme-2",
         "image_position": "left",
         "section_width": "fixed",
@@ -140,14 +133,14 @@
         "eyebrow": {
           "type": "subheading",
           "settings": {
-            "subheading": "Wardrobe permanence",
+            "subheading": "Add a subheading",
             "subheading_size": "sm"
           }
         },
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Designed to be reworn",
+            "heading": "Add a heading",
             "heading_size": "lg",
             "heading_tag": "h2"
           }
@@ -155,14 +148,13 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Each collection is edited to layer with what came before, building a wardrobe system instead of isolated statements.</p>",
+            "text": "<p>Add text that supports the image.</p>",
             "content_size": "md"
           }
         }
       },
       "block_order": ["eyebrow", "heading", "text"],
       "settings": {
-        "image": "shopify:\/\/shop_images\/freepik__natural-fashion-editorial-photography-inspired-by-__88130_1.jpg",
         "color_scheme": "scheme-1",
         "image_position": "right",
         "section_width": "fixed",
@@ -179,37 +171,34 @@
         "member_1": {
           "type": "member",
           "settings": {
-            "image": "shopify:\/\/shop_images\/freepik__femaleauthentic-fashion-editorial-photograph-based__88137_1.jpg",
-            "name": "Linh Tran",
-            "role": "Creative director",
-            "bio": "Shapes the silhouette language and seasonal point of view."
+            "name": "Team member name",
+            "role": "Add a role",
+            "bio": "Add a short bio."
           }
         },
         "member_2": {
           "type": "member",
           "settings": {
-            "image": "shopify:\/\/shop_images\/freepik__femaleauthentic-fashion-editorial-photograph-based__88136_1.jpg",
-            "name": "Mina Vo",
-            "role": "Head of atelier",
-            "bio": "Leads fittings, construction, and finishing standards across the line."
+            "name": "Team member name",
+            "role": "Add a role",
+            "bio": "Add a short bio."
           }
         },
         "member_3": {
           "type": "member",
           "settings": {
-            "image": "shopify:\/\/shop_images\/freepik__authentic-fashion-editorial-photograph-based-on-th__88132_1.jpg",
-            "name": "Julien Moreau",
-            "role": "Brand partnerships",
-            "bio": "Works with editors, buyers, and collaborators to extend the studio story."
+            "name": "Team member name",
+            "role": "Add a role",
+            "bio": "Add a short bio."
           }
         }
       },
       "block_order": ["member_1", "member_2", "member_3"],
       "settings": {
         "color_scheme": "scheme-1",
-        "subheading": "People",
+        "subheading": "Add a subheading",
         "subheading_size": "sm",
-        "heading": "The studio team",
+        "heading": "Meet the team",
         "heading_size": "lg",
         "heading_tag": "h2",
         "columns_desktop": 3,
@@ -225,41 +214,38 @@
         "stat_1": {
           "type": "stat",
           "settings": {
-            "number": 10,
-            "suffix": "+",
-            "label": "Years of craft"
+            "number": 100,
+            "label": "Add a label"
           }
         },
         "stat_2": {
           "type": "stat",
           "settings": {
-            "number": 180,
-            "suffix": "K",
-            "label": "Happy customers"
+            "number": 100,
+            "label": "Add a label"
           }
         },
         "stat_3": {
           "type": "stat",
           "settings": {
-            "number": 42,
-            "label": "Countries shipped"
+            "number": 100,
+            "label": "Add a label"
           }
         },
         "stat_4": {
           "type": "stat",
           "settings": {
             "number": 100,
-            "suffix": "%",
-            "label": "Sustainable sourcing"
+            "label": "Add a label"
           }
         }
       },
       "block_order": ["stat_1", "stat_2", "stat_3", "stat_4"],
       "settings": {
         "color_scheme": "scheme-2",
-        "subheading": "Measured growth",
+        "subheading": "Add a subheading",
         "subheading_size": "sm",
-        "heading": "Built with patience",
+        "heading": "Add a heading",
         "heading_size": "md",
         "heading_tag": "h2",
         "number_size": "2xl",
@@ -275,40 +261,37 @@
         "event_1": {
           "type": "event",
           "settings": {
-            "image": "shopify:\/\/shop_images\/rebel-timeline-2015-first-capsule.jpg",
-            "year": "2015",
-            "heading": "The first capsule",
+            "year": "Add a date",
+            "heading": "Add a milestone heading",
             "heading_size": "sm",
-            "text": "<p>Rebel began as a tightly edited capsule built around tailoring, drape, and wardrobe permanence.</p>"
+            "text": "<p>Describe this milestone in a sentence.</p>"
           }
         },
         "event_2": {
           "type": "event",
           "settings": {
-            "image": "shopify:\/\/shop_images\/rebel-timeline-2020-atelier-expansion.jpg",
-            "year": "2020",
-            "heading": "Atelier expansion",
+            "year": "Add a date",
+            "heading": "Add a milestone heading",
             "heading_size": "sm",
-            "text": "<p>The studio expanded production control, fittings, and textile development to sharpen consistency.</p>"
+            "text": "<p>Describe this milestone in a sentence.</p>"
           }
         },
         "event_3": {
           "type": "event",
           "settings": {
-            "image": "shopify:\/\/shop_images\/rebel-timeline-2026-global-wardrobe.jpg",
-            "year": "2026",
-            "heading": "A global wardrobe language",
+            "year": "Add a date",
+            "heading": "Add a milestone heading",
             "heading_size": "sm",
-            "text": "<p>Collections now speak to customers across climates and cities without losing the original atelier restraint.</p>"
+            "text": "<p>Describe this milestone in a sentence.</p>"
           }
         }
       },
       "block_order": ["event_1", "event_2", "event_3"],
       "settings": {
         "color_scheme": "scheme-2",
-        "subheading": "Milestones",
+        "subheading": "Add a subheading",
         "subheading_size": "sm",
-        "heading": "A timeline of refinement",
+        "heading": "Add a heading",
         "heading_size": "lg",
         "heading_tag": "h2",
         "padding_top_desktop": 70,
@@ -327,15 +310,5 @@
       }
     }
   },
-  "order": [
-    "breadcrumb",
-    "hero",
-    "mission",
-    "material",
-    "reworn",
-    "team",
-    "stats",
-    "timeline",
-    "page_content"
-  ]
+  "order": ["breadcrumb", "hero", "mission", "material", "reworn", "team", "stats", "timeline", "page_content"]
 }

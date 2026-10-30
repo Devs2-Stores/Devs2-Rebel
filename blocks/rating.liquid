@@ -5,6 +5,8 @@
   Shopify rating pattern.
 {% enddoc %}
 
+{%- assign product = closest.product | default: product -%}
+
 {%- if product.metafields.reviews.rating.value != blank -%}
   {%- liquid
     assign rating_decimal = 0

@@ -5,6 +5,9 @@
   availability for the selected variant.
 {% enddoc %}
 
+{%- assign product = closest.product | default: product -%}
+{%- if product != blank -%}
+
 {%- liquid
   assign selected_variant = product.selected_or_first_available_variant | default: product.variants.first
 -%}
@@ -34,6 +37,7 @@
   </pickup-availability>
   <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
 </div>
+{%- endif -%}
 
 {% schema %}
 {

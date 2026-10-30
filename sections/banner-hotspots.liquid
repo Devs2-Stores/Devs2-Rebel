@@ -38,6 +38,12 @@
         {%- liquid
           assign hotspot_product = block.settings.product
           assign hotspot_product_handle = block.settings.product_handle
+          assign hotspot_name = hotspot_product.title | default: block.settings.heading
+          if hotspot_name != blank
+            assign hotspot_label = 'accessibility.view_details_for' | t: title: hotspot_name
+          else
+            assign hotspot_label = 'accessibility.view_details' | t
+          endif
         -%}
         <div
           class="section-hotspot__dot"
@@ -45,10 +51,18 @@
           {{ block.shopify_attributes }}
           data-hotspot
         >
-          <button class="section-hotspot__pulse" aria-label="{{ 'accessibility.view_details' | t }}" data-hotspot-btn>
-            <span class="section-hotspot__plus">+</span>
+          <button
+            type="button"
+            class="section-hotspot__pulse"
+            aria-label="{{ hotspot_label | escape }}"
+            aria-expanded="false"
+            aria-controls="hotspot-tooltip-{{ block.id }}"
+            {% if hotspot_product_handle != blank %}data-label-template="{{ 'accessibility.view_details_for' | t: title: '{title}' | escape }}"{% endif %}
+            data-hotspot-btn
+          >
+            <span class="section-hotspot__plus" aria-hidden="true">+</span>
           </button>
-          <div class="section-hotspot__tooltip section-hotspot__tooltip--{{ block.settings.tooltip_position }}" data-hotspot-tooltip data-product-handle="{{ hotspot_product_handle | escape }}">
+          <div id="hotspot-tooltip-{{ block.id }}" class="section-hotspot__tooltip section-hotspot__tooltip--{{ block.settings.tooltip_position }}" data-hotspot-tooltip data-product-handle="{{ hotspot_product_handle | escape }}">
             {%- if hotspot_product != blank -%}
               <a href="{{ hotspot_product.url }}" class="section-hotspot__tooltip-product">
                 {%- if hotspot_product.featured_image -%}
@@ -171,7 +185,12 @@
     if (dy) tip.style.setProperty('--hs-shift-y', Math.round(dy) + 'px');
   }
 
-  function openTooltip(tip) {
+  function closeAll() {
+    document.querySelectorAll('[data-hotspot-tooltip].is-open').forEach(function(t) { t.classList.remove('is-open'); });
+    document.querySelectorAll('[data-hotspot-btn][aria-expanded="true"]').forEach(function(b) { b.setAttribute('aria-expanded', 'false'); });
+  }
+
+  function openTooltip(tip, btn) {
     tip.style.transition = 'none';
     tip.classList.add('is-open');
     fitTooltip(tip);
@@ -179,6 +198,13 @@
     void tip.offsetWidth;
     tip.style.transition = '';
     tip.classList.add('is-open');
+    btn.setAttribute('aria-expanded', 'true');
+  }
+
+  function labelFromProduct(btn, tip) {
+    var template = btn.getAttribute('data-label-template');
+    var product = productCache[tip.getAttribute('data-product-handle')];
+    if (template && product && product.title) btn.setAttribute('aria-label', template.replace('{title}', product.title));
   }
 
   dots.forEach(function(dot) {
@@ -187,17 +213,27 @@
     btn.addEventListener('click', function(e) {
       e.stopPropagation();
       var isOpen = tip.classList.contains('is-open');
-      document.querySelectorAll('[data-hotspot-tooltip].is-open').forEach(function(t) { t.classList.remove('is-open'); });
+      closeAll();
       if (!isOpen) {
         hydrateTooltip(tip).finally(function() {
-          openTooltip(tip);
+          labelFromProduct(btn, tip);
+          openTooltip(tip, btn);
         });
       }
     });
+    dot.addEventListener('focusout', function(e) {
+      if (!e.relatedTarget || dot.contains(e.relatedTarget)) return;
+      tip.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    });
+    dot.addEventListener('keydown', function(e) {
+      if (e.key !== 'Escape' || !tip.classList.contains('is-open')) return;
+      e.stopPropagation();
+      closeAll();
+      btn.focus();
+    });
   });
-  document.addEventListener('click', function() {
-    document.querySelectorAll('[data-hotspot-tooltip].is-open').forEach(function(t) { t.classList.remove('is-open'); });
-  });
+  document.addEventListener('click', closeAll);
 })();
 </script>
 

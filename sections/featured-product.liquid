@@ -109,7 +109,7 @@
             </div>
           {%- endif -%}
 
-          {%- if product.has_only_default_variant -%}
+          {%- if product.has_only_default_variant and product.requires_selling_plan != true -%}
             <form action="{{ routes.cart_add_url }}" method="post" class="section-featured-product__form">
               <input type="hidden" name="id" value="{{ variant.id }}">
               <input type="hidden" name="quantity" value="1">

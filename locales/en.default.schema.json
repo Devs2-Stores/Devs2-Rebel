@@ -474,7 +474,7 @@
         },
         "title": {
           "label": "Heading",
-          "default": "Table of Contents"
+          "default": "Table of contents"
         },
         "heading_levels": {
           "label": "Heading levels",
@@ -548,7 +548,7 @@
           "default": "Enter your email"
         },
         "button": {
-          "label": "Button text",
+          "label": "Button label",
           "default": "Subscribe"
         },
         "delay": {
@@ -719,7 +719,7 @@
           "label": "Size guide page"
         },
         "size_guide_button": {
-          "label": "Size guide button text",
+          "label": "Size guide button label",
           "default": "Size guide"
         }
       }
@@ -817,7 +817,7 @@
       "settings": {
         "text": {
           "label": "Text",
-          "default": "<p>Tailored streetwear and outerwear, cut to be worn every day.</p>"
+          "default": "<p>Add a short description of your brand or offer.</p>"
         },
         "text_size": {
           "label": "Text size"
@@ -829,7 +829,7 @@
       "settings": {
         "heading": {
           "label": "Heading",
-          "default": "Made to be worn"
+          "default": "Add a heading"
         },
         "style": {
           "label": "Style",
@@ -1018,37 +1018,37 @@
       "presets": {
         "split_showcase": {
           "name": "Split showcase",
-          "eyebrow": "The tailored anti-uniform",
-          "heading": "Cut, draped, made to be worn",
-          "text": "<p>Structured shoulders, relaxed lines and fabrics that move. Made in small runs so every piece sits the way it should.</p>",
+          "eyebrow": "Add a short label",
+          "heading": "Add a heading",
+          "text": "<p>Add a short description of your brand, product, or offer.</p>",
           "button": "Shop the collection"
         },
         "pull_quote": {
           "name": "Pull quote",
-          "quote": "Tailoring is not a costume. It is how you walk into the room.",
-          "attribution": "Rebel, since 2015"
+          "quote": "Add a quote from a customer or your team",
+          "attribution": "Add an attribution"
         },
         "big_statement": {
           "name": "Big statement",
-          "eyebrow": "Since 2015",
-          "heading": "One philosophy. Cut to be worn.",
+          "eyebrow": "Add a short label",
+          "heading": "Add a short brand statement",
           "button": "Explore the range"
         },
         "icon_row": {
           "name": "Icon row",
-          "heading": "Made properly",
-          "first_heading": "Cut to be worn",
-          "first_text": "<p>Structured shoulders and relaxed lines for every day.</p>",
-          "second_heading": "Fabric first",
-          "second_text": "<p>Heavy cottons, wool blends and linings chosen to last.</p>",
-          "third_heading": "Small runs",
-          "third_text": "<p>Made in limited batches so each piece stays considered.</p>"
+          "heading": "Add a heading",
+          "first_heading": "Add a feature",
+          "first_text": "<p>Describe this feature in a sentence or two.</p>",
+          "second_heading": "Add a feature",
+          "second_text": "<p>Describe this feature in a sentence or two.</p>",
+          "third_heading": "Add a feature",
+          "third_text": "<p>Describe this feature in a sentence or two.</p>"
         },
         "centered_cta": {
           "name": "Centered call to action",
-          "eyebrow": "New season",
-          "heading": "Cherry red, cut close to the bone",
-          "text": "<p>The new edit is in. Tailored outerwear and everyday staples.</p>",
+          "eyebrow": "Add a short label",
+          "heading": "Add a heading",
+          "text": "<p>Add a short message that explains your offer.</p>",
           "primary_button": "Shop new arrivals",
           "secondary_button": "View all"
         }
@@ -1245,10 +1245,10 @@
       "name": "Header",
       "settings": {
         "header__menu": {
-          "content": "Menu"
+          "content": "Navigation"
         },
         "menu": {
-          "label": "Menu"
+          "label": "Main menu"
         },
         "header__account": {
           "content": "Customer account"
@@ -1607,7 +1607,7 @@
           "default": "Add a short message about your offer"
         },
         "button_text": {
-          "label": "Button text",
+          "label": "Button label",
           "default": "Shop now"
         },
         "button_link": {
@@ -1972,16 +1972,16 @@
           "label": "Search placeholder"
         },
         "search_button": {
-          "label": "Search button text"
+          "label": "Search button label"
         },
         "primary_label": {
-          "label": "Primary button text"
+          "label": "Primary button label"
         },
         "primary_link": {
           "label": "Primary button link"
         },
         "secondary_label": {
-          "label": "Secondary button text"
+          "label": "Secondary button label"
         },
         "secondary_link": {
           "label": "Secondary button link"
@@ -2024,7 +2024,7 @@
         },
         "show_toc": {
           "label": "Show table of contents",
-          "info": "Customize TOC style in Theme settings > Table of contents."
+          "info": "Customize the table of contents style in Theme settings > Table of contents."
         },
         "header__sidebar": {
           "content": "Sidebar"
@@ -2048,13 +2048,13 @@
           "name": "Article navigation",
           "settings": {
             "show_prev_next": {
-              "label": "Show previous / next links"
+              "label": "Show previous and next links"
             },
             "show_back_to_blog": {
               "label": "Show back to blog link"
             },
             "back_text": {
-              "label": "Back to blog text",
+              "label": "Back to blog label",
               "default": "Back to blog"
             },
             "show_thumbnail": {
@@ -2064,7 +2064,7 @@
           }
         },
         "sidebar_related_posts": {
-          "name": "Sidebar: Related posts",
+          "name": "Related posts sidebar",
           "settings": {
             "title": {
               "label": "Heading",
@@ -2076,7 +2076,7 @@
           }
         },
         "sidebar_tags": {
-          "name": "Sidebar: Tags",
+          "name": "Tags sidebar",
           "settings": {
             "title": {
               "label": "Heading",
@@ -2185,14 +2185,14 @@
           }
         },
         "sidebar_categories": {
-          "name": "Sidebar: Categories",
+          "name": "Categories sidebar",
           "settings": {
             "title": {
               "label": "Heading",
               "default": "Categories"
             },
             "menu": {
-              "label": "Menu"
+              "label": "Categories menu"
             },
             "content_size": {
               "label": "Content size"
@@ -2200,7 +2200,7 @@
           }
         },
         "sidebar_recent_posts": {
-          "name": "Sidebar: Recent posts",
+          "name": "Recent posts sidebar",
           "settings": {
             "title": {
               "label": "Heading",
@@ -2215,7 +2215,7 @@
           }
         },
         "sidebar_tags": {
-          "name": "Sidebar: Tags",
+          "name": "Tags sidebar",
           "settings": {
             "title": {
               "label": "Heading",
@@ -2230,7 +2230,7 @@
           }
         },
         "sidebar_banner": {
-          "name": "Sidebar banner",
+          "name": "Banner sidebar",
           "settings": {
             "image": {
               "label": "Image"
@@ -2241,7 +2241,7 @@
             },
             "text": {
               "label": "Text",
-              "default": "Explore outerwear, layers, and everyday essentials."
+              "default": "Add a short message about your offer"
             },
             "button_label": {
               "label": "Button label",
@@ -2312,7 +2312,7 @@
               "label": "Heading"
             },
             "menu": {
-              "label": "Menu"
+              "label": "Footer menu"
             }
           }
         },
@@ -2731,10 +2731,10 @@
               "info": "IANA time zone for the open now status, for example America/New_York. Leave blank to use the shop time zone."
             },
             "address_region": {
-              "label": "State / Region"
+              "label": "State or region"
             },
             "postal_code": {
-              "label": "Postal / ZIP code"
+              "label": "Postal or ZIP code"
             },
             "country": {
               "label": "Country"
@@ -2988,6 +2988,9 @@
           "label": "Maximum products to show"
         }
       }
+    },
+    "product_quickview": {
+      "name": "Product quick view"
     },
     "cart_recommendations": {
       "name": "Cart recommendations",
@@ -3399,7 +3402,7 @@
           "settings": {
             "text": {
               "label": "Content",
-              "default": "<p>Discover our latest collection of refined pieces.</p>"
+              "default": "<p>Add a short description to support your headline.</p>"
             },
             "content_size": {
               "label": "Size",
@@ -4044,7 +4047,7 @@
       }
     },
     "custom_liquid": {
-      "name": "Custom liquid",
+      "name": "Custom Liquid",
       "settings": {
         "liquid_code": {
           "label": "Liquid code",
@@ -4103,7 +4106,7 @@
       },
       "presets": {
         "custom_liquid": {
-          "name": "Custom liquid"
+          "name": "Custom Liquid"
         }
       }
     },
@@ -4509,7 +4512,7 @@
           "settings": {
             "text": {
               "label": "Text",
-              "default": "Discover pieces crafted with care and designed to last."
+              "default": "Add a short description to support your heading"
             },
             "size": {
               "label": "Size",
@@ -4777,7 +4780,7 @@
         },
         "heading": {
           "label": "Heading",
-          "default": "Made with intention"
+          "default": "Add a heading"
         },
         "heading_size": {
           "label": "Heading size",
@@ -5099,7 +5102,7 @@
           }
         },
         "icon_size": {
-          "label": "Icon/Image size"
+          "label": "Icon or image size"
         },
         "header__desktop_spacing": {
           "content": "Desktop spacing"
@@ -5125,7 +5128,7 @@
           "name": "Column",
           "settings": {
             "image": {
-              "label": "Icon / Image"
+              "label": "Icon or image"
             },
             "heading": {
               "label": "Heading",
@@ -5303,7 +5306,7 @@
         },
         "heading": {
           "label": "Heading",
-          "default": "Crafted with intention"
+          "default": "Add a heading"
         },
         "heading_size": {
           "label": "Heading size",
@@ -5322,7 +5325,7 @@
         },
         "text": {
           "label": "Text",
-          "default": "Every product tells a story of craftsmanship and dedication."
+          "default": "Add a short description of your brand or product story"
         },
         "text_size": {
           "label": "Text size",
@@ -5462,7 +5465,7 @@
           "name": "Promotion",
           "settings": {
             "icon": {
-              "label": "Icon / Image"
+              "label": "Icon or image"
             },
             "heading": {
               "label": "Heading",
@@ -6228,7 +6231,7 @@
           "name": "Event",
           "settings": {
             "year": {
-              "label": "Year / Date"
+              "label": "Year or date"
             },
             "heading": {
               "label": "Heading",

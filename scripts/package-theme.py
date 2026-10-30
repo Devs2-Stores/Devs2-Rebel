@@ -11,11 +11,10 @@ if os.path.exists('.shopifyignore'):
 
 def should_ignore(path):
     normalized = path.replace('\\', '/')
+    base = os.path.basename(normalized)
     for pat in ignore_patterns:
         pat_clean = pat.rstrip('/')
-        if fnmatch.fnmatch(normalized, pat) or fnmatch.fnmatch(normalized, f'*{pat}*') or normalized.startswith(pat_clean + '/'):
-            return True
-        if fnmatch.fnmatch(os.path.basename(normalized), pat):
+        if fnmatch.fnmatch(normalized, pat) or fnmatch.fnmatch(base, pat) or normalized.startswith(pat_clean + '/'):
             return True
     return False
 
@@ -24,19 +23,32 @@ with open('config/settings_schema.json', encoding='utf-8') as schema_file:
     theme_info = next(item for item in json.load(schema_file) if item.get('name') == 'theme_info')
 zip_path = f"dist/rebel-v{theme_info['theme_version']}.zip"
 
+TEXT_EXTENSIONS = ('.liquid', '.json', '.js', '.css', '.svg', '.txt')
+MAX_BYTES = 50 * 1024 * 1024
+
 file_count = 0
 with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zf:
     for d in THEME_DIRS:
         if not os.path.exists(d):
             continue
         for root, _, files in os.walk(d):
-            for f in files:
+            for f in sorted(files):
                 full_path = os.path.join(root, f)
-                rel_path = os.path.relpath(full_path, '.')
+                rel_path = os.path.relpath(full_path, '.').replace('\\', '/')
                 if should_ignore(rel_path):
                     continue
-                zf.write(full_path, rel_path)
+                with open(full_path, 'rb') as src:
+                    data = src.read()
+                if rel_path.endswith(TEXT_EXTENSIONS):
+                    data = data.replace(b'\r\n', b'\n')
+                zf.writestr(rel_path, data)
                 file_count += 1
 
-size_mb = os.path.getsize(zip_path) / (1024 * 1024)
-print(f'SUCCESS: Packaged {file_count} files into {zip_path} ({size_mb:.2f} MB, < 50 MB limit)')
+size_bytes = os.path.getsize(zip_path)
+if size_bytes > MAX_BYTES:
+    raise SystemExit(f'FAIL: {zip_path} is {size_bytes} bytes, over the 50 MB limit')
+with zipfile.ZipFile(zip_path) as zf:
+    stray = sorted({name.split('/')[0] for name in zf.namelist()} - set(THEME_DIRS))
+if stray:
+    raise SystemExit(f'FAIL: unexpected top-level entries in the zip: {stray}')
+print(f'SUCCESS: Packaged {file_count} files into {zip_path} ({size_bytes / (1024 * 1024):.2f} MB, < 50 MB limit)')

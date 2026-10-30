@@ -3,6 +3,9 @@
 
   Renders the quantity input bound to the product form.
 {% enddoc %}
+
+{%- assign product = closest.product | default: product -%}
+{%- if product != blank -%}
 {%- liquid
   assign selected_variant = product.selected_or_first_available_variant | default: product.variants.first
   assign product_form_id = 'product-form-' | append: section.id
@@ -26,6 +29,7 @@
     max: max_qty
   -%}
 </div>
+{%- endif -%}
 
 {% schema %}
 {
