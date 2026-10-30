@@ -27,7 +27,7 @@ Runs froze CSS motion with `anti.media.freeze`, ignored the live-motion selector
 - `image-crop`: product cards use a fixed aspect frame with `object-fit: cover`; the demo photos have mixed ratios.
 - Not waived: `OVERLAY_POINTER_EVENTS_NONE` (fixed in code instead).
 
-A single `shop.app` iframe CSP console error appeared on `/search` and `/cart` in some runs. It names origin `127.0.0.1` and does not repeat on the demo store host.
+A single `shop.app` iframe CSP console error appeared on `/search` and `/cart` in some runs. It names origin `127.0.0.1`, so it comes from the dev proxy origin. The demo-host QA runs below returned 0 critical, but I did not inspect console output there separately, so whether it recurs on the demo host is not verified.
 
 ## Demo store
 - Test payment gateway (Bogus) activated in Admin, Settings, Payments, Third-party providers. The store is listed as "Client transfer" in Admin, Settings, Organization.
@@ -39,5 +39,5 @@ A single `shop.app` iframe CSP console error appeared on `/search` and `/cart` i
 
 ## Still open
 - Lighthouse: needs `SHOPIFY_STOREFRONT_PASSWORD` in `.env`; the storefront stays in private mode (no off switch on this store).
-- Cloudflare: `dash.cloudflare.com` is signed out (Google account shows "Signed out") and both tokens in `E:/Work/master/.env*` are rejected. The support form code and `/api/theme-support` exist but production has no `PUBLIC_TURNSTILE_SITE_KEY`, so the form renders disabled.
-- Theme name: `themes.shopify.com/themes/rebel` returns 404, but the Outsiders theme has a preset named "Rebels" and Community threads call it "Rebel theme". The owner chose to keep "Rebel".
+- Cloudflare: `dash.cloudflare.com` is signed out (Google account chooser shows "Signed out"); I do not enter Google passwords or 2FA codes. Token check (values not printed): `E:/Work/master/.env.production` holds a 3-character placeholder, not a token (API error 6111, bad header format); the 55-character token in `.env.cloudflare` (variable name `CLNUDFRARE_API_TOKEN`, misspelled) is rejected as "Invalid API Token" (code 1000). Neither parse nor quoting is the cause. The support form code and `/api/theme-support` exist but production has no `PUBLIC_TURNSTILE_SITE_KEY`, so the form renders disabled. Needs the user to sign in, or a token scoped to Turnstile, Email Sending and Pages.
+- Theme name: the user answered "Giữ Rebel" in the earlier question, but the risk stays open and the name cannot change after upload. `themes.shopify.com/themes/rebel` returns 404, yet `themes.shopify.com/themes/outsiders/presets/rebels` is a listed preset named "Rebels" (one letter apart, which Shopify's naming rule may treat as too close), and Community threads from 2024-2026 call some theme "Rebel theme". Alternatives if the user wants to avoid it: a name with no existing match, checked against Theme Store search before upload.
