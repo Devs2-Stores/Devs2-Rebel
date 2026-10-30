@@ -1,4 +1,4 @@
-# AGENTS.md - Shopify Base Theme `Rebel`
+# AGENTS.md - Shopify Base Theme `Sartor`
 
 This contract applies to the Shopify theme under `shopify/`. Read the workspace
 contract at `../AGENTS.md` first. This file adds theme-specific rules without
@@ -7,7 +7,7 @@ repeating the full workspace contract.
 ## Identity
 
 - Platform: Shopify Online Store 2.0. Git branch: `main`. Theme identity:
-  `Rebel`. Role: base theme, as recorded in `.workspace-context.json`.
+  `Sartor` (renamed from `Rebel` on 2026-10-30). Role: base theme, as recorded in `.workspace-context.json`.
 - Never mix Shopify, Haravan, and Sapo syntax. If the platform is unclear, ask
   instead of guessing.
 - Default storefront language is English. Store all new customer-facing copy
@@ -220,10 +220,10 @@ eligible submission bases.
   Never copy values from tools, write values into docs/rules/source, log them,
   or commit `.env`.
 - The storefront password is a local secret. Read it only from
-  `SHOPIFY_STOREFRONT_PASSWORD`; never write the password literal into rules,
+  `REBEL_SHOPIFY`; never write the password literal into rules,
   docs, source, commands, reports, or chat transcripts.
 - Allowed environment-variable names for routing include `SHOPIFY_STORE`,
-  `SHOPIFY_TOKEN`, `SHOPIFY_STOREFRONT_PASSWORD`, `SHOPIFY_API_VERSION`, `AIBOX_API_KEY`,
+  `SHOPIFY_TOKEN`, `REBEL_SHOPIFY`, `SHOPIFY_API_VERSION`, `AIBOX_API_KEY`,
   `AIBOX_HERO_MODEL`, `AIBOX_EDIT_MODEL`, `GOOGLE_API_KEY`,
   `GEMINI_API_KEY`, `OPEN_EXCHANGE_RATES_API_KEY`,
   `HARAVAN_ACCESS_TOKEN`, `HARAVAN_API_TOKEN`, `SAPO_SHOP`,

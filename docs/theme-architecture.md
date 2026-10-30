@@ -2,7 +2,7 @@
 
 ## Overview
 
-Rebel is a Shopify Online Store 2.0 base theme on the `main` Git branch. It is configured as a verified base theme in [.workspace-context.json](../.workspace-context.json). The deployable surface is the standard Shopify theme directories; `_reference/`, `node_modules/`, plans, and documentation are excluded from upload by [.shopifyignore](../.shopifyignore).
+Sartor is a Shopify Online Store 2.0 base theme on the `main` Git branch. It is configured as a verified base theme in [.workspace-context.json](../.workspace-context.json). The deployable surface is the standard Shopify theme directories; `_reference/`, `node_modules/`, plans, and documentation are excluded from upload by [.shopifyignore](../.shopifyignore).
 
 ## Request Path
 

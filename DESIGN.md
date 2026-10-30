@@ -1,4 +1,4 @@
-# Design direction - Rebel
+# Design direction - Sartor
 
 Read this before any storefront UI work. Token values live in
 `snippets/head-design-systems.liquid` (layout, type, spacing, radius, shadow,
@@ -16,12 +16,12 @@ the photograph first.
 
 - Full-bleed editorial photography carries the page. Text sits on the photo
   only behind a measured overlay (see "Text over images").
-- One accent colour per scheme (`button`). In the Rebel preset that is crimson
+- One accent colour per scheme (`button`). In the Sartor preset that is crimson
   `#BC1E2C`. It fills the primary call to action and marks sale prices, sale
   badges and the cart count. Everything else is bone, black or oxblood: see
   "Clean system" for the colour roles.
 - Square corners on buttons, inputs, cards, media and popups. Badges and variant
-  pills are rounded (Rebel `badge_corner` and `variant_chip_corner_radius` 40).
+  pills are rounded (Sartor `badge_corner` and `variant_chip_corner_radius` 40).
 - One Inter family for headings, subheadings and body (`type_font_*` default
   `inter_n4`). Hierarchy comes from the type scale, weight and uppercase
   tracking on subheadings, not from extra faces.
@@ -32,11 +32,11 @@ the photograph first.
 ## Presets
 
 All five presets share one component architecture. A preset changes only
-settings: scheme colours, radii, and type settings. The current preset is Rebel.
+settings: scheme colours, radii, and type settings. The current preset is Sartor.
 
 | Preset | scheme-1 bg / text / accent | Character |
 |---|---|---|
-| Rebel | `#F5F2ED` / `#0A0A0A` / `#BC1E2C` | Bone and crimson, oxblood scheme-4 `#4A0E16`, square, pill badges |
+| Sartor | `#F5F2ED` / `#0A0A0A` / `#BC1E2C` | Bone and crimson, oxblood scheme-4 `#4A0E16`, square, pill badges |
 | Noir | `#F9F9F9` / `#111111` / `#111111` | Monochrome, square throughout |
 | Vibrant | `#FFF7ED` / `#1A1A1A` / `#FF5E00` | Orange accent and an orange scheme-4 fill, square |
 | Botanical | `#FAF8F5` / `#2D3B2F` / `#3B533E` | Greens, rounded (buttons 20, inputs 12, cards 16, media 12) |
@@ -77,9 +77,9 @@ values in `config/settings_data.json`, all in one change.
 | Component sizing | `--btn-height` 3 rem, `--btn-padding-x` 1.75 rem, `--btn-font-size` 0.875 rem, `--btn-font-weight` 600, `--eyebrow-size` 0.75 rem, `--eyebrow-weight` 600, `--eyebrow-tracking` 0.14 em, `--heading-tracking` -0.02 em, `--meta-size` 0.8125 rem | Shared by every section's buttons, eyebrows and meta lines |
 | Rhythm | `--space-6xl` 4 rem, `--space-7xl` 6 rem, `--section-head-gap` (2 rem, 2.5 rem from 1024 px), `--stack-gap` 1.25 rem | Section heading to content, and between stacked text blocks |
 | Floating layer | `--shadow-float` | Floating buttons, the sticky add-to-cart bar and toasts |
-| Component families | `--{inputs,variant-pills,media,text-boxes,popup,drawer}-{border,shadow,radius}`, `--buttons-shadow`, `--buttons-outline-border`, `--color-form-bg`, `--color-form-text` | Built from the Theme settings panels of the same name and the scheme form colours. Inputs, selects, textareas, the quantity stepper, the newsletter field and the localization search use `--inputs-border`, built from the per-scheme `--color-input-border-rgb` (see "Input border"), so a field edge reaches 3.1:1 (WCAG 1.4.11). Variant pills, pop-ups, drawers and dividers keep the 1 px hairline. Rebel stores no media border and `--shadow-float` values on pop-ups and drawers. `input_stroke_opacity` defaults to 100; lowering it is the merchant's call |
+| Component families | `--{inputs,variant-pills,media,text-boxes,popup,drawer}-{border,shadow,radius}`, `--buttons-shadow`, `--buttons-outline-border`, `--color-form-bg`, `--color-form-text` | Built from the Theme settings panels of the same name and the scheme form colours. Inputs, selects, textareas, the quantity stepper, the newsletter field and the localization search use `--inputs-border`, built from the per-scheme `--color-input-border-rgb` (see "Input border"), so a field edge reaches 3.1:1 (WCAG 1.4.11). Variant pills, pop-ups, drawers and dividers keep the 1 px hairline. Sartor stores no media border and `--shadow-float` values on pop-ups and drawers. `input_stroke_opacity` defaults to 100; lowering it is the merchant's call |
 | Input border | `--color-input-border-rgb`, `--inputs-border-opacity` | Per scheme, in `snippets/head-color-schemes.liquid`: the scheme border mixed toward the scheme text in 5% steps (`color_mix`) until `color_contrast` is at least 3.1 against `background`, `background_2` and the form fill (`form_bg`). A scheme whose own border already passes is unchanged. `snippets/head-design-systems.liquid` builds `--inputs-border` from it and the opacity setting; this triplet is the only consumer of `--inputs-border-opacity` |
-| Card | `--card-border`, `--card-shadow`, `--card-image-padding`, `--card-corner-radius` | Built from the merchant card settings. Rebel sets every one to 0 |
+| Card | `--card-border`, `--card-shadow`, `--card-image-padding`, `--card-corner-radius` | Built from the merchant card settings. Sartor sets every one to 0 |
 
 ## Clean system
 

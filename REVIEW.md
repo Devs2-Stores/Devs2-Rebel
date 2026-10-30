@@ -1,4 +1,4 @@
-# UX/AX review checklist - Rebel
+# UX/AX review checklist - Sartor
 
 Use this checklist for every storefront UI change and every UX/AX review. Read
 `DESIGN.md` for the direction and `AGENTS.md` for the mandatory code gates. The
@@ -58,7 +58,7 @@ be recorded as an unresolved question.
   not a measurement.
 - State-dependent text (open/closed badges, stock, errors) is checked with each
   state forced. A live clock or stock level hides the other state.
-- Colour changes are checked in one light and one dark preset (Rebel and
+- Colour changes are checked in one light and one dark preset (Sartor and
   Cyber), with the cart drawer, search panel and mobile menu open as well as
   the page. `runs/e2e/preset-contrast.cjs` renders each preset's scheme CSS
   with liquidjs, injects it into the live page and measures every visible

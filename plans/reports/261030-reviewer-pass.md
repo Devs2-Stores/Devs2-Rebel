@@ -39,7 +39,7 @@ Five read-only reviewers (structure, commerce, accessibility/performance, copy, 
 | `/this-page-does-not-exist` | 1793342513857-run-d3bf9a64-d5e5-4b |
 
 ## Still open
-- Lighthouse: needs `SHOPIFY_STOREFRONT_PASSWORD` in `.env`.
+- Lighthouse: needs `REBEL_SHOPIFY` in `.env`.
 - Support form backend: needs Cloudflare sign-in or a scoped token; see `261030-blockers-run.md`.
 - Theme name: "Rebel" is one letter from the Outsiders preset "Rebels".
 - Fresh-install templates (blank images) were validated offline only; the dev server and demo keep their own content.

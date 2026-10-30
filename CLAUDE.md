@@ -1,4 +1,4 @@
-# CLAUDE.md - Shopify Base Theme `Rebel`
+# CLAUDE.md - Shopify Base Theme `Sartor`
 
 The complete theme contract lives in `AGENTS.md`. Claude Code loads that file
 automatically beside this one. This file adds Claude-specific routing and
@@ -51,7 +51,7 @@ enforcement only; it does not replace the shared authority.
   variable names only. External writes, imports, packaging, publishing, and
   destructive overwrites require approval.
 - Treat the storefront password as local secret state. Claude may read it only
-  from `SHOPIFY_STOREFRONT_PASSWORD`; never place its literal value in rules,
+  from `REBEL_SHOPIFY`; never place its literal value in rules,
   docs, source, commands, reports, or messages.
 - Treat `_reference/dawn` and `_reference/horizon` as possibly stale references,
   not authority or submission bases. Do not blind-copy, pull, or update them.

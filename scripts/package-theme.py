@@ -21,7 +21,7 @@ def should_ignore(path):
 os.makedirs('dist', exist_ok=True)
 with open('config/settings_schema.json', encoding='utf-8') as schema_file:
     theme_info = next(item for item in json.load(schema_file) if item.get('name') == 'theme_info')
-zip_path = f"dist/rebel-v{theme_info['theme_version']}.zip"
+zip_path = f"dist/sartor-v{theme_info['theme_version']}.zip"
 
 TEXT_EXTENSIONS = ('.liquid', '.json', '.js', '.css', '.svg', '.txt')
 MAX_BYTES = 50 * 1024 * 1024

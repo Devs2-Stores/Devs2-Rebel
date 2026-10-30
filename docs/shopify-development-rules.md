@@ -93,7 +93,7 @@ then wait for credentials and approval without exposing secret values.
 ## Storefront Credential Handling
 
 The storefront password is local secret state. Read it only from the ignored
-`SHOPIFY_STOREFRONT_PASSWORD` environment variable. Never place its literal
+`REBEL_SHOPIFY` environment variable. Never place its literal
 value in rules, documentation, source, commands, reports, logs, or chat.
 
 ## Full Theme Code Standards

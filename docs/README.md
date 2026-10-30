@@ -1,4 +1,4 @@
-# Rebel Theme Documentation
+# Sartor Theme Documentation
 
 This directory is the evergreen navigation surface for the Shopify OS 2.0 base theme.
 

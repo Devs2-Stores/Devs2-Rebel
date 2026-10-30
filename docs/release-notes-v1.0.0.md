@@ -1,6 +1,6 @@
-# Rebel 1.0.0 - release notes
+# Sartor 1.0.0 - release notes
 
-Initial release of Rebel, a Shopify Online Store 2.0 theme with one style preset (Rebel).
+Initial release of Sartor, a Shopify Online Store 2.0 theme with one style preset (Sartor).
 
 ## Included
 
