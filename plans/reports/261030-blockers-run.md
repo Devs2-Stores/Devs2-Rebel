@@ -31,9 +31,13 @@ A single `shop.app` iframe CSP console error appeared on `/search` and `/cart` i
 
 ## Demo store
 - Test payment gateway (Bogus) activated in Admin, Settings, Payments, Third-party providers. The store is listed as "Client transfer" in Admin, Settings, Organization.
+- `shopify theme check` (approved): 193 files, 0 offenses.
+- The four fixed files were upserted to demo theme 160556351559 through the Admin API; MD5 of all four equals the repo. `templates/index.json`, `sections/footer-group.json` and `config/settings_data.json` were not touched.
+- Live on the demo host: hover then `Escape` closes the megamenu panel; `.megamenu__container` computes `pointer-events: auto`.
+- `theme.qa_validate` on the demo host (rebel-streetwear-hn0q7d9h.myshopify.com), same arguments as above: `/`, `/collections/all`, `/products/charcoal-pinstripe-blazer`, `/cart`, `/search?q=jacket`, `/pages/contact`, and the 404 page all returned `PASS` / `CERTIFIED`, 0 critical. Receipts for these runs start with `1793336405557`, `1793336452532`, `1793336508143`, `1793336552002`, `1793336599553`, `1793336646745`, `1793336701818`.
+- Theme repo pushed: `c857669..0ac06cd` on `Devs2-Stores/Devs2-Rebel` main.
 
 ## Still open
 - Lighthouse: needs `SHOPIFY_STOREFRONT_PASSWORD` in `.env`; the storefront stays in private mode (no off switch on this store).
 - Cloudflare: `dash.cloudflare.com` is signed out (Google account shows "Signed out") and both tokens in `E:/Work/master/.env*` are rejected. The support form code and `/api/theme-support` exist but production has no `PUBLIC_TURNSTILE_SITE_KEY`, so the form renders disabled.
 - Theme name: `themes.shopify.com/themes/rebel` returns 404, but the Outsiders theme has a preset named "Rebels" and Community threads call it "Rebel theme". The owner chose to keep "Rebel".
-- Theme Check, demo sync of the four files above, and push of the theme repo wait for approval.
