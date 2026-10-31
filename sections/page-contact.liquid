@@ -293,6 +293,7 @@
   {%- endif -%}
 <script>
 (function() {
+  var ac = new AbortController();
   var section = document.getElementById('shopify-section-{{ section.id }}');
   if (!section) return;
 
@@ -323,11 +324,17 @@
   }
 
   syncSticky();
-  window.addEventListener('resize', syncSticky);
+  window.addEventListener('resize', syncSticky, { signal: ac.signal });
+  var ro;
   if (typeof ResizeObserver !== 'undefined') {
-    var ro = new ResizeObserver(syncSticky);
+    ro = new ResizeObserver(syncSticky);
     targets.forEach(function(node) { ro.observe(node); });
   }
+  document.addEventListener('shopify:section:unload', function(e) {
+    if (e.detail.sectionId !== '{{ section.id }}') return;
+    ac.abort();
+    if (ro) ro.disconnect();
+  }, { signal: ac.signal });
 })();
 </script>
 </contact-page>

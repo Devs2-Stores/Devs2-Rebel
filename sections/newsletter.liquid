@@ -38,6 +38,7 @@
         <input type="hidden" name="contact[tags]" value="newsletter">
         <div class="section-newsletter__form">
           <input
+            id="NewsletterEmail-{{ section.id }}"
             type="email"
             name="contact[email]"
             class="section-newsletter__input"
@@ -45,6 +46,7 @@
             required
             autocomplete="email"
             aria-label="{{ 'general.newsletter.email_label' | t }}"
+            {% if form.errors %}aria-invalid="true" aria-describedby="NewsletterError-{{ section.id }}"{% endif %}
           >
           <button type="submit" class="section-newsletter__btn button-size-{{ section.settings.button_size }}">
             {%- liquid
@@ -57,13 +59,12 @@
           </button>
         </div>
         {%- if form.posted_successfully? -%}
-          <p class="section-newsletter__success">
+          <p class="section-newsletter__success" role="status">
             {{ 'general.newsletter.success' | t }}
           </p>
-        {%- endif -%}
-        {%- if form.errors -%}
-          <p class="section-newsletter__error">
-            {{ form.errors.messages['email'] }}
+        {%- elsif form.errors -%}
+          <p class="section-newsletter__error" id="NewsletterError-{{ section.id }}" role="alert">
+            {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
           </p>
         {%- endif -%}
       {%- endform -%}

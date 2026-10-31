@@ -44,13 +44,18 @@
                 <p class="order-template__value">{{ order.fulfillment_status_label }}</p>
               </div>
             </div>
-            {%- if order.fulfillments.last.tracking_number != blank -%}
+            {%- assign tracking = order.fulfillments.last -%}
+            {%- if tracking.tracking_number != blank -%}
             <div class="order-template__tracking">
               <p class="order-template__label">{{ 'customer.order.tracking_number' | t }}:</p>
-              <a href="{{ order.fulfillments.last.tracking_url }}" class="order-template__tracking-link" title="{{ 'customer.order.track_shipment' | t }}" target="_blank" rel="noopener noreferrer">
-                {{ order.fulfillments.last.tracking_number }}
+              {%- if tracking.tracking_url != blank -%}
+              <a href="{{ tracking.tracking_url }}" class="order-template__tracking-link" title="{{ 'customer.order.track_shipment' | t }}" target="_blank" rel="noopener noreferrer" aria-describedby="a11y-new-window-message">
+                {{ tracking.tracking_number }}
                 {%- render 'icon', name: 'arrow', size: '14' -%}
               </a>
+              {%- else -%}
+              <p class="order-template__value">{{ tracking.tracking_number }}</p>
+              {%- endif -%}
             </div>
             {%- endif -%}
           </div>
@@ -122,13 +127,21 @@
                     <td data-label="{{ 'customer.order.product' | t }}" class="order-template__cell-product">
                       <div class="order-template__product-cell">
                         {%- if line_item.image -%}
-                        <a href="{{ line_item.product.url }}" title="{{ line_item.title | escape }}" class="order-template__product-image">
+                        {%- if line_item.url != blank -%}
+                        <a href="{{ line_item.url }}" title="{{ line_item.title | escape }}" class="order-template__product-image">
+                        {%- else -%}
+                        <span class="order-template__product-image">
+                        {%- endif -%}
                           {%- assign line_alt = line_item.title | escape -%}
                           {{ line_item.image | image_url: width: 160 | image_tag: widths: '80, 160', sizes: '80px', width: 80, height: 80, alt: line_alt, loading: 'lazy', decoding: 'async' }}
-                        </a>
+                        {%- if line_item.url != blank -%}</a>{%- else -%}</span>{%- endif -%}
                         {%- endif -%}
                         <div class="order-template__product-info">
-                          <a href="{{ line_item.product.url }}" class="order-template__product-title" title="{{ line_item.title | escape }}">{{ line_item.title | escape }}</a>
+                          {%- if line_item.url != blank -%}
+                          <a href="{{ line_item.url }}" class="order-template__product-title" title="{{ line_item.title | escape }}">{{ line_item.title | escape }}</a>
+                          {%- else -%}
+                          <span class="order-template__product-title">{{ line_item.title | escape }}</span>
+                          {%- endif -%}
                           {%- if line_item.variant.title != blank and line_item.variant.title != 'Default Title' -%}
                           <p class="order-template__product-variant">{{ line_item.variant.title | escape }}</p>
                           {%- endif -%}

@@ -29,6 +29,7 @@
   letter-spacing: var(--heading-tracking);
 }
 .section-marquee-products__actions {
+  margin-inline-start: auto;
   display: inline-flex;
   align-items: center;
   gap: 1.25rem;

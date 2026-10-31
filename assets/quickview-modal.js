@@ -140,12 +140,8 @@
         themeConfig.quickview.data = null;
       }
       this.classList.remove('is-open');
-      if (!closeOptions.preserveScrollLock) {
-        ThemeUtils.unlockScroll();
-      }
-      if (!closeOptions.preserveFocus) {
-        ThemeUtils.releaseFocus(this);
-      }
+      ThemeUtils.unlockScroll();
+      ThemeUtils.releaseFocus(this);
       if (this.trigger) {
         this.trigger.classList.remove('is-active');
         this.trigger = null;
@@ -329,15 +325,15 @@
 
       if (!addBtn) return;
 
-      if (price === 0) {
-        addBtn.disabled = false;
-        if (addBtnText) addBtnText.textContent = (themeConfig.strings.variant || {}).contact;
-      } else if (available) {
-        addBtn.disabled = false;
-        if (addBtnText) addBtnText.textContent = (themeConfig.strings.variant || {}).addToCart;
-      } else {
+      if (!available) {
         addBtn.disabled = true;
         if (addBtnText) addBtnText.textContent = (themeConfig.strings.variant || {}).soldOut;
+      } else if (price === 0) {
+        addBtn.disabled = false;
+        if (addBtnText) addBtnText.textContent = (themeConfig.strings.variant || {}).contact;
+      } else {
+        addBtn.disabled = false;
+        if (addBtnText) addBtnText.textContent = (themeConfig.strings.variant || {}).addToCart;
       }
     }
 
@@ -380,6 +376,18 @@
         return;
       }
 
+      const currentVariantId = this.currentVariantId;
+      const currentVariant = this.currentProduct && this.currentProduct.variants
+        ? this.currentProduct.variants.find(function(v) {
+          return v.id === currentVariantId;
+        })
+        : null;
+      if (currentVariant && currentVariant.price === 0) {
+        const contactRoot = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) ? window.Shopify.routes.root : '/';
+        window.location.assign(contactRoot + 'pages/contact');
+        return;
+      }
+
       // Get quantity
       const quantityInput = this.content ? this.content.querySelector('quantity-selector input') : null;
       const quantity = quantityInput ? parseInt(quantityInput.value) || 1 : 1;
@@ -412,22 +420,8 @@
           await updateCartData(data);
         }
 
-        // Dispatch event
+        this.close({ immediate: !!(themeConfig.cart && themeConfig.cart.auto_open_sidebar) });
         document.dispatchEvent(new CustomEvent('cart:item_added', { detail: data }));
-
-        var shouldOpenCart = typeof themeConfig !== 'undefined' && themeConfig.cart && themeConfig.cart.auto_open_sidebar;
-
-        // Close quickview before handing focus/scroll to cart on mobile
-        if (shouldOpenCart) {
-          this.close({ preserveScrollLock: true, preserveFocus: true, immediate: true });
-          if (typeof openCartSidebar === 'function') {
-            openCartSidebar();
-          } else if (typeof openCartModal === 'function') {
-            openCartModal();
-          }
-        } else {
-          this.close();
-        }
 
       } catch (error) {
         if (typeof showToast === 'function') showToast((themeConfig.strings.cart || {}).itemError, 'error');

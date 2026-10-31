@@ -12,6 +12,8 @@
 }
 .section-newsletter__inner--left { text-align: left; }
 .section-newsletter__inner--center { text-align: center; margin: 0 auto; align-items: center; }
+.section-newsletter__inner > form { align-self: stretch; width: 100%; }
+.section-newsletter__inner--center .section-newsletter__form { margin-inline: auto; }
 
 .section-newsletter__subheading {
   margin: 0;

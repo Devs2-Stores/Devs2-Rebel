@@ -8,10 +8,12 @@
 <div class="change-password-template">
     <div class="page-width">
     <h1 class="change-password-template__title">{{ 'customer.reset_password.title' | t }}</h1>
-    <div class="account-template__grid">
+    <div{% if customer %} class="account-template__grid"{% endif %}>
+      {%- if customer -%}
       <div class="change-password-template__sidebar">
         {%- render 'customer-sidebar' -%}
       </div>
+      {%- endif -%}
       <div class="change-password-template__wrapper">
         <div class="change-password-template__form">
           {%- form 'reset_customer_password' -%}

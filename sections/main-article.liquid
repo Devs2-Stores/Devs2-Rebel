@@ -32,7 +32,7 @@
 >
   <meta itemprop="dateModified" content="{{ article.updated_at | default: article.published_at | date: '%Y-%m-%d' }}">
   <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization" hidden>
-    <meta itemprop="name" content="{{ shop.name }}">
+    <meta itemprop="name" content="{{ shop.name | escape }}">
     {%- if settings.logo != blank -%}
       <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
         <meta itemprop="url" content="{{ settings.logo | image_url: width: 500 }}">

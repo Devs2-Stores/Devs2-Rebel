@@ -69,7 +69,7 @@
 {% endif %}
 
 {% if request.page_type == 'product' and product.available and product.price > 0 %}
-  <meta property="og:price:amount" content="{{ product.price | money_without_currency | strip_html }}">
+  <meta property="og:price:amount" content="{{ product.price | divided_by: 100 }}.{{ product.price | modulo: 100 | prepend: '00' | slice: -2, 2 }}">
   <meta property="og:price:currency" content="{{ cart.currency.iso_code }}">
 {% endif %}
 

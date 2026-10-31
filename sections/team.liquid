@@ -91,7 +91,7 @@
                     assign social_label = 'general.social.follow_on' | t: platform: social_platform
                   endif
                 -%}
-                <a href="{{ social_url }}" target="_blank" rel="noopener" class="section-team__social-link" aria-label="{{ social_label | escape }}">
+                <a href="{{ social_url }}" target="_blank" rel="noopener" class="section-team__social-link" aria-label="{{ social_label | escape }}" aria-describedby="a11y-new-window-message">
                   {%- render 'icon', name: social_icon -%}
                 </a>
               {%- endfor -%}

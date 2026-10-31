@@ -30,6 +30,7 @@
         {% if block.settings.open_in_new_tab %}
           target="_blank"
           rel="noopener"
+          aria-describedby="a11y-new-window-message"
         {% endif %}
       >
         {{- block.settings.label | escape -}}

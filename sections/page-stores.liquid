@@ -73,10 +73,9 @@
               {%- endif -%}
             </div>
             <div class="stores-card__content">
-              <h3 class="stores-card__name">
-                {%- render 'icon', name: 'store', size: '18' -%}
+              <h2 class="stores-card__name">
                 {{ block.settings.name | escape }}
-              </h3>
+              </h2>
               {%- if block.settings.address != blank -%}
                <address class="stores-card__info">
                 {%- render 'icon', name: 'location', size: '16' -%}
@@ -86,13 +85,13 @@
               {%- if block.settings.phone != blank -%}
               <div class="stores-card__info">
                 {%- render 'icon', name: 'phone', size: '16' -%}
-                <a href="tel:{{ block.settings.phone | replace: ' ', '' | replace: '.', '' }}" title="{{ 'sections.page_contact.call' | t }} {{ block.settings.phone | escape }}">{{ block.settings.phone | escape }}</a>
+                <a href="tel:{{ block.settings.phone | replace: ' ', '' | replace: '.', '' | escape }}" title="{{ 'sections.page_contact.call' | t }} {{ block.settings.phone | escape }}">{{ block.settings.phone | escape }}</a>
               </div>
               {%- endif -%}
               {%- if block.settings.email != blank -%}
               <div class="stores-card__info">
                 {%- render 'icon', name: 'email', size: '16' -%}
-                <a href="mailto:{{ block.settings.email }}" title="{{ 'sections.page_contact.email' | t }} {{ block.settings.email | escape }}">{{ block.settings.email | escape }}</a>
+                <a href="mailto:{{ block.settings.email | escape }}" title="{{ 'sections.page_contact.email' | t }} {{ block.settings.email | escape }}">{{ block.settings.email | escape }}</a>
               </div>
               {%- endif -%}
               {%- if block.settings.hours != blank -%}
@@ -109,7 +108,7 @@
                 endif
               -%}
               {%- if map_href != blank -%}
-              <a href="{{ map_href }}" target="_blank" rel="noopener noreferrer" class="stores-card__direction" title="{{ 'sections.page_stores.view_map' | t }}">
+              <a href="{{ map_href }}" target="_blank" rel="noopener noreferrer" class="stores-card__direction" title="{{ 'sections.page_stores.view_map' | t }}" aria-describedby="a11y-new-window-message">
                 {%- render 'icon', name: 'location', size: '16' -%}
                 <span>{{ 'sections.page_stores.view_map' | t }}</span>
               </a>

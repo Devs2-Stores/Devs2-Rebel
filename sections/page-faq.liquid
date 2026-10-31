@@ -1,10 +1,17 @@
+{{ 'page-faq.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'page-faq.js' | asset_url }}" defer="defer"></script>
+
+{%- assign faq_h = 'h2' -%}
+{%- if template.name == 'page' and template.suffix == 'faq' -%}
+  {%- assign faq_h = 'h1' -%}
+{%- endif -%}
 <faq-page class="page-faq" data-section-id="{{ section.id }}">
   {%- assign faq_question_blocks = section.blocks | where: 'type', 'question' -%}
   <section class="faq-hero">
     <div class="page-width">
       <div class="faq-hero__wrap">
         <p class="faq-hero__eyebrow">{{ 'sections.page_faq.eyebrow' | t }}</p>
-        <h1 class="faq-hero__title">
+        <{{ faq_h }} class="faq-hero__title">
           {%- if section.settings.title != blank -%}
             {{ section.settings.title | escape }}
           {%- elsif page.title != blank -%}
@@ -12,7 +19,7 @@
           {%- else -%}
             {{ 'sections.page_faq.default_title' | t }}
           {%- endif -%}
-        </h1>
+        </{{ faq_h }}>
         {%- if section.settings.description != blank -%}
           <div class="faq-hero__description">{{ section.settings.description }}</div>
         {%- endif -%}

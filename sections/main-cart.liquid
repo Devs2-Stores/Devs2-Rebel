@@ -73,7 +73,7 @@
                   <div class="upsale-item__info">
                     <a href="{{ product.url }}" class="upsale-item__title">{{ product.title | escape }}</a>
                     <p class="upsale-item__vendor">{{ product.vendor | escape }}</p>
-                    <p class="upsale-item__price">{{ product.price | money }}</p>
+                    <p class="upsale-item__price">{%- render 'money', amount: product.price -%}</p>
                   </div>
                 </li>
               {%- endfor -%}

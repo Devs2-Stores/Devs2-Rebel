@@ -132,7 +132,7 @@ class SearchModal extends HTMLElement {
         if (!cards) return;
         self.fillIdleSlot('recent', function(slot) {
           return '<h3 id="ps-idle-recent">' + ThemeUtils.escapeHtml(slot.dataset.heading) + '</h3>' +
-            '<ul class="predictive-search__list predictive-search__grid" role="group" aria-labelledby="ps-idle-recent">' + cards + '</ul>';
+            '<ul class="predictive-search__list predictive-search__grid" aria-labelledby="ps-idle-recent">' + cards + '</ul>';
         });
       });
     }
@@ -157,7 +157,6 @@ class SearchModal extends HTMLElement {
     this.classList.remove('show');
     if (this.input) {
       this.input.value = '';
-      this.input.setAttribute('aria-expanded', 'false');
     }
     this.updateClearButton('');
     this.clearResults();
@@ -201,7 +200,6 @@ class SearchModal extends HTMLElement {
   clearSearch() {
     if (!this.input) return;
     this.input.value = '';
-    this.input.setAttribute('aria-expanded', 'false');
     this.updateClearButton('');
     this.clearResults();
     if (this.searchTimeout) {
@@ -258,7 +256,7 @@ class SearchModal extends HTMLElement {
       .catch(function(error) {
         if (error.name === 'AbortError') return;
         if (requestId !== self.searchRequestId || self.searchController !== controller) return;
-        var errorMsg = themeConfig.strings.cart.error;
+        var errorMsg = themeConfig.strings.search.unavailable;
         self.displayError(errorMsg);
       })
       .finally(function() {
@@ -286,11 +284,6 @@ class SearchModal extends HTMLElement {
       this.resultsContainer.innerHTML = html;
     }
 
-    // Set aria-expanded
-    if (this.input) {
-      this.input.setAttribute('aria-expanded', 'true');
-    }
-
     this.setupResultTabs();
 
     // Close modal on result click
@@ -310,7 +303,6 @@ class SearchModal extends HTMLElement {
     if (!this.resultsContainer) return;
     var searchUrl = this.getRootUrl() + 'search?type=product&q=' + encodeURIComponent(query);
     this.resultsContainer.innerHTML = '<div class="search-modal-empty"><p>' + ThemeUtils.escapeHtml(themeConfig.strings.search.unavailable) + '</p><a href="' + ThemeUtils.escapeHtml(searchUrl) + '">' + ThemeUtils.escapeHtml(themeConfig.strings.search.viewResults) + '</a></div>';
-    if (this.input) this.input.setAttribute('aria-expanded', 'true');
   }
 
   clearResults() {
@@ -329,10 +321,10 @@ class SearchModal extends HTMLElement {
       { key: 'articles', label: this.dataset.tabArticles },
       { key: 'pages', label: this.dataset.tabPages }
     ];
-    var hasCategoryResults = tabs.some(function(tab) {
+    var present = tabs.filter(function(tab) {
       return groups.some(function(group) { return group.dataset.searchGroup === tab.key; });
     });
-    if (!hasCategoryResults) return;
+    if (present.length < 2) return;
     root.classList.add('predictive-search-results--tabbed');
     var suggestions = groups.filter(function(group) { return group.dataset.searchGroup === 'suggestions'; });
     var tablist = document.createElement('div');
@@ -406,7 +398,7 @@ class SearchModal extends HTMLElement {
    */
   handleKeydown(event) {
     if (!this.resultsContainer) return;
-    var items = this.resultsContainer.querySelectorAll('[role="option"] a, .predictive-search__link');
+    var items = this.resultsContainer.querySelectorAll('.predictive-search__link');
     if (!items.length) return;
 
     var currentIndex = Array.from(items).indexOf(document.activeElement);

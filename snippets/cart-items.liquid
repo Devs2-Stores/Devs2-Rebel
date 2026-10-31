@@ -7,7 +7,7 @@
       <span class="head-info">{{ 'sections.cart.headings.product' | t }}</span>
     </div>
     {%- for item in cart.items -%}
-      <cart-item data-var-id="{{ item.variant_id }}" data-product-id="{{ item.product.id }}" data-line-item="{{ forloop.index }}" role="listitem">
+      <cart-item data-var-id="{{ item.variant_id }}" data-product-id="{{ item.product.id }}" data-line-item="{{ forloop.index }}" data-line-key="{{ item.key }}" role="listitem">
         <a class="cart-item__image" href="{{ item.url }}" aria-label="{{ item.product.title | escape }}">
           {%- if item.image != blank -%}
             {%- assign cart_item_alt = item.image.alt | default: item.product.title | escape -%}

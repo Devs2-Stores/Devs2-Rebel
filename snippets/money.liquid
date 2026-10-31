@@ -1,0 +1,6 @@
+{%- doc -%}
+  Formats a money amount, honouring settings.price_currency_code_enabled.
+
+  @param {number} amount - Amount in minor units
+{%- enddoc -%}
+{%- if settings.price_currency_code_enabled -%}{{ amount | money_with_currency }}{%- else -%}{{ amount | money }}{%- endif -%}

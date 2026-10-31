@@ -4,7 +4,7 @@
   @param {object} product - Product to render
 {%- enddoc -%}
 
-<li class="predictive-search__item predictive-search__item--card{% unless product.available %} predictive-search__item--sold-out{% endunless %}" role="option">
+<li class="predictive-search__item predictive-search__item--card{% unless product.available %} predictive-search__item--sold-out{% endunless %}">
   <a href="{{ product.url }}" class="predictive-search__link predictive-search__link--product predictive-search__link--card">
     <span class="predictive-search__card-media">
       {%- if product.featured_image != blank -%}
@@ -31,9 +31,9 @@
         {%- if product.price == 0 -%}
           {{ 'products.product.price.contact' | t }}
         {%- else -%}
-          {{ product.price | money }}
+          {%- render 'money', amount: product.price -%}
           {%- if product.compare_at_price > product.price -%}
-          <del class="predictive-search__product-compare-price">{{ product.compare_at_price | money }}</del>
+          <del class="predictive-search__product-compare-price">{%- render 'money', amount: product.compare_at_price -%}</del>
           {%- endif -%}
         {%- endif -%}
       </span>

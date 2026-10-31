@@ -97,10 +97,33 @@
       };
     },
 
+    debounceKeyed: (fn, wait) => {
+      var timers = new Map();
+      var run = function(key) {
+        var args = Array.prototype.slice.call(arguments, 1);
+        var self = this;
+        clearTimeout(timers.get(key));
+        timers.set(key, setTimeout(function() {
+          timers.delete(key);
+          fn.apply(self, args);
+        }, wait));
+      };
+      run.cancel = function(key) {
+        if (arguments.length) {
+          clearTimeout(timers.get(key));
+          timers.delete(key);
+          return;
+        }
+        timers.forEach(clearTimeout);
+        timers.clear();
+      };
+      return run;
+    },
+
     formatMoney: (cents, format) => {
       if (cents == null) return '0';
       if (typeof cents === 'string') cents = cents.replace('.', '');
-      var formatString = format || (typeof themeConfig !== 'undefined' && themeConfig.formatMoney) || '{{amount}}';
+      var formatString = format || (typeof themeConfig !== 'undefined' && (themeConfig.priceFormat || themeConfig.formatMoney)) || '{{amount}}';
       var patt = /\{\{\s*(\w+)\s*\}\}/;
       var match = formatString.match(patt);
       if (!match) return String(cents);
@@ -215,8 +238,18 @@
         container.removeEventListener('keydown', container._focusTrapHandler);
         delete container._focusTrapHandler;
       }
-      if (container._focusTrapTrigger) {
-        container._focusTrapTrigger.focus();
+      var trigger = container._focusTrapTrigger;
+      if (trigger) {
+        trigger.focus();
+        if (document.activeElement !== trigger && trigger.isConnected && getComputedStyle(trigger).visibility === 'hidden') {
+          var prevVisibility = trigger.style.visibility;
+          var prevTransition = trigger.style.transition;
+          trigger.style.transition = 'none';
+          trigger.style.visibility = 'visible';
+          trigger.focus();
+          trigger.style.visibility = prevVisibility;
+          trigger.style.transition = prevTransition;
+        }
         delete container._focusTrapTrigger;
       }
     },

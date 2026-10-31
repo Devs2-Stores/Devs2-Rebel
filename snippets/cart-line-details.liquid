@@ -36,7 +36,7 @@
           <dt>{{ property.first | escape }}:</dt>
           <dd>
             {%- if property.last contains '/uploads/' -%}
-              <a href="{{ property.last | escape }}" target="_blank" rel="noopener">{{ property.last | split: '/' | last | escape }}</a>
+              <a href="{{ property.last | escape }}" target="_blank" rel="noopener" aria-describedby="a11y-new-window-message">{{ property.last | split: '/' | last | escape }}</a>
             {%- else -%}
               {{ property.last | escape }}
             {%- endif -%}
@@ -52,7 +52,7 @@
     {%- for discount_allocation in item.line_level_discount_allocations -%}
       <li class="cart-line-details__discount">
         <svg aria-hidden="true" focusable="false" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.5 1.5h3.75l5.25 5.25-3.75 3.75L1.5 5.25V1.5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><circle cx="4.125" cy="3.875" r=".375" fill="currentColor"/></svg>
-        <span>{{ discount_allocation.discount_application.title | escape }} (-{{ discount_allocation.amount | money }})</span>
+        <span>{{ discount_allocation.discount_application.title | escape }} (-{%- render 'money', amount: discount_allocation.amount -%})</span>
       </li>
     {%- endfor -%}
   </ul>

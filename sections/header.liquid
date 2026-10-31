@@ -198,11 +198,14 @@ global-header .header__logo .header__logo-text {
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--heading-tracking, -0.02em);
   line-height: 1;
-  white-space: nowrap;
+  text-align: center;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
 }
 @media (min-width: 1024px) {
   global-header .header__logo .header__logo-text {
     font-size: 1.3125rem;
+    white-space: nowrap;
   }
 }
 global-header .header__menu {

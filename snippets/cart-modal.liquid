@@ -54,7 +54,7 @@
                       {{ 'product-1' | placeholder_svg_tag: 'cart-modal-collection__image' }}
                     {%- endif -%}
                     <span class="cart-modal-collection__name">{{ product.title | escape }}</span>
-                    <span class="cart-modal-collection__price">{{ product.price | money }}</span>
+                    <span class="cart-modal-collection__price">{%- render 'money', amount: product.price -%}</span>
                   </a>
                 </li>
               {%- endfor -%}
@@ -77,7 +77,7 @@
         <ul class="cart-modal-discounts" role="list" hidden></ul>
         <div class="cart-modal-summary-row">
           <span class="cart-modal-summary-label">{{ 'sections.cart.estimated_total' | t }}:</span>
-          <span class="cart-modal-total cart-price">{% if settings.price_currency_code_enabled %}{{ cart.total_price | money_with_currency }}{% else %}{{ cart.total_price | money }}{% endif %}</span>
+          <span class="cart-modal-total cart-price">{%- render 'money', amount: cart.total_price -%}</span>
         </div>
         {%- if cart.taxes_included or shop.shipping_policy.body != blank -%}
           <p class="cart-modal-summary-note">

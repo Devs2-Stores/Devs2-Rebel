@@ -11,20 +11,20 @@
 {{ 'toast.css' | asset_url | stylesheet_tag }}
 {{ 'back-to-top.css' | asset_url | stylesheet_tag }}
 
-{%- if template == 'list-collections' -%}
+{%- if template.name == 'list-collections' -%}
   {{ 'list-collections.css' | asset_url | stylesheet_tag }}
-{%- elsif template == 'collection' -%}
+{%- elsif template.name == 'collection' -%}
   {{ 'collection.css' | asset_url | stylesheet_tag }}
-{%- elsif template == 'product' -%}
+{%- elsif template.name == 'product' -%}
   {{ 'product.css' | asset_url | stylesheet_tag }}
-{%- elsif template == 'cart' -%}
+{%- elsif template.name == 'cart' -%}
   {{ 'cart.css' | asset_url | stylesheet_tag }}
-{%- elsif template == '404' -%}
+{%- elsif template.name == '404' -%}
   {{ '404.css' | asset_url | stylesheet_tag }}
-{%- elsif template == 'blog' -%}
+{%- elsif template.name == 'blog' -%}
   {{ 'blog.css' | asset_url | stylesheet_tag }}
   {{ 'article-card.css' | asset_url | stylesheet_tag }}
-{%- elsif template == 'article' -%}
+{%- elsif template.name == 'article' -%}
   {{ 'article.css' | asset_url | stylesheet_tag }}
   {{ 'blog.css' | asset_url | stylesheet_tag }}
 {%- elsif template contains 'customer' -%}
@@ -37,8 +37,6 @@
   {{ 'page-contact.css' | asset_url | stylesheet_tag }}
 {%- elsif template == 'page.stores' -%}
   {{ 'page-stores.css' | asset_url | stylesheet_tag }}
-{%- elsif template == 'page.faq' -%}
-  {{ 'page-faq.css' | asset_url | stylesheet_tag }}
-{%- elsif template == 'page' -%}
+{%- elsif template.name == 'page' and template.suffix != 'faq' -%}
   {{ 'page.css' | asset_url | stylesheet_tag }}
 {%- endif -%}

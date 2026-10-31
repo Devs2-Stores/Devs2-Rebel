@@ -7,12 +7,12 @@
     </li>
     <li class="cart-total__subtotal">
       <span>{{ 'sections.cart.subtotal' | t }}:</span>
-      <strong>{{ cart.original_total_price | money }}</strong>
+      <strong>{%- render 'money', amount: cart.original_total_price -%}</strong>
     </li>
     {%- for discount_application in cart.cart_level_discount_applications -%}
       <li class="cart-total__discount-code">
         <span>{{ discount_application.title | escape }}:</span>
-        <strong>-{{ discount_application.total_allocated_amount | money }}</strong>
+        <strong>-{%- render 'money', amount: discount_application.total_allocated_amount -%}</strong>
       </li>
     {%- endfor -%}
     <li>
@@ -21,7 +21,7 @@
     </li>
     <li class="cart-total__estimated-total">
       <span>{{ 'sections.cart.estimated_total' | t }}:</span>
-      <strong class="cart-price">{% if settings.price_currency_code_enabled %}{{ cart.total_price | money_with_currency }}{% else %}{{ cart.total_price | money }}{% endif %}</strong>
+      <strong class="cart-price">{%- render 'money', amount: cart.total_price -%}</strong>
     </li>
   </ul>
   {%- render 'cart-discount', context: 'page' -%}

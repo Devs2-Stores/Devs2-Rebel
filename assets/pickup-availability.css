@@ -39,6 +39,7 @@ pickup-availability[available] {
   cursor: pointer;
   font-size: var(--font-sm);
   font-weight: var(--font-weight-medium);
+  min-height: 1.5rem;
   padding: 0 0 2px;
   text-align: left;
   text-decoration: underline;
@@ -66,7 +67,7 @@ pickup-availability-drawer {
   opacity: 0;
   visibility: hidden;
   transform: translateX(100%);
-  transition: opacity var(--transition-base), transform var(--transition-base), visibility var(--transition-base);
+  transition: opacity var(--transition-base), transform var(--transition-base), visibility 0s linear var(--duration-medium);
   box-shadow: var(--drawer-shadow);
 }
 
@@ -74,6 +75,7 @@ pickup-availability-drawer[open] {
   opacity: 1;
   visibility: visible;
   transform: translateX(0);
+  transition: opacity var(--transition-base), transform var(--transition-base), visibility 0s;
 }
 
 @media (min-width: 750px) {

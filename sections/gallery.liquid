@@ -18,7 +18,7 @@
 >
   <div class="{% if section.settings.section_width == 'fixed' %}page-width{% endif %}">
     {%- if section.settings.heading != blank -%}
-      <div class="page-width">
+      <div{% unless section.settings.section_width == 'fixed' %} class="page-width"{% endunless %}>
         <div class="section-gallery__head">
           {%- if section.settings.subheading != blank -%}
             <p class="section-gallery__subheading subheading-size-sm">{{ section.settings.subheading }}</p>
@@ -53,9 +53,9 @@
                 class: 'section-gallery__img'
               }}
               {%- if block.settings.caption != blank -%}
-                <div class="section-gallery__caption">
+                <span class="section-gallery__caption">
                   <span>{{ block.settings.caption }}</span>
-                </div>
+                </span>
               {%- endif -%}
             {%- if block.settings.link != blank -%}</a>{%- else -%}</button>{%- endif -%}
           {%- else -%}
@@ -78,6 +78,7 @@
 
 <script>
 (function() {
+  var ac = new AbortController();
   var w = document.getElementById('section-{{ section.id }}');
   if (!w) return;
   var lb = w.querySelector('[data-gallery-lightbox]');
@@ -111,7 +112,10 @@
   });
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && !lb.hidden) closeLightbox();
-  });
+  }, { signal: ac.signal });
+  document.addEventListener('shopify:section:unload', function(e) {
+    if (e.detail.sectionId === '{{ section.id }}') ac.abort();
+  }, { signal: ac.signal });
 })();
 </script>
 

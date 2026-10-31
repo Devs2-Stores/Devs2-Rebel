@@ -842,7 +842,7 @@ class ProductStickyAdd extends HTMLElement {
 		this._scrollHandler = debounce(function() { self.handleScroll(); }, 10);
 		this._resizeHandler = debounce(function() { self.calculateThreshold(); }, 150);
 
-		window.addEventListener('scroll', this._scrollHandler);
+		window.addEventListener('scroll', this._scrollHandler, { passive: true });
 		window.addEventListener('resize', this._resizeHandler);
 	}
 

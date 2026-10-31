@@ -33,9 +33,7 @@
     disconnectedCallback() {
       if (this._firstLayoutObserver) this._firstLayoutObserver.disconnect();
       if (this._boundResizeHandler) window.removeEventListener('resize', this._boundResizeHandler);
-      if (this._boundDocClick) document.removeEventListener('click', this._boundDocClick, true);
       if (this._boundDocKeydown) document.removeEventListener('keydown', this._boundDocKeydown);
-      if (this._boundFocusIn) document.removeEventListener('focusin', this._boundFocusIn);
     }
 
     bindEvents() {

@@ -51,7 +51,13 @@
             {%- when 'subheading' -%}
               <p class="section-ito__subheading subheading-size-{{ block.settings.size }}" {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
             {%- when 'heading' -%}
-              <{{ block.settings.tag }} class="section-ito__heading heading-size-{{ block.settings.size }}" {{ block.shopify_attributes }}>{{ block.settings.text }}</{{ block.settings.tag }}>
+              {%- liquid
+                assign heading_tag = block.settings.tag
+                if template.name == 'index' and heading_tag == 'h1'
+                  assign heading_tag = 'h2'
+                endif
+              -%}
+              <{{ heading_tag }} class="section-ito__heading heading-size-{{ block.settings.size }}" {{ block.shopify_attributes }}>{{ block.settings.text }}</{{ heading_tag }}>
             {%- when 'text' -%}
               <div class="section-ito__text content-size-{{ block.settings.size }}" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
             {%- when 'button' -%}

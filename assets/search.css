@@ -176,6 +176,9 @@
   font-size: var(--font-xs);
   font-weight: var(--font-weight-medium);
 }
+.search-template__tab span:empty {
+  display: none;
+}
 .search-template__tab:hover:not(:disabled) {
   color: var(--color-ink);
   background: transparent;
@@ -342,6 +345,9 @@
   margin-block-end: var(--space-lg);
   padding-block-end: var(--space-md);
   border-block-end: 1px solid var(--color-hairline);
+}
+.search-template__results-header:empty {
+  display: none;
 }
 .search-template__results-info {
   font-size: var(--meta-size);

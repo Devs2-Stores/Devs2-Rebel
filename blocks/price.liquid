@@ -21,7 +21,7 @@
     {%- if selected_variant.price == 0 -%}
       {{ 'products.product.price.contact' | t }}
     {%- else -%}
-      {%- if settings.price_currency_code_enabled -%}{{ selected_variant.price | money_with_currency }}{%- else -%}{{ selected_variant.price | money }}{%- endif -%}
+      {%- render 'money', amount: selected_variant.price -%}
     {%- endif -%}
   </div>
   <div
@@ -29,7 +29,7 @@
     data-product-compare
     {% unless has_compare %}hidden{% endunless %}
   >
-    {{- selected_variant.compare_at_price | money -}}
+    {%- render 'money', amount: selected_variant.compare_at_price -%}
   </div>
   <div
     class="product-template__price-sale"
@@ -46,7 +46,7 @@
   {%- if selected_variant.unit_price -%}
     <div class="product-template__unit-price">
       <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
-      {{ selected_variant.unit_price | money }}/{{ selected_variant.unit_price_measurement.reference_value }}{{ selected_variant.unit_price_measurement.reference_unit }}
+      {% render 'money', amount: selected_variant.unit_price %}/{{ selected_variant.unit_price_measurement.reference_value }}{{ selected_variant.unit_price_measurement.reference_unit }}
     </div>
   {%- endif -%}
   {%- if cart.taxes_included or shop.shipping_policy.body != blank -%}

@@ -3,21 +3,40 @@
 
   class CartTemplate extends HTMLElement {
     connectedCallback() {
-      if (this._initialized) return;
-      this._initialized = true;
+      this.lifecycle = new AbortController();
+      var signal = this.lifecycle.signal;
       this.sectionId = this.getSectionId();
-      this.pendingUpdate = null;
       this.updateController = null;
+      this.updateQueue = Promise.resolve();
       this.cacheElements();
 
+      var self = this;
       var cartEvents = (themeConfig.cart && themeConfig.cart.events) || {};
       this.quantityEvent = cartEvents.quantity_changed || 'cart-quantity-changed';
       this.updatedEvent = cartEvents.updated || 'cart:updated';
+      this.debouncedUpdate = ThemeUtils.debounceKeyed(function(detail) {
+        self.enqueueUpdate(detail);
+      }, 400);
 
-      this.addEventListener(this.quantityEvent, this.handleQuantityChange.bind(this));
-      this.addEventListener(cartEvents.item_delete || 'cart-item-deleted', this.handleDelete.bind(this));
-      this.addEventListener('change', this.handleFieldChange.bind(this));
-      document.addEventListener(this.updatedEvent, this.handleExternalUpdate.bind(this));
+      this.addEventListener(this.quantityEvent, this.handleQuantityChange.bind(this), { signal: signal });
+      this.addEventListener(cartEvents.item_delete || 'cart-item-deleted', this.handleDelete.bind(this), { signal: signal });
+      this.addEventListener('change', this.handleFieldChange.bind(this), { signal: signal });
+      document.addEventListener(this.updatedEvent, this.handleExternalUpdate.bind(this), { signal: signal });
+    }
+
+    disconnectedCallback() {
+      if (this.lifecycle) this.lifecycle.abort();
+      if (this.debouncedUpdate) this.debouncedUpdate.cancel();
+      if (this.updateController) this.updateController.abort();
+    }
+
+    enqueueUpdate(detail) {
+      var self = this;
+      this.updateQueue = this.updateQueue.then(function() {
+        return self.updateCart(detail);
+      }).catch(function(error) {
+        self.showError(error && error.message);
+      });
     }
 
     cacheElements() {
@@ -44,17 +63,14 @@
     }
 
     handleQuantityChange(event) {
-      if (!event.detail) return;
-      clearTimeout(this.pendingUpdate);
-      var detail = event.detail;
-      var self = this;
-      this.pendingUpdate = setTimeout(function() {
-        self.updateCart(detail);
-      }, 400);
+      if (!event.detail || !event.detail.key) return;
+      this.debouncedUpdate(event.detail.key, event.detail);
     }
 
     handleDelete(event) {
-      if (event.detail) this.updateCart(event.detail);
+      if (!event.detail || !event.detail.key) return;
+      this.debouncedUpdate.cancel(event.detail.key);
+      this.enqueueUpdate(event.detail);
     }
 
     handleFieldChange(event) {
@@ -97,34 +113,37 @@
     }
 
     async updateCart(params) {
-      var line = Number(params.line);
+      var key = params.key;
       var quantity = Number(params.quantity);
-      if (!line || Number.isNaN(quantity)) return;
+      if (!key || Number.isNaN(quantity)) return;
 
-      if (this.updateController) this.updateController.abort();
+      var lineItem = this.findLine(key);
+      if (!lineItem) return;
+      var line = Number(lineItem.dataset.lineItem);
       this.updateController = new AbortController();
       var controller = this.updateController;
       this.setUpdating(true);
-      var lineItem = this.querySelector('cart-item[data-line-item="' + line + '"]');
-      var titleEl = lineItem ? lineItem.querySelector('.cart-item__title') : null;
+      var titleEl = lineItem.querySelector('.cart-item__title');
       var title = titleEl ? titleEl.textContent.trim() : '';
       var focusSelector = this.focusSelector(document.activeElement);
 
       try {
-        var cart = await this.requestCart(this.getCartRoute('change'), { line: line, quantity: quantity }, 'error', controller.signal);
-        var updatedItem = cart.items[line - 1];
+        var cart = await this.requestCart(this.getCartRoute('change'), { id: key, quantity: quantity }, 'error', controller.signal);
+        var updatedItem = cart.items.find(function(item) {
+          return item.key === key;
+        });
 
         if (quantity > 0 && updatedItem && updatedItem.quantity !== quantity) {
           this.showQuantityError(updatedItem.quantity);
         }
 
         await this.refreshSection(controller.signal);
-        this.restoreFocus(line, quantity === 0, focusSelector);
+        this.restoreFocus(key, line, quantity === 0, focusSelector);
         this.announceChange(cart, quantity === 0 ? title : (updatedItem ? updatedItem.product_title : title), quantity === 0 ? null : (updatedItem ? updatedItem.quantity : quantity));
         await updateCartData(cart, { source: this });
       } catch (error) {
         if (error.name === 'AbortError') return;
-        this.restoreQuantity(line);
+        this.restoreQuantity(key);
         this.showError(error.message || this.getString('error'));
       } finally {
         if (this.updateController === controller) {
@@ -132,6 +151,10 @@
           this.setUpdating(false);
         }
       }
+    }
+
+    findLine(key) {
+      return this.querySelector('cart-item[data-line-key="' + key + '"]');
     }
 
     async refreshSection(signal) {
@@ -229,9 +252,9 @@
       return null;
     }
 
-    restoreFocus(line, removed, selector) {
+    restoreFocus(key, line, removed, selector) {
       var heading = this.querySelector('.cart-template__title');
-      var item = this.querySelector('cart-item[data-line-item="' + line + '"]');
+      var item = removed ? this.querySelector('cart-item[data-line-item="' + line + '"]') : this.findLine(key);
       var target = null;
       if (removed) {
         target = item ? this.visible(item, '[data-action="delete-item"]') : null;
@@ -277,8 +300,8 @@
       }, 60);
     }
 
-    restoreQuantity(line) {
-      var lineItem = this.querySelector('[data-line-item="' + line + '"]');
+    restoreQuantity(key) {
+      var lineItem = this.findLine(key);
       var input = lineItem ? lineItem.querySelector('input[type="number"]') : null;
       if (input && input.dataset.confirmedValue) input.value = input.dataset.confirmedValue;
     }
@@ -314,12 +337,12 @@
       event.preventDefault();
       var message = ((themeConfig.strings || {}).cart || {}).removeConfirm;
       if (message && !window.confirm(message)) return;
-      var line = Number(this.dataset.lineItem);
-      if (!line) return;
+      var key = this.dataset.lineKey;
+      if (!key) return;
       var eventName = ((themeConfig.cart || {}).events || {}).item_delete || 'cart-item-deleted';
       this.dispatchEvent(new CustomEvent(eventName, {
         bubbles: true,
-        detail: { line: line, quantity: 0 }
+        detail: { key: key, quantity: 0 }
       }));
     }
   }

@@ -11,13 +11,13 @@
 -%}
 <div class="cart-line-price">
   {%- if is_line_sale -%}
-    <del class="cart-line-price__original">{{ item.original_line_price | money }}</del>
+    <del class="cart-line-price__original">{%- render 'money', amount: item.original_line_price -%}</del>
   {%- endif -%}
-  <strong class="cart-line-price__final{% if is_line_sale %} cart-line-price__final--sale{% endif %}">{{ item.final_line_price | money }}</strong>
+  <strong class="cart-line-price__final{% if is_line_sale %} cart-line-price__final--sale{% endif %}">{%- render 'money', amount: item.final_line_price -%}</strong>
   {%- if item.unit_price != blank -%}
     <span class="cart-line-price__unit">
       <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
-      {{ item.unit_price | money }}/{{ item.unit_price_measurement.reference_value }}{{ item.unit_price_measurement.reference_unit }}
+      {% render 'money', amount: item.unit_price %}/{{ item.unit_price_measurement.reference_value }}{{ item.unit_price_measurement.reference_unit }}
     </span>
   {%- endif -%}
 </div>

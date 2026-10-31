@@ -15,7 +15,7 @@
 >
   <div class="{% if section.settings.section_width == 'fixed' %}page-width{% endif %}">
     {%- if section.settings.heading != blank -%}
-      <div class="page-width">
+      <div{% unless section.settings.section_width == 'fixed' %} class="page-width"{% endunless %}>
         <div class="section-hotspot__head">
           <{{ section.settings.heading_tag }} class="section-hotspot__heading heading-size-{{ section.settings.heading_size }}">
             {{- section.settings.heading -}}
@@ -71,7 +71,7 @@
                 {%- endif -%}
                 <div class="section-hotspot__tooltip-info">
                   <span class="section-hotspot__tooltip-title">{{ hotspot_product.title | escape }}</span>
-                  <span class="section-hotspot__tooltip-price">{{ hotspot_product.price | money }}</span>
+                  <span class="section-hotspot__tooltip-price">{%- render 'money', amount: hotspot_product.price -%}</span>
                 </div>
               </a>
             {%- else -%}
@@ -93,6 +93,7 @@
 
 <script>
 (function() {
+  var ac = new AbortController();
   var dots = document.querySelectorAll('#section-{{ section.id }} [data-hotspot]');
   var productCache = {};
 
@@ -234,7 +235,10 @@
       btn.focus();
     });
   });
-  document.addEventListener('click', closeAll);
+  document.addEventListener('click', closeAll, { signal: ac.signal });
+  document.addEventListener('shopify:section:unload', function(e) {
+    if (e.detail.sectionId === '{{ section.id }}') ac.abort();
+  }, { signal: ac.signal });
 })();
 </script>
 

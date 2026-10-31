@@ -22,7 +22,7 @@
               {{ block.settings.icon | image_url: width: 48 | image_tag: loading: 'lazy' }}
             </div>
           {%- elsif block.settings.emoji != blank -%}
-            <span class="section-trust__emoji">{{ block.settings.emoji }}</span>
+            <span class="section-trust__emoji" aria-hidden="true">{{ block.settings.emoji }}</span>
           {%- endif -%}
           <div class="section-trust__text-wrap">
             {%- if block.settings.heading != blank -%}

@@ -117,7 +117,8 @@
           {%- if link.type == 'collection_link' and link.object != blank -%}
             {%- assign collection = link.object -%}
             {%- assign lazyload = 'lazy' -%}
-            {%- if displayed_count <= columns_desktop -%}{%- assign lazyload = 'eager' -%}{%- endif -%}
+            {%- if displayed_count < columns_desktop -%}{%- assign lazyload = 'eager' -%}{%- endif -%}
+            {%- assign displayed_count = displayed_count | plus: 1 -%}
             {%- assign fetchpriority = 'auto' -%}
             {%- if displayed_count == 1 -%}{%- assign fetchpriority = 'high' -%}{%- endif -%}
             {%- capture item_url -%}{{ shop.url }}{{ collection.url }}{%- endcapture -%}

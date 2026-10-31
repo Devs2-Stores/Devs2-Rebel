@@ -87,10 +87,10 @@
         {%- if quickview_is_contact -%}
           {{ 'products.product.price.contact' | t }}
         {%- else -%}
-          {%- if settings.price_currency_code_enabled -%}{{ selected_variant.price | money_with_currency }}{%- else -%}{{ selected_variant.price | money }}{%- endif -%}
+          {%- render 'money', amount: selected_variant.price -%}
         {%- endif -%}
       </span>
-      <s class="quickview-product__price-compare{% unless quickview_on_sale %} hidden{% endunless %}" data-product-compare>{%- if quickview_on_sale -%}{{ selected_variant.compare_at_price | money }}{%- endif -%}</s>
+      <s class="quickview-product__price-compare{% unless quickview_on_sale %} hidden{% endunless %}" data-product-compare>{%- if quickview_on_sale -%}{%- render 'money', amount: selected_variant.compare_at_price -%}{%- endif -%}</s>
       <span class="quickview-product__price-sale{% unless quickview_on_sale %} hidden{% endunless %}" data-product-sale>{%- if quickview_on_sale -%}-{{ quickview_discount_percent }}%{%- endif -%}</span>
     </div>
 
@@ -111,10 +111,10 @@
         type="button"
         class="button-primary active quickview-product__add-btn"
         data-product-add
-        {% unless available or quickview_is_contact %}disabled{% endunless %}
+        {% unless available %}disabled{% endunless %}
       >
         <span data-add-text>
-          {%- if quickview_is_contact -%}
+          {%- if available and quickview_is_contact -%}
             {{ 'products.product.price.contact' | t }}
           {%- elsif available -%}
             {{ 'products.product.add_to_cart' | t }}

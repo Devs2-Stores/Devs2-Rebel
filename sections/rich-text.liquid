@@ -30,12 +30,18 @@
             </p>
 
           {%- when 'heading' -%}
-            <{{ block.settings.heading_tag }}
+            {%- liquid
+              assign heading_tag = block.settings.heading_tag
+              if template.name == 'index' and heading_tag == 'h1'
+                assign heading_tag = 'h2'
+              endif
+            -%}
+            <{{ heading_tag }}
               class="section-rich-text__heading heading-size-{{ block.settings.heading_size }}"
               {{ block.shopify_attributes }}
             >
               {{- block.settings.heading -}}
-            </{{ block.settings.heading_tag }}>
+            </{{ heading_tag }}>
 
           {%- when 'text' -%}
             <div

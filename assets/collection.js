@@ -384,6 +384,9 @@ class FacetFilters extends HTMLElement {
     if (newTabs && currentTabs) {
       currentTabs.innerHTML = newTabs.innerHTML;
     }
+    var newResultsHead = doc.querySelector('.search-template__results-header');
+    var currentResultsHead = document.querySelector('.search-template__results-header');
+    if (currentResultsHead) currentResultsHead.innerHTML = newResultsHead ? newResultsHead.innerHTML : '';
     var newSearchCount = doc.querySelector('.search-template__count');
     var currentSearchCount = document.querySelector('.search-template__count');
     if (newSearchCount && currentSearchCount) {
@@ -705,24 +708,12 @@ class FacetFilters extends HTMLElement {
         if (!pagination) return;
         panel.hidden = true;
         pagination.insertAdjacentElement('beforebegin', panel);
+        var tab = self.querySelector('[data-search-tab="' + type + '"]');
+        if (tab) {
+          tab.disabled = false;
+          tab.setAttribute('aria-controls', panel.id);
+        }
       }
-    });
-
-    var addCount = function(currentEl, newEl) {
-      var added = parseInt((newEl.textContent.match(/\d+/) || ['0'])[0], 10);
-      currentEl.textContent = currentEl.textContent.replace(/\d+/, function(m) { return String(parseInt(m, 10) + added); });
-      return added;
-    };
-    doc.querySelectorAll('[data-search-tab]').forEach(function(newTab) {
-      var currentTab = self.querySelector('[data-search-tab="' + newTab.getAttribute('data-search-tab') + '"]');
-      var currentSpan = currentTab && currentTab.querySelector('span');
-      var newSpan = newTab.querySelector('span');
-      if (!currentSpan || !newSpan) return;
-      if (addCount(currentSpan, newSpan) > 0) currentTab.disabled = false;
-    });
-    doc.querySelectorAll('[data-search-tab-count]').forEach(function(newInfo) {
-      var currentInfo = self.querySelector('[data-search-tab-count="' + newInfo.getAttribute('data-search-tab-count') + '"]');
-      if (currentInfo) addCount(currentInfo, newInfo);
     });
   }
 
@@ -858,7 +849,9 @@ class FacetFilters extends HTMLElement {
     if (!container) return;
 
     viewBtns.forEach(function(btn) {
-      btn.classList.toggle('collection-sort__view-btn--active', btn.getAttribute('data-view') === mode);
+      var active = btn.getAttribute('data-view') === mode;
+      btn.classList.toggle('collection-sort__view-btn--active', active);
+      btn.setAttribute('aria-pressed', String(active));
     });
 
     var listForced = mode === 'list' && this.densityEnabled && this.phoneQuery.matches;

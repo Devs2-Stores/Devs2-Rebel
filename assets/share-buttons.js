@@ -7,11 +7,17 @@
 
   class ShareButtons extends HTMLElement {
     connectedCallback() {
+      this.lifecycle = new AbortController();
       this.bindEvents();
+    }
+
+    disconnectedCallback() {
+      if (this.lifecycle) this.lifecycle.abort();
     }
 
     bindEvents() {
       var self = this;
+      var signal = this.lifecycle.signal;
 
       this.setupNativeShare();
 
@@ -19,13 +25,13 @@
         btn.addEventListener('click', function() {
           var url = this.dataset.url;
           self.copyToClipboard(url, this);
-        });
+        }, { signal: signal });
       });
 
       this.querySelectorAll('[data-native-share]').forEach(function(btn) {
         btn.addEventListener('click', function() {
           self.openNativeShare(this);
-        });
+        }, { signal: signal });
       });
     }
 
@@ -68,21 +74,33 @@
       input.style.left = '-9999px';
       document.body.appendChild(input);
       input.select();
-      document.execCommand('copy');
+      var ok = false;
+      try {
+        ok = document.execCommand('copy');
+      } catch (e) {}
       document.body.removeChild(input);
-      this.showCopiedState(button);
+      if (ok) this.showCopiedState(button);
+      else this.showCopyFailed(button);
+    }
+
+    showCopyFailed() {
+      if (typeof showToast === 'function') {
+        showToast((themeConfig.strings.share || {}).copyFailed, 'error');
+      }
     }
 
     showCopiedState(button) {
+      if (!button.dataset.copyLabel) button.dataset.copyLabel = button.getAttribute('aria-label');
+      clearTimeout(button._copiedTimer);
       button.classList.add('copied');
       button.setAttribute('aria-label', (themeConfig.strings.share || {}).success);
 
       if (typeof showToast === 'function') {
         showToast((themeConfig.strings.share || {}).success, 'success');
       }
-      setTimeout(function() {
+      button._copiedTimer = setTimeout(function() {
         button.classList.remove('copied');
-        button.setAttribute('aria-label', (themeConfig.strings.share || {}).copyArticleLink);
+        button.setAttribute('aria-label', button.dataset.copyLabel);
       }, 2000);
     }
   }

@@ -18,6 +18,7 @@
       this.closeButton = this.querySelector('[data-action="close-newsletter-popup"]');
       this.form = this.querySelector('form');
       this.emailInput = this.querySelector('input[name="contact[email]"]');
+      this.result = this.querySelector('[data-newsletter-result]');
 
       if (this.popup) {
         this.bindEvents();
@@ -44,6 +45,18 @@
 
     checkPopupStatus() {
       var self = this;
+      var own = this.form && this.form.id && window.location.hash === '#' + this.form.id;
+      if (this.result && !own) {
+        this.result.remove();
+        this.result = null;
+      }
+      if (this.result) {
+        if (this.result.classList.contains('newsletter-popup-message--success')) {
+          ThemeUtils.storage.set(this.storageKey, 'true');
+        }
+        this.showPopup();
+        return;
+      }
       var isClosed = ThemeUtils.storage.get(this.storageKey);
       if (!isClosed) {
         setTimeout(function() {
@@ -71,10 +84,7 @@
 
     handleFormSubmit(event) {
       var email = this.emailInput.value.trim();
-      if (this.validateEmail(email)) {
-        this.closePopup();
-        // Allow form submission normally
-      } else {
+      if (!this.validateEmail(email)) {
         event.preventDefault();
         if (typeof showToast === 'function' && this.dataset.msgEmail) showToast(this.dataset.msgEmail, 'error', 3000);
       }

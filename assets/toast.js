@@ -37,9 +37,8 @@
       this.container.appendChild(toast);
       this.toasts.push(toast);
 
-      requestAnimationFrame(function() {
-        toast.classList.add('toast-show');
-      });
+      void toast.offsetWidth;
+      toast.classList.add('toast-show');
 
       if (duration > 0) {
         setTimeout(function() {

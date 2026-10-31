@@ -67,11 +67,11 @@
   height: var(--list-media-h);
 }
 [data-list-layout='editorial'] .collection-card__image.collection-card__image,
-[data-list-layout='editorial'] .section-blog-posts__media.section-blog-posts__media,
 [data-list-layout='editorial'] .product-card__media-image.product-card__media-image {
   aspect-ratio: auto;
   height: var(--list-media-h);
 }
-[data-list-layout='editorial'] .section-blog-posts__media.section-blog-posts__media {
+[data-list-layout='editorial'] .article-card__media-inner.article-card__media-inner {
+  aspect-ratio: auto;
   height: calc(var(--list-media-h) * 0.75);
 }

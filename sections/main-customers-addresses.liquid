@@ -23,7 +23,7 @@
                   {%- if address.id == customer.default_address.id -%}
                   <span class="addresses-template__badge">{{ 'customer.addresses.default' | t }}</span>
                   {%- endif -%}
-                  <p class="addresses-template__name">{{ address.last_name }} {{ address.first_name }}</p>
+                  <p class="addresses-template__name">{{ address.first_name | escape }} {{ address.last_name | escape }}</p>
                   {%- if address.company != blank -%}
                   <p class="addresses-template__detail"><strong>{{ 'customer.addresses.company' | t }}:</strong> {{ address.company }}</p>
                   {%- endif -%}
@@ -85,20 +85,20 @@
       {%- endif -%}
       <div class="form form-address">
         <div class="form-group">
-          <label for="edit_last_name_{{ address.id }}">
-            <span class="required">{{ 'customer.addresses.last_name' | t }}</span>
-            <input-field class="form-group-input">
-              {%- render 'icon', name: 'user' -%}
-              <input type="text" name="address[last_name]" id="edit_last_name_{{ address.id }}" placeholder="{{ 'customer.addresses.last_name' | t }}" value="{{ form.last_name }}" required autocapitalize="words" autocomplete="family-name" class="form-control">
-            </input-field>
-          </label>
-        </div>
-        <div class="form-group">
           <label for="edit_first_name_{{ address.id }}">
             <span class="required">{{ 'customer.addresses.first_name' | t }}</span>
             <input-field class="form-group-input">
               {%- render 'icon', name: 'user' -%}
               <input type="text" name="address[first_name]" id="edit_first_name_{{ address.id }}" placeholder="{{ 'customer.addresses.first_name' | t }}" value="{{ form.first_name }}" required autocapitalize="words" autocomplete="given-name" class="form-control">
+            </input-field>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="edit_last_name_{{ address.id }}">
+            <span class="required">{{ 'customer.addresses.last_name' | t }}</span>
+            <input-field class="form-group-input">
+              {%- render 'icon', name: 'user' -%}
+              <input type="text" name="address[last_name]" id="edit_last_name_{{ address.id }}" placeholder="{{ 'customer.addresses.last_name' | t }}" value="{{ form.last_name }}" required autocapitalize="words" autocomplete="family-name" class="form-control">
             </input-field>
           </label>
         </div>
@@ -216,20 +216,20 @@
       {%- endif -%}
       <div class="form form-address">
         <div class="form-group">
-          <label for="new_last_name">
-            <span class="required">{{ 'customer.addresses.last_name' | t }}</span>
-            <input-field class="form-group-input">
-              {%- render 'icon', name: 'user' -%}
-              <input type="text" name="address[last_name]" id="new_last_name" placeholder="{{ 'customer.addresses.last_name' | t }}" value="{{ form.last_name }}" required autocapitalize="words" autocomplete="family-name" class="form-control">
-            </input-field>
-          </label>
-        </div>
-        <div class="form-group">
           <label for="new_first_name">
             <span class="required">{{ 'customer.addresses.first_name' | t }}</span>
             <input-field class="form-group-input">
               {%- render 'icon', name: 'user' -%}
               <input type="text" name="address[first_name]" id="new_first_name" placeholder="{{ 'customer.addresses.first_name' | t }}" value="{{ form.first_name }}" required autocapitalize="words" autocomplete="given-name" class="form-control">
+            </input-field>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="new_last_name">
+            <span class="required">{{ 'customer.addresses.last_name' | t }}</span>
+            <input-field class="form-group-input">
+              {%- render 'icon', name: 'user' -%}
+              <input type="text" name="address[last_name]" id="new_last_name" placeholder="{{ 'customer.addresses.last_name' | t }}" value="{{ form.last_name }}" required autocapitalize="words" autocomplete="family-name" class="form-control">
             </input-field>
           </label>
         </div>

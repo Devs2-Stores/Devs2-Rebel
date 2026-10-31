@@ -21,17 +21,22 @@
 
         <h2 class="global-heading" id="newsletter-popup-title">{% if settings.newsletter_modal_heading != blank %}{{ settings.newsletter_modal_heading }}{% else %}{{ 'newsletter.button_label' | t }}{% endif %}</h2>
         <p class="global-content">{{ settings.newsletter_modal_description }}</p>
-        {%- form 'customer' -%}
+        {%- form 'customer', id: 'NewsletterPopupForm' -%}
         <input type="hidden" name="contact[tags]" value="newsletter">
         <div class="form-group">
           <label>
             <span class="visually-hidden">{{ 'newsletter.label' | t }}</span>
-            <input class="form-control newsletter-popup-input" title="{{ 'newsletter.label' | t }}" type="email" placeholder="{% if settings.newsletter_modal_placeholder != blank %}{{ settings.newsletter_modal_placeholder }}{% else %}{{ 'newsletter.label' | t }}{% endif %}" name="contact[email]" required autocomplete="email">
+            <input class="form-control newsletter-popup-input" title="{{ 'newsletter.label' | t }}" type="email" placeholder="{% if settings.newsletter_modal_placeholder != blank %}{{ settings.newsletter_modal_placeholder | escape }}{% else %}{{ 'newsletter.label' | t }}{% endif %}" name="contact[email]" required autocomplete="email" {% if form.errors %}aria-invalid="true" aria-describedby="NewsletterPopupError"{% endif %}>
           </label>
         </div>
         <div class="form-group">
-          <button class="button-primary active newsletter-popup-submit" type="submit" title="{{ 'newsletter.button_label' | t }}">{% if settings.newsletter_modal_button != blank %}{{ settings.newsletter_modal_button }}{% else %}{{ 'newsletter.button_label' | t }}{% endif %}</button>
+          <button class="button-primary active newsletter-popup-submit" type="submit" title="{{ 'newsletter.button_label' | t }}">{% if settings.newsletter_modal_button != blank %}{{ settings.newsletter_modal_button | escape }}{% else %}{{ 'newsletter.button_label' | t }}{% endif %}</button>
         </div>
+        {%- if form.posted_successfully? -%}
+          <p class="newsletter-popup-message newsletter-popup-message--success" role="status" data-newsletter-result>{{ 'general.newsletter.success' | t }}</p>
+        {%- elsif form.errors -%}
+          <div class="newsletter-popup-message newsletter-popup-message--error" id="NewsletterPopupError" role="alert" data-newsletter-result>{{ form.errors | default_errors }}</div>
+        {%- endif -%}
         {%- endform -%}
       </div>
     </div>

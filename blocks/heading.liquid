@@ -9,6 +9,9 @@
 
 {%- liquid
   assign heading_tag = block.settings.tag
+  if template.name == 'index' and heading_tag == 'h1'
+    assign heading_tag = 'h2'
+  endif
   assign heading_classes = 'block-heading block-heading--' | append: block.settings.style
   assign heading_classes = heading_classes | append: ' block-width--' | append: block.settings.width
   if block.settings.style == 'heading'

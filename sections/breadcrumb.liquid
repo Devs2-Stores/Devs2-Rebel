@@ -76,7 +76,7 @@
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
           <span class="breadcrumb__separator" aria-hidden="true">{{ section.settings.separator }}</span>
           <a class="breadcrumb__link" itemprop="item" href="{{ bc_collection_url }}">
-            <span itemprop="name">{{ bc_collection_title }}</span>
+            <span itemprop="name">{{ bc_collection_title | escape }}</span>
           </a>
           <meta itemprop="position" content="2">
         </li>

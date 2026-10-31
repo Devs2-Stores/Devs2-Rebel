@@ -13,9 +13,9 @@
     <h3 class="predictive-search__group-title" id="ps-queries">
       {{ 'templates.search.suggestions' | t }}
     </h3>
-    <ul class="predictive-search__list" role="group" aria-labelledby="ps-queries">
+    <ul class="predictive-search__list" aria-labelledby="ps-queries">
       {%- for query in predictive_search.resources.queries -%}
-      <li class="predictive-search__item" role="option">
+      <li class="predictive-search__item">
         <a href="{{ query.url }}" class="predictive-search__link predictive-search__link--query">
           {%- render 'icon', name: 'search' -%}
           <span>{{ query.styled_text }}</span>
@@ -31,9 +31,9 @@
     <h3 class="predictive-search__group-title" id="ps-products">
       {{ 'templates.search.products' | t }}
     </h3>
-    <ul class="predictive-search__list predictive-search__list--products" role="group" aria-labelledby="ps-products">
+    <ul class="predictive-search__list predictive-search__list--products" aria-labelledby="ps-products">
       {%- for product in predictive_search.resources.products -%}
-      <li class="predictive-search__item{% unless product.available %} predictive-search__item--sold-out{% endunless %}" role="option">
+      <li class="predictive-search__item{% unless product.available %} predictive-search__item--sold-out{% endunless %}">
         <a href="{{ product.url }}" class="predictive-search__link predictive-search__link--product">
           <div class="predictive-search__product-image">
             {%- if product.featured_image != blank -%}
@@ -62,9 +62,9 @@
               {%- if product.price == 0 -%}
                 {{ 'products.product.price.contact' | t }}
               {%- else -%}
-                {{ product.price | money }}
+                {%- render 'money', amount: product.price -%}
                 {%- if product.compare_at_price > product.price -%}
-                <del class="predictive-search__product-compare-price">{{ product.compare_at_price | money }}</del>
+                <del class="predictive-search__product-compare-price">{%- render 'money', amount: product.compare_at_price -%}</del>
                 {%- endif -%}
               {%- endif -%}
             </span>
@@ -85,9 +85,9 @@
     <h3 class="predictive-search__group-title" id="ps-collections">
       {{ 'templates.search.collections' | t }}
     </h3>
-    <ul class="predictive-search__list" role="group" aria-labelledby="ps-collections">
+    <ul class="predictive-search__list" aria-labelledby="ps-collections">
       {%- for collection in predictive_search.resources.collections -%}
-      <li class="predictive-search__item" role="option">
+      <li class="predictive-search__item">
         <a href="{{ collection.url }}" class="predictive-search__link predictive-search__link--collection">
           {%- if collection.featured_image != blank -%}
           <div class="predictive-search__collection-image">
@@ -112,9 +112,9 @@
     <h3 class="predictive-search__group-title" id="ps-articles">
       {{ 'templates.search.articles' | t }}
     </h3>
-    <ul class="predictive-search__list" role="group" aria-labelledby="ps-articles">
+    <ul class="predictive-search__list" aria-labelledby="ps-articles">
       {%- for article in predictive_search.resources.articles -%}
-      <li class="predictive-search__item" role="option">
+      <li class="predictive-search__item">
         <a href="{{ article.url }}" class="predictive-search__link predictive-search__link--article">
           <span>
             <strong>{{ article.title | escape }}</strong>
@@ -134,9 +134,9 @@
     <h3 class="predictive-search__group-title" id="ps-pages">
       {{ 'templates.search.pages' | t }}
     </h3>
-    <ul class="predictive-search__list" role="group" aria-labelledby="ps-pages">
+    <ul class="predictive-search__list" aria-labelledby="ps-pages">
       {%- for page in predictive_search.resources.pages -%}
-      <li class="predictive-search__item" role="option">
+      <li class="predictive-search__item">
         <a href="{{ page.url }}" class="predictive-search__link predictive-search__link--page">
           <span>{{ page.title | escape }}</span>
         </a>
@@ -167,12 +167,12 @@
     {%- for link in predictive_content_menu.links -%}
       {%- assign link_title_downcase = link.title | downcase -%}
       {%- if link.url contains '/blogs' and link_title_downcase contains search_terms_downcase -%}
-        <li class="predictive-search__item" role="option"><a href="{{ link.url }}" class="predictive-search__link predictive-search__link--blog"><span>{{ link.title | escape }}</span></a></li>
+        <li class="predictive-search__item"><a href="{{ link.url }}" class="predictive-search__link predictive-search__link--blog"><span>{{ link.title | escape }}</span></a></li>
       {%- endif -%}
       {%- for child_link in link.links -%}
         {%- assign child_title_downcase = child_link.title | downcase -%}
         {%- if child_link.url contains '/blogs' and child_title_downcase contains search_terms_downcase -%}
-          <li class="predictive-search__item" role="option"><a href="{{ child_link.url }}" class="predictive-search__link predictive-search__link--blog"><span>{{ child_link.title | escape }}</span></a></li>
+          <li class="predictive-search__item"><a href="{{ child_link.url }}" class="predictive-search__link predictive-search__link--blog"><span>{{ child_link.title | escape }}</span></a></li>
         {%- endif -%}
       {%- endfor -%}
     {%- endfor -%}
@@ -180,14 +180,15 @@
   {%- if blog_result_count > 0 -%}
   <div class="predictive-search__group predictive-search__group--blogs" data-search-group="articles">
     <h3 class="predictive-search__group-title" id="ps-blogs">{{ 'templates.search.blogs' | t }}</h3>
-    <ul class="predictive-search__list" role="group" aria-labelledby="ps-blogs">
+    <ul class="predictive-search__list" aria-labelledby="ps-blogs">
       {{ blog_results }}
     </ul>
   </div>
   {%- endif -%}
 
   {%- liquid
-    assign total = predictive_search.resources.products.size | plus: predictive_search.resources.collections.size | plus: predictive_search.resources.articles.size | plus: predictive_search.resources.pages.size | plus: predictive_search.resources.queries.size | plus: blog_result_count
+    assign total_results = predictive_search.resources.products.size | plus: predictive_search.resources.collections.size | plus: predictive_search.resources.articles.size | plus: predictive_search.resources.pages.size | plus: blog_result_count
+    assign total = total_results | plus: predictive_search.resources.queries.size
   -%}
   {%- if total == 0 -%}
   <div class="predictive-search__no-results">
@@ -220,22 +221,11 @@
   </div>
   {%- endif -%}
 
-  {%- if total > 0 -%}
+  {%- if total_results > 0 -%}
     <a class="predictive-search__view-all" href="{{ routes.search_url }}?q={{ predictive_search.terms | url_encode }}&type=product,article,page">
-      {{ 'templates.search.view_all_results' | t: count: total, terms: predictive_search.terms }}
+      {{ 'templates.search.view_all_results' | t: count: total_results, terms: predictive_search.terms }}
     </a>
   {%- endif -%}
 
 </div>
-
-<span class="predictive-search__status sr-only" role="status" aria-live="polite">
-  {%- liquid
-    assign total_results = predictive_search.resources.products.size | plus: predictive_search.resources.collections.size | plus: predictive_search.resources.articles.size | plus: predictive_search.resources.pages.size | plus: blog_result_count
-    if total_results > 0
-      echo 'templates.search.results_count' | t: count: total_results
-    else
-      echo 'templates.search.no_results_for' | t: terms: predictive_search.terms
-    endif
-  -%}
-</span>
 {%- endif -%}

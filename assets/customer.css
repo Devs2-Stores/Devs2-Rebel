@@ -673,6 +673,10 @@ auth-form.recover-layout .form-login {
   max-width: 36rem;
   margin: 0 auto;
 }
+.change-password-template :not(.account-template__grid) > .change-password-template__wrapper {
+  max-width: 36rem;
+  margin: 0 auto;
+}
 
 .activate-account-template__form,
 .change-password-template__form,
@@ -1181,7 +1185,7 @@ auth-form.recover-layout .form-login {
   margin-bottom: var(--space-xs);
 }
 
-.order-template__product-title:hover {
+a.order-template__product-title:hover {
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }
@@ -1378,12 +1382,13 @@ address-modal.address-modal-wrapper {
   z-index: var(--z-modal, 9000);
   opacity: 0;
   visibility: hidden;
-  transition: opacity var(--transition-base), visibility var(--transition-base);
+  transition: opacity var(--transition-base), visibility 0s linear var(--duration-medium);
 }
 
 address-modal.address-modal-wrapper.show {
   opacity: 1;
   visibility: visible;
+  transition: opacity var(--transition-base), visibility 0s;
 }
 
 address-modal.address-modal-wrapper.show .address-modal-overlay {

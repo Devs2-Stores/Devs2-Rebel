@@ -7,7 +7,7 @@
 {%- assign recommendation_collection = settings.predictive_search_recommendation_collection | default: collections.all -%}
 {%- if settings.search_suggest_idle_products_enabled and recommendation_collection.products.size > 0 -%}
 <h3 id="ps-idle-recommended">{{ 'templates.search.recommended_products' | t }}</h3>
-<ul class="predictive-search__list predictive-search__grid" role="group" aria-labelledby="ps-idle-recommended">
+<ul class="predictive-search__list predictive-search__grid" aria-labelledby="ps-idle-recommended">
   {%- for product in recommendation_collection.products limit: 4 -%}
     {%- render 'predictive-search-card', product: product -%}
   {%- endfor -%}

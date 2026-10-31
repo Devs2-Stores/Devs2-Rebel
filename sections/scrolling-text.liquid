@@ -26,7 +26,7 @@
         <div class="section-marquee__segment" aria-hidden="{% if i > 1 %}true{% else %}false{% endif %}">
           {%- for block in section.blocks -%}
             {%- if block.settings.text != blank -%}
-              <span class="section-marquee__item heading-size-{{ section.settings.text_size }}" {{ block.shopify_attributes }}>
+              <span class="section-marquee__item heading-size-{{ section.settings.text_size }}" {% if i == 1 %}{{ block.shopify_attributes }}{% endif %}>
                 {{- block.settings.text -}}
               </span>
               <span class="section-marquee__sep" aria-hidden="true">{{ separator }}</span>

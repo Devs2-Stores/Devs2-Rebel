@@ -8,7 +8,7 @@ search-modal.search-modal-wrapper {
   z-index: var(--z-modal, 9000);
   opacity: 0;
   visibility: hidden;
-  transition: opacity var(--duration-medium), visibility var(--duration-medium);
+  transition: opacity var(--duration-medium) var(--ease-out), visibility var(--duration-medium);
 }
 search-modal.search-modal-wrapper.show {
   opacity: 1;
@@ -26,7 +26,7 @@ search-modal .search-modal-overlay {
   background: var(--bg-overlay);
   border: none;
   padding: 0;
-  transition: opacity var(--duration-medium);
+  transition: opacity var(--duration-medium) var(--ease-out);
   opacity: 0;
 }
 search-modal .search-modal-panel {
@@ -198,8 +198,7 @@ search-modal .search-modal-panel .search-modal-results::-webkit-scrollbar-track 
 search-modal .search-modal-panel .search-modal-results::-webkit-scrollbar-thumb {
   background: var(--color-hairline);
 }
-search-modal .search-modal-panel .search-modal-results .search-modal-results-content .search-modal-empty,
-search-modal .search-modal-panel .search-modal-results .search-modal-results-content .search-modal-no-results {
+search-modal .search-modal-panel .search-modal-results .search-modal-results-content .search-modal-empty {
   text-align: center;
   padding: 3rem 0;
   color: var(--color-muted);
@@ -336,97 +335,6 @@ search-modal .search-modal-panel .search-modal-results .search-modal-results-con
   text-align: center;
   padding: 3rem 0;
   color: var(--color-error-text);
-}
-search-modal .search-modal-panel .search-modal-results .search-modal-results-content .search-modal-products .search-modal-products-header {
-  margin-bottom: 1rem;
-}
-search-modal .search-modal-panel .search-modal-results .search-modal-results-content .search-modal-products .search-modal-products-header h3 {
-  font-size: var(--eyebrow-size, 0.75rem);
-  font-weight: var(--eyebrow-weight, 600);
-  text-transform: uppercase;
-  letter-spacing: var(--eyebrow-tracking, 0.14em);
-  color: var(--color-muted);
-}
-search-modal .search-modal-panel .search-modal-results .search-modal-results-content .search-modal-products .search-modal-products-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-search-modal .search-modal-panel .search-modal-results .search-modal-results-content .search-modal-products .search-modal-products-list > li + li {
-  margin-top: 0.5rem;
-}
-@media (hover: hover) {
-  search-modal .search-modal-panel .search-modal-results .search-modal-results-content .search-modal-products .search-modal-products-list .search-modal-product-item:hover .search-modal-product-image img {
-    transform: scale(1.03);
-  }
-}
-search-modal .search-modal-panel .search-modal-results .search-modal-results-content .search-modal-products .search-modal-products-list .search-modal-product-item:hover .search-modal-product-name {
-  color: var(--color-ink);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-search-modal .search-modal-panel .search-modal-results .search-modal-results-content .search-modal-products .search-modal-products-list .search-modal-product-item:hover .search-modal-product-arrow {
-  color: var(--color-ink);
-}
-search-modal .search-modal-panel .search-modal-results .search-modal-results-content .search-modal-products .search-modal-products-list .search-modal-product-item a {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.75rem;
-  border-radius: var(--card-corner-radius);
-  transition: background-color var(--transition-fast);
-  text-decoration: none;
-}
-search-modal .search-modal-panel .search-modal-results .search-modal-results-content .search-modal-products .search-modal-products-list .search-modal-product-item a:hover {
-  background: var(--color-gray-light);
-}
-search-modal .search-modal-panel .search-modal-results .search-modal-results-content .search-modal-products .search-modal-products-list .search-modal-product-item a:focus-visible {
-  outline: 2px solid var(--color-focus);
-  outline-offset: -2px;
-}
-search-modal .search-modal-panel .search-modal-results .search-modal-results-content .search-modal-products .search-modal-products-list .search-modal-product-item a .search-modal-product-image {
-  flex-shrink: 0;
-  width: 4rem;
-  height: 4rem;
-  overflow: hidden;
-  border-radius: var(--media-radius);
-  background: var(--color-gray-light);
-}
-search-modal .search-modal-panel .search-modal-results .search-modal-results-content .search-modal-products .search-modal-products-list .search-modal-product-item a .search-modal-product-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform var(--transition-base);
-}
-search-modal .search-modal-panel .search-modal-results .search-modal-results-content .search-modal-products .search-modal-products-list .search-modal-product-item a .search-modal-product-info {
-  flex: 1;
-  min-width: 0;
-}
-search-modal .search-modal-panel .search-modal-results .search-modal-results-content .search-modal-products .search-modal-products-list .search-modal-product-item a .search-modal-product-info .search-modal-product-name {
-  font-weight: var(--font-weight-medium);
-  font-size: 0.9375rem;
-  color: var(--color-ink);
-  margin: 0;
-}
-search-modal .search-modal-panel .search-modal-results .search-modal-results-content .search-modal-products .search-modal-products-list .search-modal-product-item a .search-modal-product-info .search-modal-product-vendor {
-  margin-top: 0.125rem;
-  font-size: var(--meta-size, 0.8125rem);
-  color: var(--color-muted);
-  margin-bottom: 0;
-}
-search-modal .search-modal-panel .search-modal-results .search-modal-results-content .search-modal-products .search-modal-products-list .search-modal-product-item a .search-modal-product-info .search-modal-product-price {
-  margin-top: 0.125rem;
-  font-size: 0.875rem;
-  font-weight: var(--font-weight-normal);
-  color: rgb(var(--color-price));
-  margin-bottom: 0;
-}
-search-modal .search-modal-panel .search-modal-results .search-modal-results-content .search-modal-products .search-modal-products-list .search-modal-product-item a .search-modal-product-arrow {
-  width: 1.125rem;
-  height: 1.125rem;
-  color: var(--color-muted);
-  transition: color var(--transition-fast);
-  flex-shrink: 0;
 }
 search-modal .search-modal-panel .search-modal-loading {
   position: absolute;
@@ -678,9 +586,6 @@ search-modal .search-modal-panel .search-modal-loading .search-modal-loading-con
   text-align: center;
   padding: 2rem 0;
   color: var(--color-muted);
-}
-.predictive-search__status {
-  display: none;
 }
 
 /* Idle state product cards */

@@ -7,44 +7,51 @@ class SearchTemplate extends HTMLElement {
     super();
     this.searchForm = null;
     this.searchInput = null;
-    this.results = null;
   }
 
   connectedCallback() {
+    this.lifecycle = new AbortController();
     this.cacheElements();
     this.bindEvents();
     this.focusSearchInput();
   }
 
+  disconnectedCallback() {
+    if (this.lifecycle) this.lifecycle.abort();
+  }
+
   cacheElements() {
     this.searchForm = this.querySelector('.search-template__form');
     this.searchInput = this.querySelector('.search-template__input');
-    this.results = this.querySelector('[data-search-results]');
     this.tabs = [...this.querySelectorAll('[data-search-tab]')];
   }
 
   bindEvents() {
+    const signal = this.lifecycle.signal;
     if (this.searchInput) {
-      this.searchInput.addEventListener('keydown', (e) => this.handleKeydown(e));
+      this.searchInput.addEventListener('keydown', (e) => this.handleKeydown(e), { signal });
     }
 
     if (this.searchForm) {
-      this.searchForm.addEventListener('submit', (e) => this.handleSubmit(e));
+      this.searchForm.addEventListener('submit', (e) => this.handleSubmit(e), { signal });
     }
-    this.tabs.forEach((tab) => tab.addEventListener('click', () => this.activateTab(tab.dataset.searchTab)));
+    this.tabs.forEach((tab) => tab.addEventListener('click', () => this.activateTab(tab.dataset.searchTab), { signal }));
     this.activateInitialTab();
     if (window.ThemeUtils) ThemeUtils.bindTablistKeys(this.tabs);
-    this.addEventListener('click', (e) => this.handlePagination(e));
     document.addEventListener('collection:filtered', () => {
       this.tabs = [...this.querySelectorAll('[data-search-tab]')];
-      this.tabs.forEach((tab) => tab.addEventListener('click', () => this.activateTab(tab.dataset.searchTab)));
+      this.tabs.forEach((tab) => tab.addEventListener('click', () => this.activateTab(tab.dataset.searchTab), { signal }));
       if (window.ThemeUtils) ThemeUtils.bindTablistKeys(this.tabs);
       this.activateInitialTab();
-    });
+    }, { signal });
   }
 
   activateInitialTab() {
-    const firstAvailable = this.tabs.find((tab) => Number(tab.querySelector('span')?.textContent || 0) > 0);
+    const firstAvailable = this.tabs.find((tab) => {
+      const n = (tab.querySelector('span') || {}).textContent;
+      const t = n ? n.trim() : '';
+      return !tab.disabled && (t === '' || Number(t) > 0);
+    });
     if (firstAvailable) this.activateTab(firstAvailable.dataset.searchTab);
   }
 
@@ -85,34 +92,6 @@ class SearchTemplate extends HTMLElement {
       e.preventDefault();
       this.searchInput.focus();
       return;
-    }
-  }
-
-  async handlePagination(e) {
-    if (this.querySelector('facet-filters')) return;
-    const link = e.target.closest('.search-template__pagination a');
-    if (!link || !this.results) return;
-    e.preventDefault();
-    const url = new URL(link.href, window.location.origin);
-    url.searchParams.set('section_id', this.results.dataset.sectionId);
-    this.results.setAttribute('aria-busy', 'true');
-    try {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error('Search pagination failed');
-      const html = await response.text();
-      const doc = new DOMParser().parseFromString(html, 'text/html');
-      const nextResults = doc.querySelector('[data-search-results]');
-      if (!nextResults) throw new Error('Search results section missing');
-      this.results.replaceWith(nextResults);
-      this.results = nextResults;
-      this.tabs = [...this.querySelectorAll('[data-search-tab]')];
-      this.activateInitialTab();
-      window.history.pushState({}, '', link.href);
-      window.scrollTo({ top: this.results.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' });
-    } catch (error) {
-      window.location.href = link.href;
-    } finally {
-      this.results.removeAttribute('aria-busy');
     }
   }
 }

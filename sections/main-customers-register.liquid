@@ -16,20 +16,20 @@
           <div class="form-error" role="alert">{{ form.errors | default_errors }}</div>
           {%- endif -%}
           <div class="form-group">
-            <label for="register-lastname">
-              <span class="required">{{ 'customer.register.last_name' | t }}</span>
-              <input-field class="form-group-input">
-                {%- render 'icon', name: 'user' -%}
-                <input type="text" id="register-lastname" class="form-control" name="customer[last_name]" required autocomplete="family-name" placeholder="{{ 'customer.register.last_name_placeholder' | t }}">
-              </input-field>
-            </label>
-          </div>
-          <div class="form-group">
             <label for="register-firstname">
               <span class="required">{{ 'customer.register.first_name' | t }}</span>
               <input-field class="form-group-input">
                 {%- render 'icon', name: 'user' -%}
                 <input type="text" id="register-firstname" class="form-control" name="customer[first_name]" required autocomplete="given-name" placeholder="{{ 'customer.register.first_name_placeholder' | t }}">
+              </input-field>
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="register-lastname">
+              <span class="required">{{ 'customer.register.last_name' | t }}</span>
+              <input-field class="form-group-input">
+                {%- render 'icon', name: 'user' -%}
+                <input type="text" id="register-lastname" class="form-control" name="customer[last_name]" required autocomplete="family-name" placeholder="{{ 'customer.register.last_name_placeholder' | t }}">
               </input-field>
             </label>
           </div>

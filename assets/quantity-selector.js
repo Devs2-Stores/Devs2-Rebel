@@ -79,12 +79,12 @@
       this.onButtonUpdates();
 
       var lineItemEl = this.closest('[data-line-item]');
-      var lineItem = lineItemEl ? parseInt(lineItemEl.dataset.lineItem) : null;
+      var lineKey = lineItemEl ? lineItemEl.dataset.lineKey || null : null;
 
       this.dispatchEvent(new CustomEvent(themeConfig.cart.events.quantity_changed, {
         bubbles: true,
         detail: {
-          line: lineItem,
+          key: lineKey,
           quantity: parseInt(this.input.value)
         }
       }));

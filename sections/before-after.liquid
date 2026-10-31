@@ -82,6 +82,7 @@
 
 <script>
 (function() {
+  var ac = new AbortController();
   var el = document.querySelector('#section-{{ section.id }} [data-compare-slider]');
   if (!el) return;
   var handle = el.querySelector('[role="slider"]');
@@ -116,10 +117,13 @@
   el.addEventListener('touchstart', function(e) {
     startDrag(e.touches[0].clientX);
   }, { passive: true });
-  document.addEventListener('mousemove', function(e) { if (dragging) update(e.clientX); });
-  document.addEventListener('touchmove', function(e) { if (dragging) update(e.touches[0].clientX); }, { passive: true });
-  document.addEventListener('mouseup', stopDrag);
-  document.addEventListener('touchend', stopDrag);
+  document.addEventListener('mousemove', function(e) { if (dragging) update(e.clientX); }, { signal: ac.signal });
+  document.addEventListener('touchmove', function(e) { if (dragging) update(e.touches[0].clientX); }, { passive: true, signal: ac.signal });
+  document.addEventListener('mouseup', stopDrag, { signal: ac.signal });
+  document.addEventListener('touchend', stopDrag, { signal: ac.signal });
+  document.addEventListener('shopify:section:unload', function(e) {
+    if (e.detail.sectionId === '{{ section.id }}') ac.abort();
+  }, { signal: ac.signal });
 
   if (handle) {
     handle.addEventListener('keydown', function(e) {

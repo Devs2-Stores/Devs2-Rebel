@@ -33,10 +33,6 @@
 .section-layered__layer {
   position: absolute; border-radius: var(--media-radius); overflow: hidden;
   box-shadow: none;
-  transition: transform var(--transition-slow);
-}
-@media (hover: hover) {
-  .section-layered__layer:hover { transform: translateY(-2px); }
 }
 
 .section-layered__layer--1 {
@@ -47,9 +43,6 @@
 }
 .section-layered__layer--3 {
   width: 35%; top: 50%; left: 55%; transform: translateY(-50%); z-index: 3;
-}
-@media (hover: hover) {
-  .section-layered__layer--3:hover { transform: translateY(calc(-50% - 2px)); }
 }
 
 .section-layered__img { width: 100%; height: auto; display: block; }

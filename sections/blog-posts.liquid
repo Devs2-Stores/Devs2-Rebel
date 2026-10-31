@@ -1,4 +1,5 @@
 {{ 'section-blog-posts.css' | asset_url | stylesheet_tag }}
+{{ 'article-card.css' | asset_url | stylesheet_tag }}
 {%- if section.settings.layout == 'carousel' or section.settings.layout == 'editorial' -%}
   {{ 'section-list-layouts.css' | asset_url | stylesheet_tag }}
 {%- endif -%}
@@ -60,34 +61,17 @@
         {%- if layout != 'grid' %} data-list-layout="{{ layout }}" style="--list-cols-d: {{ list_cols_d }}; --list-cols-m: 1; --list-ed-cols-m: 1;"{% endif %}
       >
         {%- for article in blog.articles limit: posts_to_show -%}
-          <article class="section-blog-posts__card">
-            {%- if article.image -%}
-              <a href="{{ article.url }}" class="section-blog-posts__media">
-                {{ article.image | image_url: width: 600 | image_tag:
-                  widths: '300, 400, 600',
-                  sizes: '(max-width: 749px) 100vw, 33vw',
-                  loading: 'lazy', class: 'section-blog-posts__img'
-                }}
-              </a>
-            {%- endif -%}
-            <div class="section-blog-posts__info">
-              {%- if section.settings.show_date -%}
-                <time class="section-blog-posts__date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
-                  {{ article.published_at | date: format: 'abbreviated_date' }}
-                </time>
-              {%- endif -%}
-              <h3 class="section-blog-posts__title">
-                <a href="{{ article.url }}">{{ article.title | escape }}</a>
-              </h3>
-              {%- if section.settings.show_excerpt and article.excerpt != blank -%}
-                <p class="section-blog-posts__excerpt">{{ article.excerpt | strip_html | truncate: 120 }}</p>
-              {%- endif -%}
-              <a href="{{ article.url }}" class="section-blog-posts__read-more">
-                {{ 'blogs.article.read_more' | t }}
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-              </a>
-            </div>
-          </article>
+          {%- render 'article-card',
+            article: article,
+            layout: 'grid',
+            lazyload: 'lazy',
+            show_date: section.settings.show_date,
+            show_author: false,
+            show_excerpt: section.settings.show_excerpt,
+            show_read_more: true,
+            show_category: false,
+            heading_tag: 'h3'
+          -%}
         {%- endfor -%}
       </div>
     {%- elsif request.design_mode -%}

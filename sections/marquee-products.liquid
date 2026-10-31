@@ -19,12 +19,14 @@
     --mp-mb: {{ section.settings.padding_bottom_mobile }}px;
   "
 >
-  {%- if section.settings.heading != blank -%}
+  {%- if section.settings.heading != blank or collection != blank -%}
     <div class="page-width">
       <div class="section-marquee-products__head">
-        <{{ section.settings.heading_tag }} class="section-marquee-products__heading heading-size-{{ section.settings.heading_size }}">
-          {{- section.settings.heading -}}
-        </{{ section.settings.heading_tag }}>
+        {%- if section.settings.heading != blank -%}
+          <{{ section.settings.heading_tag }} class="section-marquee-products__heading heading-size-{{ section.settings.heading_size }}">
+            {{- section.settings.heading -}}
+          </{{ section.settings.heading_tag }}>
+        {%- endif -%}
         <div class="section-marquee-products__actions">
           {%- if collection != blank -%}
             <a href="{{ collection.url }}" class="section-marquee-products__view-all">

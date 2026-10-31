@@ -32,8 +32,8 @@
     <div class="section-collapsible__list">
       {%- assign row_index = 0 -%}
       {%- for block in section.blocks -%}
-        {%- assign row_index = row_index | plus: 1 -%}
         {%- if block.settings.heading == blank -%}{%- continue -%}{%- endif -%}
+        {%- assign row_index = row_index | plus: 1 -%}
         <details class="section-collapsible__item" {{ block.shopify_attributes }}{% if section.settings.open_first and row_index == 1 %} open{% endif %}>
           <summary class="section-collapsible__trigger">
             <span class="section-collapsible__trigger-text heading-size-{{ block.settings.heading_size }}">

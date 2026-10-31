@@ -4,7 +4,7 @@
       {%- render 'icon', name: 'user' -%}
     </div>
     <p class="customer-sidebar__name">
-      {{ 'customer.sidebar.greeting' | t }}, <b>{{ customer.last_name }} {{ customer.first_name }}</b>
+      {{ 'customer.sidebar.greeting' | t }}, <b>{{ customer.first_name | escape }} {{ customer.last_name | escape }}</b>
     </p>
   </div>
   <nav class="customer-sidebar__nav" aria-label="{{ 'customer.sidebar.nav_label' | t }}">

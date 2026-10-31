@@ -79,6 +79,10 @@
 (function() {
   var container = document.getElementById('section-{{ section.id }}');
   if (!container) return;
+  function sync() {
+    var items = container.querySelectorAll('[data-promo-banner]');
+    container.hidden = items.length > 0 && Array.prototype.every.call(items, function (item) { return item.style.display === 'none'; });
+  }
   container.querySelectorAll('[data-promo-banner]').forEach(function(el) {
     var id = el.getAttribute('data-promo-id');
     var key = 'promo_dismissed_' + id;
@@ -88,9 +92,11 @@
     var btn = el.querySelector('[data-promo-close]');
     if (btn) btn.addEventListener('click', function() {
       el.style.display = 'none';
+      sync();
       try { sessionStorage.setItem(key, '1'); } catch (e) {}
     });
   });
+  sync();
 })();
 </script>
 {%- endif -%}

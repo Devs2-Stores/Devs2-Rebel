@@ -15,7 +15,7 @@
 				<div class="search-modal-form-inner">
 					<input type="hidden" name="type" value="product,article,page">
 					<label for="search-modal-input" class="sr-only">{{ 'general.search.search' | t }}</label>
-					<input type="text" name="q" id="search-modal-input" class="search-modal-input" placeholder="{{ 'templates.search.placeholder' | t }}" autocomplete="off" autofocus role="combobox" aria-expanded="false" aria-controls="predictive-search-results" aria-haspopup="listbox">
+					<input type="text" name="q" id="search-modal-input" class="search-modal-input" placeholder="{{ 'templates.search.placeholder' | t }}" autocomplete="off" autofocus aria-controls="search-modal-results-content">
 					<button type="button" class="search-modal-clear hidden" data-action="clear-search" aria-label="{{ 'general.search.reset' | t }}">
 						{%- render 'icon', name: 'close' -%}
 					</button>
@@ -26,7 +26,7 @@
 			</form>
 		</div>
 		<div class="search-modal-results" aria-live="polite" aria-atomic="false">
-			<div class="search-modal-results-content" role="listbox" aria-label="{{ 'templates.search.suggestions' | t }}">
+			<div class="search-modal-results-content" id="search-modal-results-content" role="region" aria-label="{{ 'templates.search.suggestions' | t }}">
 				<div class="search-modal-initial">
 					{%- assign trending_terms = settings.predictive_search_trending_terms | split: ',' -%}
 					{%- assign predictive_content_menu = settings.predictive_search_featured_menu | default: linklists['main-menu'] -%}

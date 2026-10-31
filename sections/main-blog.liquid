@@ -359,7 +359,6 @@
                   {%- endif -%}
 
                 {%- when 'sidebar_banner' -%}
-                  {%- assign rendered_sidebar_blocks = rendered_sidebar_blocks | plus: 1 -%}
                   {%- liquid
                     assign default_sidebar_banner_alt = 'sections.main_blog.sidebar_banner_alt' | t
                     assign banner_alt = block.settings.image.alt | default: block.settings.heading | default: default_sidebar_banner_alt
@@ -369,6 +368,8 @@
                       assign has_banner_text = true
                     endif
                   -%}
+                  {%- if block.settings.image != blank or has_banner_text -%}
+                  {%- assign rendered_sidebar_blocks = rendered_sidebar_blocks | plus: 1 -%}
                   <div
                     class="blog-sidebar__section blog-sidebar__banner-section"
                     style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;"
@@ -412,6 +413,9 @@
                       </div>
                     {%- endif -%}
                   </div>
+                  {%- elsif request.design_mode -%}
+                    <div class="blog-sidebar__section" {{ block.shopify_attributes }}></div>
+                  {%- endif -%}
               {%- endcase -%}
             {%- endfor -%}
             {%- if rendered_sidebar_blocks == 0 -%}

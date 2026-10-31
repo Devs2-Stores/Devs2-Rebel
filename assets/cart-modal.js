@@ -14,9 +14,15 @@
       var cartEvents = (themeConfig.cart && themeConfig.cart.events) || {};
       this.quantityEvent = cartEvents.quantity_changed || 'cart-quantity-changed';
       this.updatedEvent = cartEvents.updated || 'cart:updated';
-      this.debouncedUpdateQuantity = ThemeUtils.debounce(function(line, quantity) {
-        self.changeLine(line, quantity);
-      }, 400);
+      this.updateQueue = Promise.resolve();
+      this.queueChange = function(key, quantity) {
+        self.updateQueue = self.updateQueue.then(function() {
+          return self.changeLine(key, quantity);
+        }).catch(function(error) {
+          self.showError(error && error.message);
+        });
+      };
+      this.debouncedUpdateQuantity = ThemeUtils.debounceKeyed(this.queueChange, 400);
 
       this.addEventListener('click', function(event) {
         var closeButton = event.target.closest('[data-action="close-cart-modal"]');
@@ -24,16 +30,23 @@
         if (closeButton) self.close();
         if (removeButton) {
           event.preventDefault();
-          self.changeLine(Number(removeButton.dataset.line), 0);
+          var removeLine = removeButton.closest('[data-line-item]');
+          var removeKey = removeLine ? removeLine.dataset.lineKey : null;
+          if (removeKey) {
+            self.debouncedUpdateQuantity.cancel(removeKey);
+            self.queueChange(removeKey, 0);
+          }
         }
       });
       this.addEventListener('change', function(event) {
         if (event.target.matches('#cart-modal-note')) self.updateNote();
       });
       this.addEventListener(this.quantityEvent, function(event) {
-        if (!event.detail || !event.detail.line) return;
-        if (event.detail.quantity < 1) self.changeLine(event.detail.line, 0);
-        else self.debouncedUpdateQuantity(event.detail.line, event.detail.quantity);
+        if (!event.detail || !event.detail.key) return;
+        if (event.detail.quantity < 1) {
+          self.debouncedUpdateQuantity.cancel(event.detail.key);
+          self.queueChange(event.detail.key, 0);
+        } else self.debouncedUpdateQuantity(event.detail.key, event.detail.key, event.detail.quantity);
       });
 
       this.boundKeydown = function(event) {
@@ -52,6 +65,7 @@
     disconnectedCallback() {
       document.removeEventListener('keydown', this.boundKeydown);
       document.removeEventListener(this.updatedEvent, this.boundExternalUpdate);
+      if (this.debouncedUpdateQuantity) this.debouncedUpdateQuantity.cancel();
     }
 
     cacheElements() {
@@ -136,28 +150,31 @@
       return html;
     }
 
-    async changeLine(line, quantity) {
-      if (!line || Number.isNaN(quantity)) return;
-      if (this.updateController) this.updateController.abort();
+    async changeLine(key, quantity) {
+      if (!key || Number.isNaN(quantity)) return;
+      var lineItem = this.lineByKey(key);
+      if (!lineItem) return;
+      var line = Number(lineItem.dataset.lineItem);
       this.updateController = new AbortController();
       var controller = this.updateController;
       this.classList.add('is-updating');
-      var lineItem = this.lineElement(line);
-      var titleEl = lineItem ? lineItem.querySelector('.cart-modal-item__title') : null;
+      var titleEl = lineItem.querySelector('.cart-modal-item__title');
       var title = titleEl ? titleEl.textContent.trim() : '';
       var focusSelector = this.focusSelector(document.activeElement);
 
       try {
-        var cart = await this.postCart((themeConfig.routes && themeConfig.routes.cart_change_url) || '/cart/change.js', { line: line, quantity: quantity }, 'error', controller.signal);
-        var updatedItem = cart.items[line - 1];
+        var cart = await this.postCart((themeConfig.routes && themeConfig.routes.cart_change_url) || '/cart/change.js', { id: key, quantity: quantity }, 'error', controller.signal);
+        var updatedItem = cart.items.find(function(item) {
+          return item.key === key;
+        });
         if (quantity > 0 && updatedItem && updatedItem.quantity !== quantity) this.showQuantityError(updatedItem.quantity);
         await this.renderCart(cart);
-        this.restoreFocus(line, quantity === 0, focusSelector);
+        this.restoreFocus(key, line, quantity === 0, focusSelector);
         this.announceChange(cart, quantity === 0 ? title : (updatedItem ? updatedItem.product_title : title), quantity === 0 ? null : (updatedItem ? updatedItem.quantity : quantity));
         await updateCartData(cart, { source: this });
       } catch (error) {
         if (error.name !== 'AbortError') {
-          this.restoreQuantity(line);
+          this.restoreQuantity(key);
           this.showError(error.message);
         }
       } finally {
@@ -172,6 +189,10 @@
       return this.itemsContainer ? this.itemsContainer.querySelector('[data-line-item="' + line + '"]') : null;
     }
 
+    lineByKey(key) {
+      return this.itemsContainer ? this.itemsContainer.querySelector('[data-line-key="' + key + '"]') : null;
+    }
+
     focusSelector(element) {
       if (!element || !this.itemsContainer || !this.itemsContainer.contains(element)) return null;
       if (element.dataset.action) return '[data-action="' + element.dataset.action + '"]';
@@ -179,9 +200,9 @@
       return null;
     }
 
-    restoreFocus(line, removed, selector) {
+    restoreFocus(key, line, removed, selector) {
       var heading = this.querySelector('#cart-modal-title');
-      var item = this.lineElement(line);
+      var item = removed ? this.lineElement(line) : this.lineByKey(key);
       var target = null;
       if (removed) {
         target = item ? item.querySelector('[data-action="remove-cart-item"]') : null;
@@ -257,8 +278,8 @@
       return data;
     }
 
-    restoreQuantity(line) {
-      var item = this.itemsContainer ? this.itemsContainer.querySelector('[data-line-item="' + line + '"]') : null;
+    restoreQuantity(key) {
+      var item = this.lineByKey(key);
       var input = item ? item.querySelector('input[type="number"]') : null;
       if (input && input.dataset.confirmedValue) input.value = input.dataset.confirmedValue;
     }

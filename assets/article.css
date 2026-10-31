@@ -1,4 +1,5 @@
 .article-template {
+  --article-measure: 45.375rem;
   padding-top: var(--article-padding-top, 0);
   padding-bottom: var(--article-padding-bottom, 0);
 }
@@ -68,7 +69,7 @@
 .article-template__content,
 .article-template__share,
 .article-template__navigation,
-.article-template__comments { max-width: 68ch; }
+.article-template__comments { max-width: var(--article-measure); }
 .article-template__title {
   max-width: 26ch;
   margin: 0 0 var(--space-lg);

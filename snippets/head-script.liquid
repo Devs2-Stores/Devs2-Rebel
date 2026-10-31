@@ -37,48 +37,47 @@
 
     strings: {
       cart: {
-        error: `{{ 'sections.cart.cart_error' | t }}`,
-        quantityError: `{{ 'sections.cart.cart_quantity_error' | t: quantity: '[quantity]' }}`,
-        noteError: `{{ 'sections.cart.note_error' | t }}`,
-        noteSaved: `{{ 'sections.cart.note_saved' | t }}`,
-        invoiceError: `{{ 'sections.cart.invoice_error' | t }}`,
-        removeConfirm: `{{ 'sections.cart.remove_confirm' | t }}`,
-        itemAdded: `{{ 'products.product.add_to_cart_success' | t }}`,
-        itemError: `{{ 'products.product.add_to_cart_error' | t }}`
+        error: {{ 'sections.cart.cart_error' | t | json }},
+        quantityError: {{ 'sections.cart.cart_quantity_error' | t: quantity: '[quantity]' | json }},
+        noteError: {{ 'sections.cart.note_error' | t | json }},
+        noteSaved: {{ 'sections.cart.note_saved' | t | json }},
+        invoiceError: {{ 'sections.cart.invoice_error' | t | json }},
+        removeConfirm: {{ 'sections.cart.remove_confirm' | t | json }},
+        itemAdded: {{ 'products.product.add_to_cart_success' | t | json }},
+        itemError: {{ 'products.product.add_to_cart_error' | t | json }}
       },
       variant: {
-        addToCart: `{{ 'products.product.add_to_cart' | t }}`,
-        buyNow: `{{ 'products.product.buy_now' | t }}`,
-        soldOut: `{{ 'products.product.sold_out' | t }}`,
-        unavailable: `{{ 'products.product.unavailable' | t }}`,
-        unavailable_with_option: `{{ 'products.product.value_unavailable' | t: option_value: '[value]' }}`,
-        contact: `{{ 'products.product.price.contact' | t }}`,
-        inStock: `{{ 'products.product.inventory_in_stock' | t }}`,
-        updating: `{{ 'products.product.updating' | t }}`,
-        adding: `{{ 'products.product.adding' | t }}`,
-        selectAllOptions: `{{ 'products.product.select_all_options' | t }}`,
-        loadError: `{{ 'products.product.load_error' | t }}`
+        addToCart: {{ 'products.product.add_to_cart' | t | json }},
+        buyNow: {{ 'products.product.buy_now' | t | json }},
+        soldOut: {{ 'products.product.sold_out' | t | json }},
+        unavailable: {{ 'products.product.unavailable' | t | json }},
+        unavailable_with_option: {{ 'products.product.value_unavailable' | t: option_value: '[value]' | json }},
+        contact: {{ 'products.product.price.contact' | t | json }},
+        inStock: {{ 'products.product.inventory_in_stock' | t | json }},
+        updating: {{ 'products.product.updating' | t | json }},
+        adding: {{ 'products.product.adding' | t | json }},
+        selectAllOptions: {{ 'products.product.select_all_options' | t | json }},
+        loadError: {{ 'products.product.load_error' | t | json }}
       },
       share: {
-        success: `{{ 'general.share.success_message' | t }}`,
-        copyFailed: `{{ 'general.share.copy_failed' | t }}`,
-        copied: `{{ 'general.share.copied' | t }}`,
-        copyArticleLink: `{{ 'general.share.copy_article_link' | t }}`
+        success: {{ 'general.share.success_message' | t | json }},
+        copyFailed: {{ 'general.share.copy_failed' | t | json }},
+        copied: {{ 'general.share.copied' | t | json }}
       },
       collection: {
-        moreLoaded: `{{ 'products.facets.more_products_loaded' | t }}`,
-        loadError: `{{ 'products.facets.load_error' | t }}`
+        moreLoaded: {{ 'products.facets.more_products_loaded' | t | json }},
+        loadError: {{ 'products.facets.load_error' | t | json }}
       },
       search: {
-        unavailable: `{{ 'templates.search.suggestions_unavailable' | t }}`,
-        viewResults: `{{ 'templates.search.view_search_results' | t }}`
+        unavailable: {{ 'templates.search.suggestions_unavailable' | t | json }},
+        viewResults: {{ 'templates.search.view_search_results' | t | json }}
       },
       accessibility: {
-        close: `{{ 'accessibility.close' | t }}`,
-        imageAvailable: `{{ 'products.product.media.image_available' | t: index: '[index]' }}`,
-        shareSuccess: `{{ 'general.share.success_message' | t }}`,
-        previousSlide: `{{ 'accessibility.previous_slide' | t }}`,
-        nextSlide: `{{ 'accessibility.next_slide' | t }}`
+        close: {{ 'accessibility.close' | t | json }},
+        imageAvailable: {{ 'products.product.media.image_available' | t: index: '[index]' | json }},
+        shareSuccess: {{ 'general.share.success_message' | t | json }},
+        previousSlide: {{ 'accessibility.previous_slide' | t | json }},
+        nextSlide: {{ 'accessibility.next_slide' | t | json }}
       }
     },
 
@@ -176,11 +175,11 @@
 <script defer src="{{ 'toast.js' | asset_url }}"></script>
 <script defer src="{{ 'back-to-top.js' | asset_url }}"></script>
 
-{%- if template == 'collection' -%}
+{%- if template.name == 'collection' -%}
   <script defer src="{{ 'collection.js' | asset_url }}"></script>
-{%- elsif template == 'product' -%}
+{%- elsif template.name == 'product' -%}
   <script defer src="{{ 'product.js' | asset_url }}"></script>
-{%- elsif template == 'cart' -%}
+{%- elsif template.name == 'cart' -%}
   <script defer src="{{ 'cart.js' | asset_url }}"></script>
 {%- elsif template contains 'customer' -%}
   <script defer src="{{ 'customer.js' | asset_url }}"></script>
@@ -188,8 +187,6 @@
   <script defer src="{{ 'page-contact.js' | asset_url }}"></script>
 {%- elsif template == 'page.stores' -%}
   <script defer src="{{ 'page-stores.js' | asset_url }}"></script>
-{%- elsif template == 'page.faq' -%}
-  <script defer src="{{ 'page-faq.js' | asset_url }}"></script>
 {%- elsif template contains 'search' -%}
   <script defer src="{{ 'collection.js' | asset_url }}"></script>
   <script defer src="{{ 'search.js' | asset_url }}"></script>

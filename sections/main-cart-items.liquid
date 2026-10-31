@@ -3,7 +3,7 @@
 <script src="{{ 'quantity-selector.js' | asset_url }}" defer="defer"></script>
 {%- if cart.item_count > 0 -%}
   {%- for item in cart.items -%}
-    <article class="cart-modal-item" data-line-item="{{ forloop.index }}" data-variant-id="{{ item.variant_id }}">
+    <article class="cart-modal-item" data-line-item="{{ forloop.index }}" data-line-key="{{ item.key }}" data-variant-id="{{ item.variant_id }}">
       <a href="{{ item.url }}" title="{{ item.product.title | escape }}" class="cart-modal-item__image">
         {%- if item.image != blank -%}
           {%- assign cart_item_alt = item.image.alt | default: item.product.title | escape -%}
@@ -42,7 +42,7 @@
               value: item.quantity
             -%}
           </div>
-          <button type="button" class="cart-modal-item__remove" aria-label="{{ 'sections.cart.remove_title' | t: title: item.product.title }}" title="{{ 'sections.cart.remove_title' | t: title: item.product.title }}" data-action="remove-cart-item" data-line="{{ forloop.index }}">
+          <button type="button" class="cart-modal-item__remove" aria-label="{{ 'sections.cart.remove_title' | t: title: item.product.title }}" title="{{ 'sections.cart.remove_title' | t: title: item.product.title }}" data-action="remove-cart-item">
             {%- render 'icon', name: 'trash' -%}
           </button>
         </div>

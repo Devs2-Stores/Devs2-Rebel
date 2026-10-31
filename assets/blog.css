@@ -87,7 +87,7 @@
   display: block;
   width: 100%;
   object-fit: cover;
-  transition: transform var(--transition-slow);
+  transition: transform var(--transition-base);
 }
 @media (min-width: 750px) {
   .blog-featured__image {
@@ -419,7 +419,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform var(--transition-slow);
+  transition: transform var(--transition-base);
 }
 .blog-sidebar__banner::after {
   content: "";

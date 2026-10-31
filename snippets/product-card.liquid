@@ -252,26 +252,22 @@
           <span class="product-card__price-contact">{{ t_contact | escape }}</span>
           {%- elsif product.price_varies -%}
             {%- if product.compare_at_price > product.price -%}
-              <del class="product-card__price-compare">{%- if settings.price_currency_code_enabled -%}{{ product.compare_at_price | money_with_currency }}{%- else -%}{{ product.compare_at_price | money }}{%- endif -%}</del>
+              <del class="product-card__price-compare">{%- render 'money', amount: product.compare_at_price -%}</del>
             {%- endif -%}
             <span class="product-card__price-range{% if product.compare_at_price > product.price %} product-card__price-sale--on-sale{% endif %}">
-            {%- if settings.price_currency_code_enabled -%}
-              <span class="product-card__price-amount">{{ product.price_min | money_with_currency }}</span> – <span class="product-card__price-amount">{{ product.price_max | money_with_currency }}</span>
-            {%- else -%}
-              <span class="product-card__price-amount">{{ product.price_min | money }}</span> – <span class="product-card__price-amount">{{ product.price_max | money }}</span>
-            {%- endif -%}
+              <span class="product-card__price-amount">{%- render 'money', amount: product.price_min -%}</span> – <span class="product-card__price-amount">{%- render 'money', amount: product.price_max -%}</span>
           </span>
         {%- else -%}
           {%- if compare > price -%}
-            <del class="product-card__price-compare">{{ compare | money }}</del>
+            <del class="product-card__price-compare">{%- render 'money', amount: compare -%}</del>
           {%- endif -%}
           <span class="product-card__price-sale{% if compare > price %} product-card__price-sale--on-sale{% endif %}">
-            {%- if settings.price_currency_code_enabled -%}{{ price | money_with_currency }}{%- else -%}{{ price | money }}{%- endif -%}
+            {%- render 'money', amount: price -%}
           </span>
           {%- if product.selected_or_first_available_variant.unit_price -%}
             <span class="product-card__unit-price">
               <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
-              {{ product.selected_or_first_available_variant.unit_price | money }}/{{ product.selected_or_first_available_variant.unit_price_measurement.reference_value }}{{ product.selected_or_first_available_variant.unit_price_measurement.reference_unit }}
+              {% render 'money', amount: product.selected_or_first_available_variant.unit_price %}/{{ product.selected_or_first_available_variant.unit_price_measurement.reference_value }}{{ product.selected_or_first_available_variant.unit_price_measurement.reference_unit }}
             </span>
           {%- endif -%}
         {%- endif -%}
@@ -367,7 +363,7 @@
   width: 2.75rem;
   height: 2.75rem;
   padding: 0;
-  border-radius: 999px;
+  border-radius: var(--buttons-radius);
   color: var(--color-ink);
   background: rgb(var(--color-background));
   border: 0;
