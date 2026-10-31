@@ -46,25 +46,31 @@ be recorded as an unresolved question.
 
 ## Accessibility checks
 
-- axe-core with tags `wcag2a`, `wcag2aa`, `wcag21a`, `wcag21aa` and `wcag22aa`
-  reports 0 violations on every changed route at 375 and 1440. The probe
-  (`runs/e2e/r5-axe.cjs`) stops Swiper autoplay and waits for finite
-  animations to finish first, so a crossfade between two slides is never
-  measured as a colour pair. Axe then sees only each carousel's first slide;
-  check text on the other slides with the text-over-images rule below.
+- axe-core with tags `wcag2a`, `wcag2aa`, `wcag21a`, `wcag21aa` and `wcag22aa`,
+  plus the best-practice rules `heading-order`, `landmark-one-main`,
+  `landmark-no-duplicate-main` and `aria-allowed-role` (they carry no WCAG tag,
+  so a tag filter alone never runs them), report 0 violations on every changed
+  route at 375 and 1440. The probe (`runs/e2e/r5-axe.cjs`) exits 1 on any
+  violation, error, non-200 status or horizontal overflow. It stops Swiper
+  autoplay and waits for finite animations to finish first, so a crossfade
+  between two slides is never measured as a colour pair. Axe then sees only each
+  carousel's first slide; check text on the other slides with the text-over-images
+  rule below. `heading-order` inside the merchant-authored product description
+  is not a theme finding.
 - Text over images: measure the text colour against every backdrop pixel of
   the text box, with text shadows removed. Render-check and axe compare against
   the page background behind an `<img>`, so their `low-contrast` result there is
   not a measurement.
 - State-dependent text (open/closed badges, stock, errors) is checked with each
   state forced. A live clock or stock level hides the other state.
-- Colour changes are checked in one light and one dark preset (Sartor and
-  Cyber), with the cart drawer, search panel and mobile menu open as well as
-  the page. `runs/e2e/preset-contrast.cjs` renders each preset's scheme CSS
-  with liquidjs, injects it into the live page and measures every visible
-  text node against its composited background. Disabled controls (WCAG 1.4.3
-  inactive components) and frames captured mid-transition are recorded as
-  exempt, not as failures.
+- Colour changes are checked in every preset in `config/settings_data.json`
+  (today `Sartor`, which carries a light and a dark scheme), with the cart
+  drawer, search panel and mobile menu open as well as the page.
+  `runs/e2e/preset-contrast.cjs` renders each preset's scheme CSS with liquidjs,
+  injects it into the live page and measures every visible text node against
+  its composited background. Disabled controls (WCAG 1.4.3 inactive components)
+  and frames captured mid-transition are recorded as exempt, not as failures.
+  Exit 0 is the pass.
 - Targets: 24 x 24 CSS px minimum, or the WCAG 2.5.8 spacing exception. A
   44 px `small-touch-target` warning alone is not a defect.
 - Keyboard journeys: cart drawer, mobile menu, megamenu, filter drawer and quick
@@ -122,6 +128,47 @@ LocalBusiness in `page-stores`.
   merchant-owned. List them with the reason. Do not patch around them in theme
   code.
 
+## Runner
+
+`bash runs/e2e/r10-final.sh <evidence-dir>` (from the theme root, with
+`shopify theme dev` on 127.0.0.1:9292) runs every gate below. Logs go to
+`<evidence-dir>/<gate>.log`. It prints `PASS`, `FAIL` or `INFO` per gate and
+exits 1 if any gate fails, or if a replay (`*_BEFORE=1`, `EP_MUTATE`) stays
+green on its reintroduced bug. A missing argument exits 2. It never runs
+`scripts/package-theme.py`, which writes `dist/`.
+
+| # | Gate | Command (theme root) | Pass |
+|---|---|---|---|
+| 1 | settings-usage | `node scripts/settings-usage.cjs` | exit 0 |
+| 2 | overlay-contract | `node runs/e2e/overlay-contract.cjs` | exit 0 |
+| 3 | font-spacing-icon | `node runs/e2e/font-spacing-icon.cjs` | exit 0 |
+| 4 | target-spacing | `node runs/e2e/target-spacing.cjs` | exit 0 |
+| 5 | error-paths | `node runs/e2e/error-paths.cjs` | exit 0; `EP_MUTATE=no-toast` exits non-zero |
+| 6 | preset-contrast | `node runs/e2e/preset-contrast.cjs` | exit 0 |
+| 7 | r10-store-hours | `node runs/e2e/r10-store-hours.cjs` | exit 0 |
+| 8 | r10-touch-hover | `node runs/e2e/r10-touch-hover.cjs` | exit 0 |
+| 9 | r10-tabwalk | `node runs/e2e/r10-tabwalk.cjs` | exit 0 |
+| 10 | r5-axe | `node runs/e2e/r5-axe.cjs` | exit 0 |
+| 11 | facet-lifecycle | `node runs/e2e/facet-lifecycle.cjs` | exit 0; `FL_BEFORE=1` exits non-zero |
+| 12 | contact-lifecycle | `node runs/e2e/contact-lifecycle.cjs` | exit 0; `CL_BEFORE=1` exits non-zero |
+| 13 | cart-trigger-reload | `node runs/e2e/cart-trigger-reload.cjs` | exit 0; `CT_BEFORE=1` exits non-zero |
+| 14 | section-reload | `node runs/e2e/section-reload.cjs` | exit 0; `SR_BEFORE=1` exits non-zero |
+| 15 | journeys | `node runs/e2e/journeys.cjs` | exit 0 |
+
+Static steps before the browser gates: `node --check assets/*.js`, a JSON parse
+of `locales`, `config`, `templates`, `sections`, `blocks` and `listings`,
+`scripts/validate-locales.mjs`, `scripts/validate-schema-ranges.mjs`, and a
+curl of every default route (all must answer 200, otherwise the browser gates
+are skipped). `check-discovery-surfaces.mjs` runs last as advisory: its
+findings on the dev proxy are platform-owned (see Discovery surfaces).
+
+Default routes are real 200 routes of the demo store (`/blogs/news`,
+`/blogs/news/leather-care-101`, `/products/leather-care-balm`, ...).
+`gotoStore` in `runs/e2e/lib.cjs` throws on any non-2xx status, so a stale route
+fails instead of measuring an error page; a deliberate error page passes
+`{ allowStatus: [404] }`. Gate output defaults to the OS temp directory, never
+to `plans/reports/`.
+
 ## Mechanical gates
 
 - `node scripts/validate-locales.mjs` and
@@ -136,7 +183,7 @@ LocalBusiness in `page-stores`.
   setting's `label` key with `.label` replaced by `.default`, so it sits in the
   owner's namespace. Data stays literal: handles (`all, frontpage`), addresses,
   symbols (`+`, `/`, `✦`), emoji, dates, times and years.
-- `node runs/e2e/settings-usage.cjs` exits 0: every setting a section or block
+- `node scripts/settings-usage.cjs` exits 0: every setting a section or block
   declares is read by that file or a snippet it renders, and every global
   setting in `config/settings_schema.json` is read by some layout, section,
   snippet, block, template or asset (a computed `settings[key]` family such
@@ -195,5 +242,7 @@ LocalBusiness in `page-stores`.
   `error.message` from `fetch` or `JSON.parse` to the shopper.
 - Prove both with a forced failure or reload against the running theme:
   `runs/e2e/error-paths.cjs`, `section-reload.cjs`, `cart-trigger-reload.cjs`,
-  `facet-lifecycle.cjs` and `contact-lifecycle.cjs` replay HEAD scripts with
-  `*_BEFORE=1` for the before state.
+  `facet-lifecycle.cjs` and `contact-lifecycle.cjs` each assert named checks and
+  exit 1 on a failed one. Their `*_BEFORE=1` switch (`error-paths.cjs` uses
+  `EP_MUTATE=no-toast`) replays the old script or removes the failure message,
+  and the gate must then exit non-zero; the runner requires that red result.
