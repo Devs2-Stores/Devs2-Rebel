@@ -24,6 +24,7 @@
                     lazyload: 'lazy',
                     fetchpriority: 'auto',
                     show_vendor: true,
+                    image_ratio: section.settings.image_ratio,
                     sizes: '(max-width: 749px) 47vw, (max-width: 1023px) 30vw, 22vw'
                   -%}
                 </li>
@@ -82,6 +83,18 @@
       "max": 10,
       "step": 1,
       "default": 4
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "t:sections.product_recommendations.settings.image_ratio.label",
+      "options": [
+        { "value": "adapt", "label": "t:sections.product_recommendations.settings.image_ratio.options__adapt.label" },
+        { "value": "portrait", "label": "t:sections.product_recommendations.settings.image_ratio.options__portrait.label" },
+        { "value": "square", "label": "t:sections.product_recommendations.settings.image_ratio.options__square.label" },
+        { "value": "landscape", "label": "t:sections.product_recommendations.settings.image_ratio.options__landscape.label" }
+      ],
+      "default": "portrait"
     }
   ],
   "enabled_on": {

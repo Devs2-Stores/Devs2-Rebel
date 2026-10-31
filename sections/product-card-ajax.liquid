@@ -5,5 +5,5 @@
   Usage: /products/{handle}?section_id=product-card-ajax
 {% endcomment -%}
 {%- if product != blank -%}
-  {%- render 'product-card', product: product, lazyload: 'lazy', show_vendor: true -%}
+  {%- render 'product-card', product: product, lazyload: 'lazy', show_vendor: true, image_ratio: 'adapt' -%}
 {%- endif -%}

@@ -13,7 +13,7 @@
   display: block;
   overflow: hidden;
   background: var(--color-gray-light);
-  border-radius: var(--card-corner-radius);
+  border-radius: var(--media-radius);
 }
 @media (hover: hover) {
   .article-card:hover .article-card__media-image { transform: scale(1.03); }

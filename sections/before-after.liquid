@@ -86,17 +86,8 @@
   var el = document.querySelector('#section-{{ section.id }} [data-compare-slider]');
   if (!el) return;
   var handle = el.querySelector('[role="slider"]');
-  var dragging = false;
+  var pointerId = null;
   var currentPos = 0.5;
-
-  function startDrag(x) {
-    dragging = true;
-    update(x);
-  }
-
-  function stopDrag() {
-    dragging = false;
-  }
 
   function update(x) {
     var rect = el.getBoundingClientRect();
@@ -105,22 +96,27 @@
     if (handle) handle.setAttribute('aria-valuenow', Math.round(currentPos * 100));
   }
 
-  if (handle) {
-    handle.addEventListener('mousedown', function(e) { e.preventDefault(); startDrag(e.clientX); });
-    handle.addEventListener('touchstart', function(e) { startDrag(e.touches[0].clientX); }, { passive: true });
+  function endDrag(e) {
+    if (e.pointerId !== pointerId) return;
+    pointerId = null;
+    if (el.hasPointerCapture(e.pointerId)) el.releasePointerCapture(e.pointerId);
   }
-  el.addEventListener('mousedown', function(e) {
-    if (e.target === handle || handle.contains(e.target)) return;
-    e.preventDefault();
-    startDrag(e.clientX);
-  });
-  el.addEventListener('touchstart', function(e) {
-    startDrag(e.touches[0].clientX);
-  }, { passive: true });
-  document.addEventListener('mousemove', function(e) { if (dragging) update(e.clientX); }, { signal: ac.signal });
-  document.addEventListener('touchmove', function(e) { if (dragging) update(e.touches[0].clientX); }, { passive: true, signal: ac.signal });
-  document.addEventListener('mouseup', stopDrag, { signal: ac.signal });
-  document.addEventListener('touchend', stopDrag, { signal: ac.signal });
+
+  el.addEventListener('pointerdown', function(e) {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    pointerId = e.pointerId;
+    el.setPointerCapture(e.pointerId);
+    if (e.pointerType === 'mouse') {
+      e.preventDefault();
+      update(e.clientX);
+    }
+  }, { signal: ac.signal });
+  el.addEventListener('pointermove', function(e) { if (e.pointerId === pointerId) update(e.clientX); }, { signal: ac.signal });
+  el.addEventListener('pointerup', function(e) {
+    if (e.pointerId === pointerId) update(e.clientX);
+    endDrag(e);
+  }, { signal: ac.signal });
+  el.addEventListener('pointercancel', endDrag, { signal: ac.signal });
   document.addEventListener('shopify:section:unload', function(e) {
     if (e.detail.sectionId === '{{ section.id }}') ac.abort();
   }, { signal: ac.signal });

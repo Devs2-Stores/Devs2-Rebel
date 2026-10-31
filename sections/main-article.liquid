@@ -419,12 +419,12 @@
             </div>
 
             <div class="article-template__comments-list">
-              <h3 class="article-template__comments-list-title">
-                {%- render 'icon', name: 'comments', size: '20' -%}
-                <span>{{ 'blogs.article.comments' | t: count: article.comments_count }}</span>
-              </h3>
-
               {%- if article.comments_count > 0 -%}
+                <h3 class="article-template__comments-list-title">
+                  {%- render 'icon', name: 'comments', size: '20' -%}
+                  <span>{{ 'blogs.article.comments' | t: count: article.comments_count }}</span>
+                </h3>
+
                 {%- paginate article.comments by 20 -%}
                   <div class="article-template__comments-items">
                     {%- for comment in article.comments -%}

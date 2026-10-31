@@ -13,6 +13,7 @@ class ProductTemplate extends HTMLElement {
 		this.cacheElements();
 		this.bindEvents();
 		this.initTabs();
+		this.initDescriptionToggle();
 		this.initCurrentVariant();
 		this.initVariantFromURL();
 		this.initMediaGroups();
@@ -182,8 +183,6 @@ class ProductTemplate extends HTMLElement {
 			});
 		});
 		if (window.ThemeUtils) ThemeUtils.bindTablistKeys(tabButtons);
-
-		this.initDescriptionToggle();
 	}
 
 	initDescriptionToggle() {

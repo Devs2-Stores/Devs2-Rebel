@@ -23,7 +23,7 @@ const ADDRESS_FIXTURE = {
 
 const MUTATIONS = {
   'newsletter-css': { url: /newsletter-modal\.css/, edit: (b) => b.replace('visibility 0s linear var(--duration-long)', 'visibility var(--transition-slow)').replace('opacity var(--transition-slow), visibility 0s;', 'opacity var(--transition-slow), visibility var(--transition-slow);') },
-  'address-css': { url: /customer\.css/, edit: (b) => b.replace('visibility 0s linear var(--duration-medium)', 'visibility var(--transition-base)').replace('opacity var(--transition-base), visibility 0s;', 'opacity var(--transition-base), visibility var(--transition-base);') },
+  'address-css': { url: /customer\.css/, edit: (b) => b.replace('visibility 0s linear var(--duration-medium)', 'visibility var(--transition-base)').replace('visibility 0s;', 'visibility var(--transition-base);') },
   'pickup-css': { url: /pickup-availability\.css/, edit: (b) => b.replace('visibility 0s linear var(--duration-medium)', 'visibility var(--transition-base)').replace('transform var(--transition-base), visibility 0s;', 'transform var(--transition-base), visibility var(--transition-base);') },
 };
 let mutationHits = 0;

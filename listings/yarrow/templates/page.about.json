@@ -8,9 +8,9 @@
       "type": "hero",
       "settings": {
         "image_alt": "The Sage Botanicals herb garden",
-        "height_desktop": "60",
+        "height_desktop": "80",
         "height_mobile": "60",
-        "overlay_opacity": 35,
+        "overlay_opacity": 55,
         "overlay_gradient": false,
         "content_position": "bottom-left",
         "text_align": "left",
@@ -92,7 +92,7 @@
     "garden": {
       "type": "image-with-text",
       "settings": {
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
         "image_position": "left",
         "section_width": "fixed",
         "text_align": "left",
@@ -113,7 +113,7 @@
           "type": "heading",
           "settings": {
             "heading": "Half an acre of sage, calendula and chamomile",
-            "heading_size": "md",
+            "heading_size": "lg",
             "heading_tag": "h2"
           }
         },
@@ -155,7 +155,7 @@
           "type": "heading",
           "settings": {
             "heading": "Blended in batches of a few hundred",
-            "heading_size": "md",
+            "heading_size": "lg",
             "heading_tag": "h2"
           }
         },
@@ -180,7 +180,7 @@
         "subheading": "By the numbers",
         "subheading_size": "sm",
         "heading": "A small studio, growing slowly",
-        "heading_size": "md",
+        "heading_size": "lg",
         "heading_tag": "h2",
         "number_size": "2xl",
         "padding_top_desktop": 60,
@@ -193,6 +193,7 @@
           "type": "stat",
           "settings": {
             "number": 8,
+            "suffix": "",
             "label": "Formulas"
           }
         },
@@ -200,6 +201,7 @@
           "type": "stat",
           "settings": {
             "number": 3,
+            "suffix": "",
             "label": "Partner farms"
           }
         },
@@ -208,14 +210,15 @@
           "settings": {
             "number": 100,
             "suffix": "%",
-            "label": "Glass packaging"
+            "label": "Plastic-free bottles"
           }
         },
         "s4": {
           "type": "stat",
           "settings": {
-            "number": 30,
-            "label": "Day returns"
+            "number": 12,
+            "suffix": "",
+            "label": "Herbs grown in our garden"
           }
         }
       },

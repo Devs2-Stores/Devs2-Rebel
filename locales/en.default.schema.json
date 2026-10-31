@@ -1217,6 +1217,34 @@
         "options__right": {
           "label": "Right"
         }
+      },
+      "line_icon": {
+        "label": "Icon",
+        "info": "Used when no icon image is set",
+        "options": {
+          "none": "None",
+          "truck": "Truck",
+          "package": "Package",
+          "rotate_ccw": "Return arrow",
+          "shield_check": "Shield",
+          "lock": "Lock",
+          "message_circle": "Chat bubble",
+          "gift": "Gift",
+          "star": "Star",
+          "sparkles": "Sparkles",
+          "sun": "Sun",
+          "scissors": "Scissors",
+          "ruler": "Ruler",
+          "award": "Award",
+          "clock": "Clock",
+          "leaf": "Leaf",
+          "sprout": "Sprout",
+          "droplet": "Droplet",
+          "flask_conical": "Flask",
+          "recycle": "Recycle",
+          "rabbit": "Rabbit",
+          "heart": "Heart"
+        }
       }
     },
     "announcement_bar": {
@@ -2971,6 +2999,21 @@
         "max_products": {
           "label": "Maximum products to show"
         },
+        "image_ratio": {
+          "label": "Image ratio",
+          "options__adapt": {
+            "label": "Adapt to image"
+          },
+          "options__portrait": {
+            "label": "Portrait"
+          },
+          "options__square": {
+            "label": "Square"
+          },
+          "options__landscape": {
+            "label": "Landscape"
+          }
+        },
         "products": {
           "label": "Products",
           "info": "Shown instead of automatic recommendations. Leave empty to use the products set up in the Search and Discovery app."
@@ -2986,6 +3029,21 @@
         },
         "product_limit": {
           "label": "Maximum products to show"
+        },
+        "image_ratio": {
+          "label": "Image ratio",
+          "options__adapt": {
+            "label": "Adapt to image"
+          },
+          "options__portrait": {
+            "label": "Portrait"
+          },
+          "options__square": {
+            "label": "Square"
+          },
+          "options__landscape": {
+            "label": "Landscape"
+          }
         }
       }
     },
@@ -4383,8 +4441,8 @@
               "label": "Icon image"
             },
             "emoji": {
-              "label": "Emoji fallback",
-              "info": "If no icon image"
+              "label": "Emoji",
+              "info": "Used when no icon image or icon is set"
             },
             "heading": {
               "label": "Heading",
@@ -6315,8 +6373,8 @@
               "label": "Icon image"
             },
             "emoji": {
-              "label": "Emoji fallback",
-              "info": "Used if no icon image"
+              "label": "Emoji",
+              "info": "Used when no icon image or icon is set"
             },
             "heading": {
               "label": "Heading",

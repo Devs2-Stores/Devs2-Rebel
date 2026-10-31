@@ -3,4 +3,5 @@
   background: rgb(var(--color-background));
   color: var(--color-paragraph);
 }
+.section-page-content :is(h1, h2, h3, h4, h5, h6) { color: var(--color-ink); }
 .section-page-content__inner { max-width: 68ch; margin-inline: auto; }

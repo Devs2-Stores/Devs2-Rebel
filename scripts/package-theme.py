@@ -85,6 +85,7 @@ with zipfile.ZipFile(tmp_path) as zf:
         problems.append(f'listings/ entries outside <preset>/templates or <preset>/sections: {bad_listing}')
     crlf = []
     bad_json = []
+    store_specific = []
     for name in names:
         data = zf.read(name)
         if name.endswith(TEXT_EXTENSIONS) and b'\r\n' in data:
@@ -94,10 +95,15 @@ with zipfile.ZipFile(tmp_path) as zf:
                 json.loads(re.sub(r'^\s*/\*[\s\S]*?\*/', '', data.decode('utf-8')))
             except ValueError as error:
                 bad_json.append(f'{name}: {error}')
+            text = data.decode('utf-8', 'replace')
+            if 'shopify://' in text or re.search(r'metafields\.(?!shopify\.)[A-Za-z0-9_-]+\.', text):
+                store_specific.append(name)
     if crlf:
         problems.append(f'CRLF line endings left in text members: {crlf}')
     if bad_json:
         problems.append(f'invalid JSON members: {bad_json}')
+    if store_specific:
+        problems.append(f'JSON members reference custom metafields or shopify:// URLs, which do not exist on a merchant store: {store_specific}')
 if problems:
     fail('; '.join(problems))
 

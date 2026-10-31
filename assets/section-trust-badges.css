@@ -24,6 +24,8 @@
 .section-trust__icon { width: 2rem; height: 2rem; flex-shrink: 0; }
 .section-trust__icon img { width: 100%; height: 100%; object-fit: contain; }
 .section-trust__emoji { font-size: 1.5rem; flex-shrink: 0; line-height: 1; }
+.section-trust__line-icon { display: flex; flex-shrink: 0; color: var(--color-ink); }
+.section-trust__line-icon svg { width: 1.5rem; height: 1.5rem; }
 
 .section-trust__text-wrap { display: flex; flex-direction: column; gap: 0.125rem; }
 .section-trust__title { font-size: 0.875rem; font-weight: 600; color: var(--color-ink); line-height: 1.3; }

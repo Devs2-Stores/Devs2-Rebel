@@ -1431,14 +1431,12 @@
   position: fixed;
   inset: 0;
   z-index: var(--z-modal);
-  opacity: 0;
   visibility: hidden;
-  transition: opacity var(--transition-base), visibility 0s linear var(--duration-medium);
+  transition: visibility 0s linear var(--duration-medium);
 }
 .collection-filter-modal.is-open {
-  opacity: 1;
   visibility: visible;
-  transition: opacity var(--transition-base), visibility 0s;
+  transition: visibility 0s;
 }
 .collection-filter-modal.is-open .collection-filter-modal__overlay {
   opacity: 1;

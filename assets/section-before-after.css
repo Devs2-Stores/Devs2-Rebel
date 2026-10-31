@@ -23,7 +23,7 @@
   position: relative; width: 100%; max-width: var(--cmp-max-w, none); max-height: var(--cmp-max-h, none);
   aspect-ratio: var(--cmp-ratio, 3 / 2); margin: 0 auto;
   overflow: hidden; border-radius: var(--media-radius); border: var(--media-border); box-shadow: var(--media-shadow);
-  cursor: ew-resize; user-select: none; -webkit-user-select: none;
+  cursor: ew-resize; user-select: none; -webkit-user-select: none; touch-action: pan-y;
 }
 .section-compare__before, .section-compare__after { position: absolute; inset: 0; }
 .section-compare__after { clip-path: inset(0 0 0 var(--compare-pos, 50%)); }
@@ -42,7 +42,7 @@
 .section-compare__label {
   position: absolute; bottom: 1.25rem; padding: 0.375rem 0.75rem;
   font-size: var(--eyebrow-size); font-weight: var(--eyebrow-weight); text-transform: uppercase;
-  letter-spacing: var(--eyebrow-tracking); border-radius: 0;
+  letter-spacing: var(--eyebrow-tracking); border-radius: var(--badge-corner-radius);
   background: rgba(0, 0, 0, 0.72); color: var(--color-white);
 }
 .section-compare__label--before { left: 1.25rem; }

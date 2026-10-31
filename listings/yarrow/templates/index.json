@@ -4,7 +4,7 @@
       "type": "featured-product",
       "settings": {
         "color_scheme": "scheme-1",
-        "subheading": "Our most-loved formula",
+        "subheading": "Herbal skincare, grown in our garden",
         "subheading_size": "sm",
         "heading_size": "xl",
         "show_vendor": false,
@@ -31,7 +31,7 @@
     "benefits": {
       "type": "icon-boxes",
       "settings": {
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
         "subheading": "Why Sage",
         "subheading_size": "sm",
         "heading": "Grown, blended and bottled with care",
@@ -49,7 +49,7 @@
         "box_herbs": {
           "type": "box",
           "settings": {
-            "emoji": "🌿",
+            "line_icon": "leaf",
             "heading": "Garden-grown herbs",
             "text": "Half of our botanicals come from our own rows."
           }
@@ -57,7 +57,7 @@
         "box_batch": {
           "type": "box",
           "settings": {
-            "emoji": "🧴",
+            "line_icon": "flask-conical",
             "heading": "Small batches",
             "text": "Blended a few hundred bottles at a time."
           }
@@ -65,7 +65,7 @@
         "box_glass": {
           "type": "box",
           "settings": {
-            "emoji": "♻️",
+            "line_icon": "recycle",
             "heading": "Glass, not plastic",
             "text": "Refillable jars and recyclable pumps."
           }
@@ -73,7 +73,7 @@
         "box_kind": {
           "type": "box",
           "settings": {
-            "emoji": "🐇",
+            "line_icon": "rabbit",
             "heading": "Kind to all",
             "text": "Vegan formulas, never tested on animals."
           }
@@ -112,7 +112,7 @@
     "results": {
       "type": "before-after",
       "settings": {
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
         "subheading": "Four-week results",
         "subheading_size": "sm",
         "heading": "Softer skin you can see",
@@ -121,7 +121,7 @@
         "label_before": "Week 0",
         "label_after": "Week 4",
         "image_ratio": "landscape",
-        "max_width": 1200,
+        "max_width": 1600,
         "max_height": 650,
         "padding_top_desktop": 70,
         "padding_bottom_desktop": 70,
@@ -244,7 +244,7 @@
     "testimonials": {
       "type": "testimonials",
       "settings": {
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
         "subheading": "Reviews",
         "subheading_size": "sm",
         "heading": "Loved by sensitive skin",
@@ -301,7 +301,7 @@
         "heading": "Notes from the studio",
         "heading_size": "lg",
         "heading_tag": "h2",
-        "layout": "grid",
+        "layout": "carousel",
         "posts_to_show": 3,
         "columns_desktop": 3,
         "show_date": true,
@@ -316,7 +316,7 @@
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "color_scheme": "scheme-3",
+        "color_scheme": "scheme-4",
         "subheading": "Join the ritual",
         "subheading_size": "sm",
         "heading": "Seasonal notes, first to new batches",

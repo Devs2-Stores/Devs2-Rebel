@@ -7,14 +7,12 @@ cart-modal.cart-modal-wrapper {
   position: fixed;
   inset: 0;
   z-index: var(--z-modal);
-  opacity: 0;
   visibility: hidden;
-  transition: opacity var(--transition-base), visibility 0s linear var(--duration-medium);
+  transition: visibility 0s linear var(--duration-medium);
 }
 cart-modal.cart-modal-wrapper.show {
-  opacity: 1;
   visibility: visible;
-  transition: opacity var(--transition-base), visibility 0s;
+  transition: visibility 0s;
 }
 cart-modal.cart-modal-wrapper.show .cart-modal-overlay {
   opacity: 1;

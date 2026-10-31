@@ -31,16 +31,14 @@ the photograph first.
 
 ## Presets
 
-All five presets share one component architecture. A preset changes only
-settings: scheme colours, radii, and type settings. The current preset is Sartor.
+Every preset shares one component architecture. A preset changes only
+settings: scheme colours, radii, card treatment and type settings. The theme
+ships two presets, Sartor and Yarrow.
 
 | Preset | scheme-1 bg / text / accent | Character |
 |---|---|---|
-| Sartor | `#F5F2ED` / `#0A0A0A` / `#BC1E2C` | Bone and crimson, oxblood scheme-4 `#4A0E16`, square, pill badges |
-| Noir | `#F9F9F9` / `#111111` / `#111111` | Monochrome, square throughout |
-| Vibrant | `#FFF7ED` / `#1A1A1A` / `#FF5E00` | Orange accent and an orange scheme-4 fill, square |
-| Botanical | `#FAF8F5` / `#2D3B2F` / `#3B533E` | Greens, rounded (buttons 20, inputs 12, cards 16, media 12) |
-| Cyber | `#0D0E12` / `#E2E8F0` / `#00FFCC` | Dark-first neon, radius 4 |
+| Sartor | `#F5F2ED` / `#0A0A0A` / `#BC1E2C` | Bone and crimson, oxblood scheme-4 `#4A0E16`, square, pill badges, flat cards |
+| Yarrow | `#FAF8F5` / `#2D3B2F` / `#3B533E` | Herbal greens, forest scheme-4 `#4A6B50`, rounded (buttons 20, inputs 12, media 12, cards 20 with an 8 px image inset), white boxed cards with a soft shadow, serif headings |
 
 A new preset adds settings and scheme values only. It must not add selectors or
 markup branches.
@@ -79,7 +77,7 @@ values in `config/settings_data.json`, all in one change.
 | Floating layer | `--shadow-float` | Floating buttons, the sticky add-to-cart bar and toasts |
 | Component families | `--{inputs,variant-pills,media,text-boxes,popup,drawer}-{border,shadow,radius}`, `--buttons-shadow`, `--buttons-outline-border`, `--color-form-bg`, `--color-form-text` | Built from the Theme settings panels of the same name and the scheme form colours. Inputs, selects, textareas, the quantity stepper, the newsletter field and the localization search use `--inputs-border`, built from the per-scheme `--color-input-border-rgb` (see "Input border"), so a field edge reaches 3.1:1 (WCAG 1.4.11). Variant pills, pop-ups, drawers and dividers keep the 1 px hairline. Sartor stores no media border and `--shadow-float` values on pop-ups and drawers. `input_stroke_opacity` defaults to 100; lowering it is the merchant's call |
 | Input border | `--color-input-border-rgb`, `--inputs-border-opacity` | Per scheme, in `snippets/head-color-schemes.liquid`: the scheme border mixed toward the scheme text in 5% steps (`color_mix`) until `color_contrast` is at least 3.1 against `background`, `background_2` and the form fill (`form_bg`). A scheme whose own border already passes is unchanged. `snippets/head-design-systems.liquid` builds `--inputs-border` from it and the opacity setting; this triplet is the only consumer of `--inputs-border-opacity` |
-| Card | `--card-border`, `--card-shadow`, `--card-image-padding`, `--card-corner-radius` | Built from the merchant card settings. Sartor sets every one to 0 |
+| Card | `--card-border`, `--card-shadow`, `--card-image-padding`, `--card-corner-radius` | Built from the merchant card settings, all in px. Sartor sets every one to 0. Yarrow boxes cards on `scheme-2` (white) with radius 20, inset 8 and a 10% shadow (y 4, blur 20); the card radius equals the media radius plus the inset so the corners stay concentric. Sections that hold Yarrow cards use `scheme-1`, so the white card always has an edge |
 
 ## Clean system
 
@@ -133,7 +131,9 @@ carry it; chrome stays out of the way.
   relies on swipe: hide prev/next there, because arrows centred on a tall card
   land on the quick-add button or the badges.
 - **Icons.** Outline interface icons render a 1-1.25 px line:
-  `stroke-width="1.5"` on a 24 px viewBox drawn at 16-24 px. The 12 px link
+  `stroke-width="1.5"` on a 24 px viewBox drawn at 16-20 px. Feature icons in
+  icon boxes and trust badges (`snippets/icon-feature.liquid`) draw at 24 px, so
+  they use `stroke-width="1"` for the same rendered weight. The 12 px link
   chevron in icon boxes keeps 2.5 for the same rendered weight, and 40 px+
   empty-state illustrations use 1. Full-colour payment icons and filled brand
   glyphs are exempt.
@@ -427,3 +427,8 @@ carry it; chrome stays out of the way.
   the product when quick view is off); it never adds a variant the shopper did
   not pick. A product that requires a selling plan always gets the
   choose-options link to its product page, never a direct-add form.
+- At 749 px and below the card carries no floating add or choose-options
+  button, on every preset: a floating icon over the photo is a mis-tap target
+  on a phone, so the card is photo, title and price, and the product page
+  (or the quick view from a tap on the card) owns the add action. From 750 px
+  the button shows on hover, focus or touch.

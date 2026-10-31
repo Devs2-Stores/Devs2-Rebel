@@ -135,7 +135,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  aspect-ratio: var(--aspect-ratio-product);
+  aspect-ratio: var(--product-media-ratio, var(--aspect-ratio-product));
   border: 1px solid transparent;
   border-radius: var(--media-radius);
   transition: border-color var(--transition-fast);
@@ -510,6 +510,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-xs);
+  min-height: 1.5rem;
   cursor: pointer;
   font-weight: var(--font-weight-medium);
   font-size: var(--font-sm);
@@ -948,11 +949,16 @@
   width: 100%;
   height: 100%;
   z-index: var(--z-overlay);
-  display: none;
+  display: block;
+  visibility: hidden;
   opacity: 0;
-  transition: opacity var(--transition-base);
+  transition: opacity var(--transition-base), visibility 0s linear var(--duration-medium);
 }
-.product-lightbox.is-active { display: block; opacity: 1; }
+.product-lightbox.is-active {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity var(--transition-base), visibility 0s;
+}
 .product-lightbox .lightbox-overlay {
   position: absolute;
   top: 0;
@@ -1265,23 +1271,21 @@ size-guide-modal.size-guide-modal-wrapper {
   position: fixed;
   inset: 0;
   z-index: var(--z-modal, 9000);
-  opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity var(--transition-base), visibility 0s linear var(--duration-medium);
+  transition: visibility 0s linear var(--duration-medium);
 }
 size-guide-modal.size-guide-modal-wrapper:not(.hidden) {
-  opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transition: opacity var(--transition-base), visibility 0s linear 0s;
+  transition: visibility 0s;
 }
 size-guide-modal.size-guide-modal-wrapper:not(.hidden) .size-guide-modal-overlay { opacity: 1; }
 size-guide-modal.size-guide-modal-wrapper:not(.hidden) .size-guide-modal-panel { transform: none; }
 size-guide-modal.size-guide-modal-wrapper.hidden {
   display: block;
   visibility: hidden;
-  opacity: 0;
+  pointer-events: none;
 }
 size-guide-modal.size-guide-modal-wrapper.hidden .size-guide-modal-panel {
   transform: translateX(110%);
