@@ -1,0 +1,135 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "settings": {}
+    },
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "media_layout": "stacked",
+        "media_grid_columns": "2",
+        "media_aspect_ratio": "square",
+        "hide_variants": false,
+        "enable_lightbox": true
+      },
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {}
+        },
+        "subtitle": {
+          "type": "text",
+          "settings": {
+            "text": "<p>{{ product.metafields.descriptors.subtitle.value }}</p>",
+            "text_size": "md",
+            "tone": "muted",
+            "width": "wide",
+            "text_align": "inherit"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "payment_installments": {
+          "type": "payment_installments",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "buttons",
+            "cross_out_unavailable": true,
+            "unavailable_opacity": 50,
+            "option_spacing": 16
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {}
+        },
+        "stock_counter": {
+          "type": "stock_counter",
+          "settings": {
+            "stock_threshold": 10
+          }
+        },
+        "pickup_availability": {
+          "type": "pickup_availability",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "how_to_use": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How to use",
+            "content": "<p>{{ product.metafields.descriptors.care_guide.value }}</p>"
+          }
+        },
+        "shipping": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Shipping & returns",
+            "content": "<p>Orders placed before 1 pm ship the same working day. Not right for your skin? Return it within 30 days, even if opened.</p>"
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "title",
+        "rating",
+        "subtitle",
+        "price",
+        "payment_installments",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "stock_counter",
+        "pickup_availability",
+        "description",
+        "how_to_use",
+        "shipping",
+        "share"
+      ]
+    },
+    "complementary": {
+      "type": "complementary-products",
+      "settings": {
+        "container_width": "fixed",
+        "heading": "Pairs well with",
+        "product_limit": 3
+      }
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "container_width": "fixed",
+        "heading": "You may also like",
+        "product_limit": 4
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main",
+    "complementary",
+    "recommendations"
+  ]
+}

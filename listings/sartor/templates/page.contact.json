@@ -1,0 +1,65 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "settings": {}
+    },
+    "main": {
+      "type": "page-contact",
+      "settings": {
+        "title": "Contact",
+        "description": "Questions about sizing, orders or wholesale? Write to us and the studio replies within one working day.",
+        "address": "",
+        "phone": "",
+        "email": "",
+        "hours": "Mon - Fri, 10:00 - 18:00",
+        "show_social": true,
+        "show_map": false,
+        "map_embed": "",
+        "info_eyebrow": "Atelier support",
+        "info_intro": "Visit the studio, request a private appointment, or send your notes for sizing, styling, and wholesale inquiries.",
+        "stat_1_value": "24h",
+        "stat_1_label": "Average reply",
+        "stat_2_value": "1:1",
+        "stat_2_label": "Private appointments",
+        "note_title": "Appointments & wholesale",
+        "note_text": "Include preferred date, order volume, or collection interest in your message so the team can route it directly."
+      },
+      "blocks": {
+        "f_topic": {
+          "type": "select_field",
+          "settings": {
+            "label": "Topic",
+            "placeholder": "Choose a topic",
+            "options": "Order and delivery\nSizing and fit\nReturns and exchanges\nAtelier and alterations\nPress and partnerships",
+            "required": true
+          }
+        },
+        "f_order": {
+          "type": "text_field",
+          "settings": {
+            "label": "Order number",
+            "placeholder": "#1001",
+            "required": false
+          }
+        },
+        "f_news": {
+          "type": "checkbox_field",
+          "settings": {
+            "label": "Send me news about new drops",
+            "required": false
+          }
+        }
+      },
+      "block_order": [
+        "f_topic",
+        "f_order",
+        "f_news"
+      ]
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main"
+  ]
+}

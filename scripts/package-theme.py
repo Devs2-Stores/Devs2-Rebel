@@ -1,6 +1,6 @@
 import argparse, os, re, zipfile, fnmatch, json
 
-THEME_DIRS = ['assets', 'blocks', 'config', 'layout', 'locales', 'sections', 'snippets', 'templates']
+THEME_DIRS = ['assets', 'blocks', 'config', 'layout', 'listings', 'locales', 'sections', 'snippets', 'templates']
 REQUIRED_ENTRIES = ['layout/theme.liquid', 'config/settings_schema.json', 'config/settings_data.json', 'locales/en.default.json']
 FORBIDDEN_PATTERNS = ['.env', '.env.*', '*.md', 'runs/*', 'plans/*', 'scratch/*', 'node_modules/*', '.git/*']
 TEXT_EXTENSIONS = ('.liquid', '.json', '.js', '.css', '.svg', '.txt')
@@ -75,6 +75,14 @@ with zipfile.ZipFile(tmp_path) as zf:
     stray = sorted({name.split('/')[0] for name in names} - set(THEME_DIRS))
     if stray:
         problems.append(f'unexpected top-level entries in the zip: {stray}')
+    presets = json.loads(re.sub(r'^\s*/\*[\s\S]*?\*/', '', zf.read('config/settings_data.json').decode('utf-8'))).get('presets', {})
+    handles = {re.sub(r'\s+', '-', name.strip().lower()) for name in presets}
+    listed = {name.split('/')[1] for name in names if name.startswith('listings/') and name.count('/') >= 3}
+    if len(presets) > 1 and handles != listed:
+        problems.append(f'listings/ folders {sorted(listed)} do not match the presets in settings_data.json {sorted(handles)}')
+    bad_listing = sorted(name for name in names if name.startswith('listings/') and not re.fullmatch(r'listings/[a-z0-9-]+/(templates|sections)/[^/]+\.json', name))
+    if bad_listing:
+        problems.append(f'listings/ entries outside <preset>/templates or <preset>/sections: {bad_listing}')
     crlf = []
     bad_json = []
     for name in names:

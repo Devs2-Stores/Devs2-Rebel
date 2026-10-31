@@ -1,0 +1,348 @@
+{
+  "sections": {
+    "hero_product": {
+      "type": "featured-product",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "subheading": "Our most-loved formula",
+        "subheading_size": "sm",
+        "heading_size": "xl",
+        "show_vendor": false,
+        "show_description": true,
+        "description_size": "md",
+        "show_view_link": true,
+        "image_position": "right",
+        "button_size": "lg",
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 70,
+        "padding_top_mobile": 30,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "rating": {
+          "type": "rating",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "rating"
+      ]
+    },
+    "benefits": {
+      "type": "icon-boxes",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "subheading": "Why Sage",
+        "subheading_size": "sm",
+        "heading": "Grown, blended and bottled with care",
+        "heading_size": "lg",
+        "heading_tag": "h2",
+        "columns_desktop": 4,
+        "style": "centered",
+        "icon_style": "circle",
+        "padding_top_desktop": 70,
+        "padding_bottom_desktop": 70,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "box_herbs": {
+          "type": "box",
+          "settings": {
+            "emoji": "🌿",
+            "heading": "Garden-grown herbs",
+            "text": "Half of our botanicals come from our own rows."
+          }
+        },
+        "box_batch": {
+          "type": "box",
+          "settings": {
+            "emoji": "🧴",
+            "heading": "Small batches",
+            "text": "Blended a few hundred bottles at a time."
+          }
+        },
+        "box_glass": {
+          "type": "box",
+          "settings": {
+            "emoji": "♻️",
+            "heading": "Glass, not plastic",
+            "text": "Refillable jars and recyclable pumps."
+          }
+        },
+        "box_kind": {
+          "type": "box",
+          "settings": {
+            "emoji": "🐇",
+            "heading": "Kind to all",
+            "text": "Vegan formulas, never tested on animals."
+          }
+        }
+      },
+      "block_order": [
+        "box_herbs",
+        "box_batch",
+        "box_glass",
+        "box_kind"
+      ]
+    },
+    "bestsellers": {
+      "type": "featured-collection",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "subheading": "Shop the routine",
+        "subheading_size": "sm",
+        "heading": "Everyday essentials",
+        "heading_size": "lg",
+        "heading_tag": "h2",
+        "layout": "grid",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "columns_mobile": 2,
+        "show_view_all": true,
+        "image_ratio": "square",
+        "show_vendor": false,
+        "show_secondary_image": true,
+        "padding_top_desktop": 70,
+        "padding_bottom_desktop": 70,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "results": {
+      "type": "before-after",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "subheading": "Four-week results",
+        "subheading_size": "sm",
+        "heading": "Softer skin you can see",
+        "heading_size": "lg",
+        "heading_tag": "h2",
+        "label_before": "Week 0",
+        "label_after": "Week 4",
+        "image_ratio": "landscape",
+        "max_width": 1200,
+        "max_height": 650,
+        "padding_top_desktop": 70,
+        "padding_bottom_desktop": 70,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "garden_story": {
+      "type": "image-with-text",
+      "settings": {
+        "color_scheme": "scheme-4",
+        "image_position": "left",
+        "section_width": "full",
+        "text_align": "left",
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0
+      },
+      "blocks": {
+        "sub": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "From our garden",
+            "subheading_size": "sm"
+          }
+        },
+        "head": {
+          "type": "heading",
+          "settings": {
+            "heading": "Picked in the morning, steeped for six weeks",
+            "heading_size": "lg",
+            "heading_tag": "h2"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We harvest calendula, sage and chamomile by hand, then steep them slowly in cold-pressed oils. Nothing is rushed, so every bottle carries the full scent and colour of the plant.</p>",
+            "content_size": "md"
+          }
+        },
+        "btn": {
+          "type": "button",
+          "settings": {
+            "button_size": "md",
+            "button_label_1": "Read our story",
+            "button_link_1": "/pages/about",
+            "button_style_1": "secondary"
+          }
+        }
+      },
+      "block_order": [
+        "sub",
+        "head",
+        "text",
+        "btn"
+      ]
+    },
+    "routine": {
+      "type": "collapsible-content",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "subheading": "Build your routine",
+        "subheading_size": "sm",
+        "heading": "Three steps, morning and night",
+        "heading_size": "lg",
+        "heading_tag": "h2",
+        "open_first": true,
+        "padding_top_desktop": 70,
+        "padding_bottom_desktop": 70,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "step1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "1. Cleanse",
+            "heading_size": "sm",
+            "content": "<p>Massage a single pump of gel cleanser over damp skin for 30 seconds, then rinse with lukewarm water.</p>",
+            "content_size": "md"
+          }
+        },
+        "step2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "2. Tone and treat",
+            "heading_size": "sm",
+            "content": "<p>Mist toner while skin is still damp. In the evening, press in three drops of night serum.</p>",
+            "content_size": "md"
+          }
+        },
+        "step3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "3. Moisturize",
+            "heading_size": "sm",
+            "content": "<p>Warm a pea-sized amount of cream between your fingertips and press it over face and neck.</p>",
+            "content_size": "md"
+          }
+        },
+        "ingredients": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What we never use",
+            "heading_size": "sm",
+            "content": "<p>No synthetic fragrance, no parabens, no mineral oil and no microplastics. Every ingredient is listed in full on the product page.</p>",
+            "content_size": "md"
+          }
+        }
+      },
+      "block_order": [
+        "step1",
+        "step2",
+        "step3",
+        "ingredients"
+      ]
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "subheading": "Reviews",
+        "subheading_size": "sm",
+        "heading": "Loved by sensitive skin",
+        "heading_size": "lg",
+        "heading_tag": "h2",
+        "layout": "slider",
+        "columns_desktop": 3,
+        "padding_top_desktop": 70,
+        "padding_bottom_desktop": 70,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "t1": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "<p>The first cleanser that does not leave my cheeks tight. I have reordered it three times.</p>",
+            "author": "Hannah P.",
+            "author_title": "Combination skin"
+          }
+        },
+        "t2": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "<p>My redness calmed down within two weeks of switching to the chamomile cream.</p>",
+            "author": "Maya R.",
+            "author_title": "Sensitive skin"
+          }
+        },
+        "t3": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 4,
+            "quote": "<p>The night serum smells like a garden and my skin looks rested in the morning.</p>",
+            "author": "Olivia T.",
+            "author_title": "Dry skin"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ]
+    },
+    "journal": {
+      "type": "blog-posts",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "subheading": "Journal",
+        "subheading_size": "sm",
+        "heading": "Notes from the studio",
+        "heading_size": "lg",
+        "heading_tag": "h2",
+        "layout": "grid",
+        "posts_to_show": 3,
+        "columns_desktop": 3,
+        "show_date": true,
+        "show_excerpt": true,
+        "show_view_all": true,
+        "padding_top_desktop": 70,
+        "padding_bottom_desktop": 70,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "subheading": "Join the ritual",
+        "subheading_size": "sm",
+        "heading": "Seasonal notes, first to new batches",
+        "heading_size": "lg",
+        "heading_tag": "h2",
+        "description": "One letter a month: what we are harvesting, what is back in stock, and 10% off your first order.",
+        "description_size": "md",
+        "button_label": "Subscribe",
+        "button_size": "md",
+        "text_align": "center",
+        "padding_top_desktop": 70,
+        "padding_bottom_desktop": 70,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    }
+  },
+  "order": [
+    "hero_product",
+    "benefits",
+    "bestsellers",
+    "results",
+    "garden_story",
+    "routine",
+    "testimonials",
+    "journal",
+    "newsletter"
+  ]
+}

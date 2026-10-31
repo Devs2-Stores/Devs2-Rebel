@@ -1,0 +1,104 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "settings": {}
+    },
+    "main": {
+      "type": "page-faq",
+      "settings": {
+        "description": "<p>Answers about our formulas, your routine, orders and returns.</p>"
+      },
+      "blocks": {
+        "h1": {
+          "type": "heading",
+          "settings": {
+            "title": "Formulas & skin"
+          }
+        },
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Are your products suitable for sensitive skin?",
+            "answer": "<p>Yes. Every formula is fragrance-free or scented only by its herbs, and we patch-test each batch. If you react to a product, we refund it within 30 days.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Are your products vegan?",
+            "answer": "<p>All of our formulas are vegan except where a product page says otherwise. None are tested on animals.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "How long does a bottle last once opened?",
+            "answer": "<p>Use within 12 months of opening. The open-jar symbol on each label shows the period in months.</p>"
+          }
+        },
+        "h2": {
+          "type": "heading",
+          "settings": {
+            "title": "Orders & subscriptions"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "How does Subscribe & save work?",
+            "answer": "<p>Choose a delivery every 30 or 60 days on the product page and save 10% on every order. You can skip or cancel from your account at any time.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "When will my order ship?",
+            "answer": "<p>Orders placed before 1 pm ship the same working day. Delivery options and estimates are shown at checkout.</p>"
+          }
+        },
+        "h3": {
+          "type": "heading",
+          "settings": {
+            "title": "Returns"
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "question": "Can I return an opened product?",
+            "answer": "<p>Yes. If a product does not suit your skin, contact us within 30 days of delivery and we will refund it.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "h1",
+        "q1",
+        "q2",
+        "q3",
+        "h2",
+        "q4",
+        "q5",
+        "h3",
+        "q6"
+      ]
+    },
+    "contact_form": {
+      "type": "contact-form",
+      "settings": {
+        "subheading": "Still have a question?",
+        "heading": "Write to the studio",
+        "text": "<p>Tell us your skin type and what you are using now, and we will suggest a routine. We reply within one working day.</p>",
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 30,
+        "padding_bottom_mobile": 50
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main",
+    "contact_form"
+  ]
+}

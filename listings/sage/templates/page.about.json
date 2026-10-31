@@ -1,0 +1,248 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "settings": {}
+    },
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "image_alt": "The Sage Botanicals herb garden",
+        "height_desktop": "60",
+        "height_mobile": "60",
+        "overlay_opacity": 35,
+        "overlay_gradient": false,
+        "content_position": "bottom-left",
+        "text_align": "left",
+        "content_max_width": 700,
+        "color_scheme": "scheme-3"
+      },
+      "blocks": {
+        "subheading": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Our story",
+            "subheading_size": "sm"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Rooted in the garden",
+            "heading_size": "2xl",
+            "heading_tag": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Herbal skincare grown, steeped and bottled by a small studio team.</p>",
+            "content_size": "lg"
+          }
+        }
+      },
+      "block_order": [
+        "subheading",
+        "heading",
+        "text"
+      ]
+    },
+    "mission": {
+      "type": "rich-text",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "text_align": "center",
+        "section_width": "fixed",
+        "content_width": 800,
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 60,
+        "padding_top_mobile": 50,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "subheading": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "What we believe",
+            "subheading_size": "sm"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Fewer ingredients, chosen well",
+            "heading_size": "lg",
+            "heading_tag": "h2"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Every formula starts with a plant we can grow or a farmer we can visit. If we cannot explain why an ingredient is there, it does not go in the bottle.</p>",
+            "content_size": "lg"
+          }
+        }
+      },
+      "block_order": [
+        "subheading",
+        "heading",
+        "text"
+      ]
+    },
+    "garden": {
+      "type": "image-with-text",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "image_position": "left",
+        "section_width": "fixed",
+        "text_align": "left",
+        "padding_top_desktop": 70,
+        "padding_bottom_desktop": 70,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "subheading": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "The garden",
+            "subheading_size": "sm"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Half an acre of sage, calendula and chamomile",
+            "heading_size": "md",
+            "heading_tag": "h2"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We harvest by hand in the cool of the morning and dry the leaves slowly in the shade, so they keep their colour and scent.</p>",
+            "content_size": "md"
+          }
+        }
+      },
+      "block_order": [
+        "subheading",
+        "heading",
+        "text"
+      ]
+    },
+    "studio": {
+      "type": "image-with-text",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "image_position": "right",
+        "section_width": "fixed",
+        "text_align": "left",
+        "padding_top_desktop": 70,
+        "padding_bottom_desktop": 70,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "subheading": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "The studio",
+            "subheading_size": "sm"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Blended in batches of a few hundred",
+            "heading_size": "md",
+            "heading_tag": "h2"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Small batches mean fresher oils and a formula we can adjust each season, depending on what the garden gives us.</p>",
+            "content_size": "md"
+          }
+        }
+      },
+      "block_order": [
+        "subheading",
+        "heading",
+        "text"
+      ]
+    },
+    "stats": {
+      "type": "animated-counter",
+      "settings": {
+        "color_scheme": "scheme-4",
+        "subheading": "By the numbers",
+        "subheading_size": "sm",
+        "heading": "A small studio, growing slowly",
+        "heading_size": "md",
+        "heading_tag": "h2",
+        "number_size": "2xl",
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "number": 8,
+            "label": "Formulas"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "number": 3,
+            "label": "Partner farms"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "number": 100,
+            "suffix": "%",
+            "label": "Glass packaging"
+          }
+        },
+        "s4": {
+          "type": "stat",
+          "settings": {
+            "number": 30,
+            "label": "Day returns"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ]
+    },
+    "page_content": {
+      "type": "page-content",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "container_width": "fixed",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "hero",
+    "mission",
+    "garden",
+    "studio",
+    "stats",
+    "page_content"
+  ]
+}

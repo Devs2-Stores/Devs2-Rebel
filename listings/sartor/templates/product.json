@@ -1,0 +1,165 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "settings": {}
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "product_meta": {
+          "type": "product_meta",
+          "settings": {
+            "show_sku": true,
+            "show_barcode": false,
+            "show_vendor": true,
+            "show_type": false,
+            "show_availability": true
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "buttons",
+            "cross_out_unavailable": true,
+            "unavailable_opacity": 50,
+            "option_spacing": 16
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "stock_counter": {
+          "type": "stock_counter",
+          "settings": {
+            "stock_threshold": 10
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {}
+        },
+        "payment_installments": {
+          "type": "payment_installments",
+          "settings": {}
+        },
+        "pickup_availability": {
+          "type": "pickup_availability",
+          "settings": {}
+        },
+        "tabs": {
+          "type": "tabs",
+          "settings": {},
+          "blocks": {
+            "tab-description": {
+              "type": "tab",
+              "settings": {
+                "title": "Description",
+                "content_type": "description",
+                "description_readmore": true,
+                "description_max_height": 300
+              }
+            }
+          },
+          "block_order": [
+            "tab-description"
+          ]
+        },
+        "share": {
+          "type": "share",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "title",
+        "product_meta",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "stock_counter",
+        "buy_buttons",
+        "payment_installments",
+        "pickup_availability",
+        "tabs",
+        "share"
+      ],
+      "settings": {}
+    },
+    "complementary": {
+      "type": "complementary-products",
+      "settings": {
+        "heading": "Pairs well with",
+        "product_limit": 4
+      }
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "You may also like",
+        "product_limit": 4
+      }
+    },
+    "trust_badges": {
+      "type": "trust-badges",
+      "blocks": {
+        "tb1": {
+          "type": "badge",
+          "settings": {
+            "emoji": "🚚",
+            "heading": "Free shipping",
+            "text": "On orders over $150"
+          }
+        },
+        "tb2": {
+          "type": "badge",
+          "settings": {
+            "emoji": "🔒",
+            "heading": "Secure checkout",
+            "text": "Encrypted payment"
+          }
+        },
+        "tb3": {
+          "type": "badge",
+          "settings": {
+            "emoji": "↩️",
+            "heading": "Easy returns",
+            "text": "30-day return window"
+          }
+        },
+        "tb4": {
+          "type": "badge",
+          "settings": {
+            "emoji": "🧵",
+            "heading": "Made to last",
+            "text": "Atelier-finished seams"
+          }
+        }
+      },
+      "block_order": [
+        "tb1",
+        "tb2",
+        "tb3",
+        "tb4"
+      ],
+      "settings": {
+        "layout": "inline"
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main",
+    "trust_badges",
+    "complementary",
+    "recommendations"
+  ]
+}

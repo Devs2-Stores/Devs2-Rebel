@@ -1,0 +1,58 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "settings": {}
+    },
+    "main": {
+      "type": "main-collection",
+      "blocks": {
+        "collection_image": {
+          "type": "collection_image",
+          "settings": {
+            "enabled": true,
+            "image_position": "center top"
+          }
+        },
+        "subcollections": {
+          "type": "subcollections",
+          "settings": {
+            "items_limit": 10
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "countdown_drop": {
+          "type": "countdown_banner",
+          "settings": {
+            "heading": "The AW26 drop closes soon",
+            "subheading": "Limited-edition outerwear, cut in small runs.",
+            "button_text": "Shop limited edition",
+            "button_link": "shopify://collections/all",
+            "end_date": "2027-03-31",
+            "end_time": "23:59",
+            "show_after_expired": false,
+            "layout": "horizontal"
+          }
+        }
+      },
+      "block_order": [
+        "collection_image",
+        "subcollections",
+        "countdown_drop",
+        "description"
+      ],
+      "settings": {
+        "price_filter_style": "checkbox",
+        "pagination_type": "infinite",
+        "products_per_page": 12
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main"
+  ]
+}

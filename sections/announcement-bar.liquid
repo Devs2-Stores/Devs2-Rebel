@@ -40,6 +40,7 @@
 
 {% stylesheet %}
 .announcement-bar {
+  --swiper-navigation-color: currentColor;
   display: block;
   position: relative;
   padding: 0.5rem 0;
@@ -84,10 +85,17 @@
   text-underline-offset: 3px;
 }
 .announcement-bar__nav {
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  width: calc(var(--swiper-navigation-size, 2.75rem) / 44 * 27);
+  margin-top: calc(0px - var(--swiper-navigation-size, 2.75rem) / 2);
   background: transparent;
   min-width: 1.5rem;
   min-height: 1.5rem;
 }
+.announcement-bar__nav--prev { left: 0.625rem; }
+.announcement-bar__nav--next { right: 0.625rem; }
 .announcement-bar__nav:hover:after { color: var(--color-ink); }
 .announcement-bar__nav:after { color: inherit; font-size: var(--font-xs); opacity: 1; }
 .announcement-bar--rotating .announcement-bar__content { padding-inline: 2.5rem 4.25rem; }

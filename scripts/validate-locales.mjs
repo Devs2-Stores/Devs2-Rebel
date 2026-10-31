@@ -93,7 +93,7 @@ function getAllFiles(dir, ext) {
 const liquidFiles = ['layout', 'sections', 'snippets', 'blocks', 'templates']
   .filter((dir) => fs.existsSync(dir))
   .flatMap((dir) => getAllFiles(dir, '.liquid'));
-const jsonTemplates = getAllFiles('templates', '.json');
+const jsonTemplates = ['templates', 'listings'].filter((dir) => fs.existsSync(dir)).flatMap((dir) => getAllFiles(dir, '.json'));
 
 let missingStorefront = [];
 let missingSchema = [];

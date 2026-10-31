@@ -177,7 +177,7 @@ function checkSections(sections, label) {
   }
 }
 
-for (const file of [...walk('templates', '.json'), ...walk('sections', '.json')]) {
+for (const file of [...walk('templates', '.json'), ...walk('sections', '.json'), ...walk('listings', '.json')]) {
   checkSections(readJson(file).sections, file);
 }
 
