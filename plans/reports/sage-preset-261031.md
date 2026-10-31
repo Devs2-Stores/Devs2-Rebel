@@ -35,7 +35,7 @@ Branch `feat/preset-sage` (from `5f0e435`). Second Theme Store preset for Sartor
 | CLS, real `layout-shift` entries, 375 and 1440 on home, collection, product, journal | 0 |
 | Lighthouse, 3 cold runs per page, password bypass cookie | desktop avg 96 (a11y 100); mobile avg 54.3 (a11y 99.6) |
 | `theme.qa_validate` home and PDP at 1440 and 375 | FAIL / STRUCTURAL, no CERTIFIED receipt |
-| Shopify Theme Check | not run, needs approval |
+| Shopify Theme Check (approved run, `OPT_OUT_INSTRUMENTATION=true`) | 213 files inspected, no offenses, exit 0 |
 
 Mobile Lighthouse is noisy on this machine: benchmark index 654-1110 across runs, correlation 0.47 with the score. The same machine gives the Sartor demo a mobile average of 54.6, so Sage is not slower than the shipped preset. Individual Sage home runs reached 70-83 in high-benchmark runs after the preload change. Treat the 60 mobile threshold as not proven.
 
@@ -48,6 +48,5 @@ Remaining `theme.qa_validate` findings and why they are not fixed:
 
 ## Not done
 
-- Theme Check (`shopify theme check`), user approval needed.
 - No push of the branch or the docs site.
 - The Lighthouse JSON files (55 MB) stay local in `sage-preset-261031/lighthouse/` and are not committed.
