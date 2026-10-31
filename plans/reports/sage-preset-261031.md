@@ -1,19 +1,20 @@
-# Sage preset and demo store - 2026-10-31
+# Yarrow preset and demo store - 2026-10-31
 
-Branch `feat/preset-sage` (from `5f0e435`). Second Theme Store preset for Sartor, targeting the Health and beauty category.
+Branch `feat/preset-sage` (from `5f0e435`). Second Theme Store preset for Sartor, targeting the Health and beauty category. The preset was first built as `Sage`; it was renamed `Yarrow` because "Sage" is the name of a widely used WordPress starter theme (Theme Store naming rule: no name already used on another platform). A search found no theme named Yarrow on the Shopify Theme Store, WordPress, ThemeForest, Squarespace or Wix. The demo brand stays "Sage Botanicals".
 
 ## What exists now
 
 | Item | State |
 |---|---|
-| Preset `Sage` in `config/settings_data.json` | Herbal palette, serif headings, rounded cards, vertical-lift hover. |
-| `listings/sage/` | 7 templates (index, product, collection, blog, page.about, page.contact, page.faq) and the header/footer section groups. |
+| Preset `Yarrow` in `config/settings_data.json` | Herbal palette, serif headings, rounded cards, vertical-lift hover. |
+| `listings/yarrow/` | 7 templates (index, product, collection, blog, page.about, page.contact, page.faq) and the header/footer section groups. |
 | `listings/sartor/` | Templates and section groups copied from the live Sartor demo, so both presets have listing folders. |
 | `listings/manifest.json` | Lists both presets with handle and description. |
-| Demo store | `sage-botanicals-awx3grhp.myshopify.com` (client transfer store), theme `Sartor (Sage)` #190022975798 published, storefront password from `REBEL_SHOPIFY`, Test payment gateway (Bogus) active. |
-| Demo catalog | 8 products with AI images (ai-image-studio), category metafields and metaobjects, reviews rating, subscription selling plan, color-pattern swatches on the lip balm, recommendations, 5 collections, about/faq/contact pages, Journal blog with 3 articles, menus, policies. |
-| Listing screenshots | `sage-preset-261031/listing/sage-desktop.png` 2000x2496, `sage-mobile.png` 750x1334 (sizes from the Theme Store listing page). |
-| Package | `dist/sartor-v1.0.0.zip`, 325 files, 0.55 MB, contains `listings/sage` and `listings/sartor`. |
+| Demo store | `sage-botanicals-awx3grhp.myshopify.com` (client transfer store), theme `Sartor (Yarrow)` #190022975798 published with preset `Yarrow` current, storefront password from `REBEL_SHOPIFY`, Test payment gateway (Bogus) active. |
+| Demo catalog | 8 products, category metafields and metaobjects, reviews rating, subscription selling plan, color-pattern swatches on the lip balm, recommendations, 5 collections, about/faq/contact pages, Journal blog with 3 articles, menus, policies. |
+| Product images | Regenerated with ai-image-studio: 8 heroes on Wan `wan2.7-image-pro`, then 3 img2img variants per product (macro, lifestyle, flatlay) and 2 lip balm recolours (Rose, Berry). Every product now carries 4 images (lip balm 6, set 2), each lip balm variant links its own image. Old media was deleted from the products. |
+| Listing screenshots | `sage-preset-261031/listing/yarrow-desktop.png` 2000x2496, `yarrow-mobile.png` 750x1334. Captured before the Wan images; recapture after the UI council round. |
+| Package | `dist/sartor-v1.0.0.zip`, 325 files, 0.55 MB, contains `listings/yarrow` and `listings/sartor`. |
 
 ## Theme code changed
 
