@@ -19,6 +19,38 @@ jobs:
         with:
           node-version: 20
 
+      - name: Check JavaScript syntax
+        run: |
+          for f in assets/*.js; do
+            node --check "$f"
+          done
+
+      - name: Parse theme JSON
+        run: |
+          node - <<'EOF'
+          const fs = require('fs');
+          const path = require('path');
+          const walk = (dir) => fs.existsSync(dir)
+            ? fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
+                const full = path.join(dir, e.name);
+                return e.isDirectory() ? walk(full) : full.endsWith('.json') ? [full] : [];
+              })
+            : [];
+          let bad = 0;
+          for (const file of ['config', 'templates', 'sections', 'blocks', 'locales', 'listings'].flatMap(walk)) {
+            try {
+              JSON.parse(fs.readFileSync(file, 'utf8').replace(/^\s*\/\*[\s\S]*?\*\//, ''));
+            } catch (e) {
+              bad++;
+              console.error(`${file}: ${e.message}`);
+            }
+          }
+          process.exit(bad ? 1 : 0);
+          EOF
+
+      - name: Validate Settings Are Read
+        run: node scripts/settings-usage.cjs
+
       - name: Validate Schema Range Math
         run: node scripts/validate-schema-ranges.mjs
 
@@ -26,7 +58,7 @@ jobs:
         run: node scripts/validate-locales.mjs
 
       - name: Install Shopify CLI
-        run: npm install -g @shopify/cli@latest
+        run: npm install -g @shopify/cli@4.8.3
 
       - name: Run Shopify Theme Check
         run: shopify theme check --fail-level error
@@ -37,6 +69,6 @@ jobs:
       - name: Upload Distribution Theme ZIP
         uses: actions/upload-artifact@v4
         with:
-          name: rebel-v1.0.0-zip
-          path: dist/rebel-v1.0.0.zip
+          name: sartor-theme-zip
+          path: dist/sartor-v*.zip
           if-no-files-found: error

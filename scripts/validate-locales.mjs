@@ -47,6 +47,8 @@ if (bleedKeys.length > 0) {
   process.exit(1);
 }
 
+const PLURAL_CATEGORIES = new Set(['zero', 'one', 'two', 'few', 'many', 'other']);
+
 function resolveKey(root, keyPath) {
   const parts = keyPath.split('.');
   let cur = root;
@@ -58,6 +60,17 @@ function resolveKey(root, keyPath) {
     }
   }
   return cur;
+}
+
+function isPluralObject(node) {
+  if (node === null || typeof node !== 'object' || Array.isArray(node)) return false;
+  const keys = Object.keys(node);
+  return keys.length > 0 && keys.every((k) => PLURAL_CATEGORIES.has(k)) && typeof node.other === 'string';
+}
+
+function isTranslation(val) {
+  if (typeof val === 'string') return val.trim() !== '';
+  return isPluralObject(val) && Object.values(val).every((v) => typeof v === 'string' && v.trim() !== '');
 }
 
 function getAllFiles(dir, ext) {
@@ -85,70 +98,82 @@ const jsonTemplates = getAllFiles('templates', '.json');
 let missingStorefront = [];
 let missingSchema = [];
 
-// 1. Check | t filter calls in Liquid
-const tFilterRegex = /['"]([a-zA-Z0-9_.]+)['"]\s*\|\s*t/g;
+// 1. Check | t filter calls in Liquid against the storefront locale only
+const tFilterRegex = /['"]([a-zA-Z0-9_.-]+)['"]\s*\|\s*t\b/g;
+const dynamicPrefixRegex = /['"]([a-zA-Z0-9_.-]+\.)['"]\s*\|\s*append\b/g;
+const referencedStorefrontKeys = new Set();
+const dynamicStorefrontPrefixes = new Set();
 for (const file of liquidFiles) {
   const content = fs.readFileSync(file, 'utf8');
-  let match;
-  while ((match = tFilterRegex.exec(content)) !== null) {
+  for (const match of content.matchAll(tFilterRegex)) {
     const key = match[1];
-    const val = resolveKey(storefront, key) ?? resolveKey(schema, key);
-    if (val === null || (typeof val === 'string' && val.trim() === '')) {
-      missingStorefront.push(`${file} -> ${key}`);
+    referencedStorefrontKeys.add(key);
+    if (!isTranslation(resolveKey(storefront, key))) {
+      const where = isTranslation(resolveKey(schema, key)) ? ' (only exists in the schema locale)' : '';
+      missingStorefront.push(`${file} -> ${key}${where}`);
     }
   }
+  for (const match of content.matchAll(dynamicPrefixRegex)) dynamicStorefrontPrefixes.add(match[1]);
 }
 
-// 2. Check "t:..." schema keys
+// 2. Check "t:..." schema keys against the schema locale only
 const tSchemaRegex = /"t:([a-zA-Z0-9_.-]+)"/g;
 const allSchemaFiles = [...liquidFiles, ...jsonTemplates, 'config/settings_schema.json'];
-for (const file of allSchemaFiles) {
-  if (!fs.existsSync(file)) continue;
-  const content = fs.readFileSync(file, 'utf8');
-  let match;
-  while ((match = tSchemaRegex.exec(content)) !== null) {
-    const key = match[1];
-    const val = resolveKey(schema, key) ?? resolveKey(storefront, key);
-    if (val === null || (typeof val === 'string' && val.trim() === '')) {
-      missingSchema.push(`${file} -> ${key}`);
-    }
-  }
-}
-
 const referencedSchemaKeys = new Set();
 for (const file of allSchemaFiles) {
   if (!fs.existsSync(file)) continue;
   const content = fs.readFileSync(file, 'utf8');
-  for (const match of content.matchAll(tSchemaRegex)) referencedSchemaKeys.add(match[1]);
+  for (const match of content.matchAll(tSchemaRegex)) {
+    const key = match[1];
+    referencedSchemaKeys.add(key);
+    if (!isTranslation(resolveKey(schema, key))) {
+      const where = isTranslation(resolveKey(storefront, key)) ? ' (only exists in the storefront locale)' : '';
+      missingSchema.push(`${file} -> ${key}${where}`);
+    }
+  }
+}
+
+function collectStale(node, keyPath, referenced, dynamicPrefixes, out) {
+  if (node !== null && typeof node === 'object' && !isPluralObject(node)) {
+    for (const [k, v] of Object.entries(node)) collectStale(v, keyPath ? `${keyPath}.${k}` : k, referenced, dynamicPrefixes, out);
+  } else if (!referenced.has(keyPath) && ![...dynamicPrefixes].some((prefix) => keyPath.startsWith(prefix))) {
+    out.push(keyPath);
+  }
 }
 
 const staleSchema = [];
-function collectStale(node, keyPath) {
-  if (node !== null && typeof node === 'object') {
-    for (const [k, v] of Object.entries(node)) collectStale(v, keyPath ? `${keyPath}.${k}` : k);
-  } else if (!referencedSchemaKeys.has(keyPath)) {
-    staleSchema.push(keyPath);
-  }
-}
-collectStale(schema, '');
+collectStale(schema, '', referencedSchemaKeys, new Set(), staleSchema);
+
+const staleStorefront = [];
+collectStale(storefront, '', referencedStorefrontKeys, dynamicStorefrontPrefixes, staleStorefront);
+
+let failed = false;
 
 if (staleSchema.length > 0) {
+  failed = true;
   console.error(`FAILED: ${staleSchema.length} schema locale keys are not referenced by any t: reference:`);
   for (const k of staleSchema.slice(0, 10)) console.error(`  - ${k}`);
-  process.exit(1);
 }
 
-if (missingStorefront.length > 0 || missingSchema.length > 0) {
-  if (missingStorefront.length > 0) {
-    console.error(`FAILED: ${missingStorefront.length} storefront translation keys unresolvable:`);
-    for (const m of missingStorefront.slice(0, 10)) console.error(`  - ${m}`);
-  }
-  if (missingSchema.length > 0) {
-    console.error(`FAILED: ${missingSchema.length} schema translation keys unresolvable:`);
-    for (const m of missingSchema.slice(0, 10)) console.error(`  - ${m}`);
-  }
-  process.exit(1);
+if (staleStorefront.length > 0) {
+  failed = true;
+  console.error(`FAILED: ${staleStorefront.length} storefront locale keys are not referenced by any | t call:`);
+  for (const k of staleStorefront.slice(0, 10)) console.error(`  - ${k}`);
 }
 
-console.log('SUCCESS: 100% of storefront and schema keys resolved without any missing or blank values!');
+if (missingStorefront.length > 0) {
+  failed = true;
+  console.error(`FAILED: ${missingStorefront.length} storefront translation keys unresolvable:`);
+  for (const m of missingStorefront.slice(0, 10)) console.error(`  - ${m}`);
+}
+
+if (missingSchema.length > 0) {
+  failed = true;
+  console.error(`FAILED: ${missingSchema.length} schema translation keys unresolvable:`);
+  for (const m of missingSchema.slice(0, 10)) console.error(`  - ${m}`);
+}
+
+if (failed) process.exit(1);
+
+console.log('SUCCESS: 100% of storefront and schema keys resolved without any missing, blank or unreferenced values!');
 process.exit(0);
