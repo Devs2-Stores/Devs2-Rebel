@@ -4,9 +4,9 @@ const path = require('path');
 const { chromium } = require('playwright');
 const { gotoStore, recorder, ensureDir, attachLogs } = require('./lib.cjs');
 const { renderSnippet, renderSegment } = require('./snippet-render.cjs');
+const { PDP } = require('./routes.cjs');
 
 const OUT = process.env.OC_OUT || path.join(os.tmpdir(), 'e2e-overlay-contract', 'overlay-contract.json');
-const PDP = '/products/rebel-tactical-bomber-jacket';
 const FOCUSABLE = 'a[href], button:not([disabled]), input:not([type=hidden]):not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 const { results, rec } = recorder();
 const MUTATE = process.env.OC_MUTATE || '';

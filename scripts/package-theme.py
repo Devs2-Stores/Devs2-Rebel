@@ -2,7 +2,7 @@ import argparse, os, re, zipfile, fnmatch, json
 
 THEME_DIRS = ['assets', 'blocks', 'config', 'layout', 'listings', 'locales', 'sections', 'snippets', 'templates']
 REQUIRED_ENTRIES = ['layout/theme.liquid', 'config/settings_schema.json', 'config/settings_data.json', 'locales/en.default.json']
-FORBIDDEN_PATTERNS = ['.env', '.env.*', '*.md', 'runs/*', 'plans/*', 'scratch/*', 'node_modules/*', '.git/*']
+FORBIDDEN_PATTERNS = ['.env', '.env.*', '*.md', 'runs/*', 'plans/*', 'scratch/*', 'node_modules/*', '.git/*', '.DS_Store', 'Thumbs.db', '*.pyc', '*.orig', '*.rej']
 TEXT_EXTENSIONS = ('.liquid', '.json', '.js', '.css', '.svg', '.txt')
 MAX_BYTES = 50 * 1024 * 1024
 
@@ -86,10 +86,13 @@ with zipfile.ZipFile(tmp_path) as zf:
     crlf = []
     bad_json = []
     store_specific = []
+    residue = []
     for name in names:
         data = zf.read(name)
         if name.endswith(TEXT_EXTENSIONS) and b'\r\n' in data:
             crlf.append(name)
+        if name.endswith(TEXT_EXTENSIONS) and re.search(rb'\brebel\b', data, re.I):
+            residue.append(name)
         if name.endswith('.json'):
             try:
                 json.loads(re.sub(r'^\s*/\*[\s\S]*?\*/', '', data.decode('utf-8')))
@@ -100,6 +103,8 @@ with zipfile.ZipFile(tmp_path) as zf:
                 store_specific.append(name)
     if crlf:
         problems.append(f'CRLF line endings left in text members: {crlf}')
+    if residue:
+        problems.append(f'former theme name "Rebel" found in: {residue}')
     if bad_json:
         problems.append(f'invalid JSON members: {bad_json}')
     if store_specific:

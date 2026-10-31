@@ -19,27 +19,29 @@ repeating the full workspace contract.
 
 - The theme product scope includes five style presets sharing one tokenized
   component architecture.
-- The current delivery phase implements exactly one style preset first. Build
-  extensible preset and token contracts so four additional presets can be
-  added without duplicating theme structure or changing content APIs.
+- The current delivery phase ships two style presets, Sartor and Yarrow, on one
+  tokenized architecture. A new preset adds only settings, a
+  `listings/<handle>/` folder and demo-matched templates, with no duplicated
+  theme structure and no change to content APIs.
 - A later delivery phase adds full internationalization for the common Shopify
   storefront languages required by the product. Keep all customer-facing copy
   locale-backed now, with English as the source baseline; do not ship partial
   language files or hardcoded language branches.
-- Do not implement the remaining four presets or the full language rollout until
-  the user explicitly requests that phase. Do not let unrelated work expand
-  either phase.
+- Do not implement a third preset or the full language rollout until the user
+  explicitly requests it. Do not let unrelated work expand either phase.
 
 ## Theme Structure
 
 ```text
 assets/    CSS, JavaScript, and theme-owned interface assets; `base.css` owns tokens
+blocks/    theme blocks
 config/    settings_schema.json and settings_data.json
 layout/    theme.liquid and password.liquid
 locales/   en.default.json and en.default.schema.json
 sections/  merchant-configurable section files
 snippets/  reusable Liquid fragments
 templates/ JSON templates
+listings/  Theme Store preset listings (`listings/<handle>/`); `listings/manifest.json` is excluded from the zip by `.shopifyignore`
 ```
 
 ## Shopify CLI - Reference Only

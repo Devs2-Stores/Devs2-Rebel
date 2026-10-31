@@ -3,8 +3,9 @@ const path = require('path');
 const os = require('os');
 const { chromium } = require('playwright');
 const { gotoStore, settle, ensureDir, ROOT } = require('./lib.cjs');
+const { PDP } = require('./routes.cjs');
 
-const ROUTES = (process.env.TW_ROUTES || '/,/products/rebel-tactical-bomber-jacket,/collections/all,/cart,/pages/contact,/pages/about,/pages/contact?view=faq,/search?q=jacket,/pages/contact?view=stores,/pages/does-not-exist-404').split(',');
+const ROUTES = (process.env.TW_ROUTES || ['/', PDP, '/collections/all', '/cart', '/pages/contact', '/pages/about', '/pages/contact?view=faq', '/search?q=jacket', '/pages/contact?view=stores', '/pages/does-not-exist-404'].join(',')).split(',');
 const WIDTHS = (process.env.TW_WIDTHS || '375,1440').split(',').map(Number);
 const MAX = Number(process.env.TW_MAX || 600);
 const OUT = process.env.TW_OUT || path.join(os.tmpdir(), 'e2e-tabwalk', 'tabwalk.json');

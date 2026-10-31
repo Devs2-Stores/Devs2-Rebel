@@ -4,6 +4,7 @@
 const { chromium } = require('playwright');
 const { execFileSync } = require('child_process');
 const { gotoStore, settle, ROOT } = require('./lib.cjs');
+const { PDP } = require('./routes.cjs');
 
 const BEFORE = process.env.EP_BEFORE === '1';
 const MUTATE = process.env.EP_MUTATE || '';
@@ -70,13 +71,17 @@ async function scenario(page, pattern, handler, trigger) {
     }
     await gotoStore(page, '/');
     await settle(page);
-    const seed = await page.evaluate(async () => {
-      const p = await (await fetch('/products/rebel-tactical-bomber-jacket.js')).json();
+    const seed = await page.evaluate(async (pdp) => {
+      const res = await fetch(pdp + '.js');
+      if (!res.ok) return { status: 0, error: 'product fetch ' + res.status };
+      const p = await res.json();
       const v = p.variants.find((x) => x.available);
+      if (!v) return { status: 0, error: 'no available variant' };
       const r = await fetch('/cart/add.js', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ id: v.id, quantity: 1 }) });
       return { status: r.status, cartError: themeConfig.strings.cart.error, loadError: (themeConfig.strings.collection || {}).loadError || null };
-    });
+    }, PDP);
     check('seed: cart line added and locale strings present', seed.status === 200 && !!seed.cartError && !!seed.loadError, seed);
+    if (seed.status !== 200) throw new Error('seed failed: ' + JSON.stringify(seed));
 
     await gotoStore(page, '/');
     await settle(page);

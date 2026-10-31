@@ -4,10 +4,11 @@
 // heading-order inside the merchant-authored product description is ignored: product.description is merchant HTML.
 const fs = require('fs');
 const { chromium } = require('playwright');
-const { gotoStore, settle } = require('./lib.cjs');
+const { gotoStore, settle, BASE } = require('./lib.cjs');
+const { PDP } = require('./routes.cjs');
 
 const AXE = fs.readFileSync(require.resolve('axe-core/axe.min.js'), 'utf8');
-const ROUTES = (process.env.R5_ROUTES || '/,/collections/all,/products/rebel-tactical-bomber-jacket,/pages/about').split(',');
+const ROUTES = (process.env.R5_ROUTES || ['/', '/collections/all', PDP, '/pages/about'].join(',')).split(',');
 const WIDTHS = (process.env.R5_WIDTHS || '375,1440').split(',').map(Number);
 const EXPECT = Object.fromEntries((process.env.R5_EXPECT || '').split(',').filter(Boolean).map((p) => { const [r, s] = p.split('='); return [r, Number(s)]; }));
 const INJECT = process.env.R5_INJECT || '';
@@ -27,8 +28,17 @@ const MERCHANT_HTML = /__tab-description|product-template__description/;
         await ctx.addInitScript(() => { try { localStorage.setItem('newsletter_popup_closed', 'true'); } catch (e) {} });
         const page = await ctx.newPage();
         try {
-          const resp = await gotoStore(page, route, { allowStatus: EXPECT[route] ? [EXPECT[route]] : [] });
+          const account = route.startsWith('/account/');
+          const resp = await gotoStore(page, route, { allowStatus: account ? [403, 404, 429] : (EXPECT[route] ? [EXPECT[route]] : []) });
           const status = resp ? resp.status() : null;
+          if (account) {
+            const landed = new URL(page.url());
+            if (landed.origin !== new URL(BASE).origin || status !== 200 || !landed.pathname.startsWith(route.split('?')[0])) {
+              out[key] = { platformOwned: page.url(), status };
+              console.log(`[INFO] ${key} :: platform-owned`);
+              continue;
+            }
+          }
           await settle(page);
           if (INJECT) await page.evaluate((h) => document.body.insertAdjacentHTML('beforeend', h), INJECT);
           await page.evaluate(async () => {

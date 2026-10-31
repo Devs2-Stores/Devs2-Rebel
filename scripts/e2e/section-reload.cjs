@@ -1,5 +1,6 @@
 const { chromium } = require('playwright');
 const { gotoStore, settle } = require('./lib.cjs');
+const { PDP } = require('./routes.cjs');
 
 const verdict = (checks) => {
   const bad = checks.filter(([, ok]) => !ok);
@@ -9,7 +10,7 @@ const verdict = (checks) => {
 };
 
 const BEFORE = process.env.SR_BEFORE === '1';
-const PDP = '/products/rebel-tactical-bomber-jacket';
+const SCRIPTS = /\/(mobile-menu|footer|product|cart-modal|cart-recommendations)\.js/;
 
 const REVERT = {
   'mobile-menu.js': [[
@@ -38,6 +39,17 @@ const REVERT = {
 `document.addEventListener('DOMContentLoaded', initGiftCardRecipients);
 document.addEventListener('shopify:section:load', initGiftCardRecipients);`,
 `document.addEventListener('DOMContentLoaded', initGiftCardRecipients);`]],
+  'cart-modal.js': [[
+"    connectedCallback() {\n      this.documentLifecycle = new AbortController();",
+"    connectedCallback() {\n      if (this._initialized) return;\n      this.documentLifecycle = new AbortController();",
+(body) => body.includes("    connectedCallback() {\n      if (this._initialized) return;\n      this._initialized = true;\n      this.isOpen = false;")]],
+  'cart-recommendations.js': [[
+"    connectedCallback() {\n      this.lifecycle = new AbortController();",
+"    connectedCallback() {\n      if (this._initialized) return;\n      this.lifecycle = new AbortController();",
+(body) => body.includes("    connectedCallback() {\n      if (this._initialized) return;\n      this._initialized = true;\n      this.productId")], [
+/\n[ \t]*if \(requestId !== this\.loadId\) return;/g,
+'',
+(body) => !body.includes('loadId')]],
 };
 
 async function open(browser, w, route) {
@@ -45,14 +57,14 @@ async function open(browser, w, route) {
   await ctx.addInitScript(() => { try { localStorage.setItem('newsletter_popup_closed', 'true'); } catch (e) {} });
   const page = await ctx.newPage();
   const applied = {};
-  await page.route(/\/(mobile-menu|footer|product)\.js/, async (r) => {
-    const name = r.request().url().match(/\/(mobile-menu|footer|product)\.js/)[0].slice(1);
+  await page.route(SCRIPTS, async (r) => {
+    const name = r.request().url().match(SCRIPTS)[0].slice(1);
     const res = await r.fetch();
     let body = await res.text();
     applied[name] = true;
-    if (BEFORE) for (const [now, old] of REVERT[name]) {
-      if (!body.includes(now)) applied[name] = 'pattern-missing';
-      body = body.replace(now, old);
+    if (BEFORE) for (const [now, old, alreadyUnfixed] of REVERT[name]) {
+      if (typeof now === 'string' ? body.includes(now) : body.search(now) >= 0) body = body.replace(now, old);
+      else if (!(alreadyUnfixed && alreadyUnfixed(body))) applied[name] = 'pattern-missing';
     }
     await r.fulfill({ response: res, body });
   });
@@ -169,6 +181,61 @@ const reload = (page, sel) => page.evaluate(async (s) => {
       } else out.giftCard = s0;
       await ctx.close();
     }
+    {
+      const { ctx, page, applied } = await open(browser, 1440, '/');
+      const isOpen = () => page.evaluate(() => document.querySelector('cart-modal').isOpen === true);
+      await page.evaluate(() => {
+        const cm = document.querySelector('cart-modal');
+        const close = cm.close.bind(cm);
+        window.__closes = 0;
+        cm.close = function() { window.__closes += 1; return close.apply(null, arguments); };
+        const parent = cm.parentNode;
+        const next = cm.nextSibling;
+        cm.remove();
+        parent.insertBefore(cm, next);
+        window.openCartModal();
+      });
+      await page.waitForTimeout(500);
+      const openedBefore = await isOpen();
+      await page.keyboard.press('Escape');
+      await page.waitForTimeout(300);
+      out.cartModalReattach = { applied: applied['cart-modal.js'], openedBefore, openAfterEscape: await isOpen(), closes: await page.evaluate(() => window.__closes) };
+      await ctx.close();
+    }
+    {
+      const { ctx, page, applied } = await open(browser, 1440, '/cart');
+      await page.evaluate(() => {
+        const el = document.querySelector('cart-recommendations');
+        window.__loads = [];
+        el.load = (id) => window.__loads.push(id);
+        const parent = el.parentNode;
+        const next = el.nextSibling;
+        el.remove();
+        parent.insertBefore(el, next);
+        const source = document.querySelector('cart-template');
+        for (const id of [111, 222]) {
+          document.dispatchEvent(new CustomEvent(themeConfig.cart.events.updated, { detail: { source, cart: { items: [{ product_id: id }] } } }));
+        }
+      });
+      const calls = await page.evaluate(() => window.__loads);
+      out.cartRecsReattach = { applied: applied['cart-recommendations.js'], calls };
+
+      const markup = (t) => `<cart-recommendations><section data-recommendation-products>${t}</section></cart-recommendations>`;
+      await page.route(/recommendations\/products/, async (route) => {
+        const first = /product_id=111(&|$)/.test(route.request().url());
+        if (first) await new Promise((r) => setTimeout(r, 1500));
+        await route.fulfill({ status: 200, contentType: 'text/html', body: markup(first ? 'FIRST' : 'SECOND') });
+      });
+      await page.evaluate(() => {
+        const el = document.querySelector('cart-recommendations');
+        delete el.load;
+        el.load('111');
+        el.load('222');
+      });
+      await page.waitForTimeout(2500);
+      out.cartRecsStale = { text: await page.evaluate(() => document.querySelector('cart-recommendations').textContent.trim()) };
+      await ctx.close();
+    }
     console.log(JSON.stringify(out));
     const sr = [];
     for (const [k, file] of [['mobileMenu', 'mobile-menu.js'], ['footer', 'footer.js'], ['giftCard', 'product.js']]) {
@@ -179,6 +246,11 @@ const reload = (page, sel) => page.evaluate(async (s) => {
     sr.push(['footer accordion toggles after a section reload', !!out.footer && JSON.stringify(out.footer.post) === JSON.stringify(['false', 'true']), out.footer]);
     sr.push(['lightbox opens, closes on Escape, reopens after a section reload and after a remove/re-insert', !!out.lightbox && out.lightbox.pre === true && out.lightbox.closedByEscape === true && out.lightbox.post === true && out.lightbox.reopenedAfterReattach === true, out.lightbox]);
     sr.push(['gift-card recipient field enables after the checkbox is ticked, after a reload', !!out.giftCard && !!out.giftCard.afterCheck && out.giftCard.afterCheck.checked === true && out.giftCard.afterCheck.fieldDisabled === false, out.giftCard]);
+    sr.push(['cart-modal.js: revert/patch applied to the served script', out.cartModalReattach.applied === true, out.cartModalReattach.applied]);
+    sr.push(['cart-recommendations.js: revert/patch applied to the served script', out.cartRecsReattach.applied === true, out.cartRecsReattach.applied]);
+    sr.push(['a re-attached cart-modal opens, closes once on Escape and fires each document handler once', out.cartModalReattach.openedBefore === true && out.cartModalReattach.openAfterEscape === false && out.cartModalReattach.closes === 1, out.cartModalReattach]);
+    sr.push(['a re-attached cart-recommendations reloads once per cart:updated event', JSON.stringify(out.cartRecsReattach.calls) === JSON.stringify(['111', '222']), out.cartRecsReattach]);
+    sr.push(['a slow earlier recommendations response never overwrites the latest one', out.cartRecsStale.text.includes('SECOND') && !out.cartRecsStale.text.includes('FIRST'), out.cartRecsStale]);
     process.exitCode = verdict(sr);
   } finally {
     await browser.close();

@@ -4,6 +4,7 @@ if (!customElements.get('pickup-availability')) {
 		class PickupAvailability extends HTMLElement {
 			constructor() {
 				super();
+				this.fetchId = 0;
 
 				var tpl = this.querySelector('template');
 				if (tpl && tpl.content.firstElementChild) this.errorHtml = tpl.content.firstElementChild.cloneNode(true);
@@ -14,6 +15,11 @@ if (!customElements.get('pickup-availability')) {
 				this.fetchAvailability(this.dataset.variantId);
 			}
 
+			disconnectedCallback() {
+				var drawer = document.querySelector('pickup-availability-drawer');
+				if (drawer && drawer.hasAttribute('open')) drawer.hide();
+			}
+
 			fetchAvailability(variantId) {
 				if (!variantId) return;
 
@@ -22,18 +28,21 @@ if (!customElements.get('pickup-availability')) {
 				var variantSectionUrl = rootUrl + 'variants/' + variantId + '/?section_id=pickup-availability';
 
 				var self = this;
+				var requestId = ++this.fetchId;
 				fetch(variantSectionUrl)
 					.then(function (response) {
 						if (!response.ok) throw new Error(response.status);
 						return response.text();
 					})
 					.then(function (text) {
+						if (requestId !== self.fetchId) return;
 						var sectionInnerHTML = new DOMParser()
 							.parseFromString(text, 'text/html')
 							.querySelector('.shopify-section');
 						self.renderPreview(sectionInnerHTML);
 					})
 					.catch(function () {
+						if (requestId !== self.fetchId) return;
 						var button = self.querySelector('button');
 						if (button) button.removeEventListener('click', self.onClickRefreshList);
 						self.renderError();
@@ -49,6 +58,7 @@ if (!customElements.get('pickup-availability')) {
 					this.dataset.variantId = variant.id;
 					this.fetchAvailability(variant.id);
 				} else {
+					this.fetchId += 1;
 					this.removeAttribute('available');
 					this.innerHTML = '';
 				}
@@ -120,6 +130,10 @@ if (!customElements.get('pickup-availability-drawer')) {
 				) {
 					this.hide();
 				}
+			}
+
+			disconnectedCallback() {
+				if (this.hasAttribute('open')) this.hide();
 			}
 
 			hide() {

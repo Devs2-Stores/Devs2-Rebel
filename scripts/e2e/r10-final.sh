@@ -11,6 +11,7 @@ BASE="${E2E_BASE:-http://127.0.0.1:9292}"
 export NODE_NO_WARNINGS=1
 
 FAILED=()
+FAIL_MARK='^\[FAIL\]'
 gate() {        # gate <name> <command...>: command must exit 0; log in $OUT/<name>.log
   local name="$1"; shift
   if "$@" > "$OUT/$name.log" 2>&1; then
@@ -21,12 +22,14 @@ gate() {        # gate <name> <command...>: command must exit 0; log in $OUT/<na
     FAILED+=("$name")
   fi
 }
-expect_red() {  # expect_red <name> <command...>: command must exit non-zero (the gate has to catch the reintroduced bug)
-  local name="$1"; shift
+expect_red() {  # expect_red <name> <marker-regex> <command...>: command must exit non-zero AND its log must match the marker (a crash is not a caught bug)
+  local name="$1" marker="$2"; shift 2
   if "$@" > "$OUT/$name.log" 2>&1; then
     echo "FAIL  $name  (gate stayed green on the reintroduced bug)"; FAILED+=("$name")
-  else
+  elif grep -Eq "$marker" "$OUT/$name.log"; then
     echo "PASS  $name  (red as required)"
+  else
+    echo "FAIL  $name  (non-zero exit without a '$marker' line: crash or setup failure, log: $OUT/$name.log)"; FAILED+=("$name")
   fi
 }
 advisory() {    # advisory <name> <command...>: logged, never fails the run
@@ -59,7 +62,11 @@ routes_ok() {   # every default route must answer 200 on the dev server, or the 
 }
 
 # Real routes only (every one answers 200 on the dev store); deliberate 404 pages are scanned by their own gates.
-ROUTES='/,/collections,/collections/all,/products/rebel-tactical-bomber-jacket,/products/leather-care-balm,/cart,/search?q=jacket,/pages/about,/pages/contact,/pages/contact?view=faq,/pages/contact?view=stores,/blogs/news,/blogs/news/leather-care-101'
+if [ "${E2E_DISCOVER:-}" = 1 ] && [ -n "${E2E_SITE_ORIGIN:-}" ]; then
+  DISC="$(node scripts/e2e/routes.cjs --discover "$E2E_SITE_ORIGIN")" || { echo "handle discovery failed" >&2; exit 2; }
+  eval "$DISC"
+fi
+ROUTES="$(node scripts/e2e/routes.cjs --routes)" || exit 2
 IFS=',' read -r -a ROUTE_LIST <<< "$ROUTES"
 
 # 1. static
@@ -67,6 +74,7 @@ gate node-check              node_check
 gate json-parse              json_parse
 gate validate-locales        node scripts/validate-locales.mjs
 gate validate-schema-ranges  node scripts/validate-schema-ranges.mjs
+gate validate-template-structure node scripts/validate-template-structure.mjs
 gate settings-usage          node scripts/settings-usage.cjs
 
 # 2. dev server and routes
@@ -79,15 +87,15 @@ fi
 
 # 3. lifecycle / replay gates: green on the working tree, red when the bug is replayed
 gate       error-paths                 node scripts/e2e/error-paths.cjs
-expect_red error-paths-no-toast        env EP_MUTATE=no-toast node scripts/e2e/error-paths.cjs
+expect_red error-paths-no-toast        '^\[FAIL\] (drawer|cart page|collection filter|load-more)' env EP_MUTATE=no-toast node scripts/e2e/error-paths.cjs
 gate       facet-lifecycle             node scripts/e2e/facet-lifecycle.cjs
-expect_red facet-lifecycle-before      env FL_BEFORE=1 node scripts/e2e/facet-lifecycle.cjs
+expect_red facet-lifecycle-before      "$FAIL_MARK" env FL_BEFORE=1 node scripts/e2e/facet-lifecycle.cjs
 gate       contact-lifecycle           node scripts/e2e/contact-lifecycle.cjs
-expect_red contact-lifecycle-before    env CL_BEFORE=1 node scripts/e2e/contact-lifecycle.cjs
+expect_red contact-lifecycle-before    "$FAIL_MARK" env CL_BEFORE=1 node scripts/e2e/contact-lifecycle.cjs
 gate       cart-trigger-reload         node scripts/e2e/cart-trigger-reload.cjs
-expect_red cart-trigger-reload-before  env CT_BEFORE=1 node scripts/e2e/cart-trigger-reload.cjs
+expect_red cart-trigger-reload-before  "$FAIL_MARK" env CT_BEFORE=1 node scripts/e2e/cart-trigger-reload.cjs
 gate       section-reload              node scripts/e2e/section-reload.cjs
-expect_red section-reload-before       env SR_BEFORE=1 node scripts/e2e/section-reload.cjs
+expect_red section-reload-before       '^\[FAIL\] (mobile menu|footer accordion|lightbox|gift-card|a re-attached|a slow)' env SR_BEFORE=1 node scripts/e2e/section-reload.cjs
 
 # 4. journeys and browser gates (each script exits non-zero on a failed check)
 gate journeys              env E2E_OUT="$OUT" node scripts/e2e/journeys.cjs
@@ -96,19 +104,19 @@ gate font-spacing-icon     env FSI_OUT="$OUT/font-spacing-icon.json" FSI_ROUTES=
 gate target-spacing        env TS_OUT="$OUT/target-spacing.json" TS_ROUTES="$ROUTES" node scripts/e2e/target-spacing.cjs
 gate preset-contrast       env PC_OUT="$OUT/preset-contrast.json" node scripts/e2e/preset-contrast.cjs
 gate r10-store-hours       env SH_OUT="$OUT/store-hours.json" node scripts/e2e/r10-store-hours.cjs
-expect_red r10-store-hours-sign-flip env SH_OUT="$OUT/store-hours-sign-flip.json" SH_JS=scripts/e2e/fixtures/page-stores.sign-flip.js node scripts/e2e/r10-store-hours.cjs
+expect_red r10-store-hours-sign-flip '^failures [1-9]' env SH_OUT="$OUT/store-hours-sign-flip.json" SH_JS=scripts/e2e/fixtures/page-stores.sign-flip.js node scripts/e2e/r10-store-hours.cjs
 gate r10-touch-hover       env TH_OUT="$OUT/touch-hover.json" node scripts/e2e/r10-touch-hover.cjs
 gate r10-tabwalk           env TW_OUT="$OUT/tabwalk.json" TW_ROUTES="$ROUTES" node scripts/e2e/r10-tabwalk.cjs
-gate r5-axe                env R5_WIDTHS=375,768,1440 R5_ROUTES="$ROUTES" node scripts/e2e/r5-axe.cjs
+gate r5-axe                env R5_WIDTHS=375,768,1440 R5_ROUTES="$ROUTES,/account/login,/account/register" node scripts/e2e/r5-axe.cjs
 
 # 5. advisory: logged, never fails the run
 # discovery: platform-owned findings (404 child sitemaps, relative og:image) make it red by nature on the dev proxy.
-# Runs only when DISCOVERY_SCRIPT points at a check-discovery-surfaces.mjs.
+# Runs only when DISCOVERY_SCRIPT points at a check-discovery-surfaces.mjs and E2E_SITE_ORIGIN names the live storefront origin.
 DISCOVERY="${DISCOVERY_SCRIPT:-}"
-if [ -n "$DISCOVERY" ] && [ -f "$DISCOVERY" ]; then
-  advisory discovery node "$DISCOVERY" "$BASE" --site-origin https://rebel-streetwear-hn0q7d9h.myshopify.com --sample 10
+if [ -n "$DISCOVERY" ] && [ -f "$DISCOVERY" ] && [ -n "${E2E_SITE_ORIGIN:-}" ]; then
+  advisory discovery node "$DISCOVERY" "$BASE" --site-origin "$E2E_SITE_ORIGIN" --sample 10
 else
-  echo "INFO  discovery  skipped (set DISCOVERY_SCRIPT to a check-discovery-surfaces.mjs)"
+  echo "INFO  discovery  skipped (set DISCOVERY_SCRIPT and E2E_SITE_ORIGIN)"
 fi
 
 echo

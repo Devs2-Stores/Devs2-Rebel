@@ -6,7 +6,7 @@
 .section-ito__media { position: absolute; inset: 0; }
 .section-ito__media--mobile { display: none; }
 @media (max-width: 749px) {
-  .section-ito__media--mobile + .section-ito__media:not(.section-ito__media--mobile) { display: none !important; }
+  .section-ito__media--mobile + .section-ito__media:not(.section-ito__media--mobile) { display: none; }
   .section-ito__media--mobile { display: block; }
 }
 .section-ito__img { width: 100%; height: 100%; object-fit: cover; }

@@ -53,7 +53,12 @@
       if (rawConfig) return config;
 
       const res = await fetch(url, config);
-      if (!res.ok) throw new Error('HTTP ' + res.status + ' for ' + url);
+      if (!res.ok) {
+        const failure = new Error('HTTP ' + res.status + ' for ' + url);
+        failure.status = res.status;
+        failure.description = await res.json().then((data) => (data && typeof data.description === 'string' ? data.description : ''), () => '');
+        throw failure;
+      }
       if (parser === 'text') return res.text();
       return res.json();
     },

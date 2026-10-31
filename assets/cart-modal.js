@@ -3,6 +3,20 @@
 
   class CartModal extends HTMLElement {
     connectedCallback() {
+      this.documentLifecycle = new AbortController();
+      var signal = this.documentLifecycle.signal;
+      var self = this;
+      var cartEvents = (themeConfig.cart && themeConfig.cart.events) || {};
+      this.updatedEvent = cartEvents.updated || 'cart:updated';
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && self.isOpen) self.close();
+      }, { signal: signal });
+      document.addEventListener(this.updatedEvent, function(event) {
+        if (!self.isOpen || !event.detail || event.detail.source === self || !event.detail.cart) return;
+        self.renderCart(event.detail.cart).catch(function(error) {
+          self.showError(error.message);
+        });
+      }, { signal: signal });
       if (this._initialized) return;
       this._initialized = true;
       this.isOpen = false;
@@ -10,10 +24,7 @@
       this.updateController = null;
       this.cacheElements();
 
-      var self = this;
-      var cartEvents = (themeConfig.cart && themeConfig.cart.events) || {};
       this.quantityEvent = cartEvents.quantity_changed || 'cart-quantity-changed';
-      this.updatedEvent = cartEvents.updated || 'cart:updated';
       this.updateQueue = Promise.resolve();
       this.queueChange = function(key, quantity) {
         self.updateQueue = self.updateQueue.then(function() {
@@ -48,23 +59,10 @@
           self.queueChange(event.detail.key, 0);
         } else self.debouncedUpdateQuantity(event.detail.key, event.detail.key, event.detail.quantity);
       });
-
-      this.boundKeydown = function(event) {
-        if (event.key === 'Escape' && self.isOpen) self.close();
-      };
-      this.boundExternalUpdate = function(event) {
-        if (!self.isOpen || !event.detail || event.detail.source === self || !event.detail.cart) return;
-        self.renderCart(event.detail.cart).catch(function(error) {
-          self.showError(error.message);
-        });
-      };
-      document.addEventListener('keydown', this.boundKeydown);
-      document.addEventListener(this.updatedEvent, this.boundExternalUpdate);
     }
 
     disconnectedCallback() {
-      document.removeEventListener('keydown', this.boundKeydown);
-      document.removeEventListener(this.updatedEvent, this.boundExternalUpdate);
+      if (this.documentLifecycle) this.documentLifecycle.abort();
       if (this.debouncedUpdateQuantity) this.debouncedUpdateQuantity.cancel();
     }
 

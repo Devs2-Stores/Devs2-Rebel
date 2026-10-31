@@ -3,17 +3,18 @@
 
   class CartRecommendations extends HTMLElement {
     connectedCallback() {
+      this.lifecycle = new AbortController();
+      this.updatedEvent = (((themeConfig.cart || {}).events || {}).updated || 'cart:updated');
+      document.addEventListener(this.updatedEvent, this.handleCartUpdate.bind(this), { signal: this.lifecycle.signal });
       if (this._initialized) return;
       this._initialized = true;
       this.productId = this.dataset.productId || '';
-      this.updatedEvent = (((themeConfig.cart || {}).events || {}).updated || 'cart:updated');
-      this.boundCartUpdate = this.handleCartUpdate.bind(this);
-      document.addEventListener(this.updatedEvent, this.boundCartUpdate);
+      this.loadId = 0;
       this.load(this.productId);
     }
 
     disconnectedCallback() {
-      document.removeEventListener(this.updatedEvent, this.boundCartUpdate);
+      if (this.lifecycle) this.lifecycle.abort();
     }
 
     handleCartUpdate(event) {
@@ -25,6 +26,7 @@
     }
 
     async load(productId) {
+      var requestId = ++this.loadId;
       if (!productId) {
         this.innerHTML = '';
         this.hidden = true;
@@ -39,12 +41,15 @@
         url.searchParams.set('intent', this.dataset.intent || 'related');
         var response = await fetch(url.toString(), { headers: { Accept: 'text/html' } });
         if (!response.ok) throw new Error('Recommendations unavailable');
-        var documentFragment = new DOMParser().parseFromString(await response.text(), 'text/html');
+        var text = await response.text();
+        if (requestId !== this.loadId) return;
+        var documentFragment = new DOMParser().parseFromString(text, 'text/html');
         var source = documentFragment.querySelector('cart-recommendations');
         var products = source ? source.querySelector('[data-recommendation-products]') : null;
         this.innerHTML = products ? source.innerHTML : '';
         this.hidden = !products;
       } catch (error) {
+        if (requestId !== this.loadId) return;
         this.innerHTML = '';
         this.hidden = true;
       }

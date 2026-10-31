@@ -3,11 +3,11 @@ const path = require('path');
 const os = require('os');
 const { chromium } = require('playwright');
 const { ROOT, BASE, attachLogs, gotoStore, settle, recorder, ensureDir } = require('./lib.cjs');
+const { PDP, ARTICLE } = require('./routes.cjs');
 
 const OUT = ensureDir(path.resolve(ROOT, process.env.E2E_OUT || path.join(os.tmpdir(), 'e2e-journeys'), 'journeys'));
 const { results, rec } = recorder();
-const PDP = '/products/rebel-tactical-bomber-jacket';
-const ARTICLE = '/blogs/news/leather-care-101';
+
 const MUTATE = process.env.E2E_MUTATE || '';
 
 const shown = (page, sel) => page.evaluate((s) => {
@@ -605,7 +605,7 @@ J.buyNow = async (page) => {
   await gotoStore(page, PDP);
   const st = await page.evaluate(() => ({ buy: !!document.querySelector('[data-product-buy]'), dynamic: !!document.querySelector('.product-template__dynamic-checkout'), dynamicChildren: (document.querySelector('.product-template__dynamic-checkout') || { children: [] }).children.length }));
   rec(j, 'PDP offers an express checkout path (theme buy-now button or dynamic checkout container with a rendered button)', st.buy || (st.dynamic && st.dynamicChildren > 0), st);
-  if (!st.buy) return;
+  if (!st.buy) { rec(j, 'buy-now navigation skipped: only dynamic checkout is rendered', null, st); return; }
   const nav = page.waitForURL(/checkout|checkouts/, { timeout: 20000 }).then(() => true).catch(() => false);
   await page.locator('[data-product-buy]').first().click();
   const went = await nav;

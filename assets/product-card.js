@@ -29,7 +29,7 @@
           document.dispatchEvent(new CustomEvent('cart:item_added', { bubbles: true }));
         })
         .catch(function(e) {
-          window.showToast && window.showToast((themeConfig.strings.cart || {}).itemError, 'error');
+          window.showToast && window.showToast((e && e.description) || (themeConfig.strings.cart || {}).itemError, 'error');
         })
         .finally(async () => {
           await ThemeUtils.updateCartData();

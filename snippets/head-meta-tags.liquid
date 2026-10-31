@@ -100,7 +100,7 @@
       "url": "{{ shop.url }}",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "{{ shop.url }}/search?type=product&q={search_term_string}",
+        "target": "{{ shop.url }}{{ routes.search_url }}?type=product&q={search_term_string}",
         "query-input": "required name=search_term_string"
       }
     }
@@ -199,7 +199,8 @@
           ,{ "@type": "ListItem", "position": 2, "name": {{ product.collections.first.title | json }}, "item": "{{ shop.url }}{{ product.collections.first.url }}" }
           ,{ "@type": "ListItem", "position": 3, "name": {{ product.title | json }} }
         {%- else -%}
-          ,{ "@type": "ListItem", "position": 2, "name": {{ product.title | json }} }
+          ,{ "@type": "ListItem", "position": 2, "name": {{ 'general.breadcrumbs.all_products' | t | json }}, "item": "{{ shop.url }}{{ routes.all_products_collection_url | default: '/collections/all' }}" }
+          ,{ "@type": "ListItem", "position": 3, "name": {{ product.title | json }} }
         {%- endif -%}
       ]
     }
@@ -213,7 +214,7 @@
       "@type": "BreadcrumbList",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": {{ 'general.breadcrumbs.home' | t | json }}, "item": "{{ shop.url }}" },
-        { "@type": "ListItem", "position": 2, "name": {{ collection.title | json }} }
+        { "@type": "ListItem", "position": 2, "name": {%- if collection.handle == 'all' -%}{{ 'general.breadcrumbs.all_products' | t | json }}{%- else -%}{{ collection.title | json }}{%- endif -%} }
       ]
     }
   </script>
@@ -226,6 +227,7 @@
       "@type": "BlogPosting",
       "headline": {{ article.title | json }},
       "url": "{{ shop.url }}{{ article.url }}",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ canonical_url }}" },
       {%- if article.image %}
         "image": "https:{{ article.image | image_url }}",
       {%- endif %}
@@ -256,6 +258,19 @@
         { "@type": "ListItem", "position": 1, "name": {{ 'general.breadcrumbs.home' | t | json }}, "item": "{{ shop.url }}" },
         { "@type": "ListItem", "position": 2, "name": {{ blog.title | json }}, "item": "{{ shop.url }}{{ blog.url }}" },
         { "@type": "ListItem", "position": 3, "name": {{ article.title | json }} }
+      ]
+    }
+  </script>
+{% endif %}
+
+{% if request.page_type == 'blog' or request.page_type == 'page' %}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": {{ 'general.breadcrumbs.home' | t | json }}, "item": "{{ shop.url }}" },
+        { "@type": "ListItem", "position": 2, "name": {% if request.page_type == 'blog' %}{{ blog.title | json }}{% else %}{{ page.title | json }}{% endif %} }
       ]
     }
   </script>

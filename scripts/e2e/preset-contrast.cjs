@@ -3,9 +3,10 @@ const path = require('path');
 const { chromium } = require('playwright');
 const { Liquid } = require('liquidjs');
 const { ROOT, gotoStore, settle, ensureDir } = require('./lib.cjs');
+const { PDP } = require('./routes.cjs');
 
 const PRESETS = (process.env.PC_PRESETS || Object.keys(JSON.parse(fs.readFileSync(path.join(ROOT, 'config/settings_data.json'), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '')).presets).join(',')).split(',');
-const ROUTES = (process.env.PC_ROUTES || '/,/products/rebel-tactical-bomber-jacket,/collections/all,/cart,/pages/contact').split(',');
+const ROUTES = (process.env.PC_ROUTES || ['/', PDP, '/collections/all', '/cart', '/pages/contact'].join(',')).split(',');
 const WIDTHS = (process.env.PC_WIDTHS || '375,1440').split(',').map(Number);
 const STATES = (process.env.PC_STATES || 'page,search,cart,menu').split(',');
 const OUT = process.env.PC_OUT || '';

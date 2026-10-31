@@ -139,6 +139,6 @@ async function read(page) {
   ensureDir(path.dirname(OUT));
   fs.writeFileSync(OUT, JSON.stringify(report, null, 2));
   report.runs.forEach((r) => console.log(`${r.variant} ${r.instant} ${r.browserZone} offset=${r.offset} live=${r.liveRegions} cards=${r.cards} open=${r.open} closed=${r.closed} blank=${r.blank} mismatch=${r.mismatches}`));
-  console.log('failures', report.failures.length, JSON.stringify(report.failures.slice(0, 6)));
+  console.log(`failures ${report.failures.length}`, JSON.stringify(report.failures.slice(0, 6)));
   process.exit(report.failures.length ? 1 : 0);
 })().catch((e) => { console.error('ERR', e.stack); process.exit(2); });

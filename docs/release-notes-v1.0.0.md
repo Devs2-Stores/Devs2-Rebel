@@ -1,6 +1,6 @@
 # Sartor 1.0.0 - release notes
 
-Initial release of Sartor, a Shopify Online Store 2.0 theme with one style preset (Sartor).
+Initial release of Sartor, a Shopify Online Store 2.0 theme with two style presets (Sartor and Yarrow).
 
 ## Included
 
@@ -16,4 +16,4 @@ Initial release of Sartor, a Shopify Online Store 2.0 theme with one style prese
 ## Submission notes
 
 - `release-notes.md` is for the Theme Store form. Do not add it to the zip until the theme is published; Shopify requires it only for updates.
-- The zip is built by `python scripts/package-theme.py` and contains no `listings/` folder because the theme ships one preset.
+- The zip is built by `python scripts/package-theme.py` and contains `listings/sartor` and `listings/yarrow`, one folder per preset. `listings/manifest.json` is excluded by `.shopifyignore`.

@@ -31,9 +31,10 @@ enforcement only; it does not replace the shared authority.
 
 ## Project-specific enforcement
 
-- Claude must preserve the five-preset product scope while implementing only
-  the first style preset in the current phase. Keep tokens and preset contracts
-  extensible; do not build the other four styles or duplicate theme structure.
+- Claude must preserve the five-preset product scope. The current phase ships
+  two style presets, Sartor and Yarrow, on one tokenized architecture; a new
+  preset adds only settings, a `listings/<handle>/` folder and demo-matched
+  templates. Do not build a third preset without an explicit user request.
 - Claude must verify computed vertical spacing whenever composing adjacent page
   sections. Component CSS must provide an explicit fallback boundary when
   global section spacing can be configured to `0`, especially between FAQ

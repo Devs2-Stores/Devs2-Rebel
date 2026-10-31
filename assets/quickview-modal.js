@@ -424,7 +424,7 @@
         document.dispatchEvent(new CustomEvent('cart:item_added', { detail: data }));
 
       } catch (error) {
-        if (typeof showToast === 'function') showToast((themeConfig.strings.cart || {}).itemError, 'error');
+        if (typeof showToast === 'function') showToast((error && error.description) || (themeConfig.strings.cart || {}).itemError, 'error');
       } finally {
         // Re-enable button
         if (addBtn) {

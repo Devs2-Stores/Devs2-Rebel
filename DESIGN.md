@@ -22,9 +22,11 @@ the photograph first.
   "Clean system" for the colour roles.
 - Square corners on buttons, inputs, cards, media and popups. Badges and variant
   pills are rounded (Sartor `badge_corner` and `variant_chip_corner_radius` 40).
-- One Inter family for headings, subheadings and body (`type_font_*` default
-  `inter_n4`). Hierarchy comes from the type scale, weight and uppercase
-  tracking on subheadings, not from extra faces.
+- Sartor uses one Inter family for headings, subheadings and body
+  (`type_font_*` default `inter_n4`). Hierarchy comes from the type scale,
+  weight and uppercase tracking on subheadings, not from extra faces. Yarrow
+  sets its own faces in `config/settings_data.json`: `newsreader_n4` for
+  headings and `instrument_sans_n4` for subheadings and body.
 - Hero copy is short and declarative, using tailoring vocabulary: "Cut, draped,
   made to be worn", "The tailored anti-uniform", "Cherry red, cut close to the
   bone".
@@ -38,7 +40,7 @@ ships two presets, Sartor and Yarrow.
 | Preset | scheme-1 bg / text / accent | Character |
 |---|---|---|
 | Sartor | `#F5F2ED` / `#0A0A0A` / `#BC1E2C` | Bone and crimson, oxblood scheme-4 `#4A0E16`, square, pill badges, flat cards |
-| Yarrow | `#FAF8F5` / `#2D3B2F` / `#3B533E` | Herbal greens, forest scheme-4 `#4A6B50`, rounded (buttons 20, inputs 12, media 12, cards 20 with an 8 px image inset), white boxed cards with a soft shadow, serif headings |
+| Yarrow | `#FAF8F5` / `#2D3B2F` / `#3B533E` | Herbal greens, forest scheme-4 `#4A6B50`, rounded (buttons 20, inputs 12, media 12, cards 20 with an 8 px image inset), white boxed cards with a soft shadow, Newsreader serif headings, Instrument Sans body |
 
 A new preset adds settings and scheme values only. It must not add selectors or
 markup branches.
@@ -125,11 +127,14 @@ carry it; chrome stays out of the way.
   carries meaning (dark testimonial band, oxblood newsletter). Alternating
   bone and white between ordinary sections is noise.
 - **Sliders.** A product slider starts on the page-width left edge and may
-  bleed only to the right. Arrows are quiet ink icons; dots are ink. Below
-  750 px a product carousel shows about two cards plus a peek
-  (`slidesPerView: 2.1`, with the matching pre-init `--swiper-cols-mobile`) and
-  relies on swipe: hide prev/next there, because arrows centred on a tall card
-  land on the quick-add button or the badges.
+  bleed only to the right. Arrows are quiet ink icons; dots are ink. The PDP
+  related and recently viewed carousels show about two cards plus a peek below
+  750 px (`slidesPerView: 2.1`, with the matching pre-init
+  `--swiper-cols-mobile`). `featured-collection` shows the merchant's
+  whole-card `columns_mobile` below 750 px and `collection-best` below 640 px
+  (default 2; no peek there). Carousels rely on swipe on mobile: hide
+  prev/next there, because arrows centred on a tall card land on the
+  quick-add button or the badges.
 - **Icons.** Outline interface icons render a 1-1.25 px line:
   `stroke-width="1.5"` on a 24 px viewBox drawn at 16-20 px. Feature icons in
   icon boxes and trust badges (`snippets/icon-feature.liquid`) draw at 24 px, so
@@ -301,6 +306,15 @@ carry it; chrome stays out of the way.
   The title rule pins `letter-spacing: var(--h3-tracking)` and
   `text-transform: var(--h3-case, inherit)`, so changing the level never changes
   the look. Never skip a heading level (axe `heading-order`).
+- The blog featured image keeps the aspect ratio of its shape setting
+  (`blog-featured__image--<shape>`) and has no `min-height` floor, so the
+  frame never crops harder than the chosen shape.
+- `article-card` derives its blog from `article.url` (`blogs[handle]`), because
+  the `article` object has no `blog` property.
+- JSON-LD is the single source of `BreadcrumbList` and `BlogPosting`
+  (`snippets/head-meta-tags.liquid`). Do not add breadcrumb or article
+  microdata (`itemscope`, `itemprop`); the only microdata left is the `Blog`
+  block in `main-blog`.
 - UI transitions use `--ease-out` through `--transition-fast`, `--transition-base`
   and `--transition-slow`. `linear` is only for continuous loops (marquee,
   spinner, progress).
