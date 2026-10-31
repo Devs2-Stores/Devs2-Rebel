@@ -1,0 +1,12 @@
+{
+  "name": "theme-e2e-gates",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Browser and lifecycle verification gates documented in REVIEW.md; run through r10-final.sh",
+  "type": "commonjs",
+  "dependencies": {
+    "axe-core": "4.14.0",
+    "liquidjs": "10.30.0",
+    "playwright": "1.60.0"
+  }
+}

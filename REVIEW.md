@@ -35,8 +35,8 @@ a blank band as missing content until you have done that. Print is exempt.
 | Content punch | Hero and section copy is specific. Generic merchant copy is recorded as a content gap |
 | Clarity and hierarchy | One primary CTA per view. Variant values distinguishable without relying on an image |
 | Storytelling | Home order leads from the offer to proof to brand |
-| Knowledge and trust | Cart, filter and form errors speak the shopper's language. Money, stock and plan strings follow the selected variant. Store "Open now" gives the same answer from any device time zone (`runs/e2e/r10-store-hours.cjs`) |
-| Motion | Intentional motion kept. No `prefers-reduced-motion` (workspace ban). Overlays visible before focus moves. Forced `:hover` on an emulated touch device (`runs/e2e/r10-touch-hover.cjs`) changes no decorative transform. Script-revealed content is visible with the script blocked |
+| Knowledge and trust | Cart, filter and form errors speak the shopper's language. Money, stock and plan strings follow the selected variant. Store "Open now" gives the same answer from any device time zone (`scripts/e2e/r10-store-hours.cjs`) |
+| Motion | Intentional motion kept. No `prefers-reduced-motion` (workspace ban). Overlays visible before focus moves. Forced `:hover` on an emulated touch device (`scripts/e2e/r10-touch-hover.cjs`) changes no decorative transform. Script-revealed content is visible with the script blocked |
 | Responsive | No horizontal overflow at 320, 375, 768 and 1440. Tables scroll inside their wrapper |
 | Accessibility | WCAG 2.2 AA: contrast, names, focus order, target size, overlay focus management, no focus inside `aria-hidden` |
 | Performance feel | LCP hero eager with `fetchpriority="high"`, below-the-fold media lazy, no duplicate asset loads |
@@ -50,7 +50,7 @@ be recorded as an unresolved question.
   plus the best-practice rules `heading-order`, `landmark-one-main`,
   `landmark-no-duplicate-main` and `aria-allowed-role` (they carry no WCAG tag,
   so a tag filter alone never runs them), report 0 violations on every changed
-  route at 375 and 1440. The probe (`runs/e2e/r5-axe.cjs`) exits 1 on any
+  route at 375 and 1440. The probe (`scripts/e2e/r5-axe.cjs`) exits 1 on any
   violation, error, non-200 status or horizontal overflow. It stops Swiper
   autoplay and waits for finite animations to finish first, so a crossfade
   between two slides is never measured as a colour pair. Axe then sees only each
@@ -66,7 +66,7 @@ be recorded as an unresolved question.
 - Colour changes are checked in every preset in `config/settings_data.json`
   (today `Sartor`, which carries a light and a dark scheme), with the cart
   drawer, search panel and mobile menu open as well as the page.
-  `runs/e2e/preset-contrast.cjs` renders each preset's scheme CSS with liquidjs,
+  `scripts/e2e/preset-contrast.cjs` renders each preset's scheme CSS with liquidjs,
   injects it into the live page and measures every visible text node against
   its composited background. Disabled controls (WCAG 1.4.3 inactive components)
   and frames captured mid-transition are recorded as exempt, not as failures.
@@ -79,7 +79,7 @@ be recorded as an unresolved question.
   strings.
 - Screen-reader-only clips (`.visually-hidden`, `.sr-only`, visually hidden
   legends) are intended. Report them as accepted, not as clipped text.
-- Tab walk (`runs/e2e/r10-tabwalk.cjs`) lets transitions settle before it
+- Tab walk (`scripts/e2e/r10-tabwalk.cjs`) lets transitions settle before it
   measures, and no stop lands off-screen. Shopify's hCaptcha badge
   (`#shop-hcaptcha-badge-container`, injected on pages with a storefront form)
   slides in on hover but not on focus, so its Privacy and Terms links focus
@@ -130,41 +130,43 @@ LocalBusiness in `page-stores`.
 
 ## Runner
 
-`bash runs/e2e/r10-final.sh <evidence-dir>` (from the theme root, with
-`shopify theme dev` on 127.0.0.1:9292) runs every gate below. Logs go to
+`bash scripts/e2e/r10-final.sh <evidence-dir>` (from the theme root, with
+`shopify theme dev` on 127.0.0.1:9292 and `npm install` run once inside
+`scripts/e2e`) runs every gate below. Logs go to
 `<evidence-dir>/<gate>.log`. It prints `PASS`, `FAIL` or `INFO` per gate and
-exits 1 if any gate fails, or if a replay (`*_BEFORE=1`, `EP_MUTATE`) stays
-green on its reintroduced bug. A missing argument exits 2. It never runs
-`scripts/package-theme.py`, which writes `dist/`.
+exits 1 if any gate fails, or if a replay (`*_BEFORE=1`, `EP_MUTATE`, the
+`SH_JS` page-stores mutation) stays green on its reintroduced bug. A missing
+argument exits 2. It never runs `scripts/package-theme.py`, which writes `dist/`.
 
 | # | Gate | Command (theme root) | Pass |
 |---|---|---|---|
 | 1 | settings-usage | `node scripts/settings-usage.cjs` | exit 0 |
-| 2 | overlay-contract | `node runs/e2e/overlay-contract.cjs` | exit 0 |
-| 3 | font-spacing-icon | `node runs/e2e/font-spacing-icon.cjs` | exit 0 |
-| 4 | target-spacing | `node runs/e2e/target-spacing.cjs` | exit 0 |
-| 5 | error-paths | `node runs/e2e/error-paths.cjs` | exit 0; `EP_MUTATE=no-toast` exits non-zero |
-| 6 | preset-contrast | `node runs/e2e/preset-contrast.cjs` | exit 0 |
-| 7 | r10-store-hours | `node runs/e2e/r10-store-hours.cjs` | exit 0 |
-| 8 | r10-touch-hover | `node runs/e2e/r10-touch-hover.cjs` | exit 0 |
-| 9 | r10-tabwalk | `node runs/e2e/r10-tabwalk.cjs` | exit 0 |
-| 10 | r5-axe | `node runs/e2e/r5-axe.cjs` | exit 0 |
-| 11 | facet-lifecycle | `node runs/e2e/facet-lifecycle.cjs` | exit 0; `FL_BEFORE=1` exits non-zero |
-| 12 | contact-lifecycle | `node runs/e2e/contact-lifecycle.cjs` | exit 0; `CL_BEFORE=1` exits non-zero |
-| 13 | cart-trigger-reload | `node runs/e2e/cart-trigger-reload.cjs` | exit 0; `CT_BEFORE=1` exits non-zero |
-| 14 | section-reload | `node runs/e2e/section-reload.cjs` | exit 0; `SR_BEFORE=1` exits non-zero |
-| 15 | journeys | `node runs/e2e/journeys.cjs` | exit 0 |
+| 2 | overlay-contract | `node scripts/e2e/overlay-contract.cjs` | exit 0 |
+| 3 | font-spacing-icon | `node scripts/e2e/font-spacing-icon.cjs` | exit 0 |
+| 4 | target-spacing | `node scripts/e2e/target-spacing.cjs` | exit 0 |
+| 5 | error-paths | `node scripts/e2e/error-paths.cjs` | exit 0; `EP_MUTATE=no-toast` exits non-zero |
+| 6 | preset-contrast | `node scripts/e2e/preset-contrast.cjs` | exit 0 |
+| 7 | r10-store-hours | `node scripts/e2e/r10-store-hours.cjs` | exit 0; `SH_JS=scripts/e2e/fixtures/page-stores.sign-flip.js` (shop offset sign flipped) exits non-zero |
+| 8 | r10-touch-hover | `node scripts/e2e/r10-touch-hover.cjs` | exit 0 |
+| 9 | r10-tabwalk | `node scripts/e2e/r10-tabwalk.cjs` | exit 0 |
+| 10 | r5-axe | `node scripts/e2e/r5-axe.cjs` | exit 0 |
+| 11 | facet-lifecycle | `node scripts/e2e/facet-lifecycle.cjs` | exit 0; `FL_BEFORE=1` exits non-zero |
+| 12 | contact-lifecycle | `node scripts/e2e/contact-lifecycle.cjs` | exit 0; `CL_BEFORE=1` exits non-zero |
+| 13 | cart-trigger-reload | `node scripts/e2e/cart-trigger-reload.cjs` | exit 0; `CT_BEFORE=1` exits non-zero |
+| 14 | section-reload | `node scripts/e2e/section-reload.cjs` | exit 0; `SR_BEFORE=1` exits non-zero |
+| 15 | journeys | `node scripts/e2e/journeys.cjs` | exit 0 |
 
 Static steps before the browser gates: `node --check assets/*.js`, a JSON parse
 of `locales`, `config`, `templates`, `sections`, `blocks` and `listings`,
 `scripts/validate-locales.mjs`, `scripts/validate-schema-ranges.mjs`, and a
 curl of every default route (all must answer 200, otherwise the browser gates
-are skipped). `check-discovery-surfaces.mjs` runs last as advisory: its
+are skipped). `check-discovery-surfaces.mjs` runs last as advisory only when
+`DISCOVERY_SCRIPT` points at it: its
 findings on the dev proxy are platform-owned (see Discovery surfaces).
 
 Default routes are real 200 routes of the demo store (`/blogs/news`,
 `/blogs/news/leather-care-101`, `/products/leather-care-balm`, ...).
-`gotoStore` in `runs/e2e/lib.cjs` throws on any non-2xx status, so a stale route
+`gotoStore` in `scripts/e2e/lib.cjs` throws on any non-2xx status, so a stale route
 fails instead of measuring an error page; a deliberate error page passes
 `{ allowStatus: [404] }`. Gate output defaults to the OS temp directory, never
 to `plans/reports/`.
@@ -198,7 +200,7 @@ to `plans/reports/`.
   and on an unrendered app block first. A stored template value must match
   its setting's label (a "directions URL" holds a directions link, not an
   iframe embed).
-- `node runs/e2e/overlay-contract.cjs` (needs `shopify theme dev`) opens every
+- `node scripts/e2e/overlay-contract.cjs` (needs `shopify theme dev`) opens every
   overlay by keyboard and checks dialog semantics, focus trap and return,
   Escape, close button, scroll lock under the wheel, panel text in a theme
   font family (body, heading or subheading token; slotted `<shopify-account>`
@@ -206,13 +208,13 @@ to `plans/reports/`.
   `OC_ONLY=<name,...>` runs single configs. Main-frame navigations print as
   `[NAV]`, `[NAVFAIL]` and `[NAVSTATUS]` lines. A config whose trigger needs
   store data (pickup) reports INFO, not PASS.
-- `node runs/e2e/font-spacing-icon.cjs` checks fonts (theme family, a real
+- `node scripts/e2e/font-spacing-icon.cjs` checks fonts (theme family, a real
   face per used weight, nothing below the 11 px micro step in `DESIGN.md`,
   and 11 px only on micro labels: uppercase, count pill or `.content-size-xs`),
   section spacing, gutters, overlapping targets and icon names, size,
   contrast and alignment on 12 routes x 375/768/1440. Exit 0 is the pass;
   advisory rows are INFO.
-- `node runs/e2e/target-spacing.cjs` (`TS_ROUTES`, `TS_WIDTHS`) checks WCAG
+- `node scripts/e2e/target-spacing.cjs` (`TS_ROUTES`, `TS_WIDTHS`) checks WCAG
   2.5.8 on every visible target: a target under 24 x 24 px passes only when a
   24 px circle on its centre touches no other target, or it sits inside a
   sentence. It first runs a self-test fixture (16 px links 4 px apart fail,
@@ -241,7 +243,7 @@ to `plans/reports/`.
   Shopify `description` (for example a stock limit) is shown as sent. Never show
   `error.message` from `fetch` or `JSON.parse` to the shopper.
 - Prove both with a forced failure or reload against the running theme:
-  `runs/e2e/error-paths.cjs`, `section-reload.cjs`, `cart-trigger-reload.cjs`,
+  `scripts/e2e/error-paths.cjs`, `section-reload.cjs`, `cart-trigger-reload.cjs`,
   `facet-lifecycle.cjs` and `contact-lifecycle.cjs` each assert named checks and
   exit 1 on a failed one. Their `*_BEFORE=1` switch (`error-paths.cjs` uses
   `EP_MUTATE=no-toast`) replays the old script or removes the failure message,
