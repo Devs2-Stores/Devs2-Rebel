@@ -1,0 +1,90 @@
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "logo": {
+          "type": "logo",
+          "settings": {
+            "placement": "brand"
+          }
+        },
+        "brand": {
+          "type": "brand",
+          "settings": {
+            "placement": "brand",
+            "show_image": true,
+            "headline": "",
+            "description": "<p>Tailored clothing and outerwear, cut to be worn every day.</p>"
+          }
+        },
+        "social": {
+          "type": "social",
+          "settings": {
+            "placement": "brand",
+            "heading": ""
+          }
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "heading": "Stay in the know",
+            "show_form": true
+          }
+        },
+        "menu-shop": {
+          "type": "menu",
+          "settings": {
+            "heading": "Shop",
+            "menu": "footer"
+          }
+        },
+        "payment": {
+          "type": "payment",
+          "settings": {
+            "placement": "bottom"
+          }
+        },
+        "menu-help": {
+          "type": "menu",
+          "settings": {
+            "heading": "Help",
+            "menu": "footer"
+          }
+        },
+        "menu-company": {
+          "type": "menu",
+          "settings": {
+            "heading": "Company",
+            "menu": "main-menu"
+          }
+        }
+      },
+      "block_order": [
+        "logo",
+        "brand",
+        "social",
+        "newsletter",
+        "menu-shop",
+        "menu-help",
+        "menu-company",
+        "payment"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "address": "",
+        "email": "",
+        "phone": "",
+        "show_country_selector": true,
+        "show_language_selector": true,
+        "show_policies": true,
+        "show_follow_on_shop": true
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

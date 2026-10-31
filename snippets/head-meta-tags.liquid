@@ -100,7 +100,7 @@
       "url": "{{ shop.url }}",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "{{ shop.url }}/search?type=product&q={search_term_string}",
+        "target": "{{ shop.url }}{{ routes.search_url }}?type=product&q={search_term_string}",
         "query-input": "required name=search_term_string"
       }
     }
@@ -115,18 +115,17 @@
         "logo": "https:{{ settings.logo | image_url: width: 500 }}",
       {%- endif %}
       {%- assign social_networks = 'facebook,instagram,youtube,tiktok,pinterest,twitter,threads,linkedin,bluesky,snapchat,tumblr,vimeo,other' | split: ',' -%}
-      {%- assign same_as_started = false %}
-      "sameAs": [
+      {%- capture same_as -%}
         {%- for network in social_networks -%}
           {%- assign social_key = 'social_' | append: network | append: '_profile' -%}
           {%- assign social_url = settings[social_key] | strip -%}
-          {%- if social_url != blank -%}
-            {%- if same_as_started %},{% endif -%}
-            {{ social_url | json }}
-            {%- assign same_as_started = true -%}
-          {%- endif -%}
+          {%- if social_url != blank -%},{{ social_url | json }}{%- endif -%}
         {%- endfor -%}
-      ]
+      {%- endcapture -%}
+      {%- if same_as != blank %}
+        "sameAs": [{{ same_as | remove_first: ',' }}],
+      {%- endif %}
+      "@id": {{ shop.url | append: '/#organization' | json }}
     }
   </script>
 {% endif %}
@@ -139,7 +138,7 @@
       "name": {{ product.title | json }},
       "url": "{{ shop.url }}{{ product.url }}",
       {%- if product.description != blank %}
-        "description": {{ product.description | strip_html | truncatewords: 100 | json }},
+        "description": {{ product.description | strip_html | newline_to_br | replace: '<br />', ' ' | strip_newlines | truncatewords: 100 | json }},
       {%- endif %}
       {%- if product.featured_image %}
         "image": [
@@ -160,6 +159,17 @@
       {%- endif %}
       {%- if product.selected_or_first_available_variant.barcode != blank %}
         "gtin": {{ product.selected_or_first_available_variant.barcode | json }},
+      {%- endif %}
+      {%- assign review_rating = product.metafields.reviews.rating.value -%}
+      {%- assign review_count = product.metafields.reviews.rating_count.value -%}
+      {%- if review_rating != blank and review_count > 0 %}
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": {{ review_rating.rating | json }},
+          "bestRating": {{ review_rating.scale_max | json }},
+          "worstRating": {{ review_rating.scale_min | json }},
+          "ratingCount": {{ review_count | json }}
+        },
       {%- endif %}
       "offers": [
         {%- for variant in product.variants -%}
@@ -189,7 +199,8 @@
           ,{ "@type": "ListItem", "position": 2, "name": {{ product.collections.first.title | json }}, "item": "{{ shop.url }}{{ product.collections.first.url }}" }
           ,{ "@type": "ListItem", "position": 3, "name": {{ product.title | json }} }
         {%- else -%}
-          ,{ "@type": "ListItem", "position": 2, "name": {{ product.title | json }} }
+          ,{ "@type": "ListItem", "position": 2, "name": {{ 'general.breadcrumbs.all_products' | t | json }}, "item": "{{ shop.url }}{{ routes.all_products_collection_url | default: '/collections/all' }}" }
+          ,{ "@type": "ListItem", "position": 3, "name": {{ product.title | json }} }
         {%- endif -%}
       ]
     }
@@ -203,7 +214,7 @@
       "@type": "BreadcrumbList",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": {{ 'general.breadcrumbs.home' | t | json }}, "item": "{{ shop.url }}" },
-        { "@type": "ListItem", "position": 2, "name": {{ collection.title | json }} }
+        { "@type": "ListItem", "position": 2, "name": {%- if collection.handle == 'all' -%}{{ 'general.breadcrumbs.all_products' | t | json }}{%- else -%}{{ collection.title | json }}{%- endif -%} }
       ]
     }
   </script>
@@ -216,6 +227,7 @@
       "@type": "BlogPosting",
       "headline": {{ article.title | json }},
       "url": "{{ shop.url }}{{ article.url }}",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ canonical_url }}" },
       {%- if article.image %}
         "image": "https:{{ article.image | image_url }}",
       {%- endif %}
@@ -246,6 +258,19 @@
         { "@type": "ListItem", "position": 1, "name": {{ 'general.breadcrumbs.home' | t | json }}, "item": "{{ shop.url }}" },
         { "@type": "ListItem", "position": 2, "name": {{ blog.title | json }}, "item": "{{ shop.url }}{{ blog.url }}" },
         { "@type": "ListItem", "position": 3, "name": {{ article.title | json }} }
+      ]
+    }
+  </script>
+{% endif %}
+
+{% if request.page_type == 'blog' or request.page_type == 'page' %}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": {{ 'general.breadcrumbs.home' | t | json }}, "item": "{{ shop.url }}" },
+        { "@type": "ListItem", "position": 2, "name": {% if request.page_type == 'blog' %}{{ blog.title | json }}{% else %}{{ page.title | json }}{% endif %} }
       ]
     }
   </script>

@@ -6,13 +6,19 @@
 
 {%- assign product = closest.product | default: product -%}
 {%- if product != blank -%}
+  {%- liquid
+    assign title_tag = 'h2'
+    if request.page_type == 'product'
+      assign title_tag = 'h1'
+    endif
+  -%}
 
-<h1
+<{{ title_tag }}
   class="product-template__title heading-size-{{ block.settings.heading_size }}"
   {{ block.shopify_attributes }}
 >
   {{ product.title | escape }}
-</h1>
+</{{ title_tag }}>
 {%- endif -%}
 
 {% schema %}

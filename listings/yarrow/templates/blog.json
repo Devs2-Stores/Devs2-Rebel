@@ -1,0 +1,55 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "settings": {}
+    },
+    "main": {
+      "type": "main-blog",
+      "settings": {
+        "layout": "grid",
+        "container_width": "fixed",
+        "columns_desktop": "3",
+        "columns_mobile": "1",
+        "column_gap": 24,
+        "row_gap": 32,
+        "articles_per_page": 9,
+        "heading_size": "md",
+        "show_featured_post": true,
+        "show_date": true,
+        "show_author": false,
+        "show_excerpt": true,
+        "show_read_more": true,
+        "show_comment_count": false,
+        "show_tags": true,
+        "show_category": false,
+        "image_shape": "landscape"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "color_scheme": "scheme-4",
+        "subheading": "Journal",
+        "subheading_size": "sm",
+        "heading": "New notes every month",
+        "heading_size": "md",
+        "heading_tag": "h2",
+        "description": "Seasonal routines, harvest notes and first access to new batches.",
+        "description_size": "md",
+        "button_label": "Subscribe",
+        "button_size": "md",
+        "text_align": "center",
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main",
+    "newsletter"
+  ]
+}

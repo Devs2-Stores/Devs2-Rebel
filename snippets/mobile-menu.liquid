@@ -108,14 +108,12 @@ mobile-menu {
   position: fixed;
   inset: 0;
   z-index: var(--z-modal, 9000);
-  opacity: 0;
   visibility: hidden;
-  transition: opacity var(--transition-base), visibility 0s linear var(--duration-medium);
+  transition: visibility 0s linear var(--duration-medium);
 }
 mobile-menu.show {
-  opacity: 1;
   visibility: visible;
-  transition: opacity var(--transition-base), visibility 0s;
+  transition: visibility 0s;
 }
 mobile-menu.show .mobile-menu__overlay {
   opacity: 1;
@@ -218,6 +216,7 @@ mobile-menu .mobile-menu__trigger {
   padding: 1rem 1.5rem;
   background: transparent;
   border: none;
+  border-radius: 0;
   text-decoration: none;
   color: var(--color-ink);
   font-size: 0.9375rem;

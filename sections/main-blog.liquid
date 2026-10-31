@@ -46,7 +46,6 @@
   style="--blog-padding-top: {{ section.settings.padding_top }}px; --blog-padding-bottom: {{ section.settings.padding_bottom }}px; --blog-columns: {{ section.settings.columns_desktop }}; --blog-columns-mobile: {{ section.settings.columns_mobile }}; --blog-column-gap: {{ section.settings.column_gap }}px; --blog-row-gap: {{ section.settings.row_gap }}px;"
 >
   <meta itemprop="name" content="{{ blog.title | escape }}">
-  <meta itemprop="description" content="{{ blog.description | strip_html | default: page_title | escape }}">
   <meta itemprop="url" content="{{ blog.url | escape }}">
 
   <div class="{% if container_width == 'fixed' %}page-width{% endif %}">
@@ -65,14 +64,6 @@
               {%- endif -%}
             </h1>
           </div>
-
-          {%- if blog.description != blank -%}
-            <div class="blog-template__description">
-              <div class="blog-template__description-content">
-                {{ blog.description | strip_html | truncatewords: 50 | escape }}
-              </div>
-            </div>
-          {%- endif -%}
 
           {%- for block in section.blocks -%}
             {%- case block.type -%}

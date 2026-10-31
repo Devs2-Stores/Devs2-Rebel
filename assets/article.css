@@ -64,6 +64,7 @@
   border: var(--media-border);
   box-shadow: var(--media-shadow);
 }
+.article-template__media,
 .article-template__header,
 .article-template__main > .toc,
 .article-template__content,
@@ -167,7 +168,7 @@ a.article-template__info-comments:hover {
 .article-template__content h6 {
   margin-top: var(--space-4xl);
   margin-bottom: var(--space-md);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-heading-weight);
   line-height: 1.2;
   letter-spacing: var(--heading-tracking);
   color: var(--color-ink);

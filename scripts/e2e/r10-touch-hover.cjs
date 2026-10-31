@@ -2,10 +2,10 @@ const fs = require('fs');
 const path = require('path');
 const { chromium } = require('playwright');
 const { gotoStore, settle, ensureDir, ROOT } = require('./lib.cjs');
+const { PDP, ARTICLE, BLOG_HANDLE } = require('./routes.cjs');
 
 const OUT = process.env.TH_OUT || path.join(require('os').tmpdir(), 'e2e-touch-hover', 'touch-hover.json');
-const ARTICLE = '/blogs/news/leather-care-101';
-const ROUTES = (process.env.TH_ROUTES || ['/', '/collections/all', '/collections', '/pages/about', '/pages/contact', '/blogs/news', ARTICLE, '/search?q=jacket', '/products/rebel-tactical-bomber-jacket'].join(',')).split(',');
+const ROUTES = (process.env.TH_ROUTES || ['/', '/collections/all', '/collections', '/pages/about', '/pages/contact', `/blogs/${BLOG_HANDLE}`, ARTICLE, '/search?q=jacket', PDP].join(',')).split(',');
 
 const PAIRS = [
   ['.section-slideshow__btn', null],

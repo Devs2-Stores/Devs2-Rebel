@@ -54,6 +54,9 @@ jobs:
       - name: Validate Schema Range Math
         run: node scripts/validate-schema-ranges.mjs
 
+      - name: Validate Template Structure
+        run: node scripts/validate-template-structure.mjs
+
       - name: Validate Locale Integrity & Parity
         run: node scripts/validate-locales.mjs
 

@@ -601,9 +601,11 @@ search-modal .search-modal-panel .search-modal-loading .search-modal-loading-con
   }
 }
 .predictive-search__grid > .predictive-search__item {
+  display: flex;
   margin-top: 0;
 }
 .predictive-search__link--card {
+  flex: 1 1 auto;
   flex-direction: column;
   align-items: stretch;
   gap: var(--space-xs);
@@ -636,5 +638,10 @@ search-modal .search-modal-panel .search-modal-loading .search-modal-loading-con
   }
 }
 .predictive-search__link--card .predictive-search__product-info {
-  flex: 0 1 auto;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+.predictive-search__link--card .predictive-search__product-price {
+  margin-top: auto;
 }

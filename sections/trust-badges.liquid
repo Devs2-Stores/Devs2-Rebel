@@ -21,6 +21,8 @@
             <div class="section-trust__icon">
               {{ block.settings.icon | image_url: width: 48 | image_tag: loading: 'lazy' }}
             </div>
+          {%- elsif block.settings.line_icon != blank and block.settings.line_icon != 'none' -%}
+            <span class="section-trust__line-icon">{%- render 'icon-feature', name: block.settings.line_icon -%}</span>
           {%- elsif block.settings.emoji != blank -%}
             <span class="section-trust__emoji" aria-hidden="true">{{ block.settings.emoji }}</span>
           {%- endif -%}
@@ -143,11 +145,41 @@
           "label": "t:sections.trust_badges.blocks.badge.settings.icon.label"
         },
         {
+          "type": "select",
+          "id": "line_icon",
+          "label": "t:sections.all.line_icon.label",
+          "info": "t:sections.all.line_icon.info",
+          "options": [
+            { "value": "none", "label": "t:sections.all.line_icon.options.none" },
+            { "value": "truck", "label": "t:sections.all.line_icon.options.truck" },
+            { "value": "package", "label": "t:sections.all.line_icon.options.package" },
+            { "value": "rotate-ccw", "label": "t:sections.all.line_icon.options.rotate_ccw" },
+            { "value": "shield-check", "label": "t:sections.all.line_icon.options.shield_check" },
+            { "value": "lock", "label": "t:sections.all.line_icon.options.lock" },
+            { "value": "message-circle", "label": "t:sections.all.line_icon.options.message_circle" },
+            { "value": "gift", "label": "t:sections.all.line_icon.options.gift" },
+            { "value": "star", "label": "t:sections.all.line_icon.options.star" },
+            { "value": "sparkles", "label": "t:sections.all.line_icon.options.sparkles" },
+            { "value": "sun", "label": "t:sections.all.line_icon.options.sun" },
+            { "value": "scissors", "label": "t:sections.all.line_icon.options.scissors" },
+            { "value": "ruler", "label": "t:sections.all.line_icon.options.ruler" },
+            { "value": "award", "label": "t:sections.all.line_icon.options.award" },
+            { "value": "clock", "label": "t:sections.all.line_icon.options.clock" },
+            { "value": "leaf", "label": "t:sections.all.line_icon.options.leaf" },
+            { "value": "sprout", "label": "t:sections.all.line_icon.options.sprout" },
+            { "value": "droplet", "label": "t:sections.all.line_icon.options.droplet" },
+            { "value": "flask-conical", "label": "t:sections.all.line_icon.options.flask_conical" },
+            { "value": "recycle", "label": "t:sections.all.line_icon.options.recycle" },
+            { "value": "rabbit", "label": "t:sections.all.line_icon.options.rabbit" },
+            { "value": "heart", "label": "t:sections.all.line_icon.options.heart" }
+          ],
+          "default": "none"
+        },
+        {
           "type": "text",
           "id": "emoji",
           "label": "t:sections.trust_badges.blocks.badge.settings.emoji.label",
-          "info": "t:sections.trust_badges.blocks.badge.settings.emoji.info",
-          "default": "\ud83d\ude9a"
+          "info": "t:sections.trust_badges.blocks.badge.settings.emoji.info"
         },
         {
           "type": "text",
@@ -172,7 +204,7 @@
         {
           "type": "badge",
           "settings": {
-            "emoji": "\ud83d\ude9a",
+            "line_icon": "truck",
             "heading": "Free Shipping",
             "text": "On orders over $50"
           }
@@ -180,7 +212,7 @@
         {
           "type": "badge",
           "settings": {
-            "emoji": "\ud83d\udd12",
+            "line_icon": "lock",
             "heading": "Secure Payment",
             "text": "SSL encrypted checkout"
           }
@@ -188,7 +220,7 @@
         {
           "type": "badge",
           "settings": {
-            "emoji": "\u21a9\ufe0f",
+            "line_icon": "rotate-ccw",
             "heading": "Easy Returns",
             "text": "30-day return policy"
           }
@@ -196,7 +228,7 @@
         {
           "type": "badge",
           "settings": {
-            "emoji": "\ud83d\udcac",
+            "line_icon": "message-circle",
             "heading": "24/7 Support",
             "text": "We're here to help"
           }

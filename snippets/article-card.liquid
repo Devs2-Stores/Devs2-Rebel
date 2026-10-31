@@ -1,3 +1,22 @@
+{% doc %}
+  @description Blog article card with image, title, meta, excerpt, tags and read-more
+  @param {article} article - Article object (required)
+  @param {string} [layout] - Card layout: grid or list. Default: 'grid'
+  @param {string} [lazyload] - Loading strategy: lazy or eager. Default: 'lazy'
+  @param {string} [fetchpriority] - Fetch priority: auto or high. Default: 'auto'
+  @param {string} [image_shape] - Image shape: landscape, portrait, square, wide or auto. Default: 'landscape'
+  @param {string} [image_alignment] - Image focal position: top, center or bottom. Default: 'center'
+  @param {boolean} [show_date] - Show the publish date. Default: true
+  @param {boolean} [show_author] - Show the author. Default: true
+  @param {boolean} [show_excerpt] - Show the excerpt. Default: true
+  @param {boolean} [show_read_more] - Show the read more link. Default: true
+  @param {boolean} [show_comment_count] - Show the comment count. Default: false
+  @param {boolean} [show_tags] - Show up to three article tags. Default: false
+  @param {boolean} [show_category] - Show the blog title above the heading. Default: false
+  @param {string} [heading_tag] - Heading element for the title: h2, h3 or h4. Default: 'h3'
+  @example {% render 'article-card', article: article, show_tags: true %}
+{% enddoc %}
+
 {%- liquid
   assign layout = layout | default: 'grid'
   assign lazyload = lazyload | default: 'lazy'
@@ -22,6 +41,9 @@
   endif
   assign card_class = card_class | append: ' article-card--shape-' | append: image_shape
   assign card_class = card_class | append: ' article-card--pos-' | append: image_alignment
+
+  assign card_blog_handle = article.url | split: '/blogs/' | last | split: '/' | first
+  assign card_blog = blogs[card_blog_handle]
 -%}
 
 <article class="{{ card_class }}">
@@ -47,10 +69,10 @@
   </div>
 
   <div class="article-card__content">
-    {%- if show_category and blog.title != blank -%}
+    {%- if show_category and card_blog.title != blank -%}
       <div class="article-card__category">
-        <a href="{{ blog.url | escape }}" class="article-card__category-link">
-          {{ blog.title | escape }}
+        <a href="{{ card_blog.url | escape }}" class="article-card__category-link">
+          {{ card_blog.title | escape }}
         </a>
       </div>
     {%- endif -%}
@@ -95,7 +117,7 @@
     {%- if show_tags and article.tags.size > 0 -%}
       <div class="article-card__tags">
         {%- for tag in article.tags limit: 3 -%}
-          <a href="{{ blog.url | escape }}/tagged/{{ tag | handle }}" class="article-card__tag">{{ tag | escape }}</a>
+          <a href="{{ card_blog.url | escape }}/tagged/{{ tag | handle }}" class="article-card__tag">{{ tag | escape }}</a>
         {%- endfor -%}
       </div>
     {%- endif -%}

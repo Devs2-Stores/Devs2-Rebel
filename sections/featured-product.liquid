@@ -1,4 +1,6 @@
-{{ 'section-featured-product.css' | asset_url | stylesheet_tag }}
+{%- assign above_fold = false -%}
+{%- if section.index <= 2 -%}{%- assign above_fold = true -%}{%- endif -%}
+{{ 'section-featured-product.css' | asset_url | stylesheet_tag: preload: above_fold }}
 {%- comment %}
   Section: Featured Product
 {% endcomment -%}
@@ -9,7 +11,7 @@
 -%}
 
 {%- if product != blank or request.design_mode -%}
-{{ 'product.css' | asset_url | stylesheet_tag }}
+{{ 'product.css' | asset_url | stylesheet_tag: preload: above_fold }}
 <div
   id="section-{{ section.id }}"
   class="section-featured-product color-{{ section.settings.color_scheme }}"
@@ -28,6 +30,16 @@
           {%- if product.media.size > 0 -%}
             <div class="section-featured-product__media-stage">
               {%- for media in product.media -%}
+                {%- liquid
+                  assign media_loading = 'lazy'
+                  assign media_fetchpriority = 'auto'
+                  assign media_preload = false
+                  if forloop.first and above_fold
+                    assign media_loading = 'eager'
+                    assign media_fetchpriority = 'high'
+                    assign media_preload = true
+                  endif
+                -%}
                 <div
                   class="section-featured-product__media-item product-template__media-slide product-template__media-slide--{{ media.media_type }}{% if forloop.first %} is-active{% endif %}"
                   data-media-id="{{ media.id }}"
@@ -37,7 +49,9 @@
                     media: media,
                     product: product,
                     sizes: '(max-width: 749px) 100vw, 50vw',
-                    loading: 'lazy',
+                    loading: media_loading,
+                    fetchpriority: media_fetchpriority,
+                    preload: media_preload,
                     image_class: 'section-featured-product__img'
                   -%}
                 </div>

@@ -10,7 +10,8 @@
   @param {number} [columns_tablet] - Number of products to show on tablet. Default: columns_desktop
   @param {number} [columns_laptop] - Number of products to show on laptop. Default: columns_desktop
   @param {boolean} [priority] - The carousel is the first imagery on the page: load the first desktop row eagerly and give the first image high fetch priority. Default: false
-  @example {%- render 'collection-best', enabled: block.settings.enabled, title: block.settings.title, source: block.settings.source, manual_collection: block.settings.manual_collection, limit: block.settings.limit, columns_mobile: block.settings.columns_mobile, columns_desktop: block.settings.columns_desktop, priority: true -%}
+  @param {string} [image_ratio] - Image ratio: adapt, portrait, square, landscape. Default: 'portrait'
+  @example {%- render 'collection-best', enabled: block.settings.enabled, title: block.settings.title, source: block.settings.source, manual_collection: block.settings.manual_collection, limit: block.settings.limit, columns_mobile: block.settings.columns_mobile, columns_desktop: block.settings.columns_desktop, image_ratio: 'portrait', priority: true -%}
 {% enddoc %}
 
 {%- liquid
@@ -19,6 +20,7 @@
   endif
   assign limit = limit | default: 10
   assign source = source | default: 'current'
+  assign image_ratio = image_ratio | default: 'portrait'
   assign columns_mobile = columns_mobile | default: 2
   assign columns_desktop = columns_desktop | default: 4
   assign columns_tablet = columns_tablet | default: columns_desktop
@@ -62,7 +64,7 @@
               endif
             -%}
             <div class="swiper-slide">
-              {%- render 'product-card', product: product, lazyload: lazyload, fetchpriority: fetchpriority -%}
+              {%- render 'product-card', product: product, lazyload: lazyload, fetchpriority: fetchpriority, image_ratio: image_ratio -%}
             </div>
           {%- endfor -%}
         </div>

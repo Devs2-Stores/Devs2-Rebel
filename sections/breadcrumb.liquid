@@ -1,7 +1,7 @@
 {%- comment %}
   Breadcrumb Section — standalone, can be added to any page via JSON template.
   Auto-detects page type via `template` and renders appropriate breadcrumb trail.
-  Includes Schema.org BreadcrumbList structured data for SEO.
+  Structured data comes from snippets/head-meta-tags.liquid.
 {% endcomment -%}
 
 {%- liquid
@@ -31,35 +31,31 @@
 <div class="section-breadcrumbs color-{{ section.settings.color_scheme }}">
   <div class="{% if section.settings.container_width == 'fixed' %}page-width{% endif %}">
     <nav class="breadcrumb-nav" aria-label="{{ 'general.breadcrumbs.aria_label' | t }}">
-      <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+      <ol class="breadcrumb">
         {%- comment %} Home {% endcomment -%}
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a itemprop="item" href="{{ routes.root_url }}" class="breadcrumb__link" title="{{ t_home }}">
-            <span itemprop="name">{{ t_home }}</span>
+        <li>
+          <a href="{{ routes.root_url }}" class="breadcrumb__link" title="{{ t_home }}">
+            <span class="breadcrumb__name">{{ t_home }}</span>
           </a>
-          <meta itemprop="position" content="1">
         </li>
 
         {%- if template contains 'list-collections' -%}
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <li>
           <span class="breadcrumb__separator" aria-hidden="true">{{ section.settings.separator }}</span>
-          <span itemprop="name">{{ page_title }}</span>
-          <meta itemprop="position" content="2">
+          <span class="breadcrumb__name">{{ page_title }}</span>
         </li>
 
         {%- elsif template contains 'collection' and collection -%}
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <li>
           <span class="breadcrumb__separator" aria-hidden="true">{{ section.settings.separator }}</span>
-          <span itemprop="name">
+          <span class="breadcrumb__name">
             {%- if collection.handle == 'all' -%}{{ t_all_products }}{%- else -%}{{ collection.title | escape }}{%- endif -%}
           </span>
-          <meta itemprop="position" content="2">
         </li>
         {%- if current_tags.size > 0 -%}
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <li>
           <span class="breadcrumb__separator" aria-hidden="true">{{ section.settings.separator }}</span>
-          <span itemprop="name">{{ t_tags }}: <strong>{{ current_tags | join: ', ' }}</strong></span>
-          <meta itemprop="position" content="3">
+          <span class="breadcrumb__name">{{ t_tags }}: <strong>{{ current_tags | join: ', ' }}</strong></span>
         </li>
         {%- endif -%}
 
@@ -73,78 +69,68 @@
             assign bc_collection_url = product_collection.url
           endif
         -%}
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <li>
           <span class="breadcrumb__separator" aria-hidden="true">{{ section.settings.separator }}</span>
-          <a class="breadcrumb__link" itemprop="item" href="{{ bc_collection_url }}">
-            <span itemprop="name">{{ bc_collection_title | escape }}</span>
+          <a class="breadcrumb__link" href="{{ bc_collection_url }}">
+            <span class="breadcrumb__name">{{ bc_collection_title | escape }}</span>
           </a>
-          <meta itemprop="position" content="2">
         </li>
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <li>
           <span class="breadcrumb__separator" aria-hidden="true">{{ section.settings.separator }}</span>
-          <span itemprop="name">{{ product.title | escape }}</span>
-          <meta itemprop="position" content="3">
+          <span class="breadcrumb__name">{{ product.title | escape }}</span>
         </li>
 
         {%- elsif template contains 'blog' and blog -%}
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <li>
           <span class="breadcrumb__separator" aria-hidden="true">{{ section.settings.separator }}</span>
-          <span itemprop="name">{{ blog.title | escape }}</span>
-          <meta itemprop="position" content="2">
+          <span class="breadcrumb__name">{{ blog.title | escape }}</span>
         </li>
 
         {%- elsif template contains 'article' and article -%}
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <li>
           <span class="breadcrumb__separator" aria-hidden="true">{{ section.settings.separator }}</span>
-          <a itemprop="item" href="{{ blog.url }}" class="breadcrumb__link">
-            <span itemprop="name">{{ blog.title | escape }}</span>
+          <a href="{{ blog.url }}" class="breadcrumb__link">
+            <span class="breadcrumb__name">{{ blog.title | escape }}</span>
           </a>
-          <meta itemprop="position" content="2">
         </li>
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <li>
           <span class="breadcrumb__separator" aria-hidden="true">{{ section.settings.separator }}</span>
-          <span itemprop="name">{{ article.title | escape }}</span>
-          <meta itemprop="position" content="3">
+          <span class="breadcrumb__name">{{ article.title | escape }}</span>
         </li>
 
         {%- elsif template contains 'page' and page -%}
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <li>
           <span class="breadcrumb__separator" aria-hidden="true">{{ section.settings.separator }}</span>
-          <span itemprop="name">{{ page.title | escape }}</span>
-          <meta itemprop="position" content="2">
+          <span class="breadcrumb__name">{{ page.title | escape }}</span>
         </li>
 
         {%- elsif template contains 'cart' -%}
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <li>
           <span class="breadcrumb__separator" aria-hidden="true">{{ section.settings.separator }}</span>
-          <span itemprop="name">{{ t_cart }}</span>
-          <meta itemprop="position" content="2">
+          <span class="breadcrumb__name">{{ t_cart }}</span>
         </li>
 
         {%- elsif template contains 'search' -%}
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <li>
           <span class="breadcrumb__separator" aria-hidden="true">{{ section.settings.separator }}</span>
-          <span itemprop="name">{{ t_search }}</span>
-          <meta itemprop="position" content="2">
+          <span class="breadcrumb__name">{{ t_search }}</span>
         </li>
 
         {%- elsif template contains '404' -%}
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <li>
           <span class="breadcrumb__separator" aria-hidden="true">{{ section.settings.separator }}</span>
-          <span itemprop="name">{{ t_not_found }}</span>
-          <meta itemprop="position" content="2">
+          <span class="breadcrumb__name">{{ t_not_found }}</span>
         </li>
 
         {%- elsif template contains 'customers' -%}
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <li>
           <span class="breadcrumb__separator" aria-hidden="true">{{ section.settings.separator }}</span>
-          <span itemprop="name">
+          <span class="breadcrumb__name">
             {%- if template contains 'login' -%}{{ t_login }}
             {%- elsif template contains 'register' -%}{{ t_register }}
             {%- else -%}{{ t_account }}
             {%- endif -%}
           </span>
-          <meta itemprop="position" content="2">
         </li>
         {%- endif -%}
       </ol>
@@ -185,9 +171,9 @@
   color: var(--color-ink);
   font-weight: var(--font-weight-medium);
 }
-.section-breadcrumbs .breadcrumb li > [itemprop="name"],
+.section-breadcrumbs .breadcrumb li > .breadcrumb__name,
 .section-breadcrumbs .breadcrumb__link,
-.section-breadcrumbs .breadcrumb__link > [itemprop="name"] {
+.section-breadcrumbs .breadcrumb__link > .breadcrumb__name {
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;

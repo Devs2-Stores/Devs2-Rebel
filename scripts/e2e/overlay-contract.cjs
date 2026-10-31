@@ -4,9 +4,9 @@ const path = require('path');
 const { chromium } = require('playwright');
 const { gotoStore, recorder, ensureDir, attachLogs } = require('./lib.cjs');
 const { renderSnippet, renderSegment } = require('./snippet-render.cjs');
+const { PDP } = require('./routes.cjs');
 
 const OUT = process.env.OC_OUT || path.join(os.tmpdir(), 'e2e-overlay-contract', 'overlay-contract.json');
-const PDP = '/products/rebel-tactical-bomber-jacket';
 const FOCUSABLE = 'a[href], button:not([disabled]), input:not([type=hidden]):not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 const { results, rec } = recorder();
 const MUTATE = process.env.OC_MUTATE || '';
@@ -23,7 +23,7 @@ const ADDRESS_FIXTURE = {
 
 const MUTATIONS = {
   'newsletter-css': { url: /newsletter-modal\.css/, edit: (b) => b.replace('visibility 0s linear var(--duration-long)', 'visibility var(--transition-slow)').replace('opacity var(--transition-slow), visibility 0s;', 'opacity var(--transition-slow), visibility var(--transition-slow);') },
-  'address-css': { url: /customer\.css/, edit: (b) => b.replace('visibility 0s linear var(--duration-medium)', 'visibility var(--transition-base)').replace('opacity var(--transition-base), visibility 0s;', 'opacity var(--transition-base), visibility var(--transition-base);') },
+  'address-css': { url: /customer\.css/, edit: (b) => b.replace('visibility 0s linear var(--duration-medium)', 'visibility var(--transition-base)').replace('visibility 0s;', 'visibility var(--transition-base);') },
   'pickup-css': { url: /pickup-availability\.css/, edit: (b) => b.replace('visibility 0s linear var(--duration-medium)', 'visibility var(--transition-base)').replace('transform var(--transition-base), visibility 0s;', 'transform var(--transition-base), visibility var(--transition-base);') },
 };
 let mutationHits = 0;

@@ -29,15 +29,19 @@
     <div class="section-icon-boxes__grid section-icon-boxes__grid--{{ section.settings.style }}">
       {%- for block in section.blocks -%}
         <div class="section-icon-boxes__item" {{ block.shopify_attributes }}>
-          <div class="section-icon-boxes__icon-wrap section-icon-boxes__icon-wrap--{{ section.settings.icon_style }}">
-            {%- if block.settings.icon_image != blank -%}
-              {{ block.settings.icon_image | image_url: width: 64 | image_tag: loading: 'lazy', class: 'section-icon-boxes__icon-img' }}
-            {%- elsif block.settings.emoji != blank -%}
-              <span class="section-icon-boxes__emoji">{{ block.settings.emoji }}</span>
-            {%- else -%}
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            {%- endif -%}
-          </div>
+          {%- assign has_line_icon = false -%}
+          {%- if block.settings.line_icon != blank and block.settings.line_icon != 'none' -%}{%- assign has_line_icon = true -%}{%- endif -%}
+          {%- if block.settings.icon_image != blank or has_line_icon or block.settings.emoji != blank -%}
+            <div class="section-icon-boxes__icon-wrap section-icon-boxes__icon-wrap--{{ section.settings.icon_style }}">
+              {%- if block.settings.icon_image != blank -%}
+                {{ block.settings.icon_image | image_url: width: 64 | image_tag: loading: 'lazy', class: 'section-icon-boxes__icon-img' }}
+              {%- elsif has_line_icon -%}
+                {%- render 'icon-feature', name: block.settings.line_icon, class: 'section-icon-boxes__line-icon' -%}
+              {%- else -%}
+                <span class="section-icon-boxes__emoji" aria-hidden="true">{{ block.settings.emoji }}</span>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
           {%- if block.settings.heading != blank -%}
             <h3 class="section-icon-boxes__title">{{ block.settings.heading }}</h3>
           {%- endif -%}
@@ -240,10 +244,40 @@
           "label": "t:sections.icon_boxes.blocks.box.settings.icon_image.label"
         },
         {
+          "type": "select",
+          "id": "line_icon",
+          "label": "t:sections.all.line_icon.label",
+          "info": "t:sections.all.line_icon.info",
+          "options": [
+            { "value": "none", "label": "t:sections.all.line_icon.options.none" },
+            { "value": "truck", "label": "t:sections.all.line_icon.options.truck" },
+            { "value": "package", "label": "t:sections.all.line_icon.options.package" },
+            { "value": "rotate-ccw", "label": "t:sections.all.line_icon.options.rotate_ccw" },
+            { "value": "shield-check", "label": "t:sections.all.line_icon.options.shield_check" },
+            { "value": "lock", "label": "t:sections.all.line_icon.options.lock" },
+            { "value": "message-circle", "label": "t:sections.all.line_icon.options.message_circle" },
+            { "value": "gift", "label": "t:sections.all.line_icon.options.gift" },
+            { "value": "star", "label": "t:sections.all.line_icon.options.star" },
+            { "value": "sparkles", "label": "t:sections.all.line_icon.options.sparkles" },
+            { "value": "sun", "label": "t:sections.all.line_icon.options.sun" },
+            { "value": "scissors", "label": "t:sections.all.line_icon.options.scissors" },
+            { "value": "ruler", "label": "t:sections.all.line_icon.options.ruler" },
+            { "value": "award", "label": "t:sections.all.line_icon.options.award" },
+            { "value": "clock", "label": "t:sections.all.line_icon.options.clock" },
+            { "value": "leaf", "label": "t:sections.all.line_icon.options.leaf" },
+            { "value": "sprout", "label": "t:sections.all.line_icon.options.sprout" },
+            { "value": "droplet", "label": "t:sections.all.line_icon.options.droplet" },
+            { "value": "flask-conical", "label": "t:sections.all.line_icon.options.flask_conical" },
+            { "value": "recycle", "label": "t:sections.all.line_icon.options.recycle" },
+            { "value": "rabbit", "label": "t:sections.all.line_icon.options.rabbit" },
+            { "value": "heart", "label": "t:sections.all.line_icon.options.heart" }
+          ],
+          "default": "none"
+        },
+        {
           "type": "text",
           "id": "emoji",
           "label": "t:sections.icon_boxes.blocks.box.settings.emoji.label",
-          "default": "\ud83d\ude9a",
           "info": "t:sections.icon_boxes.blocks.box.settings.emoji.info"
         },
         {
@@ -279,7 +313,7 @@
         {
           "type": "box",
           "settings": {
-            "emoji": "\ud83d\ude9a",
+            "line_icon": "truck",
             "heading": "Free Shipping",
             "text": "On all orders over $50"
           }
@@ -287,7 +321,7 @@
         {
           "type": "box",
           "settings": {
-            "emoji": "\ud83d\udd12",
+            "line_icon": "lock",
             "heading": "Secure Checkout",
             "text": "256-bit SSL encryption"
           }
@@ -295,7 +329,7 @@
         {
           "type": "box",
           "settings": {
-            "emoji": "\u21a9\ufe0f",
+            "line_icon": "rotate-ccw",
             "heading": "Easy Returns",
             "text": "30-day hassle-free returns"
           }
@@ -303,7 +337,7 @@
         {
           "type": "box",
           "settings": {
-            "emoji": "\u2b50",
+            "line_icon": "star",
             "heading": "5-Star Reviews",
             "text": "Trusted by 10,000+ customers"
           }

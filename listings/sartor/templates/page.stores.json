@@ -1,0 +1,100 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "settings": {}
+    },
+    "main": {
+      "type": "page-stores",
+      "settings": {
+        "title": "Visit our stores",
+        "description": "Find a Sartor store near you for fittings, fabric consultations, and the full collection."
+      },
+      "blocks": {
+        "soho": {
+          "type": "store",
+          "settings": {
+            "name": "Sartor SoHo",
+            "address": "14 Mercer Street, New York, NY 10013",
+            "province": "New York",
+            "district": "SoHo",
+            "address_region": "New York",
+            "postal_code": "10013",
+            "country": "US",
+            "phone": "",
+            "email": "",
+            "hours": "10:00 - 19:00",
+            "timezone": "America/New_York",
+            "map_url": "https://www.google.com/maps/dir/?api=1&destination=14+Mercer+Street%2C+New+York%2C+NY+10013",
+            "latitude": "40.7233",
+            "longitude": "-74.0020"
+          }
+        },
+        "shoreditch": {
+          "type": "store",
+          "settings": {
+            "name": "Sartor Shoreditch",
+            "address": "24 Redchurch Street, London E2 7DP",
+            "province": "London",
+            "district": "Shoreditch",
+            "address_region": "England",
+            "postal_code": "E2 7DP",
+            "country": "GB",
+            "phone": "",
+            "email": "",
+            "hours": "10:00 - 19:00",
+            "timezone": "Europe/London",
+            "map_url": "https://www.google.com/maps/dir/?api=1&destination=24+Redchurch+Street%2C+London+E2+7DP",
+            "latitude": "51.5246",
+            "longitude": "-0.0719"
+          }
+        },
+        "daikanyama": {
+          "type": "store",
+          "settings": {
+            "name": "Sartor Daikanyama",
+            "address": "17-5 Daikanyama, Shibuya City, Tokyo 150-0034",
+            "province": "Tokyo",
+            "district": "Daikanyama",
+            "address_region": "Tokyo",
+            "postal_code": "150-0034",
+            "country": "JP",
+            "phone": "",
+            "email": "",
+            "hours": "11:00 - 20:00",
+            "timezone": "Asia/Tokyo",
+            "map_url": "https://www.google.com/maps/dir/?api=1&destination=17-5+Daikanyama%2C+Shibuya+City%2C+Tokyo+150-0034",
+            "latitude": "35.6487",
+            "longitude": "139.7033"
+          }
+        },
+        "shibuya": {
+          "type": "store",
+          "settings": {
+            "name": "Sartor Shibuya",
+            "address": "3-18 Shibuya, Tokyo 150-0002",
+            "province": "Tokyo",
+            "district": "Shibuya",
+            "address_region": "Tokyo",
+            "postal_code": "150-0002",
+            "country": "JP",
+            "phone": "",
+            "email": "",
+            "hours": "11:00 - 20:00",
+            "timezone": "Asia/Tokyo"
+          }
+        }
+      },
+      "block_order": [
+        "soho",
+        "shoreditch",
+        "daikanyama",
+        "shibuya"
+      ]
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main"
+  ]
+}

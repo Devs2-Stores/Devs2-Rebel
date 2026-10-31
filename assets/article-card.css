@@ -13,7 +13,7 @@
   display: block;
   overflow: hidden;
   background: var(--color-gray-light);
-  border-radius: var(--card-corner-radius);
+  border-radius: var(--media-radius);
 }
 @media (hover: hover) {
   .article-card:hover .article-card__media-image { transform: scale(1.03); }
@@ -162,7 +162,7 @@
 .article-card__tags {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-xs);
+  gap: var(--space-sm);
   margin-top: var(--space-sm);
 }
 .article-card__tag {

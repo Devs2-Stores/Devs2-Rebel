@@ -180,15 +180,15 @@
     --variant-pills-shadow-blur-radius: {{ settings.variant_chip_shadow_blur_radius }}px;
 
     /* ═══════════ CARDS ═══════════ */
-    --card-image-padding: {{ settings.product_card_image_inset | divided_by: 10.0 }}rem;
-    --card-corner-radius: {{ settings.product_card_corner_radius | divided_by: 10.0 }}rem;
+    --card-image-padding: {{ settings.product_card_image_inset }}px;
+    --card-corner-radius: {{ settings.product_card_corner_radius }}px;
     --card-text-alignment: {{ settings.product_card_text_align }};
-    --card-border-width: {{ settings.product_card_stroke_width | divided_by: 10.0 }}rem;
+    --card-border-width: {{ settings.product_card_stroke_width }}px;
     --card-border-opacity: {{ settings.product_card_stroke_opacity | divided_by: 100.0 }};
     --card-shadow-opacity: {{ settings.product_card_shadow_alpha | divided_by: 100.0 }};
-    --card-shadow-horizontal-offset: {{ settings.product_card_shadow_offset_x | divided_by: 10.0 }}rem;
-    --card-shadow-vertical-offset: {{ settings.product_card_shadow_offset_y | divided_by: 10.0 }}rem;
-    --card-shadow-blur-radius: {{ settings.product_card_shadow_blur_radius | divided_by: 10.0 }}rem;
+    --card-shadow-horizontal-offset: {{ settings.product_card_shadow_offset_x }}px;
+    --card-shadow-vertical-offset: {{ settings.product_card_shadow_offset_y }}px;
+    --card-shadow-blur-radius: {{ settings.product_card_shadow_blur_radius }}px;
 
     /* ═══════════ MEDIA ═══════════ */
     --media-border-width: {{ settings.media_frame_stroke_width }}px;
@@ -200,13 +200,13 @@
     --media-shadow-blur-radius: {{ settings.media_frame_shadow_blur_radius }}px;
 
     /* ═══════════ TEXT BOXES ═══════════ */
-    --text-boxes-border-width: {{ settings.content_box_stroke_width | divided_by: 10.0 }}rem;
+    --text-boxes-border-width: {{ settings.content_box_stroke_width }}px;
     --text-boxes-border-opacity: {{ settings.content_box_stroke_opacity | divided_by: 100.0 }};
-    --text-boxes-radius: {{ settings.content_box_corner_radius | divided_by: 10.0 }}rem;
+    --text-boxes-radius: {{ settings.content_box_corner_radius }}px;
     --text-boxes-shadow-opacity: {{ settings.content_box_shadow_alpha | divided_by: 100.0 }};
-    --text-boxes-shadow-horizontal-offset: {{ settings.content_box_shadow_offset_x | divided_by: 10.0 }}rem;
-    --text-boxes-shadow-vertical-offset: {{ settings.content_box_shadow_offset_y | divided_by: 10.0 }}rem;
-    --text-boxes-shadow-blur-radius: {{ settings.content_box_shadow_blur_radius | divided_by: 10.0 }}rem;
+    --text-boxes-shadow-horizontal-offset: {{ settings.content_box_shadow_offset_x }}px;
+    --text-boxes-shadow-vertical-offset: {{ settings.content_box_shadow_offset_y }}px;
+    --text-boxes-shadow-blur-radius: {{ settings.content_box_shadow_blur_radius }}px;
 
     /* ═══════════ POPUPS & DRAWERS ═══════════ */
     --popup-border-width: {{ settings.modal_stroke_width }}px;
@@ -267,9 +267,6 @@
 
     /* ═══════════ ASPECT RATIOS ═══════════ */
     --aspect-ratio-product: 2 / 3;
-    --aspect-ratio-collection: 1 / 1;
-    --aspect-ratio-blog: 4 / 3;
-    --aspect-ratio-article: 16 / 9;
 
     /* ═══════════ ALIASES (compat with existing CSS) ═══════════ */
     /* Color aliases */

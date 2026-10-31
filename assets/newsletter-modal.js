@@ -26,6 +26,10 @@
       }
     }
 
+    disconnectedCallback() {
+      clearTimeout(this.showTimer);
+    }
+
     bindEvents() {
       var self = this;
       if (this.closeButton) {
@@ -59,7 +63,7 @@
       }
       var isClosed = ThemeUtils.storage.get(this.storageKey);
       if (!isClosed) {
-        setTimeout(function() {
+        this.showTimer = setTimeout(function() {
           self.showPopup();
         }, this.timeToShow);
       }

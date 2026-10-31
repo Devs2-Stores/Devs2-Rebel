@@ -64,7 +64,7 @@ be recorded as an unresolved question.
 - State-dependent text (open/closed badges, stock, errors) is checked with each
   state forced. A live clock or stock level hides the other state.
 - Colour changes are checked in every preset in `config/settings_data.json`
-  (today `Sartor`, which carries a light and a dark scheme), with the cart
+  (`Sartor` and `Yarrow`, each with a light and a dark scheme), with the cart
   drawer, search panel and mobile menu open as well as the page.
   `scripts/e2e/preset-contrast.cjs` renders each preset's scheme CSS with liquidjs,
   injects it into the live page and measures every visible text node against
@@ -86,9 +86,11 @@ be recorded as an unresolved question.
   off-screen. It is platform-owned: record it and do not restyle it from the
   theme.
 - Heading order: axe `heading-order` reports 0 on `/collections/all`,
-  `/search?q=jacket`, `/collections`, `/account`, `/account/addresses` and an
-  order page. Card titles on listing pages are `h2`; a card title's computed
-  size, letter-spacing and text-transform match the `h3` they replaced.
+  `/search?q=jacket` and `/collections`. `/account`, `/account/addresses` and
+  order pages are signed-in only, and reset and activate pages are token-link
+  pages reached from email; all are checked by hand. Card titles
+  on listing pages are `h2`; a card title's computed size, letter-spacing and
+  text-transform match the `h3` they replaced.
 - Field border contrast (WCAG 1.4.11): for every colour scheme, the computed
   `border-top-color` of `.form-control` (read on a host of that scheme) is at
   least 3:1 against `background`, `background_2` and `form_bg`. Cover the
@@ -101,9 +103,13 @@ be recorded as an unresolved question.
   every non-active slide is `inert`. With one block no button renders and the
   header height (`--announcement-height`) is unchanged.
 - Autocomplete: axe `autocomplete-valid` reports 0 on `/account/login`,
-  `/account/register`, `/account/addresses`, a reset or activate page and
-  `/cart`. A scan finds no text-like customer or cart input without a token,
-  except tax ID, notes, gift-card recipient, number and search inputs.
+  `/account/register` and `/cart`. `r5-axe.cjs` checks the two login routes
+  and logs `[INFO] <width> <route> :: platform-owned` instead of failing when the store
+  uses new customer accounts (the request leaves the origin, answers non-200
+  or lands on a different path). `/account/addresses` is signed-in only, and
+  reset and activate pages are token-link pages; both are checked by hand. A scan finds no text-like
+  customer or cart input without a token, except tax ID, notes, gift-card
+  recipient, number and search inputs.
 - One `<main>` per page: `rg '<main' layout sections` lists only
   `layout/theme.liquid`, `layout/password.liquid` and
   `sections/main-gift-card.liquid`, and a rendered page contains exactly one
@@ -121,6 +127,10 @@ LocalBusiness in `page-stores`.
 
 - When a route, template, or section with structured data changes, re-check its
   JSON-LD and metadata against the rendered page.
+- JSON-LD is the single source of `BreadcrumbList` and `BlogPosting`. Breadcrumb
+  and article microdata (`itemscope`, `itemprop`, `itemtype`) are removed;
+  `rg -n 'itemscope|itemprop|itemtype' sections snippets layout` lists only the
+  `Blog` microdata in `sections/main-blog.liquid`.
 - `robots.txt`, `sitemap.xml`, `llms.txt`, `/agents.md` and markdown twins are
   served by Shopify; the theme ships no `templates/robots.txt.liquid`.
   Discovery-scan findings on those, dev-proxy URL rewrites, and missing store
@@ -158,14 +168,32 @@ argument exits 2. It never runs `scripts/package-theme.py`, which writes `dist/`
 
 Static steps before the browser gates: `node --check assets/*.js`, a JSON parse
 of `locales`, `config`, `templates`, `sections`, `blocks` and `listings`,
-`scripts/validate-locales.mjs`, `scripts/validate-schema-ranges.mjs`, and a
-curl of every default route (all must answer 200, otherwise the browser gates
-are skipped). `check-discovery-surfaces.mjs` runs last as advisory only when
-`DISCOVERY_SCRIPT` points at it: its
-findings on the dev proxy are platform-owned (see Discovery surfaces).
+`scripts/validate-locales.mjs`, `scripts/validate-schema-ranges.mjs`,
+`scripts/validate-template-structure.mjs`, `scripts/settings-usage.cjs`, and a
+curl of every route in `GATE_ROUTES` (all must answer 200, otherwise the
+browser gates are skipped). `check-discovery-surfaces.mjs` runs last as
+advisory only when `DISCOVERY_SCRIPT` points at it and `E2E_SITE_ORIGIN` names
+the live storefront origin: its findings on the dev proxy are platform-owned
+(see Discovery surfaces).
 
-Default routes are real 200 routes of the demo store (`/blogs/news`,
-`/blogs/news/leather-care-101`, `/products/leather-care-balm`, ...).
+Replay gates use `expect_red <name> <marker-regex> <command...>`. The command
+must exit non-zero and its log must also match the marker (`^\[FAIL\]` for the
+lifecycle replays, `^failures [1-9]` for `r10-store-hours`). The marker is
+required because a bare non-zero exit also happens on a crash, a missing
+selector or a setup failure, and none of those proves the replayed bug was
+caught.
+
+The browser gates run on the routes in `GATE_ROUTES`
+(`scripts/e2e/routes.cjs`, printed by `node scripts/e2e/routes.cjs --routes`).
+The handles are overridable per run with `E2E_PRODUCT`, `E2E_PRODUCT2`,
+`E2E_BLOG` and `E2E_ARTICLE`; the defaults (`/blogs/news`,
+`/blogs/news/leather-care-101`, `/products/leather-care-balm`, ...) are
+handles from the earlier Rebel store and are not guaranteed to exist on the
+current dev store. With `E2E_DISCOVER=1` and `E2E_SITE_ORIGIN=<storefront
+origin>` set, `r10-final.sh` reads the handles from that origin
+(`routes.cjs --discover`) and exports `E2E_PRODUCT`, `E2E_PRODUCT2` and
+`E2E_ARTICLE` (the blog stays `E2E_BLOG`) before building the route list; it
+exits 2 when discovery fails.
 `gotoStore` in `scripts/e2e/lib.cjs` throws on any non-2xx status, so a stale route
 fails instead of measuring an error page; a deliberate error page passes
 `{ allowStatus: [404] }`. Gate output defaults to the OS temp directory, never
@@ -173,8 +201,8 @@ to `plans/reports/`.
 
 ## Mechanical gates
 
-- `node scripts/validate-locales.mjs` and
-  `node scripts/validate-schema-ranges.mjs` exit 0.
+- `node scripts/validate-locales.mjs`, `node scripts/validate-schema-ranges.mjs`
+  and `node scripts/validate-template-structure.mjs` exit 0.
 - `node --check` passes on every changed JavaScript file, and every changed JSON
   template parses.
 - `rg "\| t \| default: '|default: '[A-Z][A-Za-z]+[ A-Za-z.:]*'" sections snippets
@@ -212,7 +240,8 @@ to `plans/reports/`.
   face per used weight, nothing below the 11 px micro step in `DESIGN.md`,
   and 11 px only on micro labels: uppercase, count pill or `.content-size-xs`),
   section spacing, gutters, overlapping targets and icon names, size,
-  contrast and alignment on 12 routes x 375/768/1440. Exit 0 is the pass;
+  contrast and alignment on every route in `GATE_ROUTES` plus a deliberate
+  404 page, x 375/768/1440. Exit 0 is the pass;
   advisory rows are INFO.
 - `node scripts/e2e/target-spacing.cjs` (`TS_ROUTES`, `TS_WIDTHS`) checks WCAG
   2.5.8 on every visible target: a target under 24 x 24 px passes only when a

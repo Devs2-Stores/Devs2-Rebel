@@ -26,33 +26,14 @@
 
 <article
   class="article-template"
-  itemscope
-  itemtype="https://schema.org/BlogPosting"
   style="--article-padding-top: {{ section.settings.padding_top }}px; --article-padding-bottom: {{ section.settings.padding_bottom }}px;"
 >
-  <meta itemprop="dateModified" content="{{ article.updated_at | default: article.published_at | date: '%Y-%m-%d' }}">
-  <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization" hidden>
-    <meta itemprop="name" content="{{ shop.name | escape }}">
-    {%- if settings.logo != blank -%}
-      <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
-        <meta itemprop="url" content="{{ settings.logo | image_url: width: 500 }}">
-      </div>
-    {%- endif -%}
-  </div>
-  <link itemprop="mainEntityOfPage" href="{{ canonical_url }}">
-  <meta
-    itemprop="description"
-    content="{{ article.excerpt | default: article.content | strip_html | truncatewords: 50 | escape }}"
-  >
 
   <div class="{% if container_width == 'fixed' %}page-width{% endif %}">
     <div class="article-template__layout {% unless has_sidebar %}article-template__layout--no-sidebar{% endunless %}">
       <div class="article-template__main">
         {%- if show_image and article.image -%}
-          <div class="article-template__media" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
-            <meta itemprop="url" content="{{ article.image | image_url: width: 2048 }}">
-            <meta itemprop="width" content="{{ article.image.width }}">
-            <meta itemprop="height" content="{{ article.image.height }}">
+          <div class="article-template__media">
             {%- liquid
               assign hero_alt = article.image.alt | default: article.title | escape
               if container_width == 'fixed'
@@ -89,7 +70,7 @@
         {%- endif -%}
 
         <div class="article-template__header">
-          <h1 class="article-template__title heading-size-{{ heading_size }}" itemprop="headline">
+          <h1 class="article-template__title heading-size-{{ heading_size }}">
             {{ article.title | escape }}
           </h1>
           <div class="article-template__info">
@@ -99,20 +80,15 @@
               </span>
             {%- endif -%}
             {%- if show_author and article.author != blank -%}
-              <span
-                class="article-template__info-author"
-                itemprop="author"
-                itemscope
-                itemtype="https://schema.org/Person"
-              >
+              <span class="article-template__info-author">
                 {%- render 'icon', name: 'user', size: '16' -%}
-                <span itemprop="name">{{ article.author | escape }}</span>
+                <span>{{ article.author | escape }}</span>
               </span>
             {%- endif -%}
             {%- if show_date -%}
               <span class="article-template__info-date">
                 {%- render 'icon', name: 'calendar', size: '16' -%}
-                <time itemprop="datePublished" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+                <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
                   {{- article.published_at | date: '%B %d, %Y' -}}
                 </time>
               </span>
@@ -120,7 +96,7 @@
             {%- if show_comment_count and blog.comments_enabled? -%}
               <a href="#comments" class="article-template__info-comments">
                 {%- render 'icon', name: 'comments', size: '16' -%}
-                <span itemprop="commentCount">{{ article.comments_count }}</span>
+                <span>{{ article.comments_count }}</span>
                 <span>{{ 'blogs.article.comments_label' | t }}</span>
               </a>
             {%- endif -%}
@@ -135,7 +111,7 @@
           assign table_label = 'blogs.article.table_label' | t | escape
           assign table_open = '<div class="article-template__table" role="region" tabindex="0" aria-label="' | append: table_label | append: '"><table'
         -%}
-        <div class="article-template__content rte" itemprop="articleBody">
+        <div class="article-template__content rte">
           {{ article.content | replace: '<table', table_open | replace: '</table>', '</table></div>' }}
         </div>
 
@@ -419,12 +395,12 @@
             </div>
 
             <div class="article-template__comments-list">
-              <h3 class="article-template__comments-list-title">
-                {%- render 'icon', name: 'comments', size: '20' -%}
-                <span>{{ 'blogs.article.comments' | t: count: article.comments_count }}</span>
-              </h3>
-
               {%- if article.comments_count > 0 -%}
+                <h3 class="article-template__comments-list-title">
+                  {%- render 'icon', name: 'comments', size: '20' -%}
+                  <span>{{ 'blogs.article.comments' | t: count: article.comments_count }}</span>
+                </h3>
+
                 {%- paginate article.comments by 20 -%}
                   <div class="article-template__comments-items">
                     {%- for comment in article.comments -%}

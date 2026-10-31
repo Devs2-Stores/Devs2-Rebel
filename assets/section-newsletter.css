@@ -84,7 +84,7 @@
   border: none; cursor: pointer;
   white-space: nowrap;
   transition: background-color var(--transition-fast), color var(--transition-fast);
-  border-radius: var(--buttons-radius, 0);
+  border-radius: 0;
 }
 .section-newsletter__btn:hover {
   background: var(--color-primary-strong);
@@ -106,4 +106,8 @@
 }
 .section-newsletter__error {
   margin: 0.5rem 0 0; font-size: 0.875rem; color: var(--color-error-text);
+}
+
+:root:has(#MainContent > .shopify-section:last-child > .section-newsletter) {
+  --footer-margin-top: 0;
 }

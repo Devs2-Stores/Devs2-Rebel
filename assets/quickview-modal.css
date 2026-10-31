@@ -7,16 +7,14 @@ quickview-modal.quickview-modal-wrapper {
   position: fixed;
   inset: 0;
   z-index: var(--z-modal, 9000);
-  opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity var(--transition-base), visibility 0s linear var(--duration-medium);
+  transition: visibility 0s linear var(--duration-medium);
 }
 quickview-modal.quickview-modal-wrapper.is-open {
-  opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transition: opacity var(--transition-base), visibility 0s linear 0s;
+  transition: visibility 0s;
 }
 quickview-modal.quickview-modal-wrapper.is-open .quickview-modal-overlay { opacity: 1; }
 quickview-modal.quickview-modal-wrapper.is-open .quickview-modal-panel { transform: none; }

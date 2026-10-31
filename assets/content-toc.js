@@ -4,7 +4,7 @@
   class ContentToc extends HTMLElement {
     connectedCallback() {
       this.disconnectObservers();
-      this.contentSelector = this.getAttribute('content-selector') || '[itemprop="articleBody"]';
+      this.contentSelector = this.getAttribute('content-selector') || '.article-template__content';
       this.headingLevels = this.getAttribute('data-heading-levels') || 'h2h3';
       this.showNumbers = this.hasAttribute('data-show-numbers');
       this.collapsible = this.hasAttribute('data-collapsible');

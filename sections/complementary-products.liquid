@@ -27,7 +27,7 @@
   {% unless has_products %}hidden{% endunless %}
 >
   {%- if has_products -%}
-    <div class="complementary-products" data-recommendation-products>
+    <div class="complementary-products color-{{ section.settings.color_scheme | default: 'scheme-1' }}" data-recommendation-products>
       <div class="{% if container_width == 'fixed' %}page-width{% endif %}">
         {%- if section.settings.heading != blank -%}
           <h2 class="complementary-products__heading global-heading">{{ section.settings.heading | escape }}</h2>
@@ -40,7 +40,7 @@
               {%- if shown >= section.settings.product_limit -%}{%- break -%}{%- endif -%}
               {%- assign shown = shown | plus: 1 -%}
               <li class="product-cards__item" role="listitem">
-                {%- render 'product-card', product: item, lazyload: 'lazy', fetchpriority: 'auto', show_vendor: true -%}
+                {%- render 'product-card', product: item, lazyload: 'lazy', fetchpriority: 'auto', show_vendor: true, image_ratio: section.settings.image_ratio -%}
               </li>
             {%- endfor -%}
           </ul>
@@ -58,6 +58,12 @@
   "class": "section-complementary-products",
   "limit": 1,
   "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
     {
       "type": "select",
       "id": "container_width",
@@ -88,6 +94,18 @@
       "max": 10,
       "step": 1,
       "default": 4
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "t:sections.complementary_products.settings.image_ratio.label",
+      "options": [
+        { "value": "adapt", "label": "t:sections.complementary_products.settings.image_ratio.options__adapt.label" },
+        { "value": "portrait", "label": "t:sections.complementary_products.settings.image_ratio.options__portrait.label" },
+        { "value": "square", "label": "t:sections.complementary_products.settings.image_ratio.options__square.label" },
+        { "value": "landscape", "label": "t:sections.complementary_products.settings.image_ratio.options__landscape.label" }
+      ],
+      "default": "portrait"
     },
     {
       "type": "product_list",
