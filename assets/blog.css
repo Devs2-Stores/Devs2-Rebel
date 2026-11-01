@@ -339,7 +339,8 @@
 .blog-sidebar__recent-post-image {
   flex-shrink: 0;
   width: 96px;
-  aspect-ratio: 16 / 9;
+  align-self: flex-start;
+  aspect-ratio: 3 / 2;
   border-radius: var(--media-radius);
   overflow: hidden;
   background: var(--color-gray-light);

@@ -66,7 +66,7 @@
     -%}
     <div
       class="section-collection-list__grid"
-      {%- if layout != 'grid' %} data-list-layout="{{ layout }}" style="--list-cols-d: {{ list_cols_d }}; --list-cols-m: {{ section.settings.columns_mobile }};"{% endif %}
+      {%- if layout != 'grid' %} data-list-layout="{{ layout }}" style="--list-cols-d: {{ list_cols_d }}; --list-cols-m: {{ section.settings.columns_mobile }};{% if section.settings.flush_tiles %} --list-gap: 0px;{% endif %}"{% endif %}
     >
       {%- for block in section.blocks -%}
         {%- liquid
@@ -245,6 +245,13 @@
         }
       ],
       "default": "grid"
+    },
+    {
+      "type": "checkbox",
+      "id": "flush_tiles",
+      "label": "t:sections.collection_list.settings.flush_tiles.label",
+      "info": "t:sections.collection_list.settings.flush_tiles.info",
+      "default": false
     },
     {
       "type": "range",

@@ -1,6 +1,6 @@
 # Sartor 1.0.0 - release notes
 
-Initial release of Sartor, a Shopify Online Store 2.0 theme with two style presets (Sartor and Yarrow).
+Initial release of Sartor, a Shopify Online Store 2.0 theme with three style presets (Sartor, Yarrow and Alder).
 
 ## Included
 
@@ -11,9 +11,10 @@ Initial release of Sartor, a Shopify Online Store 2.0 theme with two style prese
 - Customer account pages that show per-line discounts, original prices and selling plan names.
 - Custom Liquid block on product sections and a pickup availability block.
 - Structured data (Product, Article, Organization, WebSite, BreadcrumbList) and Open Graph / Twitter metadata.
+- Country/region (with currency) and language selectors in the header, the mobile menu and the footer; they render only when the store sells in more than one country or language.
 - English locale files (`en.default.json`, `en.default.schema.json`) covering every customer-facing string.
 
 ## Submission notes
 
 - `release-notes.md` is for the Theme Store form. Do not add it to the zip until the theme is published; Shopify requires it only for updates.
-- The zip is built by `python scripts/package-theme.py` and contains `listings/sartor` and `listings/yarrow`, one folder per preset. `listings/manifest.json` is excluded by `.shopifyignore`.
+- The zip is built by `python scripts/package-theme.py` and contains `listings/sartor`, `listings/yarrow` and `listings/alder`, one folder per preset. `listings/manifest.json` is excluded by `.shopifyignore`.

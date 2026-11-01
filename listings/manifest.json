@@ -2,25 +2,24 @@
   "name": "Sartor",
   "version": "1.0.0",
   "author": "Devs2",
-  "categories": [
-    "Clothing and accessories",
-    "Health and beauty",
-    "Sports and recreation"
-  ],
+  "industries_note": "Shopify tags each preset with at most two industries from its fixed list; the labels below are for the Partner Dashboard form.",
   "presets": [
     {
       "name": "Sartor",
       "handle": "sartor",
+      "industries": ["Clothing"],
       "description": "Bone and crimson tailoring with square corners, flat cards and pill badges."
     },
     {
       "name": "Yarrow",
       "handle": "yarrow",
+      "industries": ["Beauty", "Wellness"],
       "description": "Calm herbal palette with soft rounded cards, editorial serif headings and a single-product hero for focused beauty catalogs."
     },
     {
       "name": "Alder",
       "handle": "alder",
+      "industries": ["Home"],
       "description": "Warm linen ground, one terracotta accent, a light serif display face and photo-led editorial sections for home and furniture catalogs."
     }
   ]

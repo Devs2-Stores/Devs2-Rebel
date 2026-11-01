@@ -9,6 +9,7 @@ body {
   font-family: var(--font-body-family);
   font-weight: var(--font-body-weight, var(--font-weight-normal));
   font-style: var(--font-body-style, normal);
+  font-synthesis-weight: none;
   line-height: var(--line-height-normal);
 }
 

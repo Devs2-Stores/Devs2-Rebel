@@ -72,6 +72,17 @@
   border-radius: 0;
 }
 
+.section-iwt__media--tall {
+  min-height: var(--iwt-media-h);
+}
+
+.section-iwt__media--tall .section-iwt__img,
+.section-iwt__media--tall .section-iwt__placeholder {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+}
+
 .section-iwt__img {
   width: 100%;
   height: 100%;

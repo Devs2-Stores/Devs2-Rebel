@@ -144,6 +144,10 @@
   transition: border-color var(--transition-fast);
   display: block;
 }
+.product-template__media-wrapper--ratio-adapt .product-template__media-thumbs .product-template__media-thumb-image {
+  height: auto;
+  aspect-ratio: auto;
+}
 
 .product-template__media-slide[hidden],
 .product-template__media-thumb[hidden],
@@ -1164,7 +1168,7 @@
 }
 .product-sticky-add__image {
   width: 2.75rem;
-  aspect-ratio: var(--aspect-ratio-product);
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: var(--media-radius);
   flex-shrink: 0;

@@ -183,6 +183,7 @@
     --card-image-padding: {{ settings.product_card_image_inset }}px;
     --card-corner-radius: {{ settings.product_card_corner_radius }}px;
     --card-text-alignment: {{ settings.product_card_text_align }};
+    --card-title-font-family: var(--font-{{ settings.product_card_title_font | default: 'body' }}-family);
     --card-border-width: {{ settings.product_card_stroke_width }}px;
     --card-border-opacity: {{ settings.product_card_stroke_opacity | divided_by: 100.0 }};
     --card-shadow-opacity: {{ settings.product_card_shadow_alpha | divided_by: 100.0 }};

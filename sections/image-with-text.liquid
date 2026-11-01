@@ -11,13 +11,16 @@
     --iwt-db: {{ section.settings.padding_bottom_desktop }}px;
     --iwt-mt: {{ section.settings.padding_top_mobile }}px;
     --iwt-mb: {{ section.settings.padding_bottom_mobile }}px;
+    {%- if section.settings.media_height > 0 %}
+    --iwt-media-h: {{ section.settings.media_height }}vh;
+    {%- endif %}
   "
 >
   <div class="{% if section.settings.section_width == 'fixed' %}page-width{% endif %}">
     <div class="section-iwt__grid section-iwt__grid--{{ section.settings.image_position }}{% if section.settings.section_width == 'full' %} section-iwt__grid--full{% endif %}">
 
       {%- comment %} Image Column {% endcomment -%}
-      <div class="section-iwt__media">
+      <div class="section-iwt__media{% if section.settings.media_height > 0 %} section-iwt__media--tall{% endif %}">
         {%- if section.settings.image != blank -%}
           {%- assign iwt_alt = section.settings.image.alt | default: shop.name -%}
           {{ section.settings.image | image_url: width: 1200 | image_tag:
@@ -188,6 +191,17 @@
         }
       ],
       "default": "fixed"
+    },
+    {
+      "type": "range",
+      "id": "media_height",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "t:sections.image_with_text.settings.media_height.label",
+      "info": "t:sections.image_with_text.settings.media_height.info",
+      "default": 0
     },
     {
       "type": "select",

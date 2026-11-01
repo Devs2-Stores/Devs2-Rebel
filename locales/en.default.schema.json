@@ -250,6 +250,18 @@
           "options__2": {
             "label": "Card"
           }
+        },
+        "title_font": {
+          "label": "Title font",
+          "options__1": {
+            "label": "Body"
+          },
+          "options__2": {
+            "label": "Heading"
+          },
+          "options__3": {
+            "label": "Subheading"
+          }
         }
       }
     },
@@ -3248,6 +3260,10 @@
             "editorial": "Editorial"
           }
         },
+        "flush_tiles": {
+          "label": "Remove gap between tiles",
+          "info": "Applies to the carousel and editorial layouts."
+        },
         "columns_desktop": {
           "label": "Desktop columns"
         },
@@ -4670,6 +4686,10 @@
             "fixed": "Fixed width",
             "full": "Full width"
           }
+        },
+        "media_height": {
+          "label": "Minimum media height",
+          "info": "0 keeps the height of the text column."
         },
         "text_align": {
           "label": "Text alignment",

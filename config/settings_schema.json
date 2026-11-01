@@ -990,6 +990,26 @@
         "label": "t:settings_schema.global.settings.text_alignment.label"
       },
       {
+        "type": "select",
+        "id": "product_card_title_font",
+        "options": [
+          {
+            "value": "body",
+            "label": "t:settings_schema.cards.settings.title_font.options__1.label"
+          },
+          {
+            "value": "heading",
+            "label": "t:settings_schema.cards.settings.title_font.options__2.label"
+          },
+          {
+            "value": "subheading",
+            "label": "t:settings_schema.cards.settings.title_font.options__3.label"
+          }
+        ],
+        "default": "body",
+        "label": "t:settings_schema.cards.settings.title_font.label"
+      },
+      {
         "type": "color_scheme",
         "id": "product_card_scheme",
         "label": "t:settings_schema.global.settings.color_scheme.label",
