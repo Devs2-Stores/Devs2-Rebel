@@ -184,7 +184,6 @@ p {
   .text-align-mobile-right { text-align: unset; }
 }
 
-/* ── SVG Sprite ─────────────────────────────────── */
 .icons-sprite {
   position: absolute;
   width: 0;
@@ -192,8 +191,6 @@ p {
   overflow: hidden;
 }
 
-/* ── Deferred Rendering ─────────────────────────── */
-/* Sections after the first skip style/layout/paint until they near the viewport. The first section stays eager so the LCP element is never deferred. */
 .shopify-section ~ .section-collection-list-wrapper,
 .shopify-section ~ .section-marquee-products-wrapper,
 .shopify-section ~ .section-iwt-wrapper,

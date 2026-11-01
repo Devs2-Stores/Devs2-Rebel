@@ -41,7 +41,8 @@
         <a href="{{ routes.root_url }}" class="header__logo-link" title="{{ shop.name | escape }}" aria-label="{{ shop.name | escape }}">
           {%- if settings.logo != blank -%}
           {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
-          {{ settings.logo | image_url: width: 300 | image_tag: sizes: '(min-width: 750px) 300px, 150px',
+          {%- assign logo_sizes = settings.logo_width | append: 'px' -%}
+          {{ settings.logo | image_url: width: 300 | image_tag: sizes: logo_sizes,
             alt: logo_alt,
             width: settings.logo_width,
             loading: 'eager',
@@ -49,7 +50,7 @@
             class: 'header__logo-image header__logo-image--solid'
           }}
           {%- if transparent_here and clear_logo != blank -%}
-          {{ clear_logo | image_url: width: 300 | image_tag: sizes: '(min-width: 750px) 300px, 150px',
+          {{ clear_logo | image_url: width: 300 | image_tag: sizes: logo_sizes,
             alt: '',
             width: settings.logo_width,
             loading: 'eager',

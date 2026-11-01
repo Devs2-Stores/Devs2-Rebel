@@ -33,7 +33,8 @@
       <div class="footer-block footer-block--logo footer-info__logo" {{ block.shopify_attributes }}>
         <a href="{{ routes.root_url }}" title="{{ shop.name | escape }}" class="footer-logo">
           {%- if settings.footer_logo != blank -%}
-            {{ settings.footer_logo | image_url: width: 400 | image_tag: sizes: '(min-width: 750px) 400px, 200px',
+            {%- assign footer_logo_sizes = settings.footer_logo_width | append: 'px' -%}
+            {{ settings.footer_logo | image_url: width: 400 | image_tag: sizes: footer_logo_sizes,
               alt: shop.name,
               width: settings.footer_logo_width,
               height: 60,
