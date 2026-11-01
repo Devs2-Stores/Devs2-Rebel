@@ -1,0 +1,32 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "settings": {}
+    },
+    "main": {
+      "type": "main-list-collections",
+      "settings": {
+        "title": "Shop by room",
+        "subtitle": "",
+        "heading_size": "lg",
+        "heading_alignment_desktop": "left",
+        "heading_alignment_mobile": "left",
+        "image_shape": "portrait",
+        "image_position": "top-center",
+        "card_heading_size": "md",
+        "show_product_count": false,
+        "container_width": "fixed",
+        "columns_desktop": "3",
+        "columns_mobile": "2",
+        "column_gap": "lg",
+        "sort": "alphabetical",
+        "per_page": 12
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main"
+  ]
+}

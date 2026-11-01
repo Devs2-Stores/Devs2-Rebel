@@ -25,6 +25,9 @@
   if section.settings.enable_lightbox
     assign media_wrapper_class = media_wrapper_class | append: ' lightbox-enabled'
   endif
+  if section.settings.media_ground == 'page'
+    assign media_wrapper_class = media_wrapper_class | append: ' product-template__media-wrapper--ground-page'
+  endif
 
   assign visible_count = 0
   assign slides_html = ''
@@ -312,6 +315,22 @@
         }
       ],
       "default": "adapt"
+    },
+    {
+      "type": "select",
+      "id": "media_ground",
+      "label": "t:sections.main_product.settings.media_ground.label",
+      "options": [
+        {
+          "value": "gray",
+          "label": "t:sections.main_product.settings.media_ground.options__gray.label"
+        },
+        {
+          "value": "page",
+          "label": "t:sections.main_product.settings.media_ground.options__page.label"
+        }
+      ],
+      "default": "gray"
     },
     {
       "type": "checkbox",

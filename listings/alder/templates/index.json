@@ -1,0 +1,211 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "image_alt": "",
+        "height_desktop": "80",
+        "height_mobile": "80",
+        "overlay_opacity": 40,
+        "overlay_gradient": true,
+        "content_position": "bottom-left",
+        "text_align": "left",
+        "content_max_width": 700,
+        "color_scheme": "scheme-3"
+      },
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Rooms made to be lived in",
+            "heading_size": "2xl",
+            "heading_tag": "h2"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_size": "md",
+            "button_label_1": "Shop the collection",
+            "button_link_1": "/collections/all",
+            "button_style_1": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "button"
+      ]
+    },
+    "statement": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Furniture and home pieces chosen for warm materials, simple lines and everyday use.",
+            "heading_size": "xl",
+            "heading_tag": "h2"
+          }
+        }
+      },
+      "block_order": [
+        "heading"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "text_align": "center",
+        "section_width": "fixed",
+        "content_width": 800,
+        "padding_top_desktop": 120,
+        "padding_bottom_desktop": 120,
+        "padding_top_mobile": 60,
+        "padding_bottom_mobile": 60
+      }
+    },
+    "rooms": {
+      "type": "collection-list",
+      "blocks": {
+        "c_1": {
+          "type": "collection_card",
+          "settings": {
+            "custom_title": "Living"
+          }
+        },
+        "c_2": {
+          "type": "collection_card",
+          "settings": {
+            "custom_title": "Dining"
+          }
+        },
+        "c_3": {
+          "type": "collection_card",
+          "settings": {
+            "custom_title": "Bedroom"
+          }
+        },
+        "c_4": {
+          "type": "collection_card",
+          "settings": {
+            "custom_title": "Lighting"
+          }
+        }
+      },
+      "block_order": [
+        "c_1",
+        "c_2",
+        "c_3",
+        "c_4"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "subheading": "",
+        "heading": "Shop by room",
+        "heading_size": "lg",
+        "heading_tag": "h2",
+        "layout": "editorial",
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "show_count": false,
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "new_arrivals": {
+      "type": "featured-collection",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "subheading": "",
+        "heading": "New arrivals",
+        "heading_size": "lg",
+        "heading_tag": "h2",
+        "layout": "grid",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": 2,
+        "show_view_all": true,
+        "image_ratio": "portrait_45",
+        "show_vendor": false,
+        "show_secondary_image": true,
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "story": {
+      "type": "image-with-text",
+      "blocks": {
+        "iwt_head": {
+          "type": "heading",
+          "settings": {
+            "heading": "Made to last, finished by hand",
+            "heading_size": "xl",
+            "heading_tag": "h2"
+          }
+        },
+        "iwt_text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Solid wood, natural fibres and honest finishes that wear in rather than wear out.</p>",
+            "content_size": "md"
+          }
+        },
+        "iwt_btn": {
+          "type": "button",
+          "settings": {
+            "button_size": "md",
+            "button_label_1": "Read our story",
+            "button_link_1": "/pages/about",
+            "button_style_1": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "iwt_head",
+        "iwt_text",
+        "iwt_btn"
+      ],
+      "settings": {
+        "color_scheme": "scheme-4",
+        "image_position": "left",
+        "section_width": "full",
+        "text_align": "left",
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0
+      }
+    },
+    "journal": {
+      "type": "blog-posts",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "subheading": "",
+        "heading": "From the journal",
+        "heading_size": "lg",
+        "heading_tag": "h2",
+        "layout": "grid",
+        "posts_to_show": 3,
+        "columns_desktop": 3,
+        "show_date": true,
+        "show_excerpt": true,
+        "show_view_all": true,
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 50,
+        "padding_bottom_mobile": 50
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "statement",
+    "rooms",
+    "new_arrivals",
+    "story",
+    "journal"
+  ]
+}

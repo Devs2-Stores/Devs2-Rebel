@@ -28,23 +28,11 @@
             "padding_top": 0,
             "padding_bottom": 0
           }
-        },
-        "sidebar_banner": {
-          "type": "sidebar_banner",
-          "settings": {
-            "heading": "Add a heading",
-            "text": "Add a short description.",
-            "button_label": "Shop all",
-            "link": "/collections/all",
-            "padding_top": 0,
-            "padding_bottom": 0
-          }
         }
       },
       "block_order": [
         "recent_posts",
-        "tags",
-        "sidebar_banner"
+        "tags"
       ],
       "settings": {
         "layout": "grid",

@@ -1,0 +1,178 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "settings": {}
+    },
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "image_alt": "",
+        "height_desktop": "60",
+        "height_mobile": "60",
+        "overlay_opacity": 40,
+        "overlay_gradient": true,
+        "content_position": "bottom-left",
+        "text_align": "left",
+        "content_max_width": 700,
+        "color_scheme": "scheme-3"
+      },
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "About us",
+            "heading_size": "2xl",
+            "heading_tag": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Furniture and home pieces for everyday living.</p>",
+            "content_size": "lg"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text"
+      ]
+    },
+    "mission": {
+      "type": "rich-text",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "text_align": "center",
+        "section_width": "fixed",
+        "content_width": 800,
+        "padding_top_desktop": 100,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 60,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Fewer pieces, chosen well",
+            "heading_size": "lg",
+            "heading_tag": "h2"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We look for simple lines, honest materials and finishes that age well, so each piece can stay in the home for years.</p>",
+            "content_size": "lg"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text"
+      ]
+    },
+    "materials": {
+      "type": "image-with-text",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "image_position": "left",
+        "section_width": "fixed",
+        "text_align": "left",
+        "padding_top_desktop": 70,
+        "padding_bottom_desktop": 70,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "subheading": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Materials",
+            "subheading_size": "sm"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Wood, linen and wool",
+            "heading_size": "lg",
+            "heading_tag": "h2"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Natural materials bring warmth to a room and develop character with use.</p>",
+            "content_size": "md"
+          }
+        }
+      },
+      "block_order": [
+        "subheading",
+        "heading",
+        "text"
+      ]
+    },
+    "craft": {
+      "type": "image-with-text",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "image_position": "right",
+        "section_width": "fixed",
+        "text_align": "left",
+        "padding_top_desktop": 70,
+        "padding_bottom_desktop": 70,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "subheading": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Craft",
+            "subheading_size": "sm"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Finished with care",
+            "heading_size": "lg",
+            "heading_tag": "h2"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Joinery, stitching and finishing are what make a piece last. We choose makers who take the same care.</p>",
+            "content_size": "md"
+          }
+        }
+      },
+      "block_order": [
+        "subheading",
+        "heading",
+        "text"
+      ]
+    },
+    "page_content": {
+      "type": "page-content",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "container_width": "fixed",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "hero",
+    "mission",
+    "materials",
+    "craft",
+    "page_content"
+  ]
+}

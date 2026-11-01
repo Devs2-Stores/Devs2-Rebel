@@ -26,7 +26,9 @@ the photograph first.
   (`type_font_*` default `inter_n4`). Hierarchy comes from the type scale,
   weight and uppercase tracking on subheadings, not from extra faces. Yarrow
   sets its own faces in `config/settings_data.json`: `newsreader_n4` for
-  headings and `instrument_sans_n4` for subheadings and body.
+  headings and `instrument_sans_n4` for subheadings and body. Alder uses
+  `newsreader_n3` for headings, `red_hat_display_n6` for subheadings and
+  `red_hat_display_n4` for body.
 - Hero copy is short and declarative, using tailoring vocabulary: "Cut, draped,
   made to be worn", "The tailored anti-uniform", "Cherry red, cut close to the
   bone".
@@ -35,15 +37,22 @@ the photograph first.
 
 Every preset shares one component architecture. A preset changes only
 settings: scheme colours, radii, card treatment and type settings. The theme
-ships two presets, Sartor and Yarrow.
+ships three presets, Sartor, Yarrow and Alder.
 
 | Preset | scheme-1 bg / text / accent | Character |
 |---|---|---|
 | Sartor | `#F5F2ED` / `#0A0A0A` / `#BC1E2C` | Bone and crimson, oxblood scheme-4 `#4A0E16`, square, pill badges, flat cards |
 | Yarrow | `#FAF8F5` / `#2D3B2F` / `#3B533E` | Herbal greens, forest scheme-4 `#4A6B50`, rounded (buttons 20, inputs 12, media 12, cards 20 with an 8 px image inset), white boxed cards with a soft shadow, Newsreader serif headings, Instrument Sans body |
+| Alder | `#F6F2EB` / `#26211D` / `#8A4B33` | Linen and terracotta for home and furniture, olive scheme-4 `#3E4837`, square corners, flat cards, Newsreader n3 headings, Red Hat Display body, portrait 4:5 card images and the product gallery on the page ground |
 
 A new preset adds settings and scheme values only. It must not add selectors or
 markup branches.
+
+Two additive options exist for presets that need them, with defaults that leave
+earlier presets unchanged: the `portrait_45` value (4:5) of every card and
+collection `image_ratio` select, and the main product `media_ground` select
+(`gray` tile, or `page` so the gallery sits on the page ground). Alder sets both.
+Existing `portrait` keeps its meaning (2:3 on cards, 4:5 on the product gallery).
 
 Global setting ids follow `<component>_<property>`, with a trailing unit only
 where one exists, for example `button_corner_radius`, `product_card_stroke_width`,

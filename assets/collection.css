@@ -915,11 +915,13 @@
 }
 
 /* ── Loading state ── */
+#CollectionProducts {
+  transition: opacity var(--transition-fast);
+}
 .collection-template__wrapper.is-loading #CollectionProducts,
 .collection-template__facets.is-loading #CollectionProducts {
   opacity: 0.5;
   pointer-events: none;
-  transition: opacity var(--transition-fast);
 }
 .collection-template__wrapper.is-loading #CollectionPagination,
 .collection-template__facets.is-loading #CollectionPagination {

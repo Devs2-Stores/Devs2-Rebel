@@ -1428,6 +1428,15 @@
             "label": "Landscape (4:3)"
           }
         },
+        "media_ground": {
+          "label": "Image background",
+          "options__gray": {
+            "label": "Grey tile"
+          },
+          "options__page": {
+            "label": "Page colour"
+          }
+        },
         "hide_variants": {
           "label": "Hide media of other variants",
           "info": "When a variant has its own media, show only that media plus media not assigned to any variant."
@@ -1703,6 +1712,9 @@
           },
           "options__landscape": {
             "label": "Landscape"
+          },
+          "options__portrait_45": {
+            "label": "Portrait (4:5)"
           }
         },
         "show_vendor": {
@@ -3012,6 +3024,9 @@
           },
           "options__landscape": {
             "label": "Landscape"
+          },
+          "options__portrait_45": {
+            "label": "Portrait (4:5)"
           }
         },
         "products": {
@@ -3043,6 +3058,9 @@
           },
           "options__landscape": {
             "label": "Landscape"
+          },
+          "options__portrait_45": {
+            "label": "Portrait (4:5)"
           }
         }
       }
@@ -3144,7 +3162,8 @@
             "adapt": "Adapt",
             "portrait": "Portrait",
             "square": "Square",
-            "landscape": "Landscape"
+            "landscape": "Landscape",
+            "portrait_45": "Portrait (4:5)"
           }
         },
         "show_vendor": {
@@ -3244,7 +3263,8 @@
           "options": {
             "portrait": "Portrait (3:4)",
             "square": "Square",
-            "landscape": "Landscape (4:3)"
+            "landscape": "Landscape (4:3)",
+            "portrait_45": "Portrait (4:5)"
           }
         },
         "show_count": {

@@ -1,0 +1,34 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "settings": {}
+    },
+    "main": {
+      "type": "main-blog",
+      "settings": {
+        "layout": "grid",
+        "container_width": "fixed",
+        "columns_desktop": "3",
+        "columns_mobile": "1",
+        "column_gap": 24,
+        "row_gap": 32,
+        "articles_per_page": 9,
+        "heading_size": "md",
+        "show_featured_post": true,
+        "show_date": true,
+        "show_author": false,
+        "show_excerpt": true,
+        "show_read_more": true,
+        "show_comment_count": false,
+        "show_tags": true,
+        "show_category": false,
+        "image_shape": "landscape"
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main"
+  ]
+}

@@ -32,8 +32,8 @@ official Shopify requirements.
 
 - The theme supports five style presets on one shared, tokenized component
   architecture.
-- The current phase ships two style presets, Sartor and Yarrow. A new preset
-  adds only settings, a `listings/<handle>/` folder and demo-matched
+- The current phase ships three style presets, Sartor, Yarrow and Alder. A new
+  preset adds only settings, a `listings/<handle>/` folder and demo-matched
   templates, keeping preset and token contracts stable so no markup, content
   API or ad hoc selector is duplicated.
 - Add full i18n for the common Shopify storefront languages in a later phase.

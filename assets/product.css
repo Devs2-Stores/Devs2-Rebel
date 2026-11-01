@@ -68,6 +68,9 @@
   border-radius: var(--media-radius);
   overflow: hidden;
 }
+.product-template__media-wrapper--ground-page .product-template__media-slider .swiper-slide {
+  background: transparent;
+}
 .product-template__media-slider .product-template__media-image {
   width: 100%;
   height: auto;
@@ -178,6 +181,9 @@
   border: var(--media-border);
   border-radius: var(--media-radius);
   box-shadow: var(--media-shadow);
+}
+.product-template__media-wrapper--ground-page .product-template__media-list > .product-template__media-slide {
+  background: transparent;
 }
 .product-template__media-list .product-template__media-image {
   width: 100%;

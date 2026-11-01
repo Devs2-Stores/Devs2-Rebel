@@ -64,7 +64,7 @@ be recorded as an unresolved question.
 - State-dependent text (open/closed badges, stock, errors) is checked with each
   state forced. A live clock or stock level hides the other state.
 - Colour changes are checked in every preset in `config/settings_data.json`
-  (`Sartor` and `Yarrow`, each with a light and a dark scheme), with the cart
+  (`Sartor`, `Yarrow` and `Alder`, each with a light and a dark scheme), with the cart
   drawer, search panel and mobile menu open as well as the page.
   `scripts/e2e/preset-contrast.cjs` renders each preset's scheme CSS with liquidjs,
   injects it into the live page and measures every visible text node against

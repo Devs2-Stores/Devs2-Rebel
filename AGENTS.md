@@ -19,15 +19,15 @@ repeating the full workspace contract.
 
 - The theme product scope includes five style presets sharing one tokenized
   component architecture.
-- The current delivery phase ships two style presets, Sartor and Yarrow, on one
-  tokenized architecture. A new preset adds only settings, a
+- The current delivery phase ships three style presets, Sartor, Yarrow and
+  Alder, on one tokenized architecture. A new preset adds only settings, a
   `listings/<handle>/` folder and demo-matched templates, with no duplicated
   theme structure and no change to content APIs.
 - A later delivery phase adds full internationalization for the common Shopify
   storefront languages required by the product. Keep all customer-facing copy
   locale-backed now, with English as the source baseline; do not ship partial
   language files or hardcoded language branches.
-- Do not implement a third preset or the full language rollout until the user
+- Do not implement a fourth preset or the full language rollout until the user
   explicitly requests it. Do not let unrelated work expand either phase.
 
 ## Theme Structure
