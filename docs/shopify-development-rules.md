@@ -32,17 +32,19 @@ official Shopify requirements.
 
 - The theme supports five style presets on one shared, tokenized component
   architecture.
-- The current phase ships three style presets, Sartor, Yarrow and Alder. A new
-  preset adds only settings, a `listings/<handle>/` folder and demo-matched
-  templates, keeping preset and token contracts stable so no markup, content
-  API or ad hoc selector is duplicated.
+- The current phase submits one style preset, Sartor. Yarrow and Alder are
+  prepared in the repo and excluded from the zip with
+  `--only-preset sartor`. A new preset adds only settings, a
+  `listings/<handle>/` folder and demo-matched templates, keeping preset and
+  token contracts stable so no markup, content API or ad hoc selector is
+  duplicated.
 - Add full i18n for the common Shopify storefront languages in a later phase.
   All customer-facing copy must already be locale-backed with English as the
   source baseline; do not add hardcoded language branches or incomplete locale
   files.
-- Treat a third preset and the full language rollout as explicit follow-up
+- Treat a fourth preset and the full language rollout as explicit follow-up
   scope. Do not implement them implicitly during unrelated work, and build no
-  third preset without an explicit user request.
+  fourth preset without an explicit user request.
 
 ## Image Generation
 

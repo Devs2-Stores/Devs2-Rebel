@@ -38,7 +38,7 @@
         {%- render 'icon', name: 'hamburger' -%}
       </button>
       <div class="header__logo">
-        <a href="{{ routes.root_url }}" class="header__logo-link" title="{{ shop.name }}" aria-label="{{ shop.name }}">
+        <a href="{{ routes.root_url }}" class="header__logo-link" title="{{ shop.name | escape }}" aria-label="{{ shop.name | escape }}">
           {%- if settings.logo != blank -%}
           {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
           {{ settings.logo | image_url: width: 300 | image_tag:

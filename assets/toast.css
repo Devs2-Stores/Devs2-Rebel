@@ -39,8 +39,8 @@
 }
 .toast-close {
   display: flex;
-  width: var(--font-xl);
-  height: var(--font-xl);
+  width: max(var(--font-xl), 1.5rem);
+  height: max(var(--font-xl), 1.5rem);
   flex-shrink: 0;
   cursor: pointer;
   align-items: center;

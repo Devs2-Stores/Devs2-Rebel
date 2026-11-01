@@ -36,8 +36,9 @@ the photograph first.
 ## Presets
 
 Every preset shares one component architecture. A preset changes only
-settings: scheme colours, radii, card treatment and type settings. The theme
-ships three presets, Sartor, Yarrow and Alder.
+settings: scheme colours, radii, card treatment and type settings. The repo
+holds three presets, Sartor, Yarrow and Alder; only Sartor is submitted, the
+other two are prepared and excluded from the zip.
 
 | Preset | scheme-1 bg / text / accent | Character |
 |---|---|---|

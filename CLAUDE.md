@@ -31,11 +31,11 @@ enforcement only; it does not replace the shared authority.
 
 ## Project-specific enforcement
 
-- Claude must preserve the five-preset product scope. The current phase ships
-  three style presets, Sartor, Yarrow and Alder, on one tokenized
-  architecture; a new preset adds only settings, a `listings/<handle>/` folder
-  and demo-matched templates. Do not build a fourth preset without an explicit
-  user request.
+- Claude must preserve the five-preset product scope. The current phase
+  submits Sartor only; Yarrow and Alder are prepared in the repo and stay out
+  of the zip (`python scripts/package-theme.py --only-preset sartor`). A new
+  preset adds only settings, a `listings/<handle>/` folder and demo-matched
+  templates. Do not build a fourth preset without an explicit user request.
 - Claude must verify computed vertical spacing whenever composing adjacent page
   sections. Component CSS must provide an explicit fallback boundary when
   global section spacing can be configured to `0`, especially between FAQ

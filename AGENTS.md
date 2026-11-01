@@ -19,10 +19,12 @@ repeating the full workspace contract.
 
 - The theme product scope includes five style presets sharing one tokenized
   component architecture.
-- The current delivery phase ships three style presets, Sartor, Yarrow and
-  Alder, on one tokenized architecture. A new preset adds only settings, a
-  `listings/<handle>/` folder and demo-matched templates, with no duplicated
-  theme structure and no change to content APIs.
+- The current delivery phase submits one style preset, Sartor, to the Theme
+  Store. Yarrow and Alder are prepared in the repo (settings presets and
+  `listings/<handle>/` folders) and excluded from the zip by
+  `python scripts/package-theme.py --only-preset sartor`. A new preset adds
+  only settings, a `listings/<handle>/` folder and demo-matched templates,
+  with no duplicated theme structure and no change to content APIs.
 - A later delivery phase adds full internationalization for the common Shopify
   storefront languages required by the product. Keep all customer-facing copy
   locale-backed now, with English as the source baseline; do not ship partial
@@ -41,7 +43,7 @@ locales/   en.default.json and en.default.schema.json
 sections/  merchant-configurable section files
 snippets/  reusable Liquid fragments
 templates/ JSON templates
-listings/  Theme Store preset listings (`listings/<handle>/`); `listings/manifest.json` is excluded from the zip by `.shopifyignore`
+listings/  Theme Store preset listings (`listings/<handle>/`); not in the Sartor-only zip, and `listings/manifest.json` is excluded by `.shopifyignore`
 ```
 
 ## Shopify CLI - Reference Only

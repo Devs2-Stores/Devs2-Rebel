@@ -42,12 +42,13 @@
       </div>
     {%- endif -%}
 
-    <div class="section-compare__wrapper" data-compare-slider style="--compare-pos: 50%;">
+    <div class="section-compare__wrapper" data-compare-slider>
       <div class="section-compare__before">
         {%- if section.settings.image_before != blank -%}
+          {%- assign before_alt = section.settings.image_before.alt | default: section.settings.label_before | escape -%}
           {{ section.settings.image_before | image_url: width: 1200 | image_tag:
             widths: '375, 750, 1000, 1200', sizes: '(max-width: 749px) 100vw, 60vw',
-            loading: 'lazy', class: 'section-compare__img'
+            loading: 'lazy', class: 'section-compare__img', alt: before_alt
           }}
         {%- else -%}
           <div class="section-compare__ph">{{ 'image' | placeholder_svg_tag }}</div>
@@ -58,9 +59,10 @@
       </div>
       <div class="section-compare__after">
         {%- if section.settings.image_after != blank -%}
+          {%- assign after_alt = section.settings.image_after.alt | default: section.settings.label_after | escape -%}
           {{ section.settings.image_after | image_url: width: 1200 | image_tag:
             widths: '375, 750, 1000, 1200', sizes: '(max-width: 749px) 100vw, 60vw',
-            loading: 'lazy', class: 'section-compare__img'
+            loading: 'lazy', class: 'section-compare__img', alt: after_alt
           }}
         {%- else -%}
           <div class="section-compare__ph">{{ 'image' | placeholder_svg_tag }}</div>

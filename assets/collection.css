@@ -801,8 +801,8 @@
   pointer-events: none;
 }
 .facet-filter__price-range-control::-webkit-slider-thumb {
-  width: 1rem;
-  height: 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
   border: 2px solid var(--color-ink);
   border-radius: 50%;
   background: var(--color-surface);
@@ -812,8 +812,8 @@
   cursor: pointer;
 }
 .facet-filter__price-range-control::-moz-range-thumb {
-  width: 1rem;
-  height: 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
   border: 2px solid var(--color-ink);
   border-radius: 50%;
   background: var(--color-surface);

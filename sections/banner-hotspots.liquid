@@ -26,9 +26,10 @@
 
     <div class="section-hotspot__wrapper">
       {%- if section.settings.image != blank -%}
+        {%- assign hotspot_alt = section.settings.image.alt | default: section.settings.heading | strip_html | escape -%}
         {{ section.settings.image | image_url: width: 1920 | image_tag:
           widths: '750, 1080, 1440, 1920', sizes: '100vw',
-          loading: 'lazy', class: 'section-hotspot__img'
+          loading: 'lazy', class: 'section-hotspot__img', alt: hotspot_alt
         }}
       {%- else -%}
         <div class="section-hotspot__ph">{{ 'lifestyle-2' | placeholder_svg_tag }}</div>

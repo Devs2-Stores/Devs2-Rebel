@@ -7,7 +7,7 @@ input[type="radio"],
 .hidden { display: none; }
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button,
-input[type="number"] { -webkit-appearance: none; margin: 0; -moz-appearance: textfield !important; }
+input[type="number"] { -webkit-appearance: none; margin: 0; -moz-appearance: textfield; }
 input,
 button,
 select,
@@ -26,7 +26,7 @@ textarea { box-sizing: border-box; box-shadow: none; border: none; outline: none
 input:disabled,
 button:disabled,
 select:disabled,
-textarea:disabled { opacity: 0.5; pointer-events: none; cursor: not-allowed !important; }
+textarea:disabled { opacity: 0.5; pointer-events: none; cursor: not-allowed; }
 :focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 a:focus-visible,
 button:focus-visible,
@@ -81,7 +81,7 @@ textarea:focus-visible,
 :where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .faq-contact__btn, .product-card__quickview, .product-card__add-btn):disabled,
 :where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .faq-contact__btn, .product-card__quickview, .product-card__add-btn)[aria-disabled="true"] {
   opacity: 0.55;
-  cursor: not-allowed !important;
+  cursor: not-allowed;
   filter: saturate(0.75);
 }
 :where(.button-primary, .button-secondary, a[class*="__btn"], button[class*="__btn"], .faq-contact__btn, .product-card__quickview, .product-card__add-btn).loading,

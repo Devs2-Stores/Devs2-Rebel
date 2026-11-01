@@ -9,6 +9,7 @@ MAX_BYTES = 50 * 1024 * 1024
 parser = argparse.ArgumentParser(description='Package the theme into sartor-v<version>.zip')
 parser.add_argument('--out', default='dist', help='output directory (default: dist)')
 parser.add_argument('--force', action='store_true', help='overwrite an existing zip')
+parser.add_argument('--only-preset', metavar='HANDLE', help='ship a single preset: drops listings/ and keeps only that preset in config/settings_data.json')
 args = parser.parse_args()
 
 ignore_patterns = []
@@ -29,13 +30,23 @@ def should_ignore(path):
 
 with open('config/settings_schema.json', encoding='utf-8') as schema_file:
     theme_info = next(item for item in json.load(schema_file) if item.get('name') == 'theme_info')
-zip_path = os.path.join(args.out, f"sartor-v{theme_info['theme_version']}.zip")
+zip_suffix = f'-{args.only_preset}' if args.only_preset else ''
+zip_path = os.path.join(args.out, f"sartor-v{theme_info['theme_version']}{zip_suffix}.zip")
 
 if os.path.exists(zip_path) and not args.force:
     raise SystemExit(f'FAIL: {zip_path} already exists; pass --force to overwrite it or --out DIR to build elsewhere')
 
 os.makedirs(args.out, exist_ok=True)
 tmp_path = zip_path + '.partial'
+
+def single_preset_settings(raw, handle):
+    data = json.loads(raw.decode('utf-8'))
+    match = [name for name in data['presets'] if re.sub(r'\s+', '-', name.strip().lower()) == handle]
+    if len(match) != 1:
+        raise SystemExit(f'FAIL: --only-preset {handle!r} matches {match} in config/settings_data.json')
+    data['current'] = match[0]
+    data['presets'] = {match[0]: data['presets'][match[0]]}
+    return (json.dumps(data, indent=2, ensure_ascii=False) + '\n').encode('utf-8')
 
 file_count = 0
 with zipfile.ZipFile(tmp_path, 'w', zipfile.ZIP_DEFLATED) as zf:
@@ -48,8 +59,12 @@ with zipfile.ZipFile(tmp_path, 'w', zipfile.ZIP_DEFLATED) as zf:
                 rel_path = os.path.relpath(full_path, '.').replace('\\', '/')
                 if should_ignore(rel_path):
                     continue
+                if args.only_preset and rel_path.startswith('listings/'):
+                    continue
                 with open(full_path, 'rb') as src:
                     data = src.read()
+                if args.only_preset and rel_path == 'config/settings_data.json':
+                    data = single_preset_settings(data, args.only_preset)
                 if rel_path.endswith(TEXT_EXTENSIONS):
                     data = data.replace(b'\r\n', b'\n')
                 zf.writestr(rel_path, data)
@@ -83,16 +98,23 @@ with zipfile.ZipFile(tmp_path) as zf:
     bad_listing = sorted(name for name in names if name.startswith('listings/') and not re.fullmatch(r'listings/[a-z0-9-]+/(templates|sections)/[^/]+\.json', name))
     if bad_listing:
         problems.append(f'listings/ entries outside <preset>/templates or <preset>/sections: {bad_listing}')
+    if args.only_preset:
+        if len(presets) != 1 or listed or any(name.startswith('listings/') for name in names):
+            problems.append(f'--only-preset build must hold exactly one preset and no listings/ folder; found presets {sorted(handles)} and listing folders {sorted(listed)}')
+        other_presets = sorted(re.sub(r'\s+', '-', name.strip().lower()) for name in json.loads(open('config/settings_data.json', encoding='utf-8').read())['presets'] if re.sub(r'\s+', '-', name.strip().lower()) != args.only_preset)
     crlf = []
     bad_json = []
     store_specific = []
     residue = []
+    leaked = []
     for name in names:
         data = zf.read(name)
         if name.endswith(TEXT_EXTENSIONS) and b'\r\n' in data:
             crlf.append(name)
         if name.endswith(TEXT_EXTENSIONS) and re.search(rb'\brebel\b', data, re.I):
             residue.append(name)
+        if args.only_preset and other_presets and name.endswith(TEXT_EXTENSIONS) and re.search(rb'\b(' + b'|'.join(re.escape(p.encode()) for p in other_presets) + rb')\b', data, re.I):
+            leaked.append(name)
         if name.endswith('.json'):
             try:
                 json.loads(re.sub(r'^\s*/\*[\s\S]*?\*/', '', data.decode('utf-8')))
@@ -105,6 +127,8 @@ with zipfile.ZipFile(tmp_path) as zf:
         problems.append(f'CRLF line endings left in text members: {crlf}')
     if residue:
         problems.append(f'former theme name "Rebel" found in: {residue}')
+    if leaked:
+        problems.append(f'names of presets left out of this build found in: {leaked}')
     if bad_json:
         problems.append(f'invalid JSON members: {bad_json}')
     if store_specific:
