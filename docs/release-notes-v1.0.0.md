@@ -17,4 +17,4 @@ Initial release of Sartor, a Shopify Online Store 2.0 theme with one style prese
 ## Submission notes
 
 - `release-notes.md` is for the Theme Store form. Do not add it to the zip until the theme is published; Shopify requires it only for updates.
-- The zip is built by `python scripts/package-theme.py --only-preset sartor`. It contains no `listings/` folder (one preset needs none) and only the Sartor preset in `config/settings_data.json`.
+- The zip is built by `python scripts/package-theme.py --only-preset sartor`. It contains no `listings/` folder (one preset needs none) and only the Sartor preset in `config/settings_data.json`. The packager writes `listings/sartor/templates/*.json` and `listings/sartor/sections/*.json` over the root `templates/` and `sections/` copies, with every `product_handle` blanked, so the install state matches the Sartor demo.

@@ -39,17 +39,46 @@ if os.path.exists(zip_path) and not args.force:
 os.makedirs(args.out, exist_ok=True)
 tmp_path = zip_path + '.partial'
 
-def single_preset_settings(raw, handle):
-    data = json.loads(raw.decode('utf-8'))
-    match = [name for name in data['presets'] if re.sub(r'\s+', '-', name.strip().lower()) == handle]
-    if len(match) != 1:
-        raise SystemExit(f'FAIL: --only-preset {handle!r} matches {match} in config/settings_data.json')
-    data['current'] = match[0]
-    data['presets'] = {match[0]: data['presets'][match[0]]}
+def clear_demo_handles(node):
+    if isinstance(node, dict):
+        return {key: ('' if key == 'product_handle' and isinstance(value, str) else clear_demo_handles(value)) for key, value in node.items()}
+    if isinstance(node, list):
+        return [clear_demo_handles(item) for item in node]
+    return node
+
+def dump_json(data):
     return (json.dumps(data, indent=2, ensure_ascii=False) + '\n').encode('utf-8')
 
+def load_json(path):
+    with open(path, encoding='utf-8') as handle_file:
+        return json.loads(re.sub(r'^\s*/\*[\s\S]*?\*/', '', handle_file.read()))
+
+overrides = {}
+if args.only_preset:
+    handle = args.only_preset
+    settings = load_json('config/settings_data.json')
+    match = [name for name in settings['presets'] if re.sub(r'\s+', '-', name.strip().lower()) == handle]
+    if len(match) != 1:
+        raise SystemExit(f'FAIL: --only-preset {handle!r} matches {match} in config/settings_data.json')
+    overrides['config/settings_data.json'] = dump_json({'current': match[0], 'presets': {match[0]: settings['presets'][match[0]]}})
+    listing_dir = f'listings/{handle}'
+    if not os.path.isdir(listing_dir):
+        raise SystemExit(f'FAIL: {listing_dir} not found; the install state of a single-preset zip comes from it')
+    for sub in ('templates', 'sections'):
+        sub_dir = os.path.join(listing_dir, sub)
+        for name in sorted(os.listdir(sub_dir)) if os.path.isdir(sub_dir) else []:
+            overrides[f'{sub}/{name}'] = dump_json(clear_demo_handles(load_json(os.path.join(sub_dir, name))))
+
 file_count = 0
+written = set()
 with zipfile.ZipFile(tmp_path, 'w', zipfile.ZIP_DEFLATED) as zf:
+    def add(rel_path, data):
+        global file_count
+        if rel_path.endswith(TEXT_EXTENSIONS):
+            data = data.replace(b'\r\n', b'\n')
+        zf.writestr(rel_path, data)
+        written.add(rel_path)
+        file_count += 1
     for d in THEME_DIRS:
         if not os.path.exists(d):
             continue
@@ -61,14 +90,13 @@ with zipfile.ZipFile(tmp_path, 'w', zipfile.ZIP_DEFLATED) as zf:
                     continue
                 if args.only_preset and rel_path.startswith('listings/'):
                     continue
+                if rel_path in overrides:
+                    add(rel_path, overrides[rel_path])
+                    continue
                 with open(full_path, 'rb') as src:
-                    data = src.read()
-                if args.only_preset and rel_path == 'config/settings_data.json':
-                    data = single_preset_settings(data, args.only_preset)
-                if rel_path.endswith(TEXT_EXTENSIONS):
-                    data = data.replace(b'\r\n', b'\n')
-                zf.writestr(rel_path, data)
-                file_count += 1
+                    add(rel_path, src.read())
+    for rel_path in sorted(set(overrides) - written):
+        add(rel_path, overrides[rel_path])
 
 def fail(message):
     os.remove(tmp_path)
