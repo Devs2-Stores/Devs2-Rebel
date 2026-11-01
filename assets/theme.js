@@ -193,9 +193,15 @@
     },
 
     trapFocus: (container, triggerEl) => {
-      var focusableSelector = 'a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+      var focusableSelector = 'a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), summary, [tabindex]:not([tabindex="-1"])';
+      var inClosedDetails = function(el) {
+        for (var d = el.parentElement && el.parentElement.closest('details'); d; d = d.parentElement && d.parentElement.closest('details')) {
+          if (!d.open && !(el.tagName === 'SUMMARY' && el.parentElement === d)) return true;
+        }
+        return false;
+      };
       var isUsable = function(el) {
-        return el.tabIndex >= 0 && el.getClientRects().length > 0 && getComputedStyle(el).visibility !== 'hidden';
+        return el.tabIndex >= 0 && el.getClientRects().length > 0 && getComputedStyle(el).visibility !== 'hidden' && !inClosedDetails(el);
       };
       var collect = function(root, list) {
         Array.prototype.forEach.call(root.querySelectorAll('*'), function(el) {
