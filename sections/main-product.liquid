@@ -11,9 +11,9 @@
     assign selected_has_media = true
   endif
 
-  assign product_media_sizes = '(max-width: 749px) calc(100vw - 30px), (max-width: 991px) calc(50vw - 40px), (min-width: 1600px) 580px, 34vw'
+  assign product_media_sizes = '(max-width: 749px) calc(100vw - 30px), (max-width: 991px) calc(50vw - 40px), (min-width: 1600px) 740px, 45vw'
   if media_layout == 'stacked' and grid_columns == '2'
-    assign product_media_sizes = '(max-width: 749px) calc(100vw - 30px), (max-width: 991px) calc(25vw - 20px), (min-width: 1600px) 290px, 17vw'
+    assign product_media_sizes = '(max-width: 749px) calc(100vw - 30px), (max-width: 991px) calc(25vw - 20px), (min-width: 1600px) 370px, 23vw'
   endif
 
   assign media_wrapper_class = 'product-template__media-wrapper product-template__media-wrapper--' | append: media_layout | append: ' product-template__media-wrapper--ratio-' | append: media_ratio
@@ -139,10 +139,10 @@
                   {%- if media.preview_image -%}
                     {{
                       media.preview_image
-                      | image_url: width: 240
+                      | image_url: width: 304
                       | image_tag:
-                        widths: '120, 240',
-                        sizes: '80px',
+                        widths: '152, 304',
+                        sizes: '152px',
                         alt: media.alt,
                         loading: 'lazy',
                         decoding: 'async',
