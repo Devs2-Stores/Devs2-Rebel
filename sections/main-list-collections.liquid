@@ -43,18 +43,11 @@
   endif
 -%}
 
-{%- style -%}
-  #shopify-section-{{ section.id }} {
-    --columns-desktop: {{ section.settings.columns_desktop }};
-    --columns-mobile: {{ section.settings.columns_mobile | default: 2 }};
-  }
-{%- endstyle -%}
-
 {%- if layout != 'grid' -%}
   {{ 'section-list-layouts.css' | asset_url | stylesheet_tag }}
 {%- endif -%}
 
-<div class="list-collections-template section-padding">
+<div class="list-collections-template section-padding" style="--columns-desktop: {{ section.settings.columns_desktop }}; --columns-mobile: {{ section.settings.columns_mobile | default: 2 }};">
   <div class="{% if section.settings.container_width == 'fixed' %}page-width{% endif %}">
     {%- assign heading_title = section.settings.title -%}
     {%- if heading_title == blank -%}

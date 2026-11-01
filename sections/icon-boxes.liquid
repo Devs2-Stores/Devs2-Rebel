@@ -34,7 +34,7 @@
           {%- if block.settings.icon_image != blank or has_line_icon or block.settings.emoji != blank -%}
             <div class="section-icon-boxes__icon-wrap section-icon-boxes__icon-wrap--{{ section.settings.icon_style }}">
               {%- if block.settings.icon_image != blank -%}
-                {{ block.settings.icon_image | image_url: width: 64 | image_tag: loading: 'lazy', class: 'section-icon-boxes__icon-img' }}
+                {{ block.settings.icon_image | image_url: width: 64 | image_tag: sizes: '64px', loading: 'lazy', class: 'section-icon-boxes__icon-img' }}
               {%- elsif has_line_icon -%}
                 {%- render 'icon-feature', name: block.settings.line_icon, class: 'section-icon-boxes__line-icon' -%}
               {%- else -%}

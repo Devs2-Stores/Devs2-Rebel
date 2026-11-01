@@ -33,7 +33,7 @@
           <div class="section-team__avatar-wrap">
             {%- if block.settings.image != blank -%}
               {%- assign avatar_alt = block.settings.image.alt | default: block.settings.name -%}
-              {{ block.settings.image | image_url: width: 400 | image_tag:
+              {{ block.settings.image | image_url: width: 400 | image_tag: sizes: '(min-width: 750px) 25vw, 50vw',
                 loading: 'lazy', class: 'section-team__avatar', alt: avatar_alt
               }}
             {%- else -%}

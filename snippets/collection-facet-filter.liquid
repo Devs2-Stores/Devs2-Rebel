@@ -205,7 +205,7 @@
                   </div>
 
                 {%- elsif price_filter_style == 'checkbox' and range_max > 0 and price_step > 0 -%}
-                  <div class="facet-filter__price-presets" aria-label="{{ filter.label | escape }} {{ 'products.facets.price_range' | t | escape }}">
+                  <div class="facet-filter__price-presets" role="group" aria-label="{{ filter.label | escape }} {{ 'products.facets.price_range' | t | escape }}">
                     <input
                       type="hidden"
                       name="{{ filter.min_value.param_name }}"
@@ -276,9 +276,7 @@
                           type="number"
                           name="{{ filter.min_value.param_name }}"
                           id="Filter-{{ filter.min_value.param_name | handleize }}"
-                          {%- if filter.min_value.value -%}
-                            value="{{ min_value }}"
-                          {%- endif -%}
+                          {%- if filter.min_value.value %} value="{{ min_value }}"{% endif %}
                           min="0"
                           max="{{ range_max }}"
                           placeholder="0"
@@ -296,9 +294,7 @@
                           type="number"
                           name="{{ filter.max_value.param_name }}"
                           id="Filter-{{ filter.max_value.param_name | handleize }}"
-                          {%- if filter.max_value.value -%}
-                            value="{{ max_value }}"
-                          {%- endif -%}
+                          {%- if filter.max_value.value %} value="{{ max_value }}"{% endif %}
                           min="0"
                           max="{{ range_max }}"
                           placeholder="{{ range_max }}"

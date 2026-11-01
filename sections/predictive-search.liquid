@@ -38,7 +38,7 @@
           <div class="predictive-search__product-image">
             {%- if product.featured_image != blank -%}
               {%- assign ps_product_alt = product.featured_image.alt | default: product.title | escape -%}
-              {{ product.featured_image | image_url: width: 150 | image_tag:
+              {{ product.featured_image | image_url: width: 150 | image_tag: sizes: '80px',
                 loading: 'lazy',
                 alt: ps_product_alt,
                 class: 'predictive-search__img'
@@ -92,7 +92,7 @@
           {%- if collection.featured_image != blank -%}
           <div class="predictive-search__collection-image">
             {%- assign ps_col_alt = collection.title | escape -%}
-            {{ collection.featured_image | image_url: width: 80 | image_tag:
+            {{ collection.featured_image | image_url: width: 80 | image_tag: sizes: '80px',
               loading: 'lazy',
               alt: ps_col_alt,
               class: 'predictive-search__img'

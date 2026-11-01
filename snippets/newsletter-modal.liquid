@@ -7,7 +7,7 @@
       {%- if settings.newsletter_modal_image != blank -%}
       <div class="newsletter-popup-banner">
         {%- assign newsletter_alt = settings.newsletter_modal_heading | escape -%}
-        {{ settings.newsletter_modal_image | image_url: width: 600 | image_tag:
+        {{ settings.newsletter_modal_image | image_url: width: 600 | image_tag: sizes: '(min-width: 750px) 450px, 100vw',
           alt: newsletter_alt,
           width: 900, height: 1400,
           loading: 'lazy', decoding: 'async'

@@ -18,7 +18,7 @@
 >
   {%- if section.settings.image_mobile != blank and section.settings.image != blank -%}
     <div class="section-ito__media section-ito__media--mobile">
-      {{ section.settings.image_mobile | image_url: width: 750 | image_tag:
+      {{ section.settings.image_mobile | image_url: width: 750 | image_tag: sizes: '100vw',
         loading: 'lazy', class: 'section-ito__img', alt: ito_mobile_alt
       }}
       <div class="section-ito__overlay"></div>
@@ -32,7 +32,7 @@
         loading: 'lazy', class: 'section-ito__img', alt: ito_alt
       }}
     {%- elsif section.settings.image_mobile != blank -%}
-      {{ section.settings.image_mobile | image_url: width: 750 | image_tag:
+      {{ section.settings.image_mobile | image_url: width: 750 | image_tag: sizes: '100vw',
         loading: 'lazy', class: 'section-ito__img', alt: ito_mobile_alt
       }}
     {%- else -%}

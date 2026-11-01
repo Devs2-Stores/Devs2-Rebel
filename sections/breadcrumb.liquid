@@ -16,19 +16,27 @@
   assign t_account = 'general.breadcrumbs.account' | t
 -%}
 
-{%- style -%}
-  #shopify-section-{{ section.id }} .section-breadcrumbs {
-    padding-top: {{ section.settings.padding_top }}px;
-    padding-bottom: {{ section.settings.padding_bottom }}px;
-    font-size: {% if section.settings.font_size == 'xs' %}var(--font-xs){% elsif section.settings.font_size == 'base' %}var(--font-base){% else %}var(--meta-size, 0.8125rem){% endif %};
-  }
-  #shopify-section-{{ section.id }} .breadcrumb {
-    justify-content: {% if section.settings.text_alignment == 'center' %}center{% elsif section.settings.text_alignment == 'right' %}flex-end{% else %}flex-start{% endif %};
-  }
-{%- endstyle -%}
+{%- liquid
+  case section.settings.font_size
+    when 'xs'
+      assign breadcrumb_font_size = 'var(--font-xs)'
+    when 'base'
+      assign breadcrumb_font_size = 'var(--font-base)'
+    else
+      assign breadcrumb_font_size = 'var(--meta-size, 0.8125rem)'
+  endcase
+  case section.settings.text_alignment
+    when 'center'
+      assign breadcrumb_justify = 'center'
+    when 'right'
+      assign breadcrumb_justify = 'flex-end'
+    else
+      assign breadcrumb_justify = 'flex-start'
+  endcase
+-%}
 
 {%- unless template == 'index' -%}
-<div class="section-breadcrumbs color-{{ section.settings.color_scheme }}">
+<div class="section-breadcrumbs color-{{ section.settings.color_scheme }}" style="--breadcrumb-pt: {{ section.settings.padding_top }}px; --breadcrumb-pb: {{ section.settings.padding_bottom }}px; --breadcrumb-fs: {{ breadcrumb_font_size }}; --breadcrumb-justify: {{ breadcrumb_justify }};">
   <div class="{% if section.settings.container_width == 'fixed' %}page-width{% endif %}">
     <nav class="breadcrumb-nav" aria-label="{{ 'general.breadcrumbs.aria_label' | t }}">
       <ol class="breadcrumb">
@@ -142,12 +150,15 @@
 {% stylesheet %}
 /* Breadcrumb styles */
 .section-breadcrumbs {
+  padding-top: var(--breadcrumb-pt, 0);
+  padding-bottom: var(--breadcrumb-pb, 0);
   color: var(--color-muted);
-  font-size: var(--meta-size, 0.8125rem);
+  font-size: var(--breadcrumb-fs, var(--meta-size, 0.8125rem));
   line-height: var(--line-height-normal);
 }
 .section-breadcrumbs .breadcrumb {
   display: flex;
+  justify-content: var(--breadcrumb-justify, flex-start);
   flex-wrap: nowrap;
   min-width: 0;
   align-items: center;

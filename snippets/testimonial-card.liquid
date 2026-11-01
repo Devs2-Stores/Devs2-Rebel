@@ -22,7 +22,7 @@
     <div class="testimonial-card__author">
       {%- if block.settings.avatar != blank -%}
         {%- assign avatar_alt = block.settings.author | escape -%}
-        {{ block.settings.avatar | image_url: width: 80 | image_tag:
+        {{ block.settings.avatar | image_url: width: 80 | image_tag: sizes: '40px',
           loading: 'lazy', class: 'testimonial-card__avatar',
           alt: avatar_alt
         }}

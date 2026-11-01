@@ -19,7 +19,7 @@
         <div class="section-trust__item" {{ block.shopify_attributes }}>
           {%- if block.settings.icon != blank -%}
             <div class="section-trust__icon">
-              {{ block.settings.icon | image_url: width: 48 | image_tag: loading: 'lazy' }}
+              {{ block.settings.icon | image_url: width: 48 | image_tag: sizes: '48px', loading: 'lazy' }}
             </div>
           {%- elsif block.settings.line_icon != blank and block.settings.line_icon != 'none' -%}
             <span class="section-trust__line-icon">{%- render 'icon-feature', name: block.settings.line_icon -%}</span>

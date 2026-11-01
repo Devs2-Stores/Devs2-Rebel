@@ -153,7 +153,7 @@
                               assign fetchpriority = 'high'
                             endif
                           -%}
-                          <li class="product-cards__item" role="listitem">
+                          <li class="product-cards__item">
                             {%- render 'product-card', product: item, lazyload: lazyload, fetchpriority: fetchpriority, show_vendor: true, heading_tag: 'h2' -%}
                           </li>
                       {%- endcase -%}
@@ -178,7 +178,7 @@
                       {%- assign article_seen = article_seen | plus: 1 -%}
                       {%- assign content_loading = 'lazy' -%}
                       {%- if has_products == false and article_seen <= 3 -%}{%- assign content_loading = 'eager' -%}{%- endif -%}
-                      <li class="search-template__content-item" role="listitem">
+                      <li class="search-template__content-item">
                         {%- render 'article-card', article: item, layout: 'grid', lazyload: content_loading, heading_tag: 'h2' -%}
                       </li>
                     {%- endif -%}{%- endfor -%}
@@ -192,7 +192,7 @@
                 <section id="search-pages-panel" class="search-template__content-group" role="tabpanel" aria-labelledby="search-pages-tab" data-search-panel="pages">
                   <ul class="search-template__content-list" role="list">
                     {%- for item in search.results -%}{%- if item.object_type == 'page' -%}
-                      <li class="search-template__content-item" role="listitem">
+                      <li class="search-template__content-item">
                         <a class="search-page-result" href="{{ item.url }}">
                           <span class="search-page-result__content">
                             <strong class="search-page-result__title">{{ item.title | escape }}</strong>
@@ -237,7 +237,7 @@
               <h2>{{ section.settings.featured_collection.title | escape }}</h2>
               <ul class="product-cards search-template__products" role="list">
                 {%- for product in section.settings.featured_collection.products limit: 4 -%}
-                  <li class="product-cards__item" role="listitem">
+                  <li class="product-cards__item">
                     {%- render 'product-card', product: product, lazyload: 'lazy', show_vendor: true -%}
                   </li>
                 {%- endfor -%}

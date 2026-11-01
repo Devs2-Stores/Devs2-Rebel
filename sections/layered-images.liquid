@@ -19,21 +19,21 @@
       <div class="section-layered__images">
         {%- if section.settings.image_1 != blank -%}
           <div class="section-layered__layer section-layered__layer--1">
-            {{ section.settings.image_1 | image_url: width: 600 | image_tag:
+            {{ section.settings.image_1 | image_url: width: 600 | image_tag: sizes: '(min-width: 750px) 40vw, 80vw',
               loading: 'lazy', class: 'section-layered__img'
             }}
           </div>
         {%- endif -%}
         {%- if section.settings.image_2 != blank -%}
           <div class="section-layered__layer section-layered__layer--2">
-            {{ section.settings.image_2 | image_url: width: 400 | image_tag:
+            {{ section.settings.image_2 | image_url: width: 400 | image_tag: sizes: '(min-width: 750px) 30vw, 60vw',
               loading: 'lazy', class: 'section-layered__img'
             }}
           </div>
         {%- endif -%}
         {%- if section.settings.image_3 != blank -%}
           <div class="section-layered__layer section-layered__layer--3">
-            {{ section.settings.image_3 | image_url: width: 300 | image_tag:
+            {{ section.settings.image_3 | image_url: width: 300 | image_tag: sizes: '(min-width: 750px) 20vw, 40vw',
               loading: 'lazy', class: 'section-layered__img'
             }}
           </div>
@@ -66,7 +66,7 @@
           <div class="section-layered__feature" {{ block.shopify_attributes }}>
             {%- if block.settings.icon != blank -%}
               <div class="section-layered__feature-icon">
-                {{ block.settings.icon | image_url: width: 48 | image_tag: loading: 'lazy' }}
+                {{ block.settings.icon | image_url: width: 48 | image_tag: sizes: '48px', loading: 'lazy' }}
               </div>
             {%- endif -%}
             <div>

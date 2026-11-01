@@ -216,7 +216,7 @@
             {%- endfor -%}
           {%- endif -%}
           {%- if has_swatches -%}
-            <div class="product-card__swatches" aria-label="{{ option.name | escape }}">
+            <div class="product-card__swatches" role="group" aria-label="{{ option.name | escape }}">
               {%- for swatch_value in option.values limit: 6 -%}
                 {%- assign option_key = 'option' | append: option.position -%}
                 {%- assign swatch_variant = product.variants | where: option_key, swatch_value | first -%}

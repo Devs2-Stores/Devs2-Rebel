@@ -39,7 +39,7 @@
               {%- if item.id == product.id -%}{%- continue -%}{%- endif -%}
               {%- if shown >= section.settings.product_limit -%}{%- break -%}{%- endif -%}
               {%- assign shown = shown | plus: 1 -%}
-              <li class="product-cards__item" role="listitem">
+              <li class="product-cards__item">
                 {%- render 'product-card', product: item, lazyload: 'lazy', fetchpriority: 'auto', show_vendor: true, image_ratio: section.settings.image_ratio -%}
               </li>
             {%- endfor -%}

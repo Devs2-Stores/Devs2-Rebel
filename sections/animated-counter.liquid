@@ -31,7 +31,7 @@
         <div class="section-stats__item" {{ block.shopify_attributes }} data-stat data-target="{{ block.settings.number }}" data-prefix="{{ block.settings.prefix | escape }}" data-suffix="{{ block.settings.suffix | escape }}">
           {%- if block.settings.icon != blank -%}
             <div class="section-stats__icon">
-              {{ block.settings.icon | image_url: width: 64 | image_tag: loading: 'lazy' }}
+              {{ block.settings.icon | image_url: width: 64 | image_tag: sizes: '64px', loading: 'lazy' }}
             </div>
           {%- endif -%}
           <span class="section-stats__number heading-size-{{ section.settings.number_size }}">

@@ -68,7 +68,7 @@
             {%- if hotspot_product != blank -%}
               <a href="{{ hotspot_product.url }}" class="section-hotspot__tooltip-product">
                 {%- if hotspot_product.featured_image -%}
-                  {{ hotspot_product.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', class: 'section-hotspot__tooltip-img' }}
+                  {{ hotspot_product.featured_image | image_url: width: 120 | image_tag: sizes: '120px', loading: 'lazy', class: 'section-hotspot__tooltip-img' }}
                 {%- endif -%}
                 <div class="section-hotspot__tooltip-info">
                   <span class="section-hotspot__tooltip-title">{{ hotspot_product.title | escape }}</span>

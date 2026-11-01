@@ -42,7 +42,7 @@
             {%- endif -%}
             {%- if block.settings.image != blank -%}
               <div class="section-timeline__image">
-                {{ block.settings.image | image_url: width: 600 | image_tag:
+                {{ block.settings.image | image_url: width: 600 | image_tag: sizes: '(min-width: 750px) 50vw, 100vw',
                   loading: 'lazy', class: 'section-timeline__img'
                 }}
               </div>

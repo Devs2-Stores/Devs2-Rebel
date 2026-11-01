@@ -63,7 +63,7 @@
             <h2>{{ section.settings.upsale_title | escape }}</h2>
             <ul class="upsale-list" role="list">
               {%- for product in upsale_collection.products limit: section.settings.upsale_limit -%}
-                <li class="upsale-item" role="listitem">
+                <li class="upsale-item">
                   <a href="{{ product.url }}" class="upsale-item__image" aria-label="{{ product.title | escape }}">
                     {%- if product.featured_image -%}
                       {%- assign upsale_alt = product.featured_image.alt | default: product.title | escape -%}

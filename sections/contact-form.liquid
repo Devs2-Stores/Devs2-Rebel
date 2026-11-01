@@ -36,7 +36,7 @@
               <div class="section-contact-form__info-item" {{ block.shopify_attributes }}>
                 {%- if block.settings.icon != blank -%}
                   <div class="section-contact-form__info-icon">
-                    {{ block.settings.icon | image_url: width: 40 | image_tag: loading: 'lazy' }}
+                    {{ block.settings.icon | image_url: width: 40 | image_tag: sizes: '40px', loading: 'lazy' }}
                   </div>
                 {%- endif -%}
                 <div>

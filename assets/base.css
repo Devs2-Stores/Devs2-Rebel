@@ -184,6 +184,34 @@ p {
   .text-align-mobile-right { text-align: unset; }
 }
 
+/* ── SVG Sprite ─────────────────────────────────── */
+.icons-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* ── Deferred Rendering ─────────────────────────── */
+/* Sections after the first skip style/layout/paint until they near the viewport. The first section stays eager so the LCP element is never deferred. */
+.shopify-section ~ .section-collection-list-wrapper,
+.shopify-section ~ .section-marquee-products-wrapper,
+.shopify-section ~ .section-iwt-wrapper,
+.shopify-section ~ .section-layered-wrapper,
+.shopify-section ~ .section-ito-wrapper,
+.shopify-section ~ .section-testimonials-wrapper,
+.shopify-section ~ .section-blog-posts-wrapper,
+.shopify-section ~ .section-logo-list-wrapper,
+.shopify-section ~ .section-newsletter-wrapper,
+.shopify-section ~ .section-icon-boxes-wrapper,
+.shopify-section ~ .section-multicolumn-wrapper,
+.shopify-section ~ .section-trust-wrapper,
+.shopify-section ~ .section-timeline-wrapper,
+.shopify-section ~ .section-team-wrapper {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
 /* ── Section Padding ────────────────────────────── */
 .section-padding {
   padding-top: var(--spacing-sections-mobile);

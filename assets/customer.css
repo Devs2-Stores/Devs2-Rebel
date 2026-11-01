@@ -3,6 +3,11 @@
    Sidebar, Auth, Account, Orders, Addresses, Activate, Reset
    ═══════════════════════════════════════════════════ */
 
+.customer-section-spacing {
+  padding-top: var(--section-pt, 0);
+  padding-bottom: var(--section-pb, 0);
+}
+
 /* ── Shared Customer Page Rhythm & Headings ────── */
 .login-template,
 .register-template,

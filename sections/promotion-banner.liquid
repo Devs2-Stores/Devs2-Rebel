@@ -27,7 +27,7 @@
             <div class="section-promo__content">
               {%- if block.settings.icon != blank -%}
                 <div class="section-promo__icon">
-                  {{ block.settings.icon | image_url: height: 48 | image_tag: loading: 'lazy', class: 'section-promo__icon-img' }}
+                  {{ block.settings.icon | image_url: height: 48 | image_tag: sizes: '48px', loading: 'lazy', class: 'section-promo__icon-img' }}
                 </div>
               {%- endif -%}
               <div class="section-promo__text-wrap">
