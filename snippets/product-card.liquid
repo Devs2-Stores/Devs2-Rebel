@@ -233,11 +233,20 @@
                     assign swatch_style = 'background-image: url(' | append: img_url | append: '); background-size: cover; background-position: center;'
                   endif
                 -%}
+                {%- assign swatch_own_image = swatch_variant.featured_image -%}
                 <a
                   href="{{ swatch_variant.url | default: product.url }}"
                   class="product-card__swatch"
                   title="{{ swatch_value | escape }}"
                   aria-label="{{ swatch_value | escape }}"
+                  {% if swatch_own_image != blank %}
+                    data-swatch-image
+                    data-image-src="{{ swatch_own_image | image_url: width: 800 }}"
+                    data-image-srcset="{{ swatch_own_image | image_url: width: 300 }} 300w, {{ swatch_own_image | image_url: width: 400 }} 400w, {{ swatch_own_image | image_url: width: 600 }} 600w, {{ swatch_own_image | image_url: width: 800 }} 800w"
+                    data-image-alt="{{ swatch_own_image.alt | default: product.title | escape }}"
+                    data-image-width="800"
+                    data-image-height="{{ 800 | times: swatch_own_image.height | divided_by: swatch_own_image.width }}"
+                  {% endif %}
                   {% if swatch_style != '' %}style="{{ swatch_style }}"{% endif %}
                 ></a>
               {%- endfor -%}
@@ -367,6 +376,7 @@
   .product-card__media:hover .product-card__media-image .product-card__img-secondary { opacity: 1; }
 }
 .product-card__media-image .product-card__img-secondary { opacity: 0; }
+.product-card__media-image.is-variant-image .product-card__img-secondary { display: none; }
 .product-card__quickview,
 .product-card__add-btn {
   --button-hover-transform: translateY(-3px);
@@ -461,7 +471,9 @@
   background-position: center;
   transition: border-color var(--transition-fast), transform var(--transition-fast);
 }
-.product-card__swatch:focus-visible { border-color: var(--color-ink); }
+.product-card__swatch:focus-visible,
+.product-card__swatch[aria-current='true'] { border-color: var(--color-ink); }
+.product-card__swatch[aria-current='true'] { box-shadow: 0 0 0 2px rgb(var(--color-background)), 0 0 0 3px var(--color-ink); }
 @media (hover: hover) {
   .product-card__swatch:hover { border-color: var(--color-ink); }
 }

@@ -7,10 +7,38 @@
 
   class ProductCard extends HTMLElement {
     connectedCallback() {
+      this.addEventListener('click', this.onSwatchClick.bind(this));
       this.form = this.querySelector('form');
       if (!this.form) return;
       this.form.addEventListener('submit', this.onSubmitHandler.bind(this));
       this.submitButton = this.querySelector('[type="submit"]');
+    }
+
+    onSwatchClick(evt) {
+      const swatch = evt.target.closest('[data-swatch-image]');
+      if (!swatch || !this.contains(swatch)) return;
+      if (evt.defaultPrevented || evt.button > 0 || evt.metaKey || evt.ctrlKey || evt.shiftKey || evt.altKey) return;
+      const img = this.querySelector('.product-card__img-primary');
+      if (!img) return;
+      evt.preventDefault();
+
+      img.src = swatch.dataset.imageSrc;
+      img.srcset = swatch.dataset.imageSrcset;
+      img.alt = swatch.dataset.imageAlt;
+      img.width = swatch.dataset.imageWidth;
+      img.height = swatch.dataset.imageHeight;
+      const frame = img.closest('.product-card__media-image');
+      if (frame) frame.classList.add('is-variant-image');
+
+      this.querySelectorAll('.product-card__swatch[aria-current]').forEach(function(el) {
+        el.removeAttribute('aria-current');
+      });
+      swatch.setAttribute('aria-current', 'true');
+
+      const href = swatch.getAttribute('href');
+      this.querySelectorAll('.product-card__media-inner, .product-card__title a').forEach(function(link) {
+        link.setAttribute('href', href);
+      });
     }
 
     onSubmitHandler(evt) {
